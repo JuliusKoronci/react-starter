@@ -1,0 +1,23 @@
+import {combineReducers} from 'redux';
+import {routerReducer} from 'react-router-redux';
+import {reducer as formReducer} from 'redux-form';
+import authReducer from './auth/auth.reducer';
+import asyncReducer from './async/async.reducer';
+import {REDUX_RESET} from '../constants';
+
+const appReducer = combineReducers({
+    routing: routerReducer,
+    form: formReducer,
+    auth: authReducer,
+    async: asyncReducer
+});
+
+const rootReducer = (state, action) => {
+    if (action.type === REDUX_RESET) {
+        state = undefined
+    }
+
+    return appReducer(state, action)
+};
+
+export default rootReducer;

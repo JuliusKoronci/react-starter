@@ -1,0 +1,14 @@
+//Auth
+export const AUTH_LOGIN_SUBMITTED = 'AUTH_LOGIN_SUBMITTED';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_LOGOUT_SUBMITTED = 'AUTH_LOGOUT_SUBMITTED';
+export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
+export const AUTH_LOGIN_ERROR = 'AUTH_LOGIN_ERROR';
+
+
+// Async
+export const LOADING_START = 'LOADING_START';
+export const LOADING_END = 'LOADING_END';
+
+//Common
+export const REDUX_RESET = 'REDUX_RESET';
