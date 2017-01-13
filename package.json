@@ -18,7 +18,8 @@
     "redux": "^3.6.0",
     "redux-form": "^6.4.3",
     "redux-saga": "^0.14.1",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "uikit": "~2.27.1"
   },
   "scripts": {
     "start": "react-scripts start",

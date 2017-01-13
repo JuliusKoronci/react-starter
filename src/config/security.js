@@ -1,7 +1,7 @@
 import {getFromStorage} from '../app/services/storage';
 import jwtDecode from 'jwt-decode';
 
-export const USE_MOCK = true;
+export const USE_MOCK = false;
 export const TOKEN_KEY = 'JWT_TOKEN';
 
 export function isUserStoredLocaly() {

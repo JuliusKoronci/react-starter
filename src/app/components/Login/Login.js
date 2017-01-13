@@ -6,6 +6,7 @@ import LoginForm from '../../forms/Login/Login.form';
 import {history} from '../../../config/store';
 import toastr from 'toastr';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
+import '../../views/assets/css/login_page.css';
 
 class Login extends Component {
 
@@ -14,6 +15,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        document.body.className = 'login_page';
         this.isLoggedIn();
     }
 
@@ -27,6 +29,9 @@ class Login extends Component {
             toastr.success('Welcome ' + this.props.state.auth.user.username);
             history.push('/');
         }
+        if(this.props.state.auth.error !== ''){
+            NProgress.done();
+        }
     };
 
     onSubmit = (values) => {
@@ -36,7 +41,7 @@ class Login extends Component {
 
     render() {
         return (
-            <LoginForm onSubmit={this.onSubmit}/>
+            <LoginForm loginError={this.props.state.auth.error} onSubmit={this.onSubmit}/>
         );
     }
 }

@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-
+import '../../../node_modules/uikit/dist/css/uikit.almost-flat.min.css';
 class App extends Component {
 
     constructor(props, context) {
