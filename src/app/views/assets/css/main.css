@@ -3,6 +3,7 @@
 *  author: tzd
 *
 *  Content:
+*    0. Brano classy
 *    1. variables/mixins
 *    2. UIkit custom styles
 *    3. Kendo UI custom styles
@@ -15,6 +16,243 @@
 *    10. print styles
 *
 */
+
+/* 0. altair variables/mixins ======================== */
+.submenu-icon{
+  display: inline-block;
+  text-align: right;
+}
+.submenu-title{
+  display: inline-block;
+
+}
+
+.custom-filter {
+  padding: 8px 20px;
+  padding-right: 10px;
+}
+
+.custom-filter-icon {
+  width: 48px;
+  text-align: left;
+  display: inline-block;
+  color: #727272;
+  font-size: 24px;
+}
+
+.custom-filter-name {
+  font-size: 14px;
+  color: #212121;
+}
+
+.custom-filter-settings {
+ float: right;
+}
+
+.project-title {
+  display: inline-block;
+}
+
+.submenu-li {
+  display: inline-block;
+
+}
+
+.status-open {
+  background: #80BA52;
+  padding: 2px 10px;
+  border: none;
+  border-radius: 2px;
+  text-shadow: none;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: white;
+}
+
+.label-minor {
+  padding: 2px 6px;
+  border: 1px solid #0097a7;
+  border-radius: 2px;
+  text-shadow: none;
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: #0097a7;
+  }
+
+.label-major {
+  padding: 2px 6px;
+  border: 1px solid #7cb342;
+  border-radius: 2px;
+  text-shadow: none;
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: #7cb342;
+}
+
+.label-blocker {
+  padding: 2px 6px;
+  border: 1px solid #e53935;
+  border-radius: 2px;
+  text-shadow: none;
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: #e53935;
+}
+
+.label-critical {
+  padding: 2px 6px;
+  border: 1px solid #ffa000;
+  border-radius: 2px;
+  text-shadow: none;
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: #ffa000;
+}
+
+.task-table {
+  /* 1 */
+  border-collapse: collapse;
+  border-spacing: 0;
+  /* 2 */
+  width: 100%;
+  /* 3 */
+  margin-bottom: 0px;
+}
+/*
+ * Add margin if adjacent element
+ */
+* + .task-table {
+  margin-top: 0px;
+}
+.task-table th,
+.task-table td {
+  padding: 8px 8px;
+}
+/*
+ * Set alignment
+ */
+.task-table th {
+  text-align: left;
+}
+.task-table td {
+  vertical-align: top;
+}
+.task-table thead th {
+  vertical-align: bottom;
+}
+/*
+ * Caption and footer
+ */
+.task-table caption,
+.task-table tfoot {
+  font-size: 12px;
+  font-style: italic;
+}
+.task-table caption {
+  text-align: left;
+  color: #999;
+}
+/*
+ * Active State
+ */
+.task-table tbody tr.uk-active {
+  background: #f0f0f0;
+}
+
+.text-allign-right {
+  text-align: right;
+}
+.small-padding {
+  padding: 5px;
+}
+
+.private-note {
+  background-color: #ffef8f;
+}
+
+#mail-formular {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+
+#table-item {
+  border-width: 1px 1px 1px ;
+  padding: 8px 4px;
+}
+
+#border-full {
+  border-width: 1px 1px 1px ;
+  position: initial;
+
+}
+
+.alignleft {
+  float: left;
+}
+.alignright {
+  float: right;
+}
+
+.repeat-dropdown {
+  padding: 5px 15px;
+}
+
+.project-filter-link {
+  padding-left: 16px;
+}
+
+.project-filter-icon {
+  padding-left: 100px;
+}
+
+.mini-menu-checkbox {
+  line-height: 48px;
+}
+
+.task-check {
+ margin-left: 8px;
+}
+
+.open-task {
+  color: rgba(128,186,82,0.1);
+}
+
+.new-task {
+  background-color: rgba(33,150,243,0.1);
+}
+
+.task-div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.task-context {
+  padding-left: 35px;
+}
+
+.label-right {
+  margin-right: 40px;
+}
+
+.label-task {
+  margin-left: 5px;
+}
+
+.second-task {
+  background-color: rgba(233, 233, 233,0.5);
+}
+
 /* 1. altair variables/mixins ======================== */
 /* 2. UIkit custom styles ============================ */
 /* animations */
@@ -83,6 +321,23 @@
 .uk-badge-success {
   background: #7cb342;
 }
+
+.uk-badge-new {
+  background: #2da3ec;
+}
+
+.uk-badge-open {
+  background: #80BA52;
+}
+
+.uk-badge-pending {
+  background: #ff9c00;
+}
+
+.uk-badge-closed {
+  background: #ADADAD;
+}
+
 .uk-badge-muted {
   background: #bdbdbd;
 }
@@ -92,7 +347,8 @@
 .uk-badge.inline-label {
   vertical-align: 1px;
   margin-left: 4px;
-}
+    }
+
 .uk-badge-outline {
   border: 1px solid rgba(0, 0, 0, 0.12);
   background: #fff;
@@ -480,7 +736,7 @@
 .uk-input-group-addon {
   width: 1%;
   white-space: nowrap;
-  vertical-align: middle;
+  /*vertical-align: middle;*/
   line-height: 1;
   text-align: center;
   padding: 0 16px;
@@ -560,6 +816,7 @@
   border-radius: 2px 2px 0 0;
 }
 /* tables */
+
 .uk-table td {
   border-bottom-color: rgba(0, 0, 0, 0.12);
 }
@@ -638,6 +895,7 @@
 }
 .uk-text-muted {
   color: #757575 !important;
+  font-size: 13px;
 }
 .uk-text-primary {
   color: #2196f3 !important;
@@ -1357,7 +1615,7 @@
 }
 .uk-file-upload {
   width: 100%;
-  padding: 32px 16px;
+  padding: 8px 8px;
   box-sizing: border-box;
   background: #f5f5f5;
   text-align: center;
@@ -6167,6 +6425,7 @@ body > .content-preloader.preloader-active {
 .md-card-list-wrapper .md-card-list .md-card-list-item-selected {
   background: #e3f2fd;
 }
+
 /* forms */
 select,
 textarea,
@@ -6205,13 +6464,13 @@ input[type="search"].md-input,
 input[type="tel"].md-input,
 input[type="color"].md-input {
   border-radius: 0;
-  border-width: 0 0 1px;
+  border-width: 1px 1px 1px ;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.12);
-  font: 400 15px / 18px "Roboto", sans-serif;
+  font: 400 14px / 14px "Roboto", sans-serif;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0);
   box-sizing: border-box;
-  padding: 12px 4px;
+  padding: 8px 4px;
   background: transparent;
   width: 100%;
   display: block;
@@ -6436,7 +6695,7 @@ textarea.no_autosize {
 }
 .md-input-wrapper {
   position: relative;
-  padding-top: 4px;
+  padding-top: 0px;
   width: 100%;
   display: block;
 }
@@ -6479,7 +6738,7 @@ textarea.no_autosize {
 }
 .md-input-wrapper > label {
   color: #727272;
-  position: absolute;
+  /*position: absolute; uprava brano*/
   top: 16px;
   left: 4px;
   right: 0;
@@ -6488,7 +6747,7 @@ textarea.no_autosize {
   transition: all 150ms ease-out;
 }
 .md-input-wrapper + * {
-  margin-top: 10px;
+  margin-top: 14px;
 }
 .md-input-wrapper.md-input-wrapper-disabled > label {
   color: rgba(0, 0, 0, 0.26);
@@ -6508,6 +6767,7 @@ textarea.no_autosize {
   -webkit-transition: opacity 200ms ease-in;
   transition: opacity 200ms ease-in;
 }
+
 .md-input-wrapper-count > .md-input-wrapper-count .text-count-wrapper {
   position: absolute;
   bottom: 0;
@@ -7778,7 +8038,7 @@ button.md-icon {
 }
 .icheck-inline {
   display: inline-block;
-  margin: 0 16px 16px 0;
+  /*margin: 0 16px 16px 0; vypnute brano*/
 }
 .icheck-inline + .parsley-errors-list {
   margin-top: -8px;
@@ -10462,7 +10722,7 @@ div.ganttview .ui-resizable-w {
 .tablesorter-altair .tablesorter-processing {
   background-position: center center !important;
   background-repeat: no-repeat !important;
-  background-image: url(../assets/img/spinners/spinner.gif) !important;
+  background-image: url(../img/spinners/spinner.gif) !important;
 }
 .tablesorter-altair caption {
   background-color: #fff;
@@ -11437,12 +11697,13 @@ div.kineticjs-content {
   transform: rotate(-180deg);
 }
 #sidebar_main .sidebar_main_header {
-  height: 89px;
+  height: 48px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   margin-bottom: 20px;
-  background-image: url("../img/sidebar_head_bg.png");
+  background-color: #1976d2 ;
   background-repeat: no-repeat;
   background-position: -20px -124px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 192), only screen and (min-resolution: 192dppx), only screen and (min-resolution: 2dppx) {
   #sidebar_main .sidebar_main_header {
@@ -13521,7 +13782,9 @@ address p + p {
   z-index: -1;
 }
 #page_content_inner {
-  padding: 24px 24px 100px;
+  /*padding: 24px 24px 100px;*/
+  height:100%;
+
 }
 @media only screen and (min-width: 1220px) {
   .boxed_layout #page_content {

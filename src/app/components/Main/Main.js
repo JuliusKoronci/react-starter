@@ -9,6 +9,8 @@ import {isUserStoredLocaly} from '../../../config/security';
 import jwtDecode from 'jwt-decode';
 import Layout from '../../views/templates/layout.jsx';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
+import '../../views/assets/css/main.css';
+import '../../views/assets/css/themes/themes_combined.min.css';
 
 class Main extends Component {
 
@@ -21,6 +23,7 @@ class Main extends Component {
     }
 
     componentDidMount() {
+        document.body.className = 'sidebar_main_open sidebar_main_swipe';
         this.isAuthenticated();
     }
 

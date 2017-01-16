@@ -5471,7 +5471,7 @@ address p + p {
   transition: opacity 400ms;
   z-index: -1;
 }
-#page_content_inner {
+.login_page #page_content_inner {
   padding: 24px 24px 100px;
 }
 @media only screen and (min-width: 1220px) {
@@ -5497,7 +5497,7 @@ address p + p {
     box-sizing: border-box;
   }
 }
-body {
+body.login_page {
   font-size: 15px;
   padding: 64px 24px;
   overflow-y: auto;

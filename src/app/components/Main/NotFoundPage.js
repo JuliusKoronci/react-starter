@@ -8,7 +8,9 @@ class NotFoundPage extends Component {
 
     render() {
         return (
-            <div>NotFOund</div>
+            <div className="md-card-content">
+                Page Not Found ...
+            </div>
         );
     }
 }

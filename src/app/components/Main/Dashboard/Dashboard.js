@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react';
+import View from '../../../views/templates/main/dashboard/dashboard.jsx';
 
 class Dashboard extends Component {
 
@@ -8,7 +9,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div>Dashboard</div>
+            <View prop=""/>
         );
     }
 }

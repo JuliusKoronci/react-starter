@@ -6,7 +6,6 @@ import LoginForm from '../../forms/Login/Login.form';
 import {history} from '../../../config/store';
 import toastr from 'toastr';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
-import '../../views/assets/css/login_page.css';
 
 class Login extends Component {
 
