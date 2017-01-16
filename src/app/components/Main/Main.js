@@ -16,10 +16,6 @@ class Main extends Component {
 
     constructor(props, context) {
         super(props, context);
-
-        this.state = {
-            'ngprogress': false
-        }
     }
 
     componentDidMount() {
@@ -29,17 +25,11 @@ class Main extends Component {
 
     componentDidUpdate() {
         this.isAuthenticated();
-        if (this.props.loading) {
+        if (this.props.load_count >= 0 && !this.props.stop) {
             NProgress.start();
-            this.setState({
-                'ngprogress': true
-            })
         }
-        if (!this.props.loading && this.state.ngprogress) {
+        if (this.props.load_count < 1 && this.props.stop) {
             NProgress.done();
-            this.setState({
-                'ngprogress': false
-            })
         }
     }
 
@@ -60,7 +50,7 @@ class Main extends Component {
     render() {
         const {authenticated} = this.props;
         if (authenticated) {
-            return <Layout children={this.props.children} {...this.props} />;
+            return <Layout children={this.props.children}/>;
         }
 
         return null;
@@ -76,12 +66,13 @@ Main.propTypes = {
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
-        loading: state.async.loading
+        loading: state.async.loading,
+        stop: state.async.stop
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions,...asyncActions}, dispatch)
+        actions: bindActionCreators({...actions, ...asyncActions}, dispatch)
     };
 }
 

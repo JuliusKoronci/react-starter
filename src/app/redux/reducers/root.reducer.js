@@ -3,13 +3,15 @@ import {routerReducer} from 'react-router-redux';
 import {reducer as formReducer} from 'redux-form';
 import authReducer from './auth/auth.reducer';
 import asyncReducer from './async/async.reducer';
+import tasksReducer from './tasks/tasks.reducer';
 import {REDUX_RESET} from '../constants';
 
 const appReducer = combineReducers({
     routing: routerReducer,
     form: formReducer,
     auth: authReducer,
-    async: asyncReducer
+    async: asyncReducer,
+    tasks: tasksReducer
 });
 
 const rootReducer = (state, action) => {

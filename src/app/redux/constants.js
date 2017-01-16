@@ -12,3 +12,7 @@ export const LOADING_END = 'LOADING_END';
 
 //Common
 export const REDUX_RESET = 'REDUX_RESET';
+
+//Tasks
+export const REQUEST_DEFAULT_TASKS = 'REQUEST_DEFAULT_TASKS';
+export const TASKS_RECEIVED = 'TASKS_RECEIVED';

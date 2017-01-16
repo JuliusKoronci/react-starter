@@ -1,13 +1,14 @@
 import React, {PropTypes} from 'react';
 import TaskList from '../tasks/tasklist.jsx';
-const dashboard = (props) => {
+const dashboard = ({tasks}) => {
+
     return (
-        <TaskList props=""/>
+        <TaskList tasks={tasks} />
     );
 };
 
 dashboard.propTypes = {
-    props: PropTypes.object.isRequired
+    tasks: PropTypes.object.isRequired
 };
 
 export default dashboard;

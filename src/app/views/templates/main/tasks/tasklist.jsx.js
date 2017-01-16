@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
+import Task from './taskrow.jsx';
 
-const tasklist = (props) => {
+const tasklist = ({tasks}) => {
     return (
         <div className="md-card-content">
             <div className="uk-margin-bottom" data-uk-margin>
@@ -28,11 +29,12 @@ const tasklist = (props) => {
             <button className="md-btn md-btn-primary md-btn-small" type="button" data-uk-button>Bulk Actions</button>
             <p/>
             <div className="uk-overflow-container uk-margin-bottom">
-                <table className="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_issues">
+                <table className="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair"
+                       id="ts_issues">
                     <thead>
                     <tr>
                         <th className="uk-width-1-10 uk-text-center small_col">
-                            <input type="checkbox" data-md-icheck className="check_all" />
+                            <input type="checkbox" data-md-icheck className="check_all"/>
                         </th>
                         <th className="uk-text-center ">Key</th>
                         <th>Title</th>
@@ -45,71 +47,9 @@ const tasklist = (props) => {
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr>
-                        <td className="uk-text-center uk-table-middle small_col">
-                            <input type="checkbox" data-md-icheck className="check_row" />
-                        </td>
-                        <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">ALTR-1</span></td>
-                        <td>
-                            <a href="page_issue_details.html" className="uk-text-large"> Velit omnis sed voluptatibus exercitationem dolor autem cupiditate.</a>
-                            <p className="uk-margin-remove"> <span className="uk-badge uk-badge-success">major</span>
-                                <span className="uk-badge uk-badge-warning">critical</span>
-                                <span className="uk-badge uk-badge-danger">blocker</span>
-                                <span className="uk-badge uk-badge-info">minor</span>
-                            </p>
-                        </td>
-                        <td>Zachary Larson</td>
-                        <td>Company 1</td>
-                        <td>Agent 1</td>
-                        <td>22/Jun/16</td>
-                        <td>16/Jun/16</td>
-                        <td><span className="uk-badge uk-badge-open">OPEN</span></td>
-                    </tr>
-
-
-                    <tr>
-                        <td className="uk-text-center uk-table-middle small_col">
-                            <input type="checkbox" data-md-icheck className="check_row" />
-                        </td>
-                        <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">ALTR-2</span></td>
-                        <td>
-                            <a href="page_issue_details.html" className="uk-text-large"> Quidem reiciendis modi optio ratione consequatur nam numquam.</a>
-                            <p className="uk-margin-remove"> <span className="uk-badge uk-badge-success">major</span>
-                                <span className="uk-badge uk-badge-warning">critical</span>
-                                <span className="uk-badge uk-badge-danger">blocker</span>
-                                <span className="uk-badge uk-badge-info">minor</span>
-                            </p>
-                        </td>
-                        <td>Vicky Halvorson</td>
-                        <td>Company 1</td>
-                        <td>Agent 1</td>
-                        <td>26/Jun/16</td>
-                        <td>8/Jun/16</td>
-                        <td><span className="uk-badge uk-badge-new">NEW</span></td>
-                    </tr>
-
-
-                    <tr>
-                        <td className="uk-text-center uk-table-middle small_col">
-                            <input type="checkbox" data-md-icheck className="check_row" />
-                        </td>
-                        <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">ALTR-3</span></td>
-                        <td>
-                            <a href="page_issue_details.html" className="uk-text-large"> Consectetur ut tempore quo molestias ut sunt rem vitae.</a>
-                            <p className="uk-margin-remove"> <span className="uk-badge uk-badge-success">major</span>
-                                <span className="uk-badge uk-badge-warning">critical</span>
-                                <span className="uk-badge uk-badge-danger">blocker</span>
-                                <span className="uk-badge uk-badge-info">minor</span>
-                            </p>
-                        </td>
-                        <td>Abagail Effertz</td>
-                        <td>Company 1</td>
-                        <td>Agent 1</td>
-                        <td>23/Jun/16</td>
-                        <td>12/Jun/16</td>
-                        <td><span className="uk-badge uk-badge-closed">CLOSED</span></td>
-                    </tr>
+                    {tasks.data.map((task, i) => {
+                       return <Task task={task} key={i} index={i}/>
+                    })}
                     </tbody>
                 </table>
             </div>
@@ -118,7 +58,7 @@ const tasklist = (props) => {
 };
 
 tasklist.propTypes = {
-    props: PropTypes.object.isRequired
+    tasks: PropTypes.object.isRequired
 };
 
 export default tasklist;

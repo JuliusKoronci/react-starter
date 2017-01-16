@@ -117,7 +117,7 @@ const header = (prop) => {
 };
 
 header.propTypes = {
-    prop: PropTypes.object.isRequired
+    // prop: PropTypes.object.isRequired
 };
 
 export default header;

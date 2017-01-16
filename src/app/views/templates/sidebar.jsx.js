@@ -128,7 +128,7 @@ const sidebar = (prop) => {
 };
 
 sidebar.propTypes = {
-    prop: PropTypes.object.isRequired
+    // prop: PropTypes.object.isRequired
 };
 
 export default sidebar;
