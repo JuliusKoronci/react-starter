@@ -25,11 +25,16 @@ class Main extends Component {
 
     componentDidUpdate() {
         this.isAuthenticated();
+        // console.log('did update')
+        // console.log('load count: ' + this.props.load_count + ', props.stop: ' + this.props.stop + ', loading: ' + this.props.loading);
+
         if (this.props.load_count >= 0 && !this.props.stop) {
             NProgress.start();
+            //console.log('start nprogress');
         }
         if (this.props.load_count < 1 && this.props.stop) {
             NProgress.done();
+            //console.log('done nprogress');
         }
     }
 
@@ -67,7 +72,8 @@ function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
         loading: state.async.loading,
-        stop: state.async.stop
+        stop: state.async.stop,
+        load_count:state.async.load_count?state.async.load_count:0
     };
 }
 function mapDispatchToProps(dispatch) {
