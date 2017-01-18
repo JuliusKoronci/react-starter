@@ -2,7 +2,10 @@ import React, {PropTypes} from 'react';
 import Task from './taskrow.jsx';
 import Pagination from '../_partials/pagination.jsx';
 
+
 const tasklist = ({tasks}) => {
+
+
     return (
         <div className="md-card-content">
             <div className="uk-margin-bottom" data-uk-margin>
@@ -27,11 +30,13 @@ const tasklist = ({tasks}) => {
                 </div>
             </div>
             &nbsp;
-            <button className="md-btn md-btn-primary md-btn-small" type="button" data-uk-button>Bulk Actions</button>
+            <button className="md-btn md-btn-primary md-btn-small" type="button" data-uk-button>Bulk Actions
+            </button>
             <p/>
             <div className="uk-overflow-container uk-margin-bottom">
-                <table className="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair"
-                       id="ts_issues">
+                <table
+                    className="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair"
+                    id="ts_issues">
                     <thead>
                     <tr>
                         <th className="uk-width-1-10 uk-text-center small_col">
@@ -49,17 +54,19 @@ const tasklist = ({tasks}) => {
                     </thead>
                     <tbody>
                     {tasks.data.map((task, i) => {
-                       return <Task task={task} key={i} index={i}/>
+                        return <Task task={task} key={i} index={i}/>
                     })}
                     </tbody>
                 </table>
             </div>
 
-            <Pagination data={tasks.data} />
+            <Pagination links={tasks._links} total={tasks.total} page={tasks.page}
+                        loadFunction={()=>{}}/>
 
         </div>
     );
 };
+
 
 tasklist.propTypes = {
     tasks: PropTypes.object.isRequired
