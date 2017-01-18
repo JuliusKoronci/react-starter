@@ -1,10 +1,15 @@
-import {LOADING_START, LOADING_END} from '../../constants';
+import {LOADING_START, LOADING_END, ASYNC_ERROR} from '../../constants';
 
-export default function async(state = {'loading': false, 'load_count': 0, 'stop': false}, action) {
+export default function async(state = {
+    'loading': false, 'load_count': 0, 'stop': false, error: {
+        status: 0,
+        message: ''
+    }
+}, action) {
     switch (action.type) {
 
         case LOADING_START:
-            const load_count=(state.load_count?state.load_count:0);
+            const load_count = (state.load_count ? state.load_count : 0);
             return {
                 'loading': true,
                 'load_count': load_count + 1,
@@ -17,6 +22,12 @@ export default function async(state = {'loading': false, 'load_count': 0, 'stop'
                 'load_count': count,
                 'stop': count === 0
             };
+        case ASYNC_ERROR:
+            return {
+                ...state,
+                error: action.error
+            };
+            break;
         default:
             return state;
     }

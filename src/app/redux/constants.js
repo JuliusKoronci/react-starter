@@ -9,6 +9,7 @@ export const AUTH_LOGIN_ERROR = 'AUTH_LOGIN_ERROR';
 // Async
 export const LOADING_START = 'LOADING_START';
 export const LOADING_END = 'LOADING_END';
+export const ASYNC_ERROR = 'ASYNC_ERROR';
 
 //Common
 export const REDUX_RESET = 'REDUX_RESET';
