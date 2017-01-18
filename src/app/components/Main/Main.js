@@ -22,6 +22,7 @@ class Main extends Component {
 
     componentDidUpdate() {
         this.isAuthenticated();
+        this.handleAsyncErrors();
 
         if (this.props.load_count >= 0 && !this.props.stop) {
             NProgress.start();
@@ -30,6 +31,19 @@ class Main extends Component {
             NProgress.done();
         }
     }
+
+    handleAsyncErrors = () => {
+        if (this.props.error.status !== 0 && this.props.error.message !== '') {
+            switch (this.props.error.status) {
+                case 401:
+                    this.props.actions.logout();
+                    break;
+                default:
+                    toastr.error(this.props.error.message);
+                    break;
+            }
+        }
+    };
 
     isAuthenticated = () => {
         if (!this.props.authenticated) {
@@ -66,7 +80,8 @@ function mapStateToProps(state) {
         authenticated: state.auth.authenticated,
         loading: state.async.loading,
         stop: state.async.stop,
-        load_count:state.async.load_count?state.async.load_count:0
+        error: state.async.error,
+        load_count: state.async.load_count ? state.async.load_count : 0
     };
 }
 function mapDispatchToProps(dispatch) {
