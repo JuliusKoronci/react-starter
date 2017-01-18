@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../redux/actions/auth.actions';
 import * as asyncActions from '../../redux/actions/async.action';
+import * as systemActions from '../../redux/actions/system.actions';
 import {history} from '../../../config/store';
 import toastr from 'toastr';
 import {isUserStoredLocaly} from '../../../config/security';
@@ -18,13 +19,14 @@ class Main extends Component {
     componentDidMount() {
         document.body.className = 'sidebar_main_open sidebar_main_swipe';
         this.isAuthenticated();
+        this.props.actions.requestFilters();
     }
 
     componentDidUpdate() {
         this.isAuthenticated();
         this.handleAsyncErrors();
 
-        if (this.props.load_count >= 0 && !this.props.stop) {
+        if (this.props.load_count > 0 && !this.props.stop) {
             NProgress.start();
         }
         if (this.props.load_count < 1 && this.props.stop) {
@@ -62,7 +64,7 @@ class Main extends Component {
     render() {
         const {authenticated} = this.props;
         if (authenticated) {
-            return <Layout children={this.props.children}/>;
+            return <Layout children={this.props.children} {...this.props}/>;
         }
 
         return null;
@@ -81,12 +83,14 @@ function mapStateToProps(state) {
         loading: state.async.loading,
         stop: state.async.stop,
         error: state.async.error,
-        load_count: state.async.load_count ? state.async.load_count : 0
+        load_count: state.async.load_count ? state.async.load_count : 0,
+        user: state.auth.user,
+        filter: state.filter
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions, ...asyncActions}, dispatch)
+        actions: bindActionCreators({...actions, ...asyncActions, ...systemActions}, dispatch)
     };
 }
 
