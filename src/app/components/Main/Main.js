@@ -24,7 +24,7 @@ class Main extends Component {
         this.isAuthenticated();
         this.handleAsyncErrors();
 
-        if (this.props.load_count >= 0 && !this.props.stop) {
+        if (this.props.load_count > 0 && !this.props.stop) {
             NProgress.start();
         }
         if (this.props.load_count < 1 && this.props.stop) {
@@ -62,7 +62,7 @@ class Main extends Component {
     render() {
         const {authenticated} = this.props;
         if (authenticated) {
-            return <Layout children={this.props.children}/>;
+            return <Layout children={this.props.children} {...this.props}/>;
         }
 
         return null;
@@ -81,7 +81,8 @@ function mapStateToProps(state) {
         loading: state.async.loading,
         stop: state.async.stop,
         error: state.async.error,
-        load_count: state.async.load_count ? state.async.load_count : 0
+        load_count: state.async.load_count ? state.async.load_count : 0,
+        user: state.auth.user
     };
 }
 function mapDispatchToProps(dispatch) {

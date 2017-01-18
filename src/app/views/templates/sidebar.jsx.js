@@ -1,10 +1,13 @@
 import React, {PropTypes} from 'react';
+import UserAvatar from './main/_partials/userAvatar.jsx';
 
-const sidebar = (prop) => {
+const sidebar = ({user}) => {
     return (
         <aside id="sidebar_main">
             <div className="sidebar_main_header">
-                <div className="sidebar_logosidebar_logo"/>
+                <div className="sidebar_logosidebar_logo">
+                    <a href="#"><UserAvatar user={user}/></a>
+                </div>
             </div>
 
             <div className="menu_section">
@@ -128,7 +131,7 @@ const sidebar = (prop) => {
 };
 
 sidebar.propTypes = {
-    prop: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired
 };
 
 export default sidebar;

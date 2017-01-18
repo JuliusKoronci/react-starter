@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
+import UserAvatar from './main/_partials/userAvatar.jsx';
+import {Link} from 'react-router';
 
-const header = (prop) => {
+const header = ({user, logout}) => {
     return (
         <header id="header_main">
             <div className="header_main_content">
@@ -97,14 +99,16 @@ const header = (prop) => {
                                 </div>
                             </li>
                             <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-                                <a href="#" className="user_action_image"><img className="md-user-image"
-                                                                               src="assets/img/avatars/avatar_11_tn.png"
-                                                                               alt=""/></a>
+                                <a href="#" className="user_action_image">
+                                    <UserAvatar user={user}/>
+                                </a>
                                 <div className="uk-dropdown uk-dropdown-small">
                                     <ul className="uk-nav js-uk-prevent">
-                                        <li><a href="page_user_profile.html">My profile</a></li>
-                                        <li><a href="page_settings.html">Settings</a></li>
-                                        <li><a href="login.html">Logout</a></li>
+                                        <li><Link to="settings">Settings</Link></li>
+                                        <li>
+                                            <Link to="profile">My profile</Link>
+                                        </li>
+                                        <li><a href="#" onClick={logout}>Logout</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -117,7 +121,8 @@ const header = (prop) => {
 };
 
 header.propTypes = {
-    prop: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired
 };
 
 export default header;
