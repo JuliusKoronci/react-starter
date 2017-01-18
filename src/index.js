@@ -6,8 +6,6 @@ import {Router} from 'react-router';
 import {Provider} from 'react-redux';
 import store, {history} from './config/store';
 import routes from './config/router';
-import '../node_modules/toastr/build/toastr.min.css';
-import '../node_modules/nprogress/nprogress.css';
 
 
 process.env.NODE_ENV === 'production' && Raven.config(sentry_url).install();

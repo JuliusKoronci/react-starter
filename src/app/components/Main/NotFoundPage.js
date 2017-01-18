@@ -1,10 +1,6 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 
 class NotFoundPage extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-    }
 
     render() {
         return (
@@ -14,10 +10,5 @@ class NotFoundPage extends Component {
         );
     }
 }
-
-NotFoundPage.propTypes = {
-    //myProp: PropTypes.string.isRequired
-};
-
 
 export default NotFoundPage;

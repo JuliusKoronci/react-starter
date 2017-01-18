@@ -1,23 +1,22 @@
-import React, {PropTypes, Component} from 'react';
+import {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../redux/actions/auth.actions';
+import {history} from '../../../config/store';
 
 class Logout extends Component {
 
-    constructor(props, context) {
-        super(props, context);
+    componentWillMount(){
+        this.props.actions.logout();
+        history.push('/login');
     }
 
     render() {
-        return (
-            <div>Logout</div>
-        );
+        return null;
     }
 }
 
 Logout.propTypes = {
-    //myProp: PropTypes.string.isRequired
     actions: PropTypes.object.isRequired
 };
 

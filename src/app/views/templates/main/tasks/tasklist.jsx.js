@@ -18,9 +18,9 @@ const tasklist = ({tasks}) => {
                     <h2>Delete selected tasks ?</h2>
                     <span>
                         <a className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-                           href="javascript:void(0)">CANCEL</a>
+                           href="#">CANCEL</a>
                         <a className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light alignright"
-                           href="javascript:void(0)">DELETE</a>
+                           href="#">DELETE</a>
                     </span>
 
                 </div>

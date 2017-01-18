@@ -5,8 +5,8 @@ import Sidebar from './sidebar.jsx';
 export default ({children}) => {
     return (
         <div>
-            <Header/>
-            <Sidebar/>
+            <Header prop={{}}/>
+            <Sidebar  prop={{}}/>
             <div id="page_content">
                 <div id="page_content_inner">
                     <div className="md-card">

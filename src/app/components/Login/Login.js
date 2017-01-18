@@ -9,10 +9,6 @@ import NProgress from '../../../../node_modules/nprogress/nprogress';
 
 class Login extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
-
     componentDidMount() {
         document.body.className = 'login_page';
         this.isLoggedIn();

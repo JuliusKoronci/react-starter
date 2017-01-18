@@ -11,12 +11,9 @@ import Layout from '../../views/templates/layout.jsx';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
 import '../../views/assets/css/main.css';
 import '../../views/assets/css/themes/themes_combined.min.css';
+import '../../views/assets/css/nprogress.css';
 
 class Main extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-    }
 
     componentDidMount() {
         document.body.className = 'sidebar_main_open sidebar_main_swipe';
@@ -25,16 +22,12 @@ class Main extends Component {
 
     componentDidUpdate() {
         this.isAuthenticated();
-        // console.log('did update')
-        // console.log('load count: ' + this.props.load_count + ', props.stop: ' + this.props.stop + ', loading: ' + this.props.loading);
 
         if (this.props.load_count >= 0 && !this.props.stop) {
             NProgress.start();
-            //console.log('start nprogress');
         }
         if (this.props.load_count < 1 && this.props.stop) {
             NProgress.done();
-            //console.log('done nprogress');
         }
     }
 
