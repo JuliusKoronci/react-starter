@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Task from './taskrow.jsx';
+import Pagination from '../_partials/pagination.jsx';
 
 const tasklist = ({tasks}) => {
     return (
@@ -53,6 +54,9 @@ const tasklist = ({tasks}) => {
                     </tbody>
                 </table>
             </div>
+
+            <Pagination data={tasks.data} />
+
         </div>
     );
 };
