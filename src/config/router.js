@@ -16,7 +16,7 @@ export default (
         <Route path="/" component={Main}>
             <IndexRoute component={Dashboard}/>
             <Route path="profile" component={Profile}/>
-            <Route path="settings" component={Settings}/>
+            <Route name="settings" path="settings/default" component={Settings}/>
             <Route path="*" component={NotFoundPage}/>
         </Route>
     </Route>

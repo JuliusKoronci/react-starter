@@ -4,6 +4,7 @@ import {reducer as formReducer} from 'redux-form';
 import authReducer from './auth/auth.reducer';
 import asyncReducer from './async/async.reducer';
 import tasksReducer from './tasks/tasks.reducer';
+import filterReducer from './system/filter.reducer';
 import {REDUX_RESET} from '../constants';
 
 const appReducer = combineReducers({
@@ -11,7 +12,8 @@ const appReducer = combineReducers({
     form: formReducer,
     auth: authReducer,
     async: asyncReducer,
-    tasks: tasksReducer
+    tasks: tasksReducer,
+    filter: filterReducer
 });
 
 const rootReducer = (state, action) => {

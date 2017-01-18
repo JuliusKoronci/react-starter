@@ -104,7 +104,7 @@ const header = ({user, logout}) => {
                                 </a>
                                 <div className="uk-dropdown uk-dropdown-small">
                                     <ul className="uk-nav js-uk-prevent">
-                                        <li><Link to="settings">Settings</Link></li>
+                                        <li><Link to='settings/default'>Settings</Link></li>
                                         <li>
                                             <Link to="profile">My profile</Link>
                                         </li>

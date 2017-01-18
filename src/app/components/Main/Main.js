@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../redux/actions/auth.actions';
 import * as asyncActions from '../../redux/actions/async.action';
+import * as systemActions from '../../redux/actions/system.actions';
 import {history} from '../../../config/store';
 import toastr from 'toastr';
 import {isUserStoredLocaly} from '../../../config/security';
@@ -18,6 +19,7 @@ class Main extends Component {
     componentDidMount() {
         document.body.className = 'sidebar_main_open sidebar_main_swipe';
         this.isAuthenticated();
+        this.props.actions.requestFilters();
     }
 
     componentDidUpdate() {
@@ -82,12 +84,13 @@ function mapStateToProps(state) {
         stop: state.async.stop,
         error: state.async.error,
         load_count: state.async.load_count ? state.async.load_count : 0,
-        user: state.auth.user
+        user: state.auth.user,
+        filter: state.filter
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions, ...asyncActions}, dispatch)
+        actions: bindActionCreators({...actions, ...asyncActions, ...systemActions}, dispatch)
     };
 }
 
