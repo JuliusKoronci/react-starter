@@ -1,4 +1,4 @@
-import {TASK_LIST} from '../urls';
+import {TASK_LIST, HOST_URL} from '../urls';
 import {getFromStorage} from '../../app/services/storage';
 import {TOKEN_KEY, USE_MOCK} from '../../config/security';
 import {MOCK_DELAY} from '../../config/config';
@@ -30,6 +30,36 @@ function loadDefault() {
                 return Promise.resolve(tasks);
             }
         })
+}
+
+
+
+function loadTasksFromUrl(url) {
+    let config = {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY)
+        }
+    };
+
+    return fetch(HOST_URL + url, config)
+        .then(response =>
+            response.json().then(tasks => ({tasks, response}))
+        ).then(({tasks, response}) => {
+            if (!response.ok) {
+                return Promise.reject({status: response.status, message: tasks.message})
+            } else {
+                return Promise.resolve(tasks);
+            }
+        })
+}
+
+
+export function getTasksFromUrl(url) {
+    if (USE_MOCK) {
+        return mockDefault();
+    }
+    return loadTasksFromUrl(url);
 }
 
 
