@@ -33,7 +33,6 @@ function loadDefault() {
 }
 
 
-
 function loadTasksFromUrl(url) {
     let config = {
         method: 'GET',
@@ -68,4 +67,24 @@ export function defaultFilter() {
         return mockDefault();
     }
     return loadDefault();
+}
+
+export function getTaskById(id) {
+    let config = {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY)
+        }
+    };
+
+    return fetch(TASK_LIST + '/' + id, config)
+        .then(response =>
+            response.json().then(tasks => ({tasks, response}))
+        ).then(({tasks, response}) => {
+            if (!response.ok) {
+                return Promise.reject({status: response.status, message: tasks.message})
+            } else {
+                return Promise.resolve(tasks);
+            }
+        })
 }

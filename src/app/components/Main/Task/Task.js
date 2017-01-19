@@ -10,15 +10,23 @@ class Task extends Component {
     }
 
     componentDidMount() {
-        if (this.props.task.length === 0) {
-            console.log('no task');
+        if (!this.props.task) {
+            this.props.actions.loadTaskById(this.props.params.taskId);
         }
     }
 
     render() {
-        return (
-            <p>Task</p>
-        );
+        if (this.props.task) {
+            return this.renderTask(this.props.task)
+        } else {
+            return <p>Task id: {this.props.params.taskId}  ...</p>
+        }
+    }
+
+    renderTask = (task) => {
+        return (<p>
+            {task.title}
+        </p>)
     }
 }
 
@@ -30,11 +38,9 @@ Task.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     const taskId = ownProps.params.taskId;
-    const task = state.tasks.data.filter((task => {
-        return task.id === taskId
-    }));
+    const task = state.tasks.data.filter((task) => task.id == taskId);
     return {
-        task: task
+        task: task.length > 0 ? task[0] : false
     };
 }
 function mapDispatchToProps(dispatch) {
