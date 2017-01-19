@@ -5,8 +5,7 @@ const Pagination = ({total, page, links, loadFunction}) => {
     return (
         <div>
 
-                    <h4><strong>Total</strong></h4>
-                    <h4><strong>{total}</strong></h4>
+
 
                     <ul className="uk-pagination uk-margin-medium-top uk-margin-medium-bottom">
                         {links && links.first && links.first !== links.self &&
@@ -23,6 +22,9 @@ const Pagination = ({total, page, links, loadFunction}) => {
                         {links && links.last && links.last !== links.self &&
                         <li onClick={loadFunction.bind(null, links.last)} ><a href="#"><i className="uk-icon-angle-double-right"/></a></li>}
                     </ul>
+
+            {/*<h4><strong>Total</strong></h4>*/}
+            {/*<h4><strong>{total}</strong></h4>*/}
 
         </div>
     );
