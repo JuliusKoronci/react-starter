@@ -9,9 +9,15 @@ class Task extends Component {
         super(props, context);
     }
 
+    componentDidMount() {
+        if (this.props.task.length === 0) {
+            console.log('no task');
+        }
+    }
+
     render() {
         return (
-           <p></p>
+            <p>Task</p>
         );
     }
 }
@@ -22,9 +28,13 @@ Task.propTypes = {
 };
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+    const taskId = ownProps.params.taskId;
+    const task = state.tasks.data.filter((task => {
+        return task.id === taskId
+    }));
     return {
-        state: state
+        task: task
     };
 }
 function mapDispatchToProps(dispatch) {
