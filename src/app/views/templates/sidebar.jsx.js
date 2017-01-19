@@ -1,12 +1,10 @@
 import React, {PropTypes} from 'react';
-import UserAvatar from './main/_partials/userAvatar.jsx';
 
-const sidebar = ({user, filter}) => {
+const sidebar = ({filter}) => {
     return (
         <aside id="sidebar_main">
             <div className="sidebar_main_header">
                 <div className="sidebar_logosidebar_logo">
-                    <a href="#"><UserAvatar user={user}/></a>
                 </div>
             </div>
 
@@ -21,8 +19,7 @@ const sidebar = ({user, filter}) => {
                                 </a>
                             </li>
                         );
-                    })};
-
+                    })}
                 </ul>
             </div>
         </aside>
@@ -30,7 +27,6 @@ const sidebar = ({user, filter}) => {
 };
 
 sidebar.propTypes = {
-    user: PropTypes.object.isRequired,
     filter: PropTypes.array.isRequired
 };
 
