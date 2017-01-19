@@ -18,8 +18,11 @@ class Main extends Component {
 
     componentDidMount() {
         document.body.className = 'sidebar_main_open sidebar_main_swipe';
-        this.isAuthenticated();
         this.props.actions.requestFilters();
+    }
+
+    componentWillMount(){
+        this.isAuthenticated();
     }
 
     componentDidUpdate() {

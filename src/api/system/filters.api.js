@@ -12,10 +12,11 @@ function mockDefault() {
 }
 
 function loadDefault() {
+    const token = getFromStorage(TOKEN_KEY);
     let config = {
         method: 'GET',
         headers: {
-            'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY)
+            'Authorization': 'Bearer ' + token
         }
     };
 
