@@ -26,25 +26,14 @@ class Main extends Component {
     componentWillMount(){
         this.isAuthenticated();
 
-        if(getFromStorage(SIDEBAR_IS_MINIFIED)){
-            console.log('got sidebar from storage: ' + getFromStorage(SIDEBAR_IS_MINIFIED));
-        }
-        else{
-            console.log('sidebar in storage: '+ getFromStorage(SIDEBAR_IS_MINIFIED));
-        }
-
-
-        this.props.actions.toggleSidebar(getFromStorage(SIDEBAR_IS_MINIFIED)?true:false);
-
-
+        this.props.actions.toggleSidebar(!!getFromStorage(SIDEBAR_IS_MINIFIED));
     }
 
     componentDidUpdate() {
         this.isAuthenticated();
         this.handleAsyncErrors();
 
-        console.log('Main.js sidebar is minified ' + this.props.sidebarIsMinified);
-
+        //minified or normal sidebar
         if(this.props.sidebarIsMinified){
             document.body.classList.add('sidebar_mini');
         }else{

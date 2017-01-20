@@ -4,12 +4,9 @@ const defaultState = {
     'sidebarIsMinified':false
 };
 
-export default function sidebar(state={}, action) {
-    // console.log(state.sidebarIsShown);
-    console.log(action);
+export default function sidebar(state=defaultState, action) {
     switch (action.type) {
         case TOGGLE_SIDEBAR:
-            console.log(action.data + ' in reducer');
             return{
                 'sidebarIsMinified':action.data
             };

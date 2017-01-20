@@ -14,7 +14,6 @@ export function filtersReceived(data) {
 }
 
 export function toggleSidebar(data) {
-    console.log('action data:' + data);
     return {
         type: TOGGLE_SIDEBAR,
         data: data,
