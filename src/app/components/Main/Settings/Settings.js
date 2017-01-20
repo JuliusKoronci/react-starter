@@ -2,16 +2,13 @@ import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../redux/actions/settings.action';
+import View from '../../../views/templates/main/settings/settings.jsx';
 
 class Settings extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         return (
-            <div>Settings</div>
+            <View prop={{}} />
         );
     }
 }
