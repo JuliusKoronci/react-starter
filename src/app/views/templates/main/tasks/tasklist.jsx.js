@@ -3,7 +3,7 @@ import Task from './taskrow.jsx';
 import Pagination from '../_partials/pagination.jsx';
 
 
-const tasklist = ({tasks}) => {
+const tasklist = ({tasks, loadTasksFunction}) => {
 
 
     return (
@@ -61,7 +61,7 @@ const tasklist = ({tasks}) => {
             </div>
 
             <Pagination links={tasks._links} total={tasks.total} page={tasks.page}
-                        loadFunction={()=>{}}/>
+                        loadFunction={loadTasksFunction}/>
 
         </div>
     );

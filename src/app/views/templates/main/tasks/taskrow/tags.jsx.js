@@ -11,4 +11,8 @@ const tagList = ({task}) => {
     )
 };
 
+tagList.propTypes = {
+    task: PropTypes.object.isRequired
+};
+
 export default tagList;

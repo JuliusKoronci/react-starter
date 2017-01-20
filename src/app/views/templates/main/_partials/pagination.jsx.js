@@ -1,50 +1,32 @@
 import React, {PropTypes} from 'react';
 
-// const Pagination = ({data}) => {
-//
-//     console.log(data);
-//     //total,page,numberOfPages
-//     //_links self first last prev next
-//
-//     return (
-//
-//         <div>
-//             pages: <a href=""></a>
-//         </div>
-//     )
-// };
-//
-// export default Pagination;
-
 
 const Pagination = ({total, page, links, loadFunction}) => {
     return (
-        <table>
-            <tbody>
-            <tr>
-                <td>
-                    <h4><strong>Total</strong></h4></td>
-                <td>
-                    <h4><strong>{total}</strong></h4></td>
+        <div>
 
-                <td colSpan="3">
-                    {links && links.first && links.first != links.self &&
-                    <button type="button" className="btn btn-primary" onClick={loadFunction.bind(null, links.first)}>
-                        <i className="fa fa-angle-left left"/><i className="fa fa-angle-left left"/></button>}
-                    {links && links.prev &&
-                    <button type="button" className="btn btn-primary" onClick={loadFunction.bind(null, links.prev)}>
-                        <i className="fa fa-angle-left left"/></button>}
-                    <button type="button" className="btn btn-success">{page}</button>
-                    {links && links.next &&
-                    <button type="button" className="btn btn-primary" onClick={loadFunction.bind(null, links.next)}>
-                        <i className="fa fa-angle-right right"/></button>}
-                    {links && links.last && links.last != links.self &&
-                    <button type="button" className="btn btn-primary" onClick={loadFunction.bind(null, links.last)}>
-                        <i className="fa fa-angle-right right"/><i className="fa fa-angle-right right"/></button>}
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+
+                    <ul className="uk-pagination uk-margin-medium-top uk-margin-medium-bottom">
+                        {links && links.first && links.first !== links.self &&
+                        <li onClick={loadFunction.bind(null, links.first)}><span><i className="uk-icon-angle-double-left"/></span></li>}
+
+                        {links && links.prev &&
+                        <li onClick={loadFunction.bind(null, links.prev)}><span><i className="uk-icon-angle-left"/></span></li>}
+
+                        <li className="uk-active"><span>{page}</span></li>
+
+                        {links && links.next &&
+                        <li onClick={loadFunction.bind(null, links.next)} ><a href="#"><i className="uk-icon-angle-right"/></a></li>}
+
+                        {links && links.last && links.last !== links.self &&
+                        <li onClick={loadFunction.bind(null, links.last)} ><a href="#"><i className="uk-icon-angle-double-right"/></a></li>}
+                    </ul>
+
+            {/*<h4><strong>Total</strong></h4>*/}
+            {/*<h4><strong>{total}</strong></h4>*/}
+
+        </div>
     );
 };
 

@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../redux/actions/auth.actions';
 import LoginForm from '../../forms/Login/Login.form';
-import {history} from '../../../config/store';
 import toastr from 'toastr';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
 
@@ -22,7 +21,7 @@ class Login extends Component {
         if (this.props.state.auth.authenticated) {
             NProgress.done();
             toastr.success('Welcome ' + this.props.state.auth.user.username);
-            history.push('/');
+            window.location = '/';
         }
         if(this.props.state.auth.error !== ''){
             NProgress.done();

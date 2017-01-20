@@ -10,9 +10,15 @@ class Dashboard extends Component {
         this.props.actions.requestDefaultTasks();
     }
 
+
+
+    loadTasksFunction =(url, e)=>{
+        this.props.actions.requestTasksFromUrl(url);
+    };
+
     render() {
         return (
-            <View tasks={this.props.tasks}/>
+            <View tasks={this.props.tasks} loadTasksFunction={this.loadTasksFunction} />
         );
     }
 }
