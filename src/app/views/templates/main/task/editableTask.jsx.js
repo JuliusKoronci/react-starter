@@ -10,19 +10,22 @@ import RightMain from './right/main.jsx';
 
 const editableTask = (props) => {
     return (
-        <div>
-            <div className="top">
+        <div className="uk-form-row">
+            <div className="uk-grid" data-uk-grid-margin>
                 <TaskInfo {...props}/>
                 <TaskActions {...props}/>
             </div>
-            <div className="left">
-                <Summary {...props}/>
-                <Material {...props}/>
-                <CommentForm {...props}/>
-                <CommentList {...props}/>
-            </div>
-            <div className="right">
-                <RightMain {...props}/>
+            <hr />
+            <div className="uk-grid uk-grid-divider" data-uk-grid-margin>
+                <div className="uk-width-medium-3-4">
+                    <Summary {...props}/>
+                    <Material {...props}/>
+                    <CommentForm {...props}/>
+                    <CommentList {...props}/>
+                </div>
+                <div className="uk-width-medium-1-4">
+                    <RightMain {...props}/>
+                </div>
             </div>
         </div>
     );
