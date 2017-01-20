@@ -9,58 +9,84 @@ const settings = (prop) => {
                     <h1 className="heading_b uk-margin-bottom">Settings</h1>
                 </div>
                 <hr/>
-
                 <table className="uk-table uk-text-nowrap">
                     <tbody>
                     <tr>
-                        <td><a href="settings_roles.html" className="uk-text-large"> Roles</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_shared_filters.html" className="uk-text-large">Shared Filters</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_project_shared_filters.html" className="uk-text-large">Project Shared
-                            Filters</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_custom_fields.html" className="uk-text-large">Task custom Fields</a>
+                        <td>
+                            <Link to='/settings/automated_tasks' className="uk-text-large">Automated tasks</Link>
                         </td>
                     </tr>
                     <tr>
-                        <td><a href="settings_units.html" className="uk-text-large">Units</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_statuses.html" className="uk-text-large">Statuses</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_users.html" className="uk-text-large">Users</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_user_custom_fields.html" className="uk-text-large">Users custom
-                            fields </a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_companies.html" className="uk-text-large">Companies</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_company_custom_fields.html" className="uk-text-large">Companies custom
-                            fields </a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_imaps.html" className="uk-text-large">Imap</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_smtps.html" className="uk-text-large">SMTP</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_smtps.html" className="uk-text-large">Trigers</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="settings_automated_tasks.html" className="uk-text-large">Automated tasks</a>
+                        <td>
+                            <Link to='/settings/Companies' className="uk-text-large">Companies</Link>
                         </td>
                     </tr>
                     <tr>
-                        <td><a href="settings_automated_tasks.html" className="uk-text-large">Email notification</a>
+                        <td>
+                            <Link to='/settings/company_custom_fields' className="uk-text-large">Companies custom
+                                fields</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/email_notifications' className="uk-text-large">Email notifications</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/imaps' className="uk-text-large">IMAPs</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/project_shared_filters' className="uk-text-large">Project Shared
+                                Filters</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/roles' className="uk-text-large">Roles</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/shared_filters' className="uk-text-large">Shared Filters</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/smtps' className="uk-text-large">SMTPs</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/statuses' className="uk-text-large">Statuses</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/task_custom_fields' className="uk-text-large">Task custom Fields</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/trigers' className="uk-text-large">Trigers</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/units' className="uk-text-large">Units</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/users' className="uk-text-large">Users</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link to='/settings/user_custom_fields' className="uk-text-large">Users custom
+                                fields</Link>
                         </td>
                     </tr>
                     </tbody>
