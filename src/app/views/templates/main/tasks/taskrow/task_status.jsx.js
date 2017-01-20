@@ -10,4 +10,9 @@ const taskStatus = ({task}) => {
     )
 };
 
+
+taskStatus.propTypes = {
+    task: PropTypes.object.isRequired
+};
+
 export default taskStatus;

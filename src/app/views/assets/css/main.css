@@ -11707,7 +11707,7 @@ div.kineticjs-content {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 192), only screen and (min-resolution: 192dppx), only screen and (min-resolution: 2dppx) {
   #sidebar_main .sidebar_main_header {
-    background-image: url("../img/sidebar_head_bg@2x.png");
+    /*background-image: url("../img/sidebar_head_bg@2x.png");*/
     background-size: 310px 310px;
   }
 }

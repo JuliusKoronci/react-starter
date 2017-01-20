@@ -1,4 +1,4 @@
-import {TASKS_RECEIVED} from '../../constants';
+import {TASKS_RECEIVED,TASK_RECEIVED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -13,6 +13,11 @@ export default function tasks(state = defaultState, action) {
     switch (action.type) {
         case TASKS_RECEIVED:
             return action.data;
+        case TASK_RECEIVED:
+            return {
+                ...state,
+                'data': [...state.data, action.data.data]
+            };
         default:
             return state;
     }

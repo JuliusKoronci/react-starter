@@ -6,10 +6,6 @@ import View from '../../../views/templates/main/users/profile.jsx';
 
 class Profile extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         const {user} = this.props;
         return (

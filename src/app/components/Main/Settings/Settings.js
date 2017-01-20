@@ -6,10 +6,6 @@ import View from '../../../views/templates/main/settings/settings.jsx';
 
 class Settings extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         return (
             <View prop={{}} />

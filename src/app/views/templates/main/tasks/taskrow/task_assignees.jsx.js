@@ -10,4 +10,10 @@ const taskAssignees = ({task}) => {
     )
 };
 
+
+taskAssignees.propTypes = {
+    task: PropTypes.object.isRequired
+};
+
+
 export default taskAssignees;

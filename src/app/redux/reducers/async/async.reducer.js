@@ -29,7 +29,6 @@ export default function async(state = {
                 ...state,
                 error: action.error
             };
-            break;
         default:
             return state;
     }
