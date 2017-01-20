@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react';
-import View from '../../../views/templates/main/settings/users.jsx';
+import View from '../../../views/templates/main/settings/companies_custom_fields.jsx';
 
-class Users extends Component {
+class CompaniesCustomFields extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -14,9 +14,9 @@ class Users extends Component {
     }
 }
 
-Users.propTypes = {
+CompaniesCustomFields.propTypes = {
     //myProp: PropTypes.string.isRequired 
 };
 
 
-export default Users;
+export default CompaniesCustomFields;

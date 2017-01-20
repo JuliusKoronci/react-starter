@@ -13,7 +13,7 @@ const settings = (prop) => {
                     <tbody>
                     <tr>
                         <td>
-                            <Link to='/settings/automated_tasks' className="uk-text-large">Automated tasks</Link>
+                            <Link to='/settings/automated-tasks' className="uk-text-large">Automated tasks</Link>
                         </td>
                     </tr>
                     <tr>
@@ -23,13 +23,13 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/company_custom_fields' className="uk-text-large">Companies custom
+                            <Link to='/settings/companies-custom-fields' className="uk-text-large">Companies custom
                                 fields</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/email_notifications' className="uk-text-large">Email notifications</Link>
+                            <Link to='/settings/email-notification' className="uk-text-large">Email notifications</Link>
                         </td>
                     </tr>
                     <tr>
@@ -39,7 +39,7 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/project_shared_filters' className="uk-text-large">Project Shared
+                            <Link to='/settings/project-shared-filters' className="uk-text-large">Project Shared
                                 Filters</Link>
                         </td>
                     </tr>
@@ -50,7 +50,7 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/shared_filters' className="uk-text-large">Shared Filters</Link>
+                            <Link to='/settings/shared-filters' className="uk-text-large">Shared Filters</Link>
                         </td>
                     </tr>
                     <tr>
@@ -65,7 +65,7 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/task_custom_fields' className="uk-text-large">Task custom Fields</Link>
+                            <Link to='/settings/task-custom-fields' className="uk-text-large">Task custom Fields</Link>
                         </td>
                     </tr>
                     <tr>
@@ -85,7 +85,7 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/user_custom_fields' className="uk-text-large">Users custom
+                            <Link to='/settings/user-custom-fields' className="uk-text-large">Users custom
                                 fields</Link>
                         </td>
                     </tr>

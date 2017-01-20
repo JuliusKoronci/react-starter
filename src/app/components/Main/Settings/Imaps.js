@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react';
-import View from '../../../views/templates/main/settings/users.jsx';
+import View from '../../../views/templates/main/settings/imaps.jsx';
 
-class Users extends Component {
+class imaps extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -14,9 +14,9 @@ class Users extends Component {
     }
 }
 
-Users.propTypes = {
+imaps.propTypes = {
     //myProp: PropTypes.string.isRequired 
 };
 
 
-export default Users;
+export default imaps;
