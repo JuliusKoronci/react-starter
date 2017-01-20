@@ -5,10 +5,6 @@ import * as actions from '../../../redux/actions/settings.action';
 
 class Settings extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         return (
             <div>Settings</div>

@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../redux/actions/auth.actions';
 import LoginForm from '../../forms/Login/Login.form';
-import {history} from '../../../config/store';
 import toastr from 'toastr';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
 
