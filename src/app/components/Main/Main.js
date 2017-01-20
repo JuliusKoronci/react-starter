@@ -13,6 +13,8 @@ import NProgress from '../../../../node_modules/nprogress/nprogress';
 import '../../views/assets/css/main.css';
 import '../../views/assets/css/themes/themes_combined.min.css';
 import '../../views/assets/css/nprogress.css';
+import {getFromStorage} from '../../services/storage';
+import {TOGGLE_SIDEBAR} from '../../redux/constants';
 
 class Main extends Component {
 
@@ -23,11 +25,31 @@ class Main extends Component {
 
     componentWillMount(){
         this.isAuthenticated();
+
+        if(getFromStorage(TOGGLE_SIDEBAR)){
+            console.log('got sidebar from storage: ' + getFromStorage(TOGGLE_SIDEBAR));
+        }
+        else{
+            console.log('sidebar in storage: '+ getFromStorage(TOGGLE_SIDEBAR));
+        }
+
+        this.props.actions.toggleSidebar(getFromStorage(TOGGLE_SIDEBAR));
+
+
     }
 
     componentDidUpdate() {
         this.isAuthenticated();
         this.handleAsyncErrors();
+
+        console.log('Main.js sidebar is shown ' + this.props.sidebarIsShown);
+
+        if(this.props.sidebarIsShown){
+            document.body.classList.remove('sidebar_mini');
+        }else{
+            document.body.classList.add('sidebar_mini');
+        }
+
 
         if (this.props.load_count > 0 && !this.props.stop) {
             NProgress.start();
@@ -67,7 +89,7 @@ class Main extends Component {
     render() {
         const {authenticated} = this.props;
         if (authenticated) {
-            return <Layout children={this.props.children} {...this.props}/>;
+            return <Layout children={this.props.children} {...this.props} sidebarIsShown={this.props.sidebarIsShown} />;
         }
 
         return null;
@@ -88,7 +110,8 @@ function mapStateToProps(state) {
         error: state.async.error,
         load_count: state.async.load_count ? state.async.load_count : 0,
         user: state.auth.user,
-        filter: state.filter
+        filter: state.filter,
+        sidebarIsShown: state.settings.sidebarIsShown
     };
 }
 function mapDispatchToProps(dispatch) {

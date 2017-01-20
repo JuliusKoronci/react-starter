@@ -2,14 +2,16 @@ import React, {PropTypes} from 'react';
 import UserAvatar from './main/_partials/userAvatar.jsx';
 import {Link} from 'react-router';
 
-const header = ({user, logout}) => {
+const header = ({user, logout, sidebarIsShown, toggleSidebar}) => {
+
     return (
         <header id="header_main">
             <div className="header_main_content">
                 <nav className="uk-navbar">
-                    <a href="#" id="sidebar_main_toggle" className="sSwitch sSwitch_left">
+                    <a href="#" id="sidebar_main_toggle" className={sidebarIsShown?"sSwitch sSwitch_left":"sSwitch sSwitch_right"} onClick={toggleSidebar.bind(null, !sidebarIsShown)} >
                         <span className="sSwitchIcon"/>
                     </a>
+
                     <div className="uk-navbar-flip">
                         <ul className="uk-navbar-nav user_actions">
                             <li><a href="#" id="full_screen_toggle" className="user_action_icon uk-visible-large"><i

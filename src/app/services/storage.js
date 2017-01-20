@@ -1,4 +1,5 @@
 export function addToStorage(key, data) {
+    console.log('adding to storage '+key+' - '+data);
     localStorage.setItem(key, JSON.stringify(data));
 }
 
