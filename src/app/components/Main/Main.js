@@ -14,7 +14,7 @@ import '../../views/assets/css/main.css';
 import '../../views/assets/css/themes/themes_combined.min.css';
 import '../../views/assets/css/nprogress.css';
 import {getFromStorage} from '../../services/storage';
-import {TOGGLE_SIDEBAR} from '../../redux/constants';
+import {TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED} from '../../redux/constants';
 
 class Main extends Component {
 
@@ -26,14 +26,15 @@ class Main extends Component {
     componentWillMount(){
         this.isAuthenticated();
 
-        if(getFromStorage(TOGGLE_SIDEBAR)){
-            console.log('got sidebar from storage: ' + getFromStorage(TOGGLE_SIDEBAR));
+        if(getFromStorage(SIDEBAR_IS_MINIFIED)){
+            console.log('got sidebar from storage: ' + getFromStorage(SIDEBAR_IS_MINIFIED));
         }
         else{
-            console.log('sidebar in storage: '+ getFromStorage(TOGGLE_SIDEBAR));
+            console.log('sidebar in storage: '+ getFromStorage(SIDEBAR_IS_MINIFIED));
         }
 
-        this.props.actions.toggleSidebar(getFromStorage(TOGGLE_SIDEBAR));
+
+        this.props.actions.toggleSidebar(getFromStorage(SIDEBAR_IS_MINIFIED)?true:false);
 
 
     }
@@ -42,12 +43,12 @@ class Main extends Component {
         this.isAuthenticated();
         this.handleAsyncErrors();
 
-        console.log('Main.js sidebar is shown ' + this.props.sidebarIsShown);
+        console.log('Main.js sidebar is minified ' + this.props.sidebarIsMinified);
 
-        if(this.props.sidebarIsShown){
-            document.body.classList.remove('sidebar_mini');
-        }else{
+        if(this.props.sidebarIsMinified){
             document.body.classList.add('sidebar_mini');
+        }else{
+            document.body.classList.remove('sidebar_mini');
         }
 
 
@@ -89,7 +90,7 @@ class Main extends Component {
     render() {
         const {authenticated} = this.props;
         if (authenticated) {
-            return <Layout children={this.props.children} {...this.props} sidebarIsShown={this.props.sidebarIsShown} />;
+            return <Layout children={this.props.children} {...this.props} sidebarIsMinified={this.props.sidebarIsMinified} />;
         }
 
         return null;
@@ -111,7 +112,7 @@ function mapStateToProps(state) {
         load_count: state.async.load_count ? state.async.load_count : 0,
         user: state.auth.user,
         filter: state.filter,
-        sidebarIsShown: state.settings.sidebarIsShown
+        sidebarIsMinified: state.settings.sidebarIsMinified
     };
 }
 function mapDispatchToProps(dispatch) {

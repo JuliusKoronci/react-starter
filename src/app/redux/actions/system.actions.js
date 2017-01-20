@@ -1,4 +1,4 @@
-import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR} from '../constants';
+import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED} from '../constants';
 
 export function requestFilters() {
     return {
@@ -18,7 +18,7 @@ export function toggleSidebar(data) {
     return {
         type: TOGGLE_SIDEBAR,
         data: data,
-        storage: TOGGLE_SIDEBAR
+        storage: SIDEBAR_IS_MINIFIED
 
     }
 }

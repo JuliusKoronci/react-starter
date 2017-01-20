@@ -1,7 +1,7 @@
 import {TOGGLE_SIDEBAR} from '../../constants';
 
 const defaultState = {
-    'sidebarIsShown':true
+    'sidebarIsMinified':false
 };
 
 export default function sidebar(state={}, action) {
@@ -11,7 +11,7 @@ export default function sidebar(state={}, action) {
         case TOGGLE_SIDEBAR:
             console.log(action.data + ' in reducer');
             return{
-                'sidebarIsShown':action.data
+                'sidebarIsMinified':action.data
             };
         default:
             return state;
