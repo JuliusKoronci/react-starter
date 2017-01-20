@@ -2,6 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../redux/actions/users.action';
+import View from '../../../views/templates/main/users/profile.jsx';
 
 class Profile extends Component {
 
@@ -10,8 +11,9 @@ class Profile extends Component {
     }
 
     render() {
+        const {user} = this.props;
         return (
-            <div>Profile</div>
+            <View user={user}/>
         );
     }
 }
@@ -22,9 +24,9 @@ Profile.propTypes = {
 };
 
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
-        state: state
+        user: state.auth.user
     };
 }
 function mapDispatchToProps(dispatch) {

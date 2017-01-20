@@ -8,6 +8,7 @@ import Dashboard from '../app/components/Main/Dashboard/Dashboard';
 import NotFoundPage from '../app/components/Main/NotFoundPage';
 import Profile from '../app/components/Main/Users/Profile';
 import Settings from '../app/components/Main/Settings/Settings';
+import Users from '../app/components/Main/Settings/Users';
 
 export default (
     <Route component={App}>
@@ -17,6 +18,7 @@ export default (
             <IndexRoute component={Dashboard}/>
             <Route path="profile" component={Profile}/>
             <Route name="settings" path="settings/default" component={Settings}/>
+            <Route name="users" path="settings/users" component={Users}/>
             <Route path="*" component={NotFoundPage}/>
         </Route>
     </Route>
