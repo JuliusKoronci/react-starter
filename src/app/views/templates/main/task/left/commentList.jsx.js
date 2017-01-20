@@ -1,13 +1,10 @@
 import React, {PropTypes} from 'react';
 
-const commentList = (prop) => {
+const commentList = () => {
     return (
         <div></div>
     );
 };
 
-commentList.propTypes = {
-    prop: PropTypes.object.isRequired
-};
 
 export default commentList;

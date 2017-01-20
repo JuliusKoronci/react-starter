@@ -14,7 +14,7 @@ const commentForm = () => {
                     <p/>
                     <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
                            data-md-icheck/>
-                    <label for="checkbox_demo_inline_1" className="inline-label margin15">Internal Note </label>
+                    <label htmlFor="checkbox_demo_inline_1" className="inline-label margin15">Internal Note </label>
                     <a className="md-btn-flat-primary" href="#">Add attachment</a>
                     <a className="md-btn md-btn-primary md-btn-small md-btn-wave-light" href="#">Add</a>
                     <hr/>
