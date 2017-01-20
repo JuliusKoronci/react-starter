@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 
-const main = (prop) => {
+const main = ({task}) => {
     return (
         <div>prava sekcia</div>
     );
 };
 
 main.propTypes = {
-    prop: PropTypes.object.isRequired
+    task: PropTypes.object.isRequired
 };
 
 export default main;
