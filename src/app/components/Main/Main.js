@@ -5,7 +5,7 @@ import * as actions from '../../redux/actions/auth.actions';
 import * as asyncActions from '../../redux/actions/async.action';
 import * as systemActions from '../../redux/actions/system.actions';
 import {history} from '../../../config/store';
-import toastr from 'toastr';
+import toastr from '../../../config/modules';
 import {isUserStoredLocaly} from '../../../config/security';
 import jwtDecode from 'jwt-decode';
 import Layout from '../../views/templates/layout.jsx';

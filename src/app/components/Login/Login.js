@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../redux/actions/auth.actions';
 import LoginForm from '../../forms/Login/Login.form';
-import toastr from 'toastr';
+import toastr from '../../../config/modules';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
 
 class Login extends Component {
@@ -25,6 +25,7 @@ class Login extends Component {
         }
         if(this.props.state.auth.error !== ''){
             NProgress.done();
+            toastr.error('error');
         }
     };
 
