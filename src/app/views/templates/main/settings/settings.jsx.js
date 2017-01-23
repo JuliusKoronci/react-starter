@@ -91,6 +91,10 @@ const settings = (prop) => {
                     </tr>
                     </tbody>
                 </table>
+
+                <div className="text-allign-right">
+                    <a className="md-btn md-btn-primary" href="settings_company.html">Add</a>
+                </div>
             </div>
         </div>
     );

@@ -9,6 +9,21 @@ const EmailNotification = (prop) => {
                     <h1 className="heading_b uk-margin-bottom">Email notification</h1>
                 </div>
                 <hr/>
+
+                
+                
+                
+                
+
+
+
+
+
+
+
+                <div className="text-allign-right">
+                    <a className="md-btn md-btn-primary" href="settings_company.html">Add</a>
+                </div>
             </div>
         </div>
     );

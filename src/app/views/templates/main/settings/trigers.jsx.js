@@ -9,6 +9,10 @@ const trigers = (prop) => {
                     <h1 className="heading_b uk-margin-bottom">Trigers</h1>
                 </div>
                 <hr/>
+
+                <div className="text-allign-right">
+                    <a className="md-btn md-btn-primary" href="settings_company.html">Add</a>
+                </div>
             </div>
         </div>
     );
