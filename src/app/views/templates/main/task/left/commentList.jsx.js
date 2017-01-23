@@ -14,7 +14,7 @@ const commentList = () => {
                             <div className="uk-width-medium-3-4">
                                 <p className="uk-comment-title">
                                     Marcelina Lueilwitz
-                                    <span className="uk-comment-title uk-text-italic">posted note</span>
+                                    <span className="uk-comment-title uk-text-italic" style={{marginLeft: '10px'}}>posted note</span>
                                 </p>
                             </div>
                             <div className="uk-width-medium-1-4">
