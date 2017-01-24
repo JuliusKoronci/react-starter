@@ -32,22 +32,24 @@ const profile = ({user}) => {
                         General info
                     </h3>
                     <div className="uk-grid" data-uk-grid-margin>
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-2 uk-margin-bottom">
                             <label>User name</label>
                             <input className="md-input" type="text" id="user_edit_uname_control"
                                    name="user_edit_uname_control"/>
                         </div>
-                        <div className="uk-width-medium-1-2">
+
+
+                        <div className="uk-width-medium-1-2 uk-margin-bottom">
                             <label>User position</label>
                             <input className="md-input" type="text" id="user_edit_position_control"
                                    name="user_edit_position_control"/>
                         </div>
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-2 uk-margin-bottom">
                             <label>Firstname</label>
                             <input className="md-input" type="text" id="user_edit_uname_control"
                                    name="user_edit_uname_control"/>
                         </div>
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-2 uk-margin-bottom">
                             <label>Surname</label>
                             <input className="md-input" type="text" id="user_edit_position_control"
                                    name="user_edit_position_control"/>
@@ -79,30 +81,29 @@ const profile = ({user}) => {
                         <div className="uk-width-1-1">
                             <div className="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2"
                                  data-uk-grid-margin>
-                                <div>
-                                    <div className="uk-input-group">
+
+                                <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon material-icons">
                                                                         &#xE158;</i>
                                                                 </span>
-                                        <label>Email</label>
-                                        <input type="text" className="md-input" name="user_edit_email"
-                                               value="milan.bauch@hotmail.com"/>
-                                    </div>
+                                    <label>Email</label>
+                                    <input type="text" className="md-input" name="user_edit_email"
+                                           value="milan.bauch@hotmail.com"/>
                                 </div>
-                                <div>
-                                    <div className="uk-input-group">
+
+                                <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon material-icons">
                                                                         &#xE0CD;</i>
                                                                 </span>
-                                        <label>Phone Number</label>
-                                        <input type="text" className="md-input" name="user_edit_phone"
-                                               value="1-236-879-2171x5473"/>
-                                    </div>
+                                    <label>Phone Number</label>
+                                    <input type="text" className="md-input" name="user_edit_phone"
+                                           value="1-236-879-2171x5473"/>
                                 </div>
+
                                 <div>
-                                    <div className="uk-input-group">
+                                    <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon uk-icon-facebook-official"></i>
                                                                 </span>
@@ -112,36 +113,35 @@ const profile = ({user}) => {
                                                value="facebook.com/envato"/>
                                     </div>
                                 </div>
-                                <div>
-                                    <div className="uk-input-group">
+
+                                <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon uk-icon-twitter"></i>
                                                                 </span>
-                                        <label>Twitter</label>
-                                        <input type="text" className="md-input" name="user_edit_twitter"
-                                               value="twitter.com/envato"/>
-                                    </div>
+                                    <label>Twitter</label>
+                                    <input type="text" className="md-input" name="user_edit_twitter"
+                                           value="twitter.com/envato"/>
                                 </div>
-                                <div>
-                                    <div className="uk-input-group">
+
+
+                                <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon uk-icon-linkedin"></i>
                                                                 </span>
-                                        <label>Linkdin</label>
-                                        <input type="text" className="md-input" name="user_edit_linkdin"
-                                               value="linkedin.com/company/envato"/>
-                                    </div>
+                                    <label>Linkdin</label>
+                                    <input type="text" className="md-input" name="user_edit_linkdin"
+                                           value="linkedin.com/company/envato"/>
                                 </div>
-                                <div>
-                                    <div className="uk-input-group">
+
+
+                                <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon uk-icon-google-plus"></i>
                                                                 </span>
-                                        <label>Google+</label>
-                                        <input type="text" className="md-input"
-                                               name="user_edit_google_plus"
-                                               value="plus.google.com/+envato/about"/>
-                                    </div>
+                                    <label>Google+</label>
+                                    <input type="text" className="md-input"
+                                           name="user_edit_google_plus"
+                                           value="plus.google.com/+envato/about"/>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +172,7 @@ const profile = ({user}) => {
                         </div>
                         <div className="uk-grid-margin">
                             <a className="md-btn md-btn-danger" href="#">Cancel</a>
-                            <a className="md-btn md-btn-primary alignright" href="#">Save</a>
+                            <a className="md-btn md-btn-primary alignright" href="#">Change password</a>
                         </div>
                     </div>
                 </div>
