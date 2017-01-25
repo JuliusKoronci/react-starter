@@ -1,4 +1,4 @@
-import {USERS_RECEIVED} from '../../constants';
+import {STATUSES_RECEIVED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -9,9 +9,9 @@ const defaultState = {
 };
 
 
-export default function users(state = defaultState, action) {
+export default function statuses(state = defaultState, action) {
     switch (action.type) {
-        case USERS_RECEIVED:
+        case STATUSES_RECEIVED:
             return action.response;
         default:
             return state;
