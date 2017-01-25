@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react';
+import View from '../../../../views/templates/main/settings/users/users.jsx.js';
 
 class Users extends Component {
 
@@ -8,7 +9,7 @@ class Users extends Component {
 
     render() {
         return (
-            <div>Users</div>
+            <View prop={{}} />
         );
     }
 }

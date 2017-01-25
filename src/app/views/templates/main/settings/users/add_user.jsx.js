@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 
-const profile = ({user}) => {
+const user_form = (prop) => {
     return (
         <div className="md-card">
-
             <div className="md-card-content">
                 <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                     <div className="fileinput-new thumbnail">
@@ -38,7 +38,6 @@ const profile = ({user}) => {
                                    name="user_edit_uname_control"/>
                         </div>
 
-
                         <div className="uk-width-medium-1-2 uk-margin-bottom">
                             <label>User position</label>
                             <input className="md-input" type="text" id="user_edit_position_control"
@@ -54,6 +53,18 @@ const profile = ({user}) => {
                             <input className="md-input" type="text" id="user_edit_position_control"
                                    name="user_edit_position_control"/>
                         </div>
+
+                        <div className="uk-width-medium-1-2 uk-margin-bottom">
+                            <label>Company</label>
+                            <input className="md-input" type="text" id="user_edit_position_control"
+                                   name="user_edit_position_control"/>
+                        </div>
+                        <div className="uk-width-medium-1-2 uk-margin-bottom">
+                            <label>Role</label>
+                            <input className="md-input" type="text" id="user_edit_position_control"
+                                   name="user_edit_position_control"/>
+                        </div>
+
                     </div>
                     <div className="uk-grid">
                         <div className="uk-width-1-1">
@@ -146,6 +157,9 @@ const profile = ({user}) => {
                             </div>
                         </div>
                     </div>
+                    <h3 className="full_width_in_card heading_c">
+                        Custom user fields
+                    </h3>
                     <div className="uk-grid-margin">
                         <a className="md-btn md-btn-danger" href="#">Cancel</a>
                         <a className="md-btn md-btn-primary alignright" href="#">Save</a>
@@ -176,15 +190,13 @@ const profile = ({user}) => {
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     );
 };
 
-profile.propTypes = {
-    user: PropTypes.object.isRequired
+user_form.propTypes = {
+    prop: PropTypes.object.isRequired
 };
 
-export default profile;
+export default user_form;
