@@ -5,6 +5,7 @@ import authReducer from './auth/auth.reducer';
 import asyncReducer from './async/async.reducer';
 import tasksReducer from './tasks/tasks.reducer';
 import filterReducer from './system/filter.reducer';
+import usersReducer from './settings/users.reducer';
 import settingsReducer from './system/settings.reducer';
 import {REDUX_RESET} from '../constants';
 
@@ -15,7 +16,8 @@ const appReducer = combineReducers({
     async: asyncReducer,
     tasks: tasksReducer,
     filter: filterReducer,
-    settings: settingsReducer
+    settings: settingsReducer,
+    users: usersReducer
 });
 
 const rootReducer = (state, action) => {

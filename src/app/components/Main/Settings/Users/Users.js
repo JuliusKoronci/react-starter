@@ -1,22 +1,35 @@
 import React, {PropTypes, Component} from 'react';
 import View from '../../../../views/templates/main/settings/users/users.jsx.js';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../../../redux/actions/settings.action';
 
 class Users extends Component {
 
-    constructor(props, context) {
-        super(props, context);
+    componentWillMount() {
+        this.props.actions.requestUsers();
     }
 
     render() {
         return (
-            <View prop={{}} />
+            <View {...this.props.users} loadUsers={this.props.actions.requestUsers}/>
         );
     }
 }
 
 Users.propTypes = {
-    //myProp: PropTypes.string.isRequired 
+    users: PropTypes.object.isRequired
 };
 
+function mapStateToProps(state) {
+    return {
+        users: state.users
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({...actions}, dispatch)
+    };
+}
 
-export default Users;
+export default connect(mapStateToProps, mapDispatchToProps)(Users);
