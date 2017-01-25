@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
 
-const companies = (prop) => {
+const companies = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -25,26 +26,24 @@ const companies = (prop) => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="settings_company.html">Company 1</a></td>
-                        <td className="uk-text-center">Yes</td>
+
+                    {props.data.map((company, i) => {
+                        return (
+                        <tr key={i}>
+                        <td>{company.id}</td>
+                        <td><a href="settings_company.html">{company.title}</a></td>
+                        <td className="uk-text-center">{company.is_active ? 'yes' : 'no'}</td>
                         <td className="uk-text-center">
                             <a className="md-btn md-btn-danger" href="#">Delete</a>
                             <a className="md-btn md-btn-primary" href="settings_company.html">Edit</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="settings_company.html">Company 1</a></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_company.html">Edit</a>
-                        </td>
-                    </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadCompanies}/>
                 <div className="text-allign-right">
                     <Link to="/settings/companies/add" className="md-btn md-btn-primary" >Add</Link>
                 </div>

@@ -6,6 +6,7 @@ import asyncReducer from './async/async.reducer';
 import tasksReducer from './tasks/tasks.reducer';
 import filterReducer from './system/filter.reducer';
 import usersReducer from './settings/users.reducer';
+import companiesReducer from './settings/companies.reducer';
 import settingsReducer from './system/settings.reducer';
 import {REDUX_RESET} from '../constants';
 
@@ -17,7 +18,8 @@ const appReducer = combineReducers({
     tasks: tasksReducer,
     filter: filterReducer,
     settings: settingsReducer,
-    users: usersReducer
+    users: usersReducer,
+    companies: companiesReducer
 });
 
 const rootReducer = (state, action) => {

@@ -1,22 +1,34 @@
 import React, {PropTypes, Component} from 'react';
 import View from '../../../../views/templates/main/settings/companies/companies.jsx.js';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../../../redux/actions/settings.action';
 
 class Companies extends Component {
 
-    constructor(props, context) {
-        super(props, context);
+    componentWillMount() {
+        this.props.actions.requestCompanies();
     }
 
     render() {
         return (
-            <View prop={{}} />
+            <View {...this.props.companies} loadCompanies={this.props.actions.requestCompanies}/>
         );
     }
 }
-
 Companies.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    companies: PropTypes.object.isRequired
 };
 
+function mapStateToProps(state) {
+    return {
+        companies: state.companies
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({...actions}, dispatch)
+    };
+}
 
-export default Companies
+export default connect(mapStateToProps, mapDispatchToProps)(Companies);

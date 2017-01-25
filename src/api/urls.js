@@ -5,3 +5,4 @@ export const LOGIN_URL = BASE_URL + '/token-authentication';
 export const TASK_LIST = BASE_URL + '/task-bundle/tasks';
 export const FILTER_LIST = BASE_URL + '/task-bundle/filters';
 export const USERS_LIST = BASE_URL + '/core-bundle/users';
+export const COMPANIES_LIST = BASE_URL + '/core-bundle/companies';
