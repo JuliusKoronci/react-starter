@@ -50,7 +50,7 @@ const statuses = (props) => {
                     </tbody>
                 </table>
                 <Pagination links={props._links} total={props.total} page={props.page}
-                            loadFunction={props.loadUsers}/>
+                            loadFunction={props.loadStatuses}/>
                 <div className="text-allign-right">
                     <Link to="/settings/statuses/add" className="md-btn md-btn-primary">Add</Link>
                 </div>
@@ -59,8 +59,6 @@ const statuses = (props) => {
     );
 };
 
-statuses.propTypes = {
-    prop: PropTypes.object.isRequired
-};
+
 
 export default statuses;

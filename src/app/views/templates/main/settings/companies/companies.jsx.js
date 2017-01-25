@@ -52,8 +52,6 @@ const companies = (props) => {
     );
 };
 
-companies.propTypes = {
-    prop: PropTypes.object.isRequired
-};
+
 
 export default companies;
