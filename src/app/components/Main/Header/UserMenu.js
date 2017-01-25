@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import UserMenuView from '../../../views/templates/main/header/userMenu';
+import UserMenuView from '../../../views/templates/main/header/userDropdownMenu.jsx';
 
 
 class UserMenu extends Component {
@@ -9,14 +9,14 @@ class UserMenu extends Component {
         this.state = {dropdownToggled: false};
     }
 
-    toggle = () => {
+    handleToggle = () => {
         this.setState({dropdownToggled: !this.state.dropdownToggled});
     };
 
 
     render() {
         return (
-            <UserMenuView {...this.props} {...this.state} toggle={this.toggle} />
+            <UserMenuView {...this.props} {...this.state} handleToggle={this.handleToggle} />
         );
     }
 }

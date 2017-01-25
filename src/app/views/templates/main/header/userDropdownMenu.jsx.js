@@ -2,10 +2,10 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import UserAvatar from '../_partials/userAvatar.jsx';
 
-const userMenu = ({user,logout,dropdownToggled,toggle}) => {
+const userDropdownMenu = ({user,logout,dropdownToggled,handleToggle}) => {
     return (
 
-    <li className={dropdownToggled ? "uk-open" : ""} onClick={toggle}>
+    <li className={dropdownToggled ? "uk-open" : ""} onClick={handleToggle}>
         <a href="#" className="user_action_image">
             <UserAvatar user={user}/>
         </a>
@@ -26,12 +26,12 @@ const userMenu = ({user,logout,dropdownToggled,toggle}) => {
     );
 };
 
-userMenu.propTypes = {
+userDropdownMenu.propTypes = {
     logout: PropTypes.func.isRequired,
-    toggle: PropTypes.func.isRequired,
+    handleToggle: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     dropdownToggled:PropTypes.bool.isRequired,
 
 };
 
-export default userMenu;
+export default userDropdownMenu;

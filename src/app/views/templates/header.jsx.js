@@ -117,23 +117,6 @@ header.propTypes = {
     logout: PropTypes.func.isRequired
 };
 
-/*
 
- <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
- <a href="#" className="user_action_image">
- <UserAvatar user={user}/>
- </a>
- <div className="uk-dropdown uk-dropdown-small">
- <ul className="uk-nav js-uk-prevent">
- <li><Link to='/settings/default'>Settings</Link></li>
- <li>
- <Link to="/profile">My profile</Link>
- </li>
- <li><a href="#" onClick={logout}>Logout</a></li>
- </ul>
- </div>
- </li>
-
-*/
 
 export default header;
