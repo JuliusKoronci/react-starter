@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react';
-import UserAvatar from '../../../views/templates/main/_partials/userAvatar.jsx';
 import UserMenuView from '../../../views/templates/main/header/userMenu';
 
 
@@ -17,14 +16,7 @@ class UserMenu extends Component {
 
     render() {
         return (
-            <li className={this.state.dropdownToggled ? "uk-open" : ""} onClick={this.toggle}>
-                <a href="#" className="user_action_image">
-                    <UserAvatar user={this.props.user}/>
-                </a>
-
-                {this.state.dropdownToggled &&
-                <UserMenuView logout={this.props.logout} />}
-            </li>
+            <UserMenuView {...this.props} {...this.state} toggle={this.toggle} />
         );
     }
 }
