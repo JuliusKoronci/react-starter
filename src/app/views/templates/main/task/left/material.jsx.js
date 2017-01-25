@@ -40,7 +40,7 @@ const material = () => {
                                 <td><input type="text" id="table-item" className="md-input"/></td>
                                 <td>
                                     <select id="table-item" className="md-input">
-                                        <option value="" disabled selected hidden>Select...</option>
+                                        <option value="">Select...</option>
                                         <option value="a">ks</option>
                                         <option value="b">kg</option>
                                         <option value="c">m</option>
