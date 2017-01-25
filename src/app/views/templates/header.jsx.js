@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
-import UserAvatar from './main/_partials/userAvatar.jsx';
-import {Link} from 'react-router';
+import UserMenu from '../../components/Main/Header/UserMenu';
 
 const header = ({user, logout, sidebarIsMinified, toggleSidebar}) => {
 
@@ -100,20 +99,11 @@ const header = ({user, logout, sidebarIsMinified, toggleSidebar}) => {
                                     </div>
                                 </div>
                             </li>
-                            <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-                                <a href="#" className="user_action_image">
-                                    <UserAvatar user={user}/>
-                                </a>
-                                <div className="uk-dropdown uk-dropdown-small">
-                                    <ul className="uk-nav js-uk-prevent">
-                                        <li><Link to='/settings/default'>Settings</Link></li>
-                                        <li>
-                                            <Link to="/profile">My profile</Link>
-                                        </li>
-                                        <li><a href="#" onClick={logout}>Logout</a></li>
-                                    </ul>
-                                </div>
-                            </li>
+
+                            <UserMenu user={user} logout={logout} />
+
+
+
                         </ul>
                     </div>
                 </nav>
@@ -126,5 +116,24 @@ header.propTypes = {
     user: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired
 };
+
+/*
+
+ <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+ <a href="#" className="user_action_image">
+ <UserAvatar user={user}/>
+ </a>
+ <div className="uk-dropdown uk-dropdown-small">
+ <ul className="uk-nav js-uk-prevent">
+ <li><Link to='/settings/default'>Settings</Link></li>
+ <li>
+ <Link to="/profile">My profile</Link>
+ </li>
+ <li><a href="#" onClick={logout}>Logout</a></li>
+ </ul>
+ </div>
+ </li>
+
+*/
 
 export default header;

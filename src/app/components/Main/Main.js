@@ -14,7 +14,7 @@ import '../../views/assets/css/main.css';
 import '../../views/assets/css/themes/themes_combined.min.css';
 import '../../views/assets/css/nprogress.css';
 import {getFromStorage} from '../../services/storage';
-import {TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED} from '../../redux/constants';
+import {SIDEBAR_IS_MINIFIED} from '../../redux/constants';
 
 class Main extends Component {
 
