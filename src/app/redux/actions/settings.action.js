@@ -1,4 +1,4 @@
-import {REQUEST_USERS, USERS_RECEIVED, COMPANIES_RECEIVED, REQUEST_COMPANIES, STATUSES_RECEIVED, REQUEST_STATUSES } from '../constants';
+import {REQUEST_USERS, USERS_RECEIVED, COMPANIES_RECEIVED, REQUEST_COMPANIES, STATUSES_RECEIVED, REQUEST_STATUSES, ROLES_RECEIVED, REQUEST_ROLES } from '../constants';
 
 export function requestUsers(url) {
     return {
@@ -38,6 +38,21 @@ export function requestStatuses(url) {
 export function statusesReceived(response) {
     return {
         type: STATUSES_RECEIVED,
+        response
+    }
+}
+
+
+export function requestRoles(url) {
+    return {
+        type: REQUEST_ROLES,
+        url
+    }
+}
+
+export function rolesReceived(response) {
+    return {
+        type: ROLES_RECEIVED,
         response
     }
 }

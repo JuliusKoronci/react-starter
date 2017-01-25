@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
 
-const roles = (prop) => {
+const roles = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -25,35 +26,24 @@ const roles = (prop) => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Agent</td>
-                        <td className="uk-text-center">Yes</td>
+                    {props.data.map((role, i) => {
+                        return (
+                        <tr key={i}>
+                        <td>{role.id}</td>
+                        <td>{role.title}</td>
+                        <td className="uk-text-center">{role.is_active ? 'yes' : 'no'}</td>
                         <td className="uk-text-center">
                             <a className="md-btn md-btn-danger" href="#">Delete</a>
                             <a className="md-btn md-btn-primary" href="settings_role.html">Edit</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Manager</td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_role.html">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Admin</td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_role.html">Edit</a>
-                        </td>
-                    </tr>
+                        );
+                    })}
+
                     </tbody>
                 </table>
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadRoles}/>
                 <div className="text-allign-right">
                     <Link to="/settings/roles/add" className="md-btn md-btn-primary" >Add</Link>
                 </div>
@@ -62,8 +52,5 @@ const roles = (prop) => {
     );
 };
 
-roles.propTypes = {
-    prop: PropTypes.object.isRequired
-};
 
 export default roles;

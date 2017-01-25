@@ -8,7 +8,10 @@ import filterReducer from './system/filter.reducer';
 import usersReducer from './settings/users.reducer';
 import companiesReducer from './settings/companies.reducer';
 import statusesReducer from './settings/statuses.reducer';
+import rolesReducer from './settings/roles.reducer';
+
 import settingsReducer from './system/settings.reducer';
+
 import {REDUX_RESET} from '../constants';
 
 const appReducer = combineReducers({
@@ -21,7 +24,8 @@ const appReducer = combineReducers({
     settings: settingsReducer,
     users: usersReducer,
     companies: companiesReducer,
-    statuses: statusesReducer
+    statuses: statusesReducer,
+    roles: rolesReducer
 });
 
 const rootReducer = (state, action) => {
