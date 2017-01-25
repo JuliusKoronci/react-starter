@@ -7,7 +7,7 @@ const repeat = () => {
 
             <div className="uk-input-group">
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE040;</i></span>
-                <div className="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
+                <div data-uk-dropdown="{mode:'click'}" style={{float: 'left'}}>
                     <button className="md-btn md-btn-block">
                         every 1 day<i className="material-icons">&#xE5CD;</i>
                     </button>
