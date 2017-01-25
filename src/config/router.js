@@ -50,58 +50,58 @@ export default (
             <Route path='tasks/:taskId' component={Task}/>
             <Route path="profile" component={Profile}/>
             <Route name="settings" path="settings/default" component={Settings}/>
-            <Route name="automated-tasks" path="settings/automated-tasks" component={AutomatedTasks}/>
             <Route name="automated-tasks" path="settings/automated-tasks/add" component={AutomatedTask}/>
+            <Route name="automated-tasks" path="settings/automated-tasks" component={AutomatedTasks}/>
 
 
             <Route name="companies" path="settings/companies" component={Companies}/>
             <Route name="company" path="settings/companies/add" component={Company}/>
 
 
-            <Route name="companies-custom-fields" path="settings/companies-custom-fields" component={CompaniesCustomFields}/>
             <Route name="companies-custom-field" path="settings/companies-custom-fields/add" component={CompaniesCustomField}/>
+            <Route name="companies-custom-fields" path="settings/companies-custom-fields" component={CompaniesCustomFields}/>
 
 
-            <Route name="email-notifications" path="settings/email-notifications" component={EmailNotifications}/>
             <Route name="email-notification" path="settings/email-notifications/add" component={EmailNotification}/>
+            <Route name="email-notifications" path="settings/email-notifications" component={EmailNotifications}/>
 
-            <Route name="imaps" path="settings/imaps" component={Imaps}/>
             <Route name="imap" path="settings/imaps/add" component={Imap}/>
+            <Route name="imaps" path="settings/imaps" component={Imaps}/>
 
 
-            <Route name="project-shared-filters" path="settings/project-shared-filters" component={ProjectSharedFilters}/>
             <Route name="project-shared-filter" path="settings/project-shared-filters/add" component={ProjectSharedFilter}/>
+            <Route name="project-shared-filters" path="settings/project-shared-filters" component={ProjectSharedFilters}/>
 
-            <Route name="roles" path="settings/roles" component={Roles}/>
             <Route name="role" path="settings/roles/add" component={Role}/>
+            <Route name="roles" path="settings/roles" component={Roles}/>
 
 
-            <Route name="shared-filters" path="settings/shared-filters" component={SharedFilters}/>
             <Route name="shared-filter" path="settings/shared-filters/add" component={SharedFilter}/>
+            <Route name="shared-filters" path="settings/shared-filters" component={SharedFilters}/>
 
 
-            <Route name="smtps" path="settings/smtps" component={Smtps}/>
             <Route name="smtp" path="settings/smtps/add" component={Smtp}/>
+            <Route name="smtps" path="settings/smtps" component={Smtps}/>
 
 
-            <Route name="statuses" path="settings/statuses" component={Statuses}/>
             <Route name="status" path="settings/statuses/add" component={Status}/>
+            <Route name="statuses" path="settings/statuses" component={Statuses}/>
 
 
-            <Route name="task-custom-fields" path="settings/task-custom-fields" component={TaskCustomFields}/>
             <Route name="task-custom-field" path="settings/task-custom-fields/add" component={TaskCustomField}/>
+            <Route name="task-custom-fields" path="settings/task-custom-fields" component={TaskCustomFields}/>
 
-            <Route name="trigers" path="settings/trigers" component={Trigers}/>
             <Route name="triger" path="settings/trigers/add" component={Triger}/>
+            <Route name="trigers" path="settings/trigers" component={Trigers}/>
 
-            <Route name="units" path="settings/units" component={Units}/>
             <Route name="unit" path="settings/units/add" component={Unit}/>
+            <Route name="units" path="settings/units" component={Units}/>
 
-            <Route name="users" path="settings/users" component={Users}/>
             <Route name="user" path="settings/users/add" component={User}/>
+            <Route name="users" path="settings/users" component={Users}/>
 
-            <Route name="user-custom-fields" path="settings/user-custom-fields" component={UserCustomFields}/>
             <Route name="user-custom-field" path="settings/user-custom-fields/add" component={UserCustomField}/>
+            <Route name="user-custom-fields" path="settings/user-custom-fields" component={UserCustomFields}/>
 
             <Route path="*" component={NotFoundPage}/>
         </Route>
