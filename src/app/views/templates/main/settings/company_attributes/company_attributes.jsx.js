@@ -1,12 +1,13 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
 
-const CompaniesCustomFields = (props) => {
+const CompanyAttributes = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
                 <div className="uk-margin-bottom" data-uk-margin>
-                    <h1 className="heading_b uk-margin-bottom">Companies custom fields</h1>
+                    <h1 className="heading_b uk-margin-bottom">Companies attributes</h1>
                 </div>
                 <hr/>
 
@@ -21,7 +22,7 @@ const CompaniesCustomFields = (props) => {
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Company custom field name</th>
+                        <th>Company attribute name</th>
                         <th className="uk-text-center">Field type</th>
                         <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
@@ -42,6 +43,8 @@ const CompaniesCustomFields = (props) => {
                     })}
                     </tbody>
                 </table>
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadCompanyAttributes}/>
                 <div className="text-allign-right">
                     <Link to="/settings/companies-custom-fields/add" className="md-btn md-btn-primary">Add</Link>
                 </div>
@@ -51,4 +54,4 @@ const CompaniesCustomFields = (props) => {
 };
 
 
-export default CompaniesCustomFields;
+export default CompanyAttributes;

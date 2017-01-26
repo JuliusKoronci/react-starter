@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import View from '../../../../views/templates/main/settings/companies_custom_fields/add_companies_custom_field.jsx';
+import View from '../../../../views/templates/main/settings/company_attributes/add_companies_custom_field.jsx';
 
 class CompaniesCustomField extends Component {
 

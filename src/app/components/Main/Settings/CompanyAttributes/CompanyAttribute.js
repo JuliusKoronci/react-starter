@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import View from '../../../../views/templates/main/settings/companies_custom_fields/companies_custom_fields.jsx.js';
+import View from '../../../../views/templates/main/settings/company_attributes/company_attributes.jsx.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
