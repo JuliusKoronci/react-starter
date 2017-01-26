@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const smtps = (prop) => {
+const smtps = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -12,7 +12,8 @@ const smtps = (prop) => {
                 <div className="uk-input-group">
                     <span className="uk-input-group-addon"><i className="material-icons md-24">&#xE8B6;</i></span>
                     <input type="text" className="md-input"/>
-                    <span className="uk-input-group-addon"><a className="md-btn md-btn-primary" href="#">Search</a></span>
+                    <span className="uk-input-group-addon"><a className="md-btn md-btn-primary"
+                                                              href="#">Search</a></span>
                 </div>
 
                 <table className="uk-table uk-text-nowrap">
@@ -27,29 +28,29 @@ const smtps = (prop) => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>hotline@lansystems.sk</td>
-                        <td className="uk-text-center">all</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_smtp.html">Edit</a>
-                        </td>
-                    </tr>
-                 </tbody>
-            </table>
-            <div className="text-allign-right">
-                <Link to="/settings/smtps/add" className="md-btn md-btn-primary" >Add</Link>
+                    {props.data.map((smtp, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{smtp.id}</td>
+                                <td>{smtp.email}</td>
+                                <td className="uk-text-center">{smtp.project}</td>
+                                <td className="uk-text-center">{smtp.description}</td>
+                                <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
+                                <td className="uk-text-center">
+                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                    <a className="md-btn md-btn-primary" href="settings_smtp.html">Edit</a>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                    </tbody>
+                </table>
+                <div className="text-allign-right">
+                    <Link to="/settings/smtps/add" className="md-btn md-btn-primary">Add</Link>
+                </div>
             </div>
-        </div>
-        < / div >
+        </ div >
     );
-};
-
-smtps.propTypes = {
-    prop: PropTypes.object.isRequired
 };
 
 export default smtps;

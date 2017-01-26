@@ -84,3 +84,31 @@ export function taskAttributesReceived(response) {
         response
     }
 }
+
+export function requestImaps(url) {
+    return {
+        type: constants.REQUEST_IMAPS,
+        url
+    }
+}
+
+export function imapsReceived(response) {
+    return {
+        type: constants.IMAPS_RECEIVED,
+        response
+    }
+}
+
+export function requestSmtps(url) {
+    return {
+        type: constants.REQUEST_SMTPS,
+        url
+    }
+}
+
+export function smtpsReceived(response) {
+    return {
+        type: constants.SMTPS_RECEIVED,
+        response
+    }
+}

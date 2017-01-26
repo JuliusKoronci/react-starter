@@ -11,6 +11,8 @@ import statusesReducer from './settings/statuses.reducer';
 import rolesReducer from './settings/roles.reducer';
 import companyAttributes from './settings/company_attributes.reducer.js';
 import taskAttributes from './settings/task_attributes.reducer';
+import imaps from './settings/imaps.reducer';
+import smtps from './settings/smtps.reducer';
 import settingsReducer from './system/settings.reducer';
 
 import {REDUX_RESET} from '../constants';
@@ -28,7 +30,9 @@ const appReducer = combineReducers({
     statuses: statusesReducer,
     roles: rolesReducer,
     companyAttributes: companyAttributes,
-    taskAttributes: taskAttributes
+    taskAttributes: taskAttributes,
+    imaps: imaps,
+    smtps: smtps
 });
 
 const rootReducer = (state, action) => {
