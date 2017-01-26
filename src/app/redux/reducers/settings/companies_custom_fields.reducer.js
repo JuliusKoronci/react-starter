@@ -9,7 +9,7 @@ const defaultState = {
 };
 
 
-export default function users(state = defaultState, action) {
+export default function companiesCustomFields(state = defaultState, action) {
     switch (action.type) {
         case COMPANIESCUSTOMFIELDS_RECEIVED:
             return action.response;
