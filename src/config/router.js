@@ -12,8 +12,8 @@ import AutomatedTasks from '../app/components/Main/Settings/AutomatedTasks/Autom
 import AutomatedTask from '../app/components/Main/Settings/AutomatedTasks/AutomatedTask';
 import Companies from '../app/components/Main/Settings/Companies/Companies';
 import Company from '../app/components/Main/Settings/Companies/Company';
-import CompaniesCustomFields from '../app/components/Main/Settings/CompaniesCustomFields/CompaniesCustomFields';
-import CompaniesCustomField from '../app/components/Main/Settings/CompaniesCustomFields/CompaniesCustomField';
+import CompaniesCustomFields from '../app/components/Main/Settings/CompanyAttributes/CompanyAttribute';
+import CompaniesCustomField from '../app/components/Main/Settings/CompanyAttributes/CompaniesCustomField';
 import EmailNotifications from '../app/components/Main/Settings/EmailNotifications/EmailNotifications';
 import EmailNotification from '../app/components/Main/Settings/EmailNotifications/EmailNotification';
 import Imaps from '../app/components/Main/Settings/Imaps/Imaps';

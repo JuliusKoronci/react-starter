@@ -57,16 +57,16 @@ export function rolesReceived(response) {
     }
 }
 
-export function requestCompaniesCustomFields(url) {
+export function requestCompanyAttributes(url) {
     return {
-        type: constants.REQUEST_COMPANIESCUSTOMFIELDS,
+        type: constants.REQUEST_COMPANYATTRIBUTES,
         url
     }
 }
 
-export function companiesCustomFieldsReceived(response) {
+export function companyAttributesReceived(response) {
     return {
-        type: constants.COMPANIESCUSTOMFIELDS_RECEIVED,
+        type: constants.COMPANYATTRIBUTES_RECEIVED,
         response
     }
 }

@@ -1,4 +1,4 @@
-const companiesCustomFields =
+const companyAttributes =
 {
     "data":
         [
@@ -23,4 +23,4 @@ const companiesCustomFields =
     "numberOfPages": 3
 };
 
-export default companiesCustomFields;
+export default companyAttributes;

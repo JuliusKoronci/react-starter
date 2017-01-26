@@ -1,4 +1,4 @@
-import {COMPANIESCUSTOMFIELDS_RECEIVED} from '../../constants';
+import {COMPANYATTRIBUTES_RECEIVED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -9,9 +9,9 @@ const defaultState = {
 };
 
 
-export default function companiesCustomFields(state = defaultState, action) {
+export default function companyAttributes(state = defaultState, action) {
     switch (action.type) {
-        case COMPANIESCUSTOMFIELDS_RECEIVED:
+        case COMPANYATTRIBUTES_RECEIVED:
             return action.response;
         default:
             return state;

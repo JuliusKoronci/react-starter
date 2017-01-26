@@ -4,26 +4,26 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
 
-class CompaniesCustomFields extends Component {
+class CompanyAttributes extends Component {
 
     componentWillMount() {
-        this.props.actions.requestCompaniesCustomFields();
+        this.props.actions.requestCompanyAttributes();
     }
 
     render() {
         return (
-            <View {...this.props.companiesCustomFields} loadCompaniesCustomFields={this.props.actions.requestCompaniesCustomFields}/>
+            <View {...this.props.companyAttributes} loadCompanyAttributes={this.props.actions.requestCompanyAttributes}/>
         );
     }
 }
 
-CompaniesCustomFields.propTypes = {
-    companiesCustomFields: PropTypes.object.isRequired
+CompanyAttributes.propTypes = {
+    companyAttributes: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        companiesCustomFields: state.companiesCustomFields
+        companyAttributes: state.companyAttributes
     };
 }
 function mapDispatchToProps(dispatch) {
@@ -32,5 +32,5 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompaniesCustomFields);
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyAttributes);
 

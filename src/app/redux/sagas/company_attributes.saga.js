@@ -1,14 +1,14 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {REQUEST_COMPANIESCUSTOMFIELDS} from '../constants';
+import {REQUEST_COMPANYATTRIBUTES} from '../constants';
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
-import {companiesCustomFieldsReceived} from '../actions/settings.action';
-import {loadCompaniesCustomFields as getCompaniesCustomFields} from '../../../api/companies_custom_fieds/companies_custom_fields.api';
+import {companyAttributesReceived} from '../actions/settings.action';
+import {loadCompanyAttributes as getCompanyAttributes} from '../../../api/company_attributes/company_attributes.api.js';
 
-function *loadCompaniesCustomFields(action) {
+function *loadCompanyAttributes(action) {
     yield put(startAjax());
     try {
-        const data = yield call(getCompaniesCustomFields, action.url);
-        yield put(companiesCustomFieldsReceived(data));
+        const data = yield call(getCompanyAttributes, action.url);
+        yield put(companyAttributesReceived(data));
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -16,7 +16,7 @@ function *loadCompaniesCustomFields(action) {
 }
 
 
-export function *loadCompaniesCustomFieldsDefault() {
-    yield takeLatest(REQUEST_COMPANIESCUSTOMFIELDS, loadCompaniesCustomFields);
+export function *loadCompanyAttributesDefault() {
+    yield takeLatest(REQUEST_COMPANYATTRIBUTES, loadCompanyAttributes);
 
 }
