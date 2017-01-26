@@ -7,6 +7,7 @@ import {loadUsersDefault} from '../app/redux/sagas/users.saga';
 import {loadCompaniesDefault} from '../app/redux/sagas/companies.saga';
 import {loadStatusesDefault} from '../app/redux/sagas/statuses.saga';
 import {loadRolesDefault} from '../app/redux/sagas/roles.saga';
+import {loadCompaniesCustomFieldsDefault} from '../app/redux/sagas/company_custom_fields.saga';
 
 
 export default function* root() {
@@ -18,4 +19,5 @@ export default function* root() {
     yield fork(loadCompaniesDefault);
     yield fork(loadStatusesDefault);
     yield fork(loadRolesDefault);
+    yield fork(loadCompaniesCustomFieldsDefault);
 }

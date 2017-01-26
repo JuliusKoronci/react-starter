@@ -1,43 +1,43 @@
-import {REQUEST_USERS, USERS_RECEIVED, COMPANIES_RECEIVED, REQUEST_COMPANIES, STATUSES_RECEIVED, REQUEST_STATUSES, ROLES_RECEIVED, REQUEST_ROLES } from '../constants';
+import * as constants from '../constants';
 
 export function requestUsers(url) {
     return {
-        type: REQUEST_USERS,
+        type: constants.REQUEST_USERS,
         url
     }
 }
 
 export function usersReceived(response) {
     return {
-        type: USERS_RECEIVED,
+        type: constants.USERS_RECEIVED,
         response
     }
 }
 
 export function requestCompanies(url) {
     return {
-        type: REQUEST_COMPANIES,
+        type: constants.REQUEST_COMPANIES,
         url
     }
 }
 
 export function companiesReceived(response) {
     return {
-        type: COMPANIES_RECEIVED,
+        type: constants.COMPANIES_RECEIVED,
         response
     }
 }
 
 export function requestStatuses(url) {
     return {
-        type: REQUEST_STATUSES,
+        type: constants.REQUEST_STATUSES,
         url
     }
 }
 
 export function statusesReceived(response) {
     return {
-        type: STATUSES_RECEIVED,
+        type: constants.STATUSES_RECEIVED,
         response
     }
 }
@@ -45,14 +45,28 @@ export function statusesReceived(response) {
 
 export function requestRoles(url) {
     return {
-        type: REQUEST_ROLES,
+        type: constants.REQUEST_ROLES,
         url
     }
 }
 
 export function rolesReceived(response) {
     return {
-        type: ROLES_RECEIVED,
+        type: constants.ROLES_RECEIVED,
+        response
+    }
+}
+
+export function requestCompaniesCustomFields(url) {
+    return {
+        type: constants.REQUEST_COMPANIESCUSTOMFIELDS,
+        url
+    }
+}
+
+export function companiesCustomFieldsReceived(response) {
+    return {
+        type: constants.COMPANIESCUSTOMFIELDS_RECEIVED,
         response
     }
 }

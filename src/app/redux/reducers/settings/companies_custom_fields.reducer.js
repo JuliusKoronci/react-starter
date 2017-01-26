@@ -1,4 +1,4 @@
-import {USERS_RECEIVED} from '../../constants';
+import {COMPANIESCUSTOMFIELDS_RECEIVED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -11,7 +11,7 @@ const defaultState = {
 
 export default function users(state = defaultState, action) {
     switch (action.type) {
-        case USERS_RECEIVED:
+        case COMPANIESCUSTOMFIELDS_RECEIVED:
             return action.response;
         default:
             return state;

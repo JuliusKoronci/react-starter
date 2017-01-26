@@ -9,6 +9,7 @@ import usersReducer from './settings/users.reducer';
 import companiesReducer from './settings/companies.reducer';
 import statusesReducer from './settings/statuses.reducer';
 import rolesReducer from './settings/roles.reducer';
+import companiesCustomFields from './settings/companies_custom_fields.reducer';
 
 import settingsReducer from './system/settings.reducer';
 
@@ -25,7 +26,8 @@ const appReducer = combineReducers({
     users: usersReducer,
     companies: companiesReducer,
     statuses: statusesReducer,
-    roles: rolesReducer
+    roles: rolesReducer,
+    companiesCustomFields: companiesCustomFields
 });
 
 const rootReducer = (state, action) => {

@@ -1,14 +1,14 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {REQUEST_USERS} from '../constants';
+import {REQUEST_COMPANIESCUSTOMFIELDS} from '../constants';
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
-import {usersReceived} from '../actions/settings.action';
-import {loadUsers as getUsers} from '../../../api/users/users.api';
+import {companiesCustomFieldsReceived} from '../actions/settings.action';
+import {loadCompaniesCustomFields as getCompaniesCustomFields} from '../../../api/users/users.api';
 
-function *loadUsers(action) {
+function *loadCompaniesCustomFields(action) {
     yield put(startAjax());
     try {
-        const data = yield call(getUsers, action.url);
-        yield put(usersReceived(data));
+        const data = yield call(getCompaniesCustomFields, action.url);
+        yield put(companiesCustomFieldsReceived(data));
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -16,7 +16,7 @@ function *loadUsers(action) {
 }
 
 
-export function *loadUsersDefault() {
-    yield takeLatest(REQUEST_USERS, loadUsers);
+export function *loadCompaniesCustomFieldsDefault() {
+    yield takeLatest(REQUEST_COMPANIESCUSTOMFIELDS, loadCompaniesCustomFields);
 
 }
