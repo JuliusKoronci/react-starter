@@ -8,6 +8,7 @@ import {loadCompaniesDefault} from '../app/redux/sagas/companies.saga';
 import {loadStatusesDefault} from '../app/redux/sagas/statuses.saga';
 import {loadRolesDefault} from '../app/redux/sagas/roles.saga';
 import {loadCompanyAttributesDefault} from '../app/redux/sagas/company_attributes.saga.js';
+import {loadTaskAttributesDefault} from '../app/redux/sagas/task_attributes.saga.js';
 
 
 export default function* root() {
@@ -20,4 +21,5 @@ export default function* root() {
     yield fork(loadStatusesDefault);
     yield fork(loadRolesDefault);
     yield fork(loadCompanyAttributesDefault);
+    yield fork(loadTaskAttributesDefault);
 }

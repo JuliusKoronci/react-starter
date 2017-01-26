@@ -70,3 +70,17 @@ export function companyAttributesReceived(response) {
         response
     }
 }
+
+export function requestTaskAttributes(url) {
+    return {
+        type: constants.REQUEST_TASKATTRIBUTES,
+        url
+    }
+}
+
+export function taskAttributesReceived(response) {
+    return {
+        type: constants.TASKATTRIBUTES_RECEIVED,
+        response
+    }
+}

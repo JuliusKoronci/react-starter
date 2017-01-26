@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import View from '../../../../views/templates/main/settings/task_custom_fields/add_task_custom_field.jsx';
+import View from '../../../../views/templates/main/settings/task_attributes/add_task_custom_field.jsx';
 
 class TaskCustomField extends Component {
 
