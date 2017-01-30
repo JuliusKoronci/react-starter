@@ -1,10 +1,11 @@
 import React, {PropTypes} from 'react';
-import dateFormat from '../../../../../services/formatedDate'
+import dateFormat from '../../../../../services/formatedDate';
+import Input from '../../../../../forms/Task/Input.form';
 
 const taskInfo = ({task}) => {
     return (
         <div className="uk-width-medium-3-4">
-            <input type="text" className="header_b md-input" value="Task name"/>
+            <Input fieldName="title" className="header_b md-input" taskId={task.id}/>
 
             <p className="uk-text-muted">
                 Created: {task.createdBy.email} | {dateFormat(task.createdAt)}

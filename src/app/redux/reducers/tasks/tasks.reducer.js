@@ -1,4 +1,4 @@
-import {TASKS_RECEIVED,TASK_RECEIVED} from '../../constants';
+import {TASKS_RECEIVED, TASK_RECEIVED, TASK_UPDATED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -17,6 +17,16 @@ export default function tasks(state = defaultState, action) {
             return {
                 ...state,
                 'data': [...state.data, action.data.data]
+            };
+        case TASK_UPDATED:
+            return {
+                ...state,
+                'data': state.data.map((task) => {
+                    if (task.id === action.taskId) {
+                        return Object.assign({}, task, action.data);
+                    }
+                    return task;
+                })
             };
         default:
             return state;

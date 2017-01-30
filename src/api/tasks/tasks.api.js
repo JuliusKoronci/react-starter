@@ -86,5 +86,25 @@ export function getTaskById(id) {
             } else {
                 return Promise.resolve(tasks);
             }
-        })
+        });
+}
+
+export function updateTask(taskId, data) {
+    let config = {
+        method: 'PUT',
+        body: data,
+        headers: {
+            'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY)
+        }
+    };
+    return fetch(TASK_LIST + '/' + taskId + '/project/all/user/all', config)
+        .then(response =>
+            response.json().then(tasks => ({tasks, response}))
+        ).then(({tasks, response}) => {
+            if (!response.ok) {
+                return Promise.reject({status: response.status, message: tasks.message})
+            } else {
+                return Promise.resolve(tasks);
+            }
+        });
 }

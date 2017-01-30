@@ -1,4 +1,11 @@
-import {REQUEST_DEFAULT_TASKS, TASKS_RECEIVED, REQUEST_TASKS_FROM_URL, REQUEST_TASK_BY_ID, TASK_RECEIVED} from '../constants';
+import {
+    REQUEST_DEFAULT_TASKS,
+    TASKS_RECEIVED,
+    REQUEST_TASKS_FROM_URL,
+    REQUEST_TASK_BY_ID,
+    TASK_RECEIVED,
+    TASK_UPDATED
+} from '../constants';
 
 export function requestDefaultTasks() {
     return {
@@ -30,5 +37,12 @@ export function taskReceived(data) {
     return {
         type: TASK_RECEIVED,
         data
+    }
+}
+export function taskUpdated(data, taskId) {
+    return {
+        type: TASK_UPDATED,
+        data,
+        taskId
     }
 }
