@@ -1,8 +1,8 @@
-import {COMPANIES_LIST, HOST_URL} from '../urls';
+import {COMPANIES_LIST, COMPANY_POST_NEW,  HOST_URL} from '../urls';
 import {USE_MOCK} from '../../config/security';
 import {MOCK_DELAY} from '../../config/config';
 import mockCompanies from '../_mock_data/companies/companies.mock';
-import {defaultGET} from '../api';
+import {defaultGET, defaultPOST} from '../api';
 
 function mockDefault() {
     return new Promise((resolve) => {
@@ -21,4 +21,8 @@ export function loadCompanies(url) {
         finalUrl = HOST_URL + url;
     }
     return defaultGET(finalUrl);
+}
+
+export function createNewCompany(data) {
+    return defaultPOST(COMPANY_POST_NEW, data);
 }

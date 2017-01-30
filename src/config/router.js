@@ -40,68 +40,116 @@ import UserCustomFields from '../app/components/Main/Settings/UserCustomFields/U
 import UserCustomField from '../app/components/Main/Settings/UserCustomFields/UserCustomField';
 import Task from '../app/components/Main/Task/Task';
 
+export const paths = {
+    'login': '/login',
+    'logout': '/logout',
+    'task_list': '/tasks',
+    'task_show': '/tasks/:taskId',
+    'profile':'/profile',
+    'settings':'/settings/default',
+    'automated_tasks':'/settings/automated-tasks',
+    'automated_tasks_add':'/settings/automated-tasks/add',
+    'companies':'/settings/companies',
+    'companies_add':'/settings/companies/add',
+    'companies_custom_fields_add':'/settings/companies-custom-fields/add',
+    'companies_custom_fields':'/settings/companies-custom-fields',
+    'email_notifications_add':'/settings/email-notifications/add',
+    'email_notifications':'/settings/email-notifications',
+    'imaps_add':'/settings/imaps/add',
+    'imaps':'/settings/imaps',
+    'project_shared_filters_add':'/settings/project-shared-filters/add',
+    'project_shared_filters':'/settings/project-shared-filters',
+    'roles_add':'/settings/roles/add',
+    'roles':'/settings/roles',
+    'shared_filters_add':'/settings/shared-filters/add',
+    'shared_filters':'/settings/shared-filters',
+    'smtps_add':'/settings/smtps/add',
+    'smtps':'/settings/smtps',
+    'statuses_add':'/settings/statuses/add',
+    'statuses':'/settings/statuses',
+    'task_custom_fields_add':'/settings/task-custom-fields/add',
+    'task_custom_fields':'/settings/task-custom-fields',
+    'triggers_add':'/settings/trigers/add',
+    'triggers':'/settings/trigers',
+    'units_add':'/settings/units/add',
+    'units':'/settings/units',
+    'users_add':'/settings/users/add',
+    'users':'/settings/users',
+    'user_custom_fields_add':'/settings/user-custom-fields/add',
+    'user_custom_fields':'/settings/user-custom-fields'
+
+
+};
+
+// alert(generateRoute('task_show',{taskId:10}));
+
+/**
+ * json params {taskId: ''}
+ */
+export function generateRoute(name, params){
+    let path = paths[name];
+    if(params){
+    for(let i in params){
+        const replace = ':' + i;
+        path = path.replace(replace, params[i]);
+    }}
+    return path;
+}
+
 export default (
     <Route component={App}>
-        <Route path="/login" component={Login}/>
-        <Route path="/logout" component={Logout}/>
+        <Route path={paths.login} component={Login}/>
+        <Route path={paths.logout} component={Logout}/>
         <Route path="/" component={Main}>
             <IndexRoute component={Dashboard}/>
-            <Route path='tasks' component={Task}/>
-            <Route path='tasks/:taskId' component={Task}/>
-            <Route path="profile" component={Profile}/>
-            <Route name="settings" path="settings/default" component={Settings}/>
-            <Route name="automated-tasks" path="settings/automated-tasks/add" component={AutomatedTask}/>
-            <Route name="automated-tasks" path="settings/automated-tasks" component={AutomatedTasks}/>
+            <Route path={paths.task_list} component={Task}/>
+            <Route path={paths.task_show} component={Task}/>
+            <Route path={paths.profile} component={Profile}/>
+            <Route name="settings" path={paths.settings} component={Settings}/>
+            <Route name="automated-tasks" path={paths.automated_tasks_add} component={AutomatedTask}/>
+            <Route name="automated-tasks" path={paths.automated_tasks} component={AutomatedTasks}/>
 
+            <Route name="companies" path={paths.companies} component={Companies}/>
+            <Route name="company" path={paths.companies_add} component={Company}/>
 
-            <Route name="companies" path="settings/companies" component={Companies}/>
-            <Route name="company" path="settings/companies/add" component={Company}/>
+            <Route name="companies-custom-field" path={paths.companies_custom_fields_add}  component={CompaniesCustomField}/>
+            <Route name="companies-custom-fields" path={paths.companies_custom_fields} component={CompaniesCustomFields}/>
 
+            <Route name="email-notification" path={paths.email_notifications_add} component={EmailNotification}/>
+            <Route name="email-notifications" path={paths.email_notifications} component={EmailNotifications}/>
 
-            <Route name="companies-custom-field" path="settings/companies-custom-fields/add" component={CompaniesCustomField}/>
-            <Route name="companies-custom-fields" path="settings/companies-custom-fields" component={CompaniesCustomFields}/>
+            <Route name="imap" path={paths.imaps_add} component={Imap}/>
+            <Route name="imaps" path={paths.imaps} component={Imaps}/>
 
+            <Route name="project-shared-filter" path={paths.project_shared_filters_add} component={ProjectSharedFilter}/>
+            <Route name="project-shared-filters" path={paths.project_shared_filters} component={ProjectSharedFilters}/>
 
-            <Route name="email-notification" path="settings/email-notifications/add" component={EmailNotification}/>
-            <Route name="email-notifications" path="settings/email-notifications" component={EmailNotifications}/>
+            <Route name="role" path={paths.roles_add} component={Role}/>
+            <Route name="roles" path={paths.roles} component={Roles}/>
 
-            <Route name="imap" path="settings/imaps/add" component={Imap}/>
-            <Route name="imaps" path="settings/imaps" component={Imaps}/>
+            <Route name="shared-filter" path={paths.shared_filters_add} component={SharedFilter}/>
+            <Route name="shared-filters" path={paths.shared_filters} component={SharedFilters}/>
 
+            <Route name="smtp" path={paths.smtps_add} component={Smtp}/>
+            <Route name="smtps" path={paths.smtps} component={Smtps}/>
 
-            <Route name="project-shared-filter" path="settings/project-shared-filters/add" component={ProjectSharedFilter}/>
-            <Route name="project-shared-filters" path="settings/project-shared-filters" component={ProjectSharedFilters}/>
+            <Route name="status" path={paths.statuses_add} component={Status}/>
+            <Route name="statuses" path={paths.statuses} component={Statuses}/>
 
-            <Route name="role" path="settings/roles/add" component={Role}/>
-            <Route name="roles" path="settings/roles" component={Roles}/>
+            <Route name="task-custom-field" path={paths.task_custom_fields_add} component={TaskCustomField}/>
+            <Route name="task-custom-fields" path={paths.task_custom_fields} component={TaskCustomFields}/>
 
+            <Route name="triger" path={paths.triggers_add} component={Triger}/>
+            <Route name="trigers" path={paths.triggers} component={Trigers}/>
 
-            <Route name="shared-filter" path="settings/shared-filters/add" component={SharedFilter}/>
-            <Route name="shared-filters" path="settings/shared-filters" component={SharedFilters}/>
+            <Route name="unit" path={paths.units_add} component={Unit}/>
+            <Route name="units" path={paths.units} component={Units}/>
 
+            <Route name="user" path={paths.users_add} component={User}/>
+            <Route name="users" path={paths.users} component={Users}/>
 
-            <Route name="smtp" path="settings/smtps/add" component={Smtp}/>
-            <Route name="smtps" path="settings/smtps" component={Smtps}/>
-
-
-            <Route name="status" path="settings/statuses/add" component={Status}/>
-            <Route name="statuses" path="settings/statuses" component={Statuses}/>
-
-
-            <Route name="task-custom-field" path="settings/task-custom-fields/add" component={TaskCustomField}/>
-            <Route name="task-custom-fields" path="settings/task-custom-fields" component={TaskCustomFields}/>
-
-            <Route name="triger" path="settings/trigers/add" component={Triger}/>
-            <Route name="trigers" path="settings/trigers" component={Trigers}/>
-
-            <Route name="unit" path="settings/units/add" component={Unit}/>
-            <Route name="units" path="settings/units" component={Units}/>
-
-            <Route name="user" path="settings/users/add" component={User}/>
-            <Route name="users" path="settings/users" component={Users}/>
-
-            <Route name="user-custom-field" path="settings/user-custom-fields/add" component={UserCustomField}/>
-            <Route name="user-custom-fields" path="settings/user-custom-fields" component={UserCustomFields}/>
+            <Route name="user-custom-field" path={paths.user_custom_fields_add} component={UserCustomField}/>
+            <Route name="user-custom-fields" path={paths.user_custom_fields} component={UserCustomFields}/>
 
             <Route path="*" component={NotFoundPage}/>
         </Route>

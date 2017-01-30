@@ -28,6 +28,20 @@ export function companiesReceived(response) {
     }
 }
 
+export function companyPost(values) {
+    return {
+        type: constants.COMPANY_POST_NEW,
+        data: values
+    }
+}
+
+export function companyCreated(data) {
+    return {
+        type: constants.COMPANY_CREATED,
+        data
+    }
+}
+
 export function requestStatuses(url) {
     return {
         type: constants.REQUEST_STATUSES,
