@@ -153,3 +153,16 @@ export function unitsReceived(response) {
         response
     }
 }
+export function requestUserAttributes(url) {
+    return {
+        type: constants.REQUEST_USERATTRIBUTES,
+        url
+    }
+}
+
+export function userAttributesReceived(response) {
+    return {
+        type: constants.USERATTRIBUTES_RECEIVED,
+        response
+    }
+}

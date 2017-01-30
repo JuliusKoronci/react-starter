@@ -16,6 +16,7 @@ import smtps from './settings/smtps.reducer';
 import projectSharedFilters from './settings/project_shared_filters.reducer';
 import sharedFilters from './settings/shared_filters.reducer';
 import units from './settings/units.reducer';
+import userAttributes from './settings/user_attributes.reducer';
 import settingsReducer from './system/settings.reducer';
 import {REDUX_RESET} from '../constants';
 
@@ -37,6 +38,7 @@ const appReducer = combineReducers({
     smtps: smtps,
     projectSharedFilters: projectSharedFilters,
     sharedFilters: sharedFilters,
+    userAttributes: userAttributes,
     units: units
 });
 

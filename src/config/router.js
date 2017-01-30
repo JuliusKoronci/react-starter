@@ -36,7 +36,7 @@ import Units from '../app/components/Main/Settings/Units/Units';
 import Unit from '../app/components/Main/Settings/Units/Unit';
 import Users from '../app/components/Main/Settings/Users/Users';
 import User from '../app/components/Main/Settings/Users/User';
-import UserCustomFields from '../app/components/Main/Settings/UserCustomFields/UserCustomFields';
+import UserCustomFields from '../app/components/Main/Settings/UserCustomFields/UserAttributes';
 import UserCustomField from '../app/components/Main/Settings/UserCustomFields/UserCustomField';
 import Task from '../app/components/Main/Task/Task';
 
