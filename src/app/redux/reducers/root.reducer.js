@@ -15,6 +15,7 @@ import imaps from './settings/imaps.reducer';
 import smtps from './settings/smtps.reducer';
 import projectSharedFilters from './settings/project_shared_filters.reducer';
 import sharedFilters from './settings/shared_filters.reducer';
+import units from './settings/units.reducer';
 import settingsReducer from './system/settings.reducer';
 import {REDUX_RESET} from '../constants';
 
@@ -35,7 +36,8 @@ const appReducer = combineReducers({
     imaps: imaps,
     smtps: smtps,
     projectSharedFilters: projectSharedFilters,
-    sharedFilters: sharedFilters
+    sharedFilters: sharedFilters,
+    units: units
 });
 
 const rootReducer = (state, action) => {

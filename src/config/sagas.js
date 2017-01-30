@@ -13,6 +13,7 @@ import {loadImapsDefault} from '../app/redux/sagas/imaps.saga.js';
 import {loadSmtpsDefault} from '../app/redux/sagas/smtps.saga.js';
 import {loadProjectSharedFiltersDefault} from '../app/redux/sagas/project_shared_filters.saga';
 import {loadSharedFiltersDefault} from '../app/redux/sagas/shared_filters.saga';
+import {loadUnitsDefault} from '../app/redux/sagas/units.saga';
 
 
 export default function* root() {
@@ -30,4 +31,5 @@ export default function* root() {
     yield fork(loadSmtpsDefault);
     yield fork(loadProjectSharedFiltersDefault);
     yield fork(loadSharedFiltersDefault);
+    yield fork(loadUnitsDefault);
 }

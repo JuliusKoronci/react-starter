@@ -140,3 +140,16 @@ export function sharedFiltersReceived(response) {
         response
     }
 }
+export function requestUnits(url) {
+    return {
+        type: constants.REQUEST_UNITS,
+        url
+    }
+}
+
+export function unitsReceived(response) {
+    return {
+        type: constants.UNITS_RECEIVED,
+        response
+    }
+}
