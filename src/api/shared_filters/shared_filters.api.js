@@ -1,25 +1,26 @@
-import {SMTPS_LIST, HOST_URL} from '../urls';
+import {SHAREDFILTERS_LIST, HOST_URL} from '../urls';
 import {USE_MOCK} from '../../config/security';
 import {MOCK_DELAY} from '../../config/config';
-import mockSmtps from '../_mock_data/imaps/imaps.mock';
+import mockSharedFilters from '../_mock_data/shared_filters/shared_filters.mock';
 import {defaultGET} from '../api';
 
 function mockDefault() {
     return new Promise((resolve) => {
         setTimeout(function () {
-            resolve(mockSmtps);
+            resolve(mockSharedFilters);
         }, MOCK_DELAY);
     });
 }
 
-export function loadSmtps(url) {
+export function loadSharedFilters(url) {
     //nastavene tahanie mock dat
+
     return mockDefault();
 
     if (USE_MOCK) {
         return mockDefault();
     }
-    let finalUrl = SMTPS_LIST;
+    let finalUrl = SHAREDFILTERS_LIST;
     if(url){
         finalUrl = HOST_URL + url;
     }

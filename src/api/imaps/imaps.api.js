@@ -12,7 +12,7 @@ function mockDefault() {
     });
 }
 
-export function Imaps(url) {
+export function loadImaps(url) {
     //nastavene tahanie mock dat
     return mockDefault();
     

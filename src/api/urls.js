@@ -12,3 +12,5 @@ export const COMPANYATTRIBUTES_LIST = BASE_URL + '/task-bundle/company-attribute
 export const TASKATTRIBUTES_LIST = BASE_URL + '/task-bundle/task-attributes';
 export const IMAPS_LIST = BASE_URL + '/task-bundle/imaps';
 export const SMTPS_LIST = BASE_URL + '/task-bundle/smtps';
+export const PROJECTSHAREDFILTERS_LIST = BASE_URL + '/task-bundle/project-shared-filters';
+export const SHAREDFILTERS_LIST = BASE_URL + '/task-bundle/shared-filters';

@@ -11,6 +11,8 @@ import {loadCompanyAttributesDefault} from '../app/redux/sagas/company_attribute
 import {loadTaskAttributesDefault} from '../app/redux/sagas/task_attributes.saga.js';
 import {loadImapsDefault} from '../app/redux/sagas/imaps.saga.js';
 import {loadSmtpsDefault} from '../app/redux/sagas/smtps.saga.js';
+import {loadProjectSharedFiltersDefault} from '../app/redux/sagas/project_shared_filters.saga';
+import {loadSharedFiltersDefault} from '../app/redux/sagas/shared_filters.saga';
 
 
 export default function* root() {
@@ -26,4 +28,6 @@ export default function* root() {
     yield fork(loadTaskAttributesDefault);
     yield fork(loadImapsDefault);
     yield fork(loadSmtpsDefault);
+    yield fork(loadProjectSharedFiltersDefault);
+    yield fork(loadSharedFiltersDefault);
 }

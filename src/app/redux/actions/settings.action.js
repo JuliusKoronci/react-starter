@@ -112,3 +112,31 @@ export function smtpsReceived(response) {
         response
     }
 }
+
+export function requestProjectSharedFilters(url) {
+    return {
+        type: constants.REQUEST_PROJECTSHAREDFILTERS,
+        url
+    }
+}
+
+export function projectSharedFiltersReceived(response) {
+    return {
+        type: constants.PROJECTSHAREDFILTERS_RECEIVED,
+        response
+    }
+}
+
+export function requestSharedFilters(url) {
+    return {
+        type: constants.REQUEST_SHAREDFILTERS,
+        url
+    }
+}
+
+export function sharedFiltersReceived(response) {
+    return {
+        type: constants.SHAREDFILTERS_RECEIVED,
+        response
+    }
+}
