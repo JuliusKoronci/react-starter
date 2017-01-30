@@ -10,9 +10,14 @@ import companiesReducer from './settings/companies.reducer';
 import statusesReducer from './settings/statuses.reducer';
 import rolesReducer from './settings/roles.reducer';
 import companyAttributes from './settings/company_attributes.reducer.js';
-
+import taskAttributes from './settings/task_attributes.reducer';
+import imaps from './settings/imaps.reducer';
+import smtps from './settings/smtps.reducer';
+import projectSharedFilters from './settings/project_shared_filters.reducer';
+import sharedFilters from './settings/shared_filters.reducer';
+import units from './settings/units.reducer';
+import userAttributes from './settings/user_attributes.reducer';
 import settingsReducer from './system/settings.reducer';
-
 import {REDUX_RESET} from '../constants';
 
 const appReducer = combineReducers({
@@ -27,7 +32,14 @@ const appReducer = combineReducers({
     companies: companiesReducer,
     statuses: statusesReducer,
     roles: rolesReducer,
-    companyAttributes: companyAttributes
+    companyAttributes: companyAttributes,
+    taskAttributes: taskAttributes,
+    imaps: imaps,
+    smtps: smtps,
+    projectSharedFilters: projectSharedFilters,
+    sharedFilters: sharedFilters,
+    userAttributes: userAttributes,
+    units: units
 });
 
 const rootReducer = (state, action) => {

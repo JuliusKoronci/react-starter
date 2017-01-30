@@ -35,7 +35,6 @@ export function defaultPOST(url, data) {
             'Content-Type':'application/x-www-form-urlencoded'
         }
     };
-console.log('default post');
 
     return fetch(url, config)
         .then(response =>

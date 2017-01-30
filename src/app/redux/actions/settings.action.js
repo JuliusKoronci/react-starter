@@ -84,3 +84,99 @@ export function companyAttributesReceived(response) {
         response
     }
 }
+
+export function requestTaskAttributes(url) {
+    return {
+        type: constants.REQUEST_TASKATTRIBUTES,
+        url
+    }
+}
+
+export function taskAttributesReceived(response) {
+    return {
+        type: constants.TASKATTRIBUTES_RECEIVED,
+        response
+    }
+}
+
+export function requestImaps(url) {
+    return {
+        type: constants.REQUEST_IMAPS,
+        url
+    }
+}
+
+export function imapsReceived(response) {
+    return {
+        type: constants.IMAPS_RECEIVED,
+        response
+    }
+}
+
+export function requestSmtps(url) {
+    return {
+        type: constants.REQUEST_SMTPS,
+        url
+    }
+}
+
+export function smtpsReceived(response) {
+    return {
+        type: constants.SMTPS_RECEIVED,
+        response
+    }
+}
+
+export function requestProjectSharedFilters(url) {
+    return {
+        type: constants.REQUEST_PROJECTSHAREDFILTERS,
+        url
+    }
+}
+
+export function projectSharedFiltersReceived(response) {
+    return {
+        type: constants.PROJECTSHAREDFILTERS_RECEIVED,
+        response
+    }
+}
+
+export function requestSharedFilters(url) {
+    return {
+        type: constants.REQUEST_SHAREDFILTERS,
+        url
+    }
+}
+
+export function sharedFiltersReceived(response) {
+    return {
+        type: constants.SHAREDFILTERS_RECEIVED,
+        response
+    }
+}
+export function requestUnits(url) {
+    return {
+        type: constants.REQUEST_UNITS,
+        url
+    }
+}
+
+export function unitsReceived(response) {
+    return {
+        type: constants.UNITS_RECEIVED,
+        response
+    }
+}
+export function requestUserAttributes(url) {
+    return {
+        type: constants.REQUEST_USERATTRIBUTES,
+        url
+    }
+}
+
+export function userAttributesReceived(response) {
+    return {
+        type: constants.USERATTRIBUTES_RECEIVED,
+        response
+    }
+}

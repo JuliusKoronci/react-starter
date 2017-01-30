@@ -1,12 +1,13 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
 
-const smtps = (props) => {
+const TaskAttributes = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
                 <div className="uk-margin-bottom" data-uk-margin>
-                    <h1 className="heading_b uk-margin-bottom">SMTPs</h1>
+                    <h1 className="heading_b uk-margin-bottom">Task attributes</h1>
                 </div>
                 <hr/>
                 <div className="uk-input-group">
@@ -19,38 +20,38 @@ const smtps = (props) => {
                 <table className="uk-table uk-text-nowrap">
                     <thead>
                     <tr>
-                        <th>Order</th>
-                        <th>email</th>
-                        <th className="uk-text-center">Project</th>
-                        <th className="uk-text-center">Description</th>
+                        <th>ID</th>
+                        <th>Custom field name</th>
+                        <th className="uk-text-center">Field type</th>
                         <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {props.data.map((smtp, i) => {
+                    {props.data.map((taskAttribute, i) => {
                         return (
                             <tr key={i}>
-                                <td>{smtp.id}</td>
-                                <td>{smtp.email}</td>
-                                <td className="uk-text-center">{smtp.project}</td>
-                                <td className="uk-text-center">{smtp.description}</td>
-                                <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
+                                <td>{taskAttribute.id}</td>
+                                <td>{taskAttribute.title}</td>
+                                <td>{taskAttribute.type}</td>
+                                <td className="uk-text-center">{taskAttribute.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
                                     <a className="md-btn md-btn-danger" href="#">Delete</a>
-                                    <a className="md-btn md-btn-primary" href="settings_smtp.html">Edit</a>
+                                    <a className="md-btn md-btn-primary" href="settings_custom_field.html">Edit</a>
                                 </td>
                             </tr>
                         );
                     })}
                     </tbody>
                 </table>
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadTaskAttributes}/>
                 <div className="text-allign-right">
-                    <Link to="/settings/smtps/add" className="md-btn md-btn-primary">Add</Link>
+                    <Link to="/settings/task-custom-fields/add" className="md-btn md-btn-primary">Add</Link>
                 </div>
             </div>
-        </ div >
+        </div>
     );
 };
 
-export default smtps;
+export default TaskAttributes;

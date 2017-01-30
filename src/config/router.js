@@ -28,15 +28,15 @@ import Smtps from '../app/components/Main/Settings/Smtps/Smtps';
 import Smtp from '../app/components/Main/Settings/Smtps/Smtp';
 import Statuses from '../app/components/Main/Settings/Statuses/Statuses';
 import Status from '../app/components/Main/Settings/Statuses/Status';
-import TaskCustomFields from '../app/components/Main/Settings/TaskCustomFields/TaskCustomFields';
-import TaskCustomField from '../app/components/Main/Settings/TaskCustomFields/TaskCustomField';
+import TaskCustomFields from '../app/components/Main/Settings/TaskAttributes/TaskAttributes';
+import TaskCustomField from '../app/components/Main/Settings/TaskAttributes/TaskCustomField';
 import Trigers from '../app/components/Main/Settings/Trigers/Trigers';
 import Triger from '../app/components/Main/Settings/Trigers/Triger';
 import Units from '../app/components/Main/Settings/Units/Units';
 import Unit from '../app/components/Main/Settings/Units/Unit';
 import Users from '../app/components/Main/Settings/Users/Users';
 import User from '../app/components/Main/Settings/Users/User';
-import UserCustomFields from '../app/components/Main/Settings/UserCustomFields/UserCustomFields';
+import UserCustomFields from '../app/components/Main/Settings/UserCustomFields/UserAttributes';
 import UserCustomField from '../app/components/Main/Settings/UserCustomFields/UserCustomField';
 import Task from '../app/components/Main/Task/Task';
 

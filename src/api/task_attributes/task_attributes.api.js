@@ -1,22 +1,22 @@
-import {COMPANYATTRIBUTES_LIST, HOST_URL} from '../urls';
+import {TASKATTRIBUTES_LIST, HOST_URL} from '../urls';
 import {USE_MOCK} from '../../config/security';
 import {MOCK_DELAY} from '../../config/config';
-import mockCompanyAttributes from '../_mock_data/company_attributes/company_attributes.mock.js';
+import mockcompanyAttributes from '../_mock_data/task_attributes/task_attributes.mock.js';
 import {defaultGET} from '../api';
 
 function mockDefault() {
     return new Promise((resolve) => {
         setTimeout(function () {
-            resolve(mockCompanyAttributes);
+            resolve(mockcompanyAttributes);
         }, MOCK_DELAY);
     });
 }
 
-export function loadCompanyAttributes(url) {
+export function loadTaskAttributes(url) {
     if (USE_MOCK) {
         return mockDefault();
     }
-    let finalUrl = COMPANYATTRIBUTES_LIST;
+    let finalUrl = TASKATTRIBUTES_LIST;
     if(url){
         finalUrl = HOST_URL + url;
     }

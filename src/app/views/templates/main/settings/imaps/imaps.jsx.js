@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
 
-const imaps = (prop) => {
+const imaps = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -27,30 +28,32 @@ const imaps = (prop) => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>hotline@lansystems.sk</td>
-                        <td className="uk-text-center">Project 1</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_imap.html">Edit</a>
-                        </td>
-                    </tr>
+                    {props.data.map((imap, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>1</td>
+                                <td>{imap.id}</td>
+                                <td>{imap.email}</td>
+                                <td className="uk-text-center">{imap.description}</td>
+                                <td className="uk-text-center">{imap.is_active ? 'yes' : 'no'}</td>
+                                <td className="uk-text-center">
+                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                    <a className="md-btn md-btn-primary" href="settings_imap.html">Edit</a>
+                                </td>
+                            </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadImaps}/>
 
                 <div className="text-allign-right">
-                    <Link to="/settings/imaps/add" className="md-btn md-btn-primary" >Add</Link>
+                    <Link to="/settings/imaps/add" className="md-btn md-btn-primary">Add</Link>
                 </div>
             </div>
         </div>
     );
-};
-
-imaps.propTypes = {
-    prop: PropTypes.object.isRequired
 };
 
 export default imaps;

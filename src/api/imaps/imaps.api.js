@@ -1,22 +1,25 @@
-import {COMPANYATTRIBUTES_LIST, HOST_URL} from '../urls';
+import {IMAPS_LIST, HOST_URL} from '../urls';
 import {USE_MOCK} from '../../config/security';
 import {MOCK_DELAY} from '../../config/config';
-import mockCompanyAttributes from '../_mock_data/company_attributes/company_attributes.mock.js';
+import mockImaps from '../_mock_data/imaps/imaps.mock.js';
 import {defaultGET} from '../api';
 
 function mockDefault() {
     return new Promise((resolve) => {
         setTimeout(function () {
-            resolve(mockCompanyAttributes);
+            resolve(mockImaps);
         }, MOCK_DELAY);
     });
 }
 
-export function loadCompanyAttributes(url) {
+export function loadImaps(url) {
+    //nastavene tahanie mock dat
+    return mockDefault();
+    
     if (USE_MOCK) {
         return mockDefault();
     }
-    let finalUrl = COMPANYATTRIBUTES_LIST;
+    let finalUrl = IMAPS_LIST;
     if(url){
         finalUrl = HOST_URL + url;
     }

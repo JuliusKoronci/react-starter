@@ -21,14 +21,15 @@ function *postCompany(action) {
     yield put(startAjax());
     try {
         const data = yield call(createNewCompany, action.data);
-        const toast='Company '+ action.data.title +' created';
+        const toastMessage='Company '+ action.data.title +' created';
         const redirectTo=paths.companies;
-        entityCreated(toast,redirectTo);
+        entityCreated(toastMessage,redirectTo);
+
+        // reducer
         // yield put(companyCreated(data));
     } catch (e) {
         yield put(asyncError(e));
     }
-    console.log('end ajax');
     yield put(endAjax());
 }
 

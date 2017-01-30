@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const UserCustomFields = (prop) => {
+const UserAttributes = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
                 <div className="uk-margin-bottom" data-uk-margin>
-                    <h1 className="heading_b uk-margin-bottom">User custom fields</h1>
+                    <h1 className="heading_b uk-margin-bottom">User attributes</h1>
                 </div>
                 <hr/>
                 <div className="uk-input-group">
@@ -18,23 +18,27 @@ const UserCustomFields = (prop) => {
                     <thead>
                     <tr>
                         <th>Order</th>
-                        <th>User custom field name</th>
+                        <th>User attribute name</th>
                         <th className="uk-text-center">Field type</th>
                         <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td className="uk-text-center">Input</td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_status.html">Edit</a>
-                        </td>
-                    </tr>
+                    {props.data.map((userAttribute, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{userAttribute.id}</td>
+                                <td>{userAttribute.title}</td>
+                                <td>{userAttribute.type}</td>
+                                <td className="uk-text-center">{userAttribute.is_active ? 'yes' : 'no'}</td>
+                                <td className="uk-text-center">
+                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                    <a className="md-btn md-btn-primary" href="settings_custom_field.html">Edit</a>
+                                </td>
+                            </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
                 <div className="text-allign-right">
@@ -45,8 +49,6 @@ const UserCustomFields = (prop) => {
     );
 };
 
-UserCustomFields.propTypes = {
-    prop: PropTypes.object.isRequired
-};
 
-export default UserCustomFields;
+
+export default UserAttributes;
