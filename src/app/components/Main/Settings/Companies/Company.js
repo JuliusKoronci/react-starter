@@ -1,28 +1,45 @@
 import React, {PropTypes, Component} from 'react';
 // import View from '../../../../views/templates/main/settings/companies/add_company.jsx';
-import View from '../../../../forms/Settings/AddCompany.form';
+import View from '../../../../forms/Settings/Company.form';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
+import * as generalActions from '../../../../redux/actions/general.action';
 import NProgress from '../../../../../../node_modules/nprogress/nprogress';
 
 class Company extends Component {
 
-    constructor(props, context) {
-        super(props, context);
+    componentDidMount() {
+        if (this.props.params.companyId && !this.props.company) {
+            this.props.actions.loadEntityById('company',this.props.params.companyId);
+        }
     }
 
     onSubmit = (values) => {
         NProgress.start();
-        this.props.actions.companyPost(values);
+
+        if (this.props.params.companyId){
+            this.props.actions.updateEntity('company',this.props.params.companyId,values);
+        }else {
+            this.props.actions.createEntity('company',values);
+        }
     };
 
 
     render() {
-        return (
-            <View formError={null} onSubmit={this.onSubmit}/>
-        );
+
+        if (this.props.company) {
+            return(
+                <View formError={null} onSubmit={this.onSubmit} {...this.props} heading="Edit company" />
+                )
+        } else {
+            return (
+                <View formError={null} onSubmit={this.onSubmit} {...this.props} heading="Add company" />
+            );
+        }
+
     }
+
 }
 
 Company.propTypes = {
@@ -30,14 +47,18 @@ Company.propTypes = {
 };
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+    const companyId = ownProps.params.companyId;
+    const company = state.companies.data.filter((company) => parseInt(company.id, 10) === parseInt(companyId, 10));
     return {
-        company: state.company
+        company: company.length > 0 ? company[0] : false,
     };
+
 }
+
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions}, dispatch)
+        actions: bindActionCreators({...actions, ...generalActions}, dispatch),
     };
 }
 

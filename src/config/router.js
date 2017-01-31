@@ -51,6 +51,7 @@ export const paths = {
     'automated_tasks_add':'/settings/automated-tasks/add',
     'companies':'/settings/companies',
     'companies_add':'/settings/companies/add',
+    'companies_edit':'/settings/companies/:companyId',
     'companies_custom_fields_add':'/settings/companies-custom-fields/add',
     'companies_custom_fields':'/settings/companies-custom-fields',
     'email_notifications_add':'/settings/email-notifications/add',
@@ -109,8 +110,9 @@ export default (
             <Route name="automated-tasks" path={paths.automated_tasks_add} component={AutomatedTask}/>
             <Route name="automated-tasks" path={paths.automated_tasks} component={AutomatedTasks}/>
 
-            <Route name="companies" path={paths.companies} component={Companies}/>
             <Route name="company" path={paths.companies_add} component={Company}/>
+            <Route name="company" path={paths.companies_edit} component={Company}/>
+            <Route name="companies" path={paths.companies} component={Companies}/>
 
             <Route name="companies-custom-field" path={paths.companies_custom_fields_add}  component={CompaniesCustomField}/>
             <Route name="companies-custom-fields" path={paths.companies_custom_fields} component={CompaniesCustomFields}/>

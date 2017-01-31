@@ -1,10 +1,22 @@
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
 import {Field, reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
 import {required, minLength8, phone, alphanum, number} from '../../../config/validation';
 import {renderField} from '../field.tpl';
 
 class CompanyAddForm extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+    }
+
+
+    // componentDidUpdate(){
+    //     console.log(this.props.company);
+    // }
+
+
     render() {
         const {handleSubmit, formError} = this.props;
         return (
@@ -12,15 +24,17 @@ class CompanyAddForm extends Component {
             <div className="md-card">
                 <div className="md-card-content">
                     <div className="uk-margin-bottom" data-uk-margin>
-                        <h1 className="heading_b uk-margin-bottom">Add company</h1>
+                        <h1 className="heading_b uk-margin-bottom">{this.props.heading}</h1>
                     </div>
                     <hr/>
 
                     <form onSubmit={handleSubmit}>
 
+                        <Field name="is_active" type="checkbox" validate={[]} component={renderField}
+                               label="Active"/>
 
                         <Field name="title" type="text" validate={[required]} component={renderField}
-                               label="Company name" value="company" />
+                               label="Company name" value="copmany"/>
 
                         <Field name="ico" type="text" validate={[number]} component={renderField}
                                label="ICO"/>
@@ -64,8 +78,25 @@ class CompanyAddForm extends Component {
     }
 }
 
+function mapStateToProps(state, ownProps) {
+    const companyId = ownProps.params.companyId;
+    const company = state.companies.data.filter((company) => parseInt(company.id, 10) === parseInt(companyId, 10));
+
+    if(company.length > 0){
+        return {
+            initialValues: company.length > 0 ? company[0] : false,
+        };
+    }else{
+        return{};
+    }
+
+
+}
+
 CompanyAddForm = reduxForm({
     form: 'companyAddForm'
 })(CompanyAddForm);
 
-export default CompanyAddForm;
+ export default connect(mapStateToProps)(CompanyAddForm);
+
+// export default CompanyAddForm;

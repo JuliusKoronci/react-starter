@@ -3,5 +3,11 @@ import {history} from '../../config/store';
 
 export function entityCreated(toast,redirectTo){
     toastr.success(toast);
-    history.push(redirectTo);
+    if(redirectTo) {
+        history.push(redirectTo);
+    }
+}
+
+export function entityUpdated(toast){
+    toastr.success(toast);
 }
