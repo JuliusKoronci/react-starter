@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 // import View from '../../../../views/templates/main/settings/companies/add_company.jsx';
 import View from '../../../../forms/Settings/Company.form';
 import {connect} from 'react-redux';
@@ -41,10 +41,6 @@ class Company extends Component {
     }
 
 }
-
-Company.propTypes = {
-    //myProp: PropTypes.string.isRequired
-};
 
 
 function mapStateToProps(state, ownProps) {

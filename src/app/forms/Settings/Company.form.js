@@ -1,15 +1,11 @@
-import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
+import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {required, minLength8, phone, alphanum, number} from '../../../config/validation';
+import {required, phone, alphanum, number} from '../../../config/validation';
 import {renderField} from '../field.tpl';
 
 class CompanyAddForm extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
 
 
     // componentDidUpdate(){

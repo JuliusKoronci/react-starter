@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import View from '../../../../views/templates/main/settings/roles/roles.jsx.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -17,10 +17,6 @@ class Roles extends Component {
         );
     }
 }
-
-Roles.propTypes = {
-    //myProp: PropTypes.string.isRequired 
-};
 
 
 function mapStateToProps(state) {
