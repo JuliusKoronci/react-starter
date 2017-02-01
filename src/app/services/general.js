@@ -11,3 +11,7 @@ export function entityCreated(toast,redirectTo){
 export function entityUpdated(toast){
     toastr.success(toast);
 }
+
+export function entityReceived(toast){
+    toastr.success(toast);
+}

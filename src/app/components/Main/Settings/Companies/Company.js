@@ -1,42 +1,38 @@
 import React, {Component} from 'react';
-// import View from '../../../../views/templates/main/settings/companies/add_company.jsx';
 import View from '../../../../forms/Settings/Company.form';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
 import * as generalActions from '../../../../redux/actions/general.action';
 import NProgress from '../../../../../../node_modules/nprogress/nprogress';
+import {COMPANY_ENTITY} from '../../../../redux/constants';
 
 class Company extends Component {
 
     componentDidMount() {
         if (this.props.params.companyId && !this.props.company) {
-            this.props.actions.loadEntityById('company',this.props.params.companyId);
+            this.props.actions.loadEntityById(COMPANY_ENTITY, this.props.params.companyId);
         }
     }
 
     onSubmit = (values) => {
         NProgress.start();
 
-        if (this.props.params.companyId){
-            this.props.actions.updateEntity('company',this.props.params.companyId,values);
-        }else {
-            this.props.actions.createEntity('company',values);
+        if (this.props.params.companyId) {
+            this.props.actions.updateEntity(COMPANY_ENTITY, this.props.params.companyId, values);
+        } else {
+            this.props.actions.createEntity(COMPANY_ENTITY, values);
         }
     };
 
 
     render() {
 
-        if (this.props.company) {
-            return(
-                <View formError={null} onSubmit={this.onSubmit} {...this.props} heading="Edit company" />
-                )
-        } else {
-            return (
-                <View formError={null} onSubmit={this.onSubmit} {...this.props} heading="Add company" />
-            );
-        }
+
+        return (
+            <View formError={null} onSubmit={this.onSubmit} {...this.props}
+                  heading={this.props.company ? "Edit company" : "Add company"}/>
+        )
 
     }
 
