@@ -92,7 +92,7 @@ export function getTaskById(id) {
 
 export function updateTask(taskId, data) {
     let config = {
-        method: 'PUT',
+        method: 'PATCH',
         body: queryString.stringify(data),
         headers: {
             'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY),
@@ -100,7 +100,7 @@ export function updateTask(taskId, data) {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
-    return fetch(TASK_LIST + '/' + taskId + '/project/all/user/all', config)
+    return fetch(TASK_LIST + '/' + taskId, config)
         .then(response =>
             response.json().then(tasks => ({tasks, response}))
         ).then(({tasks, response}) => {
