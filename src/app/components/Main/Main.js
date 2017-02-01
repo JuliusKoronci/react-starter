@@ -10,6 +10,7 @@ import {isUserStoredLocaly} from '../../../config/security';
 import jwtDecode from 'jwt-decode';
 import Layout from '../../views/templates/layout.jsx';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
+import '../../../../node_modules/draft-js/dist/Draft.css';
 import '../../views/assets/css/main.css';
 import '../../views/assets/css/themes/themes_combined.min.css';
 import '../../views/assets/css/nprogress.css';
@@ -23,7 +24,7 @@ class Main extends Component {
         this.props.actions.requestFilters();
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.isAuthenticated();
 
         this.props.actions.toggleSidebar(!!getFromStorage(SIDEBAR_IS_MINIFIED));
@@ -34,9 +35,9 @@ class Main extends Component {
         this.handleAsyncErrors();
 
         //minified or normal sidebar
-        if(this.props.sidebarIsMinified){
+        if (this.props.sidebarIsMinified) {
             document.body.classList.add('sidebar_mini');
-        }else{
+        } else {
             document.body.classList.remove('sidebar_mini');
         }
 
@@ -79,7 +80,8 @@ class Main extends Component {
     render() {
         const {authenticated} = this.props;
         if (authenticated) {
-            return <Layout children={this.props.children} {...this.props} sidebarIsMinified={this.props.sidebarIsMinified} />;
+            return <Layout children={this.props.children} {...this.props}
+                           sidebarIsMinified={this.props.sidebarIsMinified}/>;
         }
 
         return null;

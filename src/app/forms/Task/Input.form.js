@@ -50,11 +50,7 @@ Input.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     const task = state.tasks.data.filter((task) => {
-        if (task.id === ownProps.taskId) {
-            return true;
-        }
-
-        return false;
+        return task.id === ownProps.taskId;
     })[0];
 
     return {

@@ -1,11 +1,11 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {REQUEST_DEFAULT_TASKS, REQUEST_TASKS_FROM_URL, REQUEST_TASK_BY_ID, TASK_UPDATED} from '../constants';
-import {endAjax, startAjax, asyncError} from '../actions/async.action';
+import {endAjax, startAjaxReset, asyncError} from '../actions/async.action';
 import {tasksReceived, taskReceived} from '../actions/tasks.action';
 import {defaultFilter, getTasksFromUrl, getTaskById, updateTask as updateApi} from '../../../api/tasks/tasks.api';
 
 function *defaultTasks() {
-    yield put(startAjax());
+    yield put(startAjaxReset());
     try {
         const data = yield call(defaultFilter);
         yield put(tasksReceived(data));
@@ -22,7 +22,7 @@ export function *loadTasks() {
 
 
 function *loadTasksUrl(action) {
-    yield put(startAjax());
+    yield put(startAjaxReset());
     try {
         const data = yield call(getTasksFromUrl, action.url);
         yield put(tasksReceived(data));
@@ -33,7 +33,7 @@ function *loadTasksUrl(action) {
 }
 
 function *loadTaskById(action) {
-    yield put(startAjax());
+    yield put(startAjaxReset());
     try {
         const data = yield call(getTaskById, action.id);
         yield put(taskReceived(data));
@@ -44,7 +44,7 @@ function *loadTaskById(action) {
 }
 
 function *updateTask(action) {
-    yield put(startAjax());
+    yield put(startAjaxReset());
     try {
          yield call(updateApi, action.taskId, action.data);
     } catch (e) {

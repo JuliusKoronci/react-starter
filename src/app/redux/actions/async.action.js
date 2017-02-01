@@ -1,8 +1,13 @@
-import {LOADING_START, LOADING_END, ASYNC_ERROR} from '../constants'
+import {LOADING_START,LOADING_START_RESET, LOADING_END, ASYNC_ERROR} from '../constants'
 
 export function startAjax() {
     return {
         'type': LOADING_START
+    }
+}
+export function startAjaxReset() {
+    return {
+        'type': LOADING_START_RESET
     }
 }
 export function endAjax() {

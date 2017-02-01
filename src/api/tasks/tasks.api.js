@@ -3,6 +3,7 @@ import {getFromStorage} from '../../app/services/storage';
 import {TOKEN_KEY, USE_MOCK} from '../../config/security';
 import {MOCK_DELAY} from '../../config/config';
 import mockData from '../_mock_data/tasks/tasks.mock';
+import queryString from 'query-string';
 
 function mockDefault() {
     return new Promise((resolve) => {
@@ -92,9 +93,11 @@ export function getTaskById(id) {
 export function updateTask(taskId, data) {
     let config = {
         method: 'PUT',
-        body: data,
+        body: queryString.stringify(data),
         headers: {
-            'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY)
+            'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY),
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
     return fetch(TASK_LIST + '/' + taskId + '/project/all/user/all', config)

@@ -1,12 +1,11 @@
 import React from 'react';
+import RTE from '../../../../../forms/rte/RTE.form';
 
-const summary = () => {
+const summary = ({task, actions}) => {
     return (
         <div>
             <div className="uk-margin-medium-bottom">
-                <label className="uk-text-muted">Description</label>
-                <textarea cols="30" rows="1" id="border-full" className="md-input"
-                          placeholder=""/>
+                <RTE defaultValue={task.description} action={actions.taskUpdated} fieldName="description" label="Description" taskId={task.id} />
             </div>
             <div className="uk-margin-medium-bottom">
                 <label className="uk-text-muted">Work done</label>
