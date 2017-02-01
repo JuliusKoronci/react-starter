@@ -1,22 +1,35 @@
 import React, {PropTypes, Component} from 'react';
 import View from '../../../../views/templates/main/settings/shared_filters/shared_filters.jsx';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../../../redux/actions/settings.action';
 
 class SharedFilters extends Component {
 
-    constructor(props, context) {
-        super(props, context);
+    componentWillMount() {
+        this.props.actions.requestSharedFilters();
     }
 
     render() {
         return (
-            <View prop={{}} />
+            <View {...this.props.sharedFilters} loadSharedFilters={this.props.actions.requestSharedFilters}/>
         );
     }
 }
 
 SharedFilters.propTypes = {
-    //myProp: PropTypes.string.isRequired 
+    sharedFilters: PropTypes.object.isRequired
 };
 
+function mapStateToProps(state) {
+    return {
+        sharedFilters: state.sharedFilters
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({...actions}, dispatch)
+    };
+}
 
-export default SharedFilters;
+export default connect(mapStateToProps, mapDispatchToProps)(SharedFilters);

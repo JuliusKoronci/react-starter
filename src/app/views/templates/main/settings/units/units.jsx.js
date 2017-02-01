@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
 
-const units = (prop) => {
+const units = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -28,36 +28,20 @@ const units = (prop) => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>ks</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_unit.html">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>kg</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_unit.html">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>m</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_unit.html">Edit</a>
-                        </td>
-                    </tr>
+                    {props.data.map((units, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{units.id}</td>
+                                <td>{units.name}</td>
+                                <td className="uk-text-center">{units.description}</td>
+                                <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
+                                <td className="uk-text-center">
+                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                    <a className="md-btn md-btn-primary" href="settings_units.html">Edit</a>
+                                </td>
+                            </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
 
@@ -67,10 +51,6 @@ const units = (prop) => {
             </div>
         </div>
     );
-};
-
-units.propTypes = {
-    prop: PropTypes.object.isRequired
 };
 
 export default units;

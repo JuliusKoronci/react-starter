@@ -8,3 +8,9 @@ export const minValue = min => value =>
 export const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
         'Invalid email address' : undefined;
+export const phone = value =>
+    value && !/^([+]?([\d\s*]){6,12})$/i.test(value) ?
+        'Invalid phone number' : undefined;
+export const alphanum = value =>
+    value && !/^([\w ])*$/i.test(value) ?
+        'Only numbers and letters allowed' : undefined;

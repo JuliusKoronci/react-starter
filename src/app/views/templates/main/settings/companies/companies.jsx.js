@@ -1,6 +1,7 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
+import {generateRoute} from '../../../../../../config/router';
 
 const companies = (props) => {
     return (
@@ -31,11 +32,11 @@ const companies = (props) => {
                         return (
                         <tr key={i}>
                         <td>{company.id}</td>
-                        <td><a href="settings_company.html">{company.title}</a></td>
+                            <td><Link to={generateRoute('companies_edit',{companyId:company.id})} >{company.title}</Link></td>
                         <td className="uk-text-center">{company.is_active ? 'yes' : 'no'}</td>
                         <td className="uk-text-center">
                             <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_company.html">Edit</a>
+                            <Link to={generateRoute('companies_edit',{companyId:company.id})} className="md-btn md-btn-primary" >Edit</Link>
                         </td>
                     </tr>
                         );

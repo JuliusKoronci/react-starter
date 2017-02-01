@@ -3,11 +3,17 @@ import View from '../../../../views/templates/main/settings/companies/companies.
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
+import {SETTING_REFRESH_INTERVAL} from '../../../../../config/config';
 
 class Companies extends Component {
 
     componentWillMount() {
         this.props.actions.requestCompanies();
+        this.interval = setInterval(this.props.actions.requestCompanies, SETTING_REFRESH_INTERVAL)
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.interval);
     }
 
     render() {

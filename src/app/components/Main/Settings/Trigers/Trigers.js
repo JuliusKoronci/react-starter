@@ -1,11 +1,8 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import View from '../../../../views/templates/main/settings/trigers/trigers.jsx.js';
 
 class Trigers extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
 
     render() {
         return (
@@ -13,10 +10,6 @@ class Trigers extends Component {
         );
     }
 }
-
-Trigers.propTypes = {
-    //myProp: PropTypes.string.isRequired 
-};
 
 
 export default Trigers;

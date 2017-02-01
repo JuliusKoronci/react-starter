@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
 
 const add_email_notification = (prop) => {
     return (

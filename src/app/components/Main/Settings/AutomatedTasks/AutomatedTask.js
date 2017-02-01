@@ -1,11 +1,8 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import View from '../../../../views/templates/main/settings/automated_tasks/add_automated_task.jsx';
 
 class AutomatedTask extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
 
     render() {
         return (
@@ -14,9 +11,6 @@ class AutomatedTask extends Component {
     }
 }
 
-AutomatedTask.propTypes = {
-    //myProp: PropTypes.string.isRequired 
-};
 
 
 export default AutomatedTask;

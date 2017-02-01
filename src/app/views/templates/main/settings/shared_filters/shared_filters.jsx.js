@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
 
-const SharedFilters = (prop) => {
+const SharedFilters = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -20,35 +20,33 @@ const SharedFilters = (prop) => {
                         <th>Order</th>
                         <th>Name</th>
                         <th className="uk-text-center">Icon</th>
+                        <th className="uk-text-center">Description</th>
                         <th className="uk-text-center">Role</th>
+                        <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>DO IT</td>
-                        <td className="uk-text-center">ICON</td>
-                        <td className="uk-text-center">Agent,Manager,Admin</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_shared_filter.html">Edit</a>
-                            <a className="md-btn md-btn-primary" href="settings_project_shared_filter.html">UP</a>
-                            <a className="md-btn md-btn-primary" href="settings_project_shared_filter.html">Down</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Assigned</td>
-                        <td className="uk-text-center">ICON</td>
-                        <td className="uk-text-center">Agent,Manager,Admin,Customer</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_shared_filter.html">Edit</a>
-                            <a className="md-btn md-btn-primary" href="settings_project_shared_filter.html">UP</a>
-                            <a className="md-btn md-btn-primary" href="settings_project_shared_filter.html">Down</a>
-                        </td>
-                    </tr>
+                    {props.data.map((sharedFilters, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{sharedFilters.order}</td>
+                                <td>{sharedFilters.name}</td>
+                                <td>{sharedFilters.icon}</td>
+                                <td className="uk-text-center">{sharedFilters.description}</td>
+                                <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
+                                <td className="uk-text-center">
+                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                    <a className="md-btn md-btn-primary"
+                                       href="settings_project_shared_filter.html">Edit</a>
+                                    <a className="md-btn md-btn-primary"
+                                       href="settings_project_shared_filter.html">UP</a>
+                                    <a className="md-btn md-btn-primary"
+                                       href="settings_project_shared_filter.html">Down</a>
+                                </td>
+                            </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
 
@@ -63,8 +61,5 @@ const SharedFilters = (prop) => {
     );
 };
 
-SharedFilters.propTypes = {
-    prop: PropTypes.object.isRequired
-};
 
 export default SharedFilters;

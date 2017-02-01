@@ -1,11 +1,8 @@
-import React, {PropTypes, Component} from 'react';
+import React, { Component} from 'react';
 import View from '../../../../views/templates/main/settings/users/add_user.jsx';
 
 class User extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
 
     render() {
         return (
@@ -14,9 +11,6 @@ class User extends Component {
     }
 }
 
-User.propTypes = {
-    //myProp: PropTypes.string.isRequired 
-};
 
 
 export default User;
