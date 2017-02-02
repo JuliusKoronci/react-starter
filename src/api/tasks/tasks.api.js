@@ -5,6 +5,7 @@ import {MOCK_DELAY} from '../../config/config';
 import mockData from '../_mock_data/tasks/tasks.mock';
 import queryString from 'query-string';
 
+import {buildError} from '../helpers';
 function mockDefault() {
     return new Promise((resolve) => {
         setTimeout(function () {
@@ -26,7 +27,7 @@ function loadDefault() {
             response.json().then(tasks => ({tasks, response}))
         ).then(({tasks, response}) => {
             if (!response.ok) {
-                return Promise.reject({status: response.status, message: tasks.message})
+                return Promise.reject(buildError(response, tasks))
             } else {
                 return Promise.resolve(tasks);
             }
@@ -47,7 +48,7 @@ function loadTasksFromUrl(url) {
             response.json().then(tasks => ({tasks, response}))
         ).then(({tasks, response}) => {
             if (!response.ok) {
-                return Promise.reject({status: response.status, message: tasks.message})
+                return Promise.reject(buildError(response, tasks))
             } else {
                 return Promise.resolve(tasks);
             }
@@ -83,7 +84,7 @@ export function getTaskById(id) {
             response.json().then(tasks => ({tasks, response}))
         ).then(({tasks, response}) => {
             if (!response.ok) {
-                return Promise.reject({status: response.status, message: tasks.message})
+                return Promise.reject(buildError(response, tasks))
             } else {
                 return Promise.resolve(tasks);
             }
@@ -105,7 +106,7 @@ export function updateTask(taskId, data) {
             response.json().then(tasks => ({tasks, response}))
         ).then(({tasks, response}) => {
             if (!response.ok) {
-                return Promise.reject({status: response.status, message: tasks.message})
+                return Promise.reject(buildError(response, tasks))
             } else {
                 return Promise.resolve(tasks);
             }
