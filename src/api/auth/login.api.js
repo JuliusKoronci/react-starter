@@ -1,6 +1,7 @@
 import {USE_MOCK} from '../../config/security';
 import {MOCK_DELAY} from '../../config/config';
 import {LOGIN_URL} from '../urls';
+import {buildError} from '../helpers';
 
 function mockLogin(username, password) {
     return new Promise((resolve, reject) => {
@@ -11,6 +12,7 @@ function mockLogin(username, password) {
                 })
             } else {
                 reject({
+                    'status': 409,
                     'message': 'Incorrect credentials'
                 })
             }
@@ -30,7 +32,7 @@ function apiLogin(username, password) {
             response.json().then(user => ({user, response}))
         ).then(({user, response}) => {
             if (!response.ok) {
-                return Promise.reject({status: response.status, message: user.message})
+                return Promise.reject(buildError(response, user))
             } else {
                 return Promise.resolve(user);
             }
