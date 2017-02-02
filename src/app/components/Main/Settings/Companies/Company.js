@@ -5,13 +5,17 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
 import * as generalActions from '../../../../redux/actions/general.action';
 import NProgress from '../../../../../../node_modules/nprogress/nprogress';
-import {COMPANY_ENTITY} from '../../../../redux/constants';
+import configResolver from '../../../../../config/configResolver';
 
 class Company extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.companyConfig = configResolver.getCompanyConfig(props.params.companyId);
+    }
 
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.params.companyId && !this.props.company) {
-            this.props.actions.loadEntityById(COMPANY_ENTITY, this.props.params.companyId);
+            this.props.actions.loadEntityById(this.props.params.companyId, this.companyConfig);
         }
     }
 
@@ -19,9 +23,9 @@ class Company extends Component {
         NProgress.start();
 
         if (this.props.params.companyId) {
-            this.props.actions.updateEntity(COMPANY_ENTITY, this.props.params.companyId, values);
+            this.props.actions.updateEntity(this.props.params.companyId, values, this.companyConfig);
         } else {
-            this.props.actions.createEntity(COMPANY_ENTITY, values);
+            this.props.actions.createEntity(values,this.companyConfig);
         }
     };
 
