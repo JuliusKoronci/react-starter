@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, statusesReceived} from '../app/redux/actions/settings.action';
 
 class configResolver {
     static getCompanyConfig = (id) => {
@@ -8,6 +8,25 @@ class configResolver {
             url: id ? urls.COMPANIES_LIST + '/' + id : urls.COMPANIES_LIST,
             afterEntityReceivedAction: companyReceived,
             redirectAfterCreation: paths.companies
+        }
+    };
+
+    static getAssignUserConfig(taskId, userId) {
+        return {
+            url: urls.TASK_LIST + '/' + taskId + '/assign-user/' + userId
+        }
+    };
+
+    static changeStatusConfig(taskId, userId, statusId) {
+        return {
+            url: urls.TASK_LIST + '/' + taskId + '/assign-user/' + userId + '/status/' + statusId
+        }
+    };
+
+    static loadStatusList(){
+        return {
+            url: urls.STATUSES_LIST,
+            afterEntityReceivedAction: statusesReceived,
         }
     }
 }

@@ -2,7 +2,7 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 import {REQUEST_ENTITY, CREATE_ENTITY, UPDATE_ENTITY} from '../constants';
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
 import {defaultGET, defaultRequest} from '../../../api/api';
-import {entityUpdated, entityCreated, entityReceived} from '../../services/general';
+import {entityUpdated, entityCreated} from '../../services/general';
 
 
 function *loadEntity(action) {
@@ -10,7 +10,6 @@ function *loadEntity(action) {
     try {
         let config = action.config;
         const data = yield call(defaultGET, config.url);
-        entityReceived('Entity loaded successfully');
         yield put(config.afterEntityReceivedAction(data));
     } catch (e) {
         yield put(asyncError(e));

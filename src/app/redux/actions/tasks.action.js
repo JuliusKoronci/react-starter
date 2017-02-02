@@ -4,7 +4,8 @@ import {
     REQUEST_TASKS_FROM_URL,
     REQUEST_TASK_BY_ID,
     TASK_RECEIVED,
-    TASK_UPDATED
+    TASK_UPDATED,
+    TASK_STATUS_UPDATED
 } from '../constants';
 
 export function requestDefaultTasks() {
@@ -44,5 +45,12 @@ export function taskUpdated(data, taskId) {
         type: TASK_UPDATED,
         data,
         taskId
+    }
+}
+export function updateStatus(statusConfig, assignConfig) {
+    return {
+        type: TASK_STATUS_UPDATED,
+        statusConfig,
+        assignConfig
     }
 }

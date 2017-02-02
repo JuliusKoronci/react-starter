@@ -1,8 +1,9 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {REQUEST_DEFAULT_TASKS, REQUEST_TASKS_FROM_URL, REQUEST_TASK_BY_ID, TASK_UPDATED} from '../constants';
+import {REQUEST_DEFAULT_TASKS, REQUEST_TASKS_FROM_URL, REQUEST_TASK_BY_ID, TASK_UPDATED, TASK_STATUS_UPDATED} from '../constants';
 import {endAjax, startAjaxReset, asyncError} from '../actions/async.action';
 import {tasksReceived, taskReceived} from '../actions/tasks.action';
 import {defaultFilter, getTasksFromUrl, getTaskById, updateTask as updateApi} from '../../../api/tasks/tasks.api';
+import {defaultPOST, defaultPATCH} from '../../../api/api';
 
 function *defaultTasks() {
     yield put(startAjaxReset());
@@ -53,10 +54,25 @@ function *updateTask(action) {
     yield put(endAjax());
 }
 
+function *updateStatus(action) {
+    yield put(startAjaxReset());
+    try {
+        if(action.assignConfig){
+            yield call(defaultPOST, action.assignConfig.url);
+        }
+        yield call(defaultPATCH, action.statusConfig.url);
+
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
 
 export function *loadTasksFromUrl() {
     yield takeLatest(REQUEST_TASKS_FROM_URL, loadTasksUrl);
     yield takeLatest(REQUEST_TASK_BY_ID, loadTaskById);
     yield takeLatest(TASK_UPDATED, updateTask);
+    yield takeLatest(TASK_STATUS_UPDATED, updateStatus);
 
 }

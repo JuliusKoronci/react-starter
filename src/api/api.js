@@ -49,6 +49,30 @@ export function defaultPOST(url, data) {
         })
 
 }
+export function defaultPATCH(url, data) {
+    const token = getFromStorage(TOKEN_KEY);
+    let config = {
+        method: 'PATCH',
+        body: queryString.stringify(data),
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+
+    return fetch(url, config)
+        .then(response =>
+            response.json().then(data => ({data, response}))
+        ).then(({data, response}) => {
+            if (!response.ok) {
+                return Promise.reject(buildError(response, data))
+            } else {
+                return Promise.resolve(data);
+            }
+        })
+
+}
 
 
 export function defaultRequest(url, method, data) {
