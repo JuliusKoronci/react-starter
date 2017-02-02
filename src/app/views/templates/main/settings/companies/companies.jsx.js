@@ -1,7 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
-import DeleteButton from '../../_partials/deleteButton.jsx';
+// import DeleteButton from '../../_partials/deleteButton.jsx';
+import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
+
 import {generateRoute} from '../../../../../../config/router';
 
 const companies = (props) => {
@@ -31,7 +33,7 @@ const companies = (props) => {
 
                     {props.data.map((company, i) => {
                         return (
-                        <tr key={i}>
+                        <tr key={company.id}>
                         <td>{company.id}</td>
                             <td><Link to={generateRoute('companies_edit',{companyId:company.id})} >{company.title}</Link></td>
                         <td className="uk-text-center">{company.is_active ? 'yes' : 'no'}</td>

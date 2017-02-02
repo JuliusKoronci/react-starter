@@ -3,7 +3,8 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
 import {renderField} from '../field.tpl';
-import DeleteButton from '../../views/templates/main/_partials/deleteButton.jsx';
+// import DeleteButton from '../../views/templates/main/_partials/deleteButton.jsx';
+import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
 class CompanyAddForm extends Component {
 
@@ -64,7 +65,7 @@ class CompanyAddForm extends Component {
                                 </div>
                                 <div className="uk-margin-medium-top">
 
-                                    {this.props.params.companyId && <DeleteButton handleDelete={handleDelete} id={this.props.params.companyId?parseInt(this.props.params.companyId, 10):0} />}
+                                    {this.props.params.companyId && <DeleteButton handleDelete={handleDelete} id={parseInt(this.props.params.companyId, 10)} />}
 
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE

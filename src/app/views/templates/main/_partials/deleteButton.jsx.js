@@ -2,7 +2,9 @@ import React, {PropTypes} from 'react';
 
 const deleteButton = ({handleDelete, id}) => {
     return (
-        <button className="md-btn md-btn-danger" onClick={handleDelete.bind(null, id)} >Delete</button>
+        <div>
+        <button className="md-btn md-btn-warning" onClick={handleDelete.bind(null, id)} >Are you sure?</button>
+        </div>
     );
 };
 
