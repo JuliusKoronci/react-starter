@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
+import DeleteButton from '../../_partials/deleteButton.jsx';
 import {generateRoute} from '../../../../../../config/router';
 
 const companies = (props) => {
@@ -35,7 +36,8 @@ const companies = (props) => {
                             <td><Link to={generateRoute('companies_edit',{companyId:company.id})} >{company.title}</Link></td>
                         <td className="uk-text-center">{company.is_active ? 'yes' : 'no'}</td>
                         <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
+
+                            {company.is_active && <DeleteButton handleDelete={props.handleDelete} id={company.id} />}
                             <Link to={generateRoute('companies_edit',{companyId:company.id})} className="md-btn md-btn-primary" >Edit</Link>
                         </td>
                     </tr>
