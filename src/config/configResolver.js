@@ -6,6 +6,7 @@ class configResolver {
     static getCompanyConfig = (id) => {
         return {
             url: id ? urls.COMPANIES_LIST + '/' + id : urls.COMPANIES_LIST,
+            urlList:urls.COMPANIES_LIST,
             afterEntityReceivedAction: companyReceived,
             redirectAfterCreation: paths.companies
         }

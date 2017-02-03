@@ -3,9 +3,20 @@ import View from '../../../../views/templates/main/settings/companies/companies.
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
+import * as generalActions from '../../../../redux/actions/general.action';
 import {SETTING_REFRESH_INTERVAL} from '../../../../../config/config';
+import configResolver from '../../../../../config/configResolver';
 
 class Companies extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+        this.companyConfig = configResolver.getCompanyConfig(props.params.companyId);
+    }
+
+    deleteHandler=(id)=>{
+        this.props.actions.deleteEntity(id, this.companyConfig);
+    };
 
     componentWillMount() {
         this.props.actions.requestCompanies();
@@ -18,7 +29,7 @@ class Companies extends Component {
 
     render() {
         return (
-            <View {...this.props.companies} loadCompanies={this.props.actions.requestCompanies}/>
+            <View {...this.props.companies} loadCompanies={this.props.actions.requestCompanies} handleDelete={this.deleteHandler} />
         );
     }
 }
@@ -33,7 +44,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions}, dispatch)
+        actions: bindActionCreators({...actions, ...generalActions}, dispatch)
     };
 }
 

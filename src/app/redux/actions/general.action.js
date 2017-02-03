@@ -47,3 +47,11 @@ export function updateEntity(id, values, config) {
         config
     }
 }
+
+export function deleteEntity(id, config) {
+    return {
+        type: constants.DELETE_ENTITY,
+        id,
+        config
+    }
+}
