@@ -8,6 +8,8 @@ import {
     TASK_STATUS_UPDATED
 } from '../constants';
 
+import configResolver from '../../../config/configResolver';
+
 export function requestDefaultTasks() {
     return {
         type: REQUEST_DEFAULT_TASKS
@@ -53,4 +55,16 @@ export function updateStatus(statusConfig, assignConfig) {
         statusConfig,
         assignConfig
     }
+}
+
+export function handleStatus(data, taskId) {
+    const userId = data.assigned || this.props.user.id;
+    let assignConfig = false;
+    if (!data.assigned) {
+        assignConfig = configResolver.getAssignUserConfig(taskId, userId);
+    }
+    const statusConfig = configResolver.changeStatusConfig(taskId, userId, data.status);
+
+    return updateStatus(statusConfig, assignConfig);
+
 }

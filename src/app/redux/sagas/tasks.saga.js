@@ -47,7 +47,8 @@ function *loadTaskById(action) {
 function *updateTask(action) {
     yield put(startAjaxReset());
     try {
-         yield call(updateApi, action.taskId, action.data);
+        const data =yield call(updateApi, action.taskId, action.data);
+        yield put(taskReceived(data));
     } catch (e) {
         yield put(asyncError(e));
     }

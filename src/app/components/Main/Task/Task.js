@@ -16,18 +16,6 @@ class Task extends Component {
         this.props.actions.loadEntityList(configResolver.loadStatusList());
     }
 
-    handleStatus = (data, taskId) => {
-        const userId = data.assigned || this.props.user.id;
-        let assignConfig = false;
-        if (!data.assigned) {
-            assignConfig = configResolver.getAssignUserConfig(taskId, userId);
-            // handle assign user first
-        }
-        const statusConfig = configResolver.changeStatusConfig(taskId, userId, data.status);
-        this.props.actions.updateStatus(statusConfig, assignConfig);
-
-    };
-
     render() {
         if (this.props.task) {
             return this.renderTask()
@@ -38,7 +26,7 @@ class Task extends Component {
 
     renderTask = () => {
         if (this.props.canEdit) {
-            return (<ViewEditable {...this.props} handleStatus={this.handleStatus}/>);
+            return (<ViewEditable {...this.props}/>);
         }
 
         return (<ViewReadOnly {...this.props}/>);
