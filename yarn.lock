@@ -4298,6 +4298,12 @@ react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+react-flatpickr@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-flatpickr/-/react-flatpickr-3.0.1.tgz#9ec995958399f341347fe926a64d238cb3f92020"
+  dependencies:
+    flatpickr "^2.3.5"
+
 react-quill@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/react-quill/-/react-quill-0.4.1.tgz#f54ff4f444df179ed7ef0a1379265af9024521a3"

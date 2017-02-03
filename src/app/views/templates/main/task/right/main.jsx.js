@@ -11,6 +11,7 @@ import Repeat from './repeat.jsx';
 import Attachment from './attachment.jsx';
 import Tag from './tag.jsx';
 import Custom from './custom.jsx';
+import DatePicker from '../../../../../forms/Task/Datepicker.form'
 
 const main = ({task, user, actions, handleStatus, statuses}) => {
     return (
@@ -20,9 +21,12 @@ const main = ({task, user, actions, handleStatus, statuses}) => {
             <Requester/>
             <Company/>
             <Assigned/>
-            <StartDate/>
-            <DeadlineDate/>
-            <CloseDate/>
+            <DatePicker taskId={task.id} action={actions.taskUpdated}
+                        fieldName="startedAt" label="Start At" icon="&#xE858;"/>
+            <DatePicker taskId={task.id} action={actions.taskUpdated}
+                        fieldName="deadline" label="Deadline" icon="&#xE8B2;"/>
+            <DatePicker taskId={task.id} action={actions.taskUpdated}
+                        fieldName="closedAt" label="Closed At" icon="&#xE5CD;"/>
             <Repeat/>
             <Attachment/>
             <Tag/>
