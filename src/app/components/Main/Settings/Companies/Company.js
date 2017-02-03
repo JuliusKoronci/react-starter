@@ -13,6 +13,10 @@ class Company extends Component {
         this.companyConfig = configResolver.getCompanyConfig(props.params.companyId);
     }
 
+    deleteHandler=(id)=>{
+        this.props.actions.deleteEntity(this.props.params.companyId, this.companyConfig);
+    };
+
     componentWillMount() {
         if (this.props.params.companyId && !this.props.company) {
             this.props.actions.loadEntityById(this.props.params.companyId, this.companyConfig);
@@ -35,12 +39,14 @@ class Company extends Component {
 
         return (
             <View formError={null} onSubmit={this.onSubmit} {...this.props}
-                  heading={this.props.company ? "Edit company" : "Add company"}/>
+                  heading={this.props.company ? "Edit company" : "Add company"} handleDelete={this.deleteHandler} />
         )
 
     }
 
 }
+
+
 
 
 function mapStateToProps(state, ownProps) {

@@ -18,15 +18,16 @@ export function loadEntityList(config) {
 export function createEntity(values, config) {
     return {
         type: constants.CREATE_ENTITY,
+        values,
         config
     }
 }
 
-export function patchEntity(id, values, config) {
+export function patchEntity(config, values) {
     return {
         type: constants.PATCH_ENTITY,
-        id,
-        config
+        config,
+        values
     }
 }
 
@@ -44,6 +45,14 @@ export function updateEntity(id, values, config) {
         type: constants.UPDATE_ENTITY,
         id,
         values,
+        config
+    }
+}
+
+export function deleteEntity(id, config) {
+    return {
+        type: constants.DELETE_ENTITY,
+        id,
         config
     }
 }
