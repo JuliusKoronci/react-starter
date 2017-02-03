@@ -14,8 +14,6 @@ import Companies from '../app/components/Main/Settings/Companies/Companies';
 import Company from '../app/components/Main/Settings/Companies/Company';
 import CompaniesCustomFields from '../app/components/Main/Settings/CompanyAttributes/CompanyAttribute';
 import CompaniesCustomField from '../app/components/Main/Settings/CompanyAttributes/CompaniesCustomField';
-import EmailNotifications from '../app/components/Main/Settings/EmailNotifications/EmailNotifications';
-import EmailNotification from '../app/components/Main/Settings/EmailNotifications/EmailNotification';
 import Imaps from '../app/components/Main/Settings/Imaps/Imaps';
 import Imap from '../app/components/Main/Settings/Imaps/Imap';
 import ProjectSharedFilters from '../app/components/Main/Settings/ProjectSharedFilters/ProjectSharedFilters';
@@ -116,9 +114,6 @@ export default (
 
             <Route name="companies-custom-field" path={paths.companies_custom_fields_add}  component={CompaniesCustomField}/>
             <Route name="companies-custom-fields" path={paths.companies_custom_fields} component={CompaniesCustomFields}/>
-
-            <Route name="email-notification" path={paths.email_notifications_add} component={EmailNotification}/>
-            <Route name="email-notifications" path={paths.email_notifications} component={EmailNotifications}/>
 
             <Route name="imap" path={paths.imaps_add} component={Imap}/>
             <Route name="imaps" path={paths.imaps} component={Imaps}/>
