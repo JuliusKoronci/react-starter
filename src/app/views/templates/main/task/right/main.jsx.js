@@ -12,10 +12,10 @@ import Attachment from './attachment.jsx';
 import Tag from './tag.jsx';
 import Custom from './custom.jsx';
 
-const main = ({task}) => {
+const main = ({task, user, actions, handleStatus, statuses}) => {
     return (
         <div className="md-list md-list-addon">
-            <Status/>
+            <Status task={task} statuses={statuses} user={user} action={handleStatus}/>
             <Project/>
             <Requester/>
             <Company/>

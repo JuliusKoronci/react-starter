@@ -1,4 +1,4 @@
-import {LOADING_START, LOADING_END, ASYNC_ERROR} from '../../constants';
+import {LOADING_START,LOADING_START_RESET, LOADING_END, ASYNC_ERROR} from '../../constants';
 
 export default function async(state = {
     'loading': false, 'load_count': 0, 'stop': false, error: {
@@ -15,6 +15,13 @@ export default function async(state = {
                 'loading': true,
                 'load_count': load_count + 1,
                 'stop': load_count >= 1
+            };
+        case LOADING_START_RESET:
+            return {
+                ...state,
+                'loading': true,
+                'load_count': 1,
+                'stop': 1
             };
         case LOADING_END:
             const count = (state.load_count - 1 < 1) ? 0 : state.load_count - 1;

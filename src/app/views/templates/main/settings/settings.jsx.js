@@ -18,7 +18,7 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/Companies' className="uk-text-large">Companies</Link>
+                            <Link to='/settings/companies' className="uk-text-large">Companies</Link>
                         </td>
                     </tr>
                     <tr>

@@ -1,1 +1,2 @@
-export const MOCK_DELAY = 4000;
+export const MOCK_DELAY = 2000;
+export const SETTING_REFRESH_INTERVAL = 5* 60000;

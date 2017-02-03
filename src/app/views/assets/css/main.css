@@ -318,24 +318,27 @@
 .uk-badge-warning {
   background: #ffa000;
 }
-.uk-badge-success {
-  background: #7cb342;
+.uk-badge-success, .md-btn-success {
+  background: #7cb342 !important;
+}
+.uk-badge-solved, .md-btn-solved {
+  background: #0097a7 !important;
 }
 
-.uk-badge-new {
-  background: #2da3ec;
+.uk-badge-new,.md-btn-new {
+  background: #2da3ec !important;
 }
 
-.uk-badge-open {
-  background: #80BA52;
+.uk-badge-open,.md-btn-open {
+  background: #80BA52 !important;
 }
 
-.uk-badge-pending {
-  background: #ff9c00;
+.uk-badge-pending, .md-btn-pending {
+  background: #ff9c00 !important;
 }
 
-.uk-badge-closed {
-  background: #ADADAD;
+.uk-badge-closed, .md-btn-closed {
+  background: #ADADAD !important;
 }
 
 .uk-badge-muted {
@@ -3483,7 +3486,7 @@ body > .content-preloader.preloader-active {
   text-transform: uppercase;
   -webkit-transition: all 280ms ease;
   transition: all 280ms ease;
-  color: #212121;
+  color: whitesmoke;
   box-sizing: border-box;
   cursor: pointer;
   -webkit-appearance: none;
@@ -3619,6 +3622,10 @@ body > .content-preloader.preloader-active {
 .md-btn-success:active,
 .md-btn-success.uk-active {
   background: #7cb342;
+}
+
+.md-btn-default{
+  color: #212121;
 }
 .md-btn-warning,
 .md-btn-warning:hover,

@@ -1,11 +1,14 @@
 import React, {PropTypes} from 'react';
 
 const taskStatus = ({task}) => {
+    const statuses = task.taskHasAssignedUsers.length > 0 && task.taskHasAssignedUsers.map((record) => {
+            return (
+                <span className="uk-badge" style={{background: record.status.color}}>{record.status.title}</span>
+            );
+        });
     return (
         <div>
-            {task.startedAt && !task.closedAt && <span className="uk-badge uk-badge-open">OPEN</span>}
-            {!task.startedAt && <span className="uk-badge uk-badge-open">NOT STARTED</span>}
-            {task.closedAt && <span className="uk-badge uk-badge-open">CLOSED</span>}
+            {statuses}
         </div>
     )
 };

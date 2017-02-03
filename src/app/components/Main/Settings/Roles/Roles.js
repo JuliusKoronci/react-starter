@@ -1,22 +1,33 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import View from '../../../../views/templates/main/settings/roles/roles.jsx.js';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../../../redux/actions/settings.action';
 
 class Roles extends Component {
 
-    constructor(props, context) {
-        super(props, context);
+
+    componentWillMount() {
+        this.props.actions.requestRoles();
     }
 
     render() {
         return (
-            <View prop={{}} />
+            <View {...this.props.roles} loadRoles={this.props.actions.requestRoles} />
         );
     }
 }
 
-Roles.propTypes = {
-    //myProp: PropTypes.string.isRequired 
-};
 
+function mapStateToProps(state) {
+    return {
+        roles: state.roles
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({...actions}, dispatch)
+    };
+}
 
-export default Roles;
+export default connect(mapStateToProps, mapDispatchToProps)(Roles);

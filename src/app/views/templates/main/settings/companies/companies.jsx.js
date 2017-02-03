@@ -1,7 +1,9 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
+import {generateRoute} from '../../../../../../config/router';
 
-const companies = (prop) => {
+const companies = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -25,26 +27,24 @@ const companies = (prop) => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="settings_company.html">Company 1</a></td>
-                        <td className="uk-text-center">Yes</td>
+
+                    {props.data.map((company, i) => {
+                        return (
+                        <tr key={i}>
+                        <td>{company.id}</td>
+                            <td><Link to={generateRoute('companies_edit',{companyId:company.id})} >{company.title}</Link></td>
+                        <td className="uk-text-center">{company.is_active ? 'yes' : 'no'}</td>
                         <td className="uk-text-center">
                             <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_company.html">Edit</a>
+                            <Link to={generateRoute('companies_edit',{companyId:company.id})} className="md-btn md-btn-primary" >Edit</Link>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="settings_company.html">Company 1</a></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_company.html">Edit</a>
-                        </td>
-                    </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadCompanies}/>
                 <div className="text-allign-right">
                     <Link to="/settings/companies/add" className="md-btn md-btn-primary" >Add</Link>
                 </div>
@@ -53,8 +53,6 @@ const companies = (prop) => {
     );
 };
 
-companies.propTypes = {
-    prop: PropTypes.object.isRequired
-};
+
 
 export default companies;

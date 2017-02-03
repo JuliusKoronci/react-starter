@@ -1,7 +1,8 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
 
-const statuses = (prop) => {
+const statuses = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -10,10 +11,11 @@ const statuses = (prop) => {
                 </div>
                 <hr/>
 
-                 <div className="uk-input-group">
+                <div className="uk-input-group">
                     <span className="uk-input-group-addon"><i className="material-icons md-24">&#xE8B6;</i></span>
                     <input type="text" className="md-input"/>
-                    <span className="uk-input-group-addon"><a className="md-btn md-btn-primary" href="#">Search</a></span>
+                    <span className="uk-input-group-addon"><a className="md-btn md-btn-primary"
+                                                              href="#">Search</a></span>
                 </div>
 
                 <table className="uk-table uk-text-nowrap">
@@ -28,65 +30,35 @@ const statuses = (prop) => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>New</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center"><a className="md-btn md-bg-blue-400 md-color-white" href="#">New</a></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_status.html">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Solved</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center"><a className="md-btn md-bg-green-400 md-color-white" href="#">Solved</a>
-                        </td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_status.html">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Pending</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center"><a className="md-btn md-bg-orange-400 md-color-white"
-                                                      href="#">Pending</a></td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_status.html">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Closed</td>
-                        <td className="uk-text-center"></td>
-                        <td className="uk-text-center"><a className="md-btn md-bg-grey-400 md-color-white" href="#">Closed</a>
-                        </td>
-                        <td className="uk-text-center">Yes</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_status.html">Edit</a>
-                        </td>
-                    </tr>
+
+                    {props.data.map((status, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{status.id}</td>
+                                <td>{status.title}</td>
+                                <td className="uk-text-center"></td>
+                                <td className="uk-text-center"><a className="md-btn md-bg-blue-400 md-color-white"
+                                                                  href="#">New</a></td>
+                                <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
+                                <td className="uk-text-center">
+                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                    <a className="md-btn md-btn-primary" href="settings_status.html">Edit</a>
+                                </td>
+                            </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadStatuses}/>
                 <div className="text-allign-right">
-                    <Link to="/settings/statuses/add" className="md-btn md-btn-primary" >Add</Link>
+                    <Link to="/settings/statuses/add" className="md-btn md-btn-primary">Add</Link>
                 </div>
             </div>
         </div>
     );
 };
 
-statuses.propTypes = {
-    prop: PropTypes.object.isRequired
-};
+
 
 export default statuses;

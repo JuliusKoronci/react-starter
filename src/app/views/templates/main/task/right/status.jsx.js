@@ -1,34 +1,50 @@
 import React from 'react';
+import DropDown from '../../../../../forms/Task/DropDown.form';
 
-const status = () => {
+const status = ({task, action, statuses}) => {
+    const options = statuses.map((status) => {
+        if (status.is_active) {
+            return {
+                'label': status.title,
+                'color': status.color,
+                'value': status.id,
+                'className': 'uk-badge',
+                'selectedClassName': 'md-btn md-btn-wave-light md-btn-block'
+            }
+        }
+    });
     return (
         <div>
             <label className="uk-text-muted" style={{marginLeft: '51px'}}>Status</label>
 
             <div className="uk-input-group">
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>
-                <div data-uk-dropdown="{mode:'click'}">
-                    <button className="md-btn md-btn-primary md-btn-wave-light md-btn-block" style={{paddingRight: '5px'}}>
-                        <span style={{float: 'left'}}>NEW</span>
-                        <span style={{float: 'right'}}><i className="material-icons">&#xE313;</i></span>
-                    </button>
-                    <div className="uk-dropdown">
-                        <ul className="uk-nav uk-nav-dropdown">
-                            <li>
-                                <a href="#"><span className="uk-badge uk-badge-open">OPEN</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span className="uk-badge uk-badge-solved">SOLVED</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span className="uk-badge uk-badge-pending">PENDING</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span className="uk-badge uk-badge-closed">CLOSED</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                {task.taskHasAssignedUsers.map((record, i) => {
+                    return (<DropDown
+                            key={i}
+                            fieldName="status"
+                            options={options}
+                            customLabel={record.user.username}
+                            action={action}
+                            taskId={task.id}
+                            defaultValue={record.status.id}
+                            additionalInfo={
+                                {
+                                    'assigned': record.user.id
+                                }
+                            }
+                        />
+                    )
+                })}
+                {task.taskHasAssignedUsers.length === 0 &&
+                <DropDown
+                    fieldName="status"
+                    options={options}
+                    action={action}
+                    taskId={task.id}
+                    defaultValue=""
+                />
+                }
             </div>
         </div>
     );
