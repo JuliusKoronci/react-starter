@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, statusesReceived, companyAttributesReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, statusesReceived, companyAttributeReceived} from '../app/redux/actions/settings.action';
 import {projectsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived} from '../app/redux/actions/tasks.action';
 
@@ -19,7 +19,7 @@ class configResolver {
         return {
             url: id ? urls.COMPANYATTRIBUTES_LIST + '/' + id : urls.COMPANYATTRIBUTES_LIST,
             urlList: urls.COMPANYATTRIBUTES_LIST,
-            afterEntityReceivedAction: companyAttributesReceived,
+            afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
             allowedFormFields:['city','country','dic','ic_dph','ico','street','title','zip']
         }

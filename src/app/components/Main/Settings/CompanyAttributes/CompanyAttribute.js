@@ -1,36 +1,67 @@
-import React, {PropTypes, Component} from 'react';
-import View from '../../../../views/templates/main/settings/company_attributes/company_attributes.jsx.js';
+import React, {Component} from 'react';
+import View from '../../../../forms/Settings/CompanyAttribute.form';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
+import * as generalActions from '../../../../redux/actions/general.action';
+import NProgress from '../../../../../../node_modules/nprogress/nprogress';
+import configResolver from '../../../../../config/configResolver';
 
-class CompanyAttributes extends Component {
+class CompanyAttribute extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+        this.entityId=props.params.companyAttributeId;
+        this.entityConfig = configResolver.getCompanyAttributesConfig(this.entityId);
+    }
+
+    deleteHandler=(id)=>{
+        this.props.actions.deleteEntity(this.entityId, this.entityConfig);
+    };
 
     componentWillMount() {
-        this.props.actions.requestCompanyAttributes();
+        if (this.entityId && !this.props.companyAttribute) {
+            this.props.actions.loadEntityById(this.entityId, this.entityConfig);
+        }
+
     }
+
+    onSubmit = (values) => {
+        NProgress.start();
+
+        if (this.entityId) {
+            alert('would update')
+            // this.props.actions.updateEntity(this.entityId, values, this.entityConfig);
+        } else {
+            alert('would create')
+            // this.props.actions.createEntity(values,this.entityConfig);
+        }
+    };
 
     render() {
         return (
-            <View {...this.props.companyAttributes} loadCompanyAttributes={this.props.actions.requestCompanyAttributes}/>
+            <View formError={null} onSubmit={this.onSubmit} {...this.props}
+        heading={this.props.companyAttribute ? "Edit company attribute" : "Add company attribute"} handleDelete={this.deleteHandler} />
         );
     }
 }
 
-CompanyAttributes.propTypes = {
-    companyAttributes: PropTypes.object.isRequired
-};
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+    const companyAttributeId = ownProps.params.companyAttributeId;
+    const companyAttribute = state.companyAttributes.data.filter((companyAttribute) => parseInt(companyAttribute.id, 10) === parseInt(companyAttributeId, 10));
     return {
-        companyAttributes: state.companyAttributes
+        companyAttribute: companyAttribute.length > 0 ? companyAttribute[0] : false,
     };
+
 }
+
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions}, dispatch)
+        actions: bindActionCreators({...actions, ...generalActions}, dispatch),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyAttributes);
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyAttribute);
+
 

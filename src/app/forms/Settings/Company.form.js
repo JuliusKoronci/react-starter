@@ -3,7 +3,6 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
 import {renderField} from '../field.tpl';
-// import DeleteButton from '../../views/templates/main/_partials/deleteButton.jsx';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
 class CompanyAddForm extends Component {
@@ -82,18 +81,15 @@ class CompanyAddForm extends Component {
     }
 }
 
+
+
 function mapStateToProps(state, ownProps) {
-    const companyId = ownProps.params.companyId;
-    const company = state.companies.data.filter((company) => parseInt(company.id, 10) === parseInt(companyId, 10));
-
-    if (company.length > 0) {
-        return {
-            initialValues: company.length > 0 ? company[0] : false,
-        };
-    } else {
-        return {};
-    }
-
+    const companyAttributeId = ownProps.params.companyAttributeId;
+    console.log(companyAttributeId);
+    const companyAttribute = state.companyAttributes.data.filter((companyAttribute) => parseInt(companyAttribute.id, 10) === parseInt(companyAttributeId, 10));
+    return {
+        companyAttribute: companyAttribute.length > 0 ? companyAttribute[0] : false,
+    };
 
 }
 
@@ -103,4 +99,3 @@ CompanyAddForm = reduxForm({
 
 export default connect(mapStateToProps)(CompanyAddForm);
 
-// export default CompanyAddForm;

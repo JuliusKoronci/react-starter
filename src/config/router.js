@@ -12,8 +12,8 @@ import AutomatedTasks from '../app/components/Main/Settings/AutomatedTasks/Autom
 import AutomatedTask from '../app/components/Main/Settings/AutomatedTasks/AutomatedTask';
 import Companies from '../app/components/Main/Settings/Companies/Companies';
 import Company from '../app/components/Main/Settings/Companies/Company';
-import CompaniesCustomFields from '../app/components/Main/Settings/CompanyAttributes/CompanyAttribute';
-import CompaniesCustomField from '../app/components/Main/Settings/CompanyAttributes/CompaniesCustomField';
+import CompaniesCustomFields from '../app/components/Main/Settings/CompanyAttributes/CompanyAttributes';
+import CompaniesCustomField from '../app/components/Main/Settings/CompanyAttributes/CompanyAttribute';
 import Imaps from '../app/components/Main/Settings/Imaps/Imaps';
 import Imap from '../app/components/Main/Settings/Imaps/Imap';
 import ProjectSharedFilters from '../app/components/Main/Settings/ProjectSharedFilters/ProjectSharedFilters';
@@ -52,6 +52,7 @@ export const paths = {
     'companies_edit':'/settings/companies/:companyId',
 
     'companies_attributes_add':'/settings/companies-attributes/add',
+    'companies_attributes_edit':'/settings/companies-attributes/:companyAttributeId',
     'companies_attributes':'/settings/companies-attributes',
 
     'email_notifications_add':'/settings/email-notifications/add',
@@ -115,6 +116,7 @@ export default (
             <Route name="companies" path={paths.companies} component={Companies}/>
 
             <Route name="companies-custom-field" path={paths.companies_attributes_add}  component={CompaniesCustomField}/>
+            <Route name="companies-custom-field" path={paths.companies_attributes_edit}  component={CompaniesCustomField}/>
             <Route name="companies-custom-fields" path={paths.companies_attributes} component={CompaniesCustomFields}/>
 
             <Route name="imap" path={paths.imaps_add} component={Imap}/>

@@ -24,8 +24,7 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to={paths.companies_attributes} className="uk-text-large">Companies custom
-                                fields</Link>
+                            <Link to={paths.companies_attributes} className="uk-text-large">Companies attributes</Link>
                         </td>
                     </tr>
                     <tr>

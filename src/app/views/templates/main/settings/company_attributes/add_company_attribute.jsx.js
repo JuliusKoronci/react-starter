@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 
 
-const add_companies_custom_field = (prop) => {
+const add_company_attribute = (prop) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
                 <div className="uk-margin-bottom" data-uk-margin>
-                    <h1 className="heading_b uk-margin-bottom">Add company custom field</h1>
+                    <h1 className="heading_b uk-margin-bottom">Add company attribute</h1>
                 </div>
                 <hr/>
                 <div className="uk-width-medium-1-2">
@@ -52,8 +52,8 @@ const add_companies_custom_field = (prop) => {
     );
 };
 
-add_companies_custom_field.propTypes = {
+add_company_attribute.propTypes = {
     prop: PropTypes.object.isRequired
 };
 
-export default add_companies_custom_field;
+export default add_company_attribute;
