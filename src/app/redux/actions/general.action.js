@@ -18,6 +18,7 @@ export function loadEntityList(config) {
 export function createEntity(values, config) {
     return {
         type: constants.CREATE_ENTITY,
+        values,
         config
     }
 }
@@ -26,6 +27,7 @@ export function patchEntity(id, values, config) {
     return {
         type: constants.PATCH_ENTITY,
         id,
+        values,
         config
     }
 }

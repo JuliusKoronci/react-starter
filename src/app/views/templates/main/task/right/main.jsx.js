@@ -5,6 +5,7 @@ import Attachment from './attachment.jsx';
 import Tag from './tag.jsx';
 import DatePicker from '../../../../../forms/Task/Datepicker.form';
 import Select from '../../../../../forms/Task/Select.form';
+import configResolver from '../../../../../../config/configResolver';
 
 const main = ({task, user, actions, statuses}) => {
     return (
@@ -15,7 +16,7 @@ const main = ({task, user, actions, statuses}) => {
                     defaultValue=''
                     options={[{value: 1, label: 'Test'}, {value: 2, label: 'Test 2'}]}
                     action={(e) => {
-                        console.log(e.target.value)
+                        actions.loadEntityList(configResolver.updateProject(e.target.value, task.id))
                     }}/>
             <Select label="Requester"
                     icon="&#xE7FD;"
