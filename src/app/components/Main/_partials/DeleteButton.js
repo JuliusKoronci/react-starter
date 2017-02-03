@@ -9,30 +9,30 @@ class DeleteButton extends Component {
         this.state = {confirmingDelete: false};
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.interval);
     }
 
-    setBack=()=>{
+    setBack = () => {
         this.setState({confirmingDelete: false});
         clearInterval(this.interval);
     }
 
-    confirmDelete=()=>{
-        this.setState({confirmingDelete:true});
-        this.interval = setInterval(this.setBack,2000);
+    confirmDelete = () => {
+        this.setState({confirmingDelete: true});
+        this.interval = setInterval(this.setBack, 2000);
     };
 
     render() {
         const {handleDelete, id} = this.props;
 
-        if(!this.state.confirmingDelete){
-        return (
-            <DeleteButtonView confirmDelete={this.confirmDelete} />
-        )}else
-            {return(
-            <ConfirmDeleteButtonView handleDelete={handleDelete} entityId={id} />
-            )}
+
+        return (!this.state.confirmingDelete) ? (
+                <DeleteButtonView confirmDelete={this.confirmDelete}/>
+            ) :
+            (
+                <ConfirmDeleteButtonView handleDelete={handleDelete} entityId={id}/>
+            )
 
 
     }
