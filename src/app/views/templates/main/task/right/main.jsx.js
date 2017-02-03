@@ -13,7 +13,7 @@ const main = ({task, user, actions, statuses}) => {
             <Status task={task} statuses={statuses} user={user} action={actions.handleStatus}/>
             <Select label="Project"
                     icon="&#xE2C8;"
-                    defaultValue=''
+                    defaultValue={task.project ? task.project.id : ''}
                     options={[{value: 41, label: 'Test'}, {value: 42, label: 'Test 2'}]}
                     action={(e) => {
                         actions.patchEntity(configResolver.updateProject(e.target.value, task.id))

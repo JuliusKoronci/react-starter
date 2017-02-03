@@ -14,6 +14,7 @@ class Task extends Component {
             this.props.actions.loadTaskById(this.props.params.taskId);
         }
         this.props.actions.loadEntityList(configResolver.loadStatusList());
+        this.props.actions.loadEntityList(configResolver.loadProjectList());
     }
 
     render() {

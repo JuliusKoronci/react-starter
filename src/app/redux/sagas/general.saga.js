@@ -1,8 +1,8 @@
-import {call, put, takeLatest} from 'redux-saga/effects';
+import {call, put, takeLatest, takeEvery} from 'redux-saga/effects';
 import {REQUEST_ENTITY, CREATE_ENTITY, UPDATE_ENTITY, DELETE_ENTITY, PATCH_ENTITY} from '../constants';
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
 import {defaultGET, defaultRequest} from '../../../api/api';
-import {entityUpdated, entityCreated, entityReceived, entityDeleted} from '../../services/general';
+import {entityUpdated, entityCreated, entityDeleted} from '../../services/general';
 
 
 function *loadEntity(action) {
@@ -80,12 +80,12 @@ function *createEntity(action) {
 
 
 export function *createEntityDefault() {
-    yield takeLatest(CREATE_ENTITY, createEntity);
+    yield takeEvery(CREATE_ENTITY, createEntity);
 }
 
 
 export function *loadEntityDefault() {
-    yield takeLatest(REQUEST_ENTITY, loadEntity);
+    yield takeEvery(REQUEST_ENTITY, loadEntity);
 }
 
 export function *updateEntityDefault() {

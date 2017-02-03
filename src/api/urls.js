@@ -16,3 +16,4 @@ export const SMTPS_LIST = BASE_URL + '/task-bundle/smtps';
 export const PROJECTSHAREDFILTERS_LIST = BASE_URL + '/task-bundle/project-shared-filters';
 export const SHAREDFILTERS_LIST = BASE_URL + '/task-bundle/shared-filters';
 export const USERATTRIBUTES_LIST = BASE_URL + '/task-bundle/user-attributes';
+export const PROJECT_LIST = BASE_URL + '/task-bundle/projects';

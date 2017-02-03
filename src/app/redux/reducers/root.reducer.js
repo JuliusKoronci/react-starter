@@ -18,6 +18,7 @@ import sharedFilters from './settings/shared_filters.reducer';
 import units from './settings/units.reducer';
 import userAttributes from './settings/user_attributes.reducer';
 import settingsReducer from './system/settings.reducer';
+import projectsReducer from './system/project.reducer';
 import {REDUX_RESET} from '../constants';
 
 const appReducer = combineReducers({
@@ -39,7 +40,8 @@ const appReducer = combineReducers({
     projectSharedFilters: projectSharedFilters,
     sharedFilters: sharedFilters,
     userAttributes: userAttributes,
-    units: units
+    units: units,
+    projects: projectsReducer
 });
 
 const rootReducer = (state, action) => {

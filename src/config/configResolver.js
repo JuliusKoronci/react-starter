@@ -1,6 +1,7 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
 import {companyReceived, statusesReceived} from '../app/redux/actions/settings.action';
+import {projectsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived} from '../app/redux/actions/tasks.action';
 
 class configResolver {
@@ -29,6 +30,12 @@ class configResolver {
         return {
             url: urls.STATUSES_LIST,
             afterEntityReceivedAction: statusesReceived,
+        }
+    }
+    static loadProjectList() {
+        return {
+            url: urls.PROJECT_LIST,
+            afterEntityReceivedAction: projectsReceived,
         }
     }
 

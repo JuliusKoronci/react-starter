@@ -10,6 +10,7 @@ import {endAjax, startAjaxReset, asyncError} from '../actions/async.action';
 import {tasksReceived, taskReceived} from '../actions/tasks.action';
 import {defaultFilter, getTasksFromUrl, getTaskById, updateTask as updateApi} from '../../../api/tasks/tasks.api';
 import {defaultPOST, defaultPATCH} from '../../../api/api';
+import {entityUpdated} from '../../services/general';
 
 function *defaultTasks() {
     yield put(startAjaxReset());
@@ -69,6 +70,7 @@ function *updateStatus(action) {
         }
         const data = yield call(defaultPATCH, action.statusConfig.url);
         yield put(taskReceived(data));
+        yield put(entityUpdated('Status updated!'));
 
     } catch (e) {
         yield put(asyncError(e));
