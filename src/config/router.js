@@ -36,7 +36,13 @@ import Users from '../app/components/Main/Settings/Users/Users';
 import User from '../app/components/Main/Settings/Users/User';
 import UserCustomFields from '../app/components/Main/Settings/UserCustomFields/UserAttributes';
 import UserCustomField from '../app/components/Main/Settings/UserCustomFields/UserCustomField';
+import ReportsCompanies from '../app/components/Main/Reports/Companies/ReportsCompanies';
+import ReportCompany from '../app/components/Main/Reports/Companies/ReportCompany';
+import ReportsUsers from '../app/components/Main/Reports/Users/ReportsUsers';
+import ReportUser from '../app/components/Main/Reports/Users/ReportUser';
+import ReportsCustom from '../app/components/Main/Reports/Custom/ReportsCustom';
 import Task from '../app/components/Main/Task/Task';
+
 
 export const paths = {
     'login': '/login',
@@ -75,7 +81,12 @@ export const paths = {
     'users_add':'/settings/users/add',
     'users':'/settings/users',
     'user_custom_fields_add':'/settings/user-custom-fields/add',
-    'user_custom_fields':'/settings/user-custom-fields'
+    'user_custom_fields':'/settings/user-custom-fields',
+    'reports_companies':'/reports/companies',
+    'report_company':'/reports/company',
+    'reports_users':'/reports/users',
+    'report_user':'/reports/user',
+    'reports_custom':'/reports/custom'
 
 
 };
@@ -147,6 +158,14 @@ export default (
 
             <Route name="user-custom-field" path={paths.user_custom_fields_add} component={UserCustomField}/>
             <Route name="user-custom-fields" path={paths.user_custom_fields} component={UserCustomFields}/>
+
+            <Route name="reports-companies" path={paths.reports_companies} component={ReportsCompanies}/>
+            <Route name="report-company" path={paths.report_company} component={ReportCompany}/>
+
+            <Route name="reports-users" path={paths.reports_users} component={ReportsUsers}/>
+            <Route name="report-user" path={paths.report_user} component={ReportUser}/>
+
+            <Route name="reports-custom" path={paths.reports_custom} component={ReportsCustom}/>
 
             <Route path="*" component={NotFoundPage}/>
         </Route>
