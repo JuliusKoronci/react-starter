@@ -2,7 +2,7 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 import {REQUEST_ENTITY, CREATE_ENTITY, UPDATE_ENTITY, DELETE_ENTITY} from '../constants';
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
 import {defaultGET, defaultRequest} from '../../../api/api';
-import {entityUpdated, entityCreated, entityReceived, entityDeleted} from '../../services/general';
+import {entityUpdated, entityCreated, entityReceived, entityDeleted, filterFormValues} from '../../services/general';
 
 
 
@@ -20,14 +20,12 @@ function *loadEntity(action) {
 
 
 function *updateEntity(action) {
+
     yield put(startAjax());
     try {
-        //TODO HOTFIX, api hadze 500 - Attempted to call an undefined method named "setid" of class "API\CoreBundle\Entity\Company"
-        let newValues = Object.assign({}, action.values);
-        delete newValues.id;
-
         let config = action.config;
-        yield call(defaultRequest, config.url, 'PUT', newValues);
+        let filteredValues=filterFormValues(action.values,config.allowedFormFields);
+        yield call(defaultRequest, config.url, 'PUT', filteredValues);
         entityUpdated('Updated successfully');
     } catch (e) {
         yield put(asyncError(e));
