@@ -50,8 +50,10 @@ export const paths = {
     'companies':'/settings/companies',
     'companies_add':'/settings/companies/add',
     'companies_edit':'/settings/companies/:companyId',
-    'companies_custom_fields_add':'/settings/companies-custom-fields/add',
-    'companies_custom_fields':'/settings/companies-custom-fields',
+
+    'companies_attributes_add':'/settings/companies-attributes/add',
+    'companies_attributes':'/settings/companies-attributes',
+
     'email_notifications_add':'/settings/email-notifications/add',
     'email_notifications':'/settings/email-notifications',
     'imaps_add':'/settings/imaps/add',
@@ -112,8 +114,8 @@ export default (
             <Route name="company" path={paths.companies_edit} component={Company}/>
             <Route name="companies" path={paths.companies} component={Companies}/>
 
-            <Route name="companies-custom-field" path={paths.companies_custom_fields_add}  component={CompaniesCustomField}/>
-            <Route name="companies-custom-fields" path={paths.companies_custom_fields} component={CompaniesCustomFields}/>
+            <Route name="companies-custom-field" path={paths.companies_attributes_add}  component={CompaniesCustomField}/>
+            <Route name="companies-custom-fields" path={paths.companies_attributes} component={CompaniesCustomFields}/>
 
             <Route name="imap" path={paths.imaps_add} component={Imap}/>
             <Route name="imaps" path={paths.imaps} component={Imaps}/>
