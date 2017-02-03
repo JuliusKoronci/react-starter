@@ -5,7 +5,7 @@ const defaultState = {
     '_links': {},
     'total': 0,
     'page': 1,
-    'numberOfPages': 0,
+    'numberOfPages': 0
 };
 
 

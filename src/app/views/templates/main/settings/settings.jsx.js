@@ -29,11 +29,6 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/email-notification' className="uk-text-large">Email notifications</Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <Link to='/settings/imaps' className="uk-text-large">IMAPs</Link>
                         </td>
                     </tr>

@@ -39,7 +39,6 @@ class DropDown extends Component {
             data = Object.assign(data, this.props.additionalInfo);
         }
 
-        console.log(data);
         this.props.action(
             data
             ,
@@ -84,7 +83,8 @@ class DropDown extends Component {
         return (
             <button onClick={this.toggleDropDown} className={defOption.selectedClassName}
                     style={style}>
-                <span style={{float: 'left'}}>{defOption.label} &nbsp; {this.props.customLabel && '(' + this.props.customLabel + ')'}</span>
+                <span
+                    style={{float: 'left'}}>{defOption.label} &nbsp; {this.props.customLabel && '(' + this.props.customLabel + ')'}</span>
             </button>
         );
     };
@@ -95,10 +95,13 @@ class DropDown extends Component {
             if (option.value === this.state.selected || option.is_active === false) {
                 return;
             }
+            const style = option.color && {background: option.color};
             return (
                 <li key={key}>
-                    <a onClick={this.changeSelectedOption.bind(null, option.value)} href="#"><span
-                        className={option.className}>{option.label}</span></a>
+                    <a onClick={this.changeSelectedOption.bind(null, option.value)}
+                       href="#">
+                        <span style={style} className={option.className}>{option.label}</span>
+                    </a>
                 </li>
             );
         });

@@ -5,12 +5,12 @@ import {defaultGET, defaultRequest} from '../../../api/api';
 import {entityUpdated, entityCreated, entityReceived, entityDeleted} from '../../services/general';
 
 
+
 function *loadEntity(action) {
     yield put(startAjax());
     try {
         let config = action.config;
         const data = yield call(defaultGET, config.url);
-        entityReceived('Entity loaded successfully');
         yield put(config.afterEntityReceivedAction(data));
     } catch (e) {
         yield put(asyncError(e));

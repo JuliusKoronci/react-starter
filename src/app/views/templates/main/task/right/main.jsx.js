@@ -11,18 +11,22 @@ import Repeat from './repeat.jsx';
 import Attachment from './attachment.jsx';
 import Tag from './tag.jsx';
 import Custom from './custom.jsx';
+import DatePicker from '../../../../../forms/Task/Datepicker.form'
 
-const main = ({task, actions}) => {
+const main = ({task, user, actions, handleStatus, statuses}) => {
     return (
         <div className="md-list md-list-addon">
-            <Status task={task} action={actions.taskUpdated}/>
+            <Status task={task} statuses={statuses} user={user} action={handleStatus}/>
             <Project/>
             <Requester/>
             <Company/>
             <Assigned/>
-            <StartDate/>
-            <DeadlineDate/>
-            <CloseDate/>
+            <DatePicker taskId={task.id} action={actions.taskUpdated}
+                        fieldName="startedAt" label="Start At" icon="&#xE858;"/>
+            <DatePicker taskId={task.id} action={actions.taskUpdated}
+                        fieldName="deadline" label="Deadline" icon="&#xE8B2;"/>
+            <DatePicker taskId={task.id} action={actions.taskUpdated}
+                        fieldName="closedAt" label="Closed At" icon="&#xE5CD;"/>
             <Repeat/>
             <Attachment/>
             <Tag/>

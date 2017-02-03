@@ -8,6 +8,12 @@ export function loadEntityById(id, config) {
         config
     }
 }
+export function loadEntityList(config) {
+    return {
+        type: constants.REQUEST_ENTITY,
+        config
+    }
+}
 
 export function createEntity(values, config) {
     return {
