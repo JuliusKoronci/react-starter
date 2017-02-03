@@ -1,4 +1,4 @@
-import {COMPANIES_RECEIVED, COMPANY_CREATED, COMPANY_RECEIVED} from '../../constants';
+import {COMPANIES_RECEIVED, COMPANY_RECEIVED} from '../../constants';
 
 const defaultState = {
     'data': [],
