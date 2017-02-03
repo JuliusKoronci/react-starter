@@ -23,12 +23,11 @@ export function createEntity(values, config) {
     }
 }
 
-export function patchEntity(id, values, config) {
+export function patchEntity(config, values) {
     return {
         type: constants.PATCH_ENTITY,
-        id,
-        values,
-        config
+        config,
+        values
     }
 }
 

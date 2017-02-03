@@ -14,9 +14,9 @@ const main = ({task, user, actions, statuses}) => {
             <Select label="Project"
                     icon="&#xE2C8;"
                     defaultValue=''
-                    options={[{value: 1, label: 'Test'}, {value: 2, label: 'Test 2'}]}
+                    options={[{value: 41, label: 'Test'}, {value: 42, label: 'Test 2'}]}
                     action={(e) => {
-                        actions.loadEntityList(configResolver.updateProject(e.target.value, task.id))
+                        actions.patchEntity(configResolver.updateProject(e.target.value, task.id))
                     }}/>
             <Select label="Requester"
                     icon="&#xE7FD;"
