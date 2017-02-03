@@ -10,7 +10,8 @@ class configResolver {
             url: id ? urls.COMPANIES_LIST + '/' + id : urls.COMPANIES_LIST,
             urlList: urls.COMPANIES_LIST,
             afterEntityReceivedAction: companyReceived,
-            redirectAfterCreation: paths.companies
+            redirectAfterCreation: paths.companies,
+            allowedFormFields:['city','country','dic','ic_dph','ico','street','title','zip']
         }
     };
 
