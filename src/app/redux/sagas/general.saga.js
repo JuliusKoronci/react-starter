@@ -37,12 +37,10 @@ function *updateEntity(action) {
 function *patchEntity(action) {
     yield put(startAjax());
     try {
-        //TODO HOTFIX, api hadze 500 - Attempted to call an undefined method named "setid" of class "API\CoreBundle\Entity\Company"
-        let newValues = Object.assign({}, action.values);
-        delete newValues.id;
 
         let config = action.config;
-        const data = yield call(defaultRequest, config.url, 'PATCH', newValues);
+        let filteredValues=filterFormValues(action.values,config.allowedFormFields);
+        const data = yield call(defaultRequest, config.url, 'PATCH', filteredValues);
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
@@ -70,7 +68,8 @@ function *createEntity(action) {
     yield put(startAjax());
     try {
         let config = action.config;
-        yield call(defaultRequest, config.url, 'POST', action.values);
+        let filteredValues=filterFormValues(action.values,config.allowedFormFields);
+        yield call(defaultRequest, config.url, 'POST', filteredValues);
         entityCreated('Created successfully', config.redirectAfterCreation);
     } catch (e) {
         yield put(asyncError(e));
