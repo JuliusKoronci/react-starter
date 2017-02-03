@@ -16,7 +16,7 @@ export default function tasks(state = defaultState, action) {
         case TASK_RECEIVED:
             return {
                 ...state,
-                'data': [...state.data, action.data.data]
+                'data': [action.data.data]
             };
         case TASK_UPDATED:
             return {

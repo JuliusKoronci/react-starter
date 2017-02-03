@@ -1,4 +1,5 @@
-import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED} from '../constants';
+import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED}
+from '../constants';
 
 export function requestFilters() {
     return {
@@ -9,6 +10,13 @@ export function requestFilters() {
 export function filtersReceived(data) {
     return {
         type: FILTERS_RECEIVED,
+        data
+    }
+}
+
+export function projectsReceived(data) {
+    return {
+        type: PROJECTS_RECEIVED,
         data
     }
 }

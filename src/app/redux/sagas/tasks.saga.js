@@ -1,9 +1,16 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {REQUEST_DEFAULT_TASKS, REQUEST_TASKS_FROM_URL, REQUEST_TASK_BY_ID, TASK_UPDATED, TASK_STATUS_UPDATED} from '../constants';
+import {
+    REQUEST_DEFAULT_TASKS,
+    REQUEST_TASKS_FROM_URL,
+    REQUEST_TASK_BY_ID,
+    TASK_UPDATED,
+    TASK_STATUS_UPDATED
+} from '../constants';
 import {endAjax, startAjaxReset, asyncError} from '../actions/async.action';
 import {tasksReceived, taskReceived} from '../actions/tasks.action';
 import {defaultFilter, getTasksFromUrl, getTaskById, updateTask as updateApi} from '../../../api/tasks/tasks.api';
 import {defaultPOST, defaultPATCH} from '../../../api/api';
+import {entityUpdated} from '../../services/general';
 
 function *defaultTasks() {
     yield put(startAjaxReset());
@@ -47,7 +54,8 @@ function *loadTaskById(action) {
 function *updateTask(action) {
     yield put(startAjaxReset());
     try {
-         yield call(updateApi, action.taskId, action.data);
+        const data = yield call(updateApi, action.taskId, action.data);
+        yield put(taskReceived(data));
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -57,10 +65,12 @@ function *updateTask(action) {
 function *updateStatus(action) {
     yield put(startAjaxReset());
     try {
-        if(action.assignConfig){
+        if (action.assignConfig) {
             yield call(defaultPOST, action.assignConfig.url);
         }
-        yield call(defaultPATCH, action.statusConfig.url);
+        const data = yield call(defaultPATCH, action.statusConfig.url);
+        yield put(taskReceived(data));
+        yield put(entityUpdated('Status updated!'));
 
     } catch (e) {
         yield put(asyncError(e));
