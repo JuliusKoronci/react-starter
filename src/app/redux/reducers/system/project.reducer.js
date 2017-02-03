@@ -1,6 +1,14 @@
 import {PROJECTS_RECEIVED} from '../../constants';
 
-export default function projects(state = [], action) {
+const defaultState = {
+    'data': [],
+    '_links': {},
+    'total': 0,
+    'page': 1,
+    'numberOfPages': 0,
+};
+
+export default function projects(state = defaultState, action) {
     switch (action.type) {
         case PROJECTS_RECEIVED:
             return action.data;

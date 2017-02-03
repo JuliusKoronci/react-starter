@@ -68,10 +68,8 @@ function *updateStatus(action) {
         if (action.assignConfig) {
             yield call(defaultPOST, action.assignConfig.url);
         }
-        const data = yield call(defaultPATCH, action.statusConfig.url);
-        yield put(taskReceived(data));
-        yield put(entityUpdated('Status updated!'));
-
+        yield call(defaultPATCH, action.statusConfig.url);
+        yield call(entityUpdated,'Status updated!');
     } catch (e) {
         yield put(asyncError(e));
     }
