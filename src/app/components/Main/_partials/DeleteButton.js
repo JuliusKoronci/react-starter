@@ -1,4 +1,6 @@
 import React, {PropTypes, Component} from 'react';
+import DeleteButtonView from '../../../views/templates/main/_partials/deleteButton.jsx';
+import ConfirmDeleteButtonView from '../../../views/templates/main/_partials/confirmDeleteButton.jsx';
 
 class DeleteButton extends Component {
 
@@ -26,10 +28,11 @@ class DeleteButton extends Component {
 
         if(!this.state.confirmingDelete){
         return (
-            <button className="md-btn md-btn-danger" onClick={this.confirmDelete} >Delete</button>
+            <DeleteButtonView confirmDelete={this.confirmDelete} />
         )}else
             {return(
-            <button className="md-btn md-btn-warning" onClick={handleDelete.bind(null, id)} >Are you sure?</button>)}
+            <ConfirmDeleteButtonView handleDelete={handleDelete} entityId={id} />
+            )}
 
 
     }

@@ -1,16 +1,13 @@
 import React, {PropTypes} from 'react';
 
-const deleteButton = ({handleDelete, id}) => {
+const deleteButton = ({confirmDelete}) => {
     return (
-        <div>
-        <button className="md-btn md-btn-warning" onClick={handleDelete.bind(null, id)} >Are you sure?</button>
-        </div>
+        <button className="md-btn md-btn-danger" onClick={confirmDelete} >Delete</button>
     );
 };
 
 deleteButton.propTypes = {
-    handleDelete: PropTypes.func.isRequired,
-    id: PropTypes.number.isRequired
+    confirmDelete: PropTypes.func.isRequired,
 };
 
 export default deleteButton;
