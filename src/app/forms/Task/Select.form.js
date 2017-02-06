@@ -8,7 +8,7 @@ const Select = ({options, action, defaultValue, label, icon}) => {
             <select value={defaultValue} onChange={action} className="md-input">
                 <option value={false}>Select {label}...</option>
                 {options.map((option, i) => {
-                    return <option key={i} value={option.value}>{option.label}</option>
+                    return <option key={i} value={option.id}>{option.title}</option>
                 })}
             </select>
         </div>

@@ -9,6 +9,19 @@ import configResolver from '../../../../config/configResolver';
 
 class Task extends Component {
 
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            values: ''
+        }
+    }
+
+    setValues = (values) => {
+        this.setState({
+            values: values
+        })
+    };
+
     componentWillMount() {
         if (!this.props.task) {
             this.props.actions.loadTaskById(this.props.params.taskId);
@@ -27,7 +40,7 @@ class Task extends Component {
 
     renderTask = () => {
         if (this.props.canEdit) {
-            return (<ViewEditable {...this.props}/>);
+            return (<ViewEditable setValues={this.setValues} tagValues={this.state.values} {...this.props}/>);
         }
 
         return (<ViewReadOnly {...this.props}/>);
@@ -47,7 +60,8 @@ function mapStateToProps(state, ownProps) {
         task: task.length > 0 ? task[0] : false,
         canEdit: true,
         user: state.auth.user,
-        statuses: state.statuses.data
+        statuses: state.statuses.data,
+        projects: state.projects
     };
 }
 function mapDispatchToProps(dispatch) {
