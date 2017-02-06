@@ -14,7 +14,6 @@ function mockDefault() {
 
 export function loadUserAttributes(url) {
     //nastavene tahanie mock dat
-    console.log("test");
     return mockDefault();
 
     if (USE_MOCK) {

@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {paths} from '../../../../../config/router';
 
 const settings = (prop) => {
     return (
@@ -13,74 +14,73 @@ const settings = (prop) => {
                     <tbody>
                     <tr>
                         <td>
-                            <Link to='/settings/automated-tasks' className="uk-text-large">Automated tasks</Link>
+                            <Link to={paths.automated_tasks} className="uk-text-large">Automated tasks</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/companies' className="uk-text-large">Companies</Link>
+                            <Link to={paths.companies} className="uk-text-large">Companies</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/companies-custom-fields' className="uk-text-large">Companies custom
-                                fields</Link>
+                            <Link to={paths.companies_attributes} className="uk-text-large">Companies attributes</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/imaps' className="uk-text-large">IMAPs</Link>
+                            <Link to={paths.imaps} className="uk-text-large">IMAPs</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/project-shared-filters' className="uk-text-large">Project Shared
+                            <Link to={paths.project_shared_filters} className="uk-text-large">Project Shared
                                 Filters</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/roles' className="uk-text-large">Roles</Link>
+                            <Link to={paths.roles} className="uk-text-large">Roles</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/shared-filters' className="uk-text-large">Shared Filters</Link>
+                            <Link to={paths.shared_filters} className="uk-text-large">Shared Filters</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/smtps' className="uk-text-large">SMTPs</Link>
+                            <Link to={paths.smtps} className="uk-text-large">SMTPs</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/statuses' className="uk-text-large">Statuses</Link>
+                            <Link to={paths.statuses} className="uk-text-large">Statuses</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/task-custom-fields' className="uk-text-large">Task custom Fields</Link>
+                            <Link to={paths.task_custom_fields} className="uk-text-large">Task custom Fields</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/trigers' className="uk-text-large">Trigers</Link>
+                            <Link to={paths.triggers} className="uk-text-large">Triggers</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/units' className="uk-text-large">Units</Link>
+                            <Link to={paths.units} className="uk-text-large">Units</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/users' className="uk-text-large">Users</Link>
+                            <Link to={paths.users} className="uk-text-large">Users</Link>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <Link to='/settings/user-custom-fields' className="uk-text-large">Users custom
+                            <Link to={paths.user_custom_fields} className="uk-text-large">Users custom
                                 fields</Link>
                         </td>
                     </tr>

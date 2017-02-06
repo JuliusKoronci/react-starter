@@ -15,7 +15,7 @@ function mockDefault() {
 export function loadProjectSharedFilters(url) {
     //nastavene tahanie mock dat
     return mockDefault();
-    
+
     if (USE_MOCK) {
         return mockDefault();
     }

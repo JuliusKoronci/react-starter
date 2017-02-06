@@ -47,6 +47,8 @@ class Company extends Component {
 }
 
 
+
+
 function mapStateToProps(state, ownProps) {
     const companyId = ownProps.params.companyId;
     const company = state.companies.data.filter((company) => parseInt(company.id, 10) === parseInt(companyId, 10));

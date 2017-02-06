@@ -92,6 +92,13 @@ export function companyAttributesReceived(response) {
     }
 }
 
+export function companyAttributeReceived(data) {
+    return {
+        type: constants.COMPANYATTRIBUTE_RECEIVED,
+        data
+    }
+}
+
 export function requestTaskAttributes(url) {
     return {
         type: constants.REQUEST_TASKATTRIBUTES,
