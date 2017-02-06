@@ -11,14 +11,12 @@ export const renderField = ({input, label, type, meta: {touched, error, warning}
 // export const renderSelect = ({input, label, type, meta: {touched, error, warning}}) => (
 //     <div className="uk-form-row">
 //         <label htmlFor={input.name}>{label}</label>
-//         <select value={defaultValue} onChange={action} className="md-input">
+//         <select value={defaultValue} onChange={action} className="md-input" {...input}>
 //             <option value={false}>Select {label}...</option>
 //             {options.map((option, i) => {
 //                 return <option key={i} value={option.id}>{option.title}</option>
 //             })}
 //         </select>
-//
-//         <input className="md-input" {...input} type={type}/>
 //         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
 //     </div>
 // );

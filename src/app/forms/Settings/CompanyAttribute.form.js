@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required} from '../../../config/validation';
-import {renderField} from '../field.tpl';
+import {renderField, renderSelect} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
 class CompanyAttributeForm extends Component {
@@ -37,6 +37,20 @@ class CompanyAttributeForm extends Component {
                                     <Field name="description" type="text" validate={[required]} component={renderField}
                                            label="Description"/>
                                 </div>
+
+                                <div className="uk-margin">
+                                    <label className="uk-text-muted">Type</label>
+                                    <select id="select_demo_1" className="md-input">
+                                        <option value="" disabled selected hidden>Select custom field type</option>
+                                        <option value="a">Input</option>
+                                        <option value="b">Text area</option>
+                                        <option value="c">Select</option>
+                                        <option value="c">Checkbox</option>
+                                        <option value="c">Date</option>
+                                        <option value="c">Number</option>
+                                    </select>
+                                </div>
+
                                 <div className="uk-margin">
                                     <label className="uk-text-muted">Type</label>
                                     <select id="select_demo_1" className="md-input">
