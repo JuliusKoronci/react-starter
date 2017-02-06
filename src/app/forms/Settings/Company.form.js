@@ -88,7 +88,7 @@ function mapStateToProps(state, ownProps) {
     const company = state.companies.data.filter((company) => parseInt(company.id, 10) === parseInt(companyId, 10));
 
     return {
-        initialValues: company.length > 0 ? company[0] : false,
+        initialValues: company.length > 0 ? company[0] : {},
     };
 
 }
