@@ -20,7 +20,7 @@ class Task extends Component {
         this.setState({
             values: values
         })
-    }
+    };
 
     componentWillMount() {
         if (!this.props.task) {
