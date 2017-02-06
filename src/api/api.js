@@ -56,9 +56,7 @@ export function defaultPATCH(url, data) {
         method: 'PATCH',
         body: JSON.stringify(data),
         headers: {
-            'Authorization': 'Bearer ' + token,
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Authorization': 'Bearer ' + token
         }
     };
 
@@ -84,9 +82,11 @@ export function defaultRequest(url, method, data, resolvedConfig) {
     }
     let config = {
         method: method,
-        body: (data ? JSON.stringify(data) : ''),
+        body: (data ? queryString.stringify(data) : ''),
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
 
