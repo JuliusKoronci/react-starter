@@ -4,7 +4,7 @@ export const renderField = ({input, label, type, meta: {touched, error, warning}
     <div className="uk-form-row">
         <label htmlFor={input.name}>{label}</label>
         <input className="md-input" {...input} type={type}/>
-        {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+        {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
     </div>
 );
 
