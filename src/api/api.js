@@ -2,6 +2,7 @@ import {getFromStorage} from '../app/services/storage';
 import {TOKEN_KEY} from '../config/security';
 import queryString from '../../node_modules/query-string';
 import {buildError} from './helpers';
+import {filterFormValues} from '../app/services/general';
 
 export function defaultGET(url) {
     const token = getFromStorage(TOKEN_KEY);
@@ -75,8 +76,13 @@ export function defaultPATCH(url, data) {
 }
 
 
-export function defaultRequest(url, method, data) {
+export function defaultRequest(url, method, data, resolvedConfig) {
     const token = getFromStorage(TOKEN_KEY);
+
+    if(resolvedConfig.allowedFormFields){
+        data=filterFormValues(data,resolvedConfig.allowedFormFields);
+    }
+
     let config = {
         method: method,
         body: (data ? queryString.stringify(data) : ''),

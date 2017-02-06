@@ -32,7 +32,7 @@ class CompanyAddForm extends Component {
                                        label="Active"/>
 
                                 <Field name="title" type="text" validate={[required]} component={renderField}
-                                       label="Company name" value="copmany"/>
+                                       label="Company name" />
 
                                 <Field name="ico" type="text" validate={[number]} component={renderField}
                                        label="ICO"/>
@@ -84,11 +84,11 @@ class CompanyAddForm extends Component {
 
 
 function mapStateToProps(state, ownProps) {
-    const companyAttributeId = ownProps.params.companyAttributeId;
-    console.log(companyAttributeId);
-    const companyAttribute = state.companyAttributes.data.filter((companyAttribute) => parseInt(companyAttribute.id, 10) === parseInt(companyAttributeId, 10));
+    const companyId = ownProps.params.companyId;
+    const company = state.companies.data.filter((company) => parseInt(company.id, 10) === parseInt(companyId, 10));
+
     return {
-        companyAttribute: companyAttribute.length > 0 ? companyAttribute[0] : false,
+        initialValues: company.length > 0 ? company[0] : false,
     };
 
 }

@@ -25,8 +25,7 @@ function *updateEntity(action) {
     yield put(startAjax());
     try {
         let config = action.config;
-        let filteredValues=filterFormValues(action.values,config.allowedFormFields);
-        yield call(defaultRequest, config.url, 'PUT', filteredValues);
+        yield call(defaultRequest, config.url, 'PUT', action.values, config);
         entityUpdated('Updated successfully');
     } catch (e) {
         yield put(asyncError(e));
@@ -39,8 +38,7 @@ function *patchEntity(action) {
     try {
 
         let config = action.config;
-        let filteredValues=filterFormValues(action.values,config.allowedFormFields);
-        const data = yield call(defaultRequest, config.url, 'PATCH', filteredValues);
+        const data = yield call(defaultRequest, config.url, 'PATCH', action.values, config );
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
@@ -68,8 +66,7 @@ function *createEntity(action) {
     yield put(startAjax());
     try {
         let config = action.config;
-        let filteredValues=filterFormValues(action.values,config.allowedFormFields);
-        yield call(defaultRequest, config.url, 'POST', filteredValues);
+        yield call(defaultRequest, config.url, 'POST', action.values, config);
         entityCreated('Created successfully', config.redirectAfterCreation);
     } catch (e) {
         yield put(asyncError(e));
