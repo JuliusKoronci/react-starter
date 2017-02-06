@@ -7,3 +7,34 @@ export const renderField = ({input, label, type, meta: {touched, error, warning}
         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
     </div>
 );
+
+// export const renderSelect = ({input, label, type, meta: {touched, error, warning}}) => (
+//     <div className="uk-form-row">
+//         <label htmlFor={input.name}>{label}</label>
+//         <select value={defaultValue} onChange={action} className="md-input">
+//             <option value={false}>Select {label}...</option>
+//             {options.map((option, i) => {
+//                 return <option key={i} value={option.id}>{option.title}</option>
+//             })}
+//         </select>
+//
+//         <input className="md-input" {...input} type={type}/>
+//         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+//     </div>
+// );
+//
+//
+// const Select = ({options, action, defaultValue, label, icon}) => {
+//     return (
+//     <div className="uk-input-group" style={{marginTop: '20px'}}>
+//     <span className="uk-input-group-addon"><i className="material-icons">{icon}</i></span>
+//     <label className="uk-text-muted">{label}</label>
+//     <select value={defaultValue} onChange={action} className="md-input">
+//     <option value={false}>Select {label}...</option>
+//     {options.map((option, i) => {
+//         return <option key={i} value={option.id}>{option.title}</option>
+//     })}
+//     </select>
+//     </div>
+//     );
+// };

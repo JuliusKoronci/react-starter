@@ -32,7 +32,7 @@ class CompanyAddForm extends Component {
                                        label="Active"/>
 
                                 <Field name="title" type="text" validate={[required]} component={renderField}
-                                       label="Company name" />
+                                       label="Company name"/>
 
                                 <Field name="ico" type="text" validate={[number]} component={renderField}
                                        label="ICO"/>
@@ -64,7 +64,8 @@ class CompanyAddForm extends Component {
                                 </div>
                                 <div className="uk-margin-medium-top">
 
-                                    {this.props.params.companyId && <DeleteButton handleDelete={handleDelete} id={parseInt(this.props.params.companyId, 10)} />}
+                                    {this.props.params.companyId && <DeleteButton handleDelete={handleDelete}
+                                                                                  id={parseInt(this.props.params.companyId, 10)}/>}
 
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE
@@ -82,14 +83,16 @@ class CompanyAddForm extends Component {
 }
 
 
-
 function mapStateToProps(state, ownProps) {
     const companyId = ownProps.params.companyId;
     const company = state.companies.data.filter((company) => parseInt(company.id, 10) === parseInt(companyId, 10));
 
-    return {
-        initialValues: company.length > 0 ? company[0] : {},
-    };
+    if (company.length > 0) {
+        return {
+            initialValues: company.length > 0 ? company[0] : {},
+        };
+    }
+    return {};
 
 }
 
