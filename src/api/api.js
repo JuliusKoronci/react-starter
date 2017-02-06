@@ -54,7 +54,7 @@ export function defaultPATCH(url, data) {
     const token = getFromStorage(TOKEN_KEY);
     let config = {
         method: 'PATCH',
-        body: queryString.stringify(data),
+        body: JSON.stringify(data),
         headers: {
             'Authorization': 'Bearer ' + token,
             'Accept': 'application/json',
@@ -79,17 +79,14 @@ export function defaultPATCH(url, data) {
 export function defaultRequest(url, method, data, resolvedConfig) {
     const token = getFromStorage(TOKEN_KEY);
 
-    if(resolvedConfig.allowedFormFields){
-        data=filterFormValues(data,resolvedConfig.allowedFormFields);
+    if (resolvedConfig.allowedFormFields) {
+        data = filterFormValues(data, resolvedConfig.allowedFormFields);
     }
-
     let config = {
         method: method,
-        body: (data ? queryString.stringify(data) : ''),
+        body: (data ? JSON.stringify(data) : ''),
         headers: {
-            'Authorization': 'Bearer ' + token,
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Authorization': 'Bearer ' + token
         }
     };
 

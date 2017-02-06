@@ -36,9 +36,10 @@ const main = ({task, user, actions, statuses, projects, tagValues, setValues}) =
             <Select label="Assigned"
                     icon="&#xE7FE;"
                     defaultValue=''
-                    options={[{id: 1, title: 'Test'}, {id: 2, title: 'Test 2'}]}
+                    options={[{id: 352, title: 'Test'}, {id: 358, title: 'Test 2'}]}
                     action={(e) => {
-                        console.log(e.target.value)
+                        const config = configResolver.assignUser(e.target.value, task.id, null);
+                        actions.patchEntity(config, config.values);
                     }}/>
             <DatePicker taskId={task.id} action={actions.taskUpdated} value={task.startedAt && task.startedAt.date}
                         fieldName="started_at" label="Start At" icon="&#xE858;"/>
