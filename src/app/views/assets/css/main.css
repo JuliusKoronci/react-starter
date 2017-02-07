@@ -18,6 +18,13 @@
 */
 
 /* 0. altair variables/mixins ======================== */
+
+.align-logo {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
 .submenu-icon{
   display: inline-block;
   text-align: right;
@@ -11711,6 +11718,8 @@ div.kineticjs-content {
   background-repeat: no-repeat;
   background-position: -20px -124px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  display: table;
+  width: 100%;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 192), only screen and (min-resolution: 192dppx), only screen and (min-resolution: 2dppx) {
   #sidebar_main .sidebar_main_header {
