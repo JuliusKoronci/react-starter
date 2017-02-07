@@ -7,7 +7,8 @@ const sidebar = ({filter}) => {
             <div className="sidebar_main_header">
                 <div className="align-logo">
                     <Link to='/' className="uk-text-large"><h1 className="heading_a md-color-white">LAN HELPDESK
-                        4.0</h1></Link>
+                        4.0</h1>
+                    </Link>
                 </div>
             </div>
 
@@ -28,24 +29,24 @@ const sidebar = ({filter}) => {
             <div className="menu_section">
                 <ul>
                     <li>
-                        <a href="#">
+                        <Link to='/reports/companies' className="uk-text-large">
                             <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
-                            <span className="menu_title"><Link to='/reports/companies' className="uk-text-large">Companies</Link></span>
-                        </a>
+                            <span className="menu_title">Companies</span>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to='/reports/users'
+                              className="uk-text-large">
                             <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
-                            <span className="menu_title"><Link to='/reports/users'
-                                                               className="uk-text-large">Users</Link></span>
-                        </a>
+                            <span className="menu_title">Users</span>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to='/reports/custom'
+                              className="uk-text-large">
                             <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
-                            <span className="menu_title"><Link to='/reports/custom'
-                                                               className="uk-text-large">Custom</Link></span>
-                        </a>
+                            <span className="menu_title">Custom</span>
+                        </Link>
                     </li>
                 </ul>
             </div>
