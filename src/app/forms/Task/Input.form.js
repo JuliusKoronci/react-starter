@@ -9,7 +9,26 @@ class Input extends Component {
         super(props, context);
 
         this.state = {
-            className: props.className || 'md-input'
+            className: props.className || 'md-input',
+            error: ''
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.props.number) {
+            let val = this.props.task[this.props.fieldName];
+            if (isNaN(Number.parseFloat(val))) {
+                val = '';
+            } else {
+                val = Number.parseFloat(val);
+            }
+
+            this.props.actions.taskUpdated(
+                {
+                    [this.props.fieldName]: val
+                },
+                this.props.taskId
+            )
         }
     }
 
@@ -24,19 +43,35 @@ class Input extends Component {
     };
 
     handleSubmit = (e) => {
+        let val = e.target.value;
+        if (this.props.number) {
+            if (isNaN(Number.parseFloat(val))) {
+                this.setState({
+                    error: 'Not a valid number'
+                });
+            } else {
+                this.setState({
+                    error: ''
+                });
+            }
+        }
         this.props.actions.taskUpdated(
             {
-                [this.props.fieldName]: e.target.value
+                [this.props.fieldName]: val
             },
             this.props.taskId
         )
     };
 
     render() {
+        const value = this.props.task[this.props.fieldName];
         return (
-            <input onChange={this.handleChange} onBlur={this.handleSubmit} onKeyPress={this.handleKeyPress}
-                   className={this.state.className}
-                   value={this.props.task[this.props.fieldName]}/>
+            <div>
+                <input onChange={this.handleChange} onBlur={this.handleSubmit} onKeyPress={this.handleKeyPress}
+                       className={this.state.className}
+                       value={value}/>
+                <span style={{color: 'red'}}>{this.state.error}</span>
+            </div>
         );
     }
 }
