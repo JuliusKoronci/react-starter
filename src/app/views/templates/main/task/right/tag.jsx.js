@@ -1,16 +1,22 @@
 import React from 'react';
+import { Creatable } from 'react-select';
 
-const tag = () => {
+const tag = ({tagValues,setValues}) => {
     return (
         <div className="uk-input-group" style={{marginTop: '10px'}}>
             <span className="uk-input-group-addon"><i className="material-icons">&#xE893;</i></span>
             <label className="uk-text-muted">Tag</label>
-            <select id="select_demo_1" className="md-input">
-                <option value="">Add tag...</option>
-                <option value="a">Tag 1</option>
-                <option value="b">Tag 2</option>
-                <option value="c">Tag 3</option>
-            </select>
+            <Creatable name="tags"
+                       className="md-input"
+                       value={tagValues}
+                       joinValues={true}
+                       multi={true}
+                       options={[
+                           {value: 'one', label: 'One'},
+                           {value: 'two', label: 'Two'}
+                       ]}
+                       onChange={setValues}
+            />
         </div>
     );
 };

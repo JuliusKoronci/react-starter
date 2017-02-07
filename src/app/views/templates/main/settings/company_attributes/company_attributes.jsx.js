@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
+import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
+import {paths, generateRoute} from '../../../../../../config/router';
 
 const CompanyAttributes = (props) => {
     return (
@@ -33,10 +35,16 @@ const CompanyAttributes = (props) => {
                         return (
                             <tr key={i}>
                                 <td>{companyAttribute.id}</td>
-                                <td>{companyAttribute.title}</td>
+                                <td>
+                                    <Link to={generateRoute('companies_attributes_edit',{companyAttributeId:companyAttribute.id})} >
+                                    {companyAttribute.title}
+                                    </Link>
+                                    </td>
                                 <td className="uk-text-center">{companyAttribute.type}</td>
                                 <td className="uk-text-center">{companyAttribute.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
+                                    {companyAttribute.is_active && <DeleteButton handleDelete={props.handleDelete} id={companyAttribute.id} />}
+                                    <Link to={generateRoute('companies_attributes_edit',{companyAttributeId:companyAttribute.id})} className="md-btn md-btn-primary" >Edit</Link>
                                 </td>
                             </tr>
                         );
@@ -46,7 +54,7 @@ const CompanyAttributes = (props) => {
                 <Pagination links={props._links} total={props.total} page={props.page}
                             loadFunction={props.loadCompanyAttributes}/>
                 <div className="text-allign-right">
-                    <Link to="/settings/companies-custom-fields/add" className="md-btn md-btn-primary">Add</Link>
+                    <Link to={paths.companies_attributes_add} className="md-btn md-btn-primary">Add</Link>
                 </div>
             </div>
         </div>

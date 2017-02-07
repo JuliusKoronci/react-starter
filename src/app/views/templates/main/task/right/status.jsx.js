@@ -2,15 +2,13 @@ import React from 'react';
 import DropDown from '../../../../../forms/Task/DropDown.form';
 
 const status = ({task, action, statuses}) => {
-    const options = statuses.map((status) => {
-        if (status.is_active) {
-            return {
-                'label': status.title,
-                'color': status.color,
-                'value': status.id,
-                'className': 'uk-badge',
-                'selectedClassName': 'md-btn md-btn-wave-light md-btn-block'
-            }
+    const options = statuses.filter(statue => statue.is_active).map((status) => {
+        return {
+            'label': status.title,
+            'color': status.color,
+            'value': status.id,
+            'className': 'uk-badge',
+            'selectedClassName': 'md-btn md-btn-wave-light md-btn-block'
         }
     });
     return (

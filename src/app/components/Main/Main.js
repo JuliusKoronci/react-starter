@@ -12,6 +12,7 @@ import Layout from '../../views/templates/layout.jsx';
 import NProgress from '../../../../node_modules/nprogress/nprogress';
 import '../../../../node_modules/draft-js/dist/Draft.css';
 import '../../../../node_modules/flatpickr/dist/flatpickr.min.css';
+import '../../../../node_modules/react-select/dist/react-select.min.css';
 import '../../views/assets/css/main.css';
 import '../../views/assets/css/themes/themes_combined.min.css';
 import '../../views/assets/css/nprogress.css';

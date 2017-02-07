@@ -2,6 +2,7 @@ import {getFromStorage} from '../app/services/storage';
 import {TOKEN_KEY} from '../config/security';
 import queryString from '../../node_modules/query-string';
 import {buildError} from './helpers';
+import {filterFormValues} from '../app/services/general';
 
 export function defaultGET(url) {
     const token = getFromStorage(TOKEN_KEY);
@@ -53,11 +54,9 @@ export function defaultPATCH(url, data) {
     const token = getFromStorage(TOKEN_KEY);
     let config = {
         method: 'PATCH',
-        body: queryString.stringify(data),
+        body: JSON.stringify(data),
         headers: {
-            'Authorization': 'Bearer ' + token,
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Authorization': 'Bearer ' + token
         }
     };
 
@@ -75,8 +74,12 @@ export function defaultPATCH(url, data) {
 }
 
 
-export function defaultRequest(url, method, data) {
+export function defaultRequest(url, method, data, resolvedConfig) {
     const token = getFromStorage(TOKEN_KEY);
+
+    if (resolvedConfig.allowedFormFields) {
+        data = filterFormValues(data, resolvedConfig.allowedFormFields);
+    }
     let config = {
         method: method,
         body: (data ? queryString.stringify(data) : ''),

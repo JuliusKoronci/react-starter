@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, statusesReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, statusesReceived, companyAttributeReceived} from '../app/redux/actions/settings.action';
 import {projectsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived} from '../app/redux/actions/tasks.action';
 
@@ -11,7 +11,17 @@ class configResolver {
             urlList: urls.COMPANIES_LIST,
             afterEntityReceivedAction: companyReceived,
             redirectAfterCreation: paths.companies,
-            allowedFormFields:['city','country','dic','ic_dph','ico','street','title','zip']
+            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
+        }
+    };
+
+    static getCompanyAttributesConfig = (id) => {
+        return {
+            url: id ? urls.COMPANYATTRIBUTES_LIST + '/' + id : urls.COMPANYATTRIBUTES_LIST,
+            urlList: urls.COMPANYATTRIBUTES_LIST,
+            afterEntityReceivedAction: companyAttributeReceived,
+            redirectAfterCreation: paths.companies_attributes,
+            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
         }
     };
 
@@ -33,6 +43,7 @@ class configResolver {
             afterEntityReceivedAction: statusesReceived,
         }
     }
+
     static loadProjectList() {
         return {
             url: urls.PROJECT_LIST,
@@ -44,6 +55,21 @@ class configResolver {
         return {
             url: urls.TASK_LIST + '/' + taskId + '/project/' + projectId,
             afterEntityReceivedAction: taskReceived,
+        }
+    }
+
+    static assignUser(userId, taskId, statusId) {
+        return {
+            url: urls.TASK_LIST_QUICK + '/' + taskId,
+            afterEntityReceivedAction: taskReceived,
+            values: {
+                'assigned': [
+                    {
+                        'userId': userId,
+                        'statusId': statusId
+                    }
+                ]
+            }
         }
     }
 }

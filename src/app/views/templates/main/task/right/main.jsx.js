@@ -7,37 +7,39 @@ import DatePicker from '../../../../../forms/Task/Datepicker.form';
 import Select from '../../../../../forms/Task/Select.form';
 import configResolver from '../../../../../../config/configResolver';
 
-const main = ({task, user, actions, statuses}) => {
+
+const main = ({task, user, actions, statuses, projects, tagValues, setValues}) => {
     return (
         <div className="md-list md-list-addon">
             <Status task={task} statuses={statuses} user={user} action={actions.handleStatus}/>
             <Select label="Project"
                     icon="&#xE2C8;"
                     defaultValue={task.project ? task.project.id : ''}
-                    options={[{value: 41, label: 'Test'}, {value: 42, label: 'Test 2'}]}
+                    options={projects.data.filter(project => project.is_active)}
                     action={(e) => {
                         actions.patchEntity(configResolver.updateProject(e.target.value, task.id))
                     }}/>
             <Select label="Requester"
                     icon="&#xE7FD;"
                     defaultValue=''
-                    options={[{value: 1, label: 'Test'}, {value: 2, label: 'Test 2'}]}
+                    options={[{id: 1, title: 'Test'}, {id: 2, title: 'Test 2'}]}
                     action={(e) => {
                         console.log(e.target.value)
                     }}/>
             <Select label="Company"
                     icon="&#xE7EE;"
                     defaultValue=''
-                    options={[{value: 1, label: 'Test'}, {value: 2, label: 'Test 2'}]}
+                    options={[{id: 1, title: 'Test'}, {id: 2, title: 'Test 2'}]}
                     action={(e) => {
                         console.log(e.target.value)
                     }}/>
             <Select label="Assigned"
                     icon="&#xE7FE;"
                     defaultValue=''
-                    options={[{value: 1, label: 'Test'}, {value: 2, label: 'Test 2'}]}
+                    options={[{id: 352, title: 'Test'}, {id: 358, title: 'Test 2'}]}
                     action={(e) => {
-                        console.log(e.target.value)
+                        const config = configResolver.assignUser(e.target.value, task.id, null);
+                        actions.patchEntity(config, config.values);
                     }}/>
             <DatePicker taskId={task.id} action={actions.taskUpdated} value={task.startedAt && task.startedAt.date}
                         fieldName="started_at" label="Start At" icon="&#xE858;"/>
@@ -47,7 +49,8 @@ const main = ({task, user, actions, statuses}) => {
                         fieldName="closed_at" label="Closed At" icon="&#xE5CD;"/>
             <Repeat/>
             <Attachment/>
-            <Tag/>
+
+            <Tag tagValues={tagValues} setValues={setValues}/>
         </div>
     );
 };
