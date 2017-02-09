@@ -1,22 +1,31 @@
-import {TASKS_RECEIVED, TASK_RECEIVED, TASK_UPDATED} from '../../constants';
+import {TASKS_RECEIVED, TASK_RECEIVED, TASK_UPDATED, OPTIONS_RECEIVED} from '../../constants';
 
 const defaultState = {
     'data': [],
     '_links': {},
     'total': 0,
     'page': 1,
-    'numberOfPages': 0
+    'numberOfPages': 0,
+    'options': {
+        'status': [],
+        'project': [],
+        'requester': [],
+        'company': [],
+        'tag': [],
+        'assigner': [],
+    },
+    'task': {}
 };
 
 
 export default function tasks(state = defaultState, action) {
     switch (action.type) {
         case TASKS_RECEIVED:
-            return action.data;
+            return {...state, ...action.data};
         case TASK_RECEIVED:
             return {
                 ...state,
-                'data': [action.data.data]
+                'task': action.data
             };
         case TASK_UPDATED:
             return {
@@ -27,6 +36,11 @@ export default function tasks(state = defaultState, action) {
                     }
                     return task;
                 })
+            };
+        case OPTIONS_RECEIVED:
+            return {
+                ...state,
+                'options': action.data
             };
         default:
             return state;

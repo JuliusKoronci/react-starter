@@ -1,4 +1,4 @@
-import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED}
+import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED}
 from '../constants';
 
 export function requestFilters() {
@@ -27,5 +27,12 @@ export function toggleSidebar(data) {
         data: data,
         storage: SIDEBAR_IS_MINIFIED
 
+    }
+}
+
+export function optionsReceived(data) {
+    return {
+        type: OPTIONS_RECEIVED,
+        data
     }
 }

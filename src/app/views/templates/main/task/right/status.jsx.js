@@ -2,10 +2,10 @@ import React from 'react';
 import DropDown from '../../../../../forms/Task/DropDown.form';
 
 const status = ({task, action, statuses}) => {
-    const options = statuses.filter(statue => statue.is_active).map((status) => {
+    const options = statuses.map((status) => {
         return {
             'label': status.title,
-            'color': status.color,
+            'color': status.color || '#666',
             'value': status.id,
             'className': 'uk-badge',
             'selectedClassName': 'md-btn md-btn-wave-light md-btn-block'
@@ -17,9 +17,10 @@ const status = ({task, action, statuses}) => {
 
             <div className="uk-input-group">
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>
-                {task.taskHasAssignedUsers.map((record, i) => {
+                {task.taskHasAssignedUsers.map((record) => {
+                    console.log(record);
                     return (<DropDown
-                            key={i}
+                            key={record.id}
                             fieldName="status"
                             options={options}
                             customLabel={record.user.username}

@@ -5,7 +5,8 @@ import {
     REQUEST_TASK_BY_ID,
     TASK_RECEIVED,
     TASK_UPDATED,
-    TASK_STATUS_UPDATED
+    TASK_STATUS_UPDATED,
+    TASK_UPLOADED
 } from '../constants';
 
 import configResolver from '../../../config/configResolver';
@@ -49,6 +50,14 @@ export function taskUpdated(data, taskId) {
         taskId
     }
 }
+export function taskUpload(formData, taskId) {
+    return {
+        type: TASK_UPLOADED,
+        formData,
+        taskId
+    }
+}
+
 export function updateStatus(statusConfig, assignConfig) {
     return {
         type: TASK_STATUS_UPDATED,

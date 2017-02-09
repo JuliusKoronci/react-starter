@@ -18,9 +18,9 @@ const attachment = ({task, handleFileUpload}) => {
             <label className="uk-text-muted">Attachment</label>
             {attachments.map((at, i) => {
                 return (
-                    <div>
+                    <div key={i}>
                         <br/>
-                        <a key={i} href="#">{at.slug}</a>
+                        <a target="_blank" href={at.url}>{at.slug}</a>
                     </div>
                 );
             })}
@@ -38,9 +38,6 @@ const attachment = ({task, handleFileUpload}) => {
                     display: 'block'
                 }}>Try dropping some files here, or click to select files to upload.</a>
             </Dropzone>
-            <div id="file_upload-progressbar" className="uk-progress">
-                <div className="uk-progress-bar" style={{width: '20%'}}>20%</div>
-            </div>
         </div>
     );
 };

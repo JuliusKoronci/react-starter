@@ -1,7 +1,7 @@
 import React from 'react';
 import {Creatable} from 'react-select';
 
-const tag = ({tagValues, setValues}) => {
+const tag = ({tagValues, setValues, options}) => {
 
     const values = tagValues.map(value => {
         return {
@@ -18,7 +18,7 @@ const tag = ({tagValues, setValues}) => {
                        value={values}
                        joinValues={true}
                        multi={true}
-                       options={[]}
+                       options={options}
                        onChange={setValues}
             />
         </div>
