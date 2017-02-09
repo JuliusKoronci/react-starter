@@ -9,6 +9,13 @@ const trigers = (prop) => {
                     <h1 className="heading_b uk-margin-bottom">Trigers</h1>
                 </div>
                 <hr/>
+                <div className="uk-margin-bottom">
+                    <p>
+                        Triggers take action when a ticket is created or updated.
+                        For example, use a trigger to send email notifications when an agent adds a comment to a ticket.
+                        The order of your triggers is important because triggers can act on changes made by other triggers.
+                    </p>
+                </div>
                 <table className="uk-table uk-text-nowrap">
                     <thead>
                     <tr>

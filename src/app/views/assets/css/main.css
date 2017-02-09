@@ -34,6 +34,17 @@
 
 }
 
+.div-width-50px {
+  width: 50px;
+}
+
+.center-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .custom-filter {
   padding: 8px 20px;
   padding-right: 10px;
