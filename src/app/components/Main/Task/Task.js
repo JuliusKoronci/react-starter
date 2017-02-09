@@ -6,26 +6,32 @@ import * as genActions from '../../../redux/actions/general.action';
 import ViewReadOnly from '../../../views/templates/main/task/readOnlyTask.jsx';
 import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import configResolver from '../../../../config/configResolver';
-
+import {getFromStorage} from '../../../services/storage';
+import {TOKEN_KEY} from '../../../../config/security';
 class Task extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            values: ''
-        }
     }
 
-    setValues = (values) => {
-        this.setState({
-            values: values
-        })
+    handleFileUpload = (acceptedFiles) => {
+        let formData = new FormData();
+        acceptedFiles.map((file) => {
+            name = file.name;
+            formData.append(file.name, file)
+        });
+        const token = getFromStorage(TOKEN_KEY);
+        fetch('https://dev.lanhelpdesk.com/api/v1/core-bundle/cdn/upload/task/' + this.props.task.id, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
+            method: 'POST',
+            body: formData
+        }).then(response => console.log(response))
     };
 
     componentWillMount() {
-        if (!this.props.task) {
-            this.props.actions.loadTaskById(this.props.params.taskId);
-        }
+        this.props.actions.loadTaskById(this.props.params.taskId);
         this.props.actions.loadEntityList(configResolver.loadStatusList());
         this.props.actions.loadEntityList(configResolver.loadProjectList());
     }
@@ -40,7 +46,8 @@ class Task extends Component {
 
     renderTask = () => {
         if (this.props.canEdit) {
-            return (<ViewEditable setValues={this.setValues} tagValues={this.state.values} {...this.props}/>);
+            return (<ViewEditable setValues={this.setValues} handleFileUpload={this.handleFileUpload}
+                                  {...this.props}/>);
         }
 
         return (<ViewReadOnly {...this.props}/>);

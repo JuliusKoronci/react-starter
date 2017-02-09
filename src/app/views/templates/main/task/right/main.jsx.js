@@ -8,7 +8,7 @@ import Select from '../../../../../forms/Task/Select.form';
 import configResolver from '../../../../../../config/configResolver';
 
 
-const main = ({task, user, actions, statuses, projects, tagValues, setValues}) => {
+const main = ({task, user, actions, statuses, projects, handleFileUpload}) => {
     return (
         <div className="md-list md-list-addon">
             <Status task={task} statuses={statuses} user={user} action={actions.handleStatus}/>
@@ -48,9 +48,9 @@ const main = ({task, user, actions, statuses, projects, tagValues, setValues}) =
             <DatePicker taskId={task.id} action={actions.taskUpdated}
                         fieldName="closed_at" label="Closed At" icon="&#xE5CD;"/>
             <Repeat/>
-            <Attachment/>
+            <Attachment task={task} handleFileUpload={handleFileUpload}/>
 
-            <Tag tagValues={tagValues} setValues={setValues}/>
+            <Tag tagValues={task.tags} setValues={(values) => console.log(values)}/>
         </div>
     );
 };
