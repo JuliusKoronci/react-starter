@@ -26,21 +26,30 @@ class CompanyAttribute extends Component {
 
     }
 
+    setCustomValues = (values) => {
+        console.log('set values '+values);
+        this.setState({
+            customValues: values
+        })
+    };
+
     onSubmit = (values) => {
         NProgress.start();
 
         if (this.entityId) {
-            alert('would update')
+            alert('would update');
+            console.log(values);
             // this.props.actions.updateEntity(this.entityId, values, this.entityConfig);
         } else {
-            alert('would create')
+            alert('would create');
+            console.log(values);
             // this.props.actions.createEntity(values,this.entityConfig);
         }
     };
 
     render() {
         return (
-            <View formError={null} onSubmit={this.onSubmit} {...this.props}
+            <View formError={null} onSubmit={this.onSubmit} {...this.props} setCustomValues={this.setCustomValues}
         heading={this.props.companyAttribute ? "Edit company attribute" : "Add company attribute"} handleDelete={this.deleteHandler} />
         );
     }
