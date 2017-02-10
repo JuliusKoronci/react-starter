@@ -8,6 +8,7 @@ import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import configResolver from '../../../../config/configResolver';
 import {getFromStorage} from '../../../services/storage';
 import {TOKEN_KEY} from '../../../../config/security';
+
 class Task extends Component {
 
     constructor(props, context) {
@@ -20,14 +21,8 @@ class Task extends Component {
             name = file.name;
             formData.append(file.name, file)
         });
-        const token = getFromStorage(TOKEN_KEY);
-        fetch('https://dev.lanhelpdesk.com/api/v1/core-bundle/cdn/upload/task/' + this.props.task.id, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            },
-            method: 'POST',
-            body: formData
-        }).then(response => console.log(response))
+
+        this.props.actions.taskUpload(formData,this.props.params.taskId);
     };
 
     handleFileDownload=(slug)=>{
@@ -36,8 +31,13 @@ class Task extends Component {
 
     componentWillMount() {
         this.props.actions.loadTaskById(this.props.params.taskId);
-        this.props.actions.loadEntityList(configResolver.loadStatusList());
-        this.props.actions.loadEntityList(configResolver.loadProjectList());
+        this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.task !== this.props.task) {
+            this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
+        }
     }
 
     render() {
@@ -50,7 +50,7 @@ class Task extends Component {
 
     renderTask = () => {
         if (this.props.canEdit) {
-            return (<ViewEditable setValues={this.setValues} handleFileUpload={this.handleFileUpload} handleFileDownload={this.handleFileDownload}
+            return (<ViewEditable handleFileUpload={this.handleFileUpload} handleFileDownload={this.handleFileDownload}
                                   {...this.props}/>);
         }
 
@@ -64,15 +64,13 @@ Task.propTypes = {
 };
 
 
-function mapStateToProps(state, ownProps) {
-    const taskId = ownProps.params.taskId;
-    const task = state.tasks.data.filter((task) => parseInt(task.id, 10) === parseInt(taskId, 10));
+function mapStateToProps(state) {
+    const task = state.tasks.task.data || false;
     return {
-        task: task.length > 0 ? task[0] : false,
-        canEdit: true,
-        user: state.auth.user,
-        statuses: state.statuses.data,
-        projects: state.projects
+        task: task,
+        options: state.tasks.options,
+        canEdit: task ? task.canEdit : false,
+        user: state.auth.user
     };
 }
 function mapDispatchToProps(dispatch) {

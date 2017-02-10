@@ -1,4 +1,4 @@
-import {TASK_LIST, HOST_URL} from '../urls';
+import {TASK_LIST, HOST_URL, TASK_UPLOAD} from '../urls';
 import {getFromStorage} from '../../app/services/storage';
 import {TOKEN_KEY, USE_MOCK} from '../../config/security';
 import {MOCK_DELAY} from '../../config/config';
@@ -102,6 +102,26 @@ export function updateTask(taskId, data) {
         }
     };
     return fetch(TASK_LIST + '/' + taskId, config)
+        .then(response =>
+            response.json().then(tasks => ({tasks, response}))
+        ).then(({tasks, response}) => {
+            if (!response.ok) {
+                return Promise.reject(buildError(response, tasks))
+            } else {
+                return Promise.resolve(tasks);
+            }
+        });
+}
+
+export function uploadApi(data,taskId) {
+    let config = {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY)
+        }
+    };
+    return fetch(TASK_UPLOAD + '/' + taskId, config)
         .then(response =>
             response.json().then(tasks => ({tasks, response}))
         ).then(({tasks, response}) => {

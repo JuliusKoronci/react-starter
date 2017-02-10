@@ -22,6 +22,7 @@ const attachment = ({task, handleFileUpload, handleFileDownload}) => {
                         <br/>
                         <a href="#" onClick={handleFileDownload.bind(null,at.slug)}><i className="material-icons">&#xE226;</i>&nbsp;{at.slug}</a>
                         <a href="#"><i className="material-icons">&#xE5CD;</i></a>
+
                     </div>
                 );
             })}
@@ -39,9 +40,6 @@ const attachment = ({task, handleFileUpload, handleFileDownload}) => {
                     display: 'block'
                 }}>Try dropping some files here, or click to select files to upload.</a>
             </Dropzone>
-            <div id="file_upload-progressbar" className="uk-progress">
-                <div className="uk-progress-bar" style={{width: '20%'}}>20%</div>
-            </div>
         </div>
     );
 };

@@ -27,7 +27,7 @@ export function patchEntity(config, values) {
     return {
         type: constants.PATCH_ENTITY,
         config,
-        values
+        values: values || config.values || undefined
     }
 }
 

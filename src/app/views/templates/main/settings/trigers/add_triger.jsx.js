@@ -5,7 +5,7 @@ const add_triger = (props) => {
     return (
         <div className="md-card">
             <div className="md-card-content">
-                <div className="uk-margin-bottom" data-uk-margin>
+                <div className="uk-margin-bottom">
                     <h1 className="heading_b uk-margin-bottom">Add triger</h1>
                 </div>
                 <hr/>

@@ -64,7 +64,7 @@ class Input extends Component {
     };
 
     render() {
-        const value = this.props.task[this.props.fieldName];
+        const value = this.props.task[this.props.fieldName] || '';
         return (
             <div>
                 <input onChange={this.handleChange} onBlur={this.handleSubmit} onKeyPress={this.handleKeyPress}
@@ -76,6 +76,10 @@ class Input extends Component {
     }
 }
 
+Input.defaultValue = {
+    value: ''
+};
+
 Input.propTypes = {
     taskId: PropTypes.number.isRequired,
     fieldName: PropTypes.string,
@@ -83,10 +87,8 @@ Input.propTypes = {
 };
 
 
-function mapStateToProps(state, ownProps) {
-    const task = state.tasks.data.filter((task) => {
-        return task.id === ownProps.taskId;
-    })[0];
+function mapStateToProps(state) {
+    const task = state.tasks.task.data;
 
     return {
         task: task
