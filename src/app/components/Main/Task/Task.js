@@ -30,6 +30,10 @@ class Task extends Component {
         }).then(response => console.log(response))
     };
 
+    handleFileDownload=(slug)=>{
+        this.props.actions.downloadFile(slug, configResolver.getDownloadFileConfig());
+    };
+
     componentWillMount() {
         this.props.actions.loadTaskById(this.props.params.taskId);
         this.props.actions.loadEntityList(configResolver.loadStatusList());
@@ -46,7 +50,7 @@ class Task extends Component {
 
     renderTask = () => {
         if (this.props.canEdit) {
-            return (<ViewEditable setValues={this.setValues} handleFileUpload={this.handleFileUpload}
+            return (<ViewEditable setValues={this.setValues} handleFileUpload={this.handleFileUpload} handleFileDownload={this.handleFileDownload}
                                   {...this.props}/>);
         }
 

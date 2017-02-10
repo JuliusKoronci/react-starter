@@ -56,3 +56,11 @@ export function deleteEntity(id, config) {
         config
     }
 }
+
+export function downloadFile(slug, config) {
+    return {
+        type: constants.REQUEST_DOWNLOAD_FILE,
+        config,
+        slug
+    }
+}

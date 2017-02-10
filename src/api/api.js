@@ -3,6 +3,7 @@ import {TOKEN_KEY} from '../config/security';
 import queryString from '../../node_modules/query-string';
 import {buildError} from './helpers';
 import {filterFormValues} from '../app/services/general';
+import downloadFile from 'downloadjs';
 
 export function defaultGET(url) {
     const token = getFromStorage(TOKEN_KEY);
@@ -101,5 +102,24 @@ export function defaultRequest(url, method, data, resolvedConfig) {
             }
         })
 
+}
+
+
+export function apiDownloadFile(url, resolvedConfig) {
+    const token = getFromStorage(TOKEN_KEY);
+
+    let config = {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    };
+
+    return fetch(url, config)
+        .then(function (response) {
+        return response.blob();
+    }).then(function (blob) {
+        downloadFile(blob);
+    });
 }
 

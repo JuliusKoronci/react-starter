@@ -25,6 +25,12 @@ class configResolver {
         }
     };
 
+    static getDownloadFileConfig = () => {
+        return {
+            url:urls.LOAD_ATTACHMENT
+        }
+    };
+
     static getAssignUserConfig(taskId, userId) {
         return {
             url: urls.TASK_LIST + '/' + taskId + '/assign-user/' + userId
