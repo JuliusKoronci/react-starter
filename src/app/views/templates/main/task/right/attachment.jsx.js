@@ -2,7 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import {LOAD_ATTACHMENT} from '../../../../../../api/urls';
 
-const attachment = ({task, handleFileUpload, handleFileDownload}) => {
+const attachment = ({task, handleFileUpload, handleFileDownload, handleFileDelete}) => {
     let attachments = [];
     if (task.taskHasAttachments) {
         attachments = task.taskHasAttachments.map(attachment => {
@@ -21,7 +21,7 @@ const attachment = ({task, handleFileUpload, handleFileDownload}) => {
                     <div className="download-attachmemt" key={i}>
                         <br/>
                         <a href="#" onClick={handleFileDownload.bind(null,at.slug)}><i className="material-icons">&#xE226;</i>&nbsp;{at.slug}</a>
-                        <a href="#"><i className="material-icons">&#xE5CD;</i></a>
+                        <a href="#" onClick={handleFileDelete.bind(null,at.slug)} ><i className="material-icons">&#xE5CD;</i></a>
 
                     </div>
                 );

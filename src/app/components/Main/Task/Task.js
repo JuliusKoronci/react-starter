@@ -29,6 +29,10 @@ class Task extends Component {
         this.props.actions.downloadFile(slug, configResolver.getDownloadFileConfig());
     };
 
+    handleFileDelete=(slug)=>{
+        console.log('deleting file');
+    };
+
     componentWillMount() {
         this.props.actions.loadTaskById(this.props.params.taskId);
         this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
@@ -50,7 +54,7 @@ class Task extends Component {
 
     renderTask = () => {
         if (this.props.canEdit) {
-            return (<ViewEditable handleFileUpload={this.handleFileUpload} handleFileDownload={this.handleFileDownload}
+            return (<ViewEditable handleFileUpload={this.handleFileUpload} handleFileDownload={this.handleFileDownload} handleFileDelete={this.handleFileDelete}
                                   {...this.props}/>);
         }
 

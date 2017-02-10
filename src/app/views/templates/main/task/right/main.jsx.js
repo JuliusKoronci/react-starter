@@ -9,7 +9,7 @@ import configResolver from '../../../../../../config/configResolver';
 import ReactSelect from 'react-select';
 
 
-const main = ({task, user, actions, options, handleFileUpload, handleFileDownload}) => {
+const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete}) => {
     const assignedOptions = options.assigner.map(r => {
         return {value: r.id, label: r.username}
     });
@@ -69,7 +69,7 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                         fieldName="closed_at" label="Closed At" icon="&#xE5CD;"/>
 
             {/*<Repeat/>*/}
-            <Attachment task={task} handleFileUpload={handleFileUpload} handleFileDownload={handleFileDownload} />
+            <Attachment task={task} handleFileUpload={handleFileUpload} handleFileDownload={handleFileDownload} handleFileDelete={handleFileDelete} />
 
 
             <Tag
