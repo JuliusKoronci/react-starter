@@ -6,6 +6,7 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "downloadjs": "^1.4.7",
     "draft-js": "^0.10.0",
     "draft-js-export-html": "^0.5.2",
     "jquery": "^3.1.1",
