@@ -27,7 +27,7 @@ class configResolver {
 
     static getDownloadFileConfig = () => {
         return {
-            url:urls.LOAD_ATTACHMENT
+            url: urls.LOAD_ATTACHMENT
         }
     };
 
@@ -71,6 +71,7 @@ class configResolver {
             }
         }
     }
+
     static addTags(values, taskId) {
         return {
             url: urls.TASK_LIST_QUICK + '/' + taskId,
@@ -101,6 +102,18 @@ class configResolver {
             afterEntityReceivedAction: taskReceived,
             values: {
                 'company': companyId
+            }
+        }
+    }
+
+    static addMaterial(data, taskId) {
+        return {
+            url: urls.TASK_LIST + '/' + taskId + '/invoiceable-items/unit/' + data.unit.value,
+            afterEntityReceivedAction: taskReceived,
+            values: {
+                'title': data.name.value,
+                'amount': data.quantity.value,
+                'unit_price': data.price.value
             }
         }
     }
