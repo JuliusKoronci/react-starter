@@ -19,6 +19,18 @@
 
 /* 0. altair variables/mixins ======================== */
 
+.attachment-divide {
+  margin: 5px;
+}
+.attachment-divide-top {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.attachment-remove {
+  float: right;
+}
+
 .align-logo {
   display: table-cell;
   text-align: center;
@@ -757,7 +769,7 @@
 .uk-input-group-addon {
   width: 1%;
   white-space: nowrap;
-  /*vertical-align: middle;*/
+  vertical-align: top;
   line-height: 1;
   text-align: center;
   padding: 0 16px;

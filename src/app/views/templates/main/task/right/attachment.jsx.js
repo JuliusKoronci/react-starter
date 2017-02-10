@@ -16,16 +16,6 @@ const attachment = ({task, handleFileUpload, handleFileDownload, handleFileDelet
         <div className="uk-input-group" style={{marginTop: '20px'}}>
             <span className="uk-input-group-addon"><i className="material-icons">&#xE226;</i></span>
             <label className="uk-text-muted">Attachment</label>
-            {attachments.map((at, i) => {
-                return (
-                    <div className="download-attachmemt" key={i}>
-                        <br/>
-                        <a href="#" onClick={handleFileDownload.bind(null,at.slug)}><i className="material-icons">&#xE226;</i>&nbsp;{at.slug}</a>
-                        <a href="#" onClick={handleFileDelete.bind(null,at.slug)} ><i className="material-icons">&#xE5CD;</i></a>
-
-                    </div>
-                );
-            })}
             <Dropzone style={{
                 width: '100%',
                 height: 'auto',
@@ -40,6 +30,17 @@ const attachment = ({task, handleFileUpload, handleFileDownload, handleFileDelet
                     display: 'block'
                 }}>Try dropping some files here, or click to select files to upload.</a>
             </Dropzone>
+            <hr className="attachment-divide-top"/>
+            {attachments.map((at, i) => {
+                return (
+                    <div className="attachment-download" key={i}>
+
+                        <a href="#" onClick={handleFileDownload.bind(null,at.slug)}><i className="material-icons">&#xE226;</i>&nbsp;{at.slug}</a>
+                        <a className="attachment-remove" href="#" onClick={handleFileDelete.bind(null,at.slug)} ><i className="material-icons">&#xE5CD;</i></a>
+                        <hr className="attachment-divide"/>
+                    </div>
+                );
+            })}
         </div>
     );
 };
