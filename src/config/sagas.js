@@ -15,7 +15,7 @@ import {loadProjectSharedFiltersDefault} from '../app/redux/sagas/project_shared
 import {loadSharedFiltersDefault} from '../app/redux/sagas/shared_filters.saga';
 import {loadUnitsDefault} from '../app/redux/sagas/units.saga';
 import {loadUserAttributesDefault} from '../app/redux/sagas/user_attributes.saga';
-import {loadEntityDefault,createEntityDefault,updateEntityDefault,deleteEntityDefault, downloadFileDefault} from '../app/redux/sagas/general.saga';
+import {loadEntityDefault,createEntityDefault,updateEntityDefault,deleteEntityDefault, downloadFileDefault,deleteFileDefault} from '../app/redux/sagas/general.saga';
 
 
 export default function* root() {
@@ -42,4 +42,5 @@ export default function* root() {
     yield fork(createEntityDefault);
     yield fork(updateEntityDefault);
     yield fork(deleteEntityDefault);
+    yield fork(deleteFileDefault);
 }

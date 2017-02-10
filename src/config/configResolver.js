@@ -25,6 +25,13 @@ class configResolver {
         }
     };
 
+    static deleteTaskAttachment(taskId, slug) {
+        return {
+            url: urls.TASK_LIST + '/' + taskId + '/attachment/' + slug,
+            afterFileDeletedAction: taskReceived,
+        }
+    };
+
     static getDownloadFileConfig = () => {
         return {
             url:urls.LOAD_ATTACHMENT

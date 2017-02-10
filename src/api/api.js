@@ -78,7 +78,7 @@ export function defaultPATCH(url, data) {
 export function defaultRequest(url, method, data, resolvedConfig) {
     const token = getFromStorage(TOKEN_KEY);
 
-    if (resolvedConfig.allowedFormFields) {
+    if (resolvedConfig && resolvedConfig.allowedFormFields) {
         data = filterFormValues(data, resolvedConfig.allowedFormFields);
     }
     let config = {
@@ -105,7 +105,32 @@ export function defaultRequest(url, method, data, resolvedConfig) {
 }
 
 
-export function apiDownloadFile(url, resolvedConfig) {
+export function defaultDeleteFile(url) {
+    const token = getFromStorage(TOKEN_KEY);
+
+    let config = {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json'
+        }
+    };
+
+    return fetch(url, config)
+        .then(response =>
+            response.json().then(data => ({data, response}))
+        ).then(({data, response}) => {
+            if (!response.ok) {
+                return Promise.reject(buildError(response, data))
+            } else {
+                return Promise.resolve(data);
+            }
+        })
+
+}
+
+
+export function apiDownloadFile(url) {
     const token = getFromStorage(TOKEN_KEY);
 
     let config = {

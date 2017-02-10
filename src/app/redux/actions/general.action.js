@@ -64,3 +64,11 @@ export function downloadFile(slug, config) {
         slug
     }
 }
+
+export function deleteFile(slug, config) {
+    return {
+        type: constants.REQUEST_DELETE_FILE,
+        config,
+        slug
+    }
+}

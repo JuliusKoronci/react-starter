@@ -1,7 +1,7 @@
 import {call, put, takeLatest, takeEvery} from 'redux-saga/effects';
-import {REQUEST_ENTITY, CREATE_ENTITY, UPDATE_ENTITY, DELETE_ENTITY, PATCH_ENTITY, REQUEST_DOWNLOAD_FILE} from '../constants';
+import {REQUEST_ENTITY, CREATE_ENTITY, UPDATE_ENTITY, DELETE_ENTITY, PATCH_ENTITY, REQUEST_DOWNLOAD_FILE, REQUEST_DELETE_FILE} from '../constants';
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
-import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile} from '../../../api/api';
+import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile, defaultDeleteFile} from '../../../api/api';
 import {entityUpdated, entityCreated, entityDeleted} from '../../services/general';
 
 
@@ -79,8 +79,24 @@ function *downloadFile(action) {
     let config = action.config;
     yield put(startAjax());
     try {
-        yield call(apiDownloadFile, config.url + '/'+action.slug, action.config);
+        yield call(apiDownloadFile, config.url + '/'+action.slug);
         entityUpdated('Downloading file');
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
+function *deleteFile(action) {
+    let config = action.config;
+    console.log('deleting file saga ' + config.url);
+    yield put(startAjax());
+    try {
+        const data = yield call(defaultDeleteFile, config.url);
+        if (config.afterFileDeletedAction) {
+            yield put(config.afterFileDeletedAction(data));
+        }
+        entityUpdated('File deleted');
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -109,6 +125,10 @@ export function *updateEntityDefault() {
 
 export function *deleteEntityDefault() {
     yield takeLatest(DELETE_ENTITY, deleteEntity);
+}
+
+export function *deleteFileDefault() {
+    yield takeLatest(REQUEST_DELETE_FILE, deleteFile);
 }
 
 

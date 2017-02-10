@@ -30,7 +30,7 @@ class Task extends Component {
     };
 
     handleFileDelete=(slug)=>{
-        console.log('deleting file');
+        this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId,slug));
     };
 
     componentWillMount() {
