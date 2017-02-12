@@ -13,6 +13,7 @@ const defaultState = {
         'company': [],
         'tag': [],
         'assigner': [],
+        'unit': [],
     },
     'task': {}
 };

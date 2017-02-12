@@ -18,7 +18,6 @@ const status = ({task, action, statuses}) => {
             <div className="uk-input-group">
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>
                 {task.taskHasAssignedUsers.map((record) => {
-                    console.log(record);
                     return (<DropDown
                             key={record.id}
                             fieldName="status"

@@ -6,8 +6,6 @@ import * as genActions from '../../../redux/actions/general.action';
 import ViewReadOnly from '../../../views/templates/main/task/readOnlyTask.jsx';
 import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import configResolver from '../../../../config/configResolver';
-import {getFromStorage} from '../../../services/storage';
-import {TOKEN_KEY} from '../../../../config/security';
 
 class Task extends Component {
 

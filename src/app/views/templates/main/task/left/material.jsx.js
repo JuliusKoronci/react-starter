@@ -1,6 +1,8 @@
 import React from 'react';
+import MaterialForm from '../../../../../forms/Task/Material.form';
+import configResolver from '../../../../../../config/configResolver';
 
-const material = () => {
+const material = ({task, options, actions}) => {
     return (
         <div>
             <label className="uk-text-muted">Material</label>
@@ -19,44 +21,23 @@ const material = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-
-                            </tr>
-                            <tr>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-
-                            </tr>
-                            <tr>
-                                <td><input type="text" id="table-item" className="md-input"/></td>
-                                <td><input type="text" id="table-item" className="md-input"/></td>
-                                <td>
-                                    <select id="table-item" className="md-input">
-                                        <option value="">Select...</option>
-                                        <option value="a">ks</option>
-                                        <option value="b">kg</option>
-                                        <option value="c">m</option>
-                                    </select>
-                                </td>
-                                <td><input type="text" id="table-item" className="md-input"/></td>
-                                <td>
-                                    <div className="uk-width-medium-1-6">
-                                        <a id="table-item"
-                                           className="md-btn md-btn-flat md-btn-flat-primary md-btn-wave">
-                                            Add item
-                                        </a>
-                                    </div>
-                                </td>
-
-                            </tr>
+                            {task.invoiceableItems && task.invoiceableItems.map((material, i) => {
+                                    return (
+                                        <tr key={i}>
+                                            <td>{material.title}</td>
+                                            <td>{material.amount}</td>
+                                            <td>{material.unit.shortcut}</td>
+                                            <td>{material.unit_price}</td>
+                                            <td>{material.amount * material.unit_price}</td>
+                                        </tr>
+                                    );
+                                }
+                            )}
+                            <MaterialForm options={options.unit} task={task}
+                                          addMaterial={(id, data) => {
+                                              const config = configResolver.addMaterial(data, id);
+                                              actions.createEntity(config.values, config);
+                                          }}/>
                             </tbody>
                         </table>
                     </div>
