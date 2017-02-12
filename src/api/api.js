@@ -116,16 +116,15 @@ export function defaultDeleteFile(url) {
         }
     };
 
+
     return fetch(url, config)
-        .then(response =>
-            response.json().then(data => ({data, response}))
-        ).then(({data, response}) => {
+        .then(function(response){
             if (!response.ok) {
-                return Promise.reject(buildError(response, data))
+                return Promise.reject(buildError(response, {}))
             } else {
-                return Promise.resolve(data);
+                return Promise.resolve();
             }
-        })
+        });
 
 }
 

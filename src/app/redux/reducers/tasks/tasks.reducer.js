@@ -1,4 +1,4 @@
-import {TASKS_RECEIVED, TASK_RECEIVED, TASK_UPDATED, OPTIONS_RECEIVED} from '../../constants';
+import {TASKS_RECEIVED, TASK_RECEIVED, TASK_UPDATED, OPTIONS_RECEIVED, AFTER_TASK_ATTACHMENT_DELETED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -42,6 +42,25 @@ export default function tasks(state = defaultState, action) {
                 ...state,
                 'options': action.data
             };
+
+
+        case AFTER_TASK_ATTACHMENT_DELETED:
+            const newState={...state};
+            let attachments = [];
+            if (state.task.data.taskHasAttachments) {
+                attachments = state.task.data.taskHasAttachments.map(attachment => {
+                    if(attachment.slug===action.deletedAttachmentSlug) {
+                        return false;
+                    }
+                    else{
+                        return attachment;
+                    }
+                }).filter(Boolean);
+            }
+            
+            newState.task.data.taskHasAttachments=attachments;
+            return newState;
+
         default:
             return state;
     }

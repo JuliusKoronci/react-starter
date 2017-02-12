@@ -33,8 +33,7 @@ const attachment = ({task, handleFileUpload, handleFileDownload, handleFileDelet
             <hr className="attachment-divide-top"/>
             {attachments.map((at, i) => {
                 return (
-                    <div className="attachment-download" key={i}>
-
+                    <div className="attachment-download" key={at.slug}>
                         <a href="#" onClick={handleFileDownload.bind(null,at.slug)}><i className="material-icons">&#xE226;</i>&nbsp;{at.slug}</a>
                         <a className="attachment-remove" href="#" onClick={handleFileDelete.bind(null,at.slug)} ><i className="material-icons">&#xE5CD;</i></a>
                         <hr className="attachment-divide"/>

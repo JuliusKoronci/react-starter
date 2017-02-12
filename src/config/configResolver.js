@@ -2,7 +2,7 @@ import {paths} from './router';
 import * as urls from '../api/urls';
 import {companyReceived, companyAttributeReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
-import {taskReceived} from '../app/redux/actions/tasks.action';
+import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 
 class configResolver {
     static getCompanyConfig = (id) => {
@@ -28,7 +28,8 @@ class configResolver {
     static deleteTaskAttachment(taskId, slug) {
         return {
             url: urls.TASK_LIST + '/' + taskId + '/attachment/' + slug,
-            afterFileDeletedAction: taskReceived,
+            afterFileDeletedAction: taskAttachmentDeleted,
+            afterFileDeletedActionParams:{taskId,slug}
         }
     };
 

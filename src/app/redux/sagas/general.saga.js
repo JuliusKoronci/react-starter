@@ -89,12 +89,11 @@ function *downloadFile(action) {
 
 function *deleteFile(action) {
     let config = action.config;
-    console.log('deleting file saga ' + config.url);
     yield put(startAjax());
     try {
-        const data = yield call(defaultDeleteFile, config.url);
+        yield call(defaultDeleteFile, config.url);
         if (config.afterFileDeletedAction) {
-            yield put(config.afterFileDeletedAction(data));
+            yield put(config.afterFileDeletedAction(config.afterFileDeletedActionParams));
         }
         entityUpdated('File deleted');
     } catch (e) {
@@ -128,7 +127,7 @@ export function *deleteEntityDefault() {
 }
 
 export function *deleteFileDefault() {
-    yield takeLatest(REQUEST_DELETE_FILE, deleteFile);
+    yield takeEvery(REQUEST_DELETE_FILE, deleteFile);
 }
 
 

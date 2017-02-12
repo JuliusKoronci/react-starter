@@ -29,8 +29,9 @@ class Task extends Component {
         this.props.actions.downloadFile(slug, configResolver.getDownloadFileConfig());
     };
 
-    handleFileDelete=(slug)=>{
+    handleFileDelete=(slug,e)=>{
         this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId,slug));
+        e.preventDefault();
     };
 
     componentWillMount() {
