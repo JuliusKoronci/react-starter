@@ -8,7 +8,7 @@ import {
     TASK_UPLOADED
 } from '../constants';
 import {endAjax, startAjaxReset, asyncError} from '../actions/async.action';
-import {tasksReceived, taskReceived} from '../actions/tasks.action';
+import {tasksReceived, taskReceived, taskAttachmentUploaded} from '../actions/tasks.action';
 import {defaultFilter, getTasksFromUrl, getTaskById, updateTask as updateApi, uploadApi} from '../../../api/tasks/tasks.api';
 import {defaultPOST, defaultPATCH} from '../../../api/api';
 import {entityUpdated} from '../../services/general';
@@ -81,8 +81,8 @@ function *uploadTask(action) {
     yield put(startAjaxReset());
     try {
         const data =yield call(uploadApi, action.formData, action.taskId);
-        yield call(entityUpdated,'Status updated!');
-        yield put(taskReceived(data));
+        yield call(entityUpdated,'Attachment uploaded!');
+        yield put(taskAttachmentUploaded(data));
     } catch (e) {
         yield put(asyncError(e));
     }
