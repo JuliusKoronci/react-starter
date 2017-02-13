@@ -20,15 +20,15 @@ class Task extends Component {
             formData.append(file.name, file)
         });
 
-        this.props.actions.taskUpload(formData,this.props.params.taskId);
+        this.props.actions.taskUpload(formData, this.props.params.taskId);
     };
 
-    handleFileDownload=(slug)=>{
+    handleFileDownload = (slug) => {
         this.props.actions.downloadFile(slug, configResolver.getDownloadFileConfig());
     };
 
-    handleFileDelete=(slug,e)=>{
-        this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId,slug));
+    handleFileDelete = (slug, e) => {
+        this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId, slug));
         e.preventDefault();
     };
 
@@ -53,7 +53,8 @@ class Task extends Component {
 
     renderTask = () => {
         if (this.props.canEdit) {
-            return (<ViewEditable handleFileUpload={this.handleFileUpload} handleFileDownload={this.handleFileDownload} handleFileDelete={this.handleFileDelete}
+            return (<ViewEditable handleFileUpload={this.handleFileUpload} handleFileDownload={this.handleFileDownload}
+                                  handleFileDelete={this.handleFileDelete}
                                   {...this.props}/>);
         }
 
@@ -76,6 +77,7 @@ function mapStateToProps(state) {
         user: state.auth.user
     };
 }
+
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators({...actions, ...genActions}, dispatch)

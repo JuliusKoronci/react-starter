@@ -118,9 +118,12 @@ export function defaultDeleteFile(url) {
 
 
     return fetch(url, config)
-        .then(function(response){
+        .then(function (response) {
             if (!response.ok) {
-                return Promise.reject(buildError(response, {}))
+                return Promise.reject(response.json().then(data => ({data, response})).then((json) => {
+                    const {response, data} = json;
+                    buildError(response, data)
+                }))
             } else {
                 return Promise.resolve();
             }
@@ -141,9 +144,9 @@ export function apiDownloadFile(url) {
 
     return fetch(url, config)
         .then(function (response) {
-        return response.blob();
-    }).then(function (blob) {
-        downloadFile(blob);
-    });
+            return response.blob();
+        }).then(function (blob) {
+            downloadFile(blob);
+        });
 }
 
