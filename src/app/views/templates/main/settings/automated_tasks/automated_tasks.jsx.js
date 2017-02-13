@@ -9,6 +9,12 @@ const AutomatedTasks = (prop) => {
                     <h1 className="heading_b uk-margin-bottom">Automated tasks</h1>
                 </div>
                 <hr/>
+                <div className="uk-margin-bottom">
+                    <p>Automated tasks are action to modify ticket properties at a specified time repeat.
+                    For example, an automated tasks can change ticket status from Pending to Solve when task start date is expired.
+                    The order of automated tasks is important because an automated tasks might contain an action that activates another automated tasks.</p>
+
+                </div>
                 <table className="uk-table uk-text-nowrap">
                     <thead>
                     <tr>
@@ -33,7 +39,7 @@ const AutomatedTasks = (prop) => {
                     </tbody>
                 </table>
                 <div className="text-allign-right">
-                    <Link to="/settings/automated-tasks/add" className="md-btn md-btn-primary" >Add</Link>
+                    <Link to="/settings/automated-tasks/add" className="md-btn md-btn-primary">Add</Link>
                 </div>
             </div>
         </div>

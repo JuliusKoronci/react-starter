@@ -11,23 +11,36 @@ class Task extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            values: ''
-        }
     }
 
-    setValues = (values) => {
-        this.setState({
-            values: values
-        })
+    handleFileUpload = (acceptedFiles) => {
+        let formData = new FormData();
+        acceptedFiles.map((file) => {
+            name = file.name;
+            formData.append(file.name, file)
+        });
+
+        this.props.actions.taskUpload(formData, this.props.params.taskId);
+    };
+
+    handleFileDownload = (slug) => {
+        this.props.actions.downloadFile(slug, configResolver.getDownloadFileConfig());
+    };
+
+    handleFileDelete = (slug, e) => {
+        this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId, slug));
+        e.preventDefault();
     };
 
     componentWillMount() {
-        if (!this.props.task) {
-            this.props.actions.loadTaskById(this.props.params.taskId);
+        this.props.actions.loadTaskById(this.props.params.taskId);
+        this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.task !== this.props.task) {
+            this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
         }
-        this.props.actions.loadEntityList(configResolver.loadStatusList());
-        this.props.actions.loadEntityList(configResolver.loadProjectList());
     }
 
     render() {
@@ -40,7 +53,9 @@ class Task extends Component {
 
     renderTask = () => {
         if (this.props.canEdit) {
-            return (<ViewEditable setValues={this.setValues} tagValues={this.state.values} {...this.props}/>);
+            return (<ViewEditable handleFileUpload={this.handleFileUpload} handleFileDownload={this.handleFileDownload}
+                                  handleFileDelete={this.handleFileDelete}
+                                  {...this.props}/>);
         }
 
         return (<ViewReadOnly {...this.props}/>);
@@ -53,17 +68,16 @@ Task.propTypes = {
 };
 
 
-function mapStateToProps(state, ownProps) {
-    const taskId = ownProps.params.taskId;
-    const task = state.tasks.data.filter((task) => parseInt(task.id, 10) === parseInt(taskId, 10));
+function mapStateToProps(state) {
+    const task = state.tasks.task.data || false;
     return {
-        task: task.length > 0 ? task[0] : false,
-        canEdit: true,
-        user: state.auth.user,
-        statuses: state.statuses.data,
-        projects: state.projects
+        task: task,
+        options: state.tasks.options,
+        canEdit: task ? task.canEdit : false,
+        user: state.auth.user
     };
 }
+
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators({...actions, ...genActions}, dispatch)

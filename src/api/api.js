@@ -3,6 +3,7 @@ import {TOKEN_KEY} from '../config/security';
 import queryString from '../../node_modules/query-string';
 import {buildError} from './helpers';
 import {filterFormValues} from '../app/services/general';
+import downloadFile from 'downloadjs';
 
 export function defaultGET(url) {
     const token = getFromStorage(TOKEN_KEY);
@@ -77,7 +78,7 @@ export function defaultPATCH(url, data) {
 export function defaultRequest(url, method, data, resolvedConfig) {
     const token = getFromStorage(TOKEN_KEY);
 
-    if (resolvedConfig.allowedFormFields) {
+    if (resolvedConfig && resolvedConfig.allowedFormFields) {
         data = filterFormValues(data, resolvedConfig.allowedFormFields);
     }
     let config = {
@@ -101,5 +102,51 @@ export function defaultRequest(url, method, data, resolvedConfig) {
             }
         })
 
+}
+
+
+export function defaultDeleteFile(url) {
+    const token = getFromStorage(TOKEN_KEY);
+
+    let config = {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json'
+        }
+    };
+
+
+    return fetch(url, config)
+        .then(function (response) {
+            if (!response.ok) {
+                return Promise.reject(response.json().then(data => ({data, response})).then((json) => {
+                    const {response, data} = json;
+                    buildError(response, data)
+                }))
+            } else {
+                return Promise.resolve();
+            }
+        });
+
+}
+
+
+export function apiDownloadFile(url) {
+    const token = getFromStorage(TOKEN_KEY);
+
+    let config = {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    };
+
+    return fetch(url, config)
+        .then(function (response) {
+            return response.blob();
+        }).then(function (blob) {
+            downloadFile(blob);
+        });
 }
 

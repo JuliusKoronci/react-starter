@@ -27,7 +27,7 @@ export function patchEntity(config, values) {
     return {
         type: constants.PATCH_ENTITY,
         config,
-        values
+        values: values || config.values || undefined
     }
 }
 
@@ -54,5 +54,21 @@ export function deleteEntity(id, config) {
         type: constants.DELETE_ENTITY,
         id,
         config
+    }
+}
+
+export function downloadFile(slug, config) {
+    return {
+        type: constants.REQUEST_DOWNLOAD_FILE,
+        config,
+        slug
+    }
+}
+
+export function deleteFile(slug, config) {
+    return {
+        type: constants.REQUEST_DELETE_FILE,
+        config,
+        slug
     }
 }

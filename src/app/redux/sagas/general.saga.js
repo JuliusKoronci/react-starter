@@ -1,10 +1,18 @@
 import {call, put, takeLatest, takeEvery} from 'redux-saga/effects';
-import {REQUEST_ENTITY, CREATE_ENTITY, UPDATE_ENTITY, DELETE_ENTITY, PATCH_ENTITY} from '../constants';
+
+import {
+    REQUEST_ENTITY,
+    CREATE_ENTITY,
+    UPDATE_ENTITY,
+    DELETE_ENTITY,
+    PATCH_ENTITY,
+    REQUEST_DOWNLOAD_FILE,
+    REQUEST_DELETE_FILE
+} from '../constants';
+
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
-import {defaultGET, defaultRequest, defaultPATCH} from '../../../api/api';
-import {entityUpdated, entityCreated, entityDeleted, filterFormValues} from '../../services/general';
-
-
+import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile, defaultDeleteFile} from '../../../api/api';
+import {entityUpdated, entityCreated, entityDeleted} from '../../services/general';
 
 
 function *loadEntity(action) {
@@ -38,7 +46,7 @@ function *patchEntity(action) {
     try {
 
         let config = action.config;
-        const data = yield call(defaultPATCH, config.url, action.values );
+        const data = yield call(defaultPATCH, config.url, action.values);
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
@@ -66,12 +74,48 @@ function *createEntity(action) {
     yield put(startAjax());
     try {
         let config = action.config;
-        yield call(defaultRequest, config.url, 'POST', action.values, config);
+        const data = yield call(defaultRequest, config.url, 'POST', action.values, config);
+        if (config.afterEntityReceivedAction) {
+            yield put(config.afterEntityReceivedAction(data));
+        }
         entityCreated('Created successfully', config.redirectAfterCreation);
     } catch (e) {
         yield put(asyncError(e));
     }
     yield put(endAjax());
+}
+
+
+function *downloadFile(action) {
+    let config = action.config;
+    yield put(startAjax());
+    try {
+        yield call(apiDownloadFile, config.url + '/' + action.slug, action.config);
+        entityUpdated('Downloading file');
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
+function *deleteFile(action) {
+    let config = action.config;
+    yield put(startAjax());
+    try {
+        yield call(defaultDeleteFile, config.url);
+        if (config.afterFileDeletedAction) {
+            yield put(config.afterFileDeletedAction(config.afterFileDeletedActionParams));
+        }
+        entityUpdated('File deleted');
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
+
+export function *downloadFileDefault() {
+    yield takeEvery(REQUEST_DOWNLOAD_FILE, downloadFile);
 }
 
 
@@ -92,4 +136,9 @@ export function *updateEntityDefault() {
 export function *deleteEntityDefault() {
     yield takeLatest(DELETE_ENTITY, deleteEntity);
 }
+
+export function *deleteFileDefault() {
+    yield takeEvery(REQUEST_DELETE_FILE, deleteFile);
+}
+
 

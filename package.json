@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "flow-bin": "^0.39.0",
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "downloadjs": "^1.4.7",
     "draft-js": "^0.10.0",
     "draft-js-export-html": "^0.5.2",
+    "immutable": "^3.8.1",
     "jquery": "^3.1.1",
     "jwt-decode": "^2.1.0",
     "moment": "^2.17.1",
@@ -33,6 +36,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   }
 }

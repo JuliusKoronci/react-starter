@@ -1,5 +1,6 @@
 import React from 'react';
 import RTE from '../../../../../forms/rte/RTE.form';
+import Input from '../../../../../forms/Task/Input.form';
 
 const summary = ({task, actions}) => {
     return (
@@ -8,13 +9,11 @@ const summary = ({task, actions}) => {
                 <RTE defaultValue={task.description} action={actions.taskUpdated} fieldName="description" label="Description" taskId={task.id} />
             </div>
             <div className="uk-margin-medium-bottom">
-                <label className="uk-text-muted">Work done</label>
-                <textarea cols="30" rows="0" id="border-full" className="md-input"
-                          placeholder=""/>
+                <RTE defaultValue={task.work} action={actions.taskUpdated} fieldName="work" label="Work Done" taskId={task.id} />
             </div>
             <div className="uk-margin-medium-bottom">
                 <label className="uk-text-muted">Add work time</label>
-                <input type="text" className="md-input"/>
+                <Input fieldName="work_time" className="header_b md-input" taskId={task.id} number={true}/>
             </div>
         </div>
     );
