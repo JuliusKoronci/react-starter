@@ -1,3 +1,4 @@
+// @flow
 import {
     TASKS_RECEIVED,
     TASK_RECEIVED,
@@ -6,7 +7,7 @@ import {
     AFTER_TASK_ATTACHMENT_DELETED
 } from '../../constants';
 
-const defaultState = {
+const defaultState: {data: Array<Object>, _links: Object}= {
     'data': [],
     '_links': {},
     'total': 0,
@@ -25,7 +26,7 @@ const defaultState = {
 };
 
 
-export default function tasks(state = defaultState, action) {
+export default function tasks(state: Object = defaultState, action: Object): Object {
     switch (action.type) {
         case TASKS_RECEIVED:
             return {...state, ...action.data};
@@ -59,10 +60,7 @@ export default function tasks(state = defaultState, action) {
                     data: {
                         ...state.task.data,
                         taskHasAttachments: state.task.data.taskHasAttachments.filter((att) => {
-                            if (att.slug === action.deletedAttachmentSlug) {
-                                return false;
-                            }
-                            return true;
+                            return att.slug !== action.deletedAttachmentSlug;
                         })
                     }
                 }
