@@ -15,7 +15,7 @@ class UserForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete} = this.props;
+        const {handleSubmit, formError, handleDelete, roles, user} = this.props;
         return (
 
 <div className="md-card">
@@ -66,9 +66,9 @@ class UserForm extends Component {
                         </div>
                         <div className="uk-width-medium-1-2 uk-margin-bottom">
                             <select>
-                                {roles.data.map((role, i) => {
+                                {roles.map((role, i) => {
                                     return (
-                                        <option value="">{ role }</option>
+                                        <option key={i} value={role.id}>{ role.title }</option>
                                     );
                                 })}
                             </select>
@@ -270,7 +270,7 @@ class UserForm extends Component {
 function mapStateToProps(state, ownProps) {
     const userId = ownProps.params.userId;
     const user = state.users.data.filter((user) => parseInt(user.id, 10) === parseInt(userId, 10));
-    console.log(user);
+    // console.log(user);
     if (user.length > 0) {
         return {
             initialValues: user.length > 0 ? user[0] : {},

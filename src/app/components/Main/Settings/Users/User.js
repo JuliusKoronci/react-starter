@@ -49,8 +49,10 @@ class User extends Component {
 function mapStateToProps(state, ownProps) {
     const userId = ownProps.params.userId;
     const user = state.users.data.filter((user) => parseInt(user.id, 10) === parseInt(userId, 10));
+    const roles=state.roles.data;
     return {
         user: user.length > 0 ? user[0] : false,
+        roles
     };
 
 }
