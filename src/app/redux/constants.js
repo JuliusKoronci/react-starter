@@ -70,6 +70,9 @@ export const COMPANY_CREATED='COMPANY_CREATED';
 export const COMPANY_RECEIVED='COMPANY_RECEIVED';
 
 
+//profile
+export const PROFILE_RECEIVED='PROFILE_RECEIVED';
+
 //general
 export const REQUEST_ENTITY='REQUEST_ENTITY';
 export const PATCH_ENTITY='PATCH_ENTITY';

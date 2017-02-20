@@ -3,6 +3,7 @@ import * as urls from '../api/urls';
 import {companyReceived, companyAttributeReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
+import {profileReceived} from '../app/redux/actions/users.action';
 
 class configResolver {
     static getCompanyConfig = (id) => {
@@ -24,6 +25,18 @@ class configResolver {
             allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
         }
     };
+
+    static getProfileConfig = (id) => {
+        return {
+            url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            urlList: urls.USERS_LIST,
+            allowedFormFields: ['email'],
+            // allowedFormFields: ['detailData.name','detailData.surname','detailData.phone','email','detailData.facebook','detailData.google','detailData.linkdin','detailData.twitter'],
+            // allowedFormFields: ['email','username','name','surname','phone','email','facebook','google','linkedin','twitter'],
+            afterEntityReceivedAction: profileReceived,
+        }
+    };
+
 
     static deleteTaskAttachment(taskId, slug) {
         return {

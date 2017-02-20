@@ -1,4 +1,5 @@
 import React from 'react';
+import RTE from '../forms/general/rte/RTE.form';
 
 export const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
@@ -7,6 +8,16 @@ export const renderField = ({input, label, type, meta: {touched, error, warning}
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
     </div>
 );
+
+
+export const renderRTE = ({input, label, type, meta: {touched, error, warning}}) => (
+    <div className="uk-form-row">
+        <RTE fieldName="signature" label="Signature"  {...input} defaultValue={input.value} />
+        {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
+    </div>
+);
+
+
 
 // export const renderSelect = ({input, label, type, meta: {touched, error, warning}}) => (
 //     <div className="uk-form-row">

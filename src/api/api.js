@@ -82,8 +82,9 @@ export function defaultRequest(url, method, data, resolvedConfig) {
         data = filterFormValues(data, resolvedConfig.allowedFormFields);
     }
     let config = {
-        method: method,
+         method: method,
         body: (data ? queryString.stringify(data) : ''),
+        // body: (data ? JSON.stringify(data): ''),
         headers: {
             'Authorization': 'Bearer ' + token,
             'Accept': 'application/json',
