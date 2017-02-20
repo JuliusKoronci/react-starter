@@ -31,8 +31,11 @@ export function filterFormValues(formValues, allowedKeys){
     allowedKeys.map((field, i) => {
         let value;
         try {
+
+            //field.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase();});
+
             value = eval('formValues.' + field);
-            //console.log(field, value);
+            // console.log(field, value);
             // allowedValues.field=value;
 
 
@@ -43,10 +46,10 @@ export function filterFormValues(formValues, allowedKeys){
         }
 
     });
-    Object.keys(allowedValues).map(x => allowedValues[x]);
+    // Object.keys(allowedValues).map(x => allowedValues[x]);
     // console.log(allowedValues);
 
-    // allowedValues.detailData = Object.values(allowedValues.detailData);
+    allowedValues.detailData = Object.values(allowedValues.detailData);
     // console.log(allowedValues);
 
     return allowedValues;

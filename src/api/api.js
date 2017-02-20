@@ -83,12 +83,13 @@ export function defaultRequest(url, method, data, resolvedConfig) {
     }
     let config = {
          method: method,
-        // body: (data ? queryString.stringify(data) : ''),
-        body: (data ? JSON.stringify(data): ''),
+        // body: (data ? queryString.stringify(data).replace("detailData", "detail_data") : ''),
+        body: (data ? JSON.stringify(data).replace("detailData", "detail_data") : ''),
+        // body: (data ? JSON.stringify(data): ''),
         headers: {
             'Authorization': 'Bearer ' + token,
             'Accept': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
 
