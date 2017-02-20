@@ -43,7 +43,7 @@ export function filterFormValues(formValues, allowedKeys){
         }
 
     });
-    // Object.keys(allowedValues).map(x => allowedValues[x]);
+    Object.keys(allowedValues).map(x => allowedValues[x]);
     // console.log(allowedValues);
 
     // allowedValues.detailData = Object.values(allowedValues.detailData);
