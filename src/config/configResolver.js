@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, companyAttributeReceived, userReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 
@@ -10,6 +10,16 @@ class configResolver {
             url: id ? urls.COMPANIES_LIST + '/' + id : urls.COMPANIES_LIST,
             urlList: urls.COMPANIES_LIST,
             afterEntityReceivedAction: companyReceived,
+            redirectAfterCreation: paths.companies,
+            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
+        }
+    };
+
+    static getUserConfig = (id) => {
+        return {
+            url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            urlList: urls.USERS_LIST,
+            afterEntityReceivedAction: userReceived,
             redirectAfterCreation: paths.companies,
             allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
         }
