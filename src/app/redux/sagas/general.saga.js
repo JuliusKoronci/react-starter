@@ -17,7 +17,6 @@ import {entityUpdated, entityCreated, entityDeleted} from '../../services/genera
 
 function *loadEntity(action) {
     yield put(startAjax());
-    console.log(action)
     try {
         let config = action.config;
         const data = yield call(defaultGET, config.url);
@@ -30,7 +29,7 @@ function *loadEntity(action) {
 
 
 function *updateEntity(action) {
-
+    console.log('foo',action)
     yield put(startAjax());
     try {
         let config = action.config;
