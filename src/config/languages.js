@@ -1,6 +1,6 @@
 class languages {
 	static getList = () => {
-		return ['EN','DE','SK'];
+		return [{key:'EN',title:'English'},{key:'DE',title:'German'},{key:'SK',title:'Slovak'}];
 	}
 }
 export default languages;

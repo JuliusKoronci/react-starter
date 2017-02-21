@@ -15,7 +15,7 @@ class UserForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, roles, user} = this.props;
+        const {handleSubmit, formError, handleDelete, roles, user, languages} = this.props;
         return (
 
 <div className="md-card">
@@ -90,9 +90,11 @@ class UserForm extends Component {
                 <div className="uk-grid" data-uk-grid-margin>
                     <div className="uk-width-1-1">
                         <select name="language" id="user_edit_languages" className="md-input">
-                            <option value="gb" selected>English</option>
-                            <option value="pl">Slovak</option>
-                            <option value="fr">French</option>
+                            {languages.map((lang, i) => {
+                                return (
+                                    <option key={i} value={lang.key}>{ lang.title }</option>
+                                );
+                            })}
                         </select>
                     </div>
                 </div>
@@ -105,65 +107,51 @@ class UserForm extends Component {
                              data-uk-grid-margin>
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon material-icons">
-                                                                    &#xE158;</i>
-                                                            </span>
-                                <label>Email</label>
-                                <input type="text" className="md-input" name="user_edit_email"
-                                       value=""/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon material-icons">
+                                        &#xE158;</i>
+                                </span>
+                                <Field name="email" type="text" validate={[required]} component={renderField} id="user_edit_email_control" className="md-input" label="Email"/>
                             </div>
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon material-icons">
-                                                                    &#xE0CD;</i>
-                                                            </span>
-                                <label>Phone Number</label>
-                                <input type="text" className="md-input" name="user_edit_phone"
-                                       value="1-236-879-2171x5473"/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon material-icons">
+                                        &#xE0CD;</i>
+                                </span>
+                                <Field name="detailData.mobile" type="text" validate={[required]} component={renderField} id="user_edit_phone_control" className="md-input" label="Phone Number"/>
                             </div>
 
                             <div>
                                 <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon uk-icon-facebook-official"></i>
-                                                            </span>
-                                    <label>Facebook</label>
-                                    <input type="text" className="md-input"
-                                           name="user_edit_facebook"
-                                           value="facebook.com/envato"/>
+                                    <span className="uk-input-group-addon">
+                                        <i className="md-list-addon-icon uk-icon-facebook-official"></i>
+                                    </span>
+                                    <Field name="detailData.facebook" type="text" validate={[required]} component={renderField} id="user_edit_facebook_control" className="md-input" label="Facebook"/>
                                 </div>
                             </div>
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon uk-icon-twitter"></i>
-                                                            </span>
-                                <label>Twitter</label>
-                                <input type="text" className="md-input" name="user_edit_twitter"
-                                       value="twitter.com/envato"/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon uk-icon-twitter"></i>
+                                </span>
+                                <Field name="detailData.twitter" type="text" validate={[required]} component={renderField} id="user_edit_twitter_control" className="md-input" label="Twitter"/>
                             </div>
 
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon uk-icon-linkedin"></i>
-                                                            </span>
-                                <label>Linkdin</label>
-                                <input type="text" className="md-input" name="user_edit_linkdin"
-                                       value="linkedin.com/company/envato"/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon uk-icon-linkedin"></i>
+                                </span>
+                                <Field name="detailData.linkdin" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Linkedin"/>
                             </div>
 
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon uk-icon-google-plus"></i>
-                                                            </span>
-                                <label>Google+</label>
-                                <input type="text" className="md-input"
-                                       name="user_edit_google_plus"
-                                       value="plus.google.com/+envato/about"/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon uk-icon-google-plus"></i>
+                                </span>
+                                <Field name="detailData.google" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Google"/>
                             </div>
                         </div>
                     </div>
@@ -183,16 +171,13 @@ class UserForm extends Component {
                 <div className="uk-grid-margin">
                     <div className="uk-width-1-1">
                         <div className="uk-grid-margin">
-                            <label>Old password</label>
-                            <input type="text" className="md-input"/>
+                            <Field name="old_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Old password"/>
                         </div>
                         <div className="uk-grid-margin">
-                            <label>New password</label>
-                            <input type="text" className="md-input"/>
+                            <Field name="password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="New password"/>
                         </div>
                         <div className="uk-grid-margin">
-                            <label>Repeat new password</label>
-                            <input type="text" className="md-input"/>
+                            <Field name="repeat_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Repeat new password"/>
                         </div>
                     </div>
                     <div className="uk-grid-margin">

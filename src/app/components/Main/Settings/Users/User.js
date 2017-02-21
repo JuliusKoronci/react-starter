@@ -15,7 +15,6 @@ class User extends Component {
         super(props, context);
         this.userConfig = configResolver.getUserConfig(props.params.userId);
         this.languages = languages.getList();
-        console.log('l',this.languages)
     }
 
     deleteHandler=(id)=>{
@@ -27,7 +26,6 @@ class User extends Component {
             this.props.actions.loadEntityById(this.props.params.userId, this.userConfig);
         }
         this.props.actions.requestRoles();
-        this.props.actions.loadEntityById();
     }
 
     submitHandler = (values) => {
@@ -42,7 +40,7 @@ class User extends Component {
 
     render() {
         return (
-            <View formError={null} onSubmit={this.submitHandler} {...this.props} roles={this.props.roles} user={this.props.user} heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler} />
+            <View formError={null} onSubmit={this.submitHandler} {...this.props} roles={this.props.roles} languages={this.languages} user={this.props.user} heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler} />
         );
     }
 }
