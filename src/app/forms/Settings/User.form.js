@@ -166,7 +166,7 @@ class UserForm extends Component {
             </div>
         </div>
     </form>
-    <form onClick={submitPassword}>
+    <form onSubmit={submitPassword}>
         <div className="md-card-content">
             <div className="uk-grid-margin">
                 <h3 className="full_width_in_card heading_c">
