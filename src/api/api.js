@@ -2,7 +2,7 @@ import {getFromStorage} from '../app/services/storage';
 import {TOKEN_KEY} from '../config/security';
 import queryString from '../../node_modules/query-string';
 import {buildError} from './helpers';
-import {filterFormValues} from '../app/services/general';
+import {filterFormValues, remapValues} from '../app/services/general';
 import downloadFile from 'downloadjs';
 
 export function defaultGET(url) {
@@ -78,13 +78,16 @@ export function defaultPATCH(url, data) {
 export function defaultRequest(url, method, data, resolvedConfig) {
     const token = getFromStorage(TOKEN_KEY);
 
-    if (resolvedConfig && resolvedConfig.allowedFormFields) {
-        data = filterFormValues(data, resolvedConfig.allowedFormFields);
+    // if (resolvedConfig && resolvedConfig.allowedFormFields) {
+    //     data = filterFormValues(data, resolvedConfig.allowedFormFields);
+    // }
+    if (resolvedConfig && resolvedConfig.remapValues) {
+        data = remapValues(data, resolvedConfig.remapValues);
     }
     let config = {
          method: method,
-        // body: (data ? queryString.stringify(data).replace("detailData", "detail_data") : ''),
-        body: (data ? JSON.stringify(data).replace("detailData", "detail_data") : ''),
+        body: (data ? queryString.stringify(data).replace("detailData", "detail_data") : ''),
+        // body: (data ? JSON.stringify(data).replace("detailData", "detail_data") : ''),
         // body: (data ? JSON.stringify(data): ''),
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -92,6 +95,7 @@ export function defaultRequest(url, method, data, resolvedConfig) {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
+    // return Promise.resolve(data);
 
     return fetch(url, config)
         .then(response =>

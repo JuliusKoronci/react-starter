@@ -31,6 +31,7 @@ class configResolver {
             url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
             urlList: urls.USERS_LIST,
             allowedFormFields: ['email','detailData.google','detail_data.google'],
+            remapValues:{'detailData.google':'detail_data[google]'},
             // allowedFormFields: ['detailData.name','detailData.surname','detailData.phone','email','detailData.facebook','detailData.google','detailData.linkdin','detailData.twitter'],
             // allowedFormFields: ['email','username','name','surname','phone','email','facebook','google','linkedin','twitter'],
             afterEntityReceivedAction: profileReceived,

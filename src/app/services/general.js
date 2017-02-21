@@ -24,6 +24,38 @@ export function entityReceived(toast){
 }
 
 
+
+export function remapValues(formValues, remap){
+    console.log(formValues);
+    console.log(remap);
+    let remappedValues={};
+
+    for(let k in remap) {
+
+        // console.log(eval('formValues.'+k));
+        let formValue=eval('formValues.'+k);
+
+        if(typeof formValue!='undefined'){
+            console.log('not undefined');
+            if(remap.hasOwnProperty(k)) {
+                remappedValues[remap[k]] = formValue;
+                console.log('has own');
+            }
+
+        }
+
+        //console.log(k + ' ' + remap[k]);
+        // if(myObject.hasOwnProperty(key)) {
+        //     myObject[key] *= 2;
+        // }
+    }
+
+    console.log(remappedValues);
+
+return remappedValues;
+}
+
+
 export function filterFormValues(formValues, allowedKeys){
     let clonedFormValues = Object.assign({}, formValues);
     let allowedValues={};

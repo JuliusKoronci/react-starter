@@ -33,19 +33,19 @@ class Profile extends Component {
 
         let formFields=this.profileConfig.allowedFormFields;
 
-        formFields.map((field, i) => {
-            let value;
-            try{
-            value = eval('values.' + field);
-            console.log(field,value);
-        } catch (e) {}
-
-            // //console.log(field);
-            // if(typeof eval(values.field) !='undefined'){
-            //     console.log(eval(values.field));
-            // };
-
-        });
+        // formFields.map((field, i) => {
+        //     let value;
+        //     try{
+        //     value = eval('values.' + field);
+        //     // console.log(field,value);
+        // } catch (e) {}
+        //
+        //     // //console.log(field);
+        //     // if(typeof eval(values.field) !='undefined'){
+        //     //     console.log(eval(values.field));
+        //     // };
+        //
+        // });
 
         this.props.actions.updateEntity(this.props.userId, values, this.profileConfig);
     };
