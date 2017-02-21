@@ -21,7 +21,7 @@ class configResolver {
             urlList: urls.USERS_LIST,
             afterEntityReceivedAction: userReceived,
             redirectAfterCreation: paths.companies,
-            allowedFormFields: ['email','username','language']
+            allowedFormFields: ['email','username','language','password']
             // 'city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip'
         }
     };
