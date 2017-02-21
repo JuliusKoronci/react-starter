@@ -80,8 +80,8 @@ class UserForm extends Component {
                 <div className="uk-grid">
                     <div className="uk-width-1-1">
                         <label>Signature</label>
-                        <textarea className="md-input" name="user_edit_personal_info_control"
-                        id="user_edit_personal_info_control" cols="30" rows="4" value={this.props.user.detailData.signature}></textarea>
+                        <textarea className="md-input" name="detailData.signature"
+                        id="user_edit_personal_info_control" cols="30" rows="4"></textarea>
                     </div>
                 </div>
                 <h3 className="full_width_in_card heading_c">

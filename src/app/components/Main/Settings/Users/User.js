@@ -5,6 +5,7 @@ import * as actions from '../../../../redux/actions/settings.action';
 import * as generalActions from '../../../../redux/actions/general.action';
 import NProgress from '../../../../../../node_modules/nprogress/nprogress';
 import configResolver from '../../../../../config/configResolver';
+import languages from 	   '../../../../../config/languages';
 import View from '../../../../forms/Settings/User.form.js';
 
 class User extends Component {
@@ -13,6 +14,8 @@ class User extends Component {
     constructor(props, context) {
         super(props, context);
         this.userConfig = configResolver.getUserConfig(props.params.userId);
+        this.languages = languages.getList();
+        console.log('l',this.languages)
     }
 
     deleteHandler=(id)=>{
@@ -24,6 +27,7 @@ class User extends Component {
             this.props.actions.loadEntityById(this.props.params.userId, this.userConfig);
         }
         this.props.actions.requestRoles();
+        this.props.actions.loadEntityById();
     }
 
     submitHandler = (values) => {
