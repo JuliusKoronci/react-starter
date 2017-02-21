@@ -26,9 +26,7 @@ class User extends Component {
         this.props.actions.requestRoles();
     }
 
-    submitHandler = (e,values) => {
-    	console.log(this.userConfig)
-    	e.preventDefault();
+    submitHandler = (values) => {
         NProgress.start();
 
         if (this.props.params.userId) {
@@ -40,7 +38,7 @@ class User extends Component {
 
     render() {
         return (
-            <View formError={null} handleSubmit={this.submitHandler} {...this.props} roles={this.props.roles} heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler} />
+            <View formError={null} onSubmit={this.submitHandler} {...this.props} roles={this.props.roles} heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler} />
         );
     }
 }
