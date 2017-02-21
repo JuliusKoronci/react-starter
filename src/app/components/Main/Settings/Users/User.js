@@ -38,7 +38,7 @@ class User extends Component {
 
     render() {
         return (
-            <View formError={null} onSubmit={this.submitHandler} {...this.props} roles={this.props.roles} heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler} />
+            <View formError={null} onSubmit={this.submitHandler} {...this.props} roles={this.props.roles} user={this.props.user} heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler} />
         );
     }
 }

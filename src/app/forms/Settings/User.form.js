@@ -80,8 +80,8 @@ class UserForm extends Component {
                 <div className="uk-grid">
                     <div className="uk-width-1-1">
                         <label>Signature</label>
-                                            <textarea className="md-input" name="user_edit_personal_info_control"
-                                                      id="user_edit_personal_info_control" cols="30" rows="4">Inventore eveniet consequatur illum officiis facilis non blanditiis debitis dignissimos ipsa cumque similique et sint quo minima enim provident aspernatur delectus non possimus repellat omnis ut voluptatum quaerat voluptatum corporis fugit nihil numquam consequatur deserunt est consequuntur voluptatibus quia est sed non a debitis ut laudantium eaque unde.</textarea>
+                        <textarea className="md-input" name="user_edit_personal_info_control"
+                        id="user_edit_personal_info_control" cols="30" rows="4" value={this.props.user.detailData.signature}></textarea>
                     </div>
                 </div>
                 <h3 className="full_width_in_card heading_c">
@@ -89,7 +89,7 @@ class UserForm extends Component {
                 </h3>
                 <div className="uk-grid" data-uk-grid-margin>
                     <div className="uk-width-1-1">
-                        <select id="user_edit_languages" className="md-input">
+                        <select name="language" id="user_edit_languages" className="md-input">
                             <option value="gb" selected>English</option>
                             <option value="pl">Slovak</option>
                             <option value="fr">French</option>
@@ -111,7 +111,7 @@ class UserForm extends Component {
                                                             </span>
                                 <label>Email</label>
                                 <input type="text" className="md-input" name="user_edit_email"
-                                       value="milan.bauch@hotmail.com"/>
+                                       value=""/>
                             </div>
 
                             <div className="uk-input-group uk-margin-bottom">
