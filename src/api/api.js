@@ -78,16 +78,15 @@ export function defaultPATCH(url, data) {
 export function defaultRequest(url, method, data, resolvedConfig) {
     const token = getFromStorage(TOKEN_KEY);
 
-    // if (resolvedConfig && resolvedConfig.allowedFormFields) {
-    //     data = filterFormValues(data, resolvedConfig.allowedFormFields);
-    // }
+    if (resolvedConfig && resolvedConfig.allowedFormFields) {
+        data = filterFormValues(data, resolvedConfig.allowedFormFields);
+    }
     if (resolvedConfig && resolvedConfig.remapValues) {
         data = remapValues(data, resolvedConfig.remapValues);
     }
     let config = {
          method: method,
         body: (data ? queryString.stringify(data).replace("detailData", "detail_data") : ''),
-        // body: (data ? JSON.stringify(data).replace("detailData", "detail_data") : ''),
         // body: (data ? JSON.stringify(data): ''),
         headers: {
             'Authorization': 'Bearer ' + token,

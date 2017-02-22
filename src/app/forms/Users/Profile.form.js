@@ -88,7 +88,7 @@ class ProfileForm extends Component {
                         <div className="uk-grid" data-uk-grid-margin>
                             <div className="uk-width-1-1">
                                 <select id="user_edit_languages" className="md-input">
-                                    <option value="gb" selected>English</option>
+                                    <option value="gb" >English</option>
                                     <option value="pl">Slovak</option>
                                     <option value="fr">French</option>
                                 </select>
@@ -116,18 +116,18 @@ class ProfileForm extends Component {
                                                                     <i className="md-list-addon-icon material-icons">
                                                                         &#xE0CD;</i>
                                                                 </span>
-                                        <Field name="detailData.phone" type="text" validate={[]} component={renderField}
+                                        <Field name="detailData.tel" type="text" validate={[]} component={renderField}
                                                label="Phone number"/>
                                     </div>
 
                                     <div>
                                         <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
-                                                                    <i className="md-list-addon-icon uk-icon-facebook-official"></i>
+                                                                    <i className="md-list-addon-icon uk-icon-facebook-official" />
                                                                 </span>
 
 
-                                            <Field name="detailData['facebook']" type="text" validate={[required]} component={renderField}
+                                            <Field name="detailData.facebook" type="text" validate={[required]} component={renderField}
                                                    label="Facebook"/>
 
                                         </div>
@@ -135,27 +135,27 @@ class ProfileForm extends Component {
 
                                     <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
-                                                                    <i className="md-list-addon-icon uk-icon-twitter"></i>
+                                                                    <i className="md-list-addon-icon uk-icon-twitter" />
                                                                 </span>
-                                        <Field name="detailData['twitter']" type="text" validate={[required]} component={renderField}
+                                        <Field name="detailData.twitter" type="text" validate={[required]} component={renderField}
                                                label="Twitter"/>
                                     </div>
 
 
                                     <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
-                                                                    <i className="md-list-addon-icon uk-icon-linkedin"></i>
+                                                                    <i className="md-list-addon-icon uk-icon-linkedin" />
                                                                 </span>
-                                        <Field name="detailData['linkdin']" type="text" validate={[required]} component={renderField}
+                                        <Field name="detailData.linkdin" type="text" validate={[required]} component={renderField}
                                                label="Linkedin"/>
                                     </div>
 
 
                                     <div className="uk-input-group uk-margin-bottom">
                                                                 <span className="uk-input-group-addon">
-                                                                    <i className="md-list-addon-icon uk-icon-google-plus"></i>
+                                                                    <i className="md-list-addon-icon uk-icon-google-plus" />
                                                                 </span>
-                                        <Field name="detailData['google']" type="text" validate={[required]} component={renderField}
+                                        <Field name="detailData.google" type="text" validate={[required]} component={renderField}
                                                label="Google+"/>
                                     </div>
                                 </div>

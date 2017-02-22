@@ -29,35 +29,22 @@ export function remapValues(formValues, remap){
     console.log(formValues);
     console.log(remap);
     let remappedValues={};
-
     for(let k in remap) {
-
-        // console.log(eval('formValues.'+k));
         let formValue=eval('formValues.'+k);
-
-        if(typeof formValue!='undefined'){
-            console.log('not undefined');
+        if(typeof formValue!=='undefined'){
             if(remap.hasOwnProperty(k)) {
                 remappedValues[remap[k]] = formValue;
-                console.log('has own');
+            }else{
+                remappedValues[k] = formValue;
             }
-
         }
-
-        //console.log(k + ' ' + remap[k]);
-        // if(myObject.hasOwnProperty(key)) {
-        //     myObject[key] *= 2;
-        // }
     }
-
-    console.log(remappedValues);
-
 return remappedValues;
 }
 
 
 export function filterFormValues(formValues, allowedKeys){
-    let clonedFormValues = Object.assign({}, formValues);
+    // let clonedFormValues = Object.assign({}, formValues);
     let allowedValues={};
 
     allowedKeys.map((field, i) => {
@@ -96,36 +83,24 @@ export function setObjByString(obj, str, val) {
     let keys, key;
     //make sure str is a string with length
     if (!str || !str.length || Object.prototype.toString.call(str) !== "[object String]") {
-        return false;
-    }
+           return false;
+        }
     if (obj !== Object(obj)) {
-        //if it's not an object, make it one
-        obj = {};
-    }
-    keys = str.split(".");
-    while (keys.length > 1) {
-        key = keys.shift();
-        if (obj !== Object(obj)) {
             //if it's not an object, make it one
             obj = {};
         }
-        if (!(key in obj)) {
-            //if obj doesn't contain the key, add it and set it to an empty object
-            obj[key] = {};
+       keys = str.split(".");
+       while (keys.length > 1) {
+            key = keys.shift();
+           if (obj !== Object(obj)) {
+                //if it's not an object, make it one
+                obj = {};
+            }
+           if (!(key in obj)) {
+                //if obj doesn't contain the key, add it and set it to an empty object
+                obj[key] = {};
+            }
+            obj = obj[key];
         }
-        obj = obj[key];
+       return obj[keys[0]] = val;
     }
-    return obj[keys[0]] = val;
-}
-
-
-export function index(obj,is, value) {
-    if (typeof is == 'string')
-        return index(obj,is.split('.'), value);
-    else if (is.length==1 && value!==undefined)
-        return obj[is[0]] = value;
-    else if (is.length==0)
-        return obj;
-    else
-        return index(obj[is[0]],is.slice(1), value);
-}
