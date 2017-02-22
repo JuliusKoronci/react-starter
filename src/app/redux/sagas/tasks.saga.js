@@ -13,10 +13,10 @@ import {defaultFilter, getTasksFromUrl, getTaskById, updateTask as updateApi, up
 import {defaultPOST, defaultPATCH} from '../../../api/api';
 import {entityUpdated} from '../../services/general';
 
-function *defaultTasks() {
+function *defaultTasks(action) {
     yield put(startAjaxReset());
     try {
-        const data = yield call(defaultFilter);
+        const data = yield call(defaultFilter, action.filterId);
         yield put(tasksReceived(data));
     } catch (e) {
         yield put(asyncError(e));

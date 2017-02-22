@@ -14,7 +14,8 @@ function mockDefault() {
     });
 }
 
-function loadDefault() {
+function loadDefault(filterId) {
+
     let config = {
         method: 'GET',
         headers: {
@@ -22,7 +23,12 @@ function loadDefault() {
         }
     };
 
-    return fetch(TASK_LIST, config)
+    let url = TASK_LIST;
+    if (filterId) {
+        url += '/filter/' + filterId;
+    }
+
+    return fetch(url, config)
         .then(response =>
             response.json().then(tasks => ({tasks, response}))
         ).then(({tasks, response}) => {
@@ -64,11 +70,11 @@ export function getTasksFromUrl(url) {
 }
 
 
-export function defaultFilter() {
+export function defaultFilter(filterId) {
     if (USE_MOCK) {
         return mockDefault();
     }
-    return loadDefault();
+    return loadDefault(filterId);
 }
 
 export function getTaskById(id) {
@@ -113,7 +119,7 @@ export function updateTask(taskId, data) {
         });
 }
 
-export function uploadApi(data,taskId) {
+export function uploadApi(data, taskId) {
     let config = {
         method: 'POST',
         body: data,
