@@ -7,7 +7,8 @@ import {
     TASK_UPDATED,
     TASK_STATUS_UPDATED,
     TASK_UPLOADED,
-    AFTER_TASK_ATTACHMENT_DELETED
+    AFTER_TASK_ATTACHMENT_DELETED,
+    AFTER_TASK_ATTACHMENT_UPLOADED
 } from '../constants';
 
 import configResolver from '../../../config/configResolver';
@@ -85,5 +86,12 @@ export function taskAttachmentDeleted({taskId, slug}){
         type: AFTER_TASK_ATTACHMENT_DELETED,
         taskId,
         deletedAttachmentSlug:slug
+    }
+}
+
+export function taskAttachmentUploaded({data}){
+    return{
+        type: AFTER_TASK_ATTACHMENT_UPLOADED,
+        data
     }
 }

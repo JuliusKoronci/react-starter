@@ -4,7 +4,8 @@ import {
     TASK_RECEIVED,
     TASK_UPDATED,
     OPTIONS_RECEIVED,
-    AFTER_TASK_ATTACHMENT_DELETED
+    AFTER_TASK_ATTACHMENT_DELETED,
+    AFTER_TASK_ATTACHMENT_UPLOADED
 } from '../../constants';
 
 const defaultState: {data: Array<Object>, _links: Object}= {
@@ -62,6 +63,18 @@ export default function tasks(state: Object = defaultState, action: Object): Obj
                         taskHasAttachments: state.task.data.taskHasAttachments.filter((att) => {
                             return att.slug !== action.deletedAttachmentSlug;
                         })
+                    }
+                }
+            };
+
+        case AFTER_TASK_ATTACHMENT_UPLOADED:
+            return {
+                ...state,
+                'task': {
+                    ...state.task,
+                    data: {
+                        ...state.task.data,
+                        taskHasAttachments: action.data.taskHasAttachments
                     }
                 }
             };
