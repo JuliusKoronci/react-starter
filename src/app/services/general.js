@@ -26,8 +26,6 @@ export function entityReceived(toast){
 
 
 export function remapValues(formValues, remap){
-    console.log(formValues);
-    console.log(remap);
     let remappedValues={};
     for(let k in remap) {
         let formValue=eval('formValues.'+k);

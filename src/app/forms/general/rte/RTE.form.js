@@ -115,7 +115,6 @@ class RTE extends Component {
 
 RTE.propTypes = {
     label: PropTypes.string.isRequired,
-    // action: PropTypes.func.isRequired,
     fieldName: PropTypes.string,
     defaultValue: PropTypes.string
 };

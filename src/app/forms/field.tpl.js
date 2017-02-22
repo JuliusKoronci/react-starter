@@ -12,11 +12,18 @@ export const renderField = ({input, label, type, meta: {touched, error, warning}
 
 export const renderRTE = ({input, label, type, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
-        <RTE fieldName="signature" label="Signature"  {...input} defaultValue={input.value} />
+        <RTE fieldName={input.name} label={label} {...input}  />
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
     </div>
 );
 
+export const renderTextarea = ({input, label, type, meta: {touched, error, warning}}) => (
+    <div className="uk-form-row">
+        <label htmlFor={input.name}>{label}</label>
+        <textarea {...input} />
+        {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
+    </div>
+);
 
 
 // export const renderSelect = ({input, label, type, meta: {touched, error, warning}}) => (

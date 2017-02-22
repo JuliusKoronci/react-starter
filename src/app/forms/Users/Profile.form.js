@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
-import {renderField, renderRTE} from '../field.tpl';
-// import RTE from '../../forms/general/rte/RTE.form';
+import {renderField, renderRTE, renderTextarea} from '../field.tpl';
+import RTE from '../../forms/general/rte/RTE.form';
 
 class ProfileForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError} = this.props;
+        const {handleSubmit, formError, user} = this.props;
 
 
         return (
@@ -76,8 +76,12 @@ class ProfileForm extends Component {
                             <div className="uk-width-1-1">
 
 
-                                <Field name="detailData.signature" type="text" validate={[required]} component={renderRTE}
+                                <Field name="detailData.signature" type="text" validate={[required]} component={renderTextarea}
                                 label="Signature"/>
+
+                                {/*<div className="uk-form-row">*/}
+                                    {/*<RTE fieldName="detailData.signature" label="Signature" defaultValue={user.detailData.signature} />*/}
+                                {/*</div>*/}
 
 
                             </div>
