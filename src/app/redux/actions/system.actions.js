@@ -1,9 +1,14 @@
-import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED}
+import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED,REQUEST_PROJECTS}
 from '../constants';
 
 export function requestFilters() {
     return {
         type: REQUEST_FILTERS
+    }
+}
+export function requestProjects() {
+    return {
+        type: REQUEST_PROJECTS
     }
 }
 

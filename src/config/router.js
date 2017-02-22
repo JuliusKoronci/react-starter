@@ -89,7 +89,8 @@ export const paths = {
     'report_company':'/reports/company',
     'reports_users':'/reports/users',
     'report_user':'/reports/user',
-    'reports_custom':'/reports/custom'
+    'reports_custom':'/reports/custom',
+    'filters':'/dashboard/:filterId',
 
 
 };
@@ -115,6 +116,7 @@ export default (
         <Route path={paths.logout} component={Logout}/>
         <Route path="/" component={Main}>
             <IndexRoute component={Dashboard}/>
+            <Route path={paths.filters} component={Dashboard}/>
             <Route path={paths.task_list} component={Task}/>
             <Route path={paths.task_show} component={Task}/>
             <Route path={paths.profile} component={Profile}/>
