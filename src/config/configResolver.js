@@ -34,7 +34,7 @@ class configResolver {
             remapValues:{'email':'email','username':'username','detailData.function':'detail_data[function]',
             'detailData.name':'detail_data[name]','detailData.surname':'detail_data[surname]','detailData.signature':'detail_data[signature]',
             'detailData.tel':'detail_data[tel]','detailData.facebook':'detail_data[facebook]','detailData.twitter':'detail_data[twitter]',
-            'detailData.linkdin':'detail_data[linkdin]','detailData.google':'detail_data[google]'},
+            'detailData.linkdin':'detail_data[linkdin]','detailData.google':'detail_data[google]','language':'language'},
             afterEntityReceivedAction: profileReceived,
         }
     };

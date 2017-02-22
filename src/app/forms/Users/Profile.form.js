@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
-import {renderField, renderRTE, renderTextarea} from '../field.tpl';
+import {availableLanguages} from '../../../config/config';
+import {renderField, renderRTE, renderTextarea, renderSelect} from '../field.tpl';
 import RTE from '../../forms/general/rte/RTE.form';
 
 class ProfileForm extends Component {
@@ -91,11 +92,17 @@ class ProfileForm extends Component {
                         </h3>
                         <div className="uk-grid" data-uk-grid-margin>
                             <div className="uk-width-1-1">
-                                <select id="user_edit_languages" className="md-input">
-                                    <option value="gb" >English</option>
-                                    <option value="pl">Slovak</option>
-                                    <option value="fr">French</option>
-                                </select>
+
+                                <Field name="language" validate={[]} component={renderSelect}
+                                       label="Language" options={availableLanguages} />
+
+                                {/*<select id="user_edit_languages" className="md-input">*/}
+                                    {/*<option value="gb" >English</option>*/}
+                                    {/*<option value="pl">Slovak</option>*/}
+                                    {/*<option value="fr">French</option>*/}
+                                {/*</select>*/}
+
+
                             </div>
                         </div>
                         <h3 className="full_width_in_card heading_c">
