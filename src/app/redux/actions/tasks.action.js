@@ -12,9 +12,10 @@ import {
 
 import configResolver from '../../../config/configResolver';
 
-export function requestDefaultTasks() {
+export function requestDefaultTasks(filterId) {
     return {
-        type: REQUEST_DEFAULT_TASKS
+        type: REQUEST_DEFAULT_TASKS,
+        filterId
     }
 }
 

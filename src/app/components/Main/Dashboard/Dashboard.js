@@ -7,25 +7,35 @@ import * as actions from '../../../redux/actions/tasks.action';
 class Dashboard extends Component {
 
     componentDidMount() {
-        this.props.actions.requestDefaultTasks();
+        this.props.actions.requestDefaultTasks(this.props.params.filterId);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.params.filterId !== this.props.params.filterId) {
+            this.props.actions.requestDefaultTasks(this.props.params.filterId);
+        }
     }
 
 
-
-    loadTasksFunction =(url, e)=>{
+    loadTasksFunction = (url, e) => {
         this.props.actions.requestTasksFromUrl(url);
     };
 
     render() {
         return (
-            <View tasks={this.props.tasks} loadTasksFunction={this.loadTasksFunction} />
+            <View {...this.props} loadTasksFunction={this.loadTasksFunction}/>
         );
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+    const filter = state.filter.filter((f) => {
+        return f.id == ownProps.params.filterId
+    })[0];
+
     return {
-        tasks: state.tasks
+        tasks: state.tasks,
+        filter
     };
 }
 function mapDispatchToProps(dispatch) {
