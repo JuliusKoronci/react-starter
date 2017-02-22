@@ -10,7 +10,7 @@ class ProfileForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, user} = this.props;
+        const {handleSubmit, handleFileUpload, formError, user} = this.props;
 
 
         return (
@@ -19,6 +19,7 @@ class ProfileForm extends Component {
 
                 <div className="md-card-content">
                     <form onSubmit={handleSubmit}>
+
                     <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                         <div className="fileinput-new thumbnail">
                             <img src="assets/img/avatars/user.png" alt="user avatar"/>
@@ -30,15 +31,17 @@ class ProfileForm extends Component {
                                                 className="material-icons">&#xE2C6;</i></span>
                                             <span className="fileinput-exists"><i
                                                 className="material-icons">&#xE86A;</i></span>
+
                                             <input type="file" name="user_edit_avatar_control"
-                                                   id="user_edit_avatar_control"/>
+                                                   id="user_edit_avatar_control" onChange={handleFileUpload}/>
                                         </span>
                             <a href="#" className="btn-file fileinput-exists" data-dismiss="fileinput"><i
                                 className="material-icons">&#xE5CD;</i></a>
                         </div>
                     </div>
+
                     <div className="uk-margin-bottom" data-uk-margin>
-                        <h1 className="heading_b uk-margin-bottom">Edit user profile</h1>
+                        <h1 className="heading_b uk-margin-bottom">Edit profile</h1>
                     </div>
                     <hr/>
                     <div className="uk-margin-top">
@@ -95,12 +98,6 @@ class ProfileForm extends Component {
 
                                 <Field name="language" validate={[]} component={renderSelect}
                                        label="Language" options={availableLanguages} />
-
-                                {/*<select id="user_edit_languages" className="md-input">*/}
-                                    {/*<option value="gb" >English</option>*/}
-                                    {/*<option value="pl">Slovak</option>*/}
-                                    {/*<option value="fr">French</option>*/}
-                                {/*</select>*/}
 
 
                             </div>
@@ -213,42 +210,6 @@ class ProfileForm extends Component {
 
         );
 
-        // return (
-        //
-        //     <div className="md-card">
-        //         <div className="md-card-content">
-        //             <div className="uk-margin-bottom" data-uk-margin>
-        //                 <h1 className="heading_b uk-margin-bottom">{this.props.heading}</h1>
-        //             </div>
-        //             <hr/>
-        //             <div className="uk-grid">
-        //                 <div className="uk-width-medium-1-2">
-        //                     <form onSubmit={handleSubmit}>
-        //
-        //                         <Field name="country" type="text" validate={[]} component={renderField}
-        //                                label="Country"/>
-        //
-        //
-        //                         <div className="uk-margin-medium-top">
-        //                             <div className="uk-text-danger">{formError}</div>
-        //                         </div>
-        //                         <div className="uk-margin-medium-top">
-        //
-        //                             {this.props.params.companyId && <DeleteButton handleDelete={handleDelete}
-        //                                                                           id={parseInt(this.props.params.companyId, 10)}/>}
-        //
-        //                             <button className="md-btn md-btn-primary alignright" type="submit">
-        //                                 SAVE
-        //                             </button>
-        //                         </div>
-        //                     </form>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        //
-        //
-        // );
     }
 }
 

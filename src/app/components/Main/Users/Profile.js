@@ -5,7 +5,6 @@ import * as actions from '../../../redux/actions/users.action';
 import * as generalActions from '../../../redux/actions/general.action';
 import View from '../../../forms/Users/Profile.form';
 import configResolver from '../../../../config/configResolver';
-import {filterFormValues} from '../../../../app/services/general';
 
 class Profile extends Component {
 
@@ -25,6 +24,13 @@ class Profile extends Component {
 
 
 
+    handleFileUpload = (e) => {
+        let file = e.target.files[0];
+        let formData = new FormData();
+        formData.append(file.name, file);
+        this.props.actions.fileUpload(formData, this.profileConfig);
+    };
+
     handleSubmit=(values)=>{
         let formFields=this.profileConfig.allowedFormFields;
         this.props.actions.updateEntity(this.props.userId, values, this.profileConfig);
@@ -33,7 +39,7 @@ class Profile extends Component {
     render() {
         const {user} = this.props;
         return (
-            <View user={user} onSubmit={this.handleSubmit} />
+            <View user={user} onSubmit={this.handleSubmit} handleFileUpload={this.handleFileUpload} />
         );
     }
 }

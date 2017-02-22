@@ -7,7 +7,8 @@ import {
     DELETE_ENTITY,
     PATCH_ENTITY,
     REQUEST_DOWNLOAD_FILE,
-    REQUEST_DELETE_FILE
+    REQUEST_DELETE_FILE,
+    FILE_UPLOAD
 } from '../constants';
 
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
@@ -113,6 +114,28 @@ function *deleteFile(action) {
     yield put(endAjax());
 }
 
+function *fileUpload(action) {
+    let config = action.config;
+    yield put(startAjax());
+    // console.log(action);
+
+    for (let key of action.formData.entries()) {
+        console.log(key[0] + ', ' + key[1]);
+    }
+
+    // try {
+    //     yield call(defaultDeleteFile, config.url);
+    //     if (config.afterFileDeletedAction) {
+    //         yield put(config.afterFileDeletedAction(config.afterFileDeletedActionParams));
+    //     }
+    //     entityUpdated('File uploaded');
+    // } catch (e) {
+    //     yield put(asyncError(e));
+    // }
+    //entityUpdated('File uploaded');
+    yield put(endAjax());
+}
+
 
 export function *downloadFileDefault() {
     yield takeEvery(REQUEST_DOWNLOAD_FILE, downloadFile);
@@ -141,4 +164,6 @@ export function *deleteFileDefault() {
     yield takeEvery(REQUEST_DELETE_FILE, deleteFile);
 }
 
-
+export function *uploadFileDefault() {
+    yield takeLatest(FILE_UPLOAD, fileUpload);
+}
