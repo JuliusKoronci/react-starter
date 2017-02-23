@@ -3,7 +3,7 @@ import {loadAuth} from '../app/redux/sagas/auth.saga';
 
 import {loadTasks, loadTasksFromUrl} from '../app/redux/sagas/tasks.saga';
 import {loadFilters} from '../app/redux/sagas/filter.saga';
-import {loadUsersDefault} from '../app/redux/sagas/users.saga';
+import {loadUsersDefault, uploadAvatarDefault} from '../app/redux/sagas/users.saga';
 import {loadCompaniesDefault, postNewCompany} from '../app/redux/sagas/companies.saga';
 import {loadStatusesDefault} from '../app/redux/sagas/statuses.saga';
 import {loadRolesDefault} from '../app/redux/sagas/roles.saga';
@@ -24,6 +24,7 @@ export default function* root() {
     yield fork(loadTasksFromUrl);
     yield fork(loadFilters);
     yield fork(loadUsersDefault);
+    yield fork(uploadAvatarDefault);
     yield fork(loadCompaniesDefault);
     yield fork(postNewCompany);
     yield fork(loadStatusesDefault);

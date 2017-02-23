@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
 import {availableLanguages} from '../../../config/config';
 import {renderField, renderRTE, renderTextarea, renderSelect} from '../field.tpl';
+import {LOAD_ATTACHMENT} from '../../../api/urls';
 import RTE from '../../forms/general/rte/RTE.form';
 
 class ProfileForm extends Component {
@@ -22,7 +23,7 @@ class ProfileForm extends Component {
 
                     <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                         <div className="fileinput-new thumbnail">
-                            <img src="assets/img/avatars/user.png" alt="user avatar"/>
+                            <img src={ user && user.image? LOAD_ATTACHMENT + '/'+user.image:'assets/img/avatars/user.png'} alt="user avatar"/>
                         </div>
                         <div className="fileinput-preview fileinput-exists thumbnail"></div>
                         <div className="user_avatar_controls">

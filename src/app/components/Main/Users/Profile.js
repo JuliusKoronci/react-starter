@@ -11,6 +11,7 @@ class Profile extends Component {
     constructor(props, context) {
         super(props, context);
         this.profileConfig = configResolver.getProfileConfig(props.userId);
+        this.profileAvatarConfig = configResolver.getProfileAvatarConfig(props.userId);
     }
 
 
@@ -27,8 +28,8 @@ class Profile extends Component {
     handleFileUpload = (e) => {
         let file = e.target.files[0];
         let formData = new FormData();
-        formData.append(file.name, file);
-        this.props.actions.fileUpload(formData, this.profileConfig);
+        formData.append('file', file);
+        this.props.actions.uploadAvatar(formData, this.profileAvatarConfig);
     };
 
     handleSubmit=(values)=>{

@@ -12,7 +12,7 @@ import {
 } from '../constants';
 
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
-import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile, defaultDeleteFile} from '../../../api/api';
+import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile, defaultDeleteFile, apiUploadFile} from '../../../api/api';
 import {entityUpdated, entityCreated, entityDeleted} from '../../services/general';
 
 
@@ -30,7 +30,6 @@ function *loadEntity(action) {
 
 
 function *updateEntity(action) {
-
     yield put(startAjax());
     try {
         let config = action.config;
@@ -117,22 +116,21 @@ function *deleteFile(action) {
 function *fileUpload(action) {
     let config = action.config;
     yield put(startAjax());
-    // console.log(action);
 
-    for (let key of action.formData.entries()) {
-        console.log(key[0] + ', ' + key[1]);
-    }
-
-    // try {
-    //     yield call(defaultDeleteFile, config.url);
-    //     if (config.afterFileDeletedAction) {
-    //         yield put(config.afterFileDeletedAction(config.afterFileDeletedActionParams));
-    //     }
-    //     entityUpdated('File uploaded');
-    // } catch (e) {
-    //     yield put(asyncError(e));
+    //
+    // for (let key of action.formData.entries()) {
+    //     console.log(key[0] + ', ' + key[1]);
     // }
-    //entityUpdated('File uploaded');
+
+    try {
+        const data = yield call(apiUploadFile, config.uploadUrl, action.formData);
+        if (config.afterFileUploadedAction) {
+            yield call(config.afterFileUploadedAction, config, data);
+        }
+        entityUpdated('File uploaded');
+    } catch (e) {
+        yield put(asyncError(e));
+    }
     yield put(endAjax());
 }
 

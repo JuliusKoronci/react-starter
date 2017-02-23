@@ -21,3 +21,4 @@ export const PROJECT_LIST = BASE_URL + '/task-bundle/projects';
 export const LOAD_ATTACHMENT = BASE_URL + '/core-bundle/cdn/load';
 export const OPTION_LIST = BASE_URL + '/task-bundle/tasks/options';
 export const TASK_UPLOAD = BASE_URL + '/core-bundle/cdn/upload/task';
+export const FILE_UPLOAD = BASE_URL + '/core-bundle/cdn/upload';

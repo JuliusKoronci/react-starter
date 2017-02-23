@@ -73,6 +73,7 @@ export const COMPANY_RECEIVED='COMPANY_RECEIVED';
 
 //profile
 export const PROFILE_RECEIVED='PROFILE_RECEIVED';
+export const UPLOAD_AVATAR='UPLOAD_AVATAR';
 
 //general
 export const REQUEST_ENTITY='REQUEST_ENTITY';
