@@ -27,48 +27,39 @@ class ImapForm extends Component {
                         <hr/>
                         <div className="uk-width-medium-1-2">
                             <div className="uk-margin-bottom">
-                                <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                                       data-md-icheck/>
-                                <label className="uk_dp1 uk-text-muted">Active</label>
+                                <Field type="checkbox" name="active" validate={[]} component={renderField}
+                                        label="Active"/>
                             </div>
                             <div className="uk-margin-bottom">
-
                                 <Field name="inbox_email" type="text" validate={[required]} component={renderField}
                                        label="Inbox email"/>
-
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Move email</label>
-                                <input name="move_email" type="text" className="md-input label-fixed"/>
+                                <Field name="move_email" type="text" validate={[required]} component={renderField}
+                                        label="Move email"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Server</label>
-                                <input name="host" type="text" className="md-input label-fixed"/>
+                                <Field name="host" type="text" validate={[required]} component={renderField} label="Host"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Port</label>
-                                <input name="port" type="text" className="md-input label-fixed"/>
+                                <Field name="port" type="text" validate={[required]} component={renderField} label="Port"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Login</label>
-                                <input name="login" type="text" className="md-input label-fixed"/>
+                                <Field name="login" type="text" validate={[required]} component={renderField} label="Login"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Password</label>
-                                <input name="password" type="text" className="md-input label-fixed"/>
+                                <Field name="password" type="text" validate={[required]} component={renderField} label="Password"/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Project folder</label>
                                 <input type="text" className="md-input label-fixed" value="select from projects"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                                       data-md-icheck/>
+                                <Field type="checkbox" name="ignore_certificate" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">Ignore certificate</label>
                             </div>
                             <div className="uk-margin-bottom">
-                                <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                                       data-md-icheck/>
+                                <Field type="checkbox" name="ssl" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">SSL</label>
                             </div>
                             <div className="uk-margin-bottom">

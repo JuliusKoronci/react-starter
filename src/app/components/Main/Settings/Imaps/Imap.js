@@ -20,13 +20,14 @@ class Imap extends Component {
         }
     }
 
-    onSubmit = (values,e) => {
-    	alert('foo')
+    onSubmit = (values) => {
         NProgress.start();
         if (this.props.params.imapId) {
             this.props.actions.updateEntity(this.props.params.imapId, values, this.imapConfig);
         } else {
+            console.log(values)
             this.props.actions.createEntity(values,this.imapConfig);
+            console.log('ok')
         }
     };
 
