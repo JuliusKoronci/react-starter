@@ -9,9 +9,16 @@ import configResolver from '../../../../../config/configResolver';
 
 class imap extends Component {
 
-	componentWillMount() {
+    constructor(props, context) {
+        super(props, context);
+        this.imapConfig = configResolver.getImapConfig(props.params.imapId);
+    }
 
-	}
+    componentWillMount() {
+        if (this.props.params.imapId && !this.props.imap) {
+            this.props.actions.loadEntityById(this.props.params.imapId, this.imapConfig);
+        }
+    }
 
     onSubmit = (values,e) => {
     	alert('foo')
