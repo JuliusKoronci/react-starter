@@ -20,25 +20,27 @@ export const renderRTE = ({input, label, type, meta: {touched, error, warning}})
 export const renderTextarea = ({input, label, type, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
         <label htmlFor={input.name}>{label}</label>
+        <div>
         <textarea {...input} />
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
+    </div>
     </div>
 );
 
 
-// export const renderSelect = ({input, label, type, meta: {touched, error, warning}}) => (
-//     <div className="uk-form-row">
-//         <label htmlFor={input.name}>{label}</label>
-//         <select value={defaultValue} onChange={action} className="md-input" {...input}>
-//             <option value={false}>Select {label}...</option>
-//             {options.map((option, i) => {
-//                 return <option key={i} value={option.id}>{option.title}</option>
-//             })}
-//         </select>
-//         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-//     </div>
-// );
-//
+export const renderSelect = ({input, options, label, meta: {touched, error, warning}}) => (
+    <div className="uk-form-row">
+        <label htmlFor={input.name}>{label}</label>
+        <select value={input.defaultValue} className="md-input" {...input}>
+            <option value={false}>Select {label}...</option>
+            {options.map((option, i) => {
+                return <option key={i} value={option.id}>{option.title}</option>
+            })}
+        </select>
+        {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+    </div>
+);
+
 //
 // const Select = ({options, action, defaultValue, label, icon}) => {
 //     return (

@@ -84,6 +84,7 @@ export function defaultRequest(url, method, data, resolvedConfig) {
     if (resolvedConfig && resolvedConfig.remapValues) {
         data = remapValues(data, resolvedConfig.remapValues);
     }
+
     let config = {
          method: method,
         body: (data ? queryString.stringify(data).replace("detailData", "detail_data") : ''),
@@ -152,6 +153,28 @@ export function apiDownloadFile(url) {
             return response.blob();
         }).then(function (blob) {
             downloadFile(blob);
+        });
+}
+
+
+
+export function apiUploadFile(url, data) {
+    let config = {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Authorization': 'Bearer ' + getFromStorage(TOKEN_KEY)
+        }
+    };
+    return fetch(url, config)
+        .then(response =>
+            response.json().then(data => ({data, response}))
+        ).then(({data, response}) => {
+            if (!response.ok) {
+                return Promise.reject(buildError(response, data))
+            } else {
+                return Promise.resolve(data);
+            }
         });
 }
 
