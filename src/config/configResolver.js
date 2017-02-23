@@ -65,6 +65,7 @@ class configResolver {
             urlList: urls.IMAPS_LIST,
             afterEntityReceivedAction: imapReceived,
             // redirectAfterCreation: paths.companies,
+            // remapValues:{'inbox_email':'inbox_email'},
             allowedFormFields: ['inbox_email']
         }
     };
