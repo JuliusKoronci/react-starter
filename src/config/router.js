@@ -74,6 +74,7 @@ export const paths = {
     'smtps_add':'/settings/smtps/add',
     'smtps':'/settings/smtps',
     'statuses_add':'/settings/statuses/add',
+    'statuses_edit':'/settings/statuses/:statusId',
     'statuses':'/settings/statuses',
     'task_custom_fields_add':'/settings/task-custom-fields/add',
     'task_custom_fields':'/settings/task-custom-fields',
@@ -89,7 +90,8 @@ export const paths = {
     'report_company':'/reports/company',
     'reports_users':'/reports/users',
     'report_user':'/reports/user',
-    'reports_custom':'/reports/custom'
+    'reports_custom':'/reports/custom',
+    'filters':'/dashboard/:filterId',
 
 
 };
@@ -115,6 +117,7 @@ export default (
         <Route path={paths.logout} component={Logout}/>
         <Route path="/" component={Main}>
             <IndexRoute component={Dashboard}/>
+            <Route path={paths.filters} component={Dashboard}/>
             <Route path={paths.task_list} component={Task}/>
             <Route path={paths.task_show} component={Task}/>
             <Route path={paths.profile} component={Profile}/>
@@ -146,6 +149,7 @@ export default (
             <Route name="smtps" path={paths.smtps} component={Smtps}/>
 
             <Route name="status" path={paths.statuses_add} component={Status}/>
+            <Route name="status" path={paths.statuses_edit} component={Status}/>
             <Route name="statuses" path={paths.statuses} component={Statuses}/>
 
             <Route name="task-custom-field" path={paths.task_custom_fields_add} component={TaskCustomField}/>

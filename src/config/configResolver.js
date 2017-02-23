@@ -1,8 +1,9 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, companyAttributeReceived, statusReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
+import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 
 class configResolver {
     static getCompanyConfig = (id) => {
@@ -24,6 +25,41 @@ class configResolver {
             allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
         }
     };
+
+    static getStatusConfig = (id) => {
+        return {
+            url: id ? urls.STATUSES_LIST + '/' + id : urls.STATUSES_LIST,
+            urlList: urls.STATUSES_LIST,
+            afterEntityReceivedAction: statusReceived,
+            redirectAfterCreation: paths.statuses,
+            allowedFormFields: ['title', 'description', 'color']
+        }
+    };
+
+    static getProfileConfig = (id) => {
+        return {
+            id:id?id:null,
+            url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            urlList: urls.USERS_LIST,
+            uploadUrl: urls.FILE_UPLOAD,
+            // allowedFormFields: ['email','detailData.google','detail_data.google'],
+            remapValues:{'email':'email','username':'username','detailData.function':'detail_data[function]',
+            'detailData.name':'detail_data[name]','detailData.surname':'detail_data[surname]','detailData.signature':'detail_data[signature]',
+            'detailData.tel':'detail_data[tel]','detailData.facebook':'detail_data[facebook]','detailData.twitter':'detail_data[twitter]',
+            'detailData.linkdin':'detail_data[linkdin]','detailData.google':'detail_data[google]','language':'language'},
+            afterEntityReceivedAction: profileReceived
+        }
+    };
+
+    static getProfileAvatarConfig = (id) => {
+        return {
+            id:id?id:null,
+            url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            uploadUrl: urls.FILE_UPLOAD,
+            remapValues:{'image':'image'},
+        }
+    };
+
 
     static deleteTaskAttachment(taskId, slug) {
         return {
