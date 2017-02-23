@@ -72,3 +72,11 @@ export function deleteFile(slug, config) {
         slug
     }
 }
+
+export function fileUpload(formData, config) {
+    return {
+        type: constants.FILE_UPLOAD,
+        formData,
+        config
+    }
+}
