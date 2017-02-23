@@ -24,6 +24,7 @@ class StatusForm extends Component {
                         <h1 className="heading_b uk-margin-bottom">{this.props.heading}</h1>
                     </div>
                     <hr/>
+                    <form onSubmit={handleSubmit}>
                     <div className="uk-width-medium-1-2">
                         <div className="uk-margin-bottom">
                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
@@ -54,6 +55,7 @@ class StatusForm extends Component {
                             </button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
 

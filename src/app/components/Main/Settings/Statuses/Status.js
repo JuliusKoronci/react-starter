@@ -12,7 +12,7 @@ class Status extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.statusConfig = configResolver.getStatusConfig(props.params.companyId);
+        this.statusConfig = configResolver.getStatusConfig(props.params.statusId);
     }
 
     deleteHandler=(id)=>{
