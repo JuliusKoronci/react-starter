@@ -26,6 +26,16 @@ class configResolver {
         }
     };
 
+    static getStatusConfig = (id) => {
+        return {
+            url: id ? urls.STATUSES_LIST + '/' + id : urls.STATUSES_LIST,
+            urlList: urls.STATUSES_LIST,
+            // afterEntityReceivedAction: companyReceived,
+            // redirectAfterCreation: paths.statuses,
+            // allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
+        }
+    };
+
     static getProfileConfig = (id) => {
         return {
             id:id?id:null,
