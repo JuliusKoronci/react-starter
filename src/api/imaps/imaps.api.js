@@ -14,7 +14,7 @@ function mockDefault() {
 
 export function loadImaps(url) {
     //nastavene tahanie mock dat
-    return mockDefault();
+    // return mockDefault();
     
     if (USE_MOCK) {
         return mockDefault();

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
+import {generateRoute} from '../../../../../../config/router';
 
 const imaps = (props) => {
     return (
@@ -31,22 +32,25 @@ const imaps = (props) => {
                     {props.data.map((imap, i) => {
                         return (
                             <tr key={i}>
-                                <td>1</td>
                                 <td>{imap.id}</td>
-                                <td>{imap.email}</td>
-                                <td className="uk-text-center">{imap.description}</td>
+                                <td>{imap.inbox_email}</td>
+                                <td>{imap.project.title}</td>
+                                <td className="uk-text-center">{imap.project.description}</td>
                                 <td className="uk-text-center">{imap.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
                                     <a className="md-btn md-btn-danger" href="#">Delete</a>
-                                    <a className="md-btn md-btn-primary" href="settings_imap.html">Edit</a>
+                                    <Link to={generateRoute('imaps_edit',{imapId:imap.id})} className="md-btn md-btn-primary" >Edit</Link>
                                 </td>
                             </tr>
                         );
                     })}
                     </tbody>
                 </table>
-                <Pagination links={props._links} total={props.total} page={props.page}
-                            loadFunction={props.loadImaps}/>
+
+                {props._links && props.total && props.page && <Pagination links={props._links} total={props.total} page={props.page}
+                                                                          loadFunction={props.loadImaps}/>
+                }
+
 
                 <div className="text-allign-right">
                     <Link to="/settings/imaps/add" className="md-btn md-btn-primary">Add</Link>

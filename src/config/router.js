@@ -64,6 +64,7 @@ export const paths = {
     'email_notifications_add':'/settings/email-notifications/add',
     'email_notifications':'/settings/email-notifications',
     'imaps_add':'/settings/imaps/add',
+    'imaps_edit':'/settings/imaps/:imapId',
     'imaps':'/settings/imaps',
     'project_shared_filters_add':'/settings/project-shared-filters/add',
     'project_shared_filters':'/settings/project-shared-filters',
@@ -133,6 +134,7 @@ export default (
             <Route name="companies-custom-fields" path={paths.companies_attributes} component={CompaniesCustomFields}/>
 
             <Route name="imap" path={paths.imaps_add} component={Imap}/>
+            <Route name="imap" path={paths.imaps_edit} component={Imap}/>
             <Route name="imaps" path={paths.imaps} component={Imaps}/>
 
             <Route name="project-shared-filter" path={paths.project_shared_filters_add} component={ProjectSharedFilter}/>
