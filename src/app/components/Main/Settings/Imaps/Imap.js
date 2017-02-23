@@ -23,11 +23,11 @@ class Imap extends Component {
     onSubmit = (values,e) => {
     	alert('foo')
         NProgress.start();
-        // if (this.props.params.imapId) {
-        //     this.props.actions.updateEntity(this.props.params.imapId, values, this.imapConfig);
-        // } else {
-        //     this.props.actions.createEntity(values,this.imapConfig);
-        // }
+        if (this.props.params.imapId) {
+            this.props.actions.updateEntity(this.props.params.imapId, values, this.imapConfig);
+        } else {
+            this.props.actions.createEntity(values,this.imapConfig);
+        }
     };
 
     render() {

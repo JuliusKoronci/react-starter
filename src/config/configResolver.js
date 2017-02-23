@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, companyAttributeReceived, imapReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 
@@ -37,9 +37,9 @@ class configResolver {
         return {
             url: id ? urls.IMAPS_LIST + '/' + id : urls.IMAPS_LIST,
             urlList: urls.IMAPS_LIST,
-            // afterEntityReceivedAction: imapReceived,
-            redirectAfterCreation: paths.companies,
-            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
+            afterEntityReceivedAction: imapReceived,
+            // redirectAfterCreation: paths.companies,
+            allowedFormFields: ['inbox_email']
         }
     };
 

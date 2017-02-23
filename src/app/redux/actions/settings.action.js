@@ -127,6 +127,13 @@ export function imapsReceived(response) {
     }
 }
 
+export function imapReceived(data) {
+    return {
+        type: constants.IMAP_RECEIVED,
+        data
+    }
+}
+
 export function requestSmtps(url) {
     return {
         type: constants.REQUEST_SMTPS,

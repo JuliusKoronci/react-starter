@@ -32,8 +32,10 @@ class ImapForm extends Component {
                                 <label className="uk_dp1 uk-text-muted">Active</label>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Inbox email</label>
-                                <input name="inbox_email" type="text" className="md-input label-fixed"/>
+
+                                <Field name="inbox_email" type="text" validate={[required]} component={renderField}
+                                       label="Inbox email"/>
+
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Move email</label>

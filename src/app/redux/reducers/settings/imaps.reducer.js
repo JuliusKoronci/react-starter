@@ -1,4 +1,4 @@
-import {IMAPS_RECEIVED} from '../../constants';
+import {IMAPS_RECEIVED, IMAP_RECEIVED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -13,6 +13,9 @@ export default function imaps(state = defaultState, action) {
     switch (action.type) {
         case IMAPS_RECEIVED:
             return action.response;
+        case IMAP_RECEIVED:
+            return {...state,
+            'data': [...state.data, action.data.data]};
         default:
             return state;
     }
