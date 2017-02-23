@@ -33,6 +33,16 @@ class configResolver {
         }
     };
 
+    static getImapConfig = (id) => {
+        return {
+            url: id ? urls.IMAPS_LIST + '/' + id : urls.IMAPS_LIST,
+            urlList: urls.IMAPS_LIST,
+            // afterEntityReceivedAction: imapReceived,
+            redirectAfterCreation: paths.companies,
+            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
+        }
+    };
+
     static getDownloadFileConfig = () => {
         return {
             url: urls.LOAD_ATTACHMENT
