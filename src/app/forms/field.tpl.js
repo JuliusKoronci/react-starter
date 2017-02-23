@@ -1,5 +1,6 @@
 import React from 'react';
 import RTE from '../forms/general/rte/RTE.form';
+import Colorpicker from '../forms/general/Colorpicker.form';
 
 export const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
@@ -9,6 +10,13 @@ export const renderField = ({input, label, type, meta: {touched, error, warning}
     </div>
 );
 
+export const renderColorpicker = ({input, label, type, meta: {touched, error, warning}}) => (
+    <div className="uk-form-row">
+        <label htmlFor={input.name}>{label}</label>
+        <Colorpicker input={input}  />
+        {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
+    </div>
+);
 
 export const renderRTE = ({input, label, type, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">

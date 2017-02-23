@@ -14,7 +14,6 @@ export default function statuses(state = defaultState, action) {
         case STATUSES_RECEIVED:
             return action.response;
         case STATUS_RECEIVED:
-            console.log(action);
             return {
                 ...state,
                 'data': [...state.data, action.data.data]

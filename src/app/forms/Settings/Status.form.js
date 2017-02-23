@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
-import {renderField} from '../field.tpl';
+import {renderField, renderColorpicker} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
 class StatusForm extends Component {
@@ -15,7 +15,7 @@ class StatusForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete} = this.props;
+        const {handleSubmit, formError, handleDelete, colorpickerOnDrag, colorpickerColor} = this.props;
         return (
 
             <div className="md-card">
@@ -43,8 +43,10 @@ class StatusForm extends Component {
                         </div>
 
                         <div className="uk-margin-bottom">
-                            <Field name="color" type="text" validate={[required]} component={renderField}
-                                   label="Color"/>
+
+                            <Field name="color" type="text" validate={[required]} component={renderColorpicker}
+                            label="Color"/>
+
                         </div>
 
                         <div className="uk-margin-bottom">
