@@ -7,11 +7,12 @@ import {
     DELETE_ENTITY,
     PATCH_ENTITY,
     REQUEST_DOWNLOAD_FILE,
-    REQUEST_DELETE_FILE
+    REQUEST_DELETE_FILE,
+    FILE_UPLOAD
 } from '../constants';
 
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
-import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile, defaultDeleteFile} from '../../../api/api';
+import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile, defaultDeleteFile, apiUploadFile} from '../../../api/api';
 import {entityUpdated, entityCreated, entityDeleted} from '../../services/general';
 
 
@@ -29,7 +30,6 @@ function *loadEntity(action) {
 
 
 function *updateEntity(action) {
-
     yield put(startAjax());
     try {
         let config = action.config;
@@ -113,6 +113,27 @@ function *deleteFile(action) {
     yield put(endAjax());
 }
 
+function *fileUpload(action) {
+    let config = action.config;
+    yield put(startAjax());
+
+    //
+    // for (let key of action.formData.entries()) {
+    //     console.log(key[0] + ', ' + key[1]);
+    // }
+
+    try {
+        const data = yield call(apiUploadFile, config.uploadUrl, action.formData);
+        if (config.afterFileUploadedAction) {
+            yield call(config.afterFileUploadedAction, config, data);
+        }
+        entityUpdated('File uploaded');
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
 
 export function *downloadFileDefault() {
     yield takeEvery(REQUEST_DOWNLOAD_FILE, downloadFile);
@@ -141,4 +162,6 @@ export function *deleteFileDefault() {
     yield takeEvery(REQUEST_DELETE_FILE, deleteFile);
 }
 
-
+export function *uploadFileDefault() {
+    yield takeLatest(FILE_UPLOAD, fileUpload);
+}
