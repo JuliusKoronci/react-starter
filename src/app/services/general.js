@@ -43,37 +43,37 @@ return remappedValues;
 
 export function filterFormValues(formValues, allowedKeys){
     // let clonedFormValues = Object.assign({}, formValues);
-    let allowedValues={};
-
-    allowedKeys.map((field, i) => {
-        let value;
-        try {
-
-            //field.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase();});
-
-            value = eval('formValues.' + field);
-            // console.log(field, value);
-            // allowedValues.field=value;
-
-
-            setObjByString(allowedValues,field,value);
-            //index(allowedValues,field,value);
-
-        } catch (e) {
-        }
-
-    });
-    // Object.keys(allowedValues).map(x => allowedValues[x]);
-    // console.log(allowedValues);
-
-    allowedValues.detailData = Object.values(allowedValues.detailData);
-    // console.log(allowedValues);
-
-    return allowedValues;
+    // let allowedValues={};
+    //
+    // allowedKeys.map((field, i) => {
+    //     let value;
+    //     try {
+    //
+    //         //field.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase();});
+    //
+    //         value = eval('formValues.' + field);
+    //         // console.log(field, value);
+    //         // allowedValues.field=value;
+    //
+    //
+    //         setObjByString(allowedValues,field,value);
+    //         //index(allowedValues,field,value);
+    //
+    //     } catch (e) {
+    //     }
+    //
+    // });
+    // // Object.keys(allowedValues).map(x => allowedValues[x]);
+    // // console.log(allowedValues);
+    //
+    // allowedValues.detailData = Object.values(allowedValues.detailData);
+    // // console.log(allowedValues);
+    //
+    // return allowedValues;
 
     //povodne
-    // let clonedFormValues = Object.assign({}, formValues);
-    //return allowedKeys.reduce((a, b) =>{ a[b]=clonedFormValues[b] ; return a},{});
+    let clonedFormValues = Object.assign({}, formValues);
+    return allowedKeys.reduce((a, b) =>{ a[b]=clonedFormValues[b] ; return a},{});
 }
 
 

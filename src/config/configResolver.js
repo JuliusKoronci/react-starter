@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, companyAttributeReceived, statusReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
@@ -23,6 +23,16 @@ class configResolver {
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
             allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
+        }
+    };
+
+    static getStatusConfig = (id) => {
+        return {
+            url: id ? urls.STATUSES_LIST + '/' + id : urls.STATUSES_LIST,
+            urlList: urls.STATUSES_LIST,
+            afterEntityReceivedAction: statusReceived,
+            redirectAfterCreation: paths.statuses,
+            allowedFormFields: ['title', 'description', 'color']
         }
     };
 

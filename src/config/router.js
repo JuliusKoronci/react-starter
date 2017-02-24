@@ -74,6 +74,7 @@ export const paths = {
     'smtps_add':'/settings/smtps/add',
     'smtps':'/settings/smtps',
     'statuses_add':'/settings/statuses/add',
+    'statuses_edit':'/settings/statuses/:statusId',
     'statuses':'/settings/statuses',
     'task_custom_fields_add':'/settings/task-custom-fields/add',
     'task_custom_fields':'/settings/task-custom-fields',
@@ -148,6 +149,7 @@ export default (
             <Route name="smtps" path={paths.smtps} component={Smtps}/>
 
             <Route name="status" path={paths.statuses_add} component={Status}/>
+            <Route name="status" path={paths.statuses_edit} component={Status}/>
             <Route name="statuses" path={paths.statuses} component={Statuses}/>
 
             <Route name="task-custom-field" path={paths.task_custom_fields_add} component={TaskCustomField}/>
