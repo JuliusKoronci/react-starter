@@ -1,9 +1,10 @@
 import React, {PropTypes} from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
+import {renderField} from '../field.tpl';
 import {Field, reduxForm} from 'redux-form';
 
-class AddSmtp extends Component {
+class SmtpForm extends Component {
 
     render() {
         const {handleSubmit} = this.props;
@@ -17,33 +18,32 @@ class AddSmtp extends Component {
                         <hr/>
                         <div className="uk-width-medium-1-2">
                             <div className="uk-margin-bottom">
-                                <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                                       data-md-icheck/>
+                                <Field type="checkbox" name="active" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">Active</label>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>email</label>
-                                <input type="text" className="md-input label-fixed"/>
+                                <label>Email</label>
+                                <Field type="text" name="email" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Server</label>
-                                <input type="text" className="md-input label-fixed"/>
+                                <Field type="text" name="host" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Port</label>
-                                <input type="text" className="md-input label-fixed"/>
+                                <Field type="text" name="port" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Login</label>
-                                <input type="text" className="md-input label-fixed"/>
+                                <Field type="text" name="login" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Password</label>
-                                <input type="text" className="md-input label-fixed"/>
+                                <Field type="text" name="password" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Project folder</label>
-                                <select className="md-input label-fixed">
+                                <select name="project" className="md-input label-fixed">
                                     {this.props.projects.map((p,i)=>{
                                         return (
                                             <option key={i} value={p.key}>{p.title}</option>
@@ -52,20 +52,18 @@ class AddSmtp extends Component {
                                 </select>
                             </div>
                             <div className="uk-margin-bottom">
-                                <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                                       data-md-icheck/>
+                                <Field type="checkbox" name="tls" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">TSL</label>
                             </div>
                             <div className="uk-margin-bottom">
-                                <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                                       data-md-icheck/>
+                                <Field type="checkbox" name="ssl" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">SSL</label>
                             </div>
 
                             <h3>Test smtp</h3>
                             <div className="uk-margin-bottom">
                                 <label>email for send test mail</label>
-                                <input type="text" className="md-input label-fixed"/>
+                                <Field type="text" name="test_email" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <a className="md-btn md-btn-success" href="settings_units.html">SEND</a>
@@ -83,8 +81,21 @@ class AddSmtp extends Component {
     }
 };
 
-AddSmtp = reduxForm({
-    form: 'AddSmtp'
-})(AddSmtp);
+function mapStateToProps(state, ownProps) {
+    const smtpId = ownProps.params.smtpId;
+    const smtp = state.imaps.data.filter((smtp) => parseInt(smtp.id, 10) === parseInt(smtpId, 10));
 
-export default connect()(AddSmtp);
+    if (smtp.length > 0) {
+        return {
+            initialValues: smtp.length > 0 ? smtp[0] : {},
+        };
+    }
+    return {};
+
+}
+
+SmtpForm = reduxForm({
+    form: 'SmtpForm'
+})(SmtpForm);
+
+export default connect(mapStateToProps)(SmtpForm);
