@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import View from '../../../../views/templates/main/settings/units/add_unit.jsx';
+import View from '../../../../forms/Settings/Unit.form.js';
 
 class Unit extends Component {
 
