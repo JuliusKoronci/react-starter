@@ -52,7 +52,13 @@ class ImapForm extends Component {
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Project folder</label>
-                                <input type="text" className="md-input label-fixed" value="select from projects"/>
+                                <select className="md-input label-fixed">
+                                    {this.props.projects.map((p,i)=>{
+                                        return (
+                                            <option key={i} value={p.key}>{p.title}</option>
+                                        )
+                                    })}
+                                </select>
                             </div>
                             <div className="uk-margin-bottom">
                                 <Field type="checkbox" name="ignore_certificate" validate={[]} component={renderField}/>

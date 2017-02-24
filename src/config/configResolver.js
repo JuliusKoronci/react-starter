@@ -76,7 +76,7 @@ class configResolver {
             afterEntityReceivedAction: imapReceived,
             // redirectAfterCreation: paths.companies,
             // remapValues:{'inbox_email':'inbox_email'},
-            allowedFormFields: ['inbox_email']
+            allowedFormFields: ['inbox_email','move_email','host','port','login']
         }
     };
 
