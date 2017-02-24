@@ -44,7 +44,8 @@ export const renderTextarea = ({input, label, type, meta: {touched, error, warni
 export const renderSelect = ({input, options, label, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
         <label htmlFor={input.name}>{label}</label>
-        <select value={input.defaultValue} className="md-input" {...input}>
+        {/*<select value={input.defaultValue} className="md-input" {...input} onChange={action.bind(null)} onClick={action.bind(null)} >*/}
+            <select value={input.defaultValue} className="md-input" {...input} >
             <option value={false}>Select {label}...</option>
             {options.map((option, i) => {
                 return <option key={i} value={option.id}>{option.title}</option>
