@@ -7,33 +7,35 @@ import {Field, reduxForm} from 'redux-form';
 class UnitForm extends Component {
 
     render() {
+        const {handleSubmit} = this.props;
         return (
             <div className="md-card">
-                <div className="md-card-content">
-                    <div className="uk-margin-bottom" data-uk-margin>
-                        <h1 className="heading_b uk-margin-bottom">Add unit</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="md-card-content">
+                        <div className="uk-margin-bottom" data-uk-margin>
+                            <h1 className="heading_b uk-margin-bottom">Add unit</h1>
+                        </div>
+                        <hr/>
+                        <div className="uk-width-medium-1-2">
+                            <div className="uk-margin-bottom">
+                                <Field type="checkbox" name="active" validate={[]} component={renderField}/>
+                                <label className="uk_dp1 uk-text-muted">Active</label>
+                            </div>
+                            <div className="uk-margin-bottom">
+                                <label>Unit name</label>
+                                <Field type="text" name="title" validate={[]} component={renderField}/>
+                            </div>
+                            <div className="uk-margin-bottom">
+                                <label>Description</label>
+                                <Field type="text" name="shortcut" validate={[]} component={renderField}/>
+                            </div>
+                            <div className="uk-margin-bottom">
+                                <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                <button className="md-btn md-btn-primary alignright" href="settings_units.html">Save</button>
+                            </div>
+                        </div>
                     </div>
-                    <hr/>
-                    <div className="uk-width-medium-1-2">
-                        <div className="uk-margin-bottom">
-                            <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                                   data-md-icheck/>
-                            <label className="uk_dp1 uk-text-muted">Active</label>
-                        </div>
-                        <div className="uk-margin-bottom">
-                            <label>Unit name</label>
-                            <input type="text" className="md-input label-fixed"/>
-                        </div>
-                        <div className="uk-margin-bottom">
-                            <label>Description</label>
-                            <input type="text" className="md-input label-fixed"/>
-                        </div>
-                        <div className="uk-margin-bottom">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <button className="md-btn md-btn-primary alignright" href="settings_units.html">Save</button>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         );
     }
