@@ -36,6 +36,16 @@ class configResolver {
         }
     };
 
+    static getSmtpConfig = (id) => {
+        return {
+            url: id ? urls.STATUSES_LIST + '/' + id : urls.STATUSES_LIST,
+            urlList: urls.STATUSES_LIST,
+            afterEntityReceivedAction: statusReceived,
+            redirectAfterCreation: paths.statuses,
+            allowedFormFields: ['title', 'description', 'color']
+        }
+    };
+
     static getProfileConfig = (id) => {
         return {
             id:id?id:null,

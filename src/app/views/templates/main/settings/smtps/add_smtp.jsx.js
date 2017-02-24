@@ -43,7 +43,13 @@ class AddSmtp extends Component {
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Project folder</label>
-                                <input type="text" className="md-input label-fixed" value="from ALL"/>
+                                <select className="md-input label-fixed">
+                                    {this.props.projects.map((p,i)=>{
+                                        return (
+                                            <option key={i} value={p.key}>{p.title}</option>
+                                        )
+                                    })}
+                                </select>
                             </div>
                             <div className="uk-margin-bottom">
                                 <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
