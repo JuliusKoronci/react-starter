@@ -63,6 +63,12 @@ export function statusesReceived(response) {
     }
 }
 
+export function statusReceived(data) {
+    return {
+        type: constants.STATUS_RECEIVED,
+        data
+    }
+}
 
 export function requestRoles(url) {
     return {

@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
+import {generateRoute} from '../../../../../../config/router';
+import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
 
 const statuses = (props) => {
     return (
@@ -36,13 +38,16 @@ const statuses = (props) => {
                             <tr key={i}>
                                 <td>{status.id}</td>
                                 <td>{status.title}</td>
-                                <td className="uk-text-center"></td>
-                                <td className="uk-text-center"><a className="md-btn md-bg-blue-400 md-color-white"
-                                                                  href="#">New</a></td>
+                                <td className="uk-text-center">{status.description}</td>
+                                <td className="uk-text-center">
+                                    <button className="md-btn" style={{backgroundColor:status.color}}>{status.color}</button>
+                                </td>
                                 <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
-                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
-                                    <a className="md-btn md-btn-primary" href="settings_status.html">Edit</a>
+
+                                    {status.is_active && <DeleteButton handleDelete={props.handleDelete} id={status.id} />}
+                                    <Link to={generateRoute('statuses_edit',{statusId:status.id})} className="md-btn md-btn-primary" >Edit</Link>
+
                                 </td>
                             </tr>
                         );
