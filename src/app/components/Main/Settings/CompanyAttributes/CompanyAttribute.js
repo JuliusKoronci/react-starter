@@ -49,7 +49,7 @@ class CompanyAttribute extends Component {
 
     render() {
         return (
-            <View formError={null} onSubmit={this.onSubmit} {...this.props} setCustomValues={this.setCustomValues}
+            <View formError={null} onSubmit={this.onSubmit} {...this.props} setCustomValues={this.setCustomValues} config={this.entityConfig}
         heading={this.props.companyAttribute ? "Edit company attribute" : "Add company attribute"} handleDelete={this.deleteHandler} />
         );
     }

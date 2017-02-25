@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Creatable } from 'react-select';
+
 import RTE from '../forms/general/rte/RTE.form';
+import Tagger from '../forms/general/Tagger.form';
 import Colorpicker from '../forms/general/Colorpicker.form';
 
 export const renderField = ({input, label, type, actions, meta: {touched, error, warning}}) => (
@@ -41,10 +42,11 @@ export const renderTextarea = ({input, label, type, meta: {touched, error, warni
 );
 
 
-export const renderSelect = ({input, options, label, meta: {touched, error, warning}}) => (
+export const renderSelect = ({input, options, label, action, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
         <label htmlFor={input.name}>{label}</label>
         {/*<select value={input.defaultValue} className="md-input" {...input} onChange={action.bind(null)} onClick={action.bind(null)} >*/}
+        {/*<select value={input.defaultValue} className="md-input" {...input} onChange={(action ? action.bind(null):null)} onClick={(action ? action.bind(null):null)} >/*/}
             <select value={input.defaultValue} className="md-input" {...input} >
             <option value={false}>Select {label}...</option>
             {options.map((option, i) => {
@@ -56,21 +58,31 @@ export const renderSelect = ({input, options, label, meta: {touched, error, warn
 );
 
 
-export const renderTagger = ({input,tagValues,name,defaultOptions,label,icon,action,setValues}) => {
+export const renderTagger = ({input,tagValues,defaultOptions,label,icon,action,setValues}) => {
+
+
+
+    {/*<div className="uk-input-group" style={{marginTop: '10px'}}>*/}
+        {/*{icon && <span className="uk-input-group-addon"><i className="material-icons">&#xE893;</i></span>}*/}
+        {/*<label htmlFor={input.name}>{label}</label>*/}
+        {/*<Creatable name={input.name}*/}
+                   {/*className="md-input"*/}
+                   {/*value={tagValues}*/}
+                   {/*joinValues={true}*/}
+                   {/*multi={true}*/}
+                   {/*options={defaultOptions}*/}
+                   {/*onChange={input.onChange(input.value)}*/}
+
+                   {/*{...input}*/}
+        {/*/>*/}
+    {/*</div>*/}
+
     return (
-        <div className="uk-input-group" style={{marginTop: '10px'}}>
-            {icon && <span className="uk-input-group-addon"><i className="material-icons">&#xE893;</i></span>}
-            <label htmlFor={name}>{label}</label>
-            <Creatable name={name}
-                       className="md-input"
-                       value={tagValues}
-                       joinValues={true}
-                       multi={true}
-                       options={defaultOptions}
-                       onChange={setValues}
-                       {...input}
-            />
+
+        <div>
+        <Tagger input={input} />
         </div>
+
     );
 };
 

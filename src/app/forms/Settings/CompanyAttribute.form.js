@@ -10,13 +10,27 @@ class CompanyAttributeForm extends Component {
 
     constructor(props, context){
         super(props, context);
-        this.state={customValueEnabled:false,optionValues:[{value: 'one', label: 'One'},{value: 'two', label: 'Two'}]};
+        this.state={customValueEnabled: false};
+
     }
 
-    selectOnChangeHandler=(e)=>{
-        console.log(e.target);
-        console.log('change');
-        this.setState({customValueEnabled:true});
+    componentDidUpdate(){
+
+        // console.log('did update');
+        if(this.props.currentValues && this.props.currentValues.type){
+            // console.log(this.props.currentValues.type);
+            if(this.props.config.customValuesEnabledOn.indexOf(this.props.currentValues.type)!=-1){
+                if(!this.state.customValueEnabled) {
+                    this.setState({customValueEnabled: true})
+                }
+            }
+            else{
+                if(this.state.customValueEnabled) {
+                    this.setState({customValueEnabled: false})
+                }
+            }
+            }
+
     };
 
     setCustomValues=(values)=>{
@@ -30,17 +44,21 @@ class CompanyAttributeForm extends Component {
 
     };
 
+    setValues=()=>{
+        console.log('set values');
+    };
+
 
     render() {
         const {handleSubmit, formError, handleDelete, setCustomValues} = this.props;
 
         const options=[
-            {value:'input',title:'Input',},
-            {value:'textarea',title:'Text area'},
-            {value:'select',title:'Select',customValueEnabled:true},
-            {value:'checkbox',title:'Checkbox',customValueEnabled:true},
-            {value:'date',title:'Date'},
-            {value:'number',title:'Number'}
+            {id:'input',title:'Input',},
+            {id:'textarea',title:'Text area'},
+            {id:'multi_select',title:'Select',customValueEnabled:true},
+            {id:'checkbox',title:'Checkbox',customValueEnabled:true},
+            {id:'date',title:'Date'},
+            {id:'number',title:'Number'}
             ];
 
         return (
@@ -72,7 +90,7 @@ class CompanyAttributeForm extends Component {
                                 </div>
 
                                 <div className="uk-margin">
-                                    <Field name="type" type="select" action={this.selectOnChangeHandler} options={options} validate={[required]} component={renderSelect}
+                                    <Field name="type" type="select" options={options} validate={[required]} component={renderSelect}
                                            label="Type"/>
                                 </div>
 
@@ -81,8 +99,8 @@ class CompanyAttributeForm extends Component {
                                 {this.state.customValueEnabled &&
                                 <div className="uk-margin">
                                     <h2>Add custom field values</h2>
-                                    {/*<Field name="options" setValues={this.setValues} tagValues={this.state.customValues} options={options} validate={[]} component={Tag}*/}
-                                           {/*label="Custom values"/>*/}
+                                    <Field name="options" setValues={this.setValues} tagValues={this.state.customValues} options={options} validate={[]} component={renderTagger}
+                                           label="Custom values"/>
 
                                     {/*<Tag name="options" input={{name:'options'}} options={options} tagValues={{}} setValues={setCustomValues}/>*/}
                                     {/*<Field name="options" actions={{setValues:this.setCustomValues}}  options={this.props.companyAttribute?this.props.companyAttribute.options:{}} validate={[]} component={Tag}*/}
@@ -129,13 +147,17 @@ class CompanyAttributeForm extends Component {
 function mapStateToProps(state, ownProps) {
     const companyAttributeId = ownProps.params.companyAttributeId;
     const companyAttribute = state.companyAttributes.data.filter((companyAttribute) => parseInt(companyAttribute.id, 10) === parseInt(companyAttributeId, 10));
+    const currentValues=state.form['companyAttributeForm'];
 
     if (companyAttribute.length > 0) {
         return {
             initialValues: companyAttribute.length > 0 ? companyAttribute[0] : false,
+            currentValues: (currentValues && currentValues.values?currentValues.values:{})
         };
     } else {
-        return {};
+        return {
+            currentValues: (currentValues && currentValues.values?currentValues.values:{})
+        };
     }
 
 
