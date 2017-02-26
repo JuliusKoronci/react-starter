@@ -35,7 +35,7 @@ import Unit from '../app/components/Main/Settings/Units/Unit';
 import Users from '../app/components/Main/Settings/Users/Users';
 import User from '../app/components/Main/Settings/Users/User';
 import UserCustomFields from '../app/components/Main/Settings/UserCustomFields/UserAttributes';
-import UserCustomField from '../app/components/Main/Settings/UserCustomFields/UserCustomField';
+import UserCustomField from '../app/components/Main/Settings/UserCustomFields/UserAttribute';
 import ReportsCompanies from '../app/components/Main/Reports/Companies/ReportsCompanies';
 import ReportCompany from '../app/components/Main/Reports/Companies/ReportCompany';
 import ReportsUsers from '../app/components/Main/Reports/Users/ReportsUsers';
@@ -85,6 +85,7 @@ export const paths = {
     'users_add':'/settings/users/add',
     'users':'/settings/users',
     'user_custom_fields_add':'/settings/user-custom-fields/add',
+    'user_custom_fields_edit':'/settings/user-custom-fields/:userAttributeId',
     'user_custom_fields':'/settings/user-custom-fields',
     'reports_companies':'/reports/companies',
     'report_company':'/reports/company',
@@ -165,6 +166,7 @@ export default (
             <Route name="users" path={paths.users} component={Users}/>
 
             <Route name="user-custom-field" path={paths.user_custom_fields_add} component={UserCustomField}/>
+            <Route name="user-custom-field" path={paths.user_custom_fields_edit}  component={UserCustomField}/>
             <Route name="user-custom-fields" path={paths.user_custom_fields} component={UserCustomFields}/>
 
             <Route name="reports-companies" path={paths.reports_companies} component={ReportsCompanies}/>

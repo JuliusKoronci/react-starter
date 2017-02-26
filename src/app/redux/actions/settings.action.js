@@ -194,6 +194,13 @@ export function requestUserAttributes(url) {
     }
 }
 
+export function userAttributeReceived(data) {
+    return {
+        type: constants.USERATTRIBUTE_RECEIVED,
+        data
+    }
+}
+
 export function userAttributesReceived(response) {
     return {
         type: constants.USERATTRIBUTES_RECEIVED,
