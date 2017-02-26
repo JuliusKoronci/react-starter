@@ -34,16 +34,14 @@ class CompanyAttribute extends Component {
     };
 
     onSubmit = (values) => {
-        NProgress.start();
-
         if (this.entityId) {
-            alert('would update');
-            console.log(values);
-            // this.props.actions.updateEntity(this.entityId, values, this.entityConfig);
+            // alert('would update');
+            // console.log(values);
+            this.props.actions.updateEntity(this.entityId, values, this.entityConfig);
         } else {
-            alert('would create');
-            console.log(values);
-            // this.props.actions.createEntity(values,this.entityConfig);
+            // alert('would create');
+            // console.log(values);
+            this.props.actions.createEntity(values,this.entityConfig);
         }
     };
 

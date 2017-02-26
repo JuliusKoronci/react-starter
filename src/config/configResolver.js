@@ -22,7 +22,7 @@ class configResolver {
             urlList: urls.COMPANYATTRIBUTES_LIST,
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
-            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip'],
+            allowedFormFields: ['title', 'description','options','type'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };

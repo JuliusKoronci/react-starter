@@ -16,9 +16,7 @@ class CompanyAttributeForm extends Component {
 
     componentDidUpdate(){
 
-        // console.log('did update');
         if(this.props.currentValues && this.props.currentValues.type){
-            // console.log(this.props.currentValues.type);
             if(this.props.config.customValuesEnabledOn.indexOf(this.props.currentValues.type)!=-1){
                 if(!this.state.customValueEnabled) {
                     this.setState({customValueEnabled: true})
