@@ -60,7 +60,7 @@ const settings = (prop) => {
                     </tr>
                     <tr>
                         <td>
-                            <Link to={paths.task_custom_fields} className="uk-text-large">Task custom Fields</Link>
+                            <Link to={paths.task_attributes} className="uk-text-large">Task attributes</Link>
                         </td>
                     </tr>
                     <tr>

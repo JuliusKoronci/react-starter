@@ -1,5 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
+import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
+import {paths, generateRoute} from '../../../../../../config/router';
 
 const UserAttributes = (props) => {
     return (
@@ -33,14 +36,17 @@ const UserAttributes = (props) => {
                                 <td>{userAttribute.type}</td>
                                 <td className="uk-text-center">{userAttribute.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
-                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
-                                    <a className="md-btn md-btn-primary" href="settings_custom_field.html">Edit</a>
+                                    {userAttribute.is_active && <DeleteButton handleDelete={props.handleDelete} id={userAttribute.id} />}
+                                    <Link to={generateRoute('user_custom_fields_edit',{userAttributeId:userAttribute.id})} className="md-btn md-btn-primary" >Edit</Link>
                                 </td>
                             </tr>
                         );
                     })}
                     </tbody>
                 </table>
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadUserAttributes}/>
+
                 <div className="text-allign-right">
                     <Link to="/settings/user-custom-fields/add" className="md-btn md-btn-primary" >Add</Link>
                 </div>
