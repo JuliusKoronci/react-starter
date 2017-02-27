@@ -33,7 +33,7 @@ class configResolver {
             urlList: urls.TASKATTRIBUTES_LIST,
             afterEntityReceivedAction: taskAttributeReceived,
             redirectAfterCreation: paths.task_attributes,
-            allowedFormFields: ['title','options','type'],
+            allowedFormFields: ['title','options','type','is_active'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };

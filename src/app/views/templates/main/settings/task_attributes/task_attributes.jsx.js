@@ -39,7 +39,6 @@ const TaskAttributes = (props) => {
                                 <td>{taskAttribute.type}</td>
                                 <td className="uk-text-center">{taskAttribute.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
-                                    {taskAttribute.is_active && <DeleteButton handleDelete={props.handleDelete} id={taskAttribute.id} />}
                                     <Link to={generateRoute('task_attributes_edit',{taskAttributeId:taskAttribute.id})} className="md-btn md-btn-primary" >Edit</Link>
                                 </td>
                             </tr>

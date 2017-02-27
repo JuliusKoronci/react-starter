@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required} from '../../../config/validation';
 import {renderField, renderSelect, renderTagger} from '../field.tpl';
-import DeleteButton from '../../components/Main/_partials/DeleteButton';
+
 
 class TaskAttributeForm extends Component {
 
@@ -32,15 +32,17 @@ class TaskAttributeForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete} = this.props;
+        const {handleSubmit, formError, handleDelete, customAttributeTypes, toggleActive} = this.props;
 
         const options=[
             {id:'input',title:'Input',},
-            {id:'textarea',title:'Text area'},
-            {id:'multi_select',title:'Select',customValueEnabled:true},
+            {id:'text_area',title:'Text area'},
+            {id:'simple_select',title:'Simple select'},
+            {id:'multi_select',title:'Multiselect',customValueEnabled:true},
             {id:'checkbox',title:'Checkbox',customValueEnabled:true},
             {id:'date',title:'Date'},
-            {id:'number',title:'Number'}
+            {id:'integer_number',title:'Number'},
+            {id:'decimal_number',title:'Decimal number'}
             ];
 
         return (
@@ -56,10 +58,10 @@ class TaskAttributeForm extends Component {
                             <form onSubmit={handleSubmit}>
 
                                 <div className="uk-margin">
-
-                                    <Field name="is_active" type="checkbox" validate={[]} component={renderField}
-                                           label="Active"/>
+                                <Field name="is_active" type="checkbox" validate={[]} component={renderField}
+                                       label="Active" />
                                 </div>
+
 
                                 <div className="uk-margin">
                                     <Field name="title" type="text" validate={[required]} component={renderField}
@@ -89,9 +91,6 @@ class TaskAttributeForm extends Component {
                                     <div className="uk-margin-medium-top">
                                         <div className="uk-text-danger">{formError}</div>
                                     </div>
-
-                                    {this.props.params.taskAttributeId && <DeleteButton handleDelete={handleDelete}
-                                                                                           id={parseInt(this.props.params.taskAttributeId, 10)}/>}
 
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE

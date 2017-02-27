@@ -15,11 +15,13 @@ class TaskAttribute extends Component {
         super(props, context);
         this.entityId=props.params.taskAttributeId;
         this.entityConfig = configResolver.getTaskAttributesConfig(this.entityId);
+        this.customAttributeTypes={};
     }
 
     deleteHandler=(id)=>{
         this.props.actions.deleteEntity(this.entityId, this.entityConfig);
     };
+
 
     componentWillMount() {
         if (this.entityId && !this.props.taskAttribute) {
@@ -45,7 +47,7 @@ class TaskAttribute extends Component {
     render() {
         return (
             <View formError={null} onSubmit={this.onSubmit} {...this.props} setCustomValues={this.setCustomValues} config={this.entityConfig}
-                  heading={this.props.companyAttribute ? "Edit task attribute" : "Add task attribute"} handleDelete={this.deleteHandler} />
+                  heading={this.props.companyAttribute ? "Edit task attribute" : "Add task attribute"} handleDelete={this.deleteHandler} customAttributeTypes={this.customAttributeTypes} />
         );
     }
 }
