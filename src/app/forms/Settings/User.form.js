@@ -15,11 +15,11 @@ class UserForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, roles, user} = this.props;
+        const {submitData, submitPassword, formError, handleDelete, roles, user, languages} = this.props;
         return (
 
 <div className="md-card">
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitData}>
         <div className="md-card-content">
             <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                 <div className="fileinput-new thumbnail">
@@ -90,9 +90,11 @@ class UserForm extends Component {
                 <div className="uk-grid" data-uk-grid-margin>
                     <div className="uk-width-1-1">
                         <select name="language" id="user_edit_languages" className="md-input">
-                            <option value="gb" selected>English</option>
-                            <option value="pl">Slovak</option>
-                            <option value="fr">French</option>
+                            {languages.map((lang, i) => {
+                                return (
+                                    <option key={i} value={lang.key}>{ lang.title }</option>
+                                );
+                            })}
                         </select>
                     </div>
                 </div>
@@ -105,65 +107,51 @@ class UserForm extends Component {
                              data-uk-grid-margin>
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon material-icons">
-                                                                    &#xE158;</i>
-                                                            </span>
-                                <label>Email</label>
-                                <input type="text" className="md-input" name="user_edit_email"
-                                       value=""/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon material-icons">
+                                        &#xE158;</i>
+                                </span>
+                                <Field name="email" type="text" validate={[required]} component={renderField} id="user_edit_email_control" className="md-input" label="Email"/>
                             </div>
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon material-icons">
-                                                                    &#xE0CD;</i>
-                                                            </span>
-                                <label>Phone Number</label>
-                                <input type="text" className="md-input" name="user_edit_phone"
-                                       value="1-236-879-2171x5473"/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon material-icons">
+                                        &#xE0CD;</i>
+                                </span>
+                                <Field name="detailData.mobile" type="text" validate={[required]} component={renderField} id="user_edit_phone_control" className="md-input" label="Phone Number"/>
                             </div>
 
                             <div>
                                 <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon uk-icon-facebook-official"></i>
-                                                            </span>
-                                    <label>Facebook</label>
-                                    <input type="text" className="md-input"
-                                           name="user_edit_facebook"
-                                           value="facebook.com/envato"/>
+                                    <span className="uk-input-group-addon">
+                                        <i className="md-list-addon-icon uk-icon-facebook-official"></i>
+                                    </span>
+                                    <Field name="detailData.facebook" type="text" validate={[required]} component={renderField} id="user_edit_facebook_control" className="md-input" label="Facebook"/>
                                 </div>
                             </div>
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon uk-icon-twitter"></i>
-                                                            </span>
-                                <label>Twitter</label>
-                                <input type="text" className="md-input" name="user_edit_twitter"
-                                       value="twitter.com/envato"/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon uk-icon-twitter"></i>
+                                </span>
+                                <Field name="detailData.twitter" type="text" validate={[required]} component={renderField} id="user_edit_twitter_control" className="md-input" label="Twitter"/>
                             </div>
 
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon uk-icon-linkedin"></i>
-                                                            </span>
-                                <label>Linkdin</label>
-                                <input type="text" className="md-input" name="user_edit_linkdin"
-                                       value="linkedin.com/company/envato"/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon uk-icon-linkedin"></i>
+                                </span>
+                                <Field name="detailData.linkdin" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Linkedin"/>
                             </div>
 
 
                             <div className="uk-input-group uk-margin-bottom">
-                                                            <span className="uk-input-group-addon">
-                                                                <i className="md-list-addon-icon uk-icon-google-plus"></i>
-                                                            </span>
-                                <label>Google+</label>
-                                <input type="text" className="md-input"
-                                       name="user_edit_google_plus"
-                                       value="plus.google.com/+envato/about"/>
+                                <span className="uk-input-group-addon">
+                                    <i className="md-list-addon-icon uk-icon-google-plus"></i>
+                                </span>
+                                <Field name="detailData.google" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Google"/>
                             </div>
                         </div>
                     </div>
@@ -175,96 +163,36 @@ class UserForm extends Component {
                     <a className="md-btn md-btn-danger" href="#">Cancel</a>
                     <button type="submit" className="md-btn md-btn-primary alignright" href="#">Save</button>
                 </div>
-                <div className="uk-grid-margin">
-                    <h3 className="full_width_in_card heading_c">
-                        Password reset
-                    </h3>
-                </div>
-                <div className="uk-grid-margin">
-                    <div className="uk-width-1-1">
-                        <div className="uk-grid-margin">
-                            <label>Old password</label>
-                            <input type="text" className="md-input"/>
-                        </div>
-                        <div className="uk-grid-margin">
-                            <label>New password</label>
-                            <input type="text" className="md-input"/>
-                        </div>
-                        <div className="uk-grid-margin">
-                            <label>Repeat new password</label>
-                            <input type="text" className="md-input"/>
-                        </div>
+            </div>
+        </div>
+    </form>
+    <form onSubmit={submitPassword}>
+        <div className="md-card-content">
+            <div className="uk-grid-margin">
+                <h3 className="full_width_in_card heading_c">
+                    Password reset
+                </h3>
+            </div>
+            <div className="uk-grid-margin">
+                <div className="uk-width-1-1">
+                    <div className="uk-grid-margin">
+                        <Field name="old_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Old password"/>
                     </div>
                     <div className="uk-grid-margin">
-                        <a className="md-btn md-btn-danger" href="#">Cancel</a>
-                        <a className="md-btn md-btn-primary alignright" href="#">Change password</a>
+                        <Field name="password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="New password"/>
                     </div>
+                    <div className="uk-grid-margin">
+                        <Field name="repeat_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Repeat new password"/>
+                    </div>
+                </div>
+                <div className="uk-grid-margin">
+                    <a className="md-btn md-btn-danger" href="#">Cancel</a>
+                    <button type="submit" className="md-btn md-btn-primary alignright" href="#">Change password</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-            // <div className="md-card">
-            //     <div className="md-card-content">
-            //         <div className="uk-margin-bottom" data-uk-margin>
-            //             <h1 className="heading_b uk-margin-bottom">{this.props.heading}</h1>
-            //         </div>
-            //         <hr/>
-            //         <div className="uk-grid">
-            //             <div className="uk-width-medium-1-2">
-            //                 <form onSubmit={handleSubmit}>
-
-            //                     <Field name="is_active" type="checkbox" validate={[]} component={renderField}
-            //                            label="Active"/>
-
-            //                     <Field name="title" type="text" validate={[required]} component={renderField}
-            //                            label="user name"/>
-
-            //                     <Field name="ico" type="text" validate={[number]} component={renderField}
-            //                            label="ICO"/>
-
-            //                     <Field name="dic" type="text" validate={[number]} component={renderField}
-            //                            label="DIC"/>
-
-            //                     <Field name="ic_dph" type="text" validate={[alphanum]} component={renderField}
-            //                            label="IC DPH"/>
-
-            //                     <Field name="phone" type="text" validate={[phone]} component={renderField}
-            //                            label="Phone"/>
-
-            //                     <Field name="street" type="text" validate={[]} component={renderField}
-            //                            label="Street"/>
-
-            //                     <Field name="city" type="text" validate={[]} component={renderField}
-            //                            label="City"/>
-
-            //                     <Field name="psc" type="text" validate={[alphanum]} component={renderField}
-            //                            label="PSC"/>
-
-            //                     <Field name="country" type="text" validate={[]} component={renderField}
-            //                            label="Country"/>
-
-
-            //                     <div className="uk-margin-medium-top">
-            //                         <div className="uk-text-danger">{formError}</div>
-            //                     </div>
-            //                     <div className="uk-margin-medium-top">
-
-            //                         {this.props.params.userId && <DeleteButton handleDelete={handleDelete}
-            //                                                                       id={parseInt(this.props.params.userId, 10)}/>}
-
-            //                         <button className="md-btn md-btn-primary alignright" type="submit">
-            //                             SAVE
-            //                         </button>
-            //                     </div>
-            //                 </form>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </div>
-
-
         );
     }
 }

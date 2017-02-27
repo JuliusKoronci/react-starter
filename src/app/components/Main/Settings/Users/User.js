@@ -15,7 +15,6 @@ class User extends Component {
         super(props, context);
         this.userConfig = configResolver.getUserConfig(props.params.userId);
         this.languages = languages.getList();
-        console.log('l',this.languages)
     }
 
     deleteHandler=(id)=>{
@@ -27,7 +26,6 @@ class User extends Component {
             this.props.actions.loadEntityById(this.props.params.userId, this.userConfig);
         }
         this.props.actions.requestRoles();
-        this.props.actions.loadEntityById();
     }
 
     submitHandler = (values) => {
@@ -40,9 +38,24 @@ class User extends Component {
         }
     };
 
+    passwordHandler = (values,e) => {
+    	alert('passwordHandler')
+    	NProgress.start();
+    	const old_password = '';
+    	const repeat_password = '';
+    	if (old_password !== repeat_password){
+    		return;
+    	}
+    	this.props.actions.updateEntity(this.props.params.userId, values, this.userConfig);
+    	console.log(values)
+    	e.preventDefault();
+    	e.stopPropagation();
+    	return false;
+    }
+
     render() {
         return (
-            <View formError={null} onSubmit={this.submitHandler} {...this.props} roles={this.props.roles} user={this.props.user} heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler} />
+            <View formError={null} onSubmit={this.submitHandler} passwordHandler={this.passwordHandler} {...this.props} roles={this.props.roles} languages={this.languages} user={this.props.user} heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler} />
         );
     }
 }

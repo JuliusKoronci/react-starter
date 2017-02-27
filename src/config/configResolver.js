@@ -1,6 +1,9 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived, userReceived, statusReceived, userAttributeReceived, taskAttributeReceived, unitReceived} from '../app/redux/actions/settings.action';
+
+
+import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, userReceived, unitReceived} from '../app/redux/actions/settings.action';
+
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
@@ -22,7 +25,7 @@ class configResolver {
             urlList: urls.USERS_LIST,
             afterEntityReceivedAction: userReceived,
             redirectAfterCreation: paths.companies,
-            allowedFormFields: ['username']
+            allowedFormFields: ['email','username','language','password']
             // 'city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip'
         }
     };
