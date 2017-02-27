@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
-import {renderField} from '../field.tpl';
+import {renderField, renderTextarea} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
 class UserForm extends Component {
@@ -15,11 +15,11 @@ class UserForm extends Component {
 
 
     render() {
-        const {submitData, submitPassword, formError, handleDelete, roles, user, languages} = this.props;
+        const {handleSubmit, submitData, submitPassword, formError, handleDelete, roles, user, languages} = this.props;
         return (
 
 <div className="md-card">
-    <form onSubmit={submitData}>
+    <form onSubmit={handleSubmit}>
         <div className="md-card-content">
             <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                 <div className="fileinput-new thumbnail">
@@ -80,8 +80,8 @@ class UserForm extends Component {
                 <div className="uk-grid">
                     <div className="uk-width-1-1">
                         <label>Signature</label>
-                        <textarea className="md-input" name="detailData.signature"
-                        id="user_edit_personal_info_control" cols="30" rows="4"></textarea>
+                        <Field name="detailData.signature" className="md-input" type="text" validate={[required]} component={renderTextarea}
+                               label="Signature"/>
                     </div>
                 </div>
                 <h3 className="full_width_in_card heading_c">
@@ -119,13 +119,13 @@ class UserForm extends Component {
                                     <i className="md-list-addon-icon material-icons">
                                         &#xE0CD;</i>
                                 </span>
-                                <Field name="detailData.mobile" type="text" validate={[required]} component={renderField} id="user_edit_phone_control" className="md-input" label="Phone Number"/>
+                                <Field name="detailData.tel" type="text" validate={[required]} component={renderField} id="user_edit_phone_control" className="md-input" label="Phone Number"/>
                             </div>
 
                             <div>
                                 <div className="uk-input-group uk-margin-bottom">
                                     <span className="uk-input-group-addon">
-                                        <i className="md-list-addon-icon uk-icon-facebook-official"></i>
+                                        <i className="md-list-addon-icon uk-icon-facebook-official" />
                                     </span>
                                     <Field name="detailData.facebook" type="text" validate={[required]} component={renderField} id="user_edit_facebook_control" className="md-input" label="Facebook"/>
                                 </div>
@@ -133,7 +133,7 @@ class UserForm extends Component {
 
                             <div className="uk-input-group uk-margin-bottom">
                                 <span className="uk-input-group-addon">
-                                    <i className="md-list-addon-icon uk-icon-twitter"></i>
+                                    <i className="md-list-addon-icon uk-icon-twitter"/>
                                 </span>
                                 <Field name="detailData.twitter" type="text" validate={[required]} component={renderField} id="user_edit_twitter_control" className="md-input" label="Twitter"/>
                             </div>
@@ -141,7 +141,7 @@ class UserForm extends Component {
 
                             <div className="uk-input-group uk-margin-bottom">
                                 <span className="uk-input-group-addon">
-                                    <i className="md-list-addon-icon uk-icon-linkedin"></i>
+                                    <i className="md-list-addon-icon uk-icon-linkedin"/>
                                 </span>
                                 <Field name="detailData.linkdin" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Linkedin"/>
                             </div>
@@ -149,7 +149,7 @@ class UserForm extends Component {
 
                             <div className="uk-input-group uk-margin-bottom">
                                 <span className="uk-input-group-addon">
-                                    <i className="md-list-addon-icon uk-icon-google-plus"></i>
+                                    <i className="md-list-addon-icon uk-icon-google-plus"/>
                                 </span>
                                 <Field name="detailData.google" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Google"/>
                             </div>
@@ -166,7 +166,8 @@ class UserForm extends Component {
             </div>
         </div>
     </form>
-    <form onSubmit={submitPassword}>
+
+    {/*<form onSubmit={submitPassword}>*/}
         <div className="md-card-content">
             <div className="uk-grid-margin">
                 <h3 className="full_width_in_card heading_c">
@@ -176,13 +177,13 @@ class UserForm extends Component {
             <div className="uk-grid-margin">
                 <div className="uk-width-1-1">
                     <div className="uk-grid-margin">
-                        <Field name="old_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Old password"/>
+                        {/*<Field name="old_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Old password"/>*/}
                     </div>
                     <div className="uk-grid-margin">
-                        <Field name="password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="New password"/>
+                        {/*<Field name="password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="New password"/>*/}
                     </div>
                     <div className="uk-grid-margin">
-                        <Field name="repeat_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Repeat new password"/>
+                        {/*<Field name="repeat_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Repeat new password"/>*/}
                     </div>
                 </div>
                 <div className="uk-grid-margin">
@@ -191,7 +192,7 @@ class UserForm extends Component {
                 </div>
             </div>
         </div>
-    </form>
+    {/*</form>*/}
 </div>
         );
     }
