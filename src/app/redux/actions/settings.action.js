@@ -119,6 +119,13 @@ export function taskAttributesReceived(response) {
     }
 }
 
+export function taskAttributeReceived(data) {
+    return {
+        type: constants.TASKATTRIBUTE_RECEIVED,
+        data
+    }
+}
+
 export function requestImaps(url) {
     return {
         type: constants.REQUEST_IMAPS,

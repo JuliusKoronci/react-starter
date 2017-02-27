@@ -26,8 +26,8 @@ import Smtps from '../app/components/Main/Settings/Smtps/Smtps';
 import Smtp from '../app/components/Main/Settings/Smtps/Smtp';
 import Statuses from '../app/components/Main/Settings/Statuses/Statuses';
 import Status from '../app/components/Main/Settings/Statuses/Status';
-import TaskCustomFields from '../app/components/Main/Settings/TaskAttributes/TaskAttributes';
-import TaskCustomField from '../app/components/Main/Settings/TaskAttributes/TaskCustomField';
+import TaskAttributes from '../app/components/Main/Settings/TaskAttributes/TaskAttributes';
+import TaskAttribute from '../app/components/Main/Settings/TaskAttributes/TaskAttribute';
 import Trigers from '../app/components/Main/Settings/Trigers/Trigers';
 import Triger from '../app/components/Main/Settings/Trigers/Triger';
 import Units from '../app/components/Main/Settings/Units/Units';
@@ -76,8 +76,9 @@ export const paths = {
     'statuses_add':'/settings/statuses/add',
     'statuses_edit':'/settings/statuses/:statusId',
     'statuses':'/settings/statuses',
-    'task_custom_fields_add':'/settings/task-custom-fields/add',
-    'task_custom_fields':'/settings/task-custom-fields',
+    'task_attributes_add':'/settings/task-attributes/add',
+    'task_attributes_edit':'/settings/task-attributes/:taskAttributeId',
+    'task_attributes':'/settings/task-attributes',
     'triggers_add':'/settings/trigers/add',
     'triggers':'/settings/trigers',
     'units_add':'/settings/units/add',
@@ -153,8 +154,9 @@ export default (
             <Route name="status" path={paths.statuses_edit} component={Status}/>
             <Route name="statuses" path={paths.statuses} component={Statuses}/>
 
-            <Route name="task-custom-field" path={paths.task_custom_fields_add} component={TaskCustomField}/>
-            <Route name="task-custom-fields" path={paths.task_custom_fields} component={TaskCustomFields}/>
+            <Route name="task-attribute" path={paths.task_attributes_add} component={TaskAttribute}/>
+            <Route name="task-attribute" path={paths.task_attributes_edit} component={TaskAttribute}/>
+            <Route name="task-attribute" path={paths.task_attributes} component={TaskAttributes}/>
 
             <Route name="triger" path={paths.triggers_add} component={Triger}/>
             <Route name="trigers" path={paths.triggers} component={Trigers}/>

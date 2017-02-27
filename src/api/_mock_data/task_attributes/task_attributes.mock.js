@@ -3,7 +3,7 @@ const taskAttributes =
     "data":
         [
             {
-                "id": "1",
+                "id": 1,
                 "title": "Input task additional attribute",
                 "type": "input",
                 "options": null,
