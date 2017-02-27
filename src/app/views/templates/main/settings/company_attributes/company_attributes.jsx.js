@@ -43,7 +43,7 @@ const CompanyAttributes = (props) => {
                                 <td className="uk-text-center">{companyAttribute.type}</td>
                                 <td className="uk-text-center">{companyAttribute.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
-                                    {companyAttribute.is_active && <DeleteButton handleDelete={props.handleDelete} id={companyAttribute.id} />}
+
                                     <Link to={generateRoute('companies_attributes_edit',{companyAttributeId:companyAttribute.id})} className="md-btn md-btn-primary" >Edit</Link>
                                 </td>
                             </tr>

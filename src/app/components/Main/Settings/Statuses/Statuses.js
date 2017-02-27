@@ -3,16 +3,27 @@ import View from '../../../../views/templates/main/settings/statuses/statuses.js
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
+import * as generalActions from '../../../../redux/actions/general.action';
+import configResolver from '../../../../../config/configResolver';
 
 class Statuses extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+        this.statusConfig = configResolver.getStatusConfig(props.params.statusId);
+    }
 
     componentWillMount() {
         this.props.actions.requestStatuses();
     }
 
+    deleteHandler=(id)=>{
+        this.props.actions.deleteEntity(id, this.statusConfig);
+    };
+
     render() {
         return (
-            <View {...this.props.statuses} loadStatuses={this.props.actions.requestStatuses}/>
+            <View {...this.props.statuses} loadStatuses={this.props.actions.requestStatuses} handleDelete={this.deleteHandler} />
         );
     }
 }
@@ -28,7 +39,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions}, dispatch)
+        actions: bindActionCreators({...actions, ...generalActions}, dispatch)
     };
 }
 

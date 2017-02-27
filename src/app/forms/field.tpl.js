@@ -1,26 +1,100 @@
 import React from 'react';
 
-export const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
+
+import RTE from '../forms/general/rte/RTE.form';
+import Tagger from '../forms/general/Tagger.form';
+import Colorpicker from '../forms/general/Colorpicker.form';
+
+export const renderField = ({input, label, type, actions, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
         <label htmlFor={input.name}>{label}</label>
-        <input className="md-input" {...input} type={type}/>
+        <input className="md-input" {...input} type={type} {...actions} />
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
     </div>
 );
 
-// export const renderSelect = ({input, label, type, meta: {touched, error, warning}}) => (
-//     <div className="uk-form-row">
-//         <label htmlFor={input.name}>{label}</label>
-//         <select value={defaultValue} onChange={action} className="md-input" {...input}>
-//             <option value={false}>Select {label}...</option>
-//             {options.map((option, i) => {
-//                 return <option key={i} value={option.id}>{option.title}</option>
-//             })}
-//         </select>
-//         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-//     </div>
-// );
-//
+
+
+
+export const renderColorpicker = ({input, label, type, meta: {touched, error, warning}}) => (
+    <div className="uk-form-row">
+        <label htmlFor={input.name}>{label}</label>
+        <Colorpicker input={input}  />
+        {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
+    </div>
+);
+
+export const renderRTE = ({input, label, type, meta: {touched, error, warning}}) => (
+    <div className="uk-form-row">
+        <RTE fieldName={input.name} label={label} {...input}  />
+        {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
+    </div>
+);
+
+export const renderTextarea = ({input, label, type, meta: {touched, error, warning}}) => (
+    <div className="uk-form-row">
+        <label htmlFor={input.name}>{label}</label>
+        <div>
+        <textarea {...input} />
+        {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
+    </div>
+    </div>
+);
+
+
+export const renderSelect = ({input, options, label, action, meta: {touched, error, warning}}) => (
+    <div className="uk-form-row">
+        <label htmlFor={input.name}>{label}</label>
+        {/*<select value={input.defaultValue} className="md-input" {...input} onChange={action.bind(null)} onClick={action.bind(null)} >*/}
+        {/*<select value={input.defaultValue} className="md-input" {...input} onChange={(action ? action.bind(null):null)} onClick={(action ? action.bind(null):null)} >/*/}
+            <select value={input.defaultValue} className="md-input" {...input} >
+            <option value={false}>Select {label}...</option>
+            {options.map((option, i) => {
+                return <option key={i} value={option.id}>{option.title}</option>
+            })}
+        </select>
+        {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+    </div>
+);
+
+
+export const renderTagger = ({input,tagValues,defaultOptions,label,icon,action,setValues}) => {
+
+
+
+    {/*<div className="uk-input-group" style={{marginTop: '10px'}}>*/}
+        {/*{icon && <span className="uk-input-group-addon"><i className="material-icons">&#xE893;</i></span>}*/}
+        {/*<label htmlFor={input.name}>{label}</label>*/}
+        {/*<Creatable name={input.name}*/}
+                   {/*className="md-input"*/}
+                   {/*value={tagValues}*/}
+                   {/*joinValues={true}*/}
+                   {/*multi={true}*/}
+                   {/*options={defaultOptions}*/}
+                   {/*onChange={input.onChange(input.value)}*/}
+
+                   {/*{...input}*/}
+        {/*/>*/}
+    {/*</div>*/}
+
+    return (
+
+        <div>
+        <Tagger input={input} />
+        </div>
+
+    );
+};
+
+
+
+// export const renderSelect = ({input, label, type, options, defaultValue, action, meta: {touched, error, warning}}) => (
+// <div className="uk-form-row">
+//     <label htmlFor={input.name}>{label}</label>
+//     <select value={defaultValue} onChange={action.bind(null)} onClick={action.bind(null)} className="md-input" {...input}>
+//         <option value={false}>Select {label}...</option>
+//         {options.map((option, i) => {
+//             return <option key={i} value={option.value}>{option.title}</option>
 //
 // const Select = ({options, action, defaultValue, label, icon}) => {
 //     return (
@@ -36,3 +110,4 @@ export const renderField = ({input, label, type, meta: {touched, error, warning}
 //     </div>
 //     );
 // };
+

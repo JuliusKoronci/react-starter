@@ -26,10 +26,10 @@ const sidebar = ({filter}) => {
                     {filter.map((filt, i) => {
                         return (
                             <li key={i} title="FILTER">
-                                <a href="#">
+                                <Link to={'/dashboard/' + filt.id}>
                                     <span className="menu_icon"><i className="material-icons">&#xE152;</i></span>
                                     <span className="menu_title">{filt.title}</span>
-                                </a>
+                                </Link>
                             </li>
                         );
                     })}

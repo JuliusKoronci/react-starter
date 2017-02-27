@@ -1,18 +1,19 @@
-import React, {Component} from 'react';
-import View from '../../../../forms/Settings/CompanyAttribute.form';
+import React, { Component} from 'react';
+import View from '../../../../forms/Settings/TaskAttribute.form';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
 import * as generalActions from '../../../../redux/actions/general.action';
-import NProgress from '../../../../../../node_modules/nprogress/nprogress';
 import configResolver from '../../../../../config/configResolver';
 
-class CompanyAttribute extends Component {
+
+class TaskAttribute extends Component {
+
 
     constructor(props, context) {
         super(props, context);
-        this.entityId=props.params.companyAttributeId;
-        this.entityConfig = configResolver.getCompanyAttributesConfig(this.entityId);
+        this.entityId=props.params.taskAttributeId;
+        this.entityConfig = configResolver.getTaskAttributesConfig(this.entityId);
         this.customAttributeTypes=[
             {id:'input',title:'Input',},
             {id:'text_area',title:'Text area'},
@@ -29,13 +30,13 @@ class CompanyAttribute extends Component {
         this.props.actions.deleteEntity(this.entityId, this.entityConfig);
     };
 
+
     componentWillMount() {
-        if (this.entityId && !this.props.companyAttribute) {
+        if (this.entityId && !this.props.taskAttribute) {
             this.props.actions.loadEntityById(this.entityId, this.entityConfig);
         }
 
     }
-
     setCustomValues = (values) => {
         console.log('set values '+values);
         this.setState({
@@ -54,17 +55,17 @@ class CompanyAttribute extends Component {
     render() {
         return (
             <View formError={null} onSubmit={this.onSubmit} {...this.props} setCustomValues={this.setCustomValues} config={this.entityConfig}
-        heading={this.props.companyAttribute ? "Edit company attribute" : "Add company attribute"} handleDelete={this.deleteHandler} customAttributeTypes={this.customAttributeTypes}  />
+                  heading={this.props.companyAttribute ? "Edit task attribute" : "Add task attribute"} handleDelete={this.deleteHandler} customAttributeTypes={this.customAttributeTypes} />
         );
     }
 }
 
 
 function mapStateToProps(state, ownProps) {
-    const companyAttributeId = ownProps.params.companyAttributeId;
-    const companyAttribute = state.companyAttributes.data.filter((companyAttribute) => parseInt(companyAttribute.id, 10) === parseInt(companyAttributeId, 10));
+    const taskAttributeId = ownProps.params.taskAttributeId;
+    const taskAttribute = state.taskAttributes.data.filter((taskAttribute) => parseInt(taskAttribute.id, 10) === parseInt(taskAttributeId, 10));
     return {
-        companyAttribute: companyAttribute.length > 0 ? companyAttribute[0] : false,
+        companyAttribute: taskAttribute.length > 0 ? taskAttribute[0] : false,
     };
 
 }
@@ -75,6 +76,5 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyAttribute);
-
+export default connect(mapStateToProps, mapDispatchToProps)(TaskAttribute);
 
