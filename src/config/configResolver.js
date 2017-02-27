@@ -43,7 +43,7 @@ class configResolver {
             urlList: urls.UNITS_LIST,
             afterEntityReceivedAction: unitReceived,
             redirectAfterCreation: paths.units,
-            allowedFormFields: ['title', 'shortcut']
+            allowedFormFields: ['title', 'shortcut','is_active']
         }
     };
 

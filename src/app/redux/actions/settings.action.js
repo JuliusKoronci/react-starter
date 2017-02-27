@@ -187,6 +187,14 @@ export function unitsReceived(response) {
         response
     }
 }
+
+export function unitReceived(data) {
+    return {
+        type: constants.UNIT_RECEIVED,
+        data
+    }
+}
+
 export function requestUserAttributes(url) {
     return {
         type: constants.REQUEST_USERATTRIBUTES,

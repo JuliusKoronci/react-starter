@@ -18,7 +18,7 @@ class UnitForm extends Component {
                         <hr/>
                         <div className="uk-width-medium-1-2">
                             <div className="uk-margin-bottom">
-                                <Field type="checkbox" name="active" validate={[]} component={renderField}/>
+                                <Field type="checkbox" name="is_active" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">Active</label>
                             </div>
                             <div className="uk-margin-bottom">
@@ -26,11 +26,10 @@ class UnitForm extends Component {
                                 <Field type="text" name="title" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Description</label>
+                                <label>Shortcut</label>
                                 <Field type="text" name="shortcut" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <a className="md-btn md-btn-danger" href="#">Delete</a>
                                 <button className="md-btn md-btn-primary alignright" href="settings_units.html">Save</button>
                             </div>
                         </div>
@@ -43,7 +42,7 @@ class UnitForm extends Component {
 
 function mapStateToProps(state, ownProps) {
     const unitId = ownProps.params.unitId;
-    const unit = state.imaps.data.filter((unit) => parseInt(unit.id, 10) === parseInt(unitId, 10));
+    const unit = state.units.data.filter((unit) => parseInt(unit.id, 10) === parseInt(unitId, 10));
 
     if (unit.length > 0) {
         return {

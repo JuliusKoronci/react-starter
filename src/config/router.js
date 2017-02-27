@@ -81,6 +81,7 @@ export const paths = {
     'triggers_add':'/settings/trigers/add',
     'triggers':'/settings/trigers',
     'units_add':'/settings/units/add',
+    'units_edit':'/settings/units/:unitId',
     'units':'/settings/units',
     'users_add':'/settings/users/add',
     'users':'/settings/users',
@@ -159,6 +160,7 @@ export default (
             <Route name="trigers" path={paths.triggers} component={Trigers}/>
 
             <Route name="unit" path={paths.units_add} component={Unit}/>
+            <Route name="unit" path={paths.units_edit} component={Unit}/>
             <Route name="units" path={paths.units} component={Units}/>
 
             <Route name="user" path={paths.users_add} component={User}/>

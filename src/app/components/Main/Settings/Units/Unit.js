@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
 import * as generalActions from '../../../../redux/actions/general.action';
-import * as systemActions from  '../../../../redux/actions/system.actions';
-import NProgress from '../../../../../../node_modules/nprogress/nprogress';
 import configResolver from '../../../../../config/configResolver';
 
 class UnitForm extends Component {
@@ -22,7 +20,6 @@ class UnitForm extends Component {
     }
 
     onSubmit = (values) => {
-        NProgress.start();
         if (this.props.params.unitId) {
             this.props.actions.updateEntity(this.props.params.unitId, values, this.unitConfig);
         } else {
@@ -42,10 +39,8 @@ class UnitForm extends Component {
 function mapStateToProps(state, ownProps) {
     const unitId = ownProps.params.unitId;
     const unit = state.units.data.filter((unit) => parseInt(unit.id, 10) === parseInt(unitId, 10));
-    const projects = [{key:1,title:'Foo'}]; //state.projects.data;
     return {
         unit: unit.length > 0 ? unit[0] : false,
-        projects: projects
     };
 
 }
