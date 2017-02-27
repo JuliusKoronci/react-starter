@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import { Creatable } from 'react-select';
+import Select from 'react-select';
 
 const Filter = (prop) => {
     return (
@@ -43,10 +45,15 @@ const Filter = (prop) => {
                                             <label className="uk_dp1 uk-text-muted">Column</label>
                                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                         </span>
-                                <select id="kUI_multiselect_basic" multiple="multiple" data-placeholder="Select status...">
-                                    <option>NEW</option>
-                                    <option>SOLVED</option>
-                                </select>
+
+                                <Creatable name="Status"
+                                           className="md-input"
+                                           joinValues={true}
+                                           multi={true}
+                                           options={[{value:"NEW"},{value:"OLD"}]}
+
+                                />
+
                             </form>
 
                             <form className="uk-form-stacked">
