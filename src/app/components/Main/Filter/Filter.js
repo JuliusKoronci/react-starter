@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import View from '../../../../views/templates/main/settings/automated_tasks/automated_tasks.jsx.js';
+import View from '../../../views/templates/main/filter/filter.jsx';
 
-class AutomatedTasks extends Component {
+class Filter extends Component {
 
     render() {
         return (
@@ -12,4 +12,4 @@ class AutomatedTasks extends Component {
 
 
 
-export default AutomatedTasks;
+export default Filter;

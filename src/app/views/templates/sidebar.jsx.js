@@ -11,7 +11,16 @@ const sidebar = ({filter}) => {
                     </Link>
                 </div>
             </div>
-
+            <div className="menu_section">
+                <ul>
+                    <li>
+                        <Link to='/filter' className="uk-text-large">
+                            <span className="menu_icon"><i className="material-icons">&#xE152;</i></span>
+                            <span className="menu_title">FILTER</span>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
             <div className="menu_section">
                 <ul>
                     {filter.map((filt, i) => {
