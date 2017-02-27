@@ -3,7 +3,7 @@ const userAttributes =
     "data":
         [
             {
-                "id": "1",
+                "id": 1,
                 "title": "Input user additional attribute",
                 "type": "input",
                 "options": null,

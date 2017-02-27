@@ -26,8 +26,8 @@ import Smtps from '../app/components/Main/Settings/Smtps/Smtps';
 import Smtp from '../app/components/Main/Settings/Smtps/Smtp';
 import Statuses from '../app/components/Main/Settings/Statuses/Statuses';
 import Status from '../app/components/Main/Settings/Statuses/Status';
-import TaskCustomFields from '../app/components/Main/Settings/TaskAttributes/TaskAttributes';
-import TaskCustomField from '../app/components/Main/Settings/TaskAttributes/TaskCustomField';
+import TaskAttributes from '../app/components/Main/Settings/TaskAttributes/TaskAttributes';
+import TaskAttribute from '../app/components/Main/Settings/TaskAttributes/TaskAttribute';
 import Trigers from '../app/components/Main/Settings/Trigers/Trigers';
 import Triger from '../app/components/Main/Settings/Trigers/Triger';
 import Units from '../app/components/Main/Settings/Units/Units';
@@ -35,7 +35,7 @@ import Unit from '../app/components/Main/Settings/Units/Unit';
 import Users from '../app/components/Main/Settings/Users/Users';
 import User from '../app/components/Main/Settings/Users/User';
 import UserCustomFields from '../app/components/Main/Settings/UserCustomFields/UserAttributes';
-import UserCustomField from '../app/components/Main/Settings/UserCustomFields/UserCustomField';
+import UserCustomField from '../app/components/Main/Settings/UserCustomFields/UserAttribute';
 import ReportsCompanies from '../app/components/Main/Reports/Companies/ReportsCompanies';
 import ReportCompany from '../app/components/Main/Reports/Companies/ReportCompany';
 import ReportsUsers from '../app/components/Main/Reports/Users/ReportsUsers';
@@ -77,8 +77,9 @@ export const paths = {
     'statuses_add':'/settings/statuses/add',
     'statuses_edit':'/settings/statuses/:statusId',
     'statuses':'/settings/statuses',
-    'task_custom_fields_add':'/settings/task-custom-fields/add',
-    'task_custom_fields':'/settings/task-custom-fields',
+    'task_attributes_add':'/settings/task-attributes/add',
+    'task_attributes_edit':'/settings/task-attributes/:taskAttributeId',
+    'task_attributes':'/settings/task-attributes',
     'triggers_add':'/settings/trigers/add',
     'triggers':'/settings/trigers',
     'units_add':'/settings/units/add',
@@ -86,6 +87,7 @@ export const paths = {
     'users_add':'/settings/users/add',
     'users':'/settings/users',
     'user_custom_fields_add':'/settings/user-custom-fields/add',
+    'user_custom_fields_edit':'/settings/user-custom-fields/:userAttributeId',
     'user_custom_fields':'/settings/user-custom-fields',
     'reports_companies':'/reports/companies',
     'report_company':'/reports/company',
@@ -154,8 +156,9 @@ export default (
             <Route name="status" path={paths.statuses_edit} component={Status}/>
             <Route name="statuses" path={paths.statuses} component={Statuses}/>
 
-            <Route name="task-custom-field" path={paths.task_custom_fields_add} component={TaskCustomField}/>
-            <Route name="task-custom-fields" path={paths.task_custom_fields} component={TaskCustomFields}/>
+            <Route name="task-attribute" path={paths.task_attributes_add} component={TaskAttribute}/>
+            <Route name="task-attribute" path={paths.task_attributes_edit} component={TaskAttribute}/>
+            <Route name="task-attribute" path={paths.task_attributes} component={TaskAttributes}/>
 
             <Route name="triger" path={paths.triggers_add} component={Triger}/>
             <Route name="trigers" path={paths.triggers} component={Trigers}/>
@@ -167,6 +170,7 @@ export default (
             <Route name="users" path={paths.users} component={Users}/>
 
             <Route name="user-custom-field" path={paths.user_custom_fields_add} component={UserCustomField}/>
+            <Route name="user-custom-field" path={paths.user_custom_fields_edit}  component={UserCustomField}/>
             <Route name="user-custom-fields" path={paths.user_custom_fields} component={UserCustomFields}/>
 
             <Route name="reports-companies" path={paths.reports_companies} component={ReportsCompanies}/>
