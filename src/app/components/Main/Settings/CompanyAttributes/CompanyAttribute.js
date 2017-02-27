@@ -13,6 +13,16 @@ class CompanyAttribute extends Component {
         super(props, context);
         this.entityId=props.params.companyAttributeId;
         this.entityConfig = configResolver.getCompanyAttributesConfig(this.entityId);
+        this.customAttributeTypes=[
+            {id:'input',title:'Input',},
+            {id:'text_area',title:'Text area'},
+            {id:'simple_select',title:'Simple select'},
+            {id:'multi_select',title:'Multiselect'},
+            {id:'checkbox',title:'Checkbox'},
+            {id:'date',title:'Date'},
+            {id:'integer_number',title:'Number'},
+            {id:'decimal_number',title:'Decimal number'}
+        ];
     }
 
     deleteHandler=(id)=>{
@@ -35,12 +45,8 @@ class CompanyAttribute extends Component {
 
     onSubmit = (values) => {
         if (this.entityId) {
-            // alert('would update');
-            // console.log(values);
             this.props.actions.updateEntity(this.entityId, values, this.entityConfig);
         } else {
-            // alert('would create');
-            // console.log(values);
             this.props.actions.createEntity(values,this.entityConfig);
         }
     };
@@ -48,7 +54,7 @@ class CompanyAttribute extends Component {
     render() {
         return (
             <View formError={null} onSubmit={this.onSubmit} {...this.props} setCustomValues={this.setCustomValues} config={this.entityConfig}
-        heading={this.props.companyAttribute ? "Edit company attribute" : "Add company attribute"} handleDelete={this.deleteHandler} />
+        heading={this.props.companyAttribute ? "Edit company attribute" : "Add company attribute"} handleDelete={this.deleteHandler} customAttributeTypes={this.customAttributeTypes}  />
         );
     }
 }
