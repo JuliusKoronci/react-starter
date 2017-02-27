@@ -1,8 +1,9 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived, userReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, companyAttributeReceived, userReceived, statusReceived, userAttributeReceived, taskAttributeReceived, unitReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
+import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 
 class configResolver {
     static getCompanyConfig = (id) => {
@@ -32,9 +33,77 @@ class configResolver {
             urlList: urls.COMPANYATTRIBUTES_LIST,
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
-            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip']
+            allowedFormFields: ['title', 'description','options','type','is_active'],
+            customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };
+
+    static getTaskAttributesConfig = (id) => {
+        return {
+            url: id ? urls.TASKATTRIBUTES_LIST + '/' + id : urls.TASKATTRIBUTES_LIST,
+            urlList: urls.TASKATTRIBUTES_LIST,
+            afterEntityReceivedAction: taskAttributeReceived,
+            redirectAfterCreation: paths.task_attributes,
+            allowedFormFields: ['title','options','type','description','is_active'],
+            customValuesEnabledOn:['multi_select','checkbox','simple_select']
+        }
+    };
+
+    static getUserAttributesConfig = (id) => {
+        return {
+            url: id ? urls.USERATTRIBUTES_LIST + '/' + id : urls.USERATTRIBUTES_LIST,
+            urlList: urls.USERATTRIBUTES_LIST,
+            afterEntityReceivedAction: userAttributeReceived,
+            redirectAfterCreation: paths.user_attributes,
+            allowedFormFields: ['title', 'description','options','type','is_active'],
+            customValuesEnabledOn:['multi_select','checkbox','simple_select']
+        }
+    };
+
+    static getStatusConfig = (id) => {
+        return {
+            url: id ? urls.STATUSES_LIST + '/' + id : urls.STATUSES_LIST,
+            urlList: urls.STATUSES_LIST,
+            afterEntityReceivedAction: statusReceived,
+            redirectAfterCreation: paths.statuses,
+            allowedFormFields: ['title', 'description', 'color']
+        }
+    };
+
+    static getUnitConfig = (id) => {
+        return {
+            url: id ? urls.UNITS_LIST + '/' + id : urls.UNITS_LIST,
+            urlList: urls.UNITS_LIST,
+            afterEntityReceivedAction: unitReceived,
+            redirectAfterCreation: paths.units,
+            allowedFormFields: ['title', 'shortcut','is_active']
+        }
+    };
+
+    static getProfileConfig = (id) => {
+        return {
+            id:id?id:null,
+            url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            urlList: urls.USERS_LIST,
+            uploadUrl: urls.FILE_UPLOAD,
+            // allowedFormFields: ['email','detailData.google','detail_data.google'],
+            remapValues:{'email':'email','username':'username','detailData.function':'detail_data[function]',
+            'detailData.name':'detail_data[name]','detailData.surname':'detail_data[surname]','detailData.signature':'detail_data[signature]',
+            'detailData.tel':'detail_data[tel]','detailData.facebook':'detail_data[facebook]','detailData.twitter':'detail_data[twitter]',
+            'detailData.linkdin':'detail_data[linkdin]','detailData.google':'detail_data[google]','language':'language'},
+            afterEntityReceivedAction: profileReceived
+        }
+    };
+
+    static getProfileAvatarConfig = (id) => {
+        return {
+            id:id?id:null,
+            url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            uploadUrl: urls.FILE_UPLOAD,
+            remapValues:{'image':'image'},
+        }
+    };
+
 
     static deleteTaskAttachment(taskId, slug) {
         return {

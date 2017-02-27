@@ -3,8 +3,19 @@ import View from '../../../../views/templates/main/settings/task_attributes/task
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
+import * as generalActions from '../../../../redux/actions/general.action';
+import configResolver from '../../../../../config/configResolver';
 
 class TaskAttributes extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+        this.entityConfig = configResolver.getTaskAttributesConfig(props.params.taskAttributeId);
+    }
+
+    deleteHandler=(id)=>{
+        this.props.actions.deleteEntity(id, this.entityConfig);
+    };
 
     componentWillMount() {
         this.props.actions.requestTaskAttributes();
@@ -12,7 +23,7 @@ class TaskAttributes extends Component {
 
     render() {
         return (
-            <View {...this.props.taskAttributes} loadTaskAttributes={this.props.actions.requestTaskAttributes}/>
+            <View {...this.props.taskAttributes} loadTaskAttributes={this.props.actions.requestTaskAttributes} handleDelete={this.deleteHandler} />
         );
     }
 }
@@ -28,7 +39,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions}, dispatch)
+        actions: bindActionCreators({...actions, ...generalActions}, dispatch)
     };
 }
 

@@ -70,6 +70,12 @@ export function statusesReceived(response) {
     }
 }
 
+export function statusReceived(data) {
+    return {
+        type: constants.STATUS_RECEIVED,
+        data
+    }
+}
 
 export function requestRoles(url) {
     return {
@@ -117,6 +123,13 @@ export function taskAttributesReceived(response) {
     return {
         type: constants.TASKATTRIBUTES_RECEIVED,
         response
+    }
+}
+
+export function taskAttributeReceived(data) {
+    return {
+        type: constants.TASKATTRIBUTE_RECEIVED,
+        data
     }
 }
 
@@ -188,10 +201,25 @@ export function unitsReceived(response) {
         response
     }
 }
+
+export function unitReceived(data) {
+    return {
+        type: constants.UNIT_RECEIVED,
+        data
+    }
+}
+
 export function requestUserAttributes(url) {
     return {
         type: constants.REQUEST_USERATTRIBUTES,
         url
+    }
+}
+
+export function userAttributeReceived(data) {
+    return {
+        type: constants.USERATTRIBUTE_RECEIVED,
+        data
     }
 }
 

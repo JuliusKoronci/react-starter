@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import View from '../../../../forms/Settings/CompanyAttribute.form';
+import View from '../../../../forms/Settings/UserAttribute.form';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
@@ -7,22 +7,12 @@ import * as generalActions from '../../../../redux/actions/general.action';
 import NProgress from '../../../../../../node_modules/nprogress/nprogress';
 import configResolver from '../../../../../config/configResolver';
 
-class CompanyAttribute extends Component {
+class UserAttribute extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.entityId=props.params.companyAttributeId;
-        this.entityConfig = configResolver.getCompanyAttributesConfig(this.entityId);
-        this.customAttributeTypes=[
-            {id:'input',title:'Input',},
-            {id:'text_area',title:'Text area'},
-            {id:'simple_select',title:'Simple select'},
-            {id:'multi_select',title:'Multiselect'},
-            {id:'checkbox',title:'Checkbox'},
-            {id:'date',title:'Date'},
-            {id:'integer_number',title:'Number'},
-            {id:'decimal_number',title:'Decimal number'}
-        ];
+        this.entityId=props.params.userAttributeId;
+        this.entityConfig = configResolver.getUserAttributesConfig(this.entityId);
     }
 
     deleteHandler=(id)=>{
@@ -30,7 +20,7 @@ class CompanyAttribute extends Component {
     };
 
     componentWillMount() {
-        if (this.entityId && !this.props.companyAttribute) {
+        if (this.entityId && !this.props.userAttribute) {
             this.props.actions.loadEntityById(this.entityId, this.entityConfig);
         }
 
@@ -45,8 +35,12 @@ class CompanyAttribute extends Component {
 
     onSubmit = (values) => {
         if (this.entityId) {
+            // alert('would update');
+            // console.log(values);
             this.props.actions.updateEntity(this.entityId, values, this.entityConfig);
         } else {
+            // alert('would create');
+            // console.log(values);
             this.props.actions.createEntity(values,this.entityConfig);
         }
     };
@@ -54,17 +48,17 @@ class CompanyAttribute extends Component {
     render() {
         return (
             <View formError={null} onSubmit={this.onSubmit} {...this.props} setCustomValues={this.setCustomValues} config={this.entityConfig}
-        heading={this.props.companyAttribute ? "Edit company attribute" : "Add company attribute"} handleDelete={this.deleteHandler} customAttributeTypes={this.customAttributeTypes}  />
+        heading={this.props.userAttribute ? "Edit user attribute" : "Add user attribute"} handleDelete={this.deleteHandler} />
         );
     }
 }
 
 
 function mapStateToProps(state, ownProps) {
-    const companyAttributeId = ownProps.params.companyAttributeId;
-    const companyAttribute = state.companyAttributes.data.filter((companyAttribute) => parseInt(companyAttribute.id, 10) === parseInt(companyAttributeId, 10));
+    const userAttributeId = ownProps.params.userAttributeId;
+    const userAttribute = state.userAttributes.data.filter((userAttribute) => parseInt(userAttribute.id, 10) === parseInt(userAttributeId, 10));
     return {
-        companyAttribute: companyAttribute.length > 0 ? companyAttribute[0] : false,
+        userAttribute: userAttribute.length > 0 ? userAttribute[0] : false,
     };
 
 }
@@ -75,6 +69,6 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyAttribute);
+export default connect(mapStateToProps, mapDispatchToProps)(UserAttribute);
 
 

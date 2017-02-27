@@ -3,10 +3,9 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required} from '../../../config/validation';
 import {renderField, renderSelect, renderTagger} from '../field.tpl';
-import Tag from '../../forms/tagger.jsx';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
-class CompanyAttributeForm extends Component {
+class UserAttributeForm extends Component {
 
     constructor(props, context){
         super(props, context);
@@ -35,8 +34,8 @@ class CompanyAttributeForm extends Component {
         alert('set custom values');
         console.log(values);
         this.setState({'optionValues':values});
-        if(this.props.companyAttribute){
-            this.props.companyAttribute.options=values;
+        if(this.props.userAttribute){
+            this.props.userAttribute.options=values;
         }
 
 
@@ -48,8 +47,16 @@ class CompanyAttributeForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, setCustomValues, customAttributeTypes} = this.props;
+        const {handleSubmit, formError, handleDelete, setCustomValues} = this.props;
 
+        const options=[
+            {id:'input',title:'Input',},
+            {id:'textarea',title:'Text area'},
+            {id:'multi_select',title:'Select',customValueEnabled:true},
+            {id:'checkbox',title:'Checkbox',customValueEnabled:true},
+            {id:'date',title:'Date'},
+            {id:'number',title:'Number'}
+            ];
 
         return (
             <div className="md-card">
@@ -71,7 +78,7 @@ class CompanyAttributeForm extends Component {
 
                                 <div className="uk-margin">
                                     <Field name="title" type="text" validate={[required]} component={renderField}
-                                           label="Company custom field name"/>
+                                           label="User custom field name"/>
                                 </div>
 
                                 <div className="uk-margin">
@@ -80,7 +87,7 @@ class CompanyAttributeForm extends Component {
                                 </div>
 
                                 <div className="uk-margin">
-                                    <Field name="type" type="select" options={customAttributeTypes} validate={[required]} component={renderSelect}
+                                    <Field name="type" type="select" options={options} validate={[required]} component={renderSelect}
                                            label="Type"/>
                                 </div>
 
@@ -89,9 +96,8 @@ class CompanyAttributeForm extends Component {
                                 {this.state.customValueEnabled &&
                                 <div className="uk-margin">
                                     <h2>Add custom field values</h2>
-                                    <Field name="options" setValues={this.setValues} tagValues={this.state.customValues} validate={[]} component={renderTagger}
+                                    <Field name="options" setValues={this.setValues} tagValues={this.state.customValues} options={options} validate={[]} component={renderTagger}
                                            label="Custom values"/>
-
 
                                 </div>}
 
@@ -99,6 +105,9 @@ class CompanyAttributeForm extends Component {
                                     <div className="uk-margin-medium-top">
                                         <div className="uk-text-danger">{formError}</div>
                                     </div>
+
+                                    {this.props.params.userAttributeId && <DeleteButton handleDelete={handleDelete}
+                                                                                           id={parseInt(this.props.params.userAttributeId, 10)}/>}
 
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE
@@ -118,13 +127,13 @@ class CompanyAttributeForm extends Component {
 
 
 function mapStateToProps(state, ownProps) {
-    const companyAttributeId = ownProps.params.companyAttributeId;
-    const companyAttribute = state.companyAttributes.data.filter((companyAttribute) => parseInt(companyAttribute.id, 10) === parseInt(companyAttributeId, 10));
-    const currentValues=state.form['companyAttributeForm'];
+    const userAttributeId = ownProps.params.userAttributeId;
+    const userAttribute = state.userAttributes.data.filter((userAttribute) => parseInt(userAttribute.id, 10) === parseInt(userAttributeId, 10));
+    const currentValues=state.form['userAttributeForm'];
 
-    if (companyAttribute.length > 0) {
+    if (userAttribute.length > 0) {
         return {
-            initialValues: companyAttribute.length > 0 ? companyAttribute[0] : false,
+            initialValues: userAttribute.length > 0 ? userAttribute[0] : false,
             currentValues: (currentValues && currentValues.values?currentValues.values:{})
         };
     } else {
@@ -136,10 +145,10 @@ function mapStateToProps(state, ownProps) {
 
 }
 
-CompanyAttributeForm = reduxForm({
-    form: 'companyAttributeForm'
-})(CompanyAttributeForm);
+UserAttributeForm = reduxForm({
+    form: 'userAttributeForm'
+})(UserAttributeForm);
 
-export default connect(mapStateToProps)(CompanyAttributeForm);
+export default connect(mapStateToProps)(UserAttributeForm);
 
 

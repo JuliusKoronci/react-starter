@@ -3,10 +3,9 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required} from '../../../config/validation';
 import {renderField, renderSelect, renderTagger} from '../field.tpl';
-import Tag from '../../forms/tagger.jsx';
-import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
-class CompanyAttributeForm extends Component {
+
+class TaskAttributeForm extends Component {
 
     constructor(props, context){
         super(props, context);
@@ -31,25 +30,9 @@ class CompanyAttributeForm extends Component {
 
     };
 
-    setCustomValues=(values)=>{
-        alert('set custom values');
-        console.log(values);
-        this.setState({'optionValues':values});
-        if(this.props.companyAttribute){
-            this.props.companyAttribute.options=values;
-        }
-
-
-    };
-
-    setValues=()=>{
-        console.log('set values');
-    };
-
 
     render() {
-        const {handleSubmit, formError, handleDelete, setCustomValues, customAttributeTypes} = this.props;
-
+        const {handleSubmit, formError, handleDelete, customAttributeTypes, toggleActive} = this.props;
 
         return (
             <div className="md-card">
@@ -64,14 +47,14 @@ class CompanyAttributeForm extends Component {
                             <form onSubmit={handleSubmit}>
 
                                 <div className="uk-margin">
-
-                                    <Field name="is_active" type="checkbox" validate={[]} component={renderField}
-                                           label="Active"/>
+                                <Field name="is_active" type="checkbox" validate={[]} component={renderField}
+                                       label="Active" />
                                 </div>
+
 
                                 <div className="uk-margin">
                                     <Field name="title" type="text" validate={[required]} component={renderField}
-                                           label="Company custom field name"/>
+                                           label="Task attribute name"/>
                                 </div>
 
                                 <div className="uk-margin">
@@ -91,8 +74,6 @@ class CompanyAttributeForm extends Component {
                                     <h2>Add custom field values</h2>
                                     <Field name="options" setValues={this.setValues} tagValues={this.state.customValues} validate={[]} component={renderTagger}
                                            label="Custom values"/>
-
-
                                 </div>}
 
                                 <div className="uk-margin">
@@ -118,13 +99,13 @@ class CompanyAttributeForm extends Component {
 
 
 function mapStateToProps(state, ownProps) {
-    const companyAttributeId = ownProps.params.companyAttributeId;
-    const companyAttribute = state.companyAttributes.data.filter((companyAttribute) => parseInt(companyAttribute.id, 10) === parseInt(companyAttributeId, 10));
-    const currentValues=state.form['companyAttributeForm'];
+    const taskAttributeId = ownProps.params.taskAttributeId;
+    const taskAttribute = state.taskAttributes.data.filter((taskAttribute) => parseInt(taskAttribute.id, 10) === parseInt(taskAttributeId, 10));
+    const currentValues=state.form['taskAttributeForm'];
 
-    if (companyAttribute.length > 0) {
+    if (taskAttribute.length > 0) {
         return {
-            initialValues: companyAttribute.length > 0 ? companyAttribute[0] : false,
+            initialValues: taskAttribute.length > 0 ? taskAttribute[0] : false,
             currentValues: (currentValues && currentValues.values?currentValues.values:{})
         };
     } else {
@@ -136,10 +117,10 @@ function mapStateToProps(state, ownProps) {
 
 }
 
-CompanyAttributeForm = reduxForm({
-    form: 'companyAttributeForm'
-})(CompanyAttributeForm);
+TaskAttributeForm = reduxForm({
+    form: 'taskAttributeForm'
+})(TaskAttributeForm);
 
-export default connect(mapStateToProps)(CompanyAttributeForm);
+export default connect(mapStateToProps)(TaskAttributeForm);
 
 
