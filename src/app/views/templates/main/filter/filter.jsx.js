@@ -40,95 +40,123 @@ const Filter = (prop) => {
                             </form>
 
                             <form className="uk-form-stacked uk-margin-top">
-                                <label for="kUI_multiselect_basic" className="uk_dp_1 uk-text-muted">Status</label>
+                                <label className="uk_dp_1 uk-text-muted">Status</label>
                                         <span className="alignright">
                                             <label className="uk_dp1 uk-text-muted">Column</label>
                                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                         </span>
-
+                                {/*Pouzity react-multiselect https://github.com/JedWatson/react-select*/}
                                 <Creatable name="Status"
                                            className="md-input"
                                            joinValues={true}
                                            multi={true}
-                                           options={[{value:"NEW"},{value:"OLD"}]}
-
+                                           options={[
+                                { value: 'New', label: 'New' },
+                                { value: 'Open', label: 'Open' },
+                                { value: 'Pending', label: 'Pendig' },
+                                { value: 'Closed', label: 'Closed'},
+                                ]}
                                 />
 
                             </form>
 
-                            <form className="uk-form-stacked">
+                            <form className="uk-form-stacked uk-margin-top">
                                 <label for="project" className="uk_dp_1 uk-text-muted">Project</label>
                                     <span className="alignright">
                                         <label className="uk_dp1 uk-text-muted">Column</label>
                                         <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                     </span>
-                                <select id="project" multiple="multiple" data-placeholder="Select projects...">
-                                    <option>Project 1</option>
-                                    <option>Project 2</option>
-                                </select>
+                                <Creatable name="Project"
+                                           className="md-input"
+                                           joinValues={true}
+                                           multi={true}
+                                           options={[
+                                { value: 'Projekty ku ktorym ma pouzivatel pristup',label: 'Projekty ku ktorym ma pouzivatel pristup' },
+                                ]}
+                                />
                             </form>
 
-                            <form className="uk-form-stacked">
-                                <label for="kUI_multiselect_basic" className="uk_dp_1 uk-text-muted">Created</label>
+                            <form className="uk-form-stacked uk-margin-top">
+                                <label className="uk_dp_1 uk-text-muted">Created</label>
                                         <span className="alignright">
                                             <label className="uk_dp1 uk-text-muted">Column</label>
                                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                          </span>
-                                <select id="created" multiple="multiple" data-placeholder="Select created...">
-                                    <option>user1</option>
-                                    <option>user2</option>
-                                </select>
+                                <Creatable name="Created"
+                                           className="md-input"
+                                           joinValues={true}
+                                           multi={true}
+                                           options={[
+                                { value: 'multiselect+autocomplete pouzivatelia',label: 'multiselect+autocomplete pouzivatelia' },
+                                ]}
+                                />
                             </form>
 
-                            <form className="uk-form-stacked">
+                            <form className="uk-form-stacked uk-margin-top">
                                 <label for="kUI_multiselect_basic" className="uk_dp_1 uk-text-muted">Requester</label>
                                         <span className="alignright">
                                             <label className="uk_dp1 uk-text-muted">Column</label>
                                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                          </span>
-                                <select id="requester" multiple="multiple" data-placeholder="Select requester...">
-                                    <option>user1</option>
-                                    <option>user2</option>
-                                </select>
+                                <Creatable name="Requester"
+                                           className="md-input"
+                                           joinValues={true}
+                                           multi={true}
+                                           options={[
+                                { value: 'multiselect+autocomplete pouzivatelia',label: 'multiselect+autocomplete pouzivatelia' },
+                                ]}
+                                />
                             </form>
 
-                            <form className="uk-form-stacked">
+                            <form className="uk-form-stacked uk-margin-top">
                                 <label for="kUI_multiselect_basic" className="uk_dp_1 uk-text-muted">Company</label>
                                         <span className="alignright">
                                             <label className="uk_dp1 uk-text-muted">Column</label>
                                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                          </span>
-                                <select id="company" multiple="multiple" data-placeholder="Select company...">
-                                    <option>user1</option>
-                                    <option>user2</option>
-                                </select>
+                                <Creatable name="Company"
+                                           className="md-input"
+                                           joinValues={true}
+                                           multi={true}
+                                           options={[
+                                { value: 'multiselect+autocomplete companies',label: 'multiselect+autocomplete companies' },
+                                ]}
+                                />
                             </form>
 
-                            <form className="uk-form-stacked">
-                                <label for="kUI_multiselect_basic" className="uk_dp_1 uk-text-muted">Assigned</label>
+                            <form className="uk-form-stacked uk-margin-top">
+                                <label className="uk_dp_1 uk-text-muted">Assigned</label>
                                         <span className="alignright">
                                             <label className="uk_dp1 uk-text-muted">Column</label>
                                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                          </span>
-                                <select id="assigned" multiple="multiple" data-placeholder="Select assigned...">
-                                    <option selected>Current user</option>
-                                    <option selected>Unasigned</option>
-                                    <option>user1</option>
-                                    <option>user2</option>
-                                </select>
+                                <Creatable name="Assigned"
+                                           className="md-input"
+                                           joinValues={true}
+                                           multi={true}
+                                           options={[
+                                { value: 'multiselect+autocomplete pouzivatelia',label: 'multiselect+autocomplete pouzivatelia' },
+                                ]}
+                                />
                             </form>
 
-                            <form className="uk-form-stacked">
+                            <form className="uk-form-stacked uk-margin-top">
                                 <label className="uk-text-muted">Context</label>
                                         <span className="alignright">
                                             <label className="uk_dp1 uk-text-muted">Column</label>
                                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                         </span>
-                                <select id="selec_adv_1" name="selec_adv_1" multiple data-placeholder="Select context...">
-                                </select>
+                                <Creatable name="Context"
+                                           className="md-input"
+                                           joinValues={true}
+                                           multi={true}
+                                           options={[
+                                { value: 'autocomplete context',label: 'autocomplete context' },
+                                ]}
+                                />
                             </form>
 
-                            <form className="uk-form-stacked">
+                            <form className="uk-form-stacked uk-margin-top">
                             <div className="uk-grid" data-uk-grid-margin>
                                 <div className="uk-width-medium-1-2">
                                     <label className="uk_dp_1 uk-text-muted">Created From:</label>
@@ -218,19 +246,23 @@ const Filter = (prop) => {
                         <label for="checkbox_demo_1" className="inline-label">Archived</label>
 
                         <hr/>
-                        <form className="uk-form-stacked">
-                            <label for="kUI_multiselect_basic" className="uk_dp_1 uk-text-muted">Custom select 1</label>
+                        <form className="uk-form-stacked uk-margin-top">
+                            <label className="uk_dp_1 uk-text-muted">Custom select 1</label>
                                         <span className="alignright">
                                             <label className="uk_dp1 uk-text-muted">Column</label>
                                             <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1" data-md-icheck/>
                                          </span>
-                            <select id="custom1" multiple="multiple" data-placeholder="Select custom...">
-                                <option>user1</option>
-                                <option>user2</option>
-                            </select>
+                            <Creatable name="Project"
+                                       className="md-input"
+                                       joinValues={true}
+                                       multi={true}
+                                       options={[
+                                { value: 'Projekty ku ktorym ma pouzivatel pristup',label: 'Projekty ku ktorym ma pouzivatel pristup' },
+                                ]}
+                            />
                         </form>
 
-                        <form className="uk-form-stacked ">
+                        <form className="uk-form-stacked uk-margin-top">
                             <label className="uk_dp_1 uk-text-muted">Custom input/text area</label>
                                      <span className="alignright">
                                             <label className="uk_dp1 uk-text-muted">Column</label>
