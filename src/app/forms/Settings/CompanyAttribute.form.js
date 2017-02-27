@@ -48,16 +48,8 @@ class CompanyAttributeForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, setCustomValues} = this.props;
+        const {handleSubmit, formError, handleDelete, setCustomValues, customAttributeTypes} = this.props;
 
-        const options=[
-            {id:'input',title:'Input',},
-            {id:'textarea',title:'Text area'},
-            {id:'multi_select',title:'Select',customValueEnabled:true},
-            {id:'checkbox',title:'Checkbox',customValueEnabled:true},
-            {id:'date',title:'Date'},
-            {id:'number',title:'Number'}
-            ];
 
         return (
             <div className="md-card">
@@ -88,7 +80,7 @@ class CompanyAttributeForm extends Component {
                                 </div>
 
                                 <div className="uk-margin">
-                                    <Field name="type" type="select" options={options} validate={[required]} component={renderSelect}
+                                    <Field name="type" type="select" options={customAttributeTypes} validate={[required]} component={renderSelect}
                                            label="Type"/>
                                 </div>
 
@@ -97,23 +89,9 @@ class CompanyAttributeForm extends Component {
                                 {this.state.customValueEnabled &&
                                 <div className="uk-margin">
                                     <h2>Add custom field values</h2>
-                                    <Field name="options" setValues={this.setValues} tagValues={this.state.customValues} options={options} validate={[]} component={renderTagger}
+                                    <Field name="options" setValues={this.setValues} tagValues={this.state.customValues} validate={[]} component={renderTagger}
                                            label="Custom values"/>
 
-                                    {/*<Tag name="options" input={{name:'options'}} options={options} tagValues={{}} setValues={setCustomValues}/>*/}
-                                    {/*<Field name="options" actions={{setValues:this.setCustomValues}}  options={this.props.companyAttribute?this.props.companyAttribute.options:{}} validate={[]} component={Tag}*/}
-                                           {/*label="Type"/>*/}
-
-                                    {/*<Field name="options" type="text" options={this.props.companyAttribute?this.props.companyAttribute.options:{}} validate={[]} component={renderField}*/}
-                                           {/*label="Type"/>*/}
-
-                                    {/*<Field name="options" icon="true" tagValues={this.state.optionValues} validate={[]} setValues={this.setCustomValues} component={renderTagger}*/}
-                                           {/*label="Tag"/>*/}
-
-                                    {/*<Field name="options2" icon="true" tagValues={this.state.optionValues} validate={[]} setValues={this.setCustomValues} component={Tag}*/}
-                                           {/*label="Tag"/>*/}
-
-                                    {/*<Tag name="options1" tagValues={this.state.options} setValues={this.props.setCustomValues}/>*/}
 
                                 </div>}
 
@@ -121,9 +99,6 @@ class CompanyAttributeForm extends Component {
                                     <div className="uk-margin-medium-top">
                                         <div className="uk-text-danger">{formError}</div>
                                     </div>
-
-                                    {this.props.params.companyAttributeId && <DeleteButton handleDelete={handleDelete}
-                                                                                           id={parseInt(this.props.params.companyAttributeId, 10)}/>}
 
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE

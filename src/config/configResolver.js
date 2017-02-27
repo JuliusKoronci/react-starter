@@ -22,7 +22,7 @@ class configResolver {
             urlList: urls.COMPANYATTRIBUTES_LIST,
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
-            allowedFormFields: ['title', 'description','options','type'],
+            allowedFormFields: ['title', 'description','options','type','is_active'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };
@@ -33,7 +33,7 @@ class configResolver {
             urlList: urls.TASKATTRIBUTES_LIST,
             afterEntityReceivedAction: taskAttributeReceived,
             redirectAfterCreation: paths.task_attributes,
-            allowedFormFields: ['title','options','type','is_active'],
+            allowedFormFields: ['title','options','type','description','is_active'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };
@@ -44,7 +44,7 @@ class configResolver {
             urlList: urls.USERATTRIBUTES_LIST,
             afterEntityReceivedAction: userAttributeReceived,
             redirectAfterCreation: paths.user_attributes,
-            allowedFormFields: ['title', 'description','options','type'],
+            allowedFormFields: ['title', 'description','options','type','is_active'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };
