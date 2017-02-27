@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived, statusReceived, userReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, userReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
@@ -33,6 +33,28 @@ class configResolver {
             urlList: urls.COMPANYATTRIBUTES_LIST,
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
+            allowedFormFields: ['title', 'description','options','type'],
+            customValuesEnabledOn:['multi_select','checkbox','simple_select']
+        }
+    };
+
+    static getTaskAttributesConfig = (id) => {
+        return {
+            url: id ? urls.TASKATTRIBUTES_LIST + '/' + id : urls.TASKATTRIBUTES_LIST,
+            urlList: urls.TASKATTRIBUTES_LIST,
+            afterEntityReceivedAction: taskAttributeReceived,
+            redirectAfterCreation: paths.task_attributes,
+            allowedFormFields: ['title','options','type','is_active'],
+            customValuesEnabledOn:['multi_select','checkbox','simple_select']
+        }
+    };
+
+    static getUserAttributesConfig = (id) => {
+        return {
+            url: id ? urls.USERATTRIBUTES_LIST + '/' + id : urls.USERATTRIBUTES_LIST,
+            urlList: urls.USERATTRIBUTES_LIST,
+            afterEntityReceivedAction: userAttributeReceived,
+            redirectAfterCreation: paths.user_attributes,
             allowedFormFields: ['title', 'description','options','type'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
