@@ -17,7 +17,7 @@ class Units extends Component {
     }
 }
 
-Units.propTypes = {
+ Units.propTypes = {
     units: PropTypes.object.isRequired
 };
 

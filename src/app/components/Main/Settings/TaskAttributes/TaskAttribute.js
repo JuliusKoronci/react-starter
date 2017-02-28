@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-// import View from '../../../../views/templates/main/settings/task_attributes/add_task_custom_field.jsx';
 import View from '../../../../forms/Settings/TaskAttribute.form';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -15,7 +14,16 @@ class TaskAttribute extends Component {
         super(props, context);
         this.entityId=props.params.taskAttributeId;
         this.entityConfig = configResolver.getTaskAttributesConfig(this.entityId);
-        this.customAttributeTypes={};
+        this.customAttributeTypes=[
+            {id:'input',title:'Input',},
+            {id:'text_area',title:'Text area'},
+            {id:'simple_select',title:'Simple select'},
+            {id:'multi_select',title:'Multiselect'},
+            {id:'checkbox',title:'Checkbox'},
+            {id:'date',title:'Date'},
+            {id:'integer_number',title:'Number'},
+            {id:'decimal_number',title:'Decimal number'}
+        ];
     }
 
     deleteHandler=(id)=>{

@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, smtpReceived} from '../app/redux/actions/settings.action';
+import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, unitReceived, smtpReceived} from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
@@ -22,7 +22,7 @@ class configResolver {
             urlList: urls.COMPANYATTRIBUTES_LIST,
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
-            allowedFormFields: ['title', 'description','options','type'],
+            allowedFormFields: ['title', 'description','options','type','is_active'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };
@@ -33,7 +33,7 @@ class configResolver {
             urlList: urls.TASKATTRIBUTES_LIST,
             afterEntityReceivedAction: taskAttributeReceived,
             redirectAfterCreation: paths.task_attributes,
-            allowedFormFields: ['title','options','type','is_active'],
+            allowedFormFields: ['title','options','type','description','is_active'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };
@@ -44,7 +44,7 @@ class configResolver {
             urlList: urls.USERATTRIBUTES_LIST,
             afterEntityReceivedAction: userAttributeReceived,
             redirectAfterCreation: paths.user_attributes,
-            allowedFormFields: ['title', 'description','options','type'],
+            allowedFormFields: ['title', 'description','options','type','is_active'],
             customValuesEnabledOn:['multi_select','checkbox','simple_select']
         }
     };
@@ -59,6 +59,7 @@ class configResolver {
         }
     };
 
+<<<<<<< HEAD
     static getSmtpConfig = (id) => {
         return {
             url: id ? urls.SMTP_LIST + '/' + id : urls.SMTP_LIST,
@@ -67,6 +68,15 @@ class configResolver {
             // redirectAfterCreation: paths.companies,
             // remapValues:{'inbox_email':'inbox_email'},
             allowedFormFields: ['inbox_email','move_email','host','port','login']
+=======
+    static getUnitConfig = (id) => {
+        return {
+            url: id ? urls.UNITS_LIST + '/' + id : urls.UNITS_LIST,
+            urlList: urls.UNITS_LIST,
+            afterEntityReceivedAction: unitReceived,
+            redirectAfterCreation: paths.units,
+            allowedFormFields: ['title', 'shortcut','is_active']
+>>>>>>> master
         }
     };
 

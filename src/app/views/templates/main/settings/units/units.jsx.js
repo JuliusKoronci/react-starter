@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
+import {paths, generateRoute} from '../../../../../../config/router';
 
 const units = (props) => {
     return (
@@ -22,28 +24,30 @@ const units = (props) => {
                     <tr>
                         <th>Order</th>
                         <th>Units name</th>
-                        <th className="uk-text-center">Description</th>
+                        <th className="uk-text-center">Shortcut</th>
                         <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {props.data.map((units, i) => {
+                    {props.data.map((unit, i) => {
                         return (
                             <tr key={i}>
-                                <td>{units.id}</td>
-                                <td>{units.name}</td>
-                                <td className="uk-text-center">{units.description}</td>
-                                <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
+                                <td>{unit.id}</td>
+                                <td>{unit.title}</td>
+                                <td className="uk-text-center">{unit.shortcut}</td>
+                                <td className="uk-text-center">{unit.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
-                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
-                                    <a className="md-btn md-btn-primary" href="settings_units.html">Edit</a>
+                                    <Link to={generateRoute('units_edit',{unitId:unit.id})} className="md-btn md-btn-primary" >Edit</Link>
                                 </td>
                             </tr>
                         );
                     })}
                     </tbody>
                 </table>
+
+                <Pagination links={props._links} total={props.total} page={props.page}
+                            loadFunction={props.loadUnits}/>
 
                 <div className="text-allign-right">
                     <Link to="/settings/units/add" className="md-btn md-btn-primary" >Add</Link>
