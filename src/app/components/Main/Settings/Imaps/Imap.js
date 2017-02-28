@@ -19,7 +19,7 @@ class Imap extends Component {
         if (this.props.params.imapId && !this.props.imap) {
             this.props.actions.loadEntityById(this.props.params.imapId, this.imapConfig);
         }
-        // this.props.actions.requestProjects();
+        this.props.actions.requestProjects();
     }
 
     onSubmit = (values) => {
@@ -43,7 +43,7 @@ class Imap extends Component {
 function mapStateToProps(state, ownProps) {
     const imapId = ownProps.params.imapId;
     const imap = state.imaps.data.filter((imap) => parseInt(imap.id, 10) === parseInt(imapId, 10));
-    const projects = [{key:1,title:'Foo'}]; //state.projects.data;
+    const projects = state.projects.data;
     return {
         imap: imap.length > 0 ? imap[0] : false,
         projects: projects
@@ -53,7 +53,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions, ...generalActions}, dispatch),
+        actions: bindActionCreators({...actions, ...generalActions, ...systemActions}, dispatch),
     };
 }
 
