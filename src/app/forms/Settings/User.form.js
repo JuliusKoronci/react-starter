@@ -91,6 +91,10 @@ class UserForm extends Component {
                 </div>
 
 
+                {editing &&
+                <Field name="is_active" type="checkbox" validate={[]} component={renderField}
+                       label="Active"/>
+                }
 
                 {!editing &&
                 <div className="uk-grid">
