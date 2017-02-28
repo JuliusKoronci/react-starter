@@ -36,7 +36,7 @@ const users = (props) => {
                                 <td className="uk-text-center">{user.company && user.company.title}</td>
                                 <td className="uk-text-center">{user.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
-                                    <Link className="md-btn md-btn-danger" to={'/settings/users/delete/' + user.id}>Delete</Link>
+                                    {/*<Link className="md-btn md-btn-danger" to={'/settings/users/delete/' + user.id}>Delete</Link>*/}
                                     <Link className="md-btn md-btn-primary" to={'/settings/users/edit/' + user.id}>Edit</Link>
                                 </td>
                             </tr>

@@ -88,6 +88,7 @@ export const paths = {
     'units_edit':'/settings/units/:unitId',
     'units':'/settings/units',
     'users_add':'/settings/users/add',
+    'users_edit':'/settings/users/edit/:userId',
     'users':'/settings/users',
     'user_custom_fields_add':'/settings/user-custom-fields/add',
     'user_custom_fields_edit':'/settings/user-custom-fields/:userAttributeId',
@@ -172,8 +173,9 @@ export default (
             <Route name="unit" path={paths.units_edit} component={Unit}/>
             <Route name="units" path={paths.units} component={Units}/>
 
-            <Route name="user" path={paths.users_add} component={User}/>
             <Route name="users" path={paths.users} component={Users}/>
+            <Route name="user" path={paths.users_add} component={User}/>
+            <Route name="user" path={paths.users_edit} component={User}/>
 
             <Route name="user-custom-field" path={paths.user_custom_fields_add} component={UserCustomField}/>
             <Route name="user-custom-field" path={paths.user_custom_fields_edit}  component={UserCustomField}/>

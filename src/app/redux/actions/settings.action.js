@@ -14,6 +14,13 @@ export function usersReceived(response) {
     }
 }
 
+export function userReceived(response) {
+    return {
+        type: constants.USER_RECEIVED,
+        response
+    }
+}
+
 export function requestCompanies(url) {
     return {
         type: constants.REQUEST_COMPANIES,
