@@ -42,6 +42,7 @@ import ReportsUsers from '../app/components/Main/Reports/Users/ReportsUsers';
 import ReportUser from '../app/components/Main/Reports/Users/ReportUser';
 import ReportsCustom from '../app/components/Main/Reports/Custom/ReportsCustom';
 import Task from '../app/components/Main/Task/Task';
+import Filter from '../app/components/Main/Filter/Filter';
 
 
 export const paths = {
@@ -49,6 +50,7 @@ export const paths = {
     'logout': '/logout',
     'task_list': '/tasks',
     'task_show': '/tasks/:taskId',
+    'filter': '/filter',
     'profile':'/profile',
     'settings':'/settings/default',
     'automated_tasks':'/settings/automated-tasks',
@@ -125,6 +127,8 @@ export default (
             <Route path={paths.task_list} component={Task}/>
             <Route path={paths.task_show} component={Task}/>
             <Route path={paths.profile} component={Profile}/>
+            <Route name="filter" path={paths.filter} component={Filter}/>
+
             <Route name="settings" path={paths.settings} component={Settings}/>
             <Route name="automated-tasks" path={paths.automated_tasks_add} component={AutomatedTask}/>
             <Route name="automated-tasks" path={paths.automated_tasks} component={AutomatedTasks}/>
