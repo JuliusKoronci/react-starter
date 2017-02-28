@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
-import {renderField, renderTextarea} from '../field.tpl';
+import {renderField, renderTextarea, renderSelect} from '../field.tpl';
+import {availableLanguages} from '../../../config/config';
+import {LOAD_ATTACHMENT} from '../../../api/urls';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
 class UserForm extends Component {
@@ -15,7 +17,7 @@ class UserForm extends Component {
 
 
     render() {
-        const {handleSubmit, submitData, submitPassword, formError, handleDelete, roles, user, languages} = this.props;
+        const {handleSubmit, submitData, submitPassword, formError, handleDelete, roles, user, heading, companies, editing, handleFileUpload, } = this.props;
         return (
 
 <div className="md-card">
@@ -23,7 +25,7 @@ class UserForm extends Component {
         <div className="md-card-content">
             <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                 <div className="fileinput-new thumbnail">
-                    <img src="assets/img/avatars/user.png" alt="user avatar"/>
+                    <img src={ user && user.image? LOAD_ATTACHMENT + '/'+user.image:'assets/img/avatars/user.png'} alt="user avatar"/>
                 </div>
                 <div className="fileinput-preview fileinput-exists thumbnail"></div>
                 <div className="user_avatar_controls">
@@ -33,14 +35,14 @@ class UserForm extends Component {
                                         <span className="fileinput-exists"><i
                                             className="material-icons">&#xE86A;</i></span>
                                         <input type="file" name="user_edit_avatar_control"
-                                               id="user_edit_avatar_control"/>
+                                               id="user_edit_avatar_control" onChange={handleFileUpload}/>
                                     </span>
                     <a href="#" className="btn-file fileinput-exists" data-dismiss="fileinput"><i
                         className="material-icons">&#xE5CD;</i></a>
                 </div>
             </div>
             <div className="uk-margin-bottom" data-uk-margin>
-                <h1 className="heading_b uk-margin-bottom">Edit user profile</h1>
+                <h1 className="heading_b uk-margin-bottom">{heading}</h1>
             </div>
             <hr/>
             <div className="uk-margin-top">
@@ -63,36 +65,52 @@ class UserForm extends Component {
                     </div>
 
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
-                        <Field name="company.title" type="text" validate={[required]} component={renderField} id="user_edit_company_control" className="md-input" label="Company"/>
+
+                        <Field name="company.id" validate={[required]} component={renderSelect} label="Company"
+                               options={companies.map((company, i) => {return({id:company.id,title:company.title})})} />
+
+                        {/*<Field name="company.title" type="text" validate={[required]} component={renderField} id="user_edit_company_control" className="md-input" label="Company"/>*/}
+
                     </div>
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
-                        <label className="uk-text-muted">Role</label>
-                        <select className="md-input">
-                            {roles.map((role, i) => {
-                                return (
-                                    <option key={i} value={role.id}>{ role.title }</option>
-                                );
-                            })}
-                        </select>
+
+
+                        <Field name="user_role.id" validate={[required]} component={renderSelect} label="Role"
+                               options={roles.map((role, i) => {return({id:role.id,title:role.title})})} />
+
+
                     </div>
 
                 </div>
                 <div className="uk-grid">
                     <div className="uk-width-1-1">
-                        <label>Signature</label>
+
                         <Field name="detailData.signature" className="md-input" type="text" validate={[required]} component={renderTextarea}
                                label="Signature"/>
                     </div>
                 </div>
+
+
+
+                {!editing &&
+                <div className="uk-grid">
+                    <div className="uk-width-1-1">
+
+                        <Field name="password" className="md-input" type="password" validate={[required]} component={renderField}
+                               label="Initial password"/>
+                    </div>
+                </div>}
+
+
                 <h3 className="full_width_in_card heading_c">
                     Languages
                 </h3>
                 <div className="uk-grid" data-uk-grid-margin>
                     <div className="uk-width-1-1">
                         <select name="language" id="user_edit_languages" className="md-input">
-                            {languages.map((lang, i) => {
+                            {availableLanguages.map((lang, i) => {
                                 return (
-                                    <option key={i} value={lang.key}>{ lang.title }</option>
+                                    <option key={i} value={lang.id}>{ lang.title }</option>
                                 );
                             })}
                         </select>
@@ -157,7 +175,7 @@ class UserForm extends Component {
                     </div>
                 </div>
                 <h3 className="full_width_in_card heading_c">
-                    Custom user fields
+                    User attributes
                 </h3>
                 <div className="uk-grid-margin">
                     <a className="md-btn md-btn-danger" href="#">Cancel</a>

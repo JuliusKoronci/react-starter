@@ -33,7 +33,6 @@ class Profile extends Component {
     };
 
     handleSubmit=(values)=>{
-        let formFields=this.profileConfig.allowedFormFields;
         this.props.actions.updateEntity(this.props.userId, values, this.profileConfig);
     };
 
