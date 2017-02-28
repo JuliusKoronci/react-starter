@@ -34,17 +34,6 @@ class TaskAttributeForm extends Component {
     render() {
         const {handleSubmit, formError, handleDelete, customAttributeTypes, toggleActive} = this.props;
 
-        const options=[
-            {id:'input',title:'Input',},
-            {id:'text_area',title:'Text area'},
-            {id:'simple_select',title:'Simple select'},
-            {id:'multi_select',title:'Multiselect',customValueEnabled:true},
-            {id:'checkbox',title:'Checkbox',customValueEnabled:true},
-            {id:'date',title:'Date'},
-            {id:'integer_number',title:'Number'},
-            {id:'decimal_number',title:'Decimal number'}
-            ];
-
         return (
             <div className="md-card">
                 <div className="md-card-content">
@@ -74,7 +63,7 @@ class TaskAttributeForm extends Component {
                                 </div>
 
                                 <div className="uk-margin">
-                                    <Field name="type" type="select" options={options} validate={[required]} component={renderSelect}
+                                    <Field name="type" type="select" options={customAttributeTypes} validate={[required]} component={renderSelect}
                                            label="Type"/>
                                 </div>
 
@@ -83,7 +72,7 @@ class TaskAttributeForm extends Component {
                                 {this.state.customValueEnabled &&
                                 <div className="uk-margin">
                                     <h2>Add custom field values</h2>
-                                    <Field name="options" setValues={this.setValues} tagValues={this.state.customValues} options={options} validate={[]} component={renderTagger}
+                                    <Field name="options" setValues={this.setValues} tagValues={this.state.customValues} validate={[]} component={renderTagger}
                                            label="Custom values"/>
                                 </div>}
 

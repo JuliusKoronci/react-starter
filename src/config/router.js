@@ -42,6 +42,7 @@ import ReportsUsers from '../app/components/Main/Reports/Users/ReportsUsers';
 import ReportUser from '../app/components/Main/Reports/Users/ReportUser';
 import ReportsCustom from '../app/components/Main/Reports/Custom/ReportsCustom';
 import Task from '../app/components/Main/Task/Task';
+import Filter from '../app/components/Main/Filter/Filter';
 
 
 export const paths = {
@@ -49,6 +50,7 @@ export const paths = {
     'logout': '/logout',
     'task_list': '/tasks',
     'task_show': '/tasks/:taskId',
+    'filter': '/filter',
     'profile':'/profile',
     'settings':'/settings/default',
     'automated_tasks':'/settings/automated-tasks',
@@ -83,6 +85,7 @@ export const paths = {
     'triggers_add':'/settings/trigers/add',
     'triggers':'/settings/trigers',
     'units_add':'/settings/units/add',
+    'units_edit':'/settings/units/:unitId',
     'units':'/settings/units',
     'users_add':'/settings/users/add',
     'users':'/settings/users',
@@ -124,6 +127,8 @@ export default (
             <Route path={paths.task_list} component={Task}/>
             <Route path={paths.task_show} component={Task}/>
             <Route path={paths.profile} component={Profile}/>
+            <Route name="filter" path={paths.filter} component={Filter}/>
+
             <Route name="settings" path={paths.settings} component={Settings}/>
             <Route name="automated-tasks" path={paths.automated_tasks_add} component={AutomatedTask}/>
             <Route name="automated-tasks" path={paths.automated_tasks} component={AutomatedTasks}/>
@@ -164,6 +169,7 @@ export default (
             <Route name="trigers" path={paths.triggers} component={Trigers}/>
 
             <Route name="unit" path={paths.units_add} component={Unit}/>
+            <Route name="unit" path={paths.units_edit} component={Unit}/>
             <Route name="units" path={paths.units} component={Units}/>
 
             <Route name="user" path={paths.users_add} component={User}/>
