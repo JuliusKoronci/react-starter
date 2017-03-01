@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
+import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
 import {generateRoute} from '../../../../../../config/router';
 
 const imaps = (props) => {
@@ -24,7 +25,6 @@ const imaps = (props) => {
                         <th>email</th>
                         <th className="uk-text-center">Project</th>
                         <th className="uk-text-center">Description</th>
-                        <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
                     </tr>
                     </thead>
@@ -36,9 +36,8 @@ const imaps = (props) => {
                                 <td>{imap.inbox_email}</td>
                                 <td>{imap.project.title}</td>
                                 <td className="uk-text-center">{imap.project.description}</td>
-                                <td className="uk-text-center">{imap.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
-                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                    <DeleteButton handleDelete={props.handleDelete} id={imap.id} />
                                     <Link to={generateRoute('imaps_edit',{imapId:imap.id})} className="md-btn md-btn-primary" >Edit</Link>
                                 </td>
                             </tr>

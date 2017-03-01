@@ -3,16 +3,24 @@ import View from '../../../../views/templates/main/settings/imaps/imaps.jsx.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
+import * as generalActions from '../../../../redux/actions/general.action';
+import configResolver from '../../../../../config/configResolver';
 
 class Imaps extends Component {
 
     componentWillMount() {
         this.props.actions.requestImaps();
+        this.imapConfig = configResolver.getImapConfig();
+
     }
+
+    deleteHandler=(id)=>{
+            this.props.actions.deleteEntity(id, this.imapConfig);
+    };
 
     render() {
         return (
-            <View {...this.props.imaps} loadImaps={this.props.actions.requestImaps}/>
+            <View {...this.props.imaps} loadImaps={this.props.actions.requestImaps} handleDelete={this.deleteHandler} />
         );
     }
 }
@@ -28,7 +36,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions}, dispatch)
+        actions: bindActionCreators({...actions, ...generalActions}, dispatch)
     };
 }
 

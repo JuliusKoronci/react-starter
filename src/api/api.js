@@ -97,6 +97,22 @@ export function defaultRequest(url, method, data, resolvedConfig) {
     };
     // return Promise.resolve(data);
 
+
+    if(method=='DELETE'){
+        return fetch(url, config)
+            .then(function (response) {
+                if (!response.ok) {
+                    return Promise.reject(response.json().then(data => ({data, response})).then((json) => {
+                        const {response, data} = json;
+                        buildError(response, data)
+                    }))
+                } else {
+                    return Promise.resolve();
+                }
+            });
+    }
+
+
     return fetch(url, config)
         .then(response =>
             response.json().then(data => ({data, response}))

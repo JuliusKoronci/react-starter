@@ -5,11 +5,11 @@ import {projectsReceived} from '../actions/system.actions';
 import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile, defaultDeleteFile, apiUploadFile} from '../../../api/api';
 import {entityUpdated, entityCreated, entityDeleted} from '../../services/general';
 import {PROJECT_LIST} from '../../../api/urls';
-function *loadProjects(action) {
-    action.url=PROJECT_LIST;
+function *loadProjects() {
+    const url=PROJECT_LIST;
     yield put(startAjax());
     try {
-        const data = yield call(defaultGET, action.url);
+        const data = yield call(defaultGET, url);
         yield put(projectsReceived(data));
     } catch (e) {
         yield put(asyncError(e));

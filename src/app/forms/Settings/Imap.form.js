@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
-import {renderField} from '../field.tpl';
+import {renderField, renderSelect} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
 class ImapForm extends Component {
@@ -15,7 +15,7 @@ class ImapForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, heading} = this.props;
+        const {handleSubmit, formError, handleDelete, heading, editing} = this.props;
         return (
 
             <div className="md-card">
@@ -26,10 +26,7 @@ class ImapForm extends Component {
                         </div>
                         <hr/>
                         <div className="uk-width-medium-1-2">
-                            <div className="uk-margin-bottom">
-                                <Field type="checkbox" name="active" validate={[]} component={renderField}
-                                        label="Active"/>
-                            </div>
+
                             <div className="uk-margin-bottom">
                                 <Field name="inbox_email" type="text" validate={[required]} component={renderField}
                                        label="Inbox email"/>
@@ -45,20 +42,16 @@ class ImapForm extends Component {
                                 <Field name="port" type="text" validate={[required]} component={renderField} label="Port"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="login" type="text" validate={[required]} component={renderField} label="Login"/>
+                                <Field name="name" type="text" validate={[required]} component={renderField} label="Login"/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <Field name="password" type="text" validate={[required]} component={renderField} label="Password"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Project folder</label>
-                                <select className="md-input label-fixed">
-                                    {this.props.projects.map((p,i)=>{
-                                        return (
-                                            <option key={i} value={p.key}>{p.title}</option>
-                                        )
-                                    })}
-                                </select>
+
+                                <Field name="project.id" validate={[required]} component={renderSelect} label="Project folder"
+                                       className="md-input label-fixed" options={this.props.projects.map((project, i) => {return({id:project.id,title:project.title})})} />
+
                             </div>
                             <div className="uk-margin-bottom">
                                 <Field type="checkbox" name="ignore_certificate" validate={[]} component={renderField}/>
@@ -69,9 +62,9 @@ class ImapForm extends Component {
                                 <label className="uk_dp1 uk-text-muted">SSL</label>
                             </div>
                             <div className="uk-margin-bottom">
-                                <a className="md-btn md-btn-danger" href="#">Delete</a>
+                                {editing && this.props.imap.id&& <DeleteButton handleDelete={handleDelete} id={this.props.imap.id} />}
                                 <button className="md-btn md-btn-primary alignright" href="settings_units.html">Save</button>
-                                <a className="md-btn md-btn-success alignright" href="settings_units.html">Test connection</a>
+                                <a className="md-btn md-btn-success " href="settings_units.html">Test connection</a>
                             </div>
                         </div>
                     </div>

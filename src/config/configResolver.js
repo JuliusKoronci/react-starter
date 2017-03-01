@@ -123,14 +123,13 @@ class configResolver {
         }
     };
 
-    static getImapConfig = (id) => {
+    static getImapConfig = (id, projectId) => {
         return {
-            url: id ? urls.IMAPS_LIST + '/' + id : urls.IMAPS_LIST,
+            url: urls.IMAPS_LIST + (id?'/'+id:'') + (projectId?'/project/'+projectId:''),
             urlList: urls.IMAPS_LIST,
             afterEntityReceivedAction: imapReceived,
-            // redirectAfterCreation: paths.companies,
-            // remapValues:{'inbox_email':'inbox_email'},
-            allowedFormFields: ['inbox_email','move_email','host','port','login']
+            redirectAfterCreation: paths.imaps,
+            allowedFormFields: ['inbox_email','move_email','host','port','name','password','ssl','ignore_certificate']
         }
     };
 

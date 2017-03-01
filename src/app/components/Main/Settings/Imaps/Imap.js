@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
 import * as generalActions from '../../../../redux/actions/general.action';
 import * as systemActions from  '../../../../redux/actions/system.actions';
-import NProgress from '../../../../../../node_modules/nprogress/nprogress';
 import configResolver from '../../../../../config/configResolver';
 
 class Imap extends Component {
@@ -13,6 +12,7 @@ class Imap extends Component {
     constructor(props, context) {
         super(props, context);
         this.imapConfig = configResolver.getImapConfig(props.params.imapId);
+        this.editing=!!props.params.imapId;
     }
 
     componentWillMount() {
@@ -22,20 +22,28 @@ class Imap extends Component {
         this.props.actions.requestProjects();
     }
 
+    deleteHandler=()=>{
+        if(this.props.params.imapId){
+        this.props.actions.deleteEntity(this.props.params.imapId, this.imapConfig);
+        }
+    };
+
+
     onSubmit = (values) => {
-        NProgress.start();
+
+
+        this.imapConfig = configResolver.getImapConfig(this.props.params.imapId, values.project.id );
+
         if (this.props.params.imapId) {
             this.props.actions.updateEntity(this.props.params.imapId, values, this.imapConfig);
         } else {
-            console.log(values)
             this.props.actions.createEntity(values,this.imapConfig);
-            console.log('ok')
         }
     };
 
     render() {
         return (
-            <View onSubmit={this.onSubmit} {...this.props} heading={this.props.imap ? "Edit imap" : "Add imap"} />
+            <View onSubmit={this.onSubmit} {...this.props} heading={this.props.imap ? "Edit imap" : "Add imap"} editing={this.editing} handleDelete={this.deleteHandler} />
         );
     }
 }
