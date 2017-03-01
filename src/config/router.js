@@ -75,6 +75,7 @@ export const paths = {
     'shared_filters_add':'/settings/shared-filters/add',
     'shared_filters':'/settings/shared-filters',
     'smtps_add':'/settings/smtps/add',
+    'smtps_edit':'/settings/smtps/:smtpId',
     'smtps':'/settings/smtps',
     'statuses_add':'/settings/statuses/add',
     'statuses_edit':'/settings/statuses/:statusId',
@@ -156,6 +157,7 @@ export default (
             <Route name="shared-filters" path={paths.shared_filters} component={SharedFilters}/>
 
             <Route name="smtp" path={paths.smtps_add} component={Smtp}/>
+            <Route name="smtp" path={paths.smtps_edit} component={Smtp}/>
             <Route name="smtps" path={paths.smtps} component={Smtps}/>
 
             <Route name="status" path={paths.statuses_add} component={Status}/>

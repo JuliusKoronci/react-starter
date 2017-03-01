@@ -13,8 +13,6 @@ function mockDefault() {
 }
 
 export function loadSmtps(url) {
-    //nastavene tahanie mock dat
-    return mockDefault();
 
     if (USE_MOCK) {
         return mockDefault();

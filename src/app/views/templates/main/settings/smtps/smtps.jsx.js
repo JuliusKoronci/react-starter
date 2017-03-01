@@ -1,5 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
+import Pagination from '../../_partials/pagination.jsx';
+import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
+import {generateRoute} from '../../../../../../config/router';
 
 const smtps = (props) => {
     return (
@@ -21,9 +24,6 @@ const smtps = (props) => {
                     <tr>
                         <th>Order</th>
                         <th>email</th>
-                        <th className="uk-text-center">Project</th>
-                        <th className="uk-text-center">Description</th>
-                        <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
                     </tr>
                     </thead>
@@ -33,12 +33,9 @@ const smtps = (props) => {
                             <tr key={i}>
                                 <td>{smtp.id}</td>
                                 <td>{smtp.email}</td>
-                                <td className="uk-text-center">{smtp.project}</td>
-                                <td className="uk-text-center">{smtp.description}</td>
-                                <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
-                                    <a className="md-btn md-btn-danger" href="#">Delete</a>
-                                    <a className="md-btn md-btn-primary" href="settings_smtp.html">Edit</a>
+                                    <DeleteButton handleDelete={props.handleDelete} id={smtp.id} />
+                                    <Link to={generateRoute('smtps_edit',{smtpId:smtp.id})} className="md-btn md-btn-primary" >Edit</Link>
                                 </td>
                             </tr>
                         );

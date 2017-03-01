@@ -168,6 +168,13 @@ export function smtpsReceived(response) {
     }
 }
 
+export function smtpReceived(data) {
+    return {
+        type: constants.SMTP_RECEIVED,
+        data
+    }
+}
+
 export function requestProjectSharedFilters(url) {
     return {
         type: constants.REQUEST_PROJECTSHAREDFILTERS,

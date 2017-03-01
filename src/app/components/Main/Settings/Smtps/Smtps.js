@@ -3,16 +3,24 @@ import View from '../../../../views/templates/main/settings/smtps/smtps.jsx.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
+import * as generalActions from '../../../../redux/actions/general.action';
+import configResolver from '../../../../../config/configResolver';
 
 class Smtps extends Component {
 
     componentWillMount() {
         this.props.actions.requestSmtps();
+        this.smtpConfig = configResolver.getSmtpConfig();
+
     }
+
+    deleteHandler=(id)=>{
+        this.props.actions.deleteEntity(id, this.smtpConfig);
+    };
 
     render() {
         return (
-            <View {...this.props.smtps} loadSmtps={this.props.actions.requestSmtps}/>
+            <View {...this.props.smtps} loadSmtps={this.props.actions.requestSmtps} handleDelete={this.deleteHandler}/>
         );
     }
 }
@@ -28,7 +36,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions}, dispatch)
+        actions: bindActionCreators({...actions,...generalActions}, dispatch)
     };
 }
 
