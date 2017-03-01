@@ -91,6 +91,13 @@ export function rolesReceived(response) {
     }
 }
 
+export function roleReceived(data) {
+    return {
+        type: constants.ROLE_RECEIVED,
+        data
+    }
+}
+
 export function requestCompanyAttributes(url) {
     return {
         type: constants.REQUEST_COMPANYATTRIBUTES,

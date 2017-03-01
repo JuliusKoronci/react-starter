@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
+import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
+import {generateRoute} from '../../../../../../config/router';
 
 const roles = (props) => {
     return (
@@ -32,10 +34,10 @@ const roles = (props) => {
                         <td>{role.id}</td>
                         <td>{role.title}</td>
                         <td className="uk-text-center">{role.is_active ? 'yes' : 'no'}</td>
-                        <td className="uk-text-center">
-                            <a className="md-btn md-btn-danger" href="#">Delete</a>
-                            <a className="md-btn md-btn-primary" href="settings_role.html">Edit</a>
-                        </td>
+                            <td className="uk-text-center">
+                                <DeleteButton handleDelete={props.handleDelete} id={role.id} />
+                                <Link to={generateRoute('roles_edit',{roleId:role.id})} className="md-btn md-btn-primary" >Edit</Link>
+                            </td>
                     </tr>
                         );
                     })}

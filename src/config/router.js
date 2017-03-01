@@ -71,6 +71,7 @@ export const paths = {
     'project_shared_filters_add':'/settings/project-shared-filters/add',
     'project_shared_filters':'/settings/project-shared-filters',
     'roles_add':'/settings/roles/add',
+    'roles_edit':'/settings/roles/:roleId',
     'roles':'/settings/roles',
     'shared_filters_add':'/settings/shared-filters/add',
     'shared_filters':'/settings/shared-filters',
@@ -151,6 +152,7 @@ export default (
             <Route name="project-shared-filters" path={paths.project_shared_filters} component={ProjectSharedFilters}/>
 
             <Route name="role" path={paths.roles_add} component={Role}/>
+            <Route name="role" path={paths.roles_edit} component={Role}/>
             <Route name="roles" path={paths.roles} component={Roles}/>
 
             <Route name="shared-filter" path={paths.shared_filters_add} component={SharedFilter}/>

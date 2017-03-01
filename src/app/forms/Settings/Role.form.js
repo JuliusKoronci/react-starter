@@ -5,7 +5,7 @@ import {required, phone, alphanum, number} from '../../../config/validation';
 import {renderField, renderSelect} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 
-class SmtpForm extends Component {
+class RoleForm extends Component {
 
 
 
@@ -27,39 +27,29 @@ class SmtpForm extends Component {
                         <hr/>
                         <div className="uk-width-medium-1-2">
                             <div className="uk-margin-bottom">
-                                <Field name="email" type="text" validate={[required]} component={renderField}
-                                       label="Email"/>
+                                <Field name="is_active" type="checkbox" validate={[]} component={renderField}
+                                   label="Active"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="host" type="text" validate={[required]} component={renderField} label="SMTP Server"/>
+                                <Field name="order" type="text" validate={[required]} component={renderField} label="Order"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="port" type="text" validate={[required]} component={renderField} label="Port"/>
+                                <Field name="title" type="text" validate={[required]} component={renderField} label="Role Name"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="name" type="text" validate={[required]} component={renderField} label="Login"/>
+                                <Field name="homepage" type="text" validate={[required]} component={renderField} label="Homepage"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="password" type="text" validate={[required]} component={renderField} label="Password"/>
+                                <Field name="description" type="text" validate={[required]} component={renderField} label="Description"/>
                             </div>
+
                             <div className="uk-margin-bottom">
-                                <Field type="checkbox" name="ssl" validate={[]} component={renderField}/>
-                                <label className="uk_dp1 uk-text-muted">SSL</label>
+                                <Field name="ACL" type="text" validate={[required]} component={renderField} label="ACL"/>
                             </div>
+
+
                             <div className="uk-margin-bottom">
-                                <Field type="checkbox" name="tls" validate={[]} component={renderField}/>
-                                <label className="uk_dp1 uk-text-muted">TLS</label>
-                            </div>
-                            <h3>Test smtp</h3>
-                            <div className="uk-margin-bottom">
-                                <label>email for send test mail</label>
-                                <input type="text" className="md-input label-fixed"/>
-                            </div>
-                            <div className="uk-margin-bottom">
-                                <a className="md-btn md-btn-success" href="settings_units.html">SEND</a>
-                            </div>
-                            <div className="uk-margin-bottom">
-                                {editing && this.props.smtp.id&& <DeleteButton handleDelete={handleDelete} id={this.props.smtp.id} />}
+                                {editing && this.props.role.id&& <DeleteButton handleDelete={handleDelete} id={this.props.role.id} />}
                                 <button className="md-btn md-btn-primary alignright" type="submit">
                                     SAVE
                                 </button>
@@ -76,21 +66,21 @@ class SmtpForm extends Component {
 
 
 function mapStateToProps(state, ownProps) {
-    const smtpId = ownProps.params.smtpId;
-    const smtp = state.smtps.data.filter((smtp) => parseInt(smtp.id, 10) === parseInt(smtpId, 10));
+    const roleId = ownProps.params.roleId;
+    const role = state.roles.data.filter((role) => parseInt(role.id, 10) === parseInt(roleId, 10));
 
-    if (smtp.length > 0) {
+    if (role.length > 0) {
         return {
-            initialValues: smtp.length > 0 ? smtp[0] : {},
+            initialValues: role.length > 0 ? role[0] : {},
         };
     }
     return {};
 
 }
 
-SmtpForm = reduxForm({
-    form: 'smtpForm'
-})(SmtpForm);
+RoleForm = reduxForm({
+    form: 'roleForm'
+})(RoleForm);
 
-export default connect(mapStateToProps)(SmtpForm);
+export default connect(mapStateToProps)(RoleForm);
 

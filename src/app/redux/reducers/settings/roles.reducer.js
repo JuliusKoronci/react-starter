@@ -1,4 +1,4 @@
-import {ROLES_RECEIVED} from '../../constants';
+import {ROLES_RECEIVED, ROLE_RECEIVED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -13,6 +13,9 @@ export default function roles(state = defaultState, action) {
     switch (action.type) {
         case ROLES_RECEIVED:
             return action.response;
+        case ROLE_RECEIVED:
+            return {...state,
+                'data': [...state.data, action.data.data]};
         default:
             return state;
     }

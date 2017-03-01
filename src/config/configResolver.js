@@ -1,6 +1,6 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, userReceived, unitReceived, imapReceived, smtpReceived } from '../app/redux/actions/settings.action';
+import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, userReceived, unitReceived, imapReceived, smtpReceived, roleReceived } from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
@@ -140,6 +140,16 @@ class configResolver {
             afterEntityReceivedAction: smtpReceived,
             redirectAfterCreation: paths.smtp,
             allowedFormFields: ['host','port','email','name','password','ssl','tls']
+        }
+    };
+
+    static getRoleConfig = (id) => {
+        return {
+            url: urls.ROLES_LIST + (id?'/'+id:''),
+            urlList: urls.ROLES_LIST,
+            afterEntityReceivedAction: roleReceived,
+            redirectAfterCreation: paths.roles,
+            allowedFormFields: ['title','description','is_active','order','homepage','acl']
         }
     };
 
