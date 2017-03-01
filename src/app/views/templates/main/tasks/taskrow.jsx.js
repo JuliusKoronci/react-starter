@@ -19,7 +19,7 @@ const taskrow = ({task}) => {
             </td>
 
             <td>{task.requestedBy.username}</td>
-            <td>{task.createdBy.company.title}</td>
+            <td>{task.company.title}</td>
 
 
             <td>
