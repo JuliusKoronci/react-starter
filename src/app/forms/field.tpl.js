@@ -4,6 +4,7 @@ import React from 'react';
 import RTE from '../forms/general/rte/RTE.form';
 import Tagger from '../forms/general/Tagger.form';
 import Colorpicker from '../forms/general/Colorpicker.form';
+import Multicheckbox from '../forms/general/Multicheckbox.form';
 
 export const renderField = ({input, label, type, actions, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
@@ -60,23 +61,6 @@ export const renderSelect = ({input, options, label, action, meta: {touched, err
 
 export const renderTagger = ({input,tagValues,defaultOptions,label,icon,action,setValues}) => {
 
-
-
-    {/*<div className="uk-input-group" style={{marginTop: '10px'}}>*/}
-        {/*{icon && <span className="uk-input-group-addon"><i className="material-icons">&#xE893;</i></span>}*/}
-        {/*<label htmlFor={input.name}>{label}</label>*/}
-        {/*<Creatable name={input.name}*/}
-                   {/*className="md-input"*/}
-                   {/*value={tagValues}*/}
-                   {/*joinValues={true}*/}
-                   {/*multi={true}*/}
-                   {/*options={defaultOptions}*/}
-                   {/*onChange={input.onChange(input.value)}*/}
-
-                   {/*{...input}*/}
-        {/*/>*/}
-    {/*</div>*/}
-
     return (
 
         <div>
@@ -86,6 +70,10 @@ export const renderTagger = ({input,tagValues,defaultOptions,label,icon,action,s
     );
 };
 
+
+export const renderMulticheckbox = ({input, options, label, action, meta: {touched, error, warning}}) => (
+    <Multicheckbox {...input} input={input} options={options} />
+);
 
 
 // export const renderSelect = ({input, label, type, options, defaultValue, action, meta: {touched, error, warning}}) => (

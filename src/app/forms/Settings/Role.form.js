@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
-import {renderField, renderSelect} from '../field.tpl';
+import {renderField, renderSelect, renderMulticheckbox} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
+import configAcl from '../../../config/configRoles';
 
 class RoleForm extends Component {
 
@@ -12,6 +13,19 @@ class RoleForm extends Component {
     // componentDidUpdate(){
     //     console.log(this.props.company);
     // }
+
+
+    addValue = (value) => {
+        console.log('add ' + value);
+    };
+    removeValue = (value) => {
+        console.log('remove ' + value);
+    };
+
+    checkClick = (e) => {
+        //e.target.checked ? this.addValue.bind(null,acl) : this.removeValue.bind(null,acl)
+        console.log(e.target.checked)
+    };
 
 
     render() {
@@ -28,28 +42,76 @@ class RoleForm extends Component {
                         <div className="uk-width-medium-1-2">
                             <div className="uk-margin-bottom">
                                 <Field name="is_active" type="checkbox" validate={[]} component={renderField}
-                                   label="Active"/>
+                                       label="Active"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="order" type="text" validate={[required]} component={renderField} label="Order"/>
+                                <Field name="order" type="text" validate={[required]} component={renderField}
+                                       label="Order"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="title" type="text" validate={[required]} component={renderField} label="Role Name"/>
+                                <Field name="title" type="text" validate={[required]} component={renderField}
+                                       label="Role Name"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="homepage" type="text" validate={[required]} component={renderField} label="Homepage"/>
+                                <Field name="homepage" type="text" validate={[required]} component={renderField}
+                                       label="Homepage"/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <Field name="description" type="text" validate={[required]} component={renderField} label="Description"/>
+                                <Field name="description" type="text" validate={[required]} component={renderField}
+                                       label="Description"/>
                             </div>
 
+
+
+                             {/*let fruitsArray = [apple, orange, cherry,...];*/}
+
+                             {/*{fruitsArray.map((fruit, index) =>*/}
+                             {/*<div key={index}>*/}
+                             {/*<input*/}
+                             {/*type="checkbox"*/}
+                             {/*value={fruit}*/}
+                             {/*onChange={e => e.target.checked ? fruits.addField(e.target.value) : fruits.removeField(fruits.indexOf(e.target.value))} />*/}
+                             {/*</div>*/}
+                             {/*)}*/}
+
+
+
                             <div className="uk-margin-bottom">
-                                <Field name="ACL" type="text" validate={[required]} component={renderField} label="ACL"/>
+                                <Field name="acl" type="text" validate={[required]} component={renderMulticheckbox} options={configAcl}
+                                       label="ACL"/>
                             </div>
 
 
+
+
+                            {/*{configAcl.map((acl, i) => {*/}
+
+                                {/*const fieldName = 'acl.' + acl;*/}
+                                {/*console.log(this.props.acl);*/}
+                                {/*/!*const checked=Array.isArray(this.props.acl) && this.props.acl.indexOf(acl)!=-1?'checked':'';*!/*/}
+                                {/*const checked=!!(this.props.acl && typeof this.props.acl[acl] != "undefined" && this.props.acl[acl]);*/}
+
+                                {/*return (*/}
+                                    {/*<div key={i}>*/}
+                                        {/*<label >*/}
+                                            {/*<input name={fieldName} type="checkbox" value={acl}*/}
+                                                   {/*label={acl} onClick={this.checkClick} defaultChecked={checked} checked={checked} />*/}
+                                            {/*{acl} {checked}*/}
+                                        {/*</label>*/}
+                                    {/*</div>*/}
+
+                                {/*)*/}
+                            {/*})*/}
+                            {/*}*/}
+
+
+
+
+
+
                             <div className="uk-margin-bottom">
-                                {editing && this.props.role.id&& <DeleteButton handleDelete={handleDelete} id={this.props.role.id} />}
+                                {editing && this.props.role.id &&
+                                <DeleteButton handleDelete={handleDelete} id={this.props.role.id}/>}
                                 <button className="md-btn md-btn-primary alignright" type="submit">
                                     SAVE
                                 </button>
@@ -66,15 +128,78 @@ class RoleForm extends Component {
 
 
 function mapStateToProps(state, ownProps) {
+
+
     const roleId = ownProps.params.roleId;
     const role = state.roles.data.filter((role) => parseInt(role.id, 10) === parseInt(roleId, 10));
 
+
+
     if (role.length > 0) {
+        let initialValues = role[0];
+        // let acl = Object.assign({}, eval(initialValues.acl));
+        // let acl = eval(initialValues.acl);
+
+        // console.log(eval(initialValues.acl));
+
+        // let acl = (initialValues.acl +'').split(',');
+        // let acl = eval(initialValues.acl);
+
+        // let acl = (initialValues.acl +'').split(',');
+        // console.log(acl);
+
+
+        // let newAcl={};
+
+        // configAcl.map(value => {
+        //      // console.log({[value]:initialValues.acl.indexOf(value)!=-1});
+        //
+        //
+        //     // console.log('Array? '+Array.isArray(acl));
+        //
+        //
+        //     newAcl[value] = acl.indexOf(value) != -1;
+        //
+        //
+        //     //
+        //     // try {
+        //     //     newAcl[value] = acl.indexOf(value) != -1;
+        //     // }catch(e){
+        //     //     console.log(acl, e);
+        //     // }
+        //
+        //
+        //
+        //     // return {[value]:!!initialValues.acl.indexOf(value)};
+        //     // newAcl.push({value:!!initialValues.acl.indexOf(value)});
+        //     // return value: !!initialValues.acl.indexOf(value)
+        //     }
+        // );
+
+
+        // const generatedAcl = configAcl.map(value => {
+        //     return {
+        //
+        //         value: !!initialValues.acl.indexOf(value),
+        //         label: value
+        //     }
+        // });
+
+
+        // console.log('obj',newAcl);
+
+        // initialValues.acl = generatedAcl;
+        // initialValues.acl = newAcl;
+        // initialValues['aclko']=newAcl;
+
+
         return {
-            initialValues: role.length > 0 ? role[0] : {},
+            initialValues: initialValues,
+            // acl:newAcl
         };
     }
-    return {};
+
+    return {acl:{}};
 
 }
 

@@ -1,4 +1,4 @@
-export const acl = [
+const acl = [
     'login_to_system',
     'share_filters',
     'project_shared_filters',
@@ -20,3 +20,5 @@ export const acl = [
     'imap_settings',
     'smtp_settings'
 ];
+
+export default acl;

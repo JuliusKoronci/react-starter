@@ -14,6 +14,11 @@ export default function roles(state = defaultState, action) {
         case ROLES_RECEIVED:
             return action.response;
         case ROLE_RECEIVED:
+
+            // action.data.data.acl=eval(action.data.data.acl);
+            //let data=action.data.data.acl;
+            //console.log(data);
+
             return {...state,
                 'data': [...state.data, action.data.data]};
         default:

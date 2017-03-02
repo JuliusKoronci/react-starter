@@ -51,10 +51,9 @@ function mapStateToProps(state, ownProps) {
     const roleId = ownProps.params.roleId;
     const role = state.roles.data.filter((role) => parseInt(role.id, 10) === parseInt(roleId, 10));
 
-    return {
-        role: role.length > 0 ? role[0] : false,
-
-    };
+    if(role.length > 0) {
+        return {role: role[0]};
+    }else{return {role:false}}
 
 }
 
