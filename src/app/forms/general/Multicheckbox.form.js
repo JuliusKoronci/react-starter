@@ -4,20 +4,37 @@ class Multicheckbox extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {values: {}};
-        console.log('options',props.options);
+        this.state = {inputValue: []};
     }
 
     componentDidUpdate() {
         console.log('did update');
+        if(this.state.inputValue!=this.props.input.value) {
+            this.setState({
+                inputValue: this.props.input.value
+            });
+        }
     }
 
     onChange = (value,e) => {
 
         let inputValue=this.props.input.value;
-        console.log(e.target.checked);
-        console.log(value);
-        console.log(Array.isArray(inputValue));
+
+        console.log('%c ********************', 'color: green; font-weight: bold;');
+        console.log('input value is ',inputValue);
+
+        if (typeof inputValue === 'string' || inputValue instanceof String){
+            inputValue.split(',');
+            console.log('was string, spliced, is array? '+Array.isArray(inputValue));
+            if(!Array.isArray(inputValue)){
+                inputValue=[];
+            }
+        }
+
+
+        console.log('checked: '+e.target.checked);
+        console.log('clicked on: ' + value);
+        console.log('is array? ' + Array.isArray(inputValue));
         let newValue=inputValue;
         if(e.target.checked) {
             newValue.push(value);
@@ -28,13 +45,14 @@ class Multicheckbox extends Component {
             }
         }
         console.log('new value: '+newValue);
-        // this.props.input.onChange(values);
-        // let newValue = values.map(value => {
-        //     return value.value;
-        // }).join();
-        // console.log(newValue);
-        this.props.input.onChange(newValue);
+
+
+        this.setState({inputValue: newValue});
+        this.props.onChange(newValue);
     };
+
+
+
 
 
     render() {
@@ -50,20 +68,20 @@ class Multicheckbox extends Component {
         //     const values={};
         // }
 
-
-
+        const inputValue=this.state.inputValue;
 
 
         return (
             <div>
-                <input type="text" value={this.props.input.value} name={this.props.input.name} {...this.props.input}/>
+                {/*<input type="text" value={this.props.input.value} name={this.props.input.name} {...this.props.input} />*/}
+                <input type="text" value={inputValue} name={this.props.input.name} onChange={this.props.input.onChange.bind(null,inputValue)} />
                 <label htmlFor={this.props.input.name}>{this.props.label}</label>
 
 
                 {this.props.options.map((option, i) => {
 
                 const fieldName = 'acls_' + option;
-                const checked=Array.isArray(this.props.input.value) && this.props.input.value.indexOf(option)!=-1;
+                const checked=Array.isArray(inputValue) && inputValue.indexOf(option)!=-1;
 
 
                 return (
@@ -71,7 +89,7 @@ class Multicheckbox extends Component {
                 <label >
                 <input name={fieldName} type="checkbox" value={option} onChange={this.onChange.bind(null,option)}
                 label={option} onClick={this.checkClick} checked={checked} />
-                {option} {checked} isarray? {Array.isArray(this.props.input.value)?'true':'false'}
+                {option} {checked} isarray? {Array.isArray(inputValue)?'is array':'isnt array'}
                 </label>
                 </div>
 
