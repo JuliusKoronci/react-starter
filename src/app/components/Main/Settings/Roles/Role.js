@@ -29,7 +29,7 @@ class Role extends Component {
 
 
     onSubmit = (values) => {
-        
+
         values.acl=values.acl.join();
 
         this.roleConfig = configResolver.getRoleConfig(this.props.params.roleId );
