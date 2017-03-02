@@ -49,6 +49,12 @@ class UserForm extends Component {
                 <h3 className="full_width_in_card heading_c">
                     General info
                 </h3>
+                <div className="uk-margin">
+                {editing &&
+                <Field name="is_active" type="checkbox" validate={[]} component={renderField}
+                       label="Active"/>
+                }
+                </div>
                 <div className="uk-grid" data-uk-grid-margin>
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
                         <Field name="username" type="text" validate={[required]} component={renderField} id="user_edit_username_control" className="md-input" label="User name"/>
@@ -89,12 +95,6 @@ class UserForm extends Component {
                                label="Signature"/>
                     </div>
                 </div>
-
-
-                {editing &&
-                <Field name="is_active" type="checkbox" validate={[]} component={renderField}
-                       label="Active"/>
-                }
 
                 {!editing &&
                 <div className="uk-grid">
