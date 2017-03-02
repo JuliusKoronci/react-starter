@@ -12,17 +12,18 @@ const roles = (props) => {
                     <h1 className="heading_b uk-margin-bottom">Roles</h1>
                 </div>
                 <hr/>
+                {/*
                 <div className="uk-input-group">
                     <span className="uk-input-group-addon"><i className="material-icons md-24">&#xE8B6;</i></span>
                     <input type="text" className="md-input"/>
                     <span className="uk-input-group-addon"><a className="md-btn md-btn-primary" href="#">Search</a></span>
                 </div>
-
+                */}
                 <table className="uk-table uk-text-nowrap">
                     <thead>
                     <tr>
                         <th>Order</th>
-                        <th>Customer</th>
+                        <th>Role name</th>
                         <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
                     </tr>

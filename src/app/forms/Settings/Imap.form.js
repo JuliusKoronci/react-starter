@@ -33,7 +33,7 @@ class ImapForm extends Component {
                             </div>
                             <div className="uk-margin-bottom">
                                 <Field name="move_email" type="text" validate={[required]} component={renderField}
-                                        label="Move email"/>
+                                        label="Folder for processed mails"/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <Field name="host" type="text" validate={[required]} component={renderField} label="Host"/>
