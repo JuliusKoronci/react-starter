@@ -32,7 +32,7 @@ const roles = (props) => {
                     {props.data.map((role, i) => {
                         return (
                         <tr key={i}>
-                        <td>{role.id}</td>
+                        <td>{role.order}</td>
                         <td>{role.title}</td>
                         <td className="uk-text-center">{role.is_active ? 'yes' : 'no'}</td>
                             <td className="uk-text-center">

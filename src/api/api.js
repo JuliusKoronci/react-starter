@@ -98,7 +98,7 @@ export function defaultRequest(url, method, data, resolvedConfig) {
     // return Promise.resolve(data);
 
 
-    if(method=='DELETE'){
+    if(method==='DELETE'){
         return fetch(url, config)
             .then(function (response) {
                 if (!response.ok) {

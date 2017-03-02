@@ -26,11 +26,6 @@ class StatusForm extends Component {
                     <hr/>
                     <form onSubmit={handleSubmit}>
                     <div className="uk-width-medium-1-2">
-                        <div className="uk-margin-bottom">
-                            <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                                   data-md-icheck/>
-                            <label className="uk_dp1 uk-text-muted">Active</label>
-                        </div>
 
                         <div className="uk-margin-bottom">
                             <Field name="title" type="text" validate={[required]} component={renderField}

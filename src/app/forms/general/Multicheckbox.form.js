@@ -7,8 +7,13 @@ class Multicheckbox extends Component {
         this.state = {inputValue: []};
     }
 
+
+    componentWillMount(){
+        console.log('will mount');
+    }
+
     componentDidUpdate() {
-        if (this.state.inputValue != this.props.input.value) {
+        if (this.state.inputValue !== this.props.input.value) {
             this.setState({
                 inputValue: this.props.input.value
             });
@@ -51,7 +56,7 @@ class Multicheckbox extends Component {
                 {this.props.options.map((option, i) => {
 
                     const fieldName = 'acls_' + option;
-                    const checked = Array.isArray(inputValue) && inputValue.indexOf(option) != -1;
+                    const checked = Array.isArray(inputValue) && inputValue.indexOf(option) !== -1;
 
                     return (
                         <div key={i}>
@@ -59,7 +64,7 @@ class Multicheckbox extends Component {
                                 <input name={fieldName} type="checkbox" value={option}
                                        onChange={this.onChange.bind(null, option)}
                                        label={option} onClick={this.checkClick} checked={checked}/>
-                                {option} {checked} isarray? {Array.isArray(inputValue) ? 'is array' : 'isnt array'}
+                                {option}
                             </label>
                         </div>
                     )

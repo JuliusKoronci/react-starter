@@ -64,9 +64,6 @@ class CompanyAddForm extends Component {
                                 </div>
                                 <div className="uk-margin-medium-top">
 
-                                    {this.props.params.companyId && <DeleteButton handleDelete={handleDelete}
-                                                                                  id={parseInt(this.props.params.companyId, 10)}/>}
-
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE
                                     </button>
@@ -89,10 +86,11 @@ function mapStateToProps(state, ownProps) {
 
     if (company.length > 0) {
         return {
-            initialValues: company.length > 0 ? company[0] : {},
+            initialValues: company[0]
         };
+    }else {
+        return{};
     }
-    return {};
 
 }
 

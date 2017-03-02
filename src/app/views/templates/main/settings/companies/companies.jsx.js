@@ -37,7 +37,6 @@ const companies = (props) => {
                         <td className="uk-text-center">{company.is_active ? 'yes' : 'no'}</td>
                         <td className="uk-text-center">
 
-                            {company.is_active && <DeleteButton handleDelete={props.handleDelete} id={company.id} />}
                             <Link to={generateRoute('companies_edit',{companyId:company.id})} className="md-btn md-btn-primary" >Edit</Link>
                         </td>
                     </tr>

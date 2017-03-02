@@ -28,7 +28,6 @@ const statuses = (props) => {
                         <th>Satus name</th>
                         <th className="uk-text-center">Description</th>
                         <th className="uk-text-center">Color</th>
-                        <th className="uk-text-center">Active</th>
                         <th className="uk-text-center">Action</th>
                     </tr>
                     </thead>
@@ -43,7 +42,6 @@ const statuses = (props) => {
                                 <td className="uk-text-center">
                                     <button className="md-btn" style={{backgroundColor:status.color}}>{status.color}</button>
                                 </td>
-                                <td className="uk-text-center">{status.is_active ? 'yes' : 'no'}</td>
                                 <td className="uk-text-center">
 
                                     {status.is_active && <DeleteButton handleDelete={props.handleDelete} id={status.id} />}
