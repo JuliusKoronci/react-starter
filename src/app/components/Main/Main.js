@@ -24,11 +24,12 @@ class Main extends Component {
     componentDidMount() {
         document.body.className = 'sidebar_main_open sidebar_main_swipe';
         this.props.actions.requestFilters();
+        this.props.actions.requestProjects();
+
     }
 
     componentWillMount() {
         this.isAuthenticated();
-
         this.props.actions.toggleSidebar(!!getFromStorage(SIDEBAR_IS_MINIFIED));
     }
 
@@ -105,7 +106,8 @@ function mapStateToProps(state) {
         load_count: state.async.load_count ? state.async.load_count : 0,
         user: state.auth.user,
         filter: state.filter,
-        sidebarIsMinified: state.settings.sidebarIsMinified
+        sidebarIsMinified: state.settings.sidebarIsMinified,
+        projects:state.projects.data
     };
 }
 function mapDispatchToProps(dispatch) {

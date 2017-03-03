@@ -2,8 +2,8 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 import {REQUEST_PROJECTS} from '../constants';
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
 import {projectsReceived} from '../actions/system.actions';
-import {defaultGET, defaultRequest, defaultPATCH, apiDownloadFile, defaultDeleteFile, apiUploadFile} from '../../../api/api';
-import {entityUpdated, entityCreated, entityDeleted} from '../../services/general';
+import {defaultGET} from '../../../api/api';
+
 import {PROJECT_LIST} from '../../../api/urls';
 function *loadProjects() {
     const url=PROJECT_LIST;

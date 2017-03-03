@@ -153,6 +153,16 @@ class configResolver {
         }
     };
 
+    static tasksConfig = (type,id) => {
+
+        switch(type){
+            case 'project':
+                return {url: urls.TASK_LIST + '?project=' + id};
+            default:
+                return {url: urls.TASK_LIST}
+        }
+    };
+
     static getDownloadFileConfig = () => {
         return {
             url: urls.LOAD_ATTACHMENT

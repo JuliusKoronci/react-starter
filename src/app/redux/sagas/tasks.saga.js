@@ -3,6 +3,7 @@ import {
     REQUEST_DEFAULT_TASKS,
     REQUEST_TASKS_FROM_URL,
     REQUEST_TASK_BY_ID,
+    REQUEST_TASKS_WITH_PARAMS,
     TASK_UPDATED,
     TASK_STATUS_UPDATED,
     TASK_UPLOADED
@@ -10,7 +11,7 @@ import {
 import {endAjax, startAjaxReset, asyncError} from '../actions/async.action';
 import {tasksReceived, taskReceived, taskAttachmentUploaded} from '../actions/tasks.action';
 import {defaultFilter, getTasksFromUrl, getTaskById, updateTask as updateApi, uploadApi} from '../../../api/tasks/tasks.api';
-import {defaultPOST, defaultPATCH} from '../../../api/api';
+import {defaultPOST, defaultPATCH, defaultGET} from '../../../api/api';
 import {entityUpdated} from '../../services/general';
 
 function *defaultTasks(action) {
@@ -34,6 +35,17 @@ function *loadTasksUrl(action) {
     yield put(startAjaxReset());
     try {
         const data = yield call(getTasksFromUrl, action.url);
+        yield put(tasksReceived(data));
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
+function *loadTasksWithParams(action) {
+    yield put(startAjaxReset());
+    try {
+        const data = yield call(defaultGET, action.url);
         yield put(tasksReceived(data));
     } catch (e) {
         yield put(asyncError(e));
@@ -92,6 +104,7 @@ function *uploadTask(action) {
 
 export function *loadTasksFromUrl() {
     yield takeLatest(REQUEST_TASKS_FROM_URL, loadTasksUrl);
+    yield takeLatest(REQUEST_TASKS_WITH_PARAMS, loadTasksWithParams);
     yield takeLatest(REQUEST_TASK_BY_ID, loadTaskById);
     yield takeLatest(TASK_UPDATED, updateTask);
     yield takeLatest(TASK_STATUS_UPDATED, updateStatus);

@@ -2,6 +2,7 @@ import {
     REQUEST_DEFAULT_TASKS,
     TASKS_RECEIVED,
     REQUEST_TASKS_FROM_URL,
+    REQUEST_TASKS_WITH_PARAMS,
     REQUEST_TASK_BY_ID,
     TASK_RECEIVED,
     TASK_UPDATED,
@@ -24,6 +25,14 @@ export function requestTasksFromUrl(url) {
     return {
         type: REQUEST_TASKS_FROM_URL,
         url
+    }
+}
+
+
+export function requestTasks(config) {
+    return {
+        type: REQUEST_TASKS_WITH_PARAMS,
+        url:config.url
     }
 }
 
