@@ -23,7 +23,7 @@ class ProfileForm extends Component {
 
                     <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                         <div className="fileinput-new thumbnail">
-                            <Image src={ user && user.image? LOAD_ATTACHMENT + '/'+user.image:'assets/img/avatars/user.png'} staticSrc='assets/img/avatars/user.png' fetchFromApi={!!(user && user.image)} alt="user avatar" />
+                            <Image src={ user && user.image? LOAD_ATTACHMENT + '/'+user.image:'/assets/img/avatars/user.png'} staticSrc='/assets/img/avatars/user.png' fetchFromApi={!!(user && user.image)} alt="user avatar" />
                         </div>
                         <div className="fileinput-preview fileinput-exists thumbnail"></div>
                         <div className="user_avatar_controls">
