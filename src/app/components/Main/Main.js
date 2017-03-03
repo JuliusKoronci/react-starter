@@ -25,6 +25,7 @@ class Main extends Component {
         document.body.className = 'sidebar_main_open sidebar_main_swipe';
         this.props.actions.requestFilters();
         this.props.actions.requestProjects();
+        this.props.actions.requestTags();
 
     }
 
@@ -107,7 +108,8 @@ function mapStateToProps(state) {
         user: state.auth.user,
         filter: state.filter,
         sidebarIsMinified: state.settings.sidebarIsMinified,
-        projects:state.projects.data
+        projects:state.projects.data,
+        tags:state.tags.data
     };
 }
 function mapDispatchToProps(dispatch) {

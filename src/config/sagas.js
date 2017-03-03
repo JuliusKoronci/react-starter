@@ -14,7 +14,7 @@ import {loadSmtpsDefault} from '../app/redux/sagas/smtps.saga.js';
 import {loadProjectSharedFiltersDefault} from '../app/redux/sagas/project_shared_filters.saga';
 import {loadSharedFiltersDefault} from '../app/redux/sagas/shared_filters.saga';
 import {loadUnitsDefault} from '../app/redux/sagas/units.saga';
-import {loadProjectsDefault} from '../app/redux/sagas/system.saga';
+import {loadProjectsDefault,loadTagsDefault} from '../app/redux/sagas/system.saga';
 import {loadUserAttributesDefault} from '../app/redux/sagas/user_attributes.saga';
 import {loadEntityDefault,createEntityDefault,updateEntityDefault,deleteEntityDefault, downloadFileDefault,deleteFileDefault,uploadFileDefault} from '../app/redux/sagas/general.saga';
 
@@ -39,6 +39,7 @@ export default function* root() {
     yield fork(loadSharedFiltersDefault);
     yield fork(loadUnitsDefault);
     yield fork(loadProjectsDefault);
+    yield fork(loadTagsDefault);
 
     yield fork(downloadFileDefault);
     yield fork(loadEntityDefault);

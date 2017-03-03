@@ -1,4 +1,4 @@
-import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED,REQUEST_PROJECTS}
+import {FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED,REQUEST_PROJECTS, REQUEST_TAGS, TAGS_RECEIVED}
 from '../constants';
 
 export function requestFilters() {
@@ -12,6 +12,12 @@ export function requestProjects() {
     }
 }
 
+export function requestTags() {
+    return {
+        type: REQUEST_TAGS
+    }
+}
+
 export function filtersReceived(data) {
     return {
         type: FILTERS_RECEIVED,
@@ -22,6 +28,13 @@ export function filtersReceived(data) {
 export function projectsReceived(data) {
     return {
         type: PROJECTS_RECEIVED,
+        data
+    }
+}
+
+export function tagsReceived(data) {
+    return {
+        type: TAGS_RECEIVED,
         data
     }
 }

@@ -2,11 +2,11 @@ import React from 'react';
 import Header from './header.jsx'
 import Sidebar from './sidebar.jsx';
 
-export default ({children, user, actions, filter, sidebarIsMinified, projects}) => {
+export default ({children, user, actions, filter, sidebarIsMinified, projects, tags}) => {
     return (
         <div>
             <Header user={user} logout={actions.logout} sidebarIsMinified={sidebarIsMinified} toggleSidebar={actions.toggleSidebar} />
-            <Sidebar filter={filter} projects={projects} />
+            <Sidebar filter={filter} projects={projects} tags={tags} />
             <div id="page_content">
                 <div id="page_content_inner">
                     <div className="md-card">

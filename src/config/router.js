@@ -103,7 +103,8 @@ export const paths = {
     'report_user':'/reports/user',
     'reports_custom':'/reports/custom',
     'filters':'/dashboard/:filterId',
-    'project_tasks':'/project/:projectId'
+    'project_tasks':'/project-tasks/:projectId',
+    'tag_tasks':'/tag-tasks/:tagId'
 
 
 };
@@ -136,6 +137,7 @@ export default (
             <Route name="filter" path={paths.filter} component={Filter}/>
 
             <Route path={paths.project_tasks} component={TaskList}/>
+            <Route path={paths.tag_tasks} component={TaskList}/>
 
             <Route name="settings" path={paths.settings} component={Settings}/>
             <Route name="automated-tasks" path={paths.automated_tasks_add} component={AutomatedTask}/>

@@ -158,6 +158,8 @@ class configResolver {
         switch(type){
             case 'project':
                 return {url: urls.TASK_LIST + '?project=' + id};
+            case 'tag':
+                return {url: urls.TASK_LIST + '?tag=' + id};
             default:
                 return {url: urls.TASK_LIST}
         }

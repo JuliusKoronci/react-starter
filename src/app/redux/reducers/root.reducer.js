@@ -19,6 +19,7 @@ import units from './settings/units.reducer';
 import userAttributes from './settings/user_attributes.reducer';
 import settingsReducer from './system/settings.reducer';
 import projectsReducer from './system/project.reducer';
+import tagsReducer from './system/tags.reducer';
 import profileReducer from './profile/profile.reducer';
 import {REDUX_RESET} from '../constants';
 
@@ -43,7 +44,8 @@ const appReducer = combineReducers({
     userAttributes: userAttributes,
     units: units,
     projects: projectsReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    tags: tagsReducer
 });
 
 const rootReducer = (state, action) => {

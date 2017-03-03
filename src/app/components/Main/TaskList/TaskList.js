@@ -9,14 +9,25 @@ class TaskList extends Component {
 
     componentDidMount() {
 
-        this.config=configResolver.tasksConfig('project',this.props.params.projectId);
+        if(this.props.params.projectId) {
+            this.config = configResolver.tasksConfig('project', this.props.params.projectId);
+        }
+        if(this.props.params.tagId){
+            this.config = configResolver.tasksConfig('tag', this.props.params.tagId);
+        }
 
         this.props.actions.requestTasks(this.config);
     }
 
     componentDidUpdate(prevProps) {
 
-        this.config=configResolver.tasksConfig('project',this.props.params.projectId);
+        if(this.props.params.projectId) {
+            this.config = configResolver.tasksConfig('project', this.props.params.projectId);
+        }
+        if(this.props.params.tagId){
+            this.config = configResolver.tasksConfig('tag', this.props.params.tagId);
+        }
+
 
         if (prevProps.params !== this.props.params) {
             this.props.actions.requestTasks(this.config);

@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {generateRoute,paths} from '../../../config/router';
 
-const sidebar = ({filter,projects}) => {
+const sidebar = ({filter,projects,tags}) => {
     return (
         <aside id="sidebar_main">
             <div className="sidebar_main_header">
@@ -38,6 +38,25 @@ const sidebar = ({filter,projects}) => {
             </div>
             <div className="menu_section">
                 <ul>
+
+                    <li>
+                        <a href="#"><span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
+                            <span className="menu_title">Tags</span>
+                        </a>
+
+                        <ul style={{display:'block'}} >
+                            {tags.map((tag, i) => {
+                                const link=generateRoute('tag_tasks',{tagId:tag.id});
+                                return <li key={i}>
+                                    <Link to={link}
+                                          className="uk-text-large">
+                                        {tag.title}
+                                    </Link>
+                                </li>
+                            })}
+                        </ul>
+                    </li>
+
                     <li>
                             <a href="#"><span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Projects</span>
