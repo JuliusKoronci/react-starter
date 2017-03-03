@@ -135,6 +135,18 @@ function *fileUpload(action) {
 }
 
 
+// function *getImageBlob(action) {
+//     yield put(startAjax());
+//     try {
+//         return yield call(apiGetBlob, action.url);
+//     } catch (e) {
+//         yield put(asyncError(e));
+//     }
+//     yield put(endAjax());
+// }
+
+
+
 export function *downloadFileDefault() {
     yield takeEvery(REQUEST_DOWNLOAD_FILE, downloadFile);
 }

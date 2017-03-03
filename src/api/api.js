@@ -173,6 +173,25 @@ export function apiDownloadFile(url) {
 }
 
 
+export function apiGetBlob(url) {
+    const token = getFromStorage(TOKEN_KEY);
+
+    let config = {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    };
+
+    return fetch(url, config)
+        .then(function (response) {
+            return response.blob();
+        }).then(function (blob) {
+            return blob;
+            // return Promise.resolve(blob);
+        });
+}
+
 
 export function apiUploadFile(url, data) {
     let config = {
