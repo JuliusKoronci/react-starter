@@ -2,9 +2,14 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {generateRoute,paths} from '../../../config/router';
 
-const sidebar = ({filter,projects,tags,sidebarClickEvent}) => {
+const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActive}) => {
+
+    const projectId=params.projectId;
+    const tagId=params.tagId;
+
+
     return (
-        <aside id="sidebar_main">
+        <aside id="sidebar_main" style={{overflow:'auto'}}>
             <div className="sidebar_main_header">
                 <div className="align-logo">
                     <Link to='/' className="uk-text-large"><h1 className="heading_a md-color-white">LAN HELPDESK
@@ -38,18 +43,18 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent}) => {
             </div>
             <div className="menu_section">
                 <ul>
-
-                    <li>
-                        <a href="#"><span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
+                    <li className={tagId?"submenu_trigger act_section":'submenu_trigger'} >
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={tagId?'active':''} ><span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Tags</span>
                         </a>
 
-                        <ul style={{display:'block'}} >
+                        <ul >
                             {tags.map((tag, i) => {
                                 const link=generateRoute('tag_tasks',{tagId:tag.id});
+
                                 return <li key={i}>
                                     <Link to={link}
-                                          className="uk-text-large">
+                                          className={tag.id==tagId?'active uk-text-large':'uk-text-large'} >
                                         {tag.title}
                                     </Link>
                                 </li>
@@ -57,23 +62,27 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent}) => {
                         </ul>
                     </li>
 
-                    <li>
-                            <a href="#"><span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
+
+
+                    <li className={projectId?"submenu_trigger act_section":'submenu_trigger'} >
+                            <a href="#" onClick={menuToggleActive.bind(null)} className={projectId?'active':''} ><span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Projects</span>
                             </a>
 
-                        <ul style={{display:'block'}} >
+                        <ul>
                             {projects.map((project, i) => {
                                 const link=generateRoute('project_tasks',{projectId:project.id});
                                 return <li key={i}>
                                     <Link to={link}
-                                          className="uk-text-large">
+                                          className={project.id==projectId?'active uk-text-large':'uk-text-large'} >
                                     {project.title}
                                     </Link>
                                     </li>
                             })}
                         </ul>
                     </li>
+
+
 
                     <li>
                         <Link to='/reports/companies' className="uk-text-large">
