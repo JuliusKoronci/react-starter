@@ -8,7 +8,7 @@ class FilterForm extends Component {
 
     render() {
         return (
-            <div className="uk-width-medium-1-4" id="filterDiv">
+            <div className={this.props.filterFormVisible?"uk-width-medium-1-4":'hidden'} id="filterDiv">
 
                 <a className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
                    href="javascript:void(0)">CLEAR</a>

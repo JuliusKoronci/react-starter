@@ -2,17 +2,19 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import { Creatable } from 'react-select';
 import Select from 'react-select';
+import Task from '../tasks/taskrow.jsx';
+import Pagination from '../_partials/pagination.jsx';
 
 const FilterTasks = (props) => {
     return (
-                    <div className="uk-width-medium-3-4" id="tasksDiv">
+                    <div className={props.filterFormVisible?"uk-width-medium-3-4":"uk-width-medium-4-4"} id="tasksDiv">
                         <a className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
                            href="javascript:void(0)">DELETE</a>
 
 
                         <button className="md-btn md-btn-primary md-btn-small" type="button" id="filterButon" value="Hide" onClick={props.toggleFilter.bind(null)} >
                             <span className="menu_icon"><i className="material-icons md-color-white">&#xE152;</i></span>
-                            <span className="menu_title">SHOW</span>
+                            <span className="menu_title">{props.filterFormVisible?'HIDE':'SHOW'}</span>
                         </button>
 
 
@@ -36,44 +38,13 @@ const FilterTasks = (props) => {
                                 </thead>
                                 <tbody>
 
-                                <tr>
-                                    <td className="uk-text-center uk-table-middle small_col"><input type="checkbox" data-md-icheck className="check_row" /></td>
-                                    <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">ALTR-1</span></td>
-                                    <td>
-                                        <a href="page_issue_details.html" className="uk-text-large"> Velit omnis sed voluptatibus exercitationem dolor autem cupiditate.</a>
-                                        <p className="uk-margin-remove"> <span className="uk-badge uk-badge-success">major</span>
-                                            <span className="uk-badge uk-badge-warning">critical</span>
-                                            <span className="uk-badge uk-badge-danger">blocker</span>
-                                            <span className="uk-badge uk-badge-info">minor</span>
-                                        </p>
-                                    </td>
-                                    <td>Zachary Larson</td>
-                                    <td>Company 1</td>
-                                    <td>Agent 1</td>
-                                    <td>22/Jun/16</td>
-                                    <td>16/Jun/16</td>
-                                    <td><span className="uk-badge uk-badge-open">OPEN</span></td>
-                                </tr>
+                                {props.tasks.data.map((task, i) => {
+                                    return <Task task={task} key={i} index={i}/>
+                                })}
 
 
-                                <tr>
-                                    <td className="uk-text-center uk-table-middle small_col"><input type="checkbox" data-md-icheck className="check_row" /></td>
-                                    <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">ALTR-2</span></td>
-                                    <td>
-                                        <a href="page_issue_details.html" className="uk-text-large"> Quidem reiciendis modi optio ratione consequatur nam numquam.</a>
-                                        <p className="uk-margin-remove"> <span className="uk-badge uk-badge-success">major</span>
-                                            <span className="uk-badge uk-badge-warning">critical</span>
-                                            <span className="uk-badge uk-badge-danger">blocker</span>
-                                            <span className="uk-badge uk-badge-info">minor</span>
-                                        </p>
-                                    </td>
-                                    <td>Vicky Halvorson</td>
-                                    <td>Company 1</td>
-                                    <td>Agent 1</td>
-                                    <td>26/Jun/16</td>
-                                    <td>8/Jun/16</td>
-                                    <td><span className="uk-badge uk-badge-new">NEW</span></td>
-                                </tr>
+
+
 
 
 
@@ -85,6 +56,51 @@ const FilterTasks = (props) => {
 
     );
 };
+
+
+/*
+
+ <tr>
+ <td className="uk-text-center uk-table-middle small_col"><input type="checkbox" data-md-icheck className="check_row" /></td>
+ <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">ALTR-1</span></td>
+ <td>
+ <a href="page_issue_details.html" className="uk-text-large"> Velit omnis sed voluptatibus exercitationem dolor autem cupiditate.</a>
+ <p className="uk-margin-remove"> <span className="uk-badge uk-badge-success">major</span>
+ <span className="uk-badge uk-badge-warning">critical</span>
+ <span className="uk-badge uk-badge-danger">blocker</span>
+ <span className="uk-badge uk-badge-info">minor</span>
+ </p>
+ </td>
+ <td>Zachary Larson</td>
+ <td>Company 1</td>
+ <td>Agent 1</td>
+ <td>22/Jun/16</td>
+ <td>16/Jun/16</td>
+ <td><span className="uk-badge uk-badge-open">OPEN</span></td>
+ </tr>
+
+
+ <tr>
+ <td className="uk-text-center uk-table-middle small_col"><input type="checkbox" data-md-icheck className="check_row" /></td>
+ <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">ALTR-2</span></td>
+ <td>
+ <a href="page_issue_details.html" className="uk-text-large"> Quidem reiciendis modi optio ratione consequatur nam numquam.</a>
+ <p className="uk-margin-remove"> <span className="uk-badge uk-badge-success">major</span>
+ <span className="uk-badge uk-badge-warning">critical</span>
+ <span className="uk-badge uk-badge-danger">blocker</span>
+ <span className="uk-badge uk-badge-info">minor</span>
+ </p>
+ </td>
+ <td>Vicky Halvorson</td>
+ <td>Company 1</td>
+ <td>Agent 1</td>
+ <td>26/Jun/16</td>
+ <td>8/Jun/16</td>
+ <td><span className="uk-badge uk-badge-new">NEW</span></td>
+ </tr>
+
+*/
+
 
 
 export default FilterTasks;

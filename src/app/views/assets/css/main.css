@@ -22,6 +22,7 @@
 /*.submenu_trigger ul{display:none;}*/
 /*.submenu_trigger.act_section ul{display:block !important;}*/
 
+.hidden{display:none;}
 .submenu_trigger a+ul{display:none;}
 .submenu_trigger a.active+ul{display:block !important;}
 
