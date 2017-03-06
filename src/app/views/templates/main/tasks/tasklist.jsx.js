@@ -3,13 +3,13 @@ import Task from './taskrow.jsx';
 import Pagination from '../_partials/pagination.jsx';
 
 
-const tasklist = ({tasks, loadTasksFunction, filter}) => {
+const tasklist = ({tasks, loadTasksFunction, filter, heading}) => {
 
 
     return (
         <div className="md-card-content">
             <div className="uk-margin-bottom" data-uk-margin>
-                <h1 className="heading_b uk-margin-bottom">{filter ? filter.title : 'Dashboard'}</h1>
+                <h1 className="heading_b uk-margin-bottom">{heading ? heading : 'Dashboard'}</h1>
             </div>
             <hr/>
             <button

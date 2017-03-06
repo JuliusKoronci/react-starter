@@ -16,20 +16,21 @@ class TaskList extends Component {
             this.config = configResolver.tasksConfig('tag', this.props.params.tagId);
         }
 
+
         this.props.actions.requestTasks(this.config);
     }
 
     componentDidUpdate(prevProps) {
 
-        if(this.props.params.projectId) {
-            this.config = configResolver.tasksConfig('project', this.props.params.projectId);
-        }
-        if(this.props.params.tagId){
-            this.config = configResolver.tasksConfig('tag', this.props.params.tagId);
-        }
-
-
         if (prevProps.params !== this.props.params) {
+
+            if(this.props.params.projectId) {
+                this.config = configResolver.tasksConfig('project', this.props.params.projectId);
+            }
+            if(this.props.params.tagId){
+                this.config = configResolver.tasksConfig('tag', this.props.params.tagId);
+            }
+
             this.props.actions.requestTasks(this.config);
         }
     }
@@ -40,20 +41,46 @@ class TaskList extends Component {
     };
 
     render() {
+
+
+
         return (
-            <View {...this.props} loadTasksFunction={this.loadTasksFunction}/>
+            <View {...this.props} loadTasksFunction={this.loadTasksFunction} />
         );
     }
 }
 
 function mapStateToProps(state, ownProps) {
     const filter = state.filter.filter((f) => {
-        return f.id == ownProps.params.filterId
+        return f.id === ownProps.params.filterId
     })[0];
+
+    let heading='Dashboard';
+
+    if(ownProps.params.projectId && Array.isArray(ownProps.projects)) {
+        const project = ownProps.projects.filter((f) => {
+            return f.id === ownProps.params.projectId
+        });
+
+        if(typeof project[0]!=='undefined') {
+            heading = project[0]['title'];
+        }
+    }
+
+    if(ownProps.params.tagId && Array.isArray(ownProps.tags)) {
+        const tag = ownProps.tags.filter((f) => {
+            return f.id === ownProps.params.tagId
+        });
+
+        if(typeof tag[0]!=='undefined') {
+            heading = tag[0]['title'];
+        }
+    }
 
     return {
         tasks: state.tasks,
-        filter
+        filter,
+        heading
     };
 }
 function mapDispatchToProps(dispatch) {

@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {generateRoute,paths} from '../../../config/router';
 
-const sidebar = ({filter,projects,tags}) => {
+const sidebar = ({filter,projects,tags,sidebarClickEvent}) => {
     return (
         <aside id="sidebar_main">
             <div className="sidebar_main_header">

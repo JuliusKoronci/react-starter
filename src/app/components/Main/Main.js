@@ -38,6 +38,7 @@ class Main extends Component {
         this.isAuthenticated();
         this.handleAsyncErrors();
 
+
         //minified or normal sidebar
         if (this.props.sidebarIsMinified) {
             document.body.classList.add('sidebar_mini');
@@ -85,7 +86,7 @@ class Main extends Component {
         const {authenticated} = this.props;
         if (authenticated) {
             return <Layout children={this.props.children} {...this.props}
-                           sidebarIsMinified={this.props.sidebarIsMinified}/>;
+                           sidebarIsMinified={this.props.sidebarIsMinified} />;
         }
 
         return null;
@@ -109,7 +110,7 @@ function mapStateToProps(state) {
         filter: state.filter,
         sidebarIsMinified: state.settings.sidebarIsMinified,
         projects:state.projects.data,
-        tags:state.tags.data
+        tags:state.tags.data,
     };
 }
 function mapDispatchToProps(dispatch) {

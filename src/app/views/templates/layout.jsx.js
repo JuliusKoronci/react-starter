@@ -10,7 +10,8 @@ export default ({children, user, actions, filter, sidebarIsMinified, projects, t
             <div id="page_content">
                 <div id="page_content_inner">
                     <div className="md-card">
-                            {children}
+                            {/*{children}*/}
+                        {React.cloneElement(children, {projects, tags})}
                     </div>
                 </div>
             </div>
