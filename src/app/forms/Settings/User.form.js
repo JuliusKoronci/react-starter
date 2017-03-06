@@ -7,6 +7,8 @@ import {availableLanguages} from '../../../config/config';
 import {LOAD_ATTACHMENT} from '../../../api/urls';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 import Image from '../../components/Main/Image';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
 
 class UserForm extends Component {
 
@@ -172,7 +174,7 @@ class UserForm extends Component {
                     User attributes
                 </h3>
                 <div className="uk-grid-margin">
-                    <a className="md-btn md-btn-danger" href="#">Cancel</a>
+                    <Link className="md-btn md-btn-danger" to={generateRoute('users')}>Cancel</Link>
                     <button type="submit" className="md-btn md-btn-primary alignright" href="#">Save</button>
                 </div>
             </div>
@@ -199,7 +201,7 @@ class UserForm extends Component {
                     </div>
                 </div>
                 <div className="uk-grid-margin">
-                    <a className="md-btn md-btn-danger" href="#">Cancel</a>
+                    <Link className="md-btn md-btn-danger" to={generateRoute('users')}>Cancel</Link>
                     <button type="submit" className="md-btn md-btn-primary alignright" href="#">Change password</button>
                 </div>
             </div>

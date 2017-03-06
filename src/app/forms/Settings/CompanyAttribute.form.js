@@ -5,6 +5,8 @@ import {required} from '../../../config/validation';
 import {renderField, renderSelect, renderTagger} from '../field.tpl';
 import Tag from '../../forms/tagger.jsx';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
 
 class CompanyAttributeForm extends Component {
 
@@ -99,7 +101,7 @@ class CompanyAttributeForm extends Component {
                                     <div className="uk-margin-medium-top">
                                         <div className="uk-text-danger">{formError}</div>
                                     </div>
-
+                                    <Link className="md-btn md-btn-danger" to={generateRoute('companies_attributes')}>Cancel</Link>
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE
                                     </button>

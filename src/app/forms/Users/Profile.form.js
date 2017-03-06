@@ -7,6 +7,8 @@ import {renderField, renderRTE, renderTextarea, renderSelect} from '../field.tpl
 import {LOAD_ATTACHMENT} from '../../../api/urls';
 import RTE from '../../forms/general/rte/RTE.form';
 import Image from '../../components/Main/Image';
+import {Link} from 'react-router';
+
 
 
 class ProfileForm extends Component {
@@ -171,7 +173,7 @@ class ProfileForm extends Component {
                             </div>
                         </div>
                         <div className="uk-grid-margin">
-                            <a className="md-btn md-btn-danger" href="#">Cancel</a>
+                            <Link className="md-btn md-btn-danger" to="/">Cancel</Link>
 
                             <button className="md-btn md-btn-primary alignright" type="submit">SAVE</button>
 
@@ -199,7 +201,7 @@ class ProfileForm extends Component {
                                 </div>
                             </div>
                             <div className="uk-grid-margin">
-                                <a className="md-btn md-btn-danger" href="#">Cancel</a>
+                                <Link className="md-btn md-btn-danger" to="/">Cancel</Link>
                                 <a className="md-btn md-btn-primary alignright" href="#">Change password</a>
                             </div>
                         </div>

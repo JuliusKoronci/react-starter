@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
 import {renderField, renderSelect} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
+
 
 class SmtpForm extends Component {
 
@@ -59,6 +62,7 @@ class SmtpForm extends Component {
                                 <a className="md-btn md-btn-success" href="settings_units.html">SEND</a>
                             </div>
                             <div className="uk-margin-bottom">
+                                <Link className="md-btn md-btn-danger" to={generateRoute('smtps')}>Cancel</Link>
                                 {editing && this.props.smtp.id&& <DeleteButton handleDelete={handleDelete} id={this.props.smtp.id} />}
                                 <button className="md-btn md-btn-primary alignright" type="submit">
                                     SAVE
