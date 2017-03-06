@@ -5,7 +5,8 @@ import Select from 'react-select';
 import FilterForm from '../../../../components/Main/Filter/FilterForm';
 import FilterTasks from '../../../../components/Main/Filter/FilterTasks';
 
-const Filter = (prop) => {
+const Filter = (props) => {
+
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -16,9 +17,9 @@ const Filter = (prop) => {
 
                 <div className="uk-grid uk-grid-divider" data-uk-grid-margin>
 
-                    <FilterForm />
+                    <FilterForm {...props} />
 
-                    <FilterTasks />
+                    <FilterTasks {...props} />
 
 
 
@@ -30,8 +31,5 @@ const Filter = (prop) => {
     );
 };
 
-Filter.propTypes = {
-    prop: PropTypes.object.isRequired
-};
 
 export default Filter;
