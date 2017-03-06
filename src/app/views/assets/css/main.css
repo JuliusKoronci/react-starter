@@ -18,7 +18,9 @@
 */
 
 /* 0. altair variables/mixins ======================== */
-
+.max-width-1000px {
+    max-width: 1000px;
+}
 .attachment-divide {
   margin: 5px;
 }

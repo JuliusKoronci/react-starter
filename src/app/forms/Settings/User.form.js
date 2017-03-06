@@ -19,7 +19,7 @@ class UserForm extends Component {
 
 <div className="md-card">
     <form onSubmit={handleSubmit}>
-        <div className="md-card-content">
+        <div className="md-card-content max-width-1000px">
             <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                 <div className="fileinput-new thumbnail">
                     {/*<img src={ user && user.image? LOAD_ATTACHMENT + '/'+user.image:'assets/img/avatars/user.png'} alt="user avatar"/>*/}

@@ -27,7 +27,7 @@ class StatusForm extends Component {
                     </div>
                     <hr/>
                     <form onSubmit={handleSubmit}>
-                    <div className="uk-width-medium-1-2">
+                    <div className="uk-width-medium-1-1 max-width-1000px">
 
                         <div className="uk-margin-bottom">
                             <Field name="title" type="text" validate={[required]} component={renderField}

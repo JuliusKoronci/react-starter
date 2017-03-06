@@ -20,7 +20,7 @@ class ProfileForm extends Component {
 
             <div className="md-card">
 
-                <div className="md-card-content">
+                <div className="md-card-content max-width-1000px">
                     <form onSubmit={handleSubmit}>
 
                     <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">

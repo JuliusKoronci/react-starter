@@ -28,7 +28,7 @@ class SmtpForm extends Component {
                             <h1 className="heading_b uk-margin-bottom">{heading}</h1>
                         </div>
                         <hr/>
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-1 max-width-1000px">
                             <div className="uk-margin-bottom">
                                 <Field name="email" type="text" validate={[required]} component={renderField}
                                        label="Email"/>

@@ -55,7 +55,7 @@ class CompanyAttributeForm extends Component {
 
         return (
             <div className="md-card">
-                <div className="md-card-content">
+                <div className="md-card-content max-width-1000px">
                     <div className="uk-margin-bottom" data-uk-margin>
                         <h1 className="heading_b uk-margin-bottom">{this.props.heading}</h1>
                     </div>

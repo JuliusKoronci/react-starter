@@ -45,7 +45,7 @@ class TaskAttributeForm extends Component {
                     </div>
                     <hr/>
                     <div className="uk-grid">
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-1 max-width-1000px">
 
                             <form onSubmit={handleSubmit}>
 

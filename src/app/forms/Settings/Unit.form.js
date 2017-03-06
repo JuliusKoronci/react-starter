@@ -18,7 +18,7 @@ class UnitForm extends Component {
                             <h1 className="heading_b uk-margin-bottom">Add unit</h1>
                         </div>
                         <hr/>
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-1 max-width-1000px">
                             <div className="uk-margin-bottom">
                                 <Field type="checkbox" name="is_active" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">Active</label>
