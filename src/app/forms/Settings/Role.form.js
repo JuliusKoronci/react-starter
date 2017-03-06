@@ -5,6 +5,8 @@ import {required, phone, alphanum, number} from '../../../config/validation';
 import {renderField, renderSelect, renderMulticheckbox} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 import configAcl from '../../../config/configRoles';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
 
 class RoleForm extends Component {
 
@@ -39,7 +41,7 @@ class RoleForm extends Component {
                             <h1 className="heading_b uk-margin-bottom">{heading}</h1>
                         </div>
                         <hr/>
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-1 max-width-1000px">
                             <div className="uk-margin-bottom">
                                 <Field name="is_active" type="checkbox" validate={[]} component={renderField}
                                        label="Active"/>
@@ -110,6 +112,7 @@ class RoleForm extends Component {
 
 
                             <div className="uk-margin-bottom">
+                                <Link className="md-btn md-btn-danger" to={generateRoute('roles')}>Cancel</Link>
                                 {editing && this.props.role.id &&
                                 <DeleteButton handleDelete={handleDelete} id={this.props.role.id}/>}
                                 <button className="md-btn md-btn-primary alignright" type="submit">

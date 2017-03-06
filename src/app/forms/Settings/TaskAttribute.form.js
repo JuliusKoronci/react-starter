@@ -3,6 +3,9 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required} from '../../../config/validation';
 import {renderField, renderSelect, renderTagger} from '../field.tpl';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
+
 
 
 class TaskAttributeForm extends Component {
@@ -42,7 +45,7 @@ class TaskAttributeForm extends Component {
                     </div>
                     <hr/>
                     <div className="uk-grid">
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-1 max-width-1000px">
 
                             <form onSubmit={handleSubmit}>
 
@@ -80,7 +83,7 @@ class TaskAttributeForm extends Component {
                                     <div className="uk-margin-medium-top">
                                         <div className="uk-text-danger">{formError}</div>
                                     </div>
-
+                                    <Link className="md-btn md-btn-danger" to={generateRoute('task_attributes')}>Cancel</Link>
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE
                                     </button>

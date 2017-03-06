@@ -3,6 +3,8 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import {renderField} from '../field.tpl';
 import {Field, reduxForm} from 'redux-form';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
 
 class UnitForm extends Component {
 
@@ -16,7 +18,7 @@ class UnitForm extends Component {
                             <h1 className="heading_b uk-margin-bottom">Add unit</h1>
                         </div>
                         <hr/>
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-1 max-width-1000px">
                             <div className="uk-margin-bottom">
                                 <Field type="checkbox" name="is_active" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">Active</label>
@@ -30,6 +32,7 @@ class UnitForm extends Component {
                                 <Field type="text" name="shortcut" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
+                                <Link className="md-btn md-btn-danger" to={generateRoute('units')}>Cancel</Link>
                                 <button className="md-btn md-btn-primary alignright" href="settings_units.html">Save</button>
                             </div>
                         </div>

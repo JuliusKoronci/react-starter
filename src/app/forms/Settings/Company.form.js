@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
 import {renderField} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
+
 
 class CompanyAddForm extends Component {
 
@@ -25,7 +28,7 @@ class CompanyAddForm extends Component {
                     </div>
                     <hr/>
                     <div className="uk-grid">
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-1 max-width-1000px">
                             <form onSubmit={handleSubmit}>
 
                                 <Field name="is_active" type="checkbox" validate={[]} component={renderField}
@@ -63,7 +66,7 @@ class CompanyAddForm extends Component {
                                     <div className="uk-text-danger">{formError}</div>
                                 </div>
                                 <div className="uk-margin-medium-top">
-
+                                    <Link className="md-btn md-btn-danger" to={generateRoute('companies')}>Cancel</Link>
                                     <button className="md-btn md-btn-primary alignright" type="submit">
                                         SAVE
                                     </button>

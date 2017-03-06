@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {required} from '../../../config/validation';
 import {renderField, renderSelect, renderTagger} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
 
 class UserAttributeForm extends Component {
 
@@ -66,7 +68,7 @@ class UserAttributeForm extends Component {
                     </div>
                     <hr/>
                     <div className="uk-grid">
-                        <div className="uk-width-medium-1-2">
+                        <div className="uk-width-medium-1-1 max-width-1000px">
 
                             <form onSubmit={handleSubmit}>
 

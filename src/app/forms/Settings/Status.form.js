@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
 import {renderField, renderColorpicker} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
+import {Link} from 'react-router';
+import {generateRoute} from '../../../config/router';
 
 class StatusForm extends Component {
 
@@ -25,7 +27,7 @@ class StatusForm extends Component {
                     </div>
                     <hr/>
                     <form onSubmit={handleSubmit}>
-                    <div className="uk-width-medium-1-2">
+                    <div className="uk-width-medium-1-1 max-width-1000px">
 
                         <div className="uk-margin-bottom">
                             <Field name="title" type="text" validate={[required]} component={renderField}
@@ -45,6 +47,7 @@ class StatusForm extends Component {
                         </div>
 
                         <div className="uk-margin-bottom">
+                            <Link className="md-btn md-btn-danger" to={generateRoute('statuses')}>Cancel</Link>
                             {this.props.params.statusId && <DeleteButton handleDelete={handleDelete}
                                                                           id={parseInt(this.props.params.statusId, 10)}/>}
                             <button className="md-btn md-btn-primary alignright" type="submit">

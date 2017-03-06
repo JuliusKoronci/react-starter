@@ -19,13 +19,16 @@
 
 /* 0. altair variables/mixins ======================== */
 
-
 /*.submenu_trigger ul{display:none;}*/
 /*.submenu_trigger.act_section ul{display:block !important;}*/
 
 .submenu_trigger a+ul{display:none;}
 .submenu_trigger a.active+ul{display:block !important;}
 
+
+.max-width-1000px {
+    max-width: 1000px;
+}
 
 .attachment-divide {
   margin: 5px;
