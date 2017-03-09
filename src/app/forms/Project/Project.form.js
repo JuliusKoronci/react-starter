@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {renderField} from '../field.tpl';
+import {renderField,renderTextarea} from '../field.tpl';
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router';
 import {generateRoute} from '../../../config/router';
@@ -9,13 +9,13 @@ import {generateRoute} from '../../../config/router';
 class ProjectForm extends Component {
 
     render() {
-        const {handleSubmit} = this.props;
+        const {handleSubmit,heading} = this.props;
         return (
             <div className="md-card">
                 <form onSubmit={handleSubmit}>
                     <div className="md-card-content">
                         <div className="uk-margin-bottom" data-uk-margin>
-                            <h1 className="heading_b uk-margin-bottom">Add project</h1>
+                            <h1 className="heading_b uk-margin-bottom">{heading}</h1>
                         </div>
                         <hr/>
                         <div className="uk-width-medium-1-1 max-width-1000px">
@@ -28,8 +28,8 @@ class ProjectForm extends Component {
                                 <Field type="text" name="title" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Shortcut</label>
-                                <Field type="text" name="shortcut" validate={[]} component={renderField}/>
+                                <label>Description</label>
+                                <Field type="textarea" name="description" validate={[]} component={renderTextarea}/>
                             </div>
                             <div className="uk-margin-bottom">
                                 <Link className="md-btn md-btn-danger" to={generateRoute('projects')}>Cancel</Link>

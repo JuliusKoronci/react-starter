@@ -10,37 +10,37 @@ class Project extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.unitConfig = configResolver.getUnitConfig(props.params.unitId);
+        this.projectConfig = configResolver.getProjectConfig(props.params.projectId);
     }
 
     componentWillMount() {
-        if (this.props.params.unitId && !this.props.unit) {
-            this.props.actions.loadEntityById(this.props.params.unitId, this.unitConfig);
+        if (this.props.params.projectId && !this.props.project) {
+            this.props.actions.loadEntityById(this.props.params.projectId, this.projectConfig);
         }
     }
 
     onSubmit = (values) => {
-        if (this.props.params.unitId) {
-            this.props.actions.updateEntity(this.props.params.unitId, values, this.unitConfig);
+        if (this.props.params.projectId) {
+            this.props.actions.updateEntity(this.props.params.projectId, values, this.projectConfig);
         } else {
             console.log(values)
-            this.props.actions.createEntity(values,this.unitConfig);
+            this.props.actions.createEntity(values,this.projectConfig);
             console.log('ok')
         }
     };
 
     render() {
         return (
-            <View onSubmit={this.onSubmit} {...this.props} heading={this.props.unit ? "Edit unit" : "Add unit"} />
+            <View onSubmit={this.onSubmit} {...this.props} heading={this.props.project ? "Edit project" : "Add project"} />
         );
     }
 }
 
 function mapStateToProps(state, ownProps) {
-    const unitId = ownProps.params.unitId;
-    const unit = state.units.data.filter((unit) => parseInt(unit.id, 10) === parseInt(unitId, 10));
+    const projectId = ownProps.params.projectId;
+    const project = state.projects.data.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
     return {
-        unit: unit.length > 0 ? unit[0] : false,
+        project: project.length > 0 ? project[0] : false,
     };
 
 }
