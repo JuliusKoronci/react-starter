@@ -50,12 +50,27 @@
 }
 
 .submenu-icon {
-    display: inline-block;
-    text-align: right;
+  float: left;
+  display: inline-block;
+  padding: 8px 25px;
+
 }
 
 .submenu-title {
     display: inline-block;
+    padding: 8px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.submenu-add {
+    padding: 8px 72px;
+
+}
+
+.report-menu {
+    padding: 8px 72px;
 
 }
 
@@ -13953,7 +13968,7 @@ div.kineticjs-content {
 }
 
 #sidebar_main .menu_section > ul > li ul a {
-    padding: 8px 10px 8px 72px;
+    /*padding: 8px 10px 8px 10px;*/
     display: block;
     font: 400 13px / 18px "Roboto", sans-serif;
     color: #212121;
