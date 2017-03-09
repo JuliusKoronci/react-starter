@@ -38,6 +38,7 @@ export const OPTIONS_RECEIVED = 'OPTIONS_RECEIVED';
 export const REQUEST_PROJECTS = 'REQUEST_PROJECTS';
 export const REQUEST_TAGS = 'REQUEST_TAGS';
 export const TAGS_RECEIVED = 'TAGS_RECEIVED';
+export const TAG_RECEIVED = 'TAG_RECEIVED';
 
 //settings
 export const USERS_RECEIVED = 'USERS_RECEIVED';

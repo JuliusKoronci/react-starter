@@ -44,6 +44,8 @@ import ReportUser from '../app/components/Main/Reports/Users/ReportUser';
 import ReportsCustom from '../app/components/Main/Reports/Custom/ReportsCustom';
 import Task from '../app/components/Main/Task/Task';
 import Filter from '../app/components/Main/Filter/Filter';
+import Project from '../app/components/Main/Project/Project';
+import Tag from '../app/components/Main/Tag/Tag';
 
 
 
@@ -104,7 +106,11 @@ export const paths = {
     'reports_custom':'/reports/custom',
     'filters':'/dashboard/:filterId',
     'project_tasks':'/project-tasks/:projectId',
-    'tag_tasks':'/tag-tasks/:tagId'
+    'tag_tasks':'/tag-tasks/:tagId',
+    'project_add':'/project/add',
+    'project_edit':'/project/:projectId',
+    'tag_add':'/tag/add',
+    'tag_edit':'/tag/:tagId'
 
 
 };
@@ -199,6 +205,12 @@ export default (
             <Route name="report-user" path={paths.report_user} component={ReportUser}/>
 
             <Route name="reports-custom" path={paths.reports_custom} component={ReportsCustom}/>
+
+            <Route name="project" path={paths.project_add} component={Project}/>
+            <Route name="project" path={paths.project_edit} component={Project}/>
+
+            <Route name="tag" path={paths.tag_add} component={Tag}/>
+            <Route name="tag" path={paths.tag_edit} component={Tag}/>
 
             <Route path="*" component={NotFoundPage}/>
         </Route>

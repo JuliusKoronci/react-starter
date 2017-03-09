@@ -4,6 +4,7 @@ import {companyReceived, companyAttributeReceived, statusReceived, userAttribute
 import {optionsReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
+import {tagReceived} from '../app/redux/actions/tag.action';
 
 class configResolver {
     static getCompanyConfig = (id) => {
@@ -87,6 +88,16 @@ class configResolver {
             afterEntityReceivedAction: unitReceived,
             redirectAfterCreation: paths.units,
             allowedFormFields: ['title', 'shortcut','is_active']
+        }
+    };
+
+    static getTagConfig = (id) => {
+        return {
+            url: id ? urls.TAG_LIST + '/' + id : urls.TAG_LIST,
+            urlList: urls.TAG_LIST,
+            afterEntityReceivedAction: tagReceived,
+            //redirectAfterCreation: paths.units,
+            allowedFormFields: ['title', 'color','public']
         }
     };
 
