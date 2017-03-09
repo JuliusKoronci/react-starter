@@ -11,6 +11,7 @@ class Project extends Component {
     constructor(props, context) {
         super(props, context);
         this.projectConfig = configResolver.getProjectConfig(props.params.projectId);
+        this.projectCreatedConfig = configResolver.projectCreatedConfig(props.params.projectId);
     }
 
     componentWillMount() {
@@ -21,11 +22,11 @@ class Project extends Component {
 
     onSubmit = (values) => {
         if (this.props.params.projectId) {
+            this.projectConfig = configResolver.getProjectConfig(this.props.params.projectId);
             this.props.actions.updateEntity(this.props.params.projectId, values, this.projectConfig);
         } else {
-            console.log(values)
-            this.props.actions.createEntity(values,this.projectConfig);
-            console.log('ok')
+            this.projectCreatedConfig = configResolver.projectCreatedConfig(this.props.params.projectId);
+            this.props.actions.createEntity(values,this.projectCreatedConfig);
         }
     };
 

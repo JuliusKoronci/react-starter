@@ -57,7 +57,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 ProjectForm = reduxForm({
-    form: 'ProjectForm'
+    form: 'ProjectForm',
+    enableReinitialize: true
 })(ProjectForm);
 
 export default connect(mapStateToProps)(ProjectForm);

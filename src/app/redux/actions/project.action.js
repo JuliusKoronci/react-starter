@@ -8,5 +8,12 @@ export function projectReceived(data) {
     }
 }
 
+export function projectCreated(data) {
+    return {
+        type: constants.PROJECT_CREATED,
+        data
+    }
+}
+
 
 

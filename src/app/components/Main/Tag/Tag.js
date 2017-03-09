@@ -26,8 +26,10 @@ class Tag extends Component {
 
     onSubmit = (values) => {
         if (this.props.params.tagId) {
+            this.tagConfig = configResolver.getTagConfig(this.props.params.tagId);
             this.props.actions.updateEntity(this.props.params.tagId, values, this.tagConfig);
         } else {
+            this.tagCreatedConfig = configResolver.tagCreatedConfig(this.props.params.tagId);
             this.props.actions.createEntity(values,this.tagCreatedConfig);
         }
     };

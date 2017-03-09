@@ -1,4 +1,4 @@
-import {PROJECTS_RECEIVED, PROJECT_RECEIVED} from '../../constants';
+import {PROJECTS_RECEIVED, PROJECT_RECEIVED, PROJECT_CREATED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -13,8 +13,21 @@ export default function projects(state = defaultState, action) {
         case PROJECTS_RECEIVED:
             return action.data;
         case PROJECT_RECEIVED:
-            console.log('project reducer');
-            return action.data;
+            return {
+                ...state,
+                'data': state.data.map((project) => {
+                    if (project.id === action.data.data.id) {
+                        console.log(project.id, action.data.data);
+                        return Object.assign({}, project, action.data.data);
+                    }
+                    return project;
+                })
+            };
+        case PROJECT_CREATED:
+            return {
+                ...state,
+                'data':[...state.data, action.data.data]
+            };
         default:
             return state;
     }
