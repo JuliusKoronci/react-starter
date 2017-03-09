@@ -33,7 +33,12 @@ function *updateEntity(action) {
     yield put(startAjax());
     try {
         let config = action.config;
-        yield call(defaultRequest, config.url, 'PUT', action.values, config);
+        const data = yield call(defaultRequest, config.url, 'PUT', action.values, config);
+
+        if (config.afterEntityReceivedAction) {
+            yield put(config.afterEntityReceivedAction(data));
+        }
+
         entityUpdated('Updated successfully');
     } catch (e) {
         yield put(asyncError(e));

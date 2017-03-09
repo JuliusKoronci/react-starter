@@ -52,7 +52,6 @@ class TagForm extends Component {
 function mapStateToProps(state, ownProps) {
     const tagId = ownProps.params.tagId;
     const tag = state.tags.data.filter((tag) => parseInt(tag.id, 10) === parseInt(tagId, 10));
-    console.log(tag);
     if (tag.length > 0) {
         return {
             initialValues: tag.length > 0 ? tag[0] : {},
@@ -63,7 +62,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 TagForm = reduxForm({
-    form: 'TagForm'
+    form: 'TagForm',
+    enableReinitialize: true
 })(TagForm);
 
 export default connect(mapStateToProps)(TagForm);

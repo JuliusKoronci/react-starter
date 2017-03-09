@@ -1,4 +1,4 @@
-import {TAGS_RECEIVED,TAG_RECEIVED} from '../../constants';
+import {TAGS_RECEIVED,TAG_RECEIVED,TAG_CREATED} from '../../constants';
 
 
 const defaultState = {
@@ -17,11 +17,16 @@ export default function tags(state = defaultState, action) {
             return {
                 ...state,
                 'data': state.data.map((tag) => {
-                    if (tag.id === action.tagId) {
-                        return Object.assign({}, tag, action.data);
+                    if (tag.id === action.data.data.id) {
+                        return Object.assign({}, tag, action.data.data);
                     }
                     return tag;
                 })
+            };
+        case TAG_CREATED:
+            return {
+                ...state,
+                'data':[...state.data, action.data.data]
             };
         default:
             return state;

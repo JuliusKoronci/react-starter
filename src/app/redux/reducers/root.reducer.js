@@ -18,8 +18,8 @@ import sharedFilters from './settings/shared_filters.reducer';
 import units from './settings/units.reducer';
 import userAttributes from './settings/user_attributes.reducer';
 import settingsReducer from './system/settings.reducer';
-import projectsReducer from './system/project.reducer';
 import tagsReducer from './system/tags.reducer';
+import projectsReducer from './system/project.reducer';
 import profileReducer from './profile/profile.reducer';
 import {REDUX_RESET} from '../constants';
 

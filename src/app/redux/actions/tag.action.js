@@ -7,6 +7,12 @@ export function tagReceived(data) {
         data
     }
 }
+export function tagCreated(data) {
+    return {
+        type: constants.TAG_CREATED,
+        data
+    }
+}
 
 
 

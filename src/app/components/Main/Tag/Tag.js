@@ -5,12 +5,17 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../redux/actions/settings.action';
 import * as generalActions from '../../../redux/actions/general.action';
 import configResolver from '../../../../config/configResolver';
+import {reset} from 'redux-form';
 
 class Tag extends Component {
 
     constructor(props, context) {
         super(props, context);
         this.tagConfig = configResolver.getTagConfig(props.params.tagId);
+        this.tagCreatedConfig = configResolver.tagCreatedConfig(props.params.tagId);
+    }
+
+    componentDidUpdate(prevProps){
     }
 
     componentWillMount() {
@@ -23,9 +28,7 @@ class Tag extends Component {
         if (this.props.params.tagId) {
             this.props.actions.updateEntity(this.props.params.tagId, values, this.tagConfig);
         } else {
-            console.log(values)
-            this.props.actions.createEntity(values,this.tagConfig);
-            console.log('ok')
+            this.props.actions.createEntity(values,this.tagCreatedConfig);
         }
     };
 
