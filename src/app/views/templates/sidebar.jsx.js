@@ -59,24 +59,27 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
 
                                 return <li key={i}>
 
-
+                                   <span className="submenu-title">
+                                     <Link to={link}
+                                           className={project.id==projectId?'active':''}                                      >
+                                          {project.title}
+                                        </Link>
+                                     </span>
                                     <span className="submenu-icon">
                                         <Link to={linkEdit}>
                                             <i className="material-icons">&#xE8B8;</i>
                                         </Link>
                                     </span>
-
-                                    <span className="submenu-title">
-                                     <Link to={link}
-                                           className={project.id==projectId?'active uk-text-large':'uk-text-large'}                                      >
-                                          {project.title}
-                                        </Link>
-                                     </span>
-
                                 </li>
                             })}
-                            <li><Link to={paths.project_add} className="submenu-add md-color-blue-500">
-                                <i className="material-icons md-color-blue-500">&#xE145;</i>Project</Link></li>
+                            <li>
+                                <span className="submenu-title">
+                                    <Link to={paths.project_add} className="md-color-blue-500">
+                                        <i className="material-icons md-color-blue-500">&#xE145;</i>
+                                        Project
+                                    </Link>
+                                </span>
+                            </li>
                         </ul>
                     </li>
 
@@ -96,7 +99,7 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
                                 return <li key={i}>
                                     <span className="submenu-title">
                                         <Link to={link}
-                                              className={tag.id==tagId?'active uk-text-large':'uk-text-large'}>
+                                              className={tag.id==tagId?'active':''}>
                                                 {tag.title}
                                         </Link>
                                     </span>
@@ -107,8 +110,15 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
 
                                 </li>
                             })}
-                            <li><Link to={paths.tag_add} className="submenu-add md-color-blue-500">
-                                <i className="material-icons md-color-blue-500">&#xE145;</i>Tag</Link></li>
+                            <li>
+                                <span className="submenu-title">
+                                    <Link to={paths.tag_add} className="md-color-blue-500">
+                                        <i className="material-icons md-color-blue-500">&#xE145;</i>
+                                        Tag
+                                    </Link>
+                                </span>
+
+                            </li>
                         </ul>
                     </li>
 
@@ -121,39 +131,42 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
                         </a>
                         <ul>
                             <li>
-                                <Link to='/reports/companies' className="report-menu">
-                                    <span className="menu_title">Companies</span>
-                                </Link>
+                                <span className="submenu-title">
+                                    <Link to='/reports/companies'>
+                                        Companies
+                                    </Link>
+                                 </span>
                             </li>
-                            <li>
-                                <Link to='/reports/users'
-                                      className="report-menu">
-                                    <span className="menu_title">Users</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='/reports/custom'
-                                      className="report-menu">
-                                    <span className="menu_title">Custom</span>
-                                </Link>
-                            </li>
-                            <li><Link to={paths.report_add} className="submenu-add md-color-blue-500">
-                                <i className="material-icons md-color-blue-500">&#xE145;</i>
-                                Report</Link>
-                            </li>
-                            <li>
-                                   <span className="submenu-icon">
-                                        <Link to='/reports/custom'>
-                                            <i className="material-icons">&#xE8B8;</i>
-                                        </Link>
-                                    </span>
 
-                                   <Link className="submenu-title" to='/reports/custom'>
+                            <li>
+                                <span className="submenu-title">
+                                    <Link to='/reports/users'>
+                                    Users
+                                    </Link>
+                                </span>
+                            </li>
+                            <li>
+                                <span className="submenu-title">
+                                         <Link to='/reports/custom'>
                                          Custom
-                                   </Link>
-                               
+                                         </Link>
+                                </span>
                             </li>
-
+                            <li>
+                                <span className="submenu-title">
+                                    <Link to={paths.report_add} className="md-color-blue-500">
+                                        <i className="material-icons md-color-blue-500">&#xE145;</i>
+                                     Report
+                                    </Link>
+                                </span>
+                            </li>
+                            <li>
+                                   <span className="submenu-title">
+                                        <Link to='/reports/custom'>
+                                            Custom report 1
+                                        </Link>
+                                   </span>
+                            </li>
                         </ul>
                     </li>
 
