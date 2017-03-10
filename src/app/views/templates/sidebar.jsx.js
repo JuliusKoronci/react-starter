@@ -54,10 +54,12 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
                 <ul>
                     {/*sidebar menu - projects */}
                     <li className={projectId?"submenu_trigger act_section":'submenu_trigger'} >
-                            <a href="#" onClick={menuToggleActive.bind(null)} className={projectId?'active':''} ><span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
-                            <span className="menu_title">Projects</span>
-                            </a>
 
+                           <a href="#" onClick={menuToggleActive.bind(null)} className={projectId?'active':''} >
+                                <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
+                                 <span className="menu_title">Projects</span>
+                            </a>
+                     
                         <ul>
                             {projects.map((project, i) => {
                                 const link=generateRoute('project_tasks',{projectId:project.id});
@@ -67,7 +69,7 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
 
                                    <span className="submenu-title">
                                      <Link to={link}
-                                           className={project.id==projectId?'active':''}                                      >
+                                           className={project.id==projectId?'active md-color-deep-orange-500':''}                                      >
                                           {project.title}
                                         </Link>
                                      </span>
@@ -105,7 +107,7 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
                                 return <li key={i}>
                                     <span className="submenu-title">
                                         <Link to={link}
-                                              className={tag.id==tagId?'active':''}>
+                                              className={tag.id==tagId?'active  md-color-deep-orange-500':''}>
                                                 {tag.title}
                                         </Link>
                                     </span>
@@ -130,15 +132,16 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
 
 
                     {/*sidebar menu Reports */}
-                    <li className={tagId?"submenu_report act_section":'submenu_trigger'}>
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={reportId?'active':''}><span
-                            className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
+                    <li className={reportId?"submenu_report act_section":'submenu_trigger'}>
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={reportId?'active':''}>
+                            <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Reports</span>
                         </a>
                         <ul>
                             <li>
                                 <span className="submenu-title">
-                                    <Link to='/reports/companies'>
+                                    <Link
+                                        to='/reports/companies'>
                                         Companies
                                     </Link>
                                  </span>
