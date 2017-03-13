@@ -118,6 +118,7 @@ function *createTask() {
         yield put(taskReceived(task));
         const id = task.data.id;
         const link = generateRoute('task_show', {taskId: id});
+        yield call(entityUpdated, 'Task created!');
         browserHistory.push(link);
     } catch (e) {
         yield put(asyncError(e));
