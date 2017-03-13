@@ -5,6 +5,8 @@ import RTE from '../forms/general/rte/RTE.form';
 import Tagger from '../forms/general/Tagger.form';
 import Colorpicker from '../forms/general/Colorpicker.form';
 import Multicheckbox from '../forms/general/Multicheckbox.form';
+import Multiselect from '../forms/general/Multiselect.form';
+import Datepicker from '../forms/general/Datepicker.form';
 
 export const renderField = ({input, label, type, actions, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
@@ -69,6 +71,22 @@ export const renderTagger = ({input,tagValues,defaultOptions,label,icon,action,s
 
     );
 };
+
+
+export const renderMultiselect = ({input,tagValues,defaultOptions,label,icon,action,setValues}) => {
+
+    return (
+            <Multiselect input={input} label={label} options={defaultOptions} />
+    );
+};
+
+export const renderDatepicker = ({input,tagValues,defaultOptions,label,icon,action,setValues}) => {
+
+    return (
+        <Datepicker input={input} label={label} {...input} />
+    );
+};
+
 
 
 export const renderMulticheckbox = ({input, options, label, action, meta: {touched, error, warning}}) => (

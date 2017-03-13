@@ -5,6 +5,7 @@ import authReducer from './auth/auth.reducer';
 import asyncReducer from './async/async.reducer';
 import tasksReducer from './tasks/tasks.reducer';
 import filterReducer from './system/filter.reducer';
+import filtersReducer from './system/filters.reducer';
 import usersReducer from './settings/users.reducer';
 import companiesReducer from './settings/companies.reducer';
 import statusesReducer from './settings/statuses.reducer';
@@ -30,6 +31,7 @@ const appReducer = combineReducers({
     async: asyncReducer,
     tasks: tasksReducer,
     filter: filterReducer,
+    filters: filtersReducer,
     settings: settingsReducer,
     users: usersReducer,
     companies: companiesReducer,

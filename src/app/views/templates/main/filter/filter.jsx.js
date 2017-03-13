@@ -6,7 +6,7 @@ import FilterForm from '../../../../components/Main/Filter/FilterForm';
 import FilterTasks from '../../../../components/Main/Filter/FilterTasks';
 
 const Filter = (props) => {
-
+// console.log(props.columns);
     return (
         <div className="md-card">
             <div className="md-card-content">

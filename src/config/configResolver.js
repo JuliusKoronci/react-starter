@@ -6,6 +6,7 @@ import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.ac
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 import {tagReceived, tagCreated} from '../app/redux/actions/tag.action';
 import {projectReceived,projectCreated} from '../app/redux/actions/project.action';
+import {filterReceived,filterOptionsReceived} from '../app/redux/actions/filter.action';
 
 class configResolver {
     static getCompanyConfig = (id) => {
@@ -111,6 +112,23 @@ class configResolver {
         }
     };
 
+
+    static filterConfig = (id) => {
+        return {
+            url: id ? urls.FILTER_LIST + '/' + id : urls.FILTER_LIST,
+            urlList: urls.FILTER_LIST,
+            afterEntityReceivedAction: filterReceived,
+            //redirectAfterCreation: paths.units,
+            allowedFormFields: ['title', 'color','public']
+        }
+    };
+
+    static loadFilterOptionList() {
+        return {
+            url: urls.FILTER_OPTIONS,
+            afterEntityReceivedAction: filterOptionsReceived,
+        }
+    }
 
     static getProjectConfig = (id) => {
         return {

@@ -4,29 +4,58 @@ import {Creatable} from 'react-select';
 import Select from 'react-select';
 import ColumnVisible from '../../../views/templates/main/filter/columnVisible.jsx';
 
-import {Field, reduxForm} from 'redux-form';
+import {Field, change, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../../config/validation';
-import {renderField} from '../../../forms/field.tpl';
+import {renderField, renderTagger, renderMultiselect, renderDatepicker} from '../../../forms/field.tpl';
 import DeleteButton from '../../../components/Main/_partials/DeleteButton';
 import {generateRoute} from '../../../../config/router';
 
 
 class FilterForm extends Component {
 
+
+
+    changeRowVisibility=(e)=>{
+
+        //alert('in form '+v)
+        // let name=v;
+        let checked=!!e.target.checked;
+        let name=e.target.name;
+        this.props.dispatch(change('filterForm', name, checked));
+        // e.target.onChange(true);
+        //this.props.input.onChange(newValue);
+
+    };
+
+
+
     render() {
 
-        const {handleSubmit, formError, handleDelete} = this.props;
-        return (
+        const {handleSubmit, formError, handleDelete, columns, filterOptions} = this.props;
 
-            <form className={this.props.filterFormVisible ? "uk-width-medium-1-4" : 'hidden'} id="filterDiv">
+        // console.log('columns', columns);
+
+        // { Object.keys(props.columns).map((key, i)=>{
+        //     let name=key;
+        //     if(props.columns.hasOwnProperty(name)&& typeof props.columns[name] !== 'undefined' && (!!props.columns[name].visible)) {
+        //         return <th key={i}>{props.columns[name].label}</th>;
+        //     }
+        // })
+        // }
+
+        return (
+            <form onSubmit={handleSubmit} className={this.props.filterFormVisible ? "uk-width-medium-1-4" : 'hidden'}
+                  id="filterDiv">
 
                 <a className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
                    href="javascript:void(0)">CLEAR</a>
                 <a className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
                    href="javascript:void(0)">SAVE</a>
-                <a className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-                   href="javascript:void(0)">FILTER</a>
+                <button type="submit"
+                        className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+                        href="javascript:void(0)">FILTER
+                </button>
 
 
                 <ul className="md-list md-list-addon">
@@ -35,157 +64,103 @@ class FilterForm extends Component {
                     <Field name="filter_name" type="text" validate={[]} component={renderField} label="Filter Name"/>
 
 
-
-                    <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="title"
-                                   columns={this.props.columns} className="alignright" />
-                    <Field name="task_name" type="text" validate={[]} component={renderField} label="Task Name"/>
-
-
-
-
-                    <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="status"
-                                   columns={this.props.columns} className="alignright" />
-
-                    <label className="uk_dp_1 uk-text-muted">Status</label>
-                        {/*Pouzity react-multiselect https://github.com/JedWatson/react-select*/}
-                        <Creatable name="Status"
-                                   className="md-input"
-                                   joinValues={true}
-                                   multi={true}
-                                   options={[
-                                       {value: 'New', label: 'New'},
-                                       {value: 'Open', label: 'Open'},
-                                       {value: 'Pending', label: 'Pendig'},
-                                       {value: 'Closed', label: 'Closed'},
-                                   ]} />
+                    <Field name="columns.title" type="checkbox" className="alignright" validate={[]}
+                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                    <Field name="title" type="text" validate={[]} component={renderField} label="Task Name"/>
 
 
 
 
-                    <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="project"
-                                   columns={this.props.columns} className="alignright" />
-
-                        <label htmlFor="project" className="uk_dp_1 uk-text-muted">Project</label>
-                        <Creatable name="Project"
-                                   className="md-input"
-                                   joinValues={true}
-                                   multi={true}
-                                   options={[
-                                       {
-                                           value: 'Projekty ku ktorym ma pouzivatel pristup',
-                                           label: 'Projekty ku ktorym ma pouzivatel pristup'
-                                       },
-                                   ]} />
+                    <Field name="columns.status" type="checkbox" className="alignright" validate={[]}
+                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                    <Field name="status" type="text" validate={[]} component={renderMultiselect} label="Status" defaultOptions={
+                            filterOptions.status.map((option)=>{
+                                return {value:option.id, label:option.title}
+                            })
+                    } />
 
 
-
-
-                    <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="created"
-                                   columns={this.props.columns} className="alignright" />
-
-                        <label className="uk_dp_1 uk-text-muted">Created</label>
-                        <Creatable name="Created"
-                                   className="md-input"
-                                   joinValues={true}
-                                   multi={true}
-                                   options={[
-                                       {
-                                           value: 'multiselect+autocomplete pouzivatelia',
-                                           label: 'multiselect+autocomplete pouzivatelia'
-                                       },
-                                   ]} />
+                    <Field name="columns.project" type="checkbox" className="alignright" validate={[]}
+                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}}/>
+                    <Field name="project" type="text" validate={[]} component={renderMultiselect} label="Project" defaultOptions={
+                        filterOptions.project.map((option)=>{
+                            return {value:option.id, label:option.title}
+                        })
+                    } />
 
 
 
-
-                    <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="requester"
-                                   columns={this.props.columns} className="alignright" />
-
-                        <label htmlFor="kUI_multiselect_basic" className="uk_dp_1 uk-text-muted">Requester</label>
-                        <Creatable name="Requester"
-                                   className="md-input"
-                                   joinValues={true}
-                                   multi={true}
-                                   options={[
-                                       {
-                                           value: 'multiselect+autocomplete pouzivatelia',
-                                           label: 'multiselect+autocomplete pouzivatelia'
-                                       },
-                                   ]} />
+                    <Field name="columns.created" type="checkbox" className="alignright" validate={[]}
+                           component={renderField} label="Column created" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                    <Field name="created" type="text" validate={[]} component={renderMultiselect} label="Created" defaultOptions={
+                        filterOptions.created.map((option)=>{
+                            return {value:option.id, label:option.username}
+                        })
+                    } />
 
 
 
+                    <Field name="columns.requester" type="checkbox" className="alignright" validate={[]}
+                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                    <Field name="requester" type="text" validate={[]} component={renderMultiselect} label="Requester" defaultOptions={
+                        filterOptions.requester.map((option)=>{
+                            return {value:option.id, label:option.username}
+                        })
+                    } />
 
-                    <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="company"
-                                   columns={this.props.columns} className="alignright" />
 
-                        <label htmlFor="kUI_multiselect_basic" className="uk_dp_1 uk-text-muted">Company</label>
-                        <Creatable name="Company"
-                                   className="md-input"
-                                   joinValues={true}
-                                   multi={true}
-                                   options={[
-                                       {
-                                           value: 'multiselect+autocomplete companies',
-                                           label: 'multiselect+autocomplete companies'
-                                       },
-                                   ]} />
+
+                    <Field name="columns.company" type="checkbox" className="alignright" validate={[]}
+                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                    <Field name="company" type="text" validate={[]} component={renderMultiselect} label="Company" defaultOptions={
+                        filterOptions.company.map((option)=>{
+                            return {value:option.id, label:option.title}
+                        })
+                    } />
+
+
+
+                    <Field name="columns.assigned" type="checkbox" className="alignright" validate={[]}
+                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                    <Field name="assigned" type="text" validate={[]} component={renderMultiselect} label="Assigned" defaultOptions={
+                        filterOptions.assigned.map((option)=>{
+                            return {value:option.id, label:option.username}
+                        })
+                    } />
+
+
+                    <Field name="columns.context" type="checkbox" className="alignright" validate={[]}
+                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                    <Field name="context" type="text" validate={[]} component={renderMultiselect} label="Context" defaultOptions={
+                        filterOptions.tag.map((option)=>{
+                            return {value:option.id, label:option.title}
+                        })
+                    } />
 
 
 
 
-                    <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="assigned"
-                                   columns={this.props.columns} className="alignright" />
-
-                        <label className="uk_dp_1 uk-text-muted">Assigned</label>
-                        <Creatable name="Assigned"
-                                   className="md-input"
-                                   joinValues={true}
-                                   multi={true}
-                                   options={[
-                                       {
-                                           value: 'multiselect+autocomplete pouzivatelia',
-                                           label: 'multiselect+autocomplete pouzivatelia'
-                                       },
-                                   ]}
-                        />
 
 
-
-                    <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="context"
-                                   columns={this.props.columns} className="alignright" />
-                        <label className="uk-text-muted">Context</label>
-                        <Creatable name="Context"
-                                   className="md-input"
-                                   joinValues={true}
-                                   multi={true}
-                                   options={[
-                                       {value: 'autocomplete context', label: 'autocomplete context'},
-                                   ]}
-                        />
-                    
-
-
-                    
-                        <div className="uk-grid" data-uk-grid-margin>
-                            <div className="uk-width-medium-1-2">
-                                <label className="uk_dp_1 uk-text-muted">Created From:</label>
-                                <input type="text" className="md-input"/>
-                            </div>
-
-                            <div className="uk-width-medium-1-2">
-
-
-                                <label className="uk_dp1 uk-text-muted">To:</label>
-
-                                <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="created"
-                                               columns={this.props.columns} className="alignright" />
-
-
-                                <input type="text" className="md-input"/>
-                            </div>
+                    <div className="uk-grid" data-uk-grid-margin>
+                        <div className="uk-width-medium-1-2">
+                            <Field name="created" type="text" validate={[]} component={renderDatepicker} label="Created from:" />
                         </div>
-                    
+
+                        <div className="uk-width-medium-1-2">
+
+                            <Field name="created" type="text" validate={[]} component={renderDatepicker} label="To:" />
+
+                            <Field name="columns.created" type="checkbox" className="alignright" validate={[]}
+                                   component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+
+                        </div>
+                    </div>
+
+
+
+
+
 
 
                     <hr/>
@@ -201,24 +176,24 @@ class FilterForm extends Component {
 
 
 
+
                     <div className="uk-grid" data-uk-grid-margin>
                         <div className="uk-width-medium-1-2">
-                            <label className="uk_dp_1 uk-text-muted">From:</label>
-                            <input type="text" className="md-input"/>
+
+                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="From:" />
+
                         </div>
                         <div className="uk-width-medium-1-2">
-                            <label className="uk_dp1 uk-text-muted">To:</label>
 
+                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="To:" />
 
                             <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="started"
-                                           columns={this.props.columns} className="alignright" />
+                                           columns={this.props.columns} className="alignright"/>
 
 
-                            <input type="text" className="md-input"/>
                         </div>
                     </div>
                     <hr/>
-
 
 
                     <p className="uk-text-muted">Deadline at</p>
@@ -233,88 +208,75 @@ class FilterForm extends Component {
 
                     <div className="uk-grid" data-uk-grid-margin>
                         <div className="uk-width-medium-1-2">
-                            <label className="uk_dp_1 uk-text-muted">From:</label>
-                            <input type="text" className="md-input"/>
+
+                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="From:" />
+
                         </div>
                         <div className="uk-width-medium-1-2">
-                            <label className="uk_dp1 uk-text-muted">To:</label>
+
+                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="To:" />
 
 
                             <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="deadline"
-                                           columns={this.props.columns} className="alignright" />
+                                           columns={this.props.columns} className="alignright"/>
 
 
-                            <input type="text" className="md-input"/>
                         </div>
                     </div>
                     <hr/>
-
 
 
                     <div className="uk-grid" data-uk-grid-margin>
                         <div className="uk-width-medium-1-2">
-                            <label className="uk_dp_1 uk-text-muted">Closed From:</label>
-                            <input type="text" className="md-input"/>
+
+                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="Closed from:" />
+
                         </div>
                         <div className="uk-width-medium-1-2">
-                            <label className="uk_dp1 uk-text-muted">To:</label>
+
+                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="To:" />
 
 
                             <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="deadline_closed"
-                                           columns={this.props.columns} className="alignright" />
+                                           columns={this.props.columns} className="alignright"/>
 
-
-                            <input type="text" className="md-input"/>
                         </div>
                     </div>
                     <hr/>
-
-
-
-
-
-
-
-
 
 
                     {/*<input type="checkbox" name="checkbox_demo_mercury" id="checkbox_demo_1" data-md-icheck/>*/}
                     {/*<label htmlFor="checkbox_demo_1" className="inline-label">Archived</label>*/}
 
                     {/*<hr/>*/}
-                    
-                        {/*<label className="uk_dp_1 uk-text-muted">Custom select 1</label>*/}
+
+                    {/*<label className="uk_dp_1 uk-text-muted">Custom select 1</label>*/}
 
 
                     {/*<ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="custom"*/}
-                                   {/*columns={this.props.columns} className="alignright" />*/}
+                    {/*columns={this.props.columns} className="alignright" />*/}
 
 
-                        {/*<Creatable name="Project"*/}
-                                   {/*className="md-input"*/}
-                                   {/*joinValues={true}*/}
-                                   {/*multi={true}*/}
-                                   {/*options={[*/}
-                                       {/*{*/}
-                                           {/*value: 'Projekty ku ktorym ma pouzivatel pristup',*/}
-                                           {/*label: 'Projekty ku ktorym ma pouzivatel pristup'*/}
-                                       {/*},*/}
-                                   {/*]} />*/}
-                    
-
-                    
-                        {/*<label className="uk_dp_1 uk-text-muted">Custom input/text area</label>*/}
-                        {/*<span className="alignright">*/}
-                                            {/*<label className="uk_dp1 uk-text-muted">Column</label>*/}
-                                            {/*<input type="checkbox" name="checkbox_demo_inline_mercury"*/}
-                                                   {/*id="checkbox_demo_inline_1" data-md-icheck/>*/}
-                                        {/*</span>*/}
-                        {/*<input type="text" className="md-input"/>*/}
+                    {/*<Creatable name="Project"*/}
+                    {/*className="md-input"*/}
+                    {/*joinValues={true}*/}
+                    {/*multi={true}*/}
+                    {/*options={[*/}
+                    {/*{*/}
+                    {/*value: 'Projekty ku ktorym ma pouzivatel pristup',*/}
+                    {/*label: 'Projekty ku ktorym ma pouzivatel pristup'*/}
+                    {/*},*/}
+                    {/*]} />*/}
 
 
+                    {/*<label className="uk_dp_1 uk-text-muted">Custom input/text area</label>*/}
+                    {/*<span className="alignright">*/}
+                    {/*<label className="uk_dp1 uk-text-muted">Column</label>*/}
+                    {/*<input type="checkbox" name="checkbox_demo_inline_mercury"*/}
+                    {/*id="checkbox_demo_inline_1" data-md-icheck/>*/}
+                    {/*</span>*/}
+                    {/*<input type="text" className="md-input"/>*/}
 
-
-                    
 
                 </ul>
 
@@ -323,8 +285,6 @@ class FilterForm extends Component {
         );
     }
 }
-
-
 
 
 function mapStateToProps(state, ownProps) {
@@ -338,11 +298,22 @@ function mapStateToProps(state, ownProps) {
     // }else {
     //     return{};
     // }
-    return {};
+
+    let columns={};
+    if(ownProps.columns){
+        columns=ownProps.columns;
+        // console.log('own props: ',ownProps.columns);
+    }
+
+    return {initialValues: {
+        columns:columns,
+    },
+        enableReinitialize: true
+    };
 }
 
 FilterForm = reduxForm({
-    form: 'filterFormForm'
+    form: 'filterForm'
 })(FilterForm);
 
 export default connect(mapStateToProps)(FilterForm);

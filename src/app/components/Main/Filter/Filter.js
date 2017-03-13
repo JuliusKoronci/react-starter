@@ -13,29 +13,40 @@ class Filter extends Component {
     constructor(props, context) {
         super(props, context);
 
-        // this.companyConfig = configResolver.getCompanyConfig(props.params.companyId);
+        this.filterConfig = configResolver.filterConfig(props.params.filterId);
+        this.filterOptionsConfig = configResolver.loadFilterOptionList();
 
         this.state={
             filterFormVisible:true,
             visibleFields:{'taskName':true},
 
-            columns:{
-                title:{label:'Title',visible:true},
-                status:{label:'Status'},
-                project:{label:'Project'},
-                created:{label:'Created'},
-                requester:{label:'Requester'},
-                company:{label:'Company'},
-                assigned:{label:'Assigned'},
-                context:{label:'Context'},
-                owner:{label:'Owner'},
-                deadline:{label:'Deadline'},
+            // columns:{
+            //     title:{label:'Title',visible:true},
+            //     status:{label:'Status'},
+            //     project:{label:'Project'},
+            //     created:{label:'Created'},
+            //     requester:{label:'Requester'},
+            //     company:{label:'Company'},
+            //     assigned:{label:'Assigned'},
+            //     context:{label:'Context'},
+            //     owner:{label:'Owner'},
+            //     deadline:{label:'Deadline'},
+            // }
 
+            columns:{
+                title:true,
+                status:false,
+                project:false,
+                created:false,
+                requester:false,
+                company:false,
+                assigned:false,
+                context:false,
+                owner:false,
+                deadline:false,
             }
         }
     }
-
-
 
 
 
@@ -45,14 +56,21 @@ class Filter extends Component {
     };
 
     componentWillMount() {
-        // if (this.props.params.companyId && !this.props.company) {
-        //     this.props.actions.loadEntityById(this.props.params.companyId, this.companyConfig);
-        // }
+        if (this.props.params.filterId && !this.props.filter) {
+            // alert('loading');
+            this.props.actions.loadEntityById(this.props.params.filterId, this.filterConfig);
+        }
+
+        this.props.actions.loadEntityList(this.filterOptionsConfig);
+        //else{alert('not loading')}
     }
 
     onSubmit = (values) => {
 
-        alert('submit')
+        alert('submit');
+        console.log(values);
+        this.setState({columns:values.columns});
+        console.log('columns',this.state.columns);
         // if (this.props.params.companyId) {
         //     this.props.actions.updateEntity(this.props.params.companyId, values, this.companyConfig);
         // } else {
@@ -63,6 +81,7 @@ class Filter extends Component {
 
 
     componentDidMount() {
+        // TODO
         this.config = configResolver.tasksConfig('project', 131);
         this.props.actions.requestTasks(this.config);
     }
@@ -72,20 +91,34 @@ class Filter extends Component {
         this.setState({filterFormVisible:!this.state.filterFormVisible})
     };
 
-    toggleRowVisibility=(e)=>{
 
-        let name=e.target.name;
+
+
+
+    changeRowVisibility=(value,e)=>{
+        alert('change row visibility');
+    }
+
+    toggleRowVisibility=(value,e)=>{
+
+        // console.log(e,value);
+        // let name=e.target.name;
+        let name=value;
         let checked=!!e.target.checked;
 
-        console.log(e.target.name, checked);
-
+        // console.log(e.target.name, checked);
 
         if(this.state.columns[name]) {
+            console.log('exists')
             this.setState({
                 // visibleFields: Object.assign({},this.state.visibleFields, {[name]:checked })
                 columns: Object.assign({}, this.state.columns, this.state.columns[name]['visible'] = checked)
             });
+        }else{
+            console.log('doesnt exist')
         }
+
+        console.log('columns',this.state.columns);
 
     };
 
@@ -94,7 +127,7 @@ class Filter extends Component {
     render() {
         return (
             <View {...this.props} toggleFilter={this.toggleFilter} filterFormVisible={this.state.filterFormVisible} toggleRowVisibility={this.toggleRowVisibility}
-            visibleFields={this.state.visibleFields} columns={this.state.columns} />
+            visibleFields={this.state.visibleFields} columns={this.state.columns} onSubmit={this.onSubmit} />
         );
     }
 }
@@ -103,14 +136,21 @@ class Filter extends Component {
 
 function mapStateToProps(state, ownProps) {
 
-    // const filterId = ownProps.params.filterId;
+    // console.log(state);
+    const filterId = ownProps.params.filterId;
+
     // const filter = state.filters.data.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
-    const filter =[];
+    const filter = state.filter.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
+    const filterOptions = state.filters.options || [];
+    // console.log(filterOptions);
+    // const filter =[];
+    // console.log(filter);
 
     return {
         filterFormVisible:state.filterFormVisible,
         filter: filter.length > 0 ? filter[0] : false,
-        tasks: state.tasks,
+        filterOptions: filterOptions,
+        tasks: state.tasks
     };
 }
 function mapDispatchToProps(dispatch) {

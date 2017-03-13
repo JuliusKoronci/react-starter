@@ -34,8 +34,9 @@ const FilterTasks = (props) => {
 
                                     { Object.keys(props.columns).map((key, i)=>{
                                         let name=key;
-                                        if(props.columns.hasOwnProperty(name)&& typeof props.columns[name] !== 'undefined' && (!!props.columns[name].visible)) {
-                                            return <th key={i}>{props.columns[name].label}</th>;
+                                        if(props.columns.hasOwnProperty(name)&& typeof props.columns[name] !== 'undefined' && (!!props.columns[name])) {
+                                            return <th key={i}>{name}</th>;
+                                            {/*return <th key={i}>{props.columns[name].label}</th>;*/}
                                         }
                                     })
                                     }

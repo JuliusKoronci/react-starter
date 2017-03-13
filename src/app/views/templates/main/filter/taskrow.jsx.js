@@ -16,26 +16,26 @@ const taskrow = ({task,columns}) => {
             <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">{task.id}</span></td>
 
 
-            {columns.title.visible && <td>
+            {columns.title && <td>
                 <Link className="uk-text-large" to={'/tasks/' + task.id}>{task.title}</Link>
                 <TagList task={task}/>
             </td>}
 
-            {columns.status.visible && <td><TaskStatus task={task}/></td>}
+            {columns.status && <td><TaskStatus task={task}/></td>}
 
-            {columns.project.visible && <td>{task.project.name}</td>}
+            {columns.project && <td>{task.project.name}</td>}
 
-            {columns.created.visible && <td>{dateFormat(task.createdAt)}</td>}
+            {columns.created && <td>{dateFormat(task.createdAt)}</td>}
 
-            {columns.requester.visible && <td>{task.requestedBy.username}</td>}
+            {columns.requester && <td>{task.requestedBy.username}</td>}
 
-            {columns.company.visible && <td>{task.company.title}</td>}
+            {columns.company && <td>{task.company.title}</td>}
 
-            {columns.assigned.visible && <td><TaskAssignees task={task}/></td>}
+            {columns.assigned && <td><TaskAssignees task={task}/></td>}
 
-            {columns.context.visible && <td>context</td>}
+            {columns.context && <td>context</td>}
 
-            {columns.deadline.visible && <td>{dateFormat(task.deadline)}</td>}
+            {columns.deadline && <td>{dateFormat(task.deadline)}</td>}
 
 
         </tr>

@@ -55,6 +55,7 @@ export const paths = {
     'task_list': '/tasks',
     'task_show': '/tasks/:taskId',
     'filter': '/filter',
+    'filter_edit':'/filter/:filterId',
     'profile':'/profile',
     'settings':'/settings/default',
     'automated_tasks':'/settings/automated-tasks',
@@ -140,7 +141,9 @@ export default (
             <Route path={paths.task_list} component={Task}/>
             <Route path={paths.task_show} component={Task}/>
             <Route path={paths.profile} component={Profile}/>
+            <Route name="filter" path={paths.filter_edit} component={Filter}/>
             <Route name="filter" path={paths.filter} component={Filter}/>
+
 
             <Route path={paths.project_tasks} component={TaskList}/>
             <Route path={paths.tag_tasks} component={TaskList}/>
