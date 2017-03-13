@@ -1,4 +1,6 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
+import {browserHistory} from 'react-router';
+import {generateRoute} from '../../../config/router';
 import {
     REQUEST_DEFAULT_TASKS,
     REQUEST_TASKS_FROM_URL,
@@ -6,11 +8,19 @@ import {
     REQUEST_TASKS_WITH_PARAMS,
     TASK_UPDATED,
     TASK_STATUS_UPDATED,
-    TASK_UPLOADED
+    TASK_UPLOADED,
+    CREATE_TASK
 } from '../constants';
+import {TASK_LIST} from '../../../api/urls';
 import {endAjax, startAjaxReset, asyncError} from '../actions/async.action';
 import {tasksReceived, taskReceived, taskAttachmentUploaded} from '../actions/tasks.action';
-import {defaultFilter, getTasksFromUrl, getTaskById, updateTask as updateApi, uploadApi} from '../../../api/tasks/tasks.api';
+import {
+    defaultFilter,
+    getTasksFromUrl,
+    getTaskById,
+    updateTask as updateApi,
+    uploadApi
+} from '../../../api/tasks/tasks.api';
 import {defaultPOST, defaultPATCH, defaultGET} from '../../../api/api';
 import {entityUpdated} from '../../services/general';
 
@@ -82,7 +92,7 @@ function *updateStatus(action) {
             yield call(defaultPOST, action.assignConfig.url);
         }
         yield call(defaultPATCH, action.statusConfig.url);
-        yield call(entityUpdated,'Status updated!');
+        yield call(entityUpdated, 'Status updated!');
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -92,9 +102,23 @@ function *updateStatus(action) {
 function *uploadTask(action) {
     yield put(startAjaxReset());
     try {
-        const data =yield call(uploadApi, action.formData, action.taskId);
-        yield call(entityUpdated,'Attachment uploaded!');
+        const data = yield call(uploadApi, action.formData, action.taskId);
+        yield call(entityUpdated, 'Attachment uploaded!');
         yield put(taskAttachmentUploaded(data));
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
+function *createTask() {
+    yield put(startAjaxReset());
+    try {
+        const task = yield call(defaultPOST, TASK_LIST, {title: ' '});
+        yield put(taskReceived(task));
+        const id = task.data.id;
+        const link = generateRoute('task_show', {taskId: id});
+        browserHistory.push(link);
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -109,5 +133,6 @@ export function *loadTasksFromUrl() {
     yield takeLatest(TASK_UPDATED, updateTask);
     yield takeLatest(TASK_STATUS_UPDATED, updateStatus);
     yield takeLatest(TASK_UPLOADED, uploadTask);
+    yield takeLatest(CREATE_TASK, createTask);
 
 }

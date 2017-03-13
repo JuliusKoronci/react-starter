@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import {generateRoute,paths} from '../../../config/router';
+import {generateRoute, paths} from '../../../config/router';
 
-const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActive}) => {
+const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive}) => {
 
-    const projectId=params.projectId;
-    const tagId=params.tagId;
-    const reportId=params.reportId;
+    const projectId = params.projectId;
+    const tagId = params.tagId;
+    const reportId = params.reportId;
 
 
     return (
@@ -21,8 +21,9 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
             <div className="menu_section">
                 <ul>
                     <li>
-                        <Link to='/filter'>
-                            <span className="menu_icon"><i className="material-icons md-color-blue-500">&#xE145;</i></span>
+                        <Link onClick={createTask}>
+                            <span className="menu_icon"><i
+                                className="material-icons md-color-blue-500">&#xE145;</i></span>
                             <span className="menu_title md-color-blue-500">NEW TASK</span>
                         </Link>
                     </li>
@@ -53,23 +54,23 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
             <div className="menu_section">
                 <ul>
                     {/*sidebar menu - projects */}
-                    <li className={projectId?"submenu_trigger act_section":'submenu_trigger'} >
+                    <li className={projectId?"submenu_trigger act_section":'submenu_trigger'}>
 
-                           <a href="#" onClick={menuToggleActive.bind(null)} className={projectId?'active':''} >
-                                <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
-                                 <span className="menu_title">Projects</span>
-                            </a>
-                     
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={projectId?'active':''}>
+                            <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
+                            <span className="menu_title">Projects</span>
+                        </a>
+
                         <ul>
                             {projects.map((project, i) => {
-                                const link=generateRoute('project_tasks',{projectId:project.id});
-                                const linkEdit=generateRoute('project_edit',{projectId:project.id});
+                                const link = generateRoute('project_tasks', {projectId: project.id});
+                                const linkEdit = generateRoute('project_edit', {projectId: project.id});
 
                                 return <li key={i}>
 
                                    <span className="submenu-title">
                                      <Link to={link}
-                                           className={project.id==projectId?'active md-color-deep-orange-500':''}                                      >
+                                           className={project.id==projectId?'active md-color-deep-orange-500':''}>
                                           {project.title}
                                         </Link>
                                      </span>
@@ -93,16 +94,16 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
 
 
                     {/*sidebar menu tags */}
-                    <li className={tagId?"submenu_trigger act_section":'submenu_trigger'} >
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={tagId?'active':''} >
+                    <li className={tagId?"submenu_trigger act_section":'submenu_trigger'}>
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={tagId?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE893;</i></span>
                             <span className="menu_title">Tags</span>
                         </a>
 
                         <ul >
                             {tags.map((tag, i) => {
-                                const link=generateRoute('tag_tasks',{tagId:tag.id});
-                                const linkEdit=generateRoute('tag_edit',{tagId:tag.id});
+                                const link = generateRoute('tag_tasks', {tagId: tag.id});
+                                const linkEdit = generateRoute('tag_edit', {tagId: tag.id});
 
                                 return <li key={i}>
                                     <span className="submenu-title">
@@ -112,9 +113,9 @@ const sidebar = ({filter,projects,tags,sidebarClickEvent,params, menuToggleActiv
                                         </Link>
                                     </span>
 
-                                        <Link className="submenu-icon" to={linkEdit}>
-                                            <i className="material-icons">&#xE8B8;</i>
-                                        </Link>
+                                    <Link className="submenu-icon" to={linkEdit}>
+                                        <i className="material-icons">&#xE8B8;</i>
+                                    </Link>
 
                                 </li>
                             })}
