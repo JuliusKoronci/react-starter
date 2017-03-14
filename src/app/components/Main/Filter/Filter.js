@@ -15,6 +15,7 @@ class Filter extends Component {
 
         this.filterConfig = configResolver.filterConfig(props.params.filterId);
         this.filterOptionsConfig = configResolver.loadFilterOptionList();
+        // this.filterTasksConfig = configResolver.loadFilterTasks();
 
         this.state={
             filterFormVisible:true,
@@ -62,15 +63,21 @@ class Filter extends Component {
         }
 
         this.props.actions.loadEntityList(this.filterOptionsConfig);
+        this.props.actions.loadEntityList(this.filterTasksConfig);
+
+
         //else{alert('not loading')}
     }
 
     onSubmit = (values) => {
 
-        alert('submit');
+        // alert('submit');
         console.log(values);
-        this.setState({columns:values.columns});
-        console.log('columns',this.state.columns);
+        this.setState({columns: values.columns?values.columns:{} });
+
+        this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
+
+        // console.log('columns',this.state.columns);
         // if (this.props.params.companyId) {
         //     this.props.actions.updateEntity(this.props.params.companyId, values, this.companyConfig);
         // } else {

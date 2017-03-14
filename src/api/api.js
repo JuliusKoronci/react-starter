@@ -2,10 +2,11 @@ import {getFromStorage} from '../app/services/storage';
 import {TOKEN_KEY} from '../config/security';
 import queryString from '../../node_modules/query-string';
 import {buildError} from './helpers';
-import {filterFormValues, remapValues} from '../app/services/general';
+import {filterFormValues, remapValues, encode} from '../app/services/general';
 import downloadFile from 'downloadjs';
 
-export function defaultGET(url) {
+export function defaultGET(url, resolvedConfig) {
+
     const token = getFromStorage(TOKEN_KEY);
     let config = {
         method: 'GET',
@@ -13,6 +14,17 @@ export function defaultGET(url) {
             'Authorization': 'Bearer ' + token
         }
     };
+
+    let data=false;
+    if (resolvedConfig && resolvedConfig.allowedFormFields && resolvedConfig.data) {
+        data = filterFormValues(resolvedConfig.data, resolvedConfig.allowedFormFields);
+    }
+    if (resolvedConfig && resolvedConfig.remapValues) {
+        data = remapValues(resolvedConfig.data, resolvedConfig.remapValues);
+    }
+    if (data){
+        url=url + '?'+encode(data);
+    }
 
     return fetch(url, config)
         .then(response =>

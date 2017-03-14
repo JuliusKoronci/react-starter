@@ -24,6 +24,21 @@ export function entityReceived(toast){
 }
 
 
+export function encode(obj){
+        let str = "";
+        let seperator = "";
+        for (let key in obj) {
+
+            if(typeof obj[key]!=='undefined') {
+                str += seperator;
+                // str += encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]);
+                str += key + "=" + obj[key];
+                seperator = "&";
+            }
+        }
+        return str;
+}
+
 
 export function remapValues(formValues, remap){
     let remappedValues={};

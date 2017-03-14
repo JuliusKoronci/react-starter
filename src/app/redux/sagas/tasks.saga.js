@@ -45,7 +45,7 @@ function *loadTasksUrl(action) {
 function *loadTasksWithParams(action) {
     yield put(startAjaxReset());
     try {
-        const data = yield call(defaultGET, action.url);
+        const data = yield call(defaultGET, action.url, action.config);
         yield put(tasksReceived(data));
     } catch (e) {
         yield put(asyncError(e));

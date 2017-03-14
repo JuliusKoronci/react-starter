@@ -91,8 +91,8 @@ class FilterForm extends Component {
 
 
                     <Field name="columns.created" type="checkbox" className="alignright" validate={[]}
-                           component={renderField} label="Column created" actions={{onChange:this.changeRowVisibility.bind(null)}} />
-                    <Field name="created" type="text" validate={[]} component={renderMultiselect} label="Created" defaultOptions={
+                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                    <Field name="creator" type="text" validate={[]} component={renderMultiselect} label="Created" defaultOptions={
                         filterOptions.created.map((option)=>{
                             return {value:option.id, label:option.username}
                         })
@@ -288,9 +288,9 @@ class FilterForm extends Component {
 
 
 function mapStateToProps(state, ownProps) {
-    // const filterId = ownProps.params.filterId;
-    // const filter = state.filters.data.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
-    //
+    const filterId = ownProps.params.filterId;
+    const filter = state.filter.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
+
     // if (filter.length > 0) {
     //     return {
     //         initialValues: filter[0]
@@ -305,11 +305,22 @@ function mapStateToProps(state, ownProps) {
         // console.log('own props: ',ownProps.columns);
     }
 
-    return {initialValues: {
-        columns:columns,
-    },
-        enableReinitialize: true
-    };
+    // return {initialValues: {
+    //     columns:columns,
+    // },
+    //     enableReinitialize: true
+    // };
+
+
+    if (filter.length > 0) {
+        return {
+            initialValues: {...filter[0]},enableReinitialize: true
+        };
+    }else {
+        return{};
+    }
+
+
 }
 
 FilterForm = reduxForm({

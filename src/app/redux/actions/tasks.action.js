@@ -32,7 +32,8 @@ export function requestTasksFromUrl(url) {
 export function requestTasks(config) {
     return {
         type: REQUEST_TASKS_WITH_PARAMS,
-        url:config.url
+        url:config.url,
+        config
     }
 }
 

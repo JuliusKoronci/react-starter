@@ -2,7 +2,7 @@ import {paths} from './router';
 import * as urls from '../api/urls';
 import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, userReceived, unitReceived, imapReceived, smtpReceived, roleReceived } from '../app/redux/actions/settings.action';
 import {optionsReceived} from '../app/redux/actions/system.actions';
-import {taskReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
+import {taskReceived, tasksReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 import {tagReceived, tagCreated} from '../app/redux/actions/tag.action';
 import {projectReceived,projectCreated} from '../app/redux/actions/project.action';
@@ -129,6 +129,19 @@ class configResolver {
             afterEntityReceivedAction: filterOptionsReceived,
         }
     }
+
+    static loadFilterTasks(values) {
+
+        return {
+            url: urls.TASK_LIST,
+            afterEntityReceivedAction: tasksReceived,
+            allowedFormFields: ['status', 'project','creator','requester','company','assigned','tag','follower'],
+            data:values,
+            dataToParams:true
+            // remapValues:{'detailData.function':'detail_data[function]'},
+        }
+    }
+
 
     static getProjectConfig = (id) => {
         return {

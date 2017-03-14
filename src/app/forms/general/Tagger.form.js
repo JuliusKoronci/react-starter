@@ -33,7 +33,7 @@ class Tagger extends Component {
 
     newOptionClick = (value) => {
         console.log('new option click ', value);
-        let newValue = this.props.input.value + ',' + value.value;
+        let newValue = this.props.input.value?this.props.input.value+ ',':'' + value.value;
         this.props.input.onChange(newValue);
     };
 

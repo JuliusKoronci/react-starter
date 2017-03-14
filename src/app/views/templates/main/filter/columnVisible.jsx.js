@@ -3,7 +3,8 @@ import React, {PropTypes} from 'react';
 
 const ColumnVisible = ({toggleRowVisibility, name, columns, className}) => {
 
-    let checked=typeof columns[name]!=='undefined'? (!!columns[name].visible):false;
+    let checked=columns && typeof columns[name]!== 'undefined' ? (!!columns[name].visible):false;
+
     // console.log(name,checked);
     // console.log(columns);
 
