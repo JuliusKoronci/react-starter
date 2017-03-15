@@ -9,10 +9,15 @@ import {
     TASK_STATUS_UPDATED,
     TASK_UPLOADED,
     AFTER_TASK_ATTACHMENT_DELETED,
-    AFTER_TASK_ATTACHMENT_UPLOADED
+    AFTER_TASK_ATTACHMENT_UPLOADED,
+    CREATE_TASK,
 } from '../constants';
 
 import configResolver from '../../../config/configResolver';
+
+export function createTask() {
+    return {type: CREATE_TASK};
+}
 
 export function requestDefaultTasks(filterId) {
     return {
@@ -91,16 +96,16 @@ export function handleStatus(data, taskId) {
 
 }
 
-export function taskAttachmentDeleted({taskId, slug}){
-    return{
+export function taskAttachmentDeleted({taskId, slug}) {
+    return {
         type: AFTER_TASK_ATTACHMENT_DELETED,
         taskId,
-        deletedAttachmentSlug:slug
+        deletedAttachmentSlug: slug
     }
 }
 
-export function taskAttachmentUploaded({data}){
-    return{
+export function taskAttachmentUploaded({data}) {
+    return {
         type: AFTER_TASK_ATTACHMENT_UPLOADED,
         data
     }
