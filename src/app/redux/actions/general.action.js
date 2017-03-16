@@ -80,3 +80,11 @@ export function fileUpload(formData, config) {
         config
     }
 }
+
+export function generalRequest(values, config) {
+    return {
+        type: constants.GENERAL_REQUEST,
+        values,
+        config
+    }
+}

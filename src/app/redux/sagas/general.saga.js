@@ -8,7 +8,8 @@ import {
     PATCH_ENTITY,
     REQUEST_DOWNLOAD_FILE,
     REQUEST_DELETE_FILE,
-    FILE_UPLOAD
+    FILE_UPLOAD,
+    GENERAL_REQUEST
 } from '../constants';
 
 import {endAjax, startAjax, asyncError} from '../actions/async.action';
@@ -152,6 +153,26 @@ function *fileUpload(action) {
 
 
 
+
+function *generalRequest(action) {
+    yield put(startAjax());
+    try {
+        let config = action.config;
+        const data = yield call(defaultRequest, config.url, config.method, action.values, config);
+
+        if (config.afterRequest) {
+            yield put(config.afterRequest(data,config));
+        }
+
+        entityUpdated(config.message?config.message:'Request successful');
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
+
+
 export function *downloadFileDefault() {
     yield takeEvery(REQUEST_DOWNLOAD_FILE, downloadFile);
 }
@@ -181,4 +202,8 @@ export function *deleteFileDefault() {
 
 export function *uploadFileDefault() {
     yield takeLatest(FILE_UPLOAD, fileUpload);
+}
+
+export function *generalRequestDefault() {
+    yield takeEvery(GENERAL_REQUEST, generalRequest);
 }

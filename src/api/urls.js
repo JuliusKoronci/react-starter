@@ -7,6 +7,7 @@ export const TASK_LIST_QUICK = BASE_URL + '/task-bundle/tasks/quick-update';
 export const FILTER_LIST = BASE_URL + '/task-bundle/filters';
 export const FILTER_OPTIONS = BASE_URL + '/task-bundle/filters/options';
 export const USERS_LIST = BASE_URL + '/core-bundle/users';
+export const USERS_ALL = BASE_URL + '/core-bundle/users/all';
 export const COMPANIES_LIST = BASE_URL + '/core-bundle/companies';
 export const COMPANY_POST_NEW = BASE_URL + '/core-bundle/companies';
 export const STATUSES_LIST = BASE_URL + '/task-bundle/status';

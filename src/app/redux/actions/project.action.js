@@ -15,5 +15,21 @@ export function projectCreated(data) {
     }
 }
 
+export function projectUsersUpdated(data) {
+    return {
+        type: constants.PROJECT_USERS_UPDATED,
+        data
+    }
+}
+
+export function projectUserRemoved(data,config) {
+    return {
+        type: constants.PROJECT_USER_REMOVED,
+        data,
+        config
+    }
+}
+
+
 
 

@@ -1,11 +1,11 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
 import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, userReceived, unitReceived, imapReceived, smtpReceived, roleReceived } from '../app/redux/actions/settings.action';
-import {optionsReceived} from '../app/redux/actions/system.actions';
+import {optionsReceived,usersAllReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, tasksReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 import {tagReceived, tagCreated} from '../app/redux/actions/tag.action';
-import {projectReceived,projectCreated} from '../app/redux/actions/project.action';
+import {projectReceived,projectCreated,projectUsersUpdated,projectUserRemoved} from '../app/redux/actions/project.action';
 import {filterReceived,filterOptionsReceived} from '../app/redux/actions/filter.action';
 
 class configResolver {
@@ -122,6 +122,34 @@ class configResolver {
             allowedFormFields: ['title', 'color','public']
         }
     };
+
+    static getAllUsersConfig(){
+        return {
+            url: urls.USERS_ALL,
+            urlList: urls.USERS_ALL,
+            afterEntityReceivedAction: usersAllReceived,
+        }
+    };
+
+
+    static projectUserConfig(projectId,userId){
+        return {
+            url: urls.BASE_URL+'/task-bundle/project/'+projectId+'/user/'+userId,
+            afterEntityReceivedAction: projectUsersUpdated,
+        }
+    };
+
+    static projectUserDeleteConfig(projectId,userId){
+        return {
+            url: urls.BASE_URL+'/task-bundle/project/'+projectId+'/user/'+userId,
+            method:'DELETE',
+            message:'User removed from project',
+            userId,
+            projectId,
+            afterRequest: projectUserRemoved,
+        }
+    };
+
 
     static loadFilterOptionList() {
         return {

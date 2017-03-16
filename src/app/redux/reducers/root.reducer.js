@@ -6,6 +6,7 @@ import asyncReducer from './async/async.reducer';
 import tasksReducer from './tasks/tasks.reducer';
 import filterReducer from './system/filter.reducer';
 import filtersReducer from './system/filters.reducer';
+import usersAllReducer from './system/users_all.reducer';
 import usersReducer from './settings/users.reducer';
 import companiesReducer from './settings/companies.reducer';
 import statusesReducer from './settings/statuses.reducer';
@@ -47,7 +48,8 @@ const appReducer = combineReducers({
     units: units,
     projects: projectsReducer,
     profile: profileReducer,
-    tags: tagsReducer
+    tags: tagsReducer,
+    usersAll:usersAllReducer,
 });
 
 const rootReducer = (state, action) => {
