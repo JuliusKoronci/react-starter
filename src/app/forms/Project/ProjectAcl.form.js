@@ -8,8 +8,33 @@ import {generateRoute} from '../../../config/router';
 
 class ProjectAclForm extends Component {
 
+
+    onChange=(fieldName,e)=>{
+        let checked=e.target.checked;
+        let value=e.target.name;
+        const valuesBefore=this.props.thisForm['ProjectAclForm'].values[fieldName].split(',');
+
+        if(valuesBefore.indexOf(value)==-1 && checked){
+            let newValues=valuesBefore;
+            newValues.push(value);
+            this.props.change(fieldName, newValues.join());
+            console.log(newValues);
+        }else if(valuesBefore.indexOf(value)!==-1 && !checked){
+            let newValues=valuesBefore.filter((val)=>{if(val!==value)return val;});
+            this.props.change(fieldName, newValues.join());
+            console.log(newValues);
+        }
+
+    };
+
+
     render() {
         const {handleSubmit,heading} = this.props;
+
+        const acls=['view_own_tasks','view_tasks_from_users_company','view_all_tasks',
+            'create_task','resolve_task','delete_task',
+            'view_internal_note','edit_internal_note','edit_project'];
+
         return (
             <div className="md-card">
                 <form onSubmit={handleSubmit}>
@@ -40,74 +65,24 @@ class ProjectAclForm extends Component {
                             'view_internal_note','edit_internal_note','edit_project'*/}
 
                             {this.props.project.userHasProjects.map((user, i) =>{
+                                const fieldName='user'+user.user.id;
+                                let fieldValue=user.acl.join(',');
 
                                 return <tr key={i}>
                                     <td>{user.user.username}</td>
+
+                                        {acls.map((acl,i)=>{
+                                            return <td className="uk-text-center" key={i}>
+                                                <div className="icheckbox_md">
+                                                    <input type="checkbox" name={acl} defaultChecked={(user.acl.indexOf(acl)!==-1)} onChange={this.onChange.bind(null,fieldName)} />
+                                                </div>
+                                            </td>
+                                            }
+                                        )}
+
+
                                     <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox" name="view_own_tasks"
-                                                                             defaultChecked={(user.acl.indexOf('view_own_tasks')!==-1)}
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox"
-                                                                             name="view_tasks_from_users_company"
-                                                                             
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox" name="view_all_tasks"
-                                                                             
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox" name="create_task"
-                                                                             
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox" name="resolve_task"
-                                                                             
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox" name="delete_task"
-                                                                             
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox" name="view_internal_note"
-                                                                             
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox" name="edit_internal_note"
-                                                                             
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
-                                        <div className="icheckbox_md"><input type="checkbox" name="edit_project"
-                                                                             
-                                                                             data-md-icheck=""/>
-                                            <ins className="iCheck-helper"/>
-                                        </div>
-                                    </td>
-                                    <td className="uk-text-center">
+                                        <Field type="text" name={fieldName} validate={[]} component={renderField} value={fieldValue} />
                                         <button onClick={this.props.removeUser.bind(null,user.user.id)} className="md-btn md-btn-danger">Delete</button>
                                     </td>
                                 </tr>
@@ -126,19 +101,32 @@ class ProjectAclForm extends Component {
 function mapStateToProps(state, ownProps) {
     const projectId = ownProps.params.projectId;
     const project = state.projects.data.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
+    const thisForm=state.form;
 
     if (project.length > 0) {
+        let initialValues={};
+        let fields=[];
+            project[0].userHasProjects.map((user, i) => {
+                let fieldName = 'user' + user.user.id;
+                let value=user.acl.join(',');
+                initialValues[fieldName]=value;
+                fields.push(fieldName);
+            });
+
         return {
-            initialValues: {userHasProjects: project.length > 0 ? project[0]['userHasProjects'] : []},
+            thisForm,
+            initialValues:initialValues,
+            fields
+            //initialValues: {userHasProjects: project.length > 0 ? project[0]['userHasProjects'] : []},
         };
     }
-    return {};
+    return {thisForm};
 
 }
 
 ProjectAclForm = reduxForm({
     form: 'ProjectAclForm',
-    enableReinitialize: true
+    enableReinitialize: true,
 })(ProjectAclForm);
 
 export default connect(mapStateToProps)(ProjectAclForm);

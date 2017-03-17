@@ -18,7 +18,6 @@ class Project extends Component {
         this.getAllUsersConfig = configResolver.getAllUsersConfig();
 
 
-
         //check permission
         if(this.props.auth.user.userRoleAcl.indexOf('create_projects')==-1){
             console.log('no permission');
@@ -36,10 +35,12 @@ class Project extends Component {
     componentWillMount() {
         if (this.props.params.projectId && !this.props.project) {
             this.props.actions.loadEntityById(this.props.params.projectId, this.projectConfig);
-
             // this.props.actions.requestAllUsers();
-            this.props.actions.loadEntityList(this.getAllUsersConfig);
+            // this.props.actions.loadEntityList(this.getAllUsersConfig);
+        }
 
+        if(this.props.usersAll.length==0){
+            this.props.actions.loadEntityList(this.getAllUsersConfig);
         }
     }
 
