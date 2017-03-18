@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../../redux/actions/tasks.action';
 import * as genActions from '../../../redux/actions/general.action';
-import ViewReadOnly from '../../../views/templates/main/task/readOnlyTask.jsx';
 import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import configResolver from '../../../../config/configResolver';
 import { generateRoute } from '../../../../config/router';
@@ -20,7 +19,7 @@ class Task extends Component {
 		}
 	}
 
-	componentDidUnmount() {
+	componentWillUnmount() {
 		if (this.props.newTask && !this.state.saved) {
 			this._onNewTaskCancel(this.props.params.taskId);
 		}
@@ -97,18 +96,14 @@ class Task extends Component {
 	}
 
 	renderTask = () => {
-		if (this.props.canEdit) {
-			return (<ViewEditable
-				handleFileUpload={this.handleFileUpload}
-				handleFileDownload={this.handleFileDownload}
-				handleFileDelete={this.handleFileDelete}
-				handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
-				handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
-				{...this.props}
-			/>);
-		}
-
-		return (<ViewReadOnly {...this.props} />);
+		return (<ViewEditable
+			handleFileUpload={this.handleFileUpload}
+			handleFileDownload={this.handleFileDownload}
+			handleFileDelete={this.handleFileDelete}
+			handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
+			handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
+			{...this.props}
+		/>);
 	}
 }
 
