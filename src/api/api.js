@@ -63,6 +63,28 @@ export function defaultPOST(url, data) {
         })
 
 }
+export function defaultDELETE(url) {
+    const token = getFromStorage(TOKEN_KEY);
+    let config = {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    };
+
+    return fetch(url, config)
+        .then(response =>
+            response.json().then(data => ({data, response}))
+        ).then(({data, response}) => {
+            if (!response.ok) {
+                return Promise.reject(buildError(response, data))
+            } else {
+                return Promise.resolve(data);
+            }
+        })
+
+}
+
 export function defaultPATCH(url, data) {
     const token = getFromStorage(TOKEN_KEY);
     let config = {
