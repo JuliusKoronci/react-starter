@@ -73,7 +73,6 @@ class Project extends Component {
             }
         }
 
-        console.log(newValues);
         this.props.actions.generalRequest(newValues, configAcl);
 
     };
