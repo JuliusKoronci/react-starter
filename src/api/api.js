@@ -121,15 +121,30 @@ export function defaultRequest(url, method, data, resolvedConfig) {
 
 
 
+    let bodyData='';
+
+    bodyData = data?queryString.stringify(data).replace("detailData", "detail_data"):'';
+
+    bodyData = (data && resolvedConfig && resolvedConfig.jsonStringify) ? JSON.stringify(data): '';
+
+    let headers={
+        'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json'};
+
+    if (resolvedConfig && resolvedConfig.contentType) {
+        if(resolvedConfig.contentType!=='default'){
+            headers['Content-Type']=resolvedConfig.contentType;
+        }
+    }else{
+        headers['Content-Type']='application/x-www-form-urlencoded';
+    }
+
+
     let config = {
          method: method,
-        // body: (data ? queryString.stringify(data).replace("detailData", "detail_data") : ''),
-        body: (data ? JSON.stringify(data): ''),
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Accept': 'application/json',
-            //'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        body: bodyData,
+        // body: (data ? JSON.stringify(data): ''),
+        headers: headers
     };
     // return Promise.resolve(data);
 

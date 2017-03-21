@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import { Creatable } from 'react-select';
 import Task from './taskrow.jsx';
+import Pagination from '../_partials/pagination.jsx';
 
 const FilterTasks = (props) => {
 
@@ -62,6 +63,10 @@ const FilterTasks = (props) => {
                                 </tbody>
                             </table>
                         </div>
+
+                        <Pagination links={props.tasks._links} total={props.tasks.total} page={props.tasks.page}
+                                    loadFunction={props.loadTasksFunction}/>
+
                     </div>
 
     );

@@ -143,6 +143,8 @@ class configResolver {
         return {
             url: urls.BASE_URL+'/task-bundle/project/'+projectId+'/process-acl',
             method:'POST',
+            contentType:'default',
+            jsonStringify:true
             // afterEntityReceivedAction: projectAclUpdated,
         }
     };
@@ -264,6 +266,10 @@ class configResolver {
     };
 
     static tasksConfig = (type,id) => {
+
+        if(!type){
+            return {url: urls.TASK_LIST}
+        }
 
         switch(type){
             case 'project':

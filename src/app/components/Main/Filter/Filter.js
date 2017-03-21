@@ -50,6 +50,10 @@ class Filter extends Component {
     }
 
 
+    loadTasksFunction = (url, e) => {
+        this.props.actions.requestTasksFromUrl(url);
+    };
+
 
     deleteHandler=(id)=>{
         alert('delete handler');
@@ -89,8 +93,9 @@ class Filter extends Component {
 
     componentDidMount() {
         // TODO
-        this.config = configResolver.tasksConfig('project', 131);
-        this.props.actions.requestTasks(this.config);
+        // this.config = configResolver.tasksConfig('project', 141);
+        let config = configResolver.tasksConfig();
+        this.props.actions.requestTasks(config);
     }
 
 
@@ -134,7 +139,7 @@ class Filter extends Component {
     render() {
         return (
             <View {...this.props} toggleFilter={this.toggleFilter} filterFormVisible={this.state.filterFormVisible} toggleRowVisibility={this.toggleRowVisibility}
-            visibleFields={this.state.visibleFields} columns={this.state.columns} onSubmit={this.onSubmit} />
+            visibleFields={this.state.visibleFields} columns={this.state.columns} onSubmit={this.onSubmit} loadTasksFunction={this.loadTasksFunction} />
         );
     }
 }

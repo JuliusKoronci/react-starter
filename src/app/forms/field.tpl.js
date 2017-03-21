@@ -8,8 +8,8 @@ import Multicheckbox from '../forms/general/Multicheckbox.form';
 import Multiselect from '../forms/general/Multiselect.form';
 import Datepicker from '../forms/general/Datepicker.form';
 
-export const renderField = ({input, label, type, actions, meta: {touched, error, warning}}) => (
-    <div className="uk-form-row">
+export const renderField = ({input, label, type, actions, className, meta: {touched, error, warning}}) => (
+    <div className={className?className+ " uk-form-row":'uk-form-row'}>
         <label htmlFor={input.name}>{label}</label>
         <input className="md-input" {...input} type={type} {...actions} {...input.props} />
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
