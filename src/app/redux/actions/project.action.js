@@ -30,6 +30,14 @@ export function projectUserRemoved(data,config) {
     }
 }
 
+export function projectAclUpdated(data) {
+    return {
+        type: constants.PROJECT_ACL_UPDATED,
+        data
+    }
+}
+
+
 
 
 

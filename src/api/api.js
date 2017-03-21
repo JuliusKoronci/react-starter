@@ -97,18 +97,19 @@ export function defaultRequest(url, method, data, resolvedConfig) {
         data = remapValues(data, resolvedConfig.remapValues);
     }
 
+
+
     let config = {
          method: method,
-        body: (data ? queryString.stringify(data).replace("detailData", "detail_data") : ''),
-        // body: (data ? JSON.stringify(data): ''),
+        // body: (data ? queryString.stringify(data).replace("detailData", "detail_data") : ''),
+        body: (data ? JSON.stringify(data): ''),
         headers: {
             'Authorization': 'Bearer ' + token,
             'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            //'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
     // return Promise.resolve(data);
-
 
     if(method==='DELETE'){
         return fetch(url, config)

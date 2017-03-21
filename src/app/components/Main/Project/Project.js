@@ -62,8 +62,20 @@ class Project extends Component {
     };
 
     projectAclOnSubmit = (values) => {
-        console.log(values);
-        alert('project acl submit');
+        // console.log(values);
+        // alert('project acl submit');
+
+        const configAcl = configResolver.projectAclConfig(this.props.params.projectId);
+        let newValues={};
+        for(let key in values) {
+            if(values.hasOwnProperty(key)) {
+                newValues[key.replace("user", "")] = values[key].split(',');
+            }
+        }
+
+        console.log(newValues);
+        this.props.actions.generalRequest(newValues, configAcl);
+
     };
 
     removeUser=(id, e)=>{

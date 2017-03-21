@@ -5,7 +5,7 @@ import {optionsReceived,usersAllReceived} from '../app/redux/actions/system.acti
 import {taskReceived, tasksReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 import {tagReceived, tagCreated} from '../app/redux/actions/tag.action';
-import {projectReceived,projectCreated,projectUsersUpdated,projectUserRemoved} from '../app/redux/actions/project.action';
+import {projectReceived,projectCreated,projectUsersUpdated,projectUserRemoved,projectAclUpdated} from '../app/redux/actions/project.action';
 import {filterReceived,filterOptionsReceived} from '../app/redux/actions/filter.action';
 
 class configResolver {
@@ -138,6 +138,15 @@ class configResolver {
             afterEntityReceivedAction: projectUsersUpdated,
         }
     };
+
+    static projectAclConfig(projectId){
+        return {
+            url: urls.BASE_URL+'/task-bundle/project/'+projectId+'/process-acl',
+            method:'POST',
+            // afterEntityReceivedAction: projectAclUpdated,
+        }
+    };
+
 
     static projectUserDeleteConfig(projectId,userId){
         return {

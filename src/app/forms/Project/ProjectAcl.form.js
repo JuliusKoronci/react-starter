@@ -18,11 +18,11 @@ class ProjectAclForm extends Component {
             let newValues=valuesBefore;
             newValues.push(value);
             this.props.change(fieldName, newValues.join());
-            console.log(newValues);
+
         }else if(valuesBefore.indexOf(value)!==-1 && !checked){
-            let newValues=valuesBefore.filter((val)=>{if(val!==value)return val;});
+            let newValues=valuesBefore.length>0? valuesBefore.filter((val)=>{if(val!==value)return val;}) : [];
             this.props.change(fieldName, newValues.join());
-            console.log(newValues);
+
         }
 
     };
@@ -59,10 +59,6 @@ class ProjectAclForm extends Component {
                             <tbody>
 
 
-
-                            {/*'view_own_tasks','view_tasks_from_users_company','view_all_tasks',
-                            'create_task','resolve_task','delete_task',
-                            'view_internal_note','edit_internal_note','edit_project'*/}
 
                             {this.props.project.userHasProjects.map((user, i) =>{
                                 const fieldName='user'+user.user.id;
@@ -117,7 +113,6 @@ function mapStateToProps(state, ownProps) {
             thisForm,
             initialValues:initialValues,
             fields
-            //initialValues: {userHasProjects: project.length > 0 ? project[0]['userHasProjects'] : []},
         };
     }
     return {thisForm};
