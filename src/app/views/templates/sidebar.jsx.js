@@ -8,6 +8,10 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
     const tagId = params.tagId;
     const reportId = params.reportId;
 
+    //aby boli otvorene menu Projects,Tags,Reports
+    const projectsOpen = true;
+    const tagsOpen = true;
+    const reportsOpen = true;
 
     return (
         <aside id="sidebar_main" style={{overflow:'auto'}}>
@@ -56,7 +60,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
                     {/*sidebar menu - projects */}
                     <li className={projectId?"submenu_trigger act_section":'submenu_trigger'}>
 
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={projectId?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={projectsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
                             <span className="menu_title">Projects</span>
                         </a>
@@ -95,7 +99,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
 
                     {/*sidebar menu tags */}
                     <li className={tagId?"submenu_trigger act_section":'submenu_trigger'}>
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={tagId?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={tagsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE893;</i></span>
                             <span className="menu_title">Tags</span>
                         </a>
@@ -134,7 +138,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
 
                     {/*sidebar menu Reports */}
                     <li className={reportId?"submenu_report act_section":'submenu_trigger'}>
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={reportId?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={reportsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Reports</span>
                         </a>
@@ -163,19 +167,19 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
                                 </span>
                             </li>
                             <li>
+                                   <span className="submenu-title">
+                                        <Link to='/reports/custom'>
+                                            Custom report 1
+                                        </Link>
+                                   </span>
+                            </li>
+                            <li>
                                 <span className="submenu-title">
                                     <Link to={paths.report_add} className="md-color-blue-500">
                                         <i className="material-icons md-color-blue-500">&#xE145;</i>
                                      Report
                                     </Link>
                                 </span>
-                            </li>
-                            <li>
-                                   <span className="submenu-title">
-                                        <Link to='/reports/custom'>
-                                            Custom report 1
-                                        </Link>
-                                   </span>
                             </li>
                         </ul>
                     </li>
