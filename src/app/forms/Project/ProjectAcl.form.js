@@ -40,7 +40,7 @@ class ProjectAclForm extends Component {
                 <form onSubmit={handleSubmit}>
                     <div className="md-card-content">
                         
-                        <table className="uk-table uk-text-nowrap">
+                        <table className="uk-table uk-table-align-vertical">
                             <thead>
                             <tr>
                                 <th>User</th>
@@ -78,7 +78,7 @@ class ProjectAclForm extends Component {
 
 
                                     <td className="uk-text-center">
-                                        <Field type="text" name={fieldName} validate={[]} component={renderField} value={fieldValue} />
+                                        <Field type="hidden" name={fieldName} validate={[]} component={renderField} value={fieldValue} />
                                         <button onClick={this.props.removeUser.bind(null,user.user.id)} className="md-btn md-btn-danger">Delete</button>
                                     </td>
                                 </tr>
@@ -86,7 +86,10 @@ class ProjectAclForm extends Component {
                             }
                             </tbody>
                         </table>
-                        <button type="submit" className="md-btn md-btn-primary" >Save</button>
+                        <div className="uk-margin">
+                            <Link className="md-btn md-btn-danger" to={generateRoute('projects')}>Cancel</Link>
+                            <button type="submit" className="md-btn md-btn-primary alignright">Save</button>
+                        </div>
                     </div>
                 </form>
             </div>

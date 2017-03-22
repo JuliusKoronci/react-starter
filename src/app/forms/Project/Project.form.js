@@ -18,7 +18,7 @@ class ProjectForm extends Component {
                             <h1 className="heading_b uk-margin-bottom">{heading}</h1>
                         </div>
                         <hr/>
-                        <div className="uk-width-medium-1-1 max-width-1000px">
+                        <div className="uk-width-medium-1-1">
                             <div className="uk-margin-bottom">
                                 <Field type="checkbox" name="is_active" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">Active</label>
