@@ -18,8 +18,6 @@ class FilterForm extends Component {
 
     changeRowVisibility=(e)=>{
 
-        //alert('in form '+v)
-        // let name=v;
         let checked=!!e.target.checked;
         let name=e.target.name;
         this.props.dispatch(change('filterForm', name, checked));
@@ -31,10 +29,14 @@ class FilterForm extends Component {
 
 
     render() {
-
         const {handleSubmit, formError, handleDelete, columns, filterOptions} = this.props;
+        let visibleColumns=columns.map((column)=>{
+            let key = Object.keys(column)[0];
+            if(column.hasOwnProperty(key) &&  typeof column[key] !== 'undefined' && (!!column[key]) ){
+                return key;
+            }
+        }).filter((el)=>{return el!== undefined;});
 
-        // console.log('columns', columns);
 
         // { Object.keys(props.columns).map((key, i)=>{
         //     let name=key;
@@ -61,11 +63,11 @@ class FilterForm extends Component {
                 <ul className="md-list md-list-addon">
 
 
-                    <Field name="filter_name" type="text" validate={[]} component={renderField} label="Filter Name"/>
+                    <Field name="title" type="text" validate={[]} component={renderField} label="Filter Name"/>
 
 
                     <Field name="columns.title" type="checkbox" className="alignright" validate={[]}
-                           component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
+                           component={renderField} label="Column" defaultChecked={true} actions={{onChange:this.changeRowVisibility.bind(null)}} />
                     <Field name="title" type="text" validate={[]} component={renderField} label="Task Name"/>
 
 
@@ -92,7 +94,7 @@ class FilterForm extends Component {
 
                     <Field name="columns.created" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
-                    <Field name="creator" type="text" validate={[]} component={renderMultiselect} label="Created" defaultOptions={
+                    <Field name="created" type="text" validate={[]} component={renderMultiselect} label="Created" defaultOptions={
                         filterOptions.created.map((option)=>{
                             return {value:option.id, label:option.username}
                         })
@@ -291,6 +293,23 @@ function mapStateToProps(state, ownProps) {
     const filterId = ownProps.params.filterId;
     const filter = state.filter.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
 
+
+    let visibleColumns=ownProps.columns.map((column)=>{
+        let key = Object.keys(column)[0];
+        if(column.hasOwnProperty(key) &&  typeof column[key] !== 'undefined' && (!!column[key]) ){
+            return key;
+        }
+    }).filter((el)=>{return el!== undefined;});
+    // console.log(visibleColumns);
+
+    let columns={};
+
+    visibleColumns.map((vColumn)=>{
+       columns[vColumn]=true;
+    });
+
+
+
     // if (filter.length > 0) {
     //     return {
     //         initialValues: filter[0]
@@ -299,11 +318,11 @@ function mapStateToProps(state, ownProps) {
     //     return{};
     // }
 
-    let columns={};
-    if(ownProps.columns){
-        columns=ownProps.columns;
-        // console.log('own props: ',ownProps.columns);
-    }
+    // let columns={};
+    // if(ownProps.columns){
+    //     columns=ownProps.columns;
+    //     // console.log('own props: ',ownProps.columns);
+    // }
 
     // return {initialValues: {
     //     columns:columns,
@@ -311,13 +330,23 @@ function mapStateToProps(state, ownProps) {
     //     enableReinitialize: true
     // };
 
+    // console.log(columns);
 
+    console.log(filter[0])
     if (filter.length > 0) {
         return {
-            initialValues: {...filter[0]},enableReinitialize: true
+            initialValues: {...filter[0]},
+            enableReinitialize: true
         };
-    }else {
-        return{};
+    }
+
+    else {
+        return{initialValues:{},enableReinitialize: true};
+    // else {
+    //     return{
+    //         initialValues: { ...{columns}},
+    //     enableReinitialize: true
+    //     };
     }
 
 

@@ -33,14 +33,27 @@ const FilterTasks = (props) => {
                                     <th className="uk-text-center ">Key</th>
 
 
-                                    { Object.keys(props.columns).map((key, i)=>{
-                                        let name=key;
-                                        if(props.columns.hasOwnProperty(name)&& typeof props.columns[name] !== 'undefined' && (!!props.columns[name])) {
+
+                                    {/*{ Object.keys(props.columns).map((key, i)=>{*/}
+                                        {/*let name=key;*/}
+                                        {/*if(props.columns.hasOwnProperty(name)&& typeof props.columns[name] !== 'undefined' && (!!props.columns[name])) {*/}
+                                            {/*return <th key={i}>{name}</th>;*/}
+                                            {/*/!*return <th key={i}>{props.columns[name].label}</th>;*!/*/}
+                                        {/*}*/}
+                                    {/*})*/}
+                                    {/*}*/}
+
+
+
+                                    { props.columns.map((column, i)=>{
+                                        let name=Object.keys(column)[0];
+                                        if(column.hasOwnProperty(name)&& typeof column[name] !== 'undefined' && (!!column[name])) {
                                             return <th key={i}>{name}</th>;
                                             {/*return <th key={i}>{props.columns[name].label}</th>;*/}
                                         }
                                     })
                                     }
+
 
 
                                     {/*

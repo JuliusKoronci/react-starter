@@ -15,11 +15,25 @@ class Filter extends Component {
 
         this.filterConfig = configResolver.filterConfig(props.params.filterId);
         this.filterOptionsConfig = configResolver.loadFilterOptionList();
-        // this.filterTasksConfig = configResolver.loadFilterTasks();
+        this.filterTasksConfig = configResolver.loadFilterTasks();
 
         this.state={
             filterFormVisible:true,
-            visibleFields:{'taskName':true},
+            // visibleFields:{'taskName':true},
+
+            // columns:{
+            //     title:true,
+            //     status:false,
+            //     project:false,
+            //     created:false,
+            //     requester:false,
+            //     company:false,
+            //     assigned:false,
+            //     context:false,
+            //     owner:false,
+            //     deadline:false,
+            // }
+
 
             // columns:{
             //     title:{label:'Title',visible:true},
@@ -34,18 +48,20 @@ class Filter extends Component {
             //     deadline:{label:'Deadline'},
             // }
 
-            columns:{
-                title:true,
-                status:false,
-                project:false,
-                created:false,
-                requester:false,
-                company:false,
-                assigned:false,
-                context:false,
-                owner:false,
-                deadline:false,
-            }
+
+            columns:[
+                {title:true},
+                {status:false},
+                {project:false},
+                {created:false},
+                {requester:false},
+                {company:false},
+                {assigned:false},
+                {context:false},
+                {owner:false},
+                {deadline:false},
+            ]
+
         }
     }
 
@@ -76,8 +92,48 @@ class Filter extends Component {
     onSubmit = (values) => {
 
         // alert('submit');
-        console.log(values);
-        this.setState({columns: values.columns?values.columns:{} });
+        // console.log(values);
+
+        // console.log(this.state.columns);
+        // console.log(values.columns);
+
+
+        let columns=this.state.columns.map((column)=>{
+
+
+
+            let key = Object.keys(column)[0];
+
+            // console.log(key);
+            // console.log(values.columns.hasOwnProperty(key));
+            // console.log(typeof column[key] !== 'undefined');
+            // console.log(!!values.columns[key]);
+
+
+            if(values.columns && values.columns.hasOwnProperty(key) &&  typeof column[key] !== 'undefined' && (!!values.columns[key]) ){
+                return {[key]:true};
+            }else{
+                return {[key]:false};
+            }
+
+        });
+
+        // console.log(columns);
+
+        // if(values.columns) {
+        //     let columns = Object.keys(values.columns).map((column) => {
+        //
+        //         if(column.hasOwnProperty(name)&& typeof column[name] !== 'undefined' && (!!column[name])) {
+        //
+        //         }
+        //
+        //         return
+        //     });
+        //     console.log(columns);
+        // }
+
+
+        this.setState({columns: columns?columns:[] });
 
         this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
 
@@ -95,7 +151,9 @@ class Filter extends Component {
         // TODO
         // this.config = configResolver.tasksConfig('project', 141);
         let config = configResolver.tasksConfig();
+
         this.props.actions.requestTasks(config);
+
     }
 
 

@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import dateFormat from '../../../../services/formatedDate';
 
 const taskrow = ({task,columns}) => {
+
     return (
         <tr>
             <td className="uk-text-center uk-table-middle small_col">
@@ -16,31 +17,31 @@ const taskrow = ({task,columns}) => {
             <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">{task.id}</span></td>
 
 
-            {columns.title && <td>
-                <Link className="uk-text-large" to={'/tasks/' + task.id}>{task.title}</Link>
-                <TagList task={task}/>
-            </td>}
+                {columns[0].title && <td>
+                    <Link className="uk-text-large" to={'/tasks/' + task.id}>{task.title}</Link>
+                    <TagList task={task}/>
+                </td>}
 
-            {columns.status && <td><TaskStatus task={task}/></td>}
+            {columns[1].status && <td><TaskStatus task={task}/></td>}
 
-            {columns.project && <td>{task.project.name}</td>}
+            {columns[2].project && <td>{task.project.name}</td>}
 
-            {columns.created && <td>{dateFormat(task.createdAt)}</td>}
+            {columns[3].created && <td>{dateFormat(task.createdAt)}</td>}
 
-            {columns.requester && <td>{task.requestedBy.username}</td>}
+            {columns[4].requester && <td>{task.requestedBy.username}</td>}
 
-            {columns.company && <td>{task.company.title}</td>}
+            {columns[5].company && <td>{task.company.title}</td>}
 
-            {columns.assigned && <td><TaskAssignees task={task}/></td>}
+            {columns[6].assigned && <td><TaskAssignees task={task}/></td>}
 
-            {columns.context && <td>context</td>}
+            {columns[7].context && <td>context</td>}
 
-            {columns.deadline && <td>{dateFormat(task.deadline)}</td>}
+            {columns[8].deadline && <td>{dateFormat(task.deadline)}</td>}
 
 
         </tr>
     );
-}
+};
 taskrow.propTypes = {
     task: PropTypes.object.isRequired
 };
