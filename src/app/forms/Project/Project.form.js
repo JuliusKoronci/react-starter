@@ -20,11 +20,13 @@ class ProjectForm extends Component {
                         <hr/>
                         <div className="uk-width-medium-1-1">
                             <div className="uk-margin-bottom">
-                                <Field type="checkbox" name="is_active" validate={[]} component={renderField}/>
-                                <label className="uk_dp1 uk-text-muted">Active</label>
+
+                                <Field type="checkbox" name="is_active" validate={[]} component={renderField}
+                                label="Active"/>
+                               
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Project name</label>
+                                <label className="inline-label">Project name</label>
                                 <Field type="text" name="title" validate={[]} component={renderField}/>
                             </div>
                             <div className="uk-margin-bottom">
