@@ -26,6 +26,10 @@
 .submenu_trigger a+ul{display:none;}
 .submenu_trigger a.active+ul{display:block !important;}
 
+input[required] {
+    background-color: red !important;
+}
+
 input[type=checkbox] {
     /* Double-sized Checkboxes */
     -ms-transform: scale(1.5); /* IE */
