@@ -32,7 +32,7 @@ class CompanyAddForm extends Component {
                             <form onSubmit={handleSubmit}>
 
                                 <Field name="is_active" type="checkbox" validate={[]} component={renderField}
-                                       label="Active"/>
+                                       label="Active" required/>
 
                                 <Field name="title" type="text" validate={[required]} component={renderField}
                                        label="Company name"/>

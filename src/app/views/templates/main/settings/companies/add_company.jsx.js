@@ -17,7 +17,7 @@ const add_company = (prop) => {
                     </div>
                     <div className="uk-margin-bottom">
                         <label>Company name</label>
-                        <input type="text" className="md-input label-fixed"/>
+                        <input type="text" className="md-input label-fixed" />
                     </div>
                     <div className="uk-margin-bottom">
                         <label>ICO</label>

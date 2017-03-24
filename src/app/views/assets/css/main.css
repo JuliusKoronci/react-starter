@@ -27,6 +27,7 @@
 .submenu_trigger a.active+ul{display:block !important;}
 
 
+
 .button_next_input {
     margin-top: 16px;
 }
@@ -904,7 +905,7 @@ input.error, select.error {
     /*vertical-align: middle;*/
     line-height: 1;
     text-align: center;
-    padding: 0 0 0 16px;
+
     font-size: 16px;
     min-width: 22px;
 }
