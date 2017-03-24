@@ -17,8 +17,8 @@ class Filter extends Component {
         this.filterOptionsConfig = configResolver.loadFilterOptionList();
         this.filterTasksConfig = configResolver.loadFilterTasks();
 
-        this.state={
-            filterFormVisible:true,
+        this.state = {
+            filterFormVisible: true,
             // visibleFields:{'taskName':true},
 
             // columns:{
@@ -49,17 +49,17 @@ class Filter extends Component {
             // }
 
 
-            columns:[
-                {title:true},
-                {status:false},
-                {project:false},
-                {created:false},
-                {requester:false},
-                {company:false},
-                {assigned:false},
-                {context:false},
-                {owner:false},
-                {deadline:false},
+            columns: [
+                {title: true},
+                {status: false},
+                {project: false},
+                {creator: false},
+                {requester: false},
+                {company: false},
+                {assigned: false},
+                {tag: false},
+                {owner: false},
+                {deadline: false},
             ]
 
         }
@@ -71,7 +71,7 @@ class Filter extends Component {
     };
 
 
-    deleteHandler=(id)=>{
+    deleteHandler = (id) => {
         alert('delete handler');
         // this.props.actions.deleteEntity(this.props.params.companyId, this.companyConfig);
     };
@@ -89,34 +89,38 @@ class Filter extends Component {
         //else{alert('not loading')}
     }
 
-    onSubmit = (values) => {
 
-        // alert('submit');
-        // console.log(values);
+    getFilterTasks = () => {
+        this.setState({saveFilter: false});
+    };
+    saveFilter = () => {
+        this.setState({saveFilter: true});
+    };
+
+
+
+
+
+    onSubmit = (values, e) => {
 
         // console.log(this.state.columns);
         // console.log(values.columns);
 
 
-        let columns=this.state.columns.map((column)=>{
-
-
-
+        let columns = this.state.columns.map((column) => {
             let key = Object.keys(column)[0];
-
             // console.log(key);
             // console.log(values.columns.hasOwnProperty(key));
             // console.log(typeof column[key] !== 'undefined');
             // console.log(!!values.columns[key]);
-
-
-            if(values.columns && values.columns.hasOwnProperty(key) &&  typeof column[key] !== 'undefined' && (!!values.columns[key]) ){
-                return {[key]:true};
-            }else{
-                return {[key]:false};
+            if (values.columns && values.columns.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!values.columns[key])) {
+                return {[key]: true};
+            } else {
+                return {[key]: false};
             }
-
         });
+        this.setState({columns: columns ? columns : []});
+
 
         // console.log(columns);
 
@@ -132,10 +136,43 @@ class Filter extends Component {
         //     console.log(columns);
         // }
 
+        let newFilterValues={};
+        if(values.filter) {
+            Object.keys(values.filter).map((key) => {
+                //console.log(values.filter[key]);
+                if ((values.filter.hasOwnProperty(key) && typeof values.filter[key] !== 'undefined' && values.filter[key] !== '' && values.filter[key])) {
+                    newFilterValues[key] = values.filter[key];
+                }
+            });
+        }
 
-        this.setState({columns: columns?columns:[] });
+        // console.log(newFilterValues)
+        // console.log(values)
+        values.filter=newFilterValues;
 
-        this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
+        let filterValues = Object.assign({}, values);
+        let filterSaveValues = Object.assign({}, values);
+
+
+
+
+
+
+        if (this.state.saveFilter) {
+            let columnsToSend = [];
+            this.state.columns.map((column) => {
+                let key = Object.keys(column)[0];
+                if (values.columns && values.columns.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!values.columns[key])) {
+                    columnsToSend.push(key);
+                }
+            });
+            filterSaveValues.columns = columnsToSend.join();
+            this.props.actions.generalRequest(filterSaveValues, configResolver.saveFilter(this.props.params.filterId));
+        }
+
+
+        this.props.actions.requestTasks(configResolver.loadFilterTasks(filterValues));
+
 
         // console.log('columns',this.state.columns);
         // if (this.props.params.companyId) {
@@ -144,7 +181,6 @@ class Filter extends Component {
         //     this.props.actions.createEntity(values,this.companyConfig);
         // }
     };
-
 
 
     componentDidMount() {
@@ -157,51 +193,49 @@ class Filter extends Component {
     }
 
 
-    toggleFilter=(e)=>{
-        this.setState({filterFormVisible:!this.state.filterFormVisible})
+    toggleFilter = (e) => {
+        this.setState({filterFormVisible: !this.state.filterFormVisible})
     };
 
 
-
-
-
-    changeRowVisibility=(value,e)=>{
+    changeRowVisibility = (value, e) => {
         alert('change row visibility');
     }
 
-    toggleRowVisibility=(value,e)=>{
+    toggleRowVisibility = (value, e) => {
 
         // console.log(e,value);
         // let name=e.target.name;
-        let name=value;
-        let checked=!!e.target.checked;
+        let name = value;
+        let checked = !!e.target.checked;
 
         // console.log(e.target.name, checked);
 
-        if(this.state.columns[name]) {
+        if (this.state.columns[name]) {
             console.log('exists')
             this.setState({
                 // visibleFields: Object.assign({},this.state.visibleFields, {[name]:checked })
                 columns: Object.assign({}, this.state.columns, this.state.columns[name]['visible'] = checked)
             });
-        }else{
+        } else {
             console.log('doesnt exist')
         }
 
-        console.log('columns',this.state.columns);
+        console.log('columns', this.state.columns);
 
     };
 
 
-
     render() {
         return (
-            <View {...this.props} toggleFilter={this.toggleFilter} filterFormVisible={this.state.filterFormVisible} toggleRowVisibility={this.toggleRowVisibility}
-            visibleFields={this.state.visibleFields} columns={this.state.columns} onSubmit={this.onSubmit} loadTasksFunction={this.loadTasksFunction} />
+            <View {...this.props} toggleFilter={this.toggleFilter} filterFormVisible={this.state.filterFormVisible}
+                  toggleRowVisibility={this.toggleRowVisibility}
+                  visibleFields={this.state.visibleFields} columns={this.state.columns} onSubmit={this.onSubmit}
+                  loadTasksFunction={this.loadTasksFunction} getFilterTasks={this.getFilterTasks}
+                  saveFilter={this.saveFilter}/>
         );
     }
 }
-
 
 
 function mapStateToProps(state, ownProps) {
@@ -217,7 +251,7 @@ function mapStateToProps(state, ownProps) {
     // console.log(filter);
 
     return {
-        filterFormVisible:state.filterFormVisible,
+        filterFormVisible: state.filterFormVisible,
         filter: filter.length > 0 ? filter[0] : false,
         filterOptions: filterOptions,
         tasks: state.tasks

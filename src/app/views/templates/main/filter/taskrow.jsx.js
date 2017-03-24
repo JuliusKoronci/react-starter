@@ -24,9 +24,9 @@ const taskrow = ({task,columns}) => {
 
             {columns[1].status && <td><TaskStatus task={task}/></td>}
 
-            {columns[2].project && <td>{task.project.name}</td>}
+            {columns[2].project && <td>{task.project.title}</td>}
 
-            {columns[3].created && <td>{dateFormat(task.createdAt)}</td>}
+            {columns[3].creator && <td>{task.createdBy.username}</td>}
 
             {columns[4].requester && <td>{task.requestedBy.username}</td>}
 
@@ -34,7 +34,7 @@ const taskrow = ({task,columns}) => {
 
             {columns[6].assigned && <td><TaskAssignees task={task}/></td>}
 
-            {columns[7].context && <td>context</td>}
+            {columns[7].tag && <td>{task.tags.map((tag)=>{return tag.title})}</td>}
 
             {columns[8].deadline && <td>{dateFormat(task.deadline)}</td>}
 

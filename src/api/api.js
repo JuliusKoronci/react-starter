@@ -125,7 +125,7 @@ export function defaultRequest(url, method, data, resolvedConfig) {
 
     bodyData = data?queryString.stringify(data).replace("detailData", "detail_data"):'';
 
-    bodyData = (data && resolvedConfig && resolvedConfig.jsonStringify) ? JSON.stringify(data): '';
+    bodyData = (data && resolvedConfig && resolvedConfig.jsonStringify) ? JSON.stringify(data): bodyData;
 
     let headers={
         'Authorization': 'Bearer ' + token,
@@ -139,7 +139,7 @@ export function defaultRequest(url, method, data, resolvedConfig) {
         headers['Content-Type']='application/x-www-form-urlencoded';
     }
 
-
+console.log('sending:',bodyData);
     let config = {
          method: method,
         body: bodyData,

@@ -27,9 +27,8 @@ class FilterForm extends Component {
     };
 
 
-
     render() {
-        const {handleSubmit, formError, handleDelete, columns, filterOptions} = this.props;
+        const {handleSubmit, formError, handleDelete, columns, filterOptions, getFilterTasks, saveFilter} = this.props;
         let visibleColumns=columns.map((column)=>{
             let key = Object.keys(column)[0];
             if(column.hasOwnProperty(key) &&  typeof column[key] !== 'undefined' && (!!column[key]) ){
@@ -52,12 +51,12 @@ class FilterForm extends Component {
 
                 <a className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
                    href="javascript:void(0)">CLEAR</a>
-                <a className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-                   href="javascript:void(0)">SAVE</a>
+
+                <button className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light" type="submit"
+                        onClick={saveFilter.bind(null)}>SAVE</button>
                 <button type="submit"
                         className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-                        href="javascript:void(0)">FILTER
-                </button>
+                        onClick={getFilterTasks.bind(null)} >FILTER</button>
 
 
                 <ul className="md-list md-list-addon">
@@ -68,7 +67,7 @@ class FilterForm extends Component {
 
                     <Field name="columns.title" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column" defaultChecked={true} actions={{onChange:this.changeRowVisibility.bind(null)}} />
-                    <Field name="title" type="text" validate={[]} component={renderField} label="Task Name"/>
+                    <Field name="search" type="text" validate={[]} component={renderField} label="Task Name"/>
 
 
 
@@ -92,9 +91,9 @@ class FilterForm extends Component {
 
 
 
-                    <Field name="columns.created" type="checkbox" className="alignright" validate={[]}
+                    <Field name="columns.creator" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
-                    <Field name="created" type="text" validate={[]} component={renderMultiselect} label="Created" defaultOptions={
+                    <Field name="creator" type="text" validate={[]} component={renderMultiselect} label="Created" defaultOptions={
                         filterOptions.created.map((option)=>{
                             return {value:option.id, label:option.username}
                         })
@@ -131,9 +130,9 @@ class FilterForm extends Component {
                     } />
 
 
-                    <Field name="columns.context" type="checkbox" className="alignright" validate={[]}
+                    <Field name="columns.tag" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
-                    <Field name="context" type="text" validate={[]} component={renderMultiselect} label="Context" defaultOptions={
+                    <Field name="tag" type="text" validate={[]} component={renderMultiselect} label="Context" defaultOptions={
                         filterOptions.tag.map((option)=>{
                             return {value:option.id, label:option.title}
                         })
@@ -332,10 +331,40 @@ function mapStateToProps(state, ownProps) {
 
     // console.log(columns);
 
-    console.log(filter[0])
+
+
+    let initialValues={filter:{}};
+
+    // console.log(filter[0])
     if (filter.length > 0) {
+        //visible columns
+        let columns={};
+        filter[0].columns.map((column)=>{ columns[column]=true });
+
+        let statuses=filter[0].filter.status;//.split(',');
+        let projects=filter[0].filter.project;
+        let requester=filter[0].filter.requester;
+        let company=filter[0].filter.company;
+        let creator=filter[0].filter.creator;
+        let assigned=filter[0].filter.assigned;
+        let tag=filter[0].filter.tag;
+        let search=filter[0].filter.search;
+        // console.log(statuses);
+
+        initialValues.status=statuses?statuses:'';
+        initialValues.project=projects?projects:'';
+        initialValues.columns=columns?columns:'';
+        initialValues.requester=requester?requester:'';
+        initialValues.company=company?company:'';
+        initialValues.creator=creator?creator:'';
+        initialValues.assigned=assigned?assigned:'';
+        initialValues.tag=tag?tag:'';
+        initialValues.search=search?search:'';
+        // initialValues['filter']['status']=statuses;
+
+
         return {
-            initialValues: {...filter[0]},
+            initialValues: {...filter[0], ...initialValues},
             enableReinitialize: true
         };
     }

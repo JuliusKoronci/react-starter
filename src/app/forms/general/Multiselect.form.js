@@ -47,6 +47,7 @@ class Multiselect extends Component {
 
     render() {
 
+        this.props.input.value+='';
         const values = this.props.input.value.split(',').map(value => {
             return {
                 value: value,

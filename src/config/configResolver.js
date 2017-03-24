@@ -1,12 +1,29 @@
 import {paths} from './router';
 import * as urls from '../api/urls';
-import {companyReceived, companyAttributeReceived, statusReceived, userAttributeReceived, taskAttributeReceived, userReceived, unitReceived, imapReceived, smtpReceived, roleReceived } from '../app/redux/actions/settings.action';
-import {optionsReceived,usersAllReceived} from '../app/redux/actions/system.actions';
+import {
+    companyReceived,
+    companyAttributeReceived,
+    statusReceived,
+    userAttributeReceived,
+    taskAttributeReceived,
+    userReceived,
+    unitReceived,
+    imapReceived,
+    smtpReceived,
+    roleReceived
+} from '../app/redux/actions/settings.action';
+import {optionsReceived, usersAllReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, tasksReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 import {tagReceived, tagCreated} from '../app/redux/actions/tag.action';
-import {projectReceived,projectCreated,projectUsersUpdated,projectUserRemoved,projectAclUpdated} from '../app/redux/actions/project.action';
-import {filterReceived,filterOptionsReceived} from '../app/redux/actions/filter.action';
+import {
+    projectReceived,
+    projectCreated,
+    projectUsersUpdated,
+    projectUserRemoved,
+    projectAclUpdated
+} from '../app/redux/actions/project.action';
+import {filterReceived, filterOptionsReceived} from '../app/redux/actions/filter.action';
 
 class configResolver {
     static getCompanyConfig = (id) => {
@@ -26,18 +43,29 @@ class configResolver {
             afterEntityReceivedAction: userReceived,
             redirectAfterCreation: paths.users,
             // allowedFormFields: ['email','username','language','password']
-            remapValues:{'email':'email','username':'username','detailData.function':'detail_data[function]',
-                'detailData.name':'detail_data[name]','detailData.surname':'detail_data[surname]','detailData.signature':'detail_data[signature]',
-                'detailData.tel':'detail_data[tel]','detailData.facebook':'detail_data[facebook]','detailData.twitter':'detail_data[twitter]',
-                'detailData.linkdin':'detail_data[linkdin]','detailData.google':'detail_data[google]','language':'language','is_active':'is_active'},
+            remapValues: {
+                'email': 'email',
+                'username': 'username',
+                'detailData.function': 'detail_data[function]',
+                'detailData.name': 'detail_data[name]',
+                'detailData.surname': 'detail_data[surname]',
+                'detailData.signature': 'detail_data[signature]',
+                'detailData.tel': 'detail_data[tel]',
+                'detailData.facebook': 'detail_data[facebook]',
+                'detailData.twitter': 'detail_data[twitter]',
+                'detailData.linkdin': 'detail_data[linkdin]',
+                'detailData.google': 'detail_data[google]',
+                'language': 'language',
+                'is_active': 'is_active'
+            },
         }
     };
 
     static getUserAdditionalConfig = (id, role, company, editing) => {
-    return {
-        url: urls.USERS_LIST + '/' + (id?id+'/' :'') + 'user-role/'+role + (company?'/company/'+company:''),
-    additionalFields:(!editing?{'password':'password'}:{})
-    }
+        return {
+            url: urls.USERS_LIST + '/' + (id ? id + '/' : '') + 'user-role/' + role + (company ? '/company/' + company : ''),
+            additionalFields: (!editing ? {'password': 'password'} : {})
+        }
     };
 
     static getCompanyAttributesConfig = (id) => {
@@ -46,8 +74,8 @@ class configResolver {
             urlList: urls.COMPANYATTRIBUTES_LIST,
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
-            allowedFormFields: ['title', 'description','options','type','is_active'],
-            customValuesEnabledOn:['multi_select','checkbox','simple_select']
+            allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
+            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
         }
     };
 
@@ -57,8 +85,8 @@ class configResolver {
             urlList: urls.TASKATTRIBUTES_LIST,
             afterEntityReceivedAction: taskAttributeReceived,
             redirectAfterCreation: paths.task_attributes,
-            allowedFormFields: ['title','options','type','description','is_active'],
-            customValuesEnabledOn:['multi_select','checkbox','simple_select']
+            allowedFormFields: ['title', 'options', 'type', 'description', 'is_active'],
+            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
         }
     };
 
@@ -68,8 +96,8 @@ class configResolver {
             urlList: urls.USERATTRIBUTES_LIST,
             afterEntityReceivedAction: userAttributeReceived,
             redirectAfterCreation: paths.user_attributes,
-            allowedFormFields: ['title', 'description','options','type','is_active'],
-            customValuesEnabledOn:['multi_select','checkbox','simple_select']
+            allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
+            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
         }
     };
 
@@ -89,7 +117,7 @@ class configResolver {
             urlList: urls.UNITS_LIST,
             afterEntityReceivedAction: unitReceived,
             redirectAfterCreation: paths.units,
-            allowedFormFields: ['title', 'shortcut','is_active']
+            allowedFormFields: ['title', 'shortcut', 'is_active']
         }
     };
 
@@ -99,7 +127,7 @@ class configResolver {
             urlList: urls.TAG_LIST,
             afterEntityReceivedAction: tagReceived,
             //redirectAfterCreation: paths.units,
-            allowedFormFields: ['title', 'color','public']
+            allowedFormFields: ['title', 'color', 'public']
         }
     };
     static tagCreatedConfig = (id) => {
@@ -108,7 +136,7 @@ class configResolver {
             urlList: urls.TAG_LIST,
             afterEntityReceivedAction: tagCreated,
             //redirectAfterCreation: paths.units,
-            allowedFormFields: ['title', 'color','public']
+            allowedFormFields: ['title', 'color', 'public']
         }
     };
 
@@ -119,11 +147,11 @@ class configResolver {
             urlList: urls.FILTER_LIST,
             afterEntityReceivedAction: filterReceived,
             //redirectAfterCreation: paths.units,
-            allowedFormFields: ['title', 'color','public']
+            allowedFormFields: ['title', 'color', 'public']
         }
     };
 
-    static getAllUsersConfig(){
+    static getAllUsersConfig() {
         return {
             url: urls.USERS_ALL,
             urlList: urls.USERS_ALL,
@@ -132,32 +160,59 @@ class configResolver {
     };
 
 
-    static projectUserConfig(projectId,userId){
+    static projectUserConfig(projectId, userId) {
         return {
-            url: urls.BASE_URL+'/task-bundle/project/'+projectId+'/user/'+userId,
+            url: urls.BASE_URL + '/task-bundle/project/' + projectId + '/user/' + userId,
             afterEntityReceivedAction: projectUsersUpdated,
         }
     };
 
-    static projectAclConfig(projectId){
+    static projectAclConfig(projectId) {
         return {
-            url: urls.BASE_URL+'/task-bundle/project/'+projectId+'/process-acl',
-            method:'POST',
-            contentType:'default',
-            jsonStringify:true
+            url: urls.BASE_URL + '/task-bundle/project/' + projectId + '/process-acl',
+            method: 'POST',
+            contentType: 'default',
+            jsonStringify: true
             // afterEntityReceivedAction: projectAclUpdated,
         }
     };
 
 
-    static projectUserDeleteConfig(projectId,userId){
+    static projectUserDeleteConfig(projectId, userId) {
         return {
-            url: urls.BASE_URL+'/task-bundle/project/'+projectId+'/user/'+userId,
-            method:'DELETE',
-            message:'User removed from project',
+            url: urls.BASE_URL + '/task-bundle/project/' + projectId + '/user/' + userId,
+            method: 'DELETE',
+            message: 'User removed from project',
             userId,
             projectId,
             afterRequest: projectUserRemoved,
+        }
+    };
+
+
+    static saveFilter(filterId) {
+
+        const method = filterId ? 'PUT' : 'POST';
+        const url = filterId ? urls.BASE_URL + '/task-bundle/filters/' + filterId : urls.BASE_URL + '/task-bundle/filters';
+
+        return {
+            url,
+            method,
+            remapValues: {
+                'title': 'title',
+                'status': 'filter[status]',
+                'project': 'filter[project]',
+                'requester': 'filter[requester]',
+                'company': 'filter[company]',
+                'creator': 'filter[creator]',
+                'assigned': 'filter[assigned]',
+                'tag': 'filter[tag]',
+                'search': 'filter[search]',
+                'columns': 'columns'
+            }
+            // contentType:'default',
+            // jsonStringify:true
+            // afterEntityReceivedAction: projectAclUpdated,
         }
     };
 
@@ -171,14 +226,26 @@ class configResolver {
 
     static loadFilterTasks(values) {
 
-        return {
+        let config = {
             url: urls.TASK_LIST,
             afterEntityReceivedAction: tasksReceived,
-            allowedFormFields: ['status', 'project','creator','requester','company','assigned','tag','follower'],
-            data:values,
-            dataToParams:true
-            // remapValues:{'detailData.function':'detail_data[function]'},
+            allowedFormFields: ['status', 'project', 'creator', 'requester', 'company', 'assigned', 'tag', 'follower', 'search'],
+            data: values,
+            dataToParams: true
+        };
+
+        if (values) {
+            let newValues = {};
+            config.allowedFormFields.map((key) => {
+                if (values.hasOwnProperty(key) && typeof values[key] !== 'undefined' && values[key] !== '') {
+                    newValues[key] = values[key];
+                }
+            });
+            config.data = newValues;
         }
+
+
+        return config;
     }
 
 
@@ -204,25 +271,35 @@ class configResolver {
 
     static getProfileConfig = (id) => {
         return {
-            id:id?id:null,
+            id: id ? id : null,
             url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
             urlList: urls.USERS_LIST,
             uploadUrl: urls.FILE_UPLOAD,
             // allowedFormFields: ['email','detailData.google','detail_data.google'],
-            remapValues:{'email':'email','username':'username','detailData.function':'detail_data[function]',
-            'detailData.name':'detail_data[name]','detailData.surname':'detail_data[surname]','detailData.signature':'detail_data[signature]',
-            'detailData.tel':'detail_data[tel]','detailData.facebook':'detail_data[facebook]','detailData.twitter':'detail_data[twitter]',
-            'detailData.linkdin':'detail_data[linkdin]','detailData.google':'detail_data[google]','language':'language'},
+            remapValues: {
+                'email': 'email',
+                'username': 'username',
+                'detailData.function': 'detail_data[function]',
+                'detailData.name': 'detail_data[name]',
+                'detailData.surname': 'detail_data[surname]',
+                'detailData.signature': 'detail_data[signature]',
+                'detailData.tel': 'detail_data[tel]',
+                'detailData.facebook': 'detail_data[facebook]',
+                'detailData.twitter': 'detail_data[twitter]',
+                'detailData.linkdin': 'detail_data[linkdin]',
+                'detailData.google': 'detail_data[google]',
+                'language': 'language'
+            },
             afterEntityReceivedAction: profileReceived
         }
     };
 
     static getProfileAvatarConfig = (id) => {
         return {
-            id:id?id:null,
+            id: id ? id : null,
             url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
             uploadUrl: urls.FILE_UPLOAD,
-            remapValues:{'image':'image'},
+            remapValues: {'image': 'image'},
         }
     };
 
@@ -231,47 +308,47 @@ class configResolver {
         return {
             url: urls.TASK_LIST + '/' + taskId + '/attachment/' + slug,
             afterFileDeletedAction: taskAttachmentDeleted,
-            afterFileDeletedActionParams:{taskId,slug}
+            afterFileDeletedActionParams: {taskId, slug}
         }
     };
 
     static getImapConfig = (id, projectId) => {
         return {
-            url: urls.IMAPS_LIST + (id?'/'+id:'') + (projectId?'/project/'+projectId:''),
+            url: urls.IMAPS_LIST + (id ? '/' + id : '') + (projectId ? '/project/' + projectId : ''),
             urlList: urls.IMAPS_LIST,
             afterEntityReceivedAction: imapReceived,
             redirectAfterCreation: paths.imaps,
-            allowedFormFields: ['inbox_email','move_email','host','port','name','password','ssl','ignore_certificate']
+            allowedFormFields: ['inbox_email', 'move_email', 'host', 'port', 'name', 'password', 'ssl', 'ignore_certificate']
         }
     };
 
     static getSmtpConfig = (id, projectId) => {
         return {
-            url: urls.SMTPS_LIST + (id?'/'+id:''),
+            url: urls.SMTPS_LIST + (id ? '/' + id : ''),
             urlList: urls.SMTPS_LIST,
             afterEntityReceivedAction: smtpReceived,
             redirectAfterCreation: paths.smtp,
-            allowedFormFields: ['host','port','email','name','password','ssl','tls']
+            allowedFormFields: ['host', 'port', 'email', 'name', 'password', 'ssl', 'tls']
         }
     };
 
     static getRoleConfig = (id) => {
         return {
-            url: urls.ROLES_LIST + (id?'/'+id:''),
+            url: urls.ROLES_LIST + (id ? '/' + id : ''),
             urlList: urls.ROLES_LIST,
             afterEntityReceivedAction: roleReceived,
             redirectAfterCreation: paths.roles,
-            allowedFormFields: ['title','description','is_active','order','homepage','acl']
+            allowedFormFields: ['title', 'description', 'is_active', 'order', 'homepage', 'acl']
         }
     };
 
-    static tasksConfig = (type,id) => {
+    static tasksConfig = (type, id) => {
 
-        if(!type){
+        if (!type) {
             return {url: urls.TASK_LIST}
         }
 
-        switch(type){
+        switch (type) {
             case 'project':
                 return {url: urls.TASK_LIST + '?project=' + id};
             case 'tag':

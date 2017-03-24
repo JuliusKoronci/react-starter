@@ -8,11 +8,11 @@ export function filterReceived(data) {
     }
 }
 
-    export function filterOptionsReceived(data) {
-        return {
-            type: constants.FILTER_OPTIONS_RECEIVED,
-            data
-        }
+export function filterOptionsReceived(data) {
+    return {
+        type: constants.FILTER_OPTIONS_RECEIVED,
+        data
+    }
 
 }
 
