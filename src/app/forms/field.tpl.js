@@ -80,10 +80,10 @@ export const renderMultiselect = ({input,tagValues,defaultOptions,label,icon,act
     );
 };
 
-export const renderDatepicker = ({input,tagValues,defaultOptions,label,icon,action,setValues}) => {
+export const renderDatepicker = ({input,label,action,setValues}) => {
 
     return (
-        <Datepicker input={input} label={label} {...input} />
+        <Datepicker input={input} label={label} {...input} action={action} />
     );
 };
 

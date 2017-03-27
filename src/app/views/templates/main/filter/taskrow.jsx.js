@@ -36,7 +36,10 @@ const taskrow = ({task,columns}) => {
 
             {columns[7].tag && <td>{task.tags.map((tag)=>{return tag.title})}</td>}
 
-            {columns[8].deadline && <td>{dateFormat(task.deadline)}</td>}
+            {columns[8].created && <td>{task.createdAt && task.createdAt.date?dateFormat(task.createdAt.date):'-'}</td>}
+            {columns[9].started && <td>{task.startedAt && task.startedAt.date?dateFormat(task.startedAt.date):'-'}</td>}
+            {columns[10].deadline && <td>{task.deadline && task.deadline.date?dateFormat(task.deadline.date):'-'}</td>}
+            {columns[11].closed && <td>{task.closedAt && task.closedAt.date?dateFormat(task.closedAt.date):'-'}</td>}
 
 
         </tr>

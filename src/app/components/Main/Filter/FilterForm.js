@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import {Creatable} from 'react-select';
 import Select from 'react-select';
 import ColumnVisible from '../../../views/templates/main/filter/columnVisible.jsx';
+import {convertApiStringToDate} from '../../../services/general';
 
 import {Field, change, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
@@ -143,14 +144,26 @@ class FilterForm extends Component {
 
 
 
+                    <p className="uk-text-muted">Created at</p>
+
+
+                        <Field type="radio" name="createdTime.radio" value="now" data-md-icheck component={renderField} />
+                        <label className="inline-label">Overdue</label>
+
+                        <Field type="radio" name="createdTime.radio" value="timeRange" data-md-icheck component={renderField} />
+                        <label className="inline-label">Time range</label>
+
+
                     <div className="uk-grid" data-uk-grid-margin>
                         <div className="uk-width-medium-1-2">
-                            <Field name="created" type="text" validate={[]} component={renderDatepicker} label="Created from:" />
+                            <Field name="createdTime.from" type="text" validate={[]} component={renderDatepicker} label="Created from:" />
                         </div>
 
                         <div className="uk-width-medium-1-2">
 
-                            <Field name="created" type="text" validate={[]} component={renderDatepicker} label="To:" />
+                            <Field name="createdTime.to" type="text" validate={[]} component={renderDatepicker} label="To:" />
+
+
 
                             <Field name="columns.created" type="checkbox" className="alignright" validate={[]}
                                    component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
@@ -166,14 +179,13 @@ class FilterForm extends Component {
 
                     <hr/>
                     <p className="uk-text-muted">Started at</p>
-                    <p>
-                        <input type="radio" name="radio_demo" id="radio_demo_1" data-md-icheck/>
-                        <label htmlFor="radio_demo_1" className="inline-label">Overdue</label>
-                    </p>
-                    <p>
-                        <input type="radio" name="radio_demo" id="radio_demo_2" data-md-icheck/>
-                        <label htmlFor="radio_demo_2" className="inline-label">Time range</label>
-                    </p>
+
+                    <Field type="radio" name="startedTime.radio" value="now" data-md-icheck component={renderField} />
+                    <label className="inline-label">Overdue</label>
+
+                    <Field type="radio" name="startedTime.radio" value="timeRange" data-md-icheck component={renderField} />
+                    <label className="inline-label">Time range</label>
+
 
 
 
@@ -181,45 +193,48 @@ class FilterForm extends Component {
                     <div className="uk-grid" data-uk-grid-margin>
                         <div className="uk-width-medium-1-2">
 
-                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="From:" />
+                            <Field name="startedTime.from" type="text" validate={[]} component={renderDatepicker} label="From:" />
 
                         </div>
                         <div className="uk-width-medium-1-2">
 
-                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="To:" />
+                            <Field name="startedTime.to" type="text" validate={[]} component={renderDatepicker} label="To:" />
 
-                            <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="started"
-                                           columns={this.props.columns} className="alignright"/>
+                            <Field name="columns.started" type="checkbox" className="alignright" validate={[]}
+                                   component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
 
 
                         </div>
                     </div>
                     <hr/>
+
+
+
 
 
                     <p className="uk-text-muted">Deadline at</p>
-                    <p>
-                        <input type="radio" name="radio_demo" id="radio_demo_1" data-md-icheck/>
-                        <label htmlFor="radio_demo_1" className="inline-label">Overdue</label>
-                    </p>
-                    <p>
-                        <input type="radio" name="radio_demo" id="radio_demo_2" data-md-icheck/>
-                        <label htmlFor="radio_demo_2" className="inline-label">Time range</label>
-                    </p>
+
+                    <Field type="radio" name="deadlineTime.radio" value="now" data-md-icheck component={renderField} />
+                    <label className="inline-label">Overdue</label>
+
+                    <Field type="radio" name="deadlineTime.radio" value="timeRange" data-md-icheck component={renderField} />
+                    <label className="inline-label">Time range</label>
+
+
 
                     <div className="uk-grid" data-uk-grid-margin>
                         <div className="uk-width-medium-1-2">
 
-                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="From:" />
+                            <Field name="deadlineTime.from" type="text" validate={[]} component={renderDatepicker} label="From:" />
 
                         </div>
                         <div className="uk-width-medium-1-2">
 
-                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="To:" />
+                            <Field name="deadlineTime.to" type="text" validate={[]} component={renderDatepicker} label="To:" />
 
 
-                            <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="deadline"
-                                           columns={this.props.columns} className="alignright"/>
+                            <Field name="columns.deadline" type="checkbox" className="alignright" validate={[]}
+                                   component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
 
 
                         </div>
@@ -227,20 +242,28 @@ class FilterForm extends Component {
                     <hr/>
 
 
+                    <p className="uk-text-muted">Closed at</p>
+
+                    <Field type="radio" name="closedTime.radio" value="now" data-md-icheck component={renderField} />
+                    <label className="inline-label">Overdue</label>
+
+                    <Field type="radio" name="closedTime.radio" value="timeRange" data-md-icheck component={renderField} />
+                    <label className="inline-label">Time range</label>
+
+
                     <div className="uk-grid" data-uk-grid-margin>
                         <div className="uk-width-medium-1-2">
 
-                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="Closed from:" />
+                            <Field name="closedTime.from" type="text" validate={[]} component={renderDatepicker} label="Closed from:" />
 
                         </div>
                         <div className="uk-width-medium-1-2">
 
-                            <Field name="" type="text" validate={[]} component={renderDatepicker} label="To:" />
+                            <Field name="closedTime.to" type="text" validate={[]} component={renderDatepicker} label="To:" />
 
 
-                            <ColumnVisible toggleRowVisibility={this.props.toggleRowVisibility} name="deadline_closed"
-                                           columns={this.props.columns} className="alignright"/>
-
+                            <Field name="columns.closed" type="checkbox" className="alignright" validate={[]}
+                                   component={renderField} label="Column" actions={{onChange:this.changeRowVisibility.bind(null)}} />
                         </div>
                     </div>
                     <hr/>
@@ -349,6 +372,13 @@ function mapStateToProps(state, ownProps) {
         let assigned=filter[0].filter.assigned;
         let tag=filter[0].filter.tag;
         let search=filter[0].filter.search;
+
+        let createdTime=filter[0].filter.createdTime;
+        let startedTime=filter[0].filter.startedTime;
+        let deadlineTime=filter[0].filter.deadlineTime;
+        let closedTime=filter[0].filter.closedTime;
+
+
         // console.log(statuses);
 
         initialValues.status=statuses?statuses:'';
@@ -360,6 +390,50 @@ function mapStateToProps(state, ownProps) {
         initialValues.assigned=assigned?assigned:'';
         initialValues.tag=tag?tag:'';
         initialValues.search=search?search:'';
+
+
+        initialValues.createdTime={};
+        initialValues.startedTime={};
+        initialValues.deadlineTime={};
+        initialValues.closedTime={};
+
+
+        initialValues.createdTime.radio='now';
+        initialValues.startedTime.radio='now';
+        initialValues.deadlineTime.radio='now';
+        initialValues.closedTime.radio='now';
+
+
+        if(createdTime&&createdTime==='TO=NOW'){
+        }else if(createdTime && createdTime.split().length>0){
+            initialValues.createdTime.radio='timeRange';
+            initialValues.createdTime.from=convertApiStringToDate(createdTime&&createdTime.split(',')[0]?createdTime.split(',')[0]:'');
+            initialValues.createdTime.to=convertApiStringToDate(createdTime&&createdTime.split(',')[1]?createdTime.split(',')[1]:'');
+        }
+
+        if(startedTime&&startedTime==='TO=NOW'){
+        }else if(startedTime && startedTime.split().length>0){
+            initialValues.startedTime.radio='timeRange';
+            initialValues.startedTime.from=convertApiStringToDate(startedTime&&startedTime.split(',')[0]?startedTime.split(',')[0]:'');
+            initialValues.startedTime.to=convertApiStringToDate(startedTime&&startedTime.split(',')[1]?startedTime.split(',')[1]:'');
+        }
+
+        if(deadlineTime&&deadlineTime==='TO=NOW'){
+        }else if(deadlineTime && deadlineTime.split().length>0){
+            initialValues.deadlineTime.radio='timeRange';
+            initialValues.deadlineTime.from=convertApiStringToDate(deadlineTime&&deadlineTime.split(',')[0]?deadlineTime.split(',')[0]:'');
+            initialValues.deadlineTime.to=convertApiStringToDate(deadlineTime&&deadlineTime.split(',')[1]?deadlineTime.split(',')[1]:'');
+        }
+
+        if(closedTime&&closedTime==='TO=NOW'){
+        }else if(closedTime && closedTime.split().length>0){
+            initialValues.closedTime.radio='timeRange';
+            initialValues.closedTime.from=convertApiStringToDate(closedTime&&closedTime.split(',')[0]?closedTime.split(',')[0]:'');
+            initialValues.closedTime.to=convertApiStringToDate(closedTime&&closedTime.split(',')[1]?closedTime.split(',')[1]:'');
+        }
+
+
+
         // initialValues['filter']['status']=statuses;
 
 

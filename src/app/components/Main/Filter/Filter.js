@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../../redux/actions/tasks.action';
 import * as generalActions from '../../../redux/actions/general.action';
 import configResolver from '../../../../config/configResolver';
+import {convertDateToApiString} from '../../../services/general';
 
 import View from '../../../views/templates/main/filter/filter.jsx';
 
@@ -58,8 +59,11 @@ class Filter extends Component {
                 {company: false},
                 {assigned: false},
                 {tag: false},
-                {owner: false},
+                // {owner: false},
+                {created: false},
+                {started: false},
                 {deadline: false},
+                {closed: false},
             ]
 
         }
@@ -106,6 +110,34 @@ class Filter extends Component {
         // console.log(this.state.columns);
         // console.log(values.columns);
 
+        console.log('values:',values);
+        ['closedTime','startedTime','deadlineTime','createdTime'].map((field)=>{
+            if(values[field]['radio']==='now'){
+                values[field]=this.state.saveFilter?'TO=NOW':'TO%3DNOW';
+
+            }else if(values[field]['radio']==='timeRange'){
+                // values[field]='';
+
+                let from=values[field]['from'];
+                let to=values[field]['to'];
+
+
+            if((typeof from !== 'undefined' && from !== '') || (typeof to !== 'undefined' && to !== ''))
+            {
+                from=convertDateToApiString(from);
+                to=convertDateToApiString(to);
+                values[field]=this.state.saveFilter?'FROM='+from+',TO='+to:'FROM%3D'+from+',TO&%3D'+to;
+            }else{
+                values[field]='';
+            }
+
+
+            }
+
+        });
+
+
+        // throw new DOMException();
 
         let columns = this.state.columns.map((column) => {
             let key = Object.keys(column)[0];
@@ -167,7 +199,9 @@ class Filter extends Component {
                 }
             });
             filterSaveValues.columns = columnsToSend.join();
-            this.props.actions.generalRequest(filterSaveValues, configResolver.saveFilter(this.props.params.filterId));
+
+            let config=configResolver.saveFilter(filterSaveValues,this.props.params.filterId)
+            this.props.actions.generalRequest(config.data, config);
         }
 
 
@@ -186,10 +220,9 @@ class Filter extends Component {
     componentDidMount() {
         // TODO
         // this.config = configResolver.tasksConfig('project', 141);
-        let config = configResolver.tasksConfig();
 
+        let config =this.props.params.filterId?configResolver.tasksConfig('filter',this.props.params.filterId):configResolver.tasksConfig();
         this.props.actions.requestTasks(config);
-
     }
 
 

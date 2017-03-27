@@ -190,14 +190,15 @@ class configResolver {
     };
 
 
-    static saveFilter(filterId) {
+    static saveFilter(values,filterId) {
 
         const method = filterId ? 'PUT' : 'POST';
         const url = filterId ? urls.BASE_URL + '/task-bundle/filters/' + filterId : urls.BASE_URL + '/task-bundle/filters';
 
-        return {
+        let config = {
             url,
             method,
+            data:values,
             remapValues: {
                 'title': 'title',
                 'status': 'filter[status]',
@@ -208,12 +209,28 @@ class configResolver {
                 'assigned': 'filter[assigned]',
                 'tag': 'filter[tag]',
                 'search': 'filter[search]',
-                'columns': 'columns'
+                'columns': 'columns',
+                'closedTime':'filter[closedTime]',
+                'startedTime':'filter[startedTime]',
+                'deadlineTime':'filter[deadlineTime]',
+                'createdTime':'filter[createdTime]',
             }
             // contentType:'default',
             // jsonStringify:true
             // afterEntityReceivedAction: projectAclUpdated,
+        };
+
+        if (values) {
+            let newValues = {};
+            Object.keys(config.remapValues).map((key) => {
+                if (values.hasOwnProperty(key) && typeof values[key] !== 'undefined' && values[key] !== '') {
+                    newValues[key] = values[key];
+                }
+            });
+            config.data = newValues;
         }
+
+        return config;
     };
 
 
@@ -225,11 +242,10 @@ class configResolver {
     }
 
     static loadFilterTasks(values) {
-
         let config = {
             url: urls.TASK_LIST,
             afterEntityReceivedAction: tasksReceived,
-            allowedFormFields: ['status', 'project', 'creator', 'requester', 'company', 'assigned', 'tag', 'follower', 'search'],
+            allowedFormFields: ['status', 'project', 'creator', 'requester', 'company', 'assigned', 'tag', 'follower', 'search','closedTime','startedTime','deadlineTime','createdTime'],
             data: values,
             dataToParams: true
         };
@@ -243,8 +259,6 @@ class configResolver {
             });
             config.data = newValues;
         }
-
-
         return config;
     }
 
@@ -353,6 +367,8 @@ class configResolver {
                 return {url: urls.TASK_LIST + '?project=' + id};
             case 'tag':
                 return {url: urls.TASK_LIST + '?tag=' + id};
+            case 'filter':
+                return {url: urls.TASK_LIST + '/filter/' + id};
             default:
                 return {url: urls.TASK_LIST}
         }
