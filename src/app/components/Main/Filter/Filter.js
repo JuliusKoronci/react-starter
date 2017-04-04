@@ -20,35 +20,6 @@ class Filter extends Component {
 
         this.state = {
             filterFormVisible: true,
-            // visibleFields:{'taskName':true},
-
-            // columns:{
-            //     title:true,
-            //     status:false,
-            //     project:false,
-            //     created:false,
-            //     requester:false,
-            //     company:false,
-            //     assigned:false,
-            //     context:false,
-            //     owner:false,
-            //     deadline:false,
-            // }
-
-
-            // columns:{
-            //     title:{label:'Title',visible:true},
-            //     status:{label:'Status'},
-            //     project:{label:'Project'},
-            //     created:{label:'Created'},
-            //     requester:{label:'Requester'},
-            //     company:{label:'Company'},
-            //     assigned:{label:'Assigned'},
-            //     context:{label:'Context'},
-            //     owner:{label:'Owner'},
-            //     deadline:{label:'Deadline'},
-            // }
-
 
             columns: [
                 {title: true},
@@ -77,7 +48,6 @@ class Filter extends Component {
 
     deleteHandler = (id) => {
         alert('delete handler');
-        // this.props.actions.deleteEntity(this.props.params.companyId, this.companyConfig);
     };
 
     componentWillMount() {
@@ -102,49 +72,42 @@ class Filter extends Component {
     };
 
 
-
-
-
     onSubmit = (values, e) => {
 
-        // console.log(this.state.columns);
-        // console.log(values.columns);
+        console.log('values:', values);
 
-        console.log('values:',values);
-        ['closedTime','startedTime','deadlineTime','createdTime'].map((field)=>{
-            if(values[field]['radio']==='now'){
-                values[field]=this.state.saveFilter?'TO=NOW':'TO%3DNOW';
 
-            }else if(values[field]['radio']==='timeRange'){
+        ['closedTime', 'startedTime', 'deadlineTime', 'createdTime'].map((field) => {
+
+            if (values[field] && values[field+'Radio'] === 'now') {
+                values[field] = this.state.saveFilter ? 'TO=NOW' : 'TO%3DNOW';
+
+            } else {
+                //if (values[field]['radio'] === 'timeRange') {
                 // values[field]='';
 
-                let from=values[field]['from'];
-                let to=values[field]['to'];
+                let from = values[field]?values[field]['from']:'';
+                let to = values[field]?values[field]['to']:'';
 
+                from = convertDateToApiString(from);
+                to = convertDateToApiString(to);
 
-            if((typeof from !== 'undefined' && from !== '') || (typeof to !== 'undefined' && to !== ''))
-            {
-                from=convertDateToApiString(from);
-                to=convertDateToApiString(to);
-                values[field]=this.state.saveFilter?'FROM='+from+',TO='+to:'FROM%3D'+from+',TO&%3D'+to;
-            }else{
-                values[field]='';
+                if ((typeof from !== 'undefined' && from !== '') || (typeof to !== 'undefined' && to !== '')) {
+                    values[field] = this.state.saveFilter ? 'FROM=' + from + ',TO=' + to : 'FROM%3D' + from + ',TO&%3D' + to;
+                } else {
+                    values[field] = '';
+                }
             }
 
+            // values[field+'Radio']='TO=NOW'
 
-            }
+            console.log(values);
 
         });
-
-
-        // throw new DOMException();
+        // values={};
 
         let columns = this.state.columns.map((column) => {
             let key = Object.keys(column)[0];
-            // console.log(key);
-            // console.log(values.columns.hasOwnProperty(key));
-            // console.log(typeof column[key] !== 'undefined');
-            // console.log(!!values.columns[key]);
             if (values.columns && values.columns.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!values.columns[key])) {
                 return {[key]: true};
             } else {
@@ -154,22 +117,8 @@ class Filter extends Component {
         this.setState({columns: columns ? columns : []});
 
 
-        // console.log(columns);
-
-        // if(values.columns) {
-        //     let columns = Object.keys(values.columns).map((column) => {
-        //
-        //         if(column.hasOwnProperty(name)&& typeof column[name] !== 'undefined' && (!!column[name])) {
-        //
-        //         }
-        //
-        //         return
-        //     });
-        //     console.log(columns);
-        // }
-
-        let newFilterValues={};
-        if(values.filter) {
+        let newFilterValues = {};
+        if (values.filter) {
             Object.keys(values.filter).map((key) => {
                 //console.log(values.filter[key]);
                 if ((values.filter.hasOwnProperty(key) && typeof values.filter[key] !== 'undefined' && values.filter[key] !== '' && values.filter[key])) {
@@ -180,14 +129,10 @@ class Filter extends Component {
 
         // console.log(newFilterValues)
         // console.log(values)
-        values.filter=newFilterValues;
+        values.filter = newFilterValues;
 
         let filterValues = Object.assign({}, values);
         let filterSaveValues = Object.assign({}, values);
-
-
-
-
 
 
         if (this.state.saveFilter) {
@@ -200,20 +145,13 @@ class Filter extends Component {
             });
             filterSaveValues.columns = columnsToSend.join();
 
-            let config=configResolver.saveFilter(filterSaveValues,this.props.params.filterId)
+            let config = configResolver.saveFilter(filterSaveValues, this.props.params.filterId)
             this.props.actions.generalRequest(config.data, config);
         }
 
 
         this.props.actions.requestTasks(configResolver.loadFilterTasks(filterValues));
 
-
-        // console.log('columns',this.state.columns);
-        // if (this.props.params.companyId) {
-        //     this.props.actions.updateEntity(this.props.params.companyId, values, this.companyConfig);
-        // } else {
-        //     this.props.actions.createEntity(values,this.companyConfig);
-        // }
     };
 
 
@@ -221,7 +159,7 @@ class Filter extends Component {
         // TODO
         // this.config = configResolver.tasksConfig('project', 141);
 
-        let config =this.props.params.filterId?configResolver.tasksConfig('filter',this.props.params.filterId):configResolver.tasksConfig();
+        let config = this.props.params.filterId ? configResolver.tasksConfig('filter', this.props.params.filterId) : configResolver.tasksConfig();
         this.props.actions.requestTasks(config);
     }
 
@@ -231,18 +169,20 @@ class Filter extends Component {
     };
 
 
+
+
+
+
     changeRowVisibility = (value, e) => {
         alert('change row visibility');
     }
 
+
+
     toggleRowVisibility = (value, e) => {
 
-        // console.log(e,value);
-        // let name=e.target.name;
         let name = value;
         let checked = !!e.target.checked;
-
-        // console.log(e.target.name, checked);
 
         if (this.state.columns[name]) {
             console.log('exists')
@@ -272,16 +212,11 @@ class Filter extends Component {
 
 
 function mapStateToProps(state, ownProps) {
-
-    // console.log(state);
     const filterId = ownProps.params.filterId;
 
-    // const filter = state.filters.data.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
+
     const filter = state.filter.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
     const filterOptions = state.filters.options || [];
-    // console.log(filterOptions);
-    // const filter =[];
-    // console.log(filter);
 
     return {
         filterFormVisible: state.filterFormVisible,

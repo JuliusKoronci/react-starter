@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {Creatable} from 'react-select';
+import Select from 'react-select';
 
 class Multiselect extends Component {
 
@@ -8,27 +8,18 @@ class Multiselect extends Component {
         this.state = {values: {}};
     }
 
-    componentDidUpdate() {
-        // console.log(this.props.input.value);
-        // this.setState({
-        //     values:this.props.input.value?(this.props.input.value.split(',').map(option => {
-        //         return {
-        //             value: option,
-        //             label: option
-        //         }
-        // })):{}
-        // });
-    }
-
     onChange = (values) => {
         // this.props.input.onChange(values);
-        console.log('tagger on change ', values);
+        console.log('on change ', values);
+
         let newValue = values.map(value => {
             return value.value;
-        }).join();
-        console.log(newValue);
+        });
+
+        let unique = [...new Set(newValue)].join();
+
         //this.props.input.value+','+value.value;
-        this.props.input.onChange(newValue);
+        this.props.input.onChange(unique);
     };
 
     newOptionClick = (value) => {
@@ -46,47 +37,35 @@ class Multiselect extends Component {
     };
 
     render() {
-
         this.props.input.value+='';
         const values = this.props.input.value.split(',').map(value => {
-            return {
-                value: value,
-                label: value
+            if(value!=='') {
+                let foundLabel=this.props.options.filter((option) => parseInt(option.value,10) === parseInt(value,10));
+                let label=foundLabel && foundLabel[0] && foundLabel[0]['label']?foundLabel[0]['label']:value;
+                return {
+                    value,
+                    label
+                }
             }
         });
+
+
 
         return (
             <div>
                 <input type="hidden" value={this.props.input.value} name={this.props.input.name} {...this.props.input}/>
                 <label htmlFor={this.props.input.name}>{this.props.label}</label>
-                <Creatable
+                <Select
                     className="md-input"
                     value={values}
 
-                    /*
-                     options={this.props.input.value.split(',').map(option => {
-                     return {
-                     value: option,
-                     label: option
-                     }})}
-                     */
+                    isOptionUnique={true}
                     joinValues={true}
                     multi={true}
                     onChange={ this.onChange }
                     onBlurResetsInput={false}
                     //onInputChange={ this.onChange }
 
-                    /*
-                     {...this.props.input}
-
-
-                     options={['option1','option2'].map(option => {
-                     return {
-                     value: option,
-                     label: option
-                     }
-                     })}
-                     */
                     options={
                         this.props.options || []
                     }

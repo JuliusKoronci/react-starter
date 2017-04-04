@@ -4,23 +4,29 @@ import { history } from '../../config/store';
 
 export function convertDateToApiString(date){
 
-	date=new Date(date);
 
-	let month=date.getMonth()+1;
-    let day=date.getDate();
-    let hours=date.getHours();
-    let minutes=date.getMinutes();
-    let seconds=date.getSeconds();
+    let parsedDate = Date.parse(date);
+	date=new Date(parsedDate);
 
-    hours=hours>9?hours:'0'+hours;
-    minutes=minutes>9?minutes:'0'+minutes;
-    seconds=seconds>9?seconds:'0'+seconds;
-    month=month>9?month:'0'+month;
-    day=day>9?day:'0'+day;
+    if(date !== "Invalid Date" && !isNaN(date)){
 
-	let string=date.getFullYear()+'-'+month+'-'+day+'T'+hours+':'+minutes+':'+seconds+'+01:00';
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
 
-	return string;
+        hours = hours > 9 ? hours : '0' + hours;
+        minutes = minutes > 9 ? minutes : '0' + minutes;
+        seconds = seconds > 9 ? seconds : '0' + seconds;
+        month = month > 9 ? month : '0' + month;
+        day = day > 9 ? day : '0' + day;
+
+        let string = date.getFullYear() + '-' + month + '-' + day + 'T' + hours + ':' + minutes + ':' + seconds + '+01:00';
+
+        return string;
+    }
+    return '';
 }
 
 
