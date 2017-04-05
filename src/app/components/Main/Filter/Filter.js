@@ -20,7 +20,7 @@ class Filter extends Component {
 
         this.state = {
             filterFormVisible: true,
-            sentValues:[],
+            sentValues: [],
 
             columns: [
                 {title: true},
@@ -73,13 +73,9 @@ class Filter extends Component {
     };
 
 
-
-
-
-
     onSubmit = (oldValues, e) => {
 
-        let values=Object.assign({},oldValues);
+        let values = Object.assign({}, oldValues);
 
         // console.log('save?',this.state.saveFilter);
         // console.log('values:', values);
@@ -89,7 +85,7 @@ class Filter extends Component {
 
             // console.log(field,values[field+'Radio'],values[field]);
 
-            if (values[field+'Radio'] && values[field+'Radio'] === 'now') {
+            if (values[field + 'Radio'] && values[field + 'Radio'] === 'now') {
                 values[field] = this.state.saveFilter ? 'TO=NOW' : 'TO%3DNOW';
 
                 // console.log('now',[field]);
@@ -98,8 +94,8 @@ class Filter extends Component {
                 //if (values[field]['radio'] === 'timeRange') {
                 // values[field]='';
 
-                let from = values[field]?values[field]['from']:'';
-                let to = values[field]?values[field]['to']:'';
+                let from = values[field] ? values[field]['from'] : '';
+                let to = values[field] ? values[field]['to'] : '';
 
                 from = convertDateToApiString(from);
                 to = convertDateToApiString(to);
@@ -149,11 +145,6 @@ class Filter extends Component {
         let filterSaveValues = Object.assign({}, values);
 
 
-
-
-
-
-
         if (this.state.saveFilter) {
             let columnsToSend = [];
             this.state.columns.map((column) => {
@@ -174,13 +165,6 @@ class Filter extends Component {
     };
 
 
-
-
-
-
-
-
-
     componentDidMount() {
         // TODO
         // this.config = configResolver.tasksConfig('project', 141);
@@ -195,14 +179,9 @@ class Filter extends Component {
     };
 
 
-
-
-
-
     changeRowVisibility = (value, e) => {
         alert('change row visibility');
     }
-
 
 
     toggleRowVisibility = (value, e) => {
