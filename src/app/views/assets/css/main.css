@@ -27,6 +27,10 @@
 .submenu_trigger a.active+ul{display:block !important;}
 
 
+.button_next_input {
+    margin-top: 16px;
+}
+
 .max-width-1000px {
     max-width: 1000px;
 }
@@ -900,7 +904,7 @@ input.error, select.error {
     /*vertical-align: middle;*/
     line-height: 1;
     text-align: center;
-    padding: 0 16px;
+    padding: 0 0 0 16px;
     font-size: 16px;
     min-width: 22px;
 }
@@ -7974,7 +7978,7 @@ input[type="url"].md-input:focus,
 input[type="search"].md-input:focus,
 input[type="tel"].md-input:focus,
 input[type="color"].md-input:focus {
-    background: transparent;
+    background: azure;
     border-color: rgba(0, 0, 0, 0.12);
 }
 
@@ -9602,7 +9606,7 @@ button.md-icon {
 }
 
 .icheckbox_md {
-    border: 2px solid rgba(0, 0, 0, 0.54);
+
     border-radius: 2px;
     width: 18px;
     height: 18px;

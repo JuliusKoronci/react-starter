@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "flow-bin": "^0.39.0",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "@kadira/storybook": "^2.21.0"
   },
   "dependencies": {
     "downloadjs": "^1.4.7",
@@ -38,6 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   }
 }

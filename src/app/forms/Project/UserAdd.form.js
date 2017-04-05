@@ -25,9 +25,8 @@ class UserAdd extends Component {
                                 } />
 
 
-
                                 <span className="md-input-bar "/></div>
-                            <span className="uk-input-group-addon"><button className="md-btn md-btn-primary" type="submit">Add</button></span>
+                            <span className="uk-input-group-addon"><button className="md-btn md-btn-success button_next_input" type="submit">Add</button></span>
                         </div>
 
                     </div>
