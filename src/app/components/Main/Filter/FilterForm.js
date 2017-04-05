@@ -5,7 +5,7 @@ import Select from 'react-select';
 import ColumnVisible from '../../../views/templates/main/filter/columnVisible.jsx';
 import {convertApiStringToDate} from '../../../services/general';
 
-import {Field, change, reduxForm} from 'redux-form';
+import {Field, change, reduxForm, reset} from 'redux-form';
 import {connect} from 'react-redux';
 import FilterFromTimepicker from './FilterFormTimepicker';
 import {required, phone, alphanum, number} from '../../../../config/validation';
@@ -17,7 +17,6 @@ import {generateRoute} from '../../../../config/router';
 class FilterForm extends Component {
 
 
-
     changeRowVisibility=(e)=>{
 
         let checked=!!e.target.checked;
@@ -27,6 +26,12 @@ class FilterForm extends Component {
         //this.props.input.onChange(newValue);
 
     };
+
+    resetForm=(e)=>{
+        e.preventDefault();
+        this.props.dispatch(reset('filterForm'));
+    };
+
 
 
     render() {
@@ -51,12 +56,12 @@ class FilterForm extends Component {
             <form onSubmit={handleSubmit} className={this.props.filterFormVisible ? "uk-width-medium-1-4" : 'hidden'}
                   id="filterDiv">
 
-                <a className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-                   href="javascript:void(0)">CLEAR</a>
+                <button className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+                   onClick={this.resetForm.bind(null)} >RESET</button>
 
 
-                <button className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light" type="submit"
-                        onClick={saveFilter.bind(null)}>SAVE</button>
+                {this.props.filter && <button className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light" type="submit"
+                        onClick={saveFilter.bind(null)}>SAVE</button>}
 
 
                 <button type="submit"
@@ -67,7 +72,9 @@ class FilterForm extends Component {
                 <ul className="md-list md-list-addon">
 
 
-                    <Field name="title" type="text" validate={[]} component={renderField} label="Filter Name"/>
+
+                    {this.props.filter && <Field name="title" type="text" validate={[]} component={renderField} label="Filter Name"/>}
+
 
 
                     <Field name="columns.title" type="checkbox" className="alignright" validate={[]}
@@ -385,32 +392,11 @@ function mapStateToProps(state, ownProps) {
         //     initialValues.createdTime.from=convertApiStringToDate(createdTime&&createdTime.split(',')[0]?createdTime.split(',')[0]:'');
         //     initialValues.createdTime.to=convertApiStringToDate(createdTime&&createdTime.split(',')[1]?createdTime.split(',')[1]:'');
         // }
-        //
-        // if(startedTime&&startedTime==='TO=NOW'){
-        // }else if(startedTime && startedTime.split().length>0){
-        //     initialValues.startedTime.radio='timeRange';
-        //     initialValues.startedTime.from=convertApiStringToDate(startedTime&&startedTime.split(',')[0]?startedTime.split(',')[0]:'');
-        //     initialValues.startedTime.to=convertApiStringToDate(startedTime&&startedTime.split(',')[1]?startedTime.split(',')[1]:'');
-        // }
-        //
-        // if(deadlineTime&&deadlineTime==='TO=NOW'){
-        // }else if(deadlineTime && deadlineTime.split().length>0){
-        //     initialValues.deadlineTime.radio='timeRange';
-        //     initialValues.deadlineTime.from=convertApiStringToDate(deadlineTime&&deadlineTime.split(',')[0]?deadlineTime.split(',')[0]:'');
-        //     initialValues.deadlineTime.to=convertApiStringToDate(deadlineTime&&deadlineTime.split(',')[1]?deadlineTime.split(',')[1]:'');
-        // }
-        //
-        // if(closedTime&&closedTime==='TO=NOW'){
-        // }else if(closedTime && closedTime.split().length>0){
-        //     initialValues.closedTime.radio='timeRange';
-        //     initialValues.closedTime.from=convertApiStringToDate(closedTime&&closedTime.split(',')[0]?closedTime.split(',')[0]:'');
-        //     initialValues.closedTime.to=convertApiStringToDate(closedTime&&closedTime.split(',')[1]?closedTime.split(',')[1]:'');
-        // }
 
 
 
         // initialValues['filter']['status']=statuses;
-        console.log('is filter', initialValues);
+        // console.log('is filter', initialValues);
 
         return {
             initialValues: {...filter, ...initialValues},
@@ -419,7 +405,7 @@ function mapStateToProps(state, ownProps) {
     }
 
     else {
-        console.log('isnt filter', initialValues);
+        // console.log('isnt filter', initialValues);
         return{initialValues:{...initialValues},enableReinitialize: true};
     // else {
     //     return{

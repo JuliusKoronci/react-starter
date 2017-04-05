@@ -20,6 +20,7 @@ class Filter extends Component {
 
         this.state = {
             filterFormVisible: true,
+            sentValues:[],
 
             columns: [
                 {title: true},
@@ -72,15 +73,26 @@ class Filter extends Component {
     };
 
 
-    onSubmit = (values, e) => {
 
-        console.log('values:', values);
+
+
+
+    onSubmit = (oldValues, e) => {
+
+        let values=Object.assign({},oldValues);
+
+        // console.log('save?',this.state.saveFilter);
+        // console.log('values:', values);
 
 
         ['closedTime', 'startedTime', 'deadlineTime', 'createdTime'].map((field) => {
 
-            if (values[field] && values[field+'Radio'] === 'now') {
+            // console.log(field,values[field+'Radio'],values[field]);
+
+            if (values[field+'Radio'] && values[field+'Radio'] === 'now') {
                 values[field] = this.state.saveFilter ? 'TO=NOW' : 'TO%3DNOW';
+
+                // console.log('now',[field]);
 
             } else {
                 //if (values[field]['radio'] === 'timeRange') {
@@ -99,12 +111,14 @@ class Filter extends Component {
                 }
             }
 
-            // values[field+'Radio']='TO=NOW'
+            // this.setState({sentValues:})
 
-            console.log(values);
+            // values[field+'Radio']='TO=NOW'
 
         });
         // values={};
+
+        // console.log(values);
 
         let columns = this.state.columns.map((column) => {
             let key = Object.keys(column)[0];
@@ -135,6 +149,11 @@ class Filter extends Component {
         let filterSaveValues = Object.assign({}, values);
 
 
+
+
+
+
+
         if (this.state.saveFilter) {
             let columnsToSend = [];
             this.state.columns.map((column) => {
@@ -145,7 +164,7 @@ class Filter extends Component {
             });
             filterSaveValues.columns = columnsToSend.join();
 
-            let config = configResolver.saveFilter(filterSaveValues, this.props.params.filterId)
+            let config = configResolver.saveFilter(filterSaveValues, this.props.params.filterId);
             this.props.actions.generalRequest(config.data, config);
         }
 
@@ -153,6 +172,13 @@ class Filter extends Component {
         this.props.actions.requestTasks(configResolver.loadFilterTasks(filterValues));
 
     };
+
+
+
+
+
+
+
 
 
     componentDidMount() {
