@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {required, phone, email, alphanum, number} from '../../../config/validation';
+import {required, email} from '../../../config/validation';
 import {renderField, renderTextarea, renderSelect} from '../field.tpl';
 import {availableLanguages} from '../../../config/config';
 import {LOAD_ATTACHMENT} from '../../../api/urls';
-import DeleteButton from '../../components/Main/_partials/DeleteButton';
 import Image from '../../components/Main/Image';
 import {Link} from 'react-router';
 import {generateRoute} from '../../../config/router';

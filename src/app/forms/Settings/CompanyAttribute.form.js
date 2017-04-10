@@ -3,8 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required} from '../../../config/validation';
 import {renderField, renderSelect, renderTagger} from '../field.tpl';
-import Tag from '../../forms/tagger.jsx';
-import DeleteButton from '../../components/Main/_partials/DeleteButton';
+
 import {Link} from 'react-router';
 import {generateRoute} from '../../../config/router';
 
@@ -19,7 +18,7 @@ class CompanyAttributeForm extends Component {
     componentDidUpdate(){
 
         if(this.props.currentValues && this.props.currentValues.type){
-            if(this.props.config.customValuesEnabledOn.indexOf(this.props.currentValues.type)!=-1){
+            if(this.props.config.customValuesEnabledOn.indexOf(this.props.currentValues.type)!==-1){
                 if(!this.state.customValueEnabled) {
                     this.setState({customValueEnabled: true})
                 }

@@ -1,7 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
-import Pagination from '../../_partials/pagination.jsx';
-import {generateRoute} from '../../../../../../config/router';
 
 const reports_custom = (props) => {
     return (
@@ -25,9 +22,9 @@ const reports_custom = (props) => {
                                         data-uk-modal="{target:'#modal_default'}">SAVE
                                 </button>
                                 <a className="md-btn md-btn-warning md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-                                   href="javascript:void(0)">CLEAR</a>
+                                   href="#">CLEAR</a>
                                 <a className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-                                   href="javascript:void(0)">FILTER</a>
+                                   href="#">FILTER</a>
                             </div>
                             <p></p>
                             <form className="uk-form-stacked ">

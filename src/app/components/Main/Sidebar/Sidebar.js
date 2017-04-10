@@ -6,10 +6,6 @@ import {createTask} from '../../../redux/actions/tasks.action';
 
 class Sidebar extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
-
     menuToggleActive = (e) => {
 
         if (e.target.classList.contains('active')) {

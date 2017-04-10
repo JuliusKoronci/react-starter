@@ -1,12 +1,7 @@
-import React, {PropTypes} from 'react';
-import Status from './status.jsx';
-import Attachment from './attachment.jsx';
-import Tag from './tag.jsx';
-import Select from '../../../../../forms/Task/Select.form';
-import ReactSelect from 'react-select';
+import React from 'react';
 
 
-const main = ({}) => {
+const main = () => {
 
     return (
         <div className="md-list md-list-addon">

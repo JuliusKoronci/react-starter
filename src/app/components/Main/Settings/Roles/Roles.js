@@ -3,7 +3,6 @@ import View from '../../../../views/templates/main/settings/roles/roles.jsx.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../../redux/actions/settings.action';
-import * as generalActions from '../../../../redux/actions/general.action';
 import configResolver from '../../../../../config/configResolver';
 
 class Roles extends Component {

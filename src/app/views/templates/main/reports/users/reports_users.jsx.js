@@ -1,9 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Pagination from '../../_partials/pagination.jsx';
-import {generateRoute} from '../../../../../../config/router';
 
-const reports_users = (props) => {
+const reports_users = () => {
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -15,13 +13,13 @@ const reports_users = (props) => {
                     <h3 className="heading_a">Tasks close date</h3>
                 </div>
                 <div className="uk-grid uk-margin">
-                    <div class="uk-form-width-mini">
+                    <div className="uk-form-width-mini">
                         <p>From:</p>
                     </div>
                     <div className="uk-form-width-medium">
                         <input type="text" className="md-input"/>
                     </div>
-                    <div class="uk-form-width-mini">
+                    <div className="uk-form-width-mini">
                         <p>To:</p>
                     </div>
                     <div className="uk-form-width-medium">

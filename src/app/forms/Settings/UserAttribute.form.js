@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 import {required} from '../../../config/validation';
 import {renderField, renderSelect, renderTagger} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
-import {Link} from 'react-router';
-import {generateRoute} from '../../../config/router';
+
 
 class UserAttributeForm extends Component {
 
@@ -18,7 +17,7 @@ class UserAttributeForm extends Component {
     componentDidUpdate(){
 
         if(this.props.currentValues && this.props.currentValues.type){
-            if(this.props.config.customValuesEnabledOn.indexOf(this.props.currentValues.type)!=-1){
+            if(this.props.config.customValuesEnabledOn.indexOf(this.props.currentValues.type)!==-1){
                 if(!this.state.customValueEnabled) {
                     this.setState({customValueEnabled: true})
                 }

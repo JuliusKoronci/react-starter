@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {renderField,renderTextarea} from '../field.tpl';
+import {renderField} from '../field.tpl';
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router';
 import {generateRoute} from '../../../config/router';
@@ -14,7 +14,7 @@ class ProjectAclForm extends Component {
         let value=e.target.name;
         const valuesBefore=this.props.thisForm['ProjectAclForm'].values[fieldName].split(',');
 
-        if(valuesBefore.indexOf(value)==-1 && checked){
+        if(valuesBefore.indexOf(value)===-1 && checked){
             let newValues=valuesBefore;
             newValues.push(value);
             this.props.change(fieldName, newValues.join());

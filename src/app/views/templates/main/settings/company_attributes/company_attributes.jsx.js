@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
-import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
 import {paths, generateRoute} from '../../../../../../config/router';
 
 const CompanyAttributes = (props) => {

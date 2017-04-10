@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 
 const Select = ({options, action, defaultValue, label, icon}) => {
     return (

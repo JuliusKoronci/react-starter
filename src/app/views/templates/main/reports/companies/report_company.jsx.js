@@ -1,9 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
-import Pagination from '../../_partials/pagination.jsx';
-import {generateRoute} from '../../../../../../config/router';
 
-const reports_companies = (props) => {
+const reports_companies = () => {
     return (
         <div className="md-card">
             <div className="md-card-content">

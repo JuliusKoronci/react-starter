@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {required, phone, alphanum, number} from '../../../config/validation';
+import {required} from '../../../config/validation';
 import {renderField, renderColorpicker} from '../field.tpl';
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router';

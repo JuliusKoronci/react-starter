@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import Status from './status.jsx';
-import Repeat from './repeat.jsx';
+// import Repeat from './repeat.jsx';
 import Attachment from './attachment.jsx';
 import Tag from './tag.jsx';
 import DatePicker from '../../../../../forms/Task/Datepicker.form';

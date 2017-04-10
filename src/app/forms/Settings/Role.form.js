@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {required, phone, alphanum, number} from '../../../config/validation';
-import {renderField, renderSelect, renderMulticheckbox} from '../field.tpl';
+import {required} from '../../../config/validation';
+import {renderField, renderMulticheckbox} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 import configAcl from '../../../config/configRoles';
 import {Link} from 'react-router';

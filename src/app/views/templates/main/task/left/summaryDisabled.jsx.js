@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const summary = ({}) => {
+const summary = () => {
 	return (
 		<div>
 			<div className="uk-margin-medium-bottom">

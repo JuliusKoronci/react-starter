@@ -12,7 +12,7 @@ class Datepicker extends Component {
 
     render() {
 
-        const ic = this.props.icon || '&#xE858;';
+        // const ic = this.props.icon || '&#xE858;';
         const value=this.props.value;
         const label=this.props.label;
 

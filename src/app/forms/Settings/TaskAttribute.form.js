@@ -19,7 +19,7 @@ class TaskAttributeForm extends Component {
     componentDidUpdate(){
 
         if(this.props.currentValues && this.props.currentValues.type){
-            if(this.props.config.customValuesEnabledOn.indexOf(this.props.currentValues.type)!=-1){
+            if(this.props.config.customValuesEnabledOn.indexOf(this.props.currentValues.type)!==-1){
                 if(!this.state.customValueEnabled) {
                     this.setState({customValueEnabled: true})
                 }

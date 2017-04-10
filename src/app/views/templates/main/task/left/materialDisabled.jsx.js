@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const material = ({}) => {
+const material = () => {
 	return (
 		<div>
 			<label className="uk-text-muted">Material</label>

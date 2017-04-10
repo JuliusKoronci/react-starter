@@ -1,7 +1,4 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
-import { Creatable } from 'react-select';
-import Select from 'react-select';
+import React from 'react';
 import FilterForm from '../../../../components/Main/Filter/FilterForm';
 import FilterTasks from '../../../../components/Main/Filter/FilterTasks';
 
@@ -20,9 +17,6 @@ const Filter = (props) => {
                     <FilterForm {...props} />
 
                     <FilterTasks {...props} />
-
-
-
 
 
                 </div>

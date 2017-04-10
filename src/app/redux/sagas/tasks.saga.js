@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
-import { generateRoute, paths } from '../../../config/router';
+import { generateRoute } from '../../../config/router';
 import {
 	REQUEST_DEFAULT_TASKS,
 	REQUEST_TASKS_FROM_URL,
@@ -111,20 +111,6 @@ function *uploadTask(action) {
 	}
 	yield put(endAjax());
 }
-
-// function *createTask() {
-// 	yield put(startAjaxReset());
-// 	try {
-// 		const task = yield call(defaultPOST, TASK_LIST, { title: ' ' });
-// 		yield put(taskReceived(task));
-// 		const id = task.data.id;
-// 		const link = generateRoute('task_new', { taskId: id, newTask: true });
-// 		browserHistory.push(link);
-// 	} catch (e) {
-// 		yield put(asyncError(e));
-// 	}
-// 	yield put(endAjax());
-// }
 
 function *createTask(action) {
 	let values=action.data?action.data:{title:' '};

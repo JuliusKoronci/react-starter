@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
-import {paths, generateRoute} from '../../../../../../config/router';
+import {generateRoute} from '../../../../../../config/router';
 
 const units = (props) => {
     return (

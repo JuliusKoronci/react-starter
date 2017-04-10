@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {renderField, renderSelect} from '../field.tpl';
+import {renderSelect} from '../field.tpl';
 import {Field, reduxForm} from 'redux-form';
 import {required} from '../../../config/validation';
 
