@@ -16,8 +16,11 @@ import {
 
 import configResolver from '../../../config/configResolver';
 
-export function createTask() {
-	return { type: CREATE_TASK };
+export function createTask(data) {
+	return {
+		type: CREATE_TASK,
+		data
+	};
 }
 
 export function requestDefaultTasks(filterId) {

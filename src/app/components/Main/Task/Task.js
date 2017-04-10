@@ -1,133 +1,201 @@
-import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {PropTypes, Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as actions from '../../../redux/actions/tasks.action';
 import * as genActions from '../../../redux/actions/general.action';
 import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
+import ViewCreatable from '../../../views/templates/main/task/creatingTask.jsx';
 import configResolver from '../../../../config/configResolver';
-import { generateRoute } from '../../../../config/router';
-import { entityCreated, entityError } from '../../../services/general';
-import { TASK_LIST } from '../../../../api/urls';
+import {generateRoute} from '../../../../config/router';
+import {entityCreated, entityError} from '../../../services/general';
+import {TASK_LIST} from '../../../../api/urls';
 
 class Task extends Component {
 
-	constructor(props, context) {
-		super(props, context);
+    constructor(props, context) {
+        super(props, context);
 
-		this.state = {
-			saved: false,
-		}
-	}
+        this.state = {
+            saved: false,
+            creatingTask: true,
+            newTaskTitle: '',
+        }
+    }
 
-	componentWillUnmount() {
-		if (this.props.newTask && !this.state.saved) {
-			this._onNewTaskCancel(this.props.params.taskId);
-		}
-	}
+    componentWillUnmount() {
+        if (this.props.newTask && !this.state.saved) {
+            this._onNewTaskCancel(this.props.params.taskId);
+        }
+    }
 
-	handleFileUpload = (acceptedFiles) => {
-		let formData = new FormData();
-		acceptedFiles.map((file) => {
-			name = file.name;
-			formData.append(file.name, file)
-		});
+    handleFileUpload = (acceptedFiles) => {
+        let formData = new FormData();
+        acceptedFiles.map((file) => {
+            name = file.name;
+            formData.append(file.name, file)
+        });
 
-		this.props.actions.taskUpload(formData, this.props.params.taskId);
-	};
+        this.props.actions.taskUpload(formData, this.props.params.taskId);
+    };
 
-	handleFileDownload = (slug) => {
-		this.props.actions.downloadFile(slug, configResolver.getDownloadFileConfig());
-	};
+    handleFileDownload = (slug) => {
+        this.props.actions.downloadFile(slug, configResolver.getDownloadFileConfig());
+    };
 
-	handleFileDelete = (slug, e) => {
-		this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId, slug));
-		e.preventDefault();
-	};
+    handleFileDelete = (slug, e) => {
+        this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId, slug));
+        e.preventDefault();
+    };
 
-	_onValidate = () => {
-		const task = this.props.task;
-		console.log(task);
+    _onValidate = () => {
+        const task = this.props.task;
+        console.log(task);
 
-		if (task.taskHasAssignedUsers.length === 0) {
-			return false;
-		}
-		if (task.title.trim() === '') {
-			return false;
-		}
-		if (!task.company && !task.company.id) {
-			return false;
-		}
+        if (task.taskHasAssignedUsers.length === 0) {
+            return false;
+        }
+        if (task.title.trim() === '') {
+            return false;
+        }
+        if (!task.company && !task.company.id) {
+            return false;
+        }
 
-		return true;
-	};
+        return true;
+    };
 
-	_onNewTaskCreate = (taskId) => {
-		const path = generateRoute('task_list', { taskId: taskId });
-		if (this._onValidate()) {
-			this.setState({
-				saved: true,
-			});
-			entityCreated('Task created!', path);
-		} else {
-			entityError('The following fields are mandatory: Status, Project, Requester, Company, Assigned');
-		}
-	};
-	_onNewTaskCancel = (taskId) => {
-		this.props.actions.deleteTask(`${TASK_LIST}/${taskId}`);
-	};
+    _onNewTaskCreate = (taskId) => {
+        const path = generateRoute('task_list', {taskId: taskId});
+        if (this._onValidate()) {
+            this.setState({
+                saved: true,
+            });
+            entityCreated('Task created!', path);
+        } else {
+            entityError('The following fields are mandatory: Status, Project, Requester, Company, Assigned');
+        }
+    };
+    _onNewTaskCancel = (taskId) => {
+        this.props.actions.deleteTask(`${TASK_LIST}/${taskId}`);
+    };
 
-	componentWillMount() {
-		this.props.actions.loadTaskById(this.props.params.taskId);
-		this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
-	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.task !== this.props.task) {
-			this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
-		}
-	}
 
-	render() {
-		if (this.props.task) {
-			return this.renderTask()
-		} else {
-			return <p>Task id: {this.props.params.taskId} ...</p>
-		}
-	}
 
-	renderTask = () => {
-		return (<ViewEditable
-			handleFileUpload={this.handleFileUpload}
-			handleFileDownload={this.handleFileDownload}
-			handleFileDelete={this.handleFileDelete}
-			handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
-			handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
-			{...this.props}
-		/>);
-	}
+
+
+
+
+    newTaskTitleChangeHandler = (e) => {
+        const value=e.target.value;
+        this.setState({newTaskTitle: value});
+    };
+
+    createTaskHandler = (e) => {
+        e.preventDefault();
+        let config=configResolver.createTask();
+        let values={'title':this.state.newTaskTitle};
+
+        console.log(this.state.newTaskTitle);
+        // this.props.actions.createEntity(values,config);
+        this.props.actions.createTask(values,config);
+        return false;
+    };
+
+
+
+
+
+    componentWillMount() {
+
+        if (this.props.params.taskId) {
+            this.props.actions.loadTaskById(this.props.params.taskId);
+            this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
+            this.setState({'creatingTask': false})
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevProps.task !== this.props.task) {
+
+            if (this.props.params.taskId) {
+                this.setState({'creatingTask': true})
+            } else {
+                this.setState({'creatingTask': false})
+            }
+
+            if (!this.state.creatingTask) {
+                this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
+            }
+        }
+    }
+
+    render() {
+        if (this.props.task) {
+            return this.renderTask()
+        }
+        else if (this.props.creatingTask) {
+            return this.renderCreatingTask()
+        }
+        else {
+            return <p>Task id: {this.props.params.taskId} ...</p>
+        }
+    }
+
+    renderCreatingTask = () => {
+        return (<ViewCreatable
+            saveAction={this.createTaskHandler}
+            handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
+            newTaskTitleChangeHandler={this.newTaskTitleChangeHandler}
+            {...this.props}
+        />);
+    };
+
+    renderTask = () => {
+        return (<ViewEditable
+            handleFileUpload={this.handleFileUpload}
+            handleFileDownload={this.handleFileDownload}
+            handleFileDelete={this.handleFileDelete}
+            handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
+            handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
+            {...this.props}
+        />);
+    }
 }
 
 Task.propTypes = {
-	//myProp: PropTypes.string.isRequired
-	actions: PropTypes.object.isRequired
+    //myProp: PropTypes.string.isRequired
+    actions: PropTypes.object.isRequired
 };
 
 
 function mapStateToProps(state, ownProps) {
-	const task = state.tasks.task.data || false;
-	return {
-		task: task,
-		newTask: ownProps.params.newTask,
-		options: state.tasks.options,
-		canEdit: task ? task.canEdit : false,
-		user: state.auth.user
-	};
+    const task = state.tasks.task.data || false;
+
+    if (!ownProps.params.taskId) {
+        return {
+            newTaskTitle: state.newTaskTitle,
+            task: false,
+            user: state.auth.user,
+            creatingTask: true
+        };
+    }
+
+    return {
+        task: task,
+        newTask: ownProps.params.newTask,
+        options: state.tasks.options,
+        canEdit: task ? task.canEdit : false,
+        user: state.auth.user,
+        creatingTask: false
+    };
 }
 
 function mapDispatchToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ ...actions, ...genActions }, dispatch)
-	};
+    return {
+        actions: bindActionCreators({...actions, ...genActions}, dispatch)
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Task);

@@ -34,6 +34,15 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
                 </ul>
                 <ul>
                     <li>
+                        <Link to={'/tasks/create'}>
+                            <span className="menu_icon"><i
+                                className="material-icons md-color-blue-500">&#xE145;</i></span>
+                            <span className="menu_title md-color-blue-500">CREATE TASK</span>
+                        </Link>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
                         <Link to='/filter'>
                             <span className="menu_icon"><i className="material-icons">&#xE152;</i></span>
                             <span className="menu_title">FILTER</span>

@@ -466,6 +466,12 @@ class configResolver {
             }
         }
     }
+
+    static createTask() {
+        return {
+            url: urls.TASK_LIST,
+        }
+    }
 }
 
 export default configResolver;

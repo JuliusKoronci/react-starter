@@ -112,18 +112,34 @@ function *uploadTask(action) {
 	yield put(endAjax());
 }
 
-function *createTask() {
-	yield put(startAjaxReset());
-	try {
-		const task = yield call(defaultPOST, TASK_LIST, { title: ' ' });
-		yield put(taskReceived(task));
-		const id = task.data.id;
-		const link = generateRoute('task_new', { taskId: id, newTask: true });
-		browserHistory.push(link);
-	} catch (e) {
-		yield put(asyncError(e));
-	}
-	yield put(endAjax());
+// function *createTask() {
+// 	yield put(startAjaxReset());
+// 	try {
+// 		const task = yield call(defaultPOST, TASK_LIST, { title: ' ' });
+// 		yield put(taskReceived(task));
+// 		const id = task.data.id;
+// 		const link = generateRoute('task_new', { taskId: id, newTask: true });
+// 		browserHistory.push(link);
+// 	} catch (e) {
+// 		yield put(asyncError(e));
+// 	}
+// 	yield put(endAjax());
+// }
+
+function *createTask(action) {
+	let values=action.data?action.data:{title:' '};
+    yield put(startAjaxReset());
+    try {
+        const task = yield call(defaultPOST, TASK_LIST, values);
+        yield put(taskReceived(task));
+        const id = task.data.id;
+        // const link = generateRoute('task_new', { taskId: id, newTask: true });
+        const link = generateRoute('task_show', { taskId: id});
+        browserHistory.push(link);
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
 }
 
 function *deleteTask(action) {

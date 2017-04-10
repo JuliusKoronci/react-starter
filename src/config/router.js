@@ -53,6 +53,7 @@ export const paths = {
     'login': '/login',
     'logout': '/logout',
     'task_list': '/tasks',
+    'task_create': '/tasks/create',
     'task_show': '/tasks/:taskId',
     'task_new': '/tasks/:taskId/newTask/:newTask',
     'filter': '/filter',
@@ -141,6 +142,7 @@ export default (
             <Route path={paths.filters} component={Dashboard}/>
             <Route path={paths.task_list} component={Task}/>
             <Route path={paths.task_new} component={Task}/>
+            <Route path={paths.task_create} component={Task}/>
             <Route path={paths.task_show} component={Task}/>
             <Route path={paths.profile} component={Profile}/>
             <Route name="filter" path={paths.filter_edit} component={Filter}/>
