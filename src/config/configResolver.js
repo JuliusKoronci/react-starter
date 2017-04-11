@@ -472,6 +472,12 @@ class configResolver {
             url: urls.TASK_LIST,
         }
     }
+
+    static addTaskComment(taskId) {
+        return {
+            url: urls.TASK_LIST + '/'+taskId+'/comments',
+        }
+    }
 }
 
 export default configResolver;

@@ -12,9 +12,20 @@ import {
 	AFTER_TASK_ATTACHMENT_UPLOADED,
 	CREATE_TASK,
 	DELETE_TASK,
+    ADD_TASK_COMMENT
 } from '../constants';
 
 import configResolver from '../../../config/configResolver';
+
+
+export function addTaskComment(data,config) {
+    return {
+        type: ADD_TASK_COMMENT,
+        data,
+		config
+    };
+}
+
 
 export function createTask(data) {
 	return {

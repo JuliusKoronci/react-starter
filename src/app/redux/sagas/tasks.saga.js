@@ -10,7 +10,8 @@ import {
 	TASK_STATUS_UPDATED,
 	TASK_UPLOADED,
 	CREATE_TASK,
-	DELETE_TASK
+	DELETE_TASK,
+    ADD_TASK_COMMENT
 } from '../constants';
 import { TASK_LIST } from '../../../api/urls';
 import { endAjax, startAjaxReset, asyncError } from '../actions/async.action';
@@ -141,6 +142,25 @@ function *deleteTask(action) {
 }
 
 
+
+function *addTaskComment(action) {
+    let values=action.data?action.data:{body:' ',title:' '};
+    yield put(startAjaxReset());
+    try {
+        const comment = yield call(defaultPOST, action.config.url, values);
+console.log(comment);
+        // yield put(taskReceived(task));
+        // const id = task.data.id;
+        // const link = generateRoute('task_show', { taskId: id});
+        // browserHistory.push(link);
+
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
+}
+
+
 export function *loadTasksFromUrl() {
 	yield takeLatest(REQUEST_TASKS_FROM_URL, loadTasksUrl);
 	yield takeLatest(REQUEST_TASKS_WITH_PARAMS, loadTasksWithParams);
@@ -150,5 +170,6 @@ export function *loadTasksFromUrl() {
 	yield takeLatest(TASK_UPLOADED, uploadTask);
 	yield takeLatest(CREATE_TASK, createTask);
 	yield takeLatest(DELETE_TASK, deleteTask);
+	yield takeLatest(ADD_TASK_COMMENT, addTaskComment);
 
 }

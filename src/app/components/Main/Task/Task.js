@@ -19,6 +19,13 @@ class Task extends Component {
             saved: false,
             creatingTask: true,
             newTaskTitle: '',
+            commentFormBody:'',
+            commentFormEmail:false,
+            commentFormInternalNote:false,
+            commentFormEmailSubject:'',
+            commentFormEmailTo:'',
+            commentFormEmailCc:'',
+            commentFormErrors:{}
         }
     }
 
@@ -80,10 +87,45 @@ class Task extends Component {
     };
 
 
+    toggleState=(data,e)=>{
+
+        e.preventDefault();
+        if(data.hasOwnProperty('value')){
+            this.setState({[data.key]:data.value})
+        }else{
+            this.setState({[data.key]:!this.state[data.key]})
+            // this.setState({[data.key]:!e.target.checked})
+        }
+    };
+
+    formChangeHandler = (e) => {
+        const value=e.target.value;
+        const targetName=e.target.name;
+        this.setState({[targetName]: value});
+    };
 
 
+    sendComment=()=>{
+        let values={};
+        if(this.state.commentFormEmail){
+            values= {
+                body: this.state.commentFormBody,
+                title: this.state.commentFormEmailSubject,
+                email_to: this.state.commentFormEmailTo,
+                email_cc:this.state.commentFormEmailCc,
+                email:true,
+                internal:this.state.commentFormInternalNote,
 
-
+            };
+        }else{
+            values={body:this.state.commentFormBody,
+                title:' ',
+                internal:this.state.commentFormInternalNote,
+            };
+        }
+        let config=configResolver.addTaskComment(this.props.params.taskId);
+        this.props.actions.addTaskComment(values,config);
+    };
 
 
     newTaskTitleChangeHandler = (e) => {
@@ -132,8 +174,11 @@ class Task extends Component {
     }
 
     render() {
-        if (this.props.task) {
+        if (this.props.task && this.props.task.canEdit) {
             return this.renderTask()
+        }
+        if (this.props.task && !this.props.task.canEdit) {
+            return <p>Read only task</p>
         }
         else if (this.props.creatingTask) {
             return this.renderCreatingTask()
@@ -159,6 +204,17 @@ class Task extends Component {
             handleFileDelete={this.handleFileDelete}
             handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
             handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
+
+            sendComment={this.sendComment}
+            formChangeHandler={this.formChangeHandler}
+            toggleState={this.toggleState}
+            commentFormEmail={this.state.commentFormEmail}
+            commentFormInternalNote={this.state.commentFormInternalNote}
+            commentFormBody={this.state.commentFormBody}
+            commentFormEmailTo={this.state.commentFormEmailTo}
+            commentFormEmailCc={this.state.commentFormEmailCc}
+            commentFormEmailSubject={this.state.commentFormEmailSubject}
+
             {...this.props}
         />);
     }
@@ -172,9 +228,10 @@ Task.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     const task = state.tasks.task.data || false;
+    let stateToProps={};
 
     if (!ownProps.params.taskId) {
-        return {
+        stateToProps= {
             newTaskTitle: state.newTaskTitle,
             task: false,
             user: state.auth.user,
@@ -182,7 +239,7 @@ function mapStateToProps(state, ownProps) {
         };
     }
 
-    return {
+    stateToProps= {
         task: task,
         newTask: ownProps.params.newTask,
         options: state.tasks.options,
@@ -190,6 +247,10 @@ function mapStateToProps(state, ownProps) {
         user: state.auth.user,
         creatingTask: false
     };
+
+
+
+    return stateToProps;
 }
 
 function mapDispatchToProps(dispatch) {
