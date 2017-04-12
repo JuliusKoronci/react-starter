@@ -317,6 +317,14 @@ class configResolver {
         }
     };
 
+    static fileUploadConfig = () => {
+        return {
+            url: urls.FILE_UPLOAD,
+            uploadUrl: urls.FILE_UPLOAD,
+            remapValues: {'image': 'image'},
+        }
+    };
+
 
     static deleteTaskAttachment(taskId, slug) {
         return {

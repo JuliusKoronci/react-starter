@@ -9,6 +9,7 @@ import configResolver from '../../../../config/configResolver';
 import {generateRoute} from '../../../../config/router';
 import {entityCreated, entityError} from '../../../services/general';
 import {TASK_LIST} from '../../../../api/urls';
+import {apiUploadFile} from '../../../../api/api';
 
 class Task extends Component {
 
@@ -19,13 +20,14 @@ class Task extends Component {
             saved: false,
             creatingTask: true,
             newTaskTitle: '',
-            commentFormBody:'',
-            commentFormEmail:false,
-            commentFormInternalNote:false,
-            commentFormEmailSubject:'',
-            commentFormEmailTo:'',
-            commentFormEmailCc:'',
-            commentFormErrors:{}
+            commentFormBody: '',
+            commentFormEmail: false,
+            commentFormInternalNote: false,
+            commentFormEmailSubject: '',
+            commentFormEmailTo: '',
+            commentFormEmailCc: '',
+            commentFormAttachments: [],
+            commentFormErrors: {}
         }
     }
 
@@ -87,65 +89,91 @@ class Task extends Component {
     };
 
 
-    toggleState=(data,e)=>{
+    toggleState = (data, e) => {
 
         e.preventDefault();
-        if(data.hasOwnProperty('value')){
-            this.setState({[data.key]:data.value})
-        }else{
-            this.setState({[data.key]:!this.state[data.key]})
+        if (data.hasOwnProperty('value')) {
+            this.setState({[data.key]: data.value})
+        } else {
+            this.setState({[data.key]: !this.state[data.key]})
             // this.setState({[data.key]:!e.target.checked})
         }
     };
 
     formChangeHandler = (e) => {
-        const value=e.target.value;
-        const targetName=e.target.name;
+        const value = e.target.value;
+        const targetName = e.target.name;
         this.setState({[targetName]: value});
     };
 
+    handleCommentFileUpload = (e) => {
+        let file = e.target.files[0];
+        let formData = new FormData();
+        formData.append('file', file);
 
-    sendComment=()=>{
-        let values={};
-        if(this.state.commentFormEmail){
-            values= {
+        let config = configResolver.fileUploadConfig();
+
+        try {
+            let response = apiUploadFile(config.url, formData);
+            response.then((data) => {
+                let att = this.state.commentFormAttachments;
+                att.unshift(data.slug);
+                this.setState({commentFormAttachments: att});
+            });
+        } catch (e) {
+            console.log(e);
+        }
+
+
+    };
+
+    handleCommentFileDelete = (slug, e) => {
+        // this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId, slug));
+        // e.preventDefault();
+    };
+
+
+    sendComment = () => {
+        let values = {};
+        if (this.state.commentFormEmail) {
+            values = {
                 body: this.state.commentFormBody,
                 title: this.state.commentFormEmailSubject,
                 email_to: this.state.commentFormEmailTo,
-                email_cc:this.state.commentFormEmailCc,
-                email:true,
-                internal:this.state.commentFormInternalNote,
+                email_cc: this.state.commentFormEmailCc,
+                email: true,
+                internal: this.state.commentFormInternalNote,
+                slug:this.state.commentFormAttachments.length>0?this.state.commentFormAttachments.join():null,
 
             };
-        }else{
-            values={body:this.state.commentFormBody,
-                title:' ',
-                internal:this.state.commentFormInternalNote,
+        } else {
+            values = {
+                body: this.state.commentFormBody,
+                title: ' ',
+                internal: this.state.commentFormInternalNote,
+                slug:this.state.commentFormAttachments.length>0?this.state.commentFormAttachments.join():null,
             };
         }
-        let config=configResolver.addTaskComment(this.props.params.taskId);
-        this.props.actions.addTaskComment(values,config);
+        let config = configResolver.addTaskComment(this.props.params.taskId);
+        this.props.actions.addTaskComment(values, config);
     };
 
 
     newTaskTitleChangeHandler = (e) => {
-        const value=e.target.value;
+        const value = e.target.value;
         this.setState({newTaskTitle: value});
     };
 
     createTaskHandler = (e) => {
         e.preventDefault();
-        let config=configResolver.createTask();
-        let values={'title':this.state.newTaskTitle};
+        let config = configResolver.createTask();
+        let values = {'title': this.state.newTaskTitle};
 
         console.log(this.state.newTaskTitle);
         // this.props.actions.createEntity(values,config);
-        this.props.actions.createTask(values,config);
+        this.props.actions.createTask(values, config);
         return false;
     };
-
-
-
 
 
     componentWillMount() {
@@ -214,6 +242,11 @@ class Task extends Component {
             commentFormEmailTo={this.state.commentFormEmailTo}
             commentFormEmailCc={this.state.commentFormEmailCc}
             commentFormEmailSubject={this.state.commentFormEmailSubject}
+            commentFormAttachments={this.state.commentFormAttachments}
+            handleCommentFileUpload={this.handleCommentFileUpload}
+
+            saveAction={() => {
+            }}
 
             {...this.props}
         />);
@@ -228,10 +261,10 @@ Task.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     const task = state.tasks.task.data || false;
-    let stateToProps={};
+    let stateToProps = {};
 
     if (!ownProps.params.taskId) {
-        stateToProps= {
+        stateToProps = {
             newTaskTitle: state.newTaskTitle,
             task: false,
             user: state.auth.user,
@@ -239,7 +272,7 @@ function mapStateToProps(state, ownProps) {
         };
     }
 
-    stateToProps= {
+    stateToProps = {
         task: task,
         newTask: ownProps.params.newTask,
         options: state.tasks.options,
@@ -247,7 +280,6 @@ function mapStateToProps(state, ownProps) {
         user: state.auth.user,
         creatingTask: false
     };
-
 
 
     return stateToProps;

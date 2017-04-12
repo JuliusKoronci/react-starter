@@ -7,13 +7,17 @@ import CommentForm from './left/commentForm.jsx';
 import CommentList from './left/commentList.jsx';
 import RightMain from './right/main.jsx';
 import NewTaskPannel from './left/newTaskPannel.jsx';
-
+import TaskButtonPanel from './top/taskButtonPanel.jsx';
 
 const editableTask = (props) => {
 	return (
 		<div className="md-card-content">
 			<div className="uk-form-row">
 				{props.newTask && <NewTaskPannel {...props} />}
+
+				<TaskButtonPanel saveAction={props.saveAction} />
+				<hr />
+
 				<div className="uk-grid" data-uk-grid-margin>
 					<TaskInfo {...props} />
 					<TaskActions {...props} />
