@@ -484,6 +484,7 @@ class configResolver {
     static addTaskComment(taskId) {
         return {
             url: urls.TASK_LIST + '/'+taskId+'/comments',
+            taskId
         }
     }
 }

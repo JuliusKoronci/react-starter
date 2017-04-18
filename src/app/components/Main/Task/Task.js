@@ -20,6 +20,14 @@ class Task extends Component {
             saved: false,
             creatingTask: true,
             newTaskTitle: '',
+
+            form: {
+                title: '',
+                description: '',
+                work: '',
+                work_time: '',
+            },
+
             commentFormBody: '',
             commentFormEmail: false,
             commentFormInternalNote: false,
@@ -104,6 +112,18 @@ class Task extends Component {
         const value = e.target.value;
         const targetName = e.target.name;
         this.setState({[targetName]: value});
+
+        console.log(this.state);
+    };
+
+    formInputChangeHandler = (name,value) => {
+
+        // let obj={form[name]:value};
+
+        let form=Object.assign({},this.state.form);
+        form[name]=value;
+        this.setState({form: form});
+        // console.log(this.state);
     };
 
     handleCommentFileUpload = (e) => {
@@ -155,8 +175,8 @@ class Task extends Component {
             };
         }
 
-        if(this.state.commentFormAttachments.length>0){
-            values.slug=this.state.commentFormAttachments.join();
+        if (this.state.commentFormAttachments.length > 0) {
+            values.slug = this.state.commentFormAttachments.join();
         }
 
         let config = configResolver.addTaskComment(this.props.params.taskId);
@@ -174,7 +194,7 @@ class Task extends Component {
         let config = configResolver.createTask();
         let values = {'title': this.state.newTaskTitle};
 
-        console.log(this.state.newTaskTitle);
+        // console.log(this.state.newTaskTitle);
         // this.props.actions.createEntity(values,config);
         this.props.actions.createTask(values, config);
         return false;
@@ -187,7 +207,7 @@ class Task extends Component {
             this.props.actions.loadTaskById(this.props.params.taskId);
             this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
             this.setState({'creatingTask': false})
-        }else{
+        } else {
             this.setState({'creatingTask': true})
         }
     }
@@ -195,6 +215,8 @@ class Task extends Component {
     componentDidUpdate(prevProps, prevState) {
 
         if (prevProps.task !== this.props.task) {
+
+            // console.log('did update');
 
             if (this.props.params.taskId) {
                 this.setState({'creatingTask': false})
@@ -205,6 +227,22 @@ class Task extends Component {
             if (!this.state.creatingTask) {
                 this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
             }
+
+            if (JSON.stringify(prevProps.task.comments) !== JSON.stringify(this.props.task.comments)) {
+
+                this.setState({
+                    commentFormBody: '',
+                    commentFormEmail: false,
+                    commentFormInternalNote: false,
+                    commentFormEmailSubject: '',
+                    commentFormEmailTo: '',
+                    commentFormEmailCc: '',
+                    commentFormAttachments: [],
+                    commentFormErrors: {}
+                });
+            }
+
+
         }
     }
 
@@ -242,6 +280,7 @@ class Task extends Component {
 
             sendComment={this.sendComment}
             formChangeHandler={this.formChangeHandler}
+            formInputChangeHandler={this.formInputChangeHandler}
             toggleState={this.toggleState}
             commentFormEmail={this.state.commentFormEmail}
             commentFormInternalNote={this.state.commentFormInternalNote}
@@ -255,6 +294,7 @@ class Task extends Component {
             saveAction={() => {
             }}
 
+            form={this.state.form}
             {...this.props}
         />);
     }
@@ -277,7 +317,7 @@ function mapStateToProps(state, ownProps) {
             user: state.auth.user,
             creatingTask: true
         };
-    }else {
+    } else {
 
         stateToProps = {
             task: task,
@@ -285,7 +325,7 @@ function mapStateToProps(state, ownProps) {
             options: state.tasks.options,
             canEdit: task ? task.canEdit : false,
             user: state.auth.user,
-            creatingTask: false
+            creatingTask: false,
         };
     }
 

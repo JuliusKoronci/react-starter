@@ -15,7 +15,7 @@ import {
 } from '../constants';
 import { TASK_LIST } from '../../../api/urls';
 import { endAjax, startAjaxReset, asyncError } from '../actions/async.action';
-import { tasksReceived, taskReceived, taskAttachmentUploaded } from '../actions/tasks.action';
+import { tasksReceived, taskReceived, taskAttachmentUploaded,commentAdded } from '../actions/tasks.action';
 import {
 	defaultFilter,
 	getTasksFromUrl,
@@ -148,8 +148,7 @@ function *addTaskComment(action) {
     yield put(startAjaxReset());
     try {
         const comment = yield call(defaultPOST, action.config.url, values);
-console.log(comment);
-        // yield put(taskReceived(task));
+        yield put(commentAdded({taskId:action.config.taskId,comment:comment.data}));
         // const id = task.data.id;
         // const link = generateRoute('task_show', { taskId: id});
         // browserHistory.push(link);

@@ -33,7 +33,12 @@ class Input extends Component {
     }
 
     handleChange = (e) => {
-        this.handleSubmit(e);
+
+        if(this.props.formInputChangeHandler){
+            this.props.formInputChangeHandler(this.props.fieldName,e.target.value);
+        }else {
+            this.handleSubmit(e);
+        }
     };
 
     handleKeyPress = (e) => {
@@ -64,7 +69,11 @@ class Input extends Component {
     };
 
     render() {
-        const value = this.props.task[this.props.fieldName] || '';
+
+        let val=this.props.form && this.props.form[this.props.fieldName]?this.props.form[this.props.fieldName]:false;
+
+        const value = val || this.props.task[this.props.fieldName] || '';
+
         return (
             <div>
                 <input onChange={this.handleChange} onBlur={this.handleSubmit} onKeyPress={this.handleKeyPress}

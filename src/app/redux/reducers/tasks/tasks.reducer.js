@@ -5,7 +5,8 @@ import {
     TASK_UPDATED,
     OPTIONS_RECEIVED,
     AFTER_TASK_ATTACHMENT_DELETED,
-    AFTER_TASK_ATTACHMENT_UPLOADED
+    AFTER_TASK_ATTACHMENT_UPLOADED,
+    TASK_COMMENT_ADDED
 } from '../../constants';
 
 const defaultState: {data: Array<Object>, _links: Object}= {
@@ -50,6 +51,21 @@ export default function tasks(state: Object = defaultState, action: Object): Obj
             return {
                 ...state,
                 'options': action.data
+            };
+
+        case TASK_COMMENT_ADDED:
+            let commentId=action.data.comment.id;
+            let comments=Object.assign({},state.task.data.comments,{[commentId]:action.data.comment});
+
+            return {
+                ...state,
+                'task': {
+                    ...state.task,
+                    data: {
+                        ...state.task.data,
+                        comments
+                    }
+                }
             };
 
 

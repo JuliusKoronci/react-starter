@@ -12,7 +12,8 @@ import {
 	AFTER_TASK_ATTACHMENT_UPLOADED,
 	CREATE_TASK,
 	DELETE_TASK,
-    ADD_TASK_COMMENT
+    ADD_TASK_COMMENT,
+    TASK_COMMENT_ADDED
 } from '../constants';
 
 import configResolver from '../../../config/configResolver';
@@ -103,6 +104,13 @@ export function updateStatus(statusConfig, assignConfig) {
 		statusConfig,
 		assignConfig
 	}
+}
+
+export function commentAdded(data) {
+    return {
+        type: TASK_COMMENT_ADDED,
+        data
+    }
 }
 
 export function handleStatus(data, taskId) {
