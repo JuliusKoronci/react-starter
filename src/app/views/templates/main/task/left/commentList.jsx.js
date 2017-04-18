@@ -1,7 +1,9 @@
 import React from 'react';
 import formatDate from '../../../../../services/formatedDate';
+import Image from '../../../../../components/Main/Image';
+import {LOAD_ATTACHMENT} from '../../../../../../api/urls';
 
-const commentList = ({task}) => {
+const commentList = ({task,handleFileDownload}) => {
 
     let comments = [];
     if (task && Object.keys(task.comments).length) {
@@ -19,8 +21,19 @@ const commentList = ({task}) => {
                 let key = comment.id;
                 let date = formatDate(comment.createdAt.date);
                 let username = comment.createdBy.username;
+                let initials = comment.createdBy.name.charAt(0)+comment.createdBy.surname.charAt(0);
+                let attachments=[];
                 let avatar = <div className="timeline_icon timeline_icon_success"><p
-                    className="md-user-letters md-bg-cyan">{username.charAt(0)}</p></div>;
+                    className="md-user-letters md-bg-cyan">{initials}</p></div>;
+
+
+                    if(comment.createdBy.avatarSlug){
+                        avatar=<div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                            <div className="fileinput-new thumbnail">
+                                <Image src={ LOAD_ATTACHMENT + '/'+comment.createdBy.avatarSlug} staticSrc='/assets/img/avatars/user.png' fetchFromApi={true} alt="user avatar" />
+                            </div>
+                        </div>
+                    }
 
                 if (comment.email) {
                     avatar = <div className="timeline_icon timeline_icon_primary">
@@ -80,13 +93,16 @@ const commentList = ({task}) => {
                                 {comment.body}
                             </p>
 
-                            {comment.commentHasAttachments && comment.commentHasAttachments.length > 0 &&
-                            <p className="md-color-blue-900">
+                            {comment.commentHasAttachments.map(att=>{
+
+                                return <p key={att.id} className="md-color-blue-900" onClick={handleFileDownload.bind(null,att.slug)}>
                             <span>
-                                <i className="material-icons md-color-blue-900">&#xE226;</i>Priloha 1
+                                <i className="material-icons md-color-blue-900">&#xE226;</i>{att.slug}
                             </span>
-                            </p>
-                            }
+                                </p>
+
+                            })}
+
                         </div>
                     </article>
                     <hr/>
@@ -95,72 +111,72 @@ const commentList = ({task}) => {
             })}
 
 
-            <div className="timeline_item">
-                <div className="timeline_icon timeline_icon_primary">
-                    <i className="material-icons">&#xE163;</i>
-                </div>
+            {/*<div className="timeline_item">*/}
+                {/*<div className="timeline_icon timeline_icon_primary">*/}
+                    {/*<i className="material-icons">&#xE163;</i>*/}
+                {/*</div>*/}
 
-                <article className="uk-comment">
-                    <header className="uk-comment-header" style={{paddingTop: '8px'}}>
-                        <div className="uk-grid" data-uk-grid-margin>
-                            <div className="uk-width-medium-3-4">
-                                <p className="uk-comment-title">
-                                    <span className="uk-comment-title uk-text-italic">From:</span>
-                                    branislav.susta@gmail.com
-                                </p>
-                                <p className="uk-comment-title">
-                                    <span className="uk-comment-title uk-text-italic">To:  </span>
-                                    hotline@lansystems.sk
-                                </p>
-                                <p className="uk-comment-title">
-                                    <span className="uk-comment-title uk-text-italic">Cc:  </span>
-                                    hotline@lansystems.sk
-                                </p>
-                                <br/>
-                                <p className="uk-comment-title">
-                                    <span className="uk-comment-title uk-text-italic">Subject: </span>
-                                    Mail Subject
-                                </p>
-                                <br/>
-                            </div>
+                {/*<article className="uk-comment">*/}
+                    {/*<header className="uk-comment-header" style={{paddingTop: '8px'}}>*/}
+                        {/*<div className="uk-grid" data-uk-grid-margin>*/}
+                            {/*<div className="uk-width-medium-3-4">*/}
+                                {/*<p className="uk-comment-title">*/}
+                                    {/*<span className="uk-comment-title uk-text-italic">From:</span>*/}
+                                    {/*branislav.susta@gmail.com*/}
+                                {/*</p>*/}
+                                {/*<p className="uk-comment-title">*/}
+                                    {/*<span className="uk-comment-title uk-text-italic">To:  </span>*/}
+                                    {/*hotline@lansystems.sk*/}
+                                {/*</p>*/}
+                                {/*<p className="uk-comment-title">*/}
+                                    {/*<span className="uk-comment-title uk-text-italic">Cc:  </span>*/}
+                                    {/*hotline@lansystems.sk*/}
+                                {/*</p>*/}
+                                {/*<br/>*/}
+                                {/*<p className="uk-comment-title">*/}
+                                    {/*<span className="uk-comment-title uk-text-italic">Subject: </span>*/}
+                                    {/*Mail Subject*/}
+                                {/*</p>*/}
+                                {/*<br/>*/}
+                            {/*</div>*/}
 
-                            <div className="uk-width-medium-1-4">
-                                <div className="uk-comment-meta text-allign-right">
-                                    24/Jun/15 14:26
-                                </div>
-                            </div>
-                        </div>
-                    </header>
+                            {/*<div className="uk-width-medium-1-4">*/}
+                                {/*<div className="uk-comment-meta text-allign-right">*/}
+                                    {/*24/Jun/15 14:26*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                    {/*</header>*/}
 
-                    <div style={{marginLeft: '10px'}}>
-                        <p>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr,
-                            sed diam nonumy
-                            eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam
-                            voluptua.Lorem ipsum dolor sit amet, consetetur
-                            sadipscing elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et
-                            dolore
-                            magna aliquyam
-                            erat, sed diam voluptua.
-                        </p>
+                    {/*<div style={{marginLeft: '10px'}}>*/}
+                        {/*<p>*/}
+                            {/*Lorem ipsum dolor sit amet, consetetur sadipscing*/}
+                            {/*elitr,*/}
+                            {/*sed diam nonumy*/}
+                            {/*eirmod tempor invidunt ut labore et dolore magna*/}
+                            {/*aliquyam erat, sed diam*/}
+                            {/*voluptua.Lorem ipsum dolor sit amet, consetetur*/}
+                            {/*sadipscing elitr, sed*/}
+                            {/*diam nonumy eirmod tempor invidunt ut labore et*/}
+                            {/*dolore*/}
+                            {/*magna aliquyam*/}
+                            {/*erat, sed diam voluptua.*/}
+                        {/*</p>*/}
 
-                        <p className="md-color-blue-900">
-                            <span>
-                                <i className="material-icons md-color-blue-900">&#xE226;</i>Priloha 1
-                            </span>
+                        {/*<p className="md-color-blue-900">*/}
+                            {/*<span>*/}
+                                {/*<i className="material-icons md-color-blue-900">&#xE226;</i>Priloha 1*/}
+                            {/*</span>*/}
 
-                            <span>
-                                <i className="material-icons md-color-blue-900">&#xE226;</i> Priloha 2
-                            </span>
-                        </p>
+                            {/*<span>*/}
+                                {/*<i className="material-icons md-color-blue-900">&#xE226;</i> Priloha 2*/}
+                            {/*</span>*/}
+                        {/*</p>*/}
 
-                    </div>
-                </article>
-            </div>
-            <hr/>
+                    {/*</div>*/}
+                {/*</article>*/}
+            {/*</div>*/}
+            {/*<hr/>*/}
 
         </div>
     );

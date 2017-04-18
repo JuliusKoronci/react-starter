@@ -135,6 +135,8 @@ class Task extends Component {
 
     sendComment = () => {
         let values = {};
+
+
         if (this.state.commentFormEmail) {
             values = {
                 body: this.state.commentFormBody,
@@ -142,18 +144,21 @@ class Task extends Component {
                 email_to: this.state.commentFormEmailTo,
                 email_cc: this.state.commentFormEmailCc,
                 email: true,
-                internal: this.state.commentFormInternalNote,
-                slug:this.state.commentFormAttachments.length>0?this.state.commentFormAttachments.join():null,
+                internal: this.state.commentFormInternalNote
 
             };
         } else {
             values = {
                 body: this.state.commentFormBody,
                 title: ' ',
-                internal: this.state.commentFormInternalNote,
-                slug:this.state.commentFormAttachments.length>0?this.state.commentFormAttachments.join():null,
+                internal: this.state.commentFormInternalNote
             };
         }
+
+        if(this.state.commentFormAttachments.length>0){
+            values.slug=this.state.commentFormAttachments.join();
+        }
+
         let config = configResolver.addTaskComment(this.props.params.taskId);
         this.props.actions.addTaskComment(values, config);
     };
@@ -182,6 +187,8 @@ class Task extends Component {
             this.props.actions.loadTaskById(this.props.params.taskId);
             this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
             this.setState({'creatingTask': false})
+        }else{
+            this.setState({'creatingTask': true})
         }
     }
 
@@ -190,9 +197,9 @@ class Task extends Component {
         if (prevProps.task !== this.props.task) {
 
             if (this.props.params.taskId) {
-                this.setState({'creatingTask': true})
-            } else {
                 this.setState({'creatingTask': false})
+            } else {
+                this.setState({'creatingTask': true})
             }
 
             if (!this.state.creatingTask) {
@@ -270,16 +277,17 @@ function mapStateToProps(state, ownProps) {
             user: state.auth.user,
             creatingTask: true
         };
-    }
+    }else {
 
-    stateToProps = {
-        task: task,
-        newTask: ownProps.params.newTask,
-        options: state.tasks.options,
-        canEdit: task ? task.canEdit : false,
-        user: state.auth.user,
-        creatingTask: false
-    };
+        stateToProps = {
+            task: task,
+            newTask: ownProps.params.newTask,
+            options: state.tasks.options,
+            canEdit: task ? task.canEdit : false,
+            user: state.auth.user,
+            creatingTask: false
+        };
+    }
 
 
     return stateToProps;
