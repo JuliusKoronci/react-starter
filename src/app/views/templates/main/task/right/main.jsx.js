@@ -9,7 +9,10 @@ import configResolver from '../../../../../../config/configResolver';
 import ReactSelect from 'react-select';
 
 
-const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete}) => {
+const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler,form}) => {
+
+    // console.log(form);
+
     const assignedOptions = options.assigner.map(r => {
         return {value: r.id, label: r.username}
     });
@@ -17,6 +20,7 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
     return (
         <div className="md-list md-list-addon">
             <Status task={task} statuses={options.status} user={user} action={actions.handleStatus}/>
+
             <Select label="Project"
                     icon="&#xE2C8;"
                     defaultValue={task.project ? task.project.id : ''}
@@ -26,37 +30,45 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                     }}/>
             <Select label="Requester"
                     icon="&#xE7FD;"
-                    defaultValue={task.requestedBy.id || ''}
+                    // defaultValue={task.requestedBy.id || ''}
+                    defaultValue={form.requester || ''}
                     options={options.requester.map(r => {
                         return {id: r.id, title: r.username}
                     })}
                     action={(e) => {
-                        actions.patchEntity(configResolver.updateRequester(e.target.value, task.id))
+                        // actions.patchEntity(configResolver.updateRequester(e.target.value, task.id))
+                        formInputChangeHandler('requester',e.target.value)
                     }}/>
             <Select label="Company"
                     icon="&#xE7EE;"
-                    defaultValue={task.company ? task.company.id : ''}
+                    // defaultValue={task.company ? task.company.id : ''}
                     options={options.company}
+                    defaultValue={form.company}
                     action={(e) => {
-                        actions.patchEntity(configResolver.updateCompany(e.target.value, task.id))
+                        formInputChangeHandler('company',e.target.value)
+                        // actions.patchEntity(configResolver.updateCompany(e.target.value, task.id))
                     }}/>
             <div className="uk-input-group" style={{marginTop: '10px'}}>
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE7FE;</i></span>
                 <label className="uk-text-muted">Assigned</label>
                 <ReactSelect multi={true}
                              value={
-                                 task.taskHasAssignedUsers.map((tHuser, i) => {
-                                     return {
-                                         value: tHuser.user.id,
-                                         label: tHuser.user.username
-                                     }
-                                 })
+
+                                 form.assigned
+                                 // task.taskHasAssignedUsers.map((tHuser, i) => {
+                                 //     return {
+                                 //         value: tHuser.user.id,
+                                 //         label: tHuser.user.username
+                                 //     }
+                                 // })
                              }
                              options={assignedOptions}
                              joinValues={true}
                              onChange={(values) => {
-                                 const config = configResolver.assignUser(values, task.id, null);
-                                 actions.patchEntity(config, config.values);
+                                 formInputChangeHandler('assigned',values)
+
+                                 // const config = configResolver.assignUser(values, task.id, null);
+                                 // actions.patchEntity(config, config.values);
                              }}
                 />
             </div>

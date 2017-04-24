@@ -26,7 +26,11 @@ class Task extends Component {
                 description: '',
                 work: '',
                 work_time: '',
-            },
+                company: '',
+                requester: '',
+                assigned: '',
+            }
+            ,
 
             commentFormBody: '',
             commentFormEmail: false,
@@ -116,14 +120,21 @@ class Task extends Component {
         console.log(this.state);
     };
 
-    formInputChangeHandler = (name,value) => {
+    formInputChangeHandler = (name,value,e) => {
 
         // let obj={form[name]:value};
-
+console.log('change',name,value);
         let form=Object.assign({},this.state.form);
         form[name]=value;
         this.setState({form: form});
         // console.log(this.state);
+    };
+
+
+
+    saveTask=()=>{
+
+        console.log(this.state);
     };
 
     handleCommentFileUpload = (e) => {
@@ -291,8 +302,7 @@ class Task extends Component {
             commentFormAttachments={this.state.commentFormAttachments}
             handleCommentFileUpload={this.handleCommentFileUpload}
 
-            saveAction={() => {
-            }}
+            saveAction={this.saveTask}
 
             form={this.state.form}
             {...this.props}
