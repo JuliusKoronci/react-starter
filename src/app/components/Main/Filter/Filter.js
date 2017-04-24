@@ -230,8 +230,6 @@ class Filter extends Component {
 function mapStateToProps(state, ownProps) {
     const filterId = ownProps.params.filterId;
 
-    console.log('mapping state to props')
-
     const filter = state.filter.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
     const filterOptions = state.filters.options || [];
 
