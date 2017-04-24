@@ -5,7 +5,22 @@ import Pagination from '../_partials/pagination.jsx';
 const FilterTasks = (props) => {
 
 
+// console.log(props.columns);
+// console.log(!!(props.filter && props.filter.columns));
 
+
+let columns=props.columns;
+// console.log(columns);
+
+if (props.filter && props.filter.columns && !props.getColumnsFromState){
+    columns=columns.map(column=>{
+        // Object.keys(columns)
+        // console.log(Object.keys(column)[0]);
+        return{[Object.keys(column)[0]]:props.filter.columns.indexOf(Object.keys(column)[0])!==-1};
+    });
+    //props.filter.columns;
+    // console.log(columns);
+}
 
     return (
                     <div className={props.filterFormVisible?"uk-width-medium-3-4":"uk-width-medium-4-4"} id="tasksDiv">
@@ -44,7 +59,7 @@ const FilterTasks = (props) => {
 
 
 
-                                    { props.columns.map((column, i)=>{
+                                    { columns.map((column, i)=>{
                                         let name=Object.keys(column)[0];
                                         if(column.hasOwnProperty(name)&& typeof column[name] !== 'undefined' && (!!column[name])) {
                                             return <th key={i}>{name}</th>;
@@ -68,7 +83,7 @@ const FilterTasks = (props) => {
                                 <tbody>
 
                                 {props.tasks.data.map((task, i) => {
-                                    return <Task task={task} key={i} index={i} columns={props.columns} />
+                                    return <Task task={task} key={i} index={i} columns={columns} />
                                 })}
 
 

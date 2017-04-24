@@ -22,6 +22,7 @@ class Filter extends Component {
             filterFormVisible: props.formVisible || true,
             sentValues: [],
 
+            getColumnsFromState:false,
             columns: [
                 {title: true},
                 {status: false},
@@ -74,6 +75,8 @@ class Filter extends Component {
 
 
     onSubmit = (oldValues, e) => {
+
+        this.setState({getColumnsFromState:true});
 
         let values = Object.assign({}, oldValues);
 
@@ -205,16 +208,20 @@ class Filter extends Component {
 
 
     render() {
+        // console.log(!!this.filter && this.filter.columns);
         return (
-            <View {...this.props} toggleFilter={this.toggleFilter}
+            <View {...this.props}
+                  toggleFilter={this.toggleFilter}
                   filterFormVisible={this.state.filterFormVisible}
                   toggleRowVisibility={this.toggleRowVisibility}
                   visibleFields={this.state.visibleFields}
-                  columns={this.state.columns}
+                  columns={this.filter && this.filter.columns?this.filter.columns:this.state.columns}
                   onSubmit={this.onSubmit}
                   loadTasksFunction={this.loadTasksFunction}
                   getFilterTasks={this.getFilterTasks}
-                  saveFilter={this.saveFilter}/>
+                  saveFilter={this.saveFilter}
+                  getColumnsFromState={this.state.getColumnsFromState}
+            />
         );
     }
 }
@@ -223,6 +230,7 @@ class Filter extends Component {
 function mapStateToProps(state, ownProps) {
     const filterId = ownProps.params.filterId;
 
+    console.log('mapping state to props')
 
     const filter = state.filter.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
     const filterOptions = state.filters.options || [];

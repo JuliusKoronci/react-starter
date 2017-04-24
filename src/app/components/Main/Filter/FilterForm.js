@@ -67,6 +67,7 @@ class FilterForm extends Component {
                     <Field name="columns.title" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column" defaultChecked={true}
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
+
                     <Field name="search" type="text" validate={[]} component={renderField} label="Task Name"/>
 
 
@@ -177,8 +178,6 @@ function mapStateToProps(state, ownProps) {
 
 
     let columns = {};
-
-
     let visibleColumns = ownProps.columns.map((column) => {
         let key = Object.keys(column)[0];
         if (column.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!column[key])) {
@@ -188,12 +187,23 @@ function mapStateToProps(state, ownProps) {
         return el !== undefined;
     });
 
+
+
+    if(filter && filter[0] && !Object.keys(columns).length){
+        visibleColumns=filter[0].columns;
+    }
+
+    // console.log(visibleColumns);
+
     visibleColumns.map((vColumn) => {
         columns[vColumn] = true;
     });
 
 
+
     let initialValues = {filter: {}};
+    initialValues.columns = columns ? columns : '';
+
     let timePickers = ['createdTime', 'startedTime', 'deadlineTime', 'closedTime'];
 
     timePickers.map(picker => {
@@ -220,7 +230,6 @@ function mapStateToProps(state, ownProps) {
 
         initialValues.status = statuses ? statuses : '';
         initialValues.project = projects ? projects : '';
-        initialValues.columns = columns ? columns : '';
         initialValues.requester = requester ? requester : '';
         initialValues.company = company ? company : '';
         initialValues.creator = creator ? creator : '';
@@ -228,6 +237,7 @@ function mapStateToProps(state, ownProps) {
         initialValues.tag = tag ? tag : '';
         initialValues.search = search ? search : '';
 
+        // console.log('filter initial values:',initialValues);
 
         timePickers.map(picker => {
             initialValues[picker] = {};
@@ -244,15 +254,18 @@ function mapStateToProps(state, ownProps) {
         });
 
 
+        // console.log(initialValues.columns)
+
         return {
             initialValues: {...filter, ...initialValues},
             enableReinitialize: true
         };
     }
 
-    else {
-        return {initialValues: {...initialValues}, enableReinitialize: true};
-    }
+
+    //ak neni konkretny filter
+    return {initialValues: {...initialValues}, enableReinitialize: true};
+
 
 
 }

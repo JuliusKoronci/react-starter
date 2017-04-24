@@ -37,14 +37,12 @@ export default function async(state = {
                 error: action.error
             };
         case REMOVE_ERROR:
-
             if(action.error===state.error.message){
                 return {
                     ...state,
                     error:{status:0,message:''}
                 }
             }
-            
             return {
                 ...state
             };
