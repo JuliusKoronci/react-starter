@@ -19,7 +19,7 @@ class Filter extends Component {
         this.filterTasksConfig = configResolver.loadFilterTasks();
 
         this.state = {
-            filterFormVisible: true,
+            filterFormVisible: props.formVisible || true,
             sentValues: [],
 
             columns: [
@@ -206,10 +206,14 @@ class Filter extends Component {
 
     render() {
         return (
-            <View {...this.props} toggleFilter={this.toggleFilter} filterFormVisible={this.state.filterFormVisible}
+            <View {...this.props} toggleFilter={this.toggleFilter}
+                  filterFormVisible={this.state.filterFormVisible}
                   toggleRowVisibility={this.toggleRowVisibility}
-                  visibleFields={this.state.visibleFields} columns={this.state.columns} onSubmit={this.onSubmit}
-                  loadTasksFunction={this.loadTasksFunction} getFilterTasks={this.getFilterTasks}
+                  visibleFields={this.state.visibleFields}
+                  columns={this.state.columns}
+                  onSubmit={this.onSubmit}
+                  loadTasksFunction={this.loadTasksFunction}
+                  getFilterTasks={this.getFilterTasks}
                   saveFilter={this.saveFilter}/>
         );
     }

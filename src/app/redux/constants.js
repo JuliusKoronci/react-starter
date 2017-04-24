@@ -11,6 +11,7 @@ export const LOADING_START = 'LOADING_START';
 export const LOADING_START_RESET = 'LOADING_START_RESET';
 export const LOADING_END = 'LOADING_END';
 export const ASYNC_ERROR = 'ASYNC_ERROR';
+export const REMOVE_ERROR = 'REMOVE_ERROR';
 
 //Common
 export const REDUX_RESET = 'REDUX_RESET';

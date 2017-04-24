@@ -24,7 +24,7 @@ class FilterForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, columns, filterOptions, getFilterTasks, saveFilter} = this.props;
+        const {handleSubmit, formError, columns, filterOptions, getFilterTasks, saveFilter} = this.props;
         let visibleColumns = columns.map((column) => {
             let key = Object.keys(column)[0];
             if (column.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!column[key])) {

@@ -1,4 +1,4 @@
-import {LOADING_START,LOADING_START_RESET, LOADING_END, ASYNC_ERROR} from '../../constants';
+import {LOADING_START,LOADING_START_RESET, LOADING_END, ASYNC_ERROR, REMOVE_ERROR} from '../../constants';
 
 export default function async(state = {
     'loading': false, 'load_count': 0, 'stop': false, error: {
@@ -35,6 +35,18 @@ export default function async(state = {
             return {
                 ...state,
                 error: action.error
+            };
+        case REMOVE_ERROR:
+
+            if(action.error===state.error.message){
+                return {
+                    ...state,
+                    error:{status:0,message:''}
+                }
+            }
+            
+            return {
+                ...state
             };
         default:
             return state;

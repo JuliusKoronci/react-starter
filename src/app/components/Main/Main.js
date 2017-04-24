@@ -63,6 +63,7 @@ class Main extends Component {
                     break;
                 default:
                     toastr.error(this.props.error.message);
+                    this.props.actions.removeError(this.props.error.message);
                     break;
             }
         }
