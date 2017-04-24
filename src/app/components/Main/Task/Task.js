@@ -235,7 +235,7 @@ console.log('change',name,value);
                 this.setState({'creatingTask': true})
             }
 
-            if (!this.state.creatingTask) {
+            if (!this.state.creatingTask && this.props.params.taskId) {
                 this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
             }
 
