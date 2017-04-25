@@ -88,6 +88,16 @@ class configResolver {
         }
     };
 
+    static companyAttributeUpdate = (id) => {
+        return {
+            url: id ? urls.COMPANYATTRIBUTES_LIST + '/' + id : urls.COMPANYATTRIBUTES_LIST,
+            urlList: urls.COMPANYATTRIBUTES_LIST,
+            allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
+            redirectAfter: paths.companies_attributes,
+        }
+    };
+
+
     static getTaskAttributesConfig = (id) => {
         return {
             url: id ? urls.TASKATTRIBUTES_LIST + '/' + id : urls.TASKATTRIBUTES_LIST,

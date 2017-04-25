@@ -76,7 +76,7 @@ class CompanyAttributeForm extends Component {
                                 </div>
 
                                 <div className="uk-margin">
-                                    <Field name="description" type="text" validate={[required]} component={renderField}
+                                    <Field name="description" type="text" validate={[]} component={renderField}
                                            label="Description"/>
                                 </div>
 

@@ -25,7 +25,7 @@ class Company extends Component {
 
     onSubmit = (values) => {
         NProgress.start();
-        
+
         if (this.props.params.companyId) {
             let config=configResolver.companyUpdate(this.props.params.companyId );
             this.props.actions.updateEntity(this.props.params.companyId, values, config);
