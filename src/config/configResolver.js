@@ -36,6 +36,15 @@ class configResolver {
         }
     };
 
+    static companyUpdate = (id) => {
+        return {
+            url: urls.COMPANIES_LIST + (id ? '/' + id : ''),
+            urlList: urls.COMPANIES_LIST,
+            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip'],
+            redirectAfter: paths.companies,
+        }
+    };
+
     static getUserConfig = (id) => {
         return {
             url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
