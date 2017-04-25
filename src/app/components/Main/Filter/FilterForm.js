@@ -22,6 +22,16 @@ class FilterForm extends Component {
         this.props.dispatch(reset('filterForm'));
     };
 
+    datePickerClear=(name)=>{
+        let fieldName=name + 'Radio';
+        this.props.dispatch(change('filterForm', fieldName, 'timeRange'));
+
+        fieldName=name + '.from';
+        this.props.dispatch(change('filterForm', fieldName, ''));
+        fieldName=name + '.to';
+        this.props.dispatch(change('filterForm', fieldName, ''));
+    };
+
 
     render() {
         const {handleSubmit, formError, columns, filterOptions, getFilterTasks, saveFilter} = this.props;
@@ -151,15 +161,19 @@ class FilterForm extends Component {
 
                     <FilterFromTimepicker name={'createdTime'} label={'Created At'}
                                           columnVisibilityName={'columns.created'}
+                                          datePickerClear={this.datePickerClear}
                                           changeRowVisibility={this.changeRowVisibility}/>
                     <FilterFromTimepicker name={'startedTime'} label={'Started At'}
                                           columnVisibilityName={'columns.started'}
+                                          datePickerClear={this.datePickerClear}
                                           changeRowVisibility={this.changeRowVisibility}/>
                     <FilterFromTimepicker name={'deadlineTime'} label={'Deadline At'}
                                           columnVisibilityName={'columns.deadline'}
+                                          datePickerClear={this.datePickerClear}
                                           changeRowVisibility={this.changeRowVisibility}/>
                     <FilterFromTimepicker name={'closedTime'} label={'Closed At'}
                                           columnVisibilityName={'columns.closed'}
+                                          datePickerClear={this.datePickerClear}
                                           changeRowVisibility={this.changeRowVisibility}/>
 
 
