@@ -168,6 +168,15 @@ class configResolver {
         }
     };
 
+    static unitUpdate = (id) => {
+        return {
+            url: id ? urls.UNITS_LIST + '/' + id : urls.UNITS_LIST,
+            urlList: urls.UNITS_LIST,
+            redirectAfter: paths.units,
+            allowedFormFields: ['title', 'shortcut', 'is_active']
+        }
+    };
+
     static getTagConfig = (id) => {
         return {
             url: id ? urls.TAG_LIST + '/' + id : urls.TAG_LIST,

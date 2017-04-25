@@ -21,11 +21,10 @@ class UnitForm extends Component {
 
     onSubmit = (values) => {
         if (this.props.params.unitId) {
-            this.props.actions.updateEntity(this.props.params.unitId, values, this.unitConfig);
+            let config=configResolver.unitUpdate(this.props.params.unitId);
+            this.props.actions.updateEntity(this.props.params.unitId, values, config);
         } else {
-            console.log(values)
             this.props.actions.createEntity(values,this.unitConfig);
-            console.log('ok')
         }
     };
 
