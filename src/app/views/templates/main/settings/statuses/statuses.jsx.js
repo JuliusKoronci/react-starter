@@ -44,8 +44,11 @@ const statuses = (props) => {
                                 </td>
                                 <td className="uk-text-center">
 
-                                    {status.is_active && <DeleteButton handleDelete={props.handleDelete} id={status.id} />}
-                                    <Link to={generateRoute('statuses_edit',{statusId:status.id})} className="md-btn md-btn-primary" >Edit</Link>
+                                    {/*{status.is_active && <DeleteButton handleDelete={props.handleDelete} id={status.id} />}*/}
+
+                                    {status.is_active &&
+                                    <Link to={generateRoute('statuses_edit',{statusId:status.id})} className="md-btn md-btn-primary" >Edit</Link>}
+                                    {!status.is_active && <span>Inactive</span>}
 
                                 </td>
                             </tr>

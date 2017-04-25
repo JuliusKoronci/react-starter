@@ -29,8 +29,10 @@ class Status extends Component {
         NProgress.start();
 
         if (this.props.params.statusId) {
-            this.props.actions.updateEntity(this.props.params.statusId, values, this.statusConfig);
+            let config=configResolver.statusUpdate(this.props.params.statusId);
+            this.props.actions.updateEntity(this.props.params.statusId, values, config);
         } else {
+            values['order']=0;
             this.props.actions.createEntity(values,this.statusConfig);
         }
     };

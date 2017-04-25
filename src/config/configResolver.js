@@ -126,7 +126,16 @@ class configResolver {
             urlList: urls.STATUSES_LIST,
             afterEntityReceivedAction: statusReceived,
             redirectAfterCreation: paths.statuses,
-            allowedFormFields: ['title', 'description', 'color']
+            allowedFormFields: ['title', 'description', 'color','order']
+        }
+    };
+
+    static statusUpdate = (id) => {
+        return {
+            url: id ? urls.STATUSES_LIST + '/' + id : urls.STATUSES_LIST,
+            urlList: urls.STATUSES_LIST,
+            redirectAfter: paths.statuses,
+            allowedFormFields: ['title', 'description', 'color','order']
         }
     };
 

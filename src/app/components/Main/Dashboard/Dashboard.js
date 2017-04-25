@@ -30,7 +30,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state, ownProps) {
     const filter = state.filter.filter((f) => {
-        return f.id == ownProps.params.filterId
+        return f.id === parseInt(ownProps.params.filterId,10);
     })[0];
 
     return {
