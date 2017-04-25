@@ -68,7 +68,10 @@ function *deleteEntity(action) {
     try {
         let config = action.config;
         yield call(defaultRequest, config.urlList + '/' + action.id, 'DELETE');
-        entityDeleted('Deleted successfully ' + action.id, config.redirectAfterCreation);
+
+
+        let redirectTo=config.redirectAfterCreation || config.redirectAfterDelete;
+        entityDeleted('Deleted successfully ' + action.id, redirectTo);
     } catch (e) {
         yield put(asyncError(e));
     }

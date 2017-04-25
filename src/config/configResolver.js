@@ -349,10 +349,19 @@ class configResolver {
             url: urls.SMTPS_LIST + (id ? '/' + id : ''),
             urlList: urls.SMTPS_LIST,
             afterEntityReceivedAction: smtpReceived,
-            redirectAfterCreation: paths.smtp,
+            redirectAfterCreation: paths.smtps,
             allowedFormFields: ['host', 'port', 'email', 'name', 'password', 'ssl', 'tls']
         }
     };
+
+    static smtpDeleteConfig = (id) => {
+        return {
+            url: urls.SMTPS_LIST + (id ? '/' + id : ''),
+            urlList: urls.SMTPS_LIST,
+            redirectAfterDelete: paths.smtps,
+        }
+    };
+
 
     static getRoleConfig = (id) => {
         return {

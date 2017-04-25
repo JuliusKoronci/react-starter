@@ -12,7 +12,6 @@ const defaultState = {
 export default function statuses(state = defaultState, action) {
     switch (action.type) {
         case SMTPS_RECEIVED:
-            console.log(action.response);
             return action.response;
         case SMTP_RECEIVED:
             return {...state,

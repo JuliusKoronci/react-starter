@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 const confirmDeleteButton = ({handleDelete, entityId}) => {
     return (
-    <button className="md-btn md-btn-warning" onClick={handleDelete.bind(null, entityId)} >Are you sure?</button>
+    <a className="md-btn md-btn-warning" onClick={handleDelete.bind(null, entityId)} >Are you sure?</a>
     );
 };
 
