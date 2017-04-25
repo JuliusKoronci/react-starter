@@ -26,6 +26,14 @@
 .submenu_trigger a+ul{display:none;}
 .submenu_trigger a.active+ul{display:block !important;}
 
+.filter-clear {
+    float: right;
+    margin-top: -1.5em;
+}
+
+.filter-time-range-column {
+    margin-top: 8px;
+}
 
 .button_next_input {
     margin-top: 16px;

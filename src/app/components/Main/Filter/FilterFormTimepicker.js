@@ -1,18 +1,45 @@
 import React from 'react';
 import {Field} from 'redux-form';
-import {renderField, renderDatepicker} from '../../../forms/field.tpl';
+import {renderField, renderDatepicker, renderRadio} from '../../../forms/field.tpl';
 
 
 const FilterDatePicker = ({name, changeRowVisibility, label, columnVisibilityName, datePickerClear}) => {
 
     return ( <div>
-            <p className="uk-text-muted">{label}</p>
-            <Field type="radio" name={name + 'Radio'} value="now" data-md-icheck component={renderField}/>
-            <label className="inline-label">Overdue</label>
+            <hr/>
 
-            <Field type="radio" name={name + 'Radio'} value="timeRange" data-md-icheck component={renderField}/>
-            <label className="inline-label">Time range</label>
+            <p>{label}</p>
 
+
+            <Field name={columnVisibilityName} type="checkbox" className="alignright filter-time-range-column" validate={[]}
+                   component={renderField} label="Column" actions={{onChange: changeRowVisibility.bind(null)}}/>
+
+            
+            <Field
+                type="radio"
+                name={name + 'Radio'}
+                value="now"
+                component={renderRadio}
+                label="Overdue"
+                className="margin"
+            />
+
+
+
+            <Field
+                type="radio"
+                name={name + 'Radio'}
+                value="timeRange"
+                component={renderRadio}
+                label="Time range"
+                className="pull-left"
+            />
+
+
+            <button onClick={datePickerClear.bind(null,name)} className="filter-clear">Clear</button>
+
+
+            <div className="clearfix"></div>
             <div className="uk-grid" data-uk-grid-margin>
                 <div className="uk-width-medium-1-2">
 
@@ -23,13 +50,12 @@ const FilterDatePicker = ({name, changeRowVisibility, label, columnVisibilityNam
 
                     <Field name={name + '.to'} type="text" validate={[]} component={renderDatepicker} label="To:"/>
 
-                    <span onClick={datePickerClear.bind(null,name)} >X Clear</span>
+             </div>
 
-                    <Field name={columnVisibilityName} type="checkbox" className="alignright" validate={[]}
-                           component={renderField} label="Column" actions={{onChange: changeRowVisibility.bind(null)}}/>
-                </div>
+
+
             </div>
-            <hr/>
+
         </div>
     );
 };

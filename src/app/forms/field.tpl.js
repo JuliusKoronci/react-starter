@@ -16,7 +16,13 @@ export const renderField = ({input, label, type, actions, className, meta: {touc
     </div>
 );
 
-
+export const renderRadio = ({input, label, type, actions, className, meta: {touched, error, warning}}) => (
+    <div className={className?className+ " uk-form-row":'uk-form-row'}>
+        <input className="md-input" {...input} type={type} {...actions} {...input.props} />
+        <label htmlFor={input.name}>{label}</label>
+        {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
+    </div>
+);
 
 
 export const renderColorpicker = ({input, label, type, meta: {touched, error, warning}}) => (

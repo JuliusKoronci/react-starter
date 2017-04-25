@@ -73,14 +73,15 @@ class FilterForm extends Component {
                     {this.props.filter &&
                     <Field name="title" type="text" validate={[]} component={renderField} label="Filter Name"/>}
 
-
+                    <div className="uk-margin-bottom">
                     <Field name="columns.title" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column" defaultChecked={true}
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
 
                     <Field name="search" type="text" validate={[]} component={renderField} label="Task Name"/>
+                    </div>
 
-
+                    <div className="uk-margin-bottom">
                     <Field name="columns.status" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column"
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
@@ -91,8 +92,9 @@ class FilterForm extends Component {
                                    return {value: option.id, label: option.title}
                                })
                            }/>
+                    </div>
 
-
+                    <div className="uk-margin-bottom">
                     <Field name="columns.project" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column"
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
@@ -102,8 +104,9 @@ class FilterForm extends Component {
                                    return {value: option.id, label: option.title}
                                })
                            }/>
+                    </div>
 
-
+                    <div className="uk-margin-bottom">
                     <Field name="columns.creator" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column"
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
@@ -113,8 +116,9 @@ class FilterForm extends Component {
                                    return {value: option.id, label: option.username}
                                })
                            }/>
+                    </div>
 
-
+                    <div className="uk-margin-bottom">
                     <Field name="columns.requester" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column"
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
@@ -124,8 +128,9 @@ class FilterForm extends Component {
                                    return {value: option.id, label: option.username}
                                })
                            }/>
+                    </div>
 
-
+                    <div className="uk-margin-bottom">
                     <Field name="columns.company" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column"
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
@@ -135,8 +140,9 @@ class FilterForm extends Component {
                                    return {value: option.id, label: option.title}
                                })
                            }/>
+                    </div>
 
-
+                    <div className="uk-margin-bottom">
                     <Field name="columns.assigned" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column"
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
@@ -146,8 +152,9 @@ class FilterForm extends Component {
                                    return {value: option.id, label: option.username}
                                })
                            }/>
+                     </div>
 
-
+                    <div className="uk-margin-bottom">
                     <Field name="columns.tag" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column"
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
@@ -157,7 +164,7 @@ class FilterForm extends Component {
                                    return {value: option.id, label: option.title}
                                })
                            }/>
-
+                    </div>
 
                     <FilterFromTimepicker name={'createdTime'} label={'Created At'}
                                           columnVisibilityName={'columns.created'}
