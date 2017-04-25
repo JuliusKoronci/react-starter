@@ -410,6 +410,15 @@ class configResolver {
         }
     };
 
+    static roleUpdate = (id) => {
+        return {
+            url: urls.ROLES_LIST + (id ? '/' + id : ''),
+            urlList: urls.ROLES_LIST,
+            allowedFormFields: ['title', 'description', 'is_active', 'order', 'homepage', 'acl'],
+            redirectAfter: paths.roles,
+        }
+    };
+
     static tasksConfig = (type, id) => {
 
         if (!type) {
