@@ -46,7 +46,8 @@ class TaskAttribute extends Component {
 
     onSubmit = (values) => {
         if (this.entityId) {
-            this.props.actions.updateEntity(this.entityId, values, this.entityConfig);
+            let config=configResolver.taskAttributeUpdate(this.entityId);
+            this.props.actions.updateEntity(this.entityId, values, config);
         } else {
             this.props.actions.createEntity(values,this.entityConfig);
         }

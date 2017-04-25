@@ -109,6 +109,17 @@ class configResolver {
         }
     };
 
+    static taskAttributeUpdate = (id) => {
+        return {
+            url: id ? urls.TASKATTRIBUTES_LIST + '/' + id : urls.TASKATTRIBUTES_LIST,
+            urlList: urls.TASKATTRIBUTES_LIST,
+            redirectAfter: paths.task_attributes,
+            allowedFormFields: ['title', 'options', 'type', 'description', 'is_active'],
+        }
+    };
+
+
+
     static getUserAttributesConfig = (id) => {
         return {
             url: id ? urls.USERATTRIBUTES_LIST + '/' + id : urls.USERATTRIBUTES_LIST,
@@ -117,6 +128,14 @@ class configResolver {
             redirectAfterCreation: paths.user_attributes,
             allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
             customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
+        }
+    };
+    static userAttributeUpdate = (id) => {
+        return {
+            url: id ? urls.USERATTRIBUTES_LIST + '/' + id : urls.USERATTRIBUTES_LIST,
+            urlList: urls.USERATTRIBUTES_LIST,
+            redirectAfter: paths.user_custom_fields,
+            allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
         }
     };
 
