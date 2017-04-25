@@ -363,6 +363,15 @@ class configResolver {
         }
     };
 
+    static imapUpdate = (id, projectId) => {
+        return {
+            url: urls.IMAPS_LIST + (id ? '/' + id : '') + (projectId ? '/project/' + projectId : ''),
+            urlList: urls.IMAPS_LIST,
+            allowedFormFields: ['inbox_email', 'move_email', 'host', 'port', 'name', 'password', 'ssl', 'ignore_certificate'],
+            redirectAfter: paths.imaps,
+        }
+    };
+
     static getSmtpConfig = (id, projectId) => {
         return {
             url: urls.SMTPS_LIST + (id ? '/' + id : ''),

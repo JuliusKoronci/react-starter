@@ -39,6 +39,7 @@ function *updateEntity(action) {
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
+        // console.log(action)
         entityUpdated('Updated successfully', config.redirectAfter);
     } catch (e) {
         yield put(asyncError(e));
