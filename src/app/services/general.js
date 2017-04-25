@@ -55,8 +55,11 @@ export function entityDeleted(toast, redirectTo) {
 	}
 }
 
-export function entityUpdated(toast) {
+export function entityUpdated(toast,redirectTo) {
 	toastr.success(toast);
+    if (redirectTo) {
+        history.push(redirectTo);
+    }
 }
 
 export function entityReceived(toast) {

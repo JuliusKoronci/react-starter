@@ -362,6 +362,15 @@ class configResolver {
         }
     };
 
+    static smtpUpdate = (id) => {
+        return {
+            url: urls.SMTPS_LIST + (id ? '/' + id : ''),
+            urlList: urls.SMTPS_LIST,
+            allowedFormFields: ['host', 'port', 'email', 'name', 'password', 'ssl', 'tls'],
+            redirectAfter: paths.smtps,
+        }
+    };
+
 
     static getRoleConfig = (id) => {
         return {

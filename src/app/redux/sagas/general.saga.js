@@ -39,8 +39,7 @@ function *updateEntity(action) {
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
-
-        entityUpdated('Updated successfully');
+        entityUpdated('Updated successfully', config.redirectAfter);
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -56,7 +55,7 @@ function *patchEntity(action) {
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
-        entityUpdated('Updated successfully');
+        entityUpdated('Updated successfully', config.redirectAfter);
     } catch (e) {
         yield put(asyncError(e));
     }

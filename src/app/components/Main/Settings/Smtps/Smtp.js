@@ -34,7 +34,8 @@ class Smtp extends Component {
         this.smtpConfig = configResolver.getSmtpConfig(this.props.params.smtpId );
 
         if (this.props.params.smtpId) {
-            this.props.actions.updateEntity(this.props.params.smtpId, values, this.smtpConfig);
+            let config=configResolver.smtpUpdate(this.props.params.smtpId );
+            this.props.actions.updateEntity(this.props.params.smtpId, values, config);
         } else {
             this.props.actions.createEntity(values,this.smtpConfig);
         }
