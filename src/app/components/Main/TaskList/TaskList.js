@@ -59,7 +59,7 @@ function mapStateToProps(state, ownProps) {
 
     if(ownProps.params.projectId && Array.isArray(ownProps.projects)) {
         const project = ownProps.projects.filter((f) => {
-            return f.id === ownProps.params.projectId
+            return f.id === parseInt(ownProps.params.projectId,10);
         });
 
         if(typeof project[0]!=='undefined') {
@@ -69,7 +69,7 @@ function mapStateToProps(state, ownProps) {
 
     if(ownProps.params.tagId && Array.isArray(ownProps.tags)) {
         const tag = ownProps.tags.filter((f) => {
-            return f.id === ownProps.params.tagId
+            return f.id === parseInt(ownProps.params.tagId,10);
         });
 
         if(typeof tag[0]!=='undefined') {
