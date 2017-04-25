@@ -39,8 +39,8 @@ function *updateEntity(action) {
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
-
-        entityUpdated('Updated successfully');
+        // console.log(action)
+        entityUpdated('Updated successfully', config.redirectAfter);
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -56,7 +56,7 @@ function *patchEntity(action) {
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
-        entityUpdated('Updated successfully');
+        entityUpdated('Updated successfully', config.redirectAfter);
     } catch (e) {
         yield put(asyncError(e));
     }
@@ -68,7 +68,10 @@ function *deleteEntity(action) {
     try {
         let config = action.config;
         yield call(defaultRequest, config.urlList + '/' + action.id, 'DELETE');
-        entityDeleted('Deleted successfully ' + action.id, config.redirectAfterCreation);
+
+
+        let redirectTo=config.redirectAfterCreation || config.redirectAfterDelete;
+        entityDeleted('Deleted successfully ' + action.id, redirectTo);
     } catch (e) {
         yield put(asyncError(e));
     }

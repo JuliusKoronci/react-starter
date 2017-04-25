@@ -63,7 +63,7 @@ class SmtpForm extends Component {
                             </div>
                             <div className="uk-margin-bottom">
                                 <Link className="md-btn md-btn-danger" to={generateRoute('smtps')}>Cancel</Link>
-                                {editing && this.props.smtp.id&& <DeleteButton handleDelete={handleDelete} id={this.props.smtp.id} />}
+                                {editing && this.props.smtp.id&& <DeleteButton handleDelete={handleDelete.bind(null)} id={this.props.smtp.id} />}
                                 <button className="md-btn md-btn-primary alignright" type="submit">
                                     SAVE
                                 </button>

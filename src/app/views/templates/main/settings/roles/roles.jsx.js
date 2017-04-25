@@ -36,7 +36,7 @@ const roles = (props) => {
                         <td>{role.title}</td>
                         <td className="uk-text-center">{role.is_active ? 'yes' : 'no'}</td>
                             <td className="uk-text-center">
-                                <DeleteButton handleDelete={props.handleDelete} id={role.id} />
+                                {/*<DeleteButton handleDelete={props.handleDelete} id={role.id} />*/}
                                 <Link to={generateRoute('roles_edit',{roleId:role.id})} className="md-btn md-btn-primary" >Edit</Link>
                             </td>
                     </tr>

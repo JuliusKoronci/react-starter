@@ -35,7 +35,8 @@ class Role extends Component {
         this.roleConfig = configResolver.getRoleConfig(this.props.params.roleId );
 
         if (this.props.params.roleId) {
-            this.props.actions.updateEntity(this.props.params.roleId, values, this.roleConfig);
+            let config=configResolver.roleUpdate(this.props.params.roleId);
+            this.props.actions.updateEntity(this.props.params.roleId, values, config);
         } else {
             this.props.actions.createEntity(values,this.roleConfig);
         }

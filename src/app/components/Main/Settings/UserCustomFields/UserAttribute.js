@@ -34,12 +34,9 @@ class UserAttribute extends Component {
 
     onSubmit = (values) => {
         if (this.entityId) {
-            // alert('would update');
-            // console.log(values);
-            this.props.actions.updateEntity(this.entityId, values, this.entityConfig);
+            let config=configResolver.userAttributeUpdate(this.entityId);
+            this.props.actions.updateEntity(this.entityId, values, config);
         } else {
-            // alert('would create');
-            // console.log(values);
             this.props.actions.createEntity(values,this.entityConfig);
         }
     };

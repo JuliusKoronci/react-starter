@@ -36,6 +36,15 @@ class configResolver {
         }
     };
 
+    static companyUpdate = (id) => {
+        return {
+            url: urls.COMPANIES_LIST + (id ? '/' + id : ''),
+            urlList: urls.COMPANIES_LIST,
+            allowedFormFields: ['city', 'country', 'dic', 'ic_dph', 'ico', 'street', 'title', 'zip'],
+            redirectAfter: paths.companies,
+        }
+    };
+
     static getUserConfig = (id) => {
         return {
             url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
@@ -61,6 +70,32 @@ class configResolver {
         }
     };
 
+
+    static userUpdate = (id) => {
+
+        return {
+            url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            urlList: urls.USERS_LIST,
+            redirectAfter: paths.users,
+            remapValues: {
+                'email': 'email',
+                'username': 'username',
+                'detailData.function': 'detail_data[function]',
+                'detailData.name': 'detail_data[name]',
+                'detailData.surname': 'detail_data[surname]',
+                'detailData.signature': 'detail_data[signature]',
+                'detailData.tel': 'detail_data[tel]',
+                'detailData.facebook': 'detail_data[facebook]',
+                'detailData.twitter': 'detail_data[twitter]',
+                'detailData.linkdin': 'detail_data[linkdin]',
+                'detailData.google': 'detail_data[google]',
+                'language': 'language',
+                'is_active': 'is_active'
+            },
+        }
+    };
+
+
     static getUserAdditionalConfig = (id, role, company, editing) => {
         return {
             url: urls.USERS_LIST + '/' + (id ? id + '/' : '') + 'user-role/' + role + (company ? '/company/' + company : ''),
@@ -79,6 +114,16 @@ class configResolver {
         }
     };
 
+    static companyAttributeUpdate = (id) => {
+        return {
+            url: id ? urls.COMPANYATTRIBUTES_LIST + '/' + id : urls.COMPANYATTRIBUTES_LIST,
+            urlList: urls.COMPANYATTRIBUTES_LIST,
+            allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
+            redirectAfter: paths.companies_attributes,
+        }
+    };
+
+
     static getTaskAttributesConfig = (id) => {
         return {
             url: id ? urls.TASKATTRIBUTES_LIST + '/' + id : urls.TASKATTRIBUTES_LIST,
@@ -90,6 +135,17 @@ class configResolver {
         }
     };
 
+    static taskAttributeUpdate = (id) => {
+        return {
+            url: id ? urls.TASKATTRIBUTES_LIST + '/' + id : urls.TASKATTRIBUTES_LIST,
+            urlList: urls.TASKATTRIBUTES_LIST,
+            redirectAfter: paths.task_attributes,
+            allowedFormFields: ['title', 'options', 'type', 'description', 'is_active'],
+        }
+    };
+
+
+
     static getUserAttributesConfig = (id) => {
         return {
             url: id ? urls.USERATTRIBUTES_LIST + '/' + id : urls.USERATTRIBUTES_LIST,
@@ -100,6 +156,14 @@ class configResolver {
             customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
         }
     };
+    static userAttributeUpdate = (id) => {
+        return {
+            url: id ? urls.USERATTRIBUTES_LIST + '/' + id : urls.USERATTRIBUTES_LIST,
+            urlList: urls.USERATTRIBUTES_LIST,
+            redirectAfter: paths.user_custom_fields,
+            allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
+        }
+    };
 
     static getStatusConfig = (id) => {
         return {
@@ -107,7 +171,16 @@ class configResolver {
             urlList: urls.STATUSES_LIST,
             afterEntityReceivedAction: statusReceived,
             redirectAfterCreation: paths.statuses,
-            allowedFormFields: ['title', 'description', 'color']
+            allowedFormFields: ['title', 'description', 'color','order']
+        }
+    };
+
+    static statusUpdate = (id) => {
+        return {
+            url: id ? urls.STATUSES_LIST + '/' + id : urls.STATUSES_LIST,
+            urlList: urls.STATUSES_LIST,
+            redirectAfter: paths.statuses,
+            allowedFormFields: ['title', 'description', 'color','order']
         }
     };
 
@@ -117,6 +190,15 @@ class configResolver {
             urlList: urls.UNITS_LIST,
             afterEntityReceivedAction: unitReceived,
             redirectAfterCreation: paths.units,
+            allowedFormFields: ['title', 'shortcut', 'is_active']
+        }
+    };
+
+    static unitUpdate = (id) => {
+        return {
+            url: id ? urls.UNITS_LIST + '/' + id : urls.UNITS_LIST,
+            urlList: urls.UNITS_LIST,
+            redirectAfter: paths.units,
             allowedFormFields: ['title', 'shortcut', 'is_active']
         }
     };
@@ -344,15 +426,42 @@ class configResolver {
         }
     };
 
+    static imapUpdate = (id, projectId) => {
+        return {
+            url: urls.IMAPS_LIST + (id ? '/' + id : '') + (projectId ? '/project/' + projectId : ''),
+            urlList: urls.IMAPS_LIST,
+            allowedFormFields: ['inbox_email', 'move_email', 'host', 'port', 'name', 'password', 'ssl', 'ignore_certificate'],
+            redirectAfter: paths.imaps,
+        }
+    };
+
     static getSmtpConfig = (id, projectId) => {
         return {
             url: urls.SMTPS_LIST + (id ? '/' + id : ''),
             urlList: urls.SMTPS_LIST,
             afterEntityReceivedAction: smtpReceived,
-            redirectAfterCreation: paths.smtp,
+            redirectAfterCreation: paths.smtps,
             allowedFormFields: ['host', 'port', 'email', 'name', 'password', 'ssl', 'tls']
         }
     };
+
+    static smtpDeleteConfig = (id) => {
+        return {
+            url: urls.SMTPS_LIST + (id ? '/' + id : ''),
+            urlList: urls.SMTPS_LIST,
+            redirectAfterDelete: paths.smtps,
+        }
+    };
+
+    static smtpUpdate = (id) => {
+        return {
+            url: urls.SMTPS_LIST + (id ? '/' + id : ''),
+            urlList: urls.SMTPS_LIST,
+            allowedFormFields: ['host', 'port', 'email', 'name', 'password', 'ssl', 'tls'],
+            redirectAfter: paths.smtps,
+        }
+    };
+
 
     static getRoleConfig = (id) => {
         return {
@@ -361,6 +470,15 @@ class configResolver {
             afterEntityReceivedAction: roleReceived,
             redirectAfterCreation: paths.roles,
             allowedFormFields: ['title', 'description', 'is_active', 'order', 'homepage', 'acl']
+        }
+    };
+
+    static roleUpdate = (id) => {
+        return {
+            url: urls.ROLES_LIST + (id ? '/' + id : ''),
+            urlList: urls.ROLES_LIST,
+            allowedFormFields: ['title', 'description', 'is_active', 'order', 'homepage', 'acl'],
+            redirectAfter: paths.roles,
         }
     };
 

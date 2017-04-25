@@ -35,7 +35,9 @@ class Imap extends Component {
         this.imapConfig = configResolver.getImapConfig(this.props.params.imapId, values.project.id );
 
         if (this.props.params.imapId) {
-            this.props.actions.updateEntity(this.props.params.imapId, values, this.imapConfig);
+
+            let config=configResolver.imapUpdate(this.props.params.imapId);
+            this.props.actions.updateEntity(this.props.params.imapId, values, config);
         } else {
             this.props.actions.createEntity(values,this.imapConfig);
         }

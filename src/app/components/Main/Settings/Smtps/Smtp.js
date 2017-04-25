@@ -21,20 +21,21 @@ class Smtp extends Component {
      
     }
 
-    deleteHandler=()=>{
+    deleteHandler=(id,e)=>{
+        e.preventDefault();
         if(this.props.params.smtpId){
-            this.props.actions.deleteEntity(this.props.params.smtpId, this.smtpConfig);
+            let config=configResolver.smtpDeleteConfig(this.props.params.smtpId);
+            this.props.actions.deleteEntity(this.props.params.smtpId, config);
         }
     };
 
 
     onSubmit = (values) => {
-
-
         this.smtpConfig = configResolver.getSmtpConfig(this.props.params.smtpId );
 
         if (this.props.params.smtpId) {
-            this.props.actions.updateEntity(this.props.params.smtpId, values, this.smtpConfig);
+            let config=configResolver.smtpUpdate(this.props.params.smtpId );
+            this.props.actions.updateEntity(this.props.params.smtpId, values, config);
         } else {
             this.props.actions.createEntity(values,this.smtpConfig);
         }
