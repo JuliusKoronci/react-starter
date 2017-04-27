@@ -164,3 +164,39 @@ export function setObjByString(obj, str, val) {
 	}
 	return obj[keys[0]] = val;
 }
+
+
+export function stripEmptyValues(values, stripOnlyKeys) {
+    if (values) {
+        // let newValues = {};
+        let newValues = Object.assign({},values);
+        let removeValues = [];
+
+        if(stripOnlyKeys && stripOnlyKeys.length>0){
+
+        	stripOnlyKeys.map((key) => {
+                if (newValues.hasOwnProperty(key) && typeof newValues[key] !== 'undefined' && newValues[key] !== '') {
+                    // newValues[key] = values[key];
+                }else{
+					removeValues.push(key);
+				}
+            });
+
+		}else{
+            Object.keys(newValues).map((key) => {
+                if (newValues.hasOwnProperty(key) && typeof newValues[key] !== 'undefined' && newValues[key] !== '') {
+                    // newValues[key] = values[key];
+                }else{
+                    removeValues.push(key);
+                }
+            });
+		}
+
+        removeValues.map(key=>{
+            delete newValues[key];
+        });
+
+        values = newValues;
+    }
+    return values;
+}

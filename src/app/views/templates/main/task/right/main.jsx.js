@@ -21,13 +21,23 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
         <div className="md-list md-list-addon">
             <Status task={task} statuses={options.status} user={user} action={actions.handleStatus}/>
 
+
             <Select label="Project"
                     icon="&#xE2C8;"
-                    defaultValue={task.project ? task.project.id : ''}
+                    // defaultValue={task.project ? task.project.id : ''}
+                    defaultValue={form.project || ''}
                     options={options.project}
+                    // action={(e) => {actions.patchEntity(configResolver.updateProject(e.target.value, task.id))}}
+                value={form.project}
+                // defaultValue=''
+                name='project'
                     action={(e) => {
-                        actions.patchEntity(configResolver.updateProject(e.target.value, task.id))
-                    }}/>
+                        formInputChangeHandler('project',e.target.value)
+                    }}
+
+            />
+
+
             <Select label="Requester"
                     icon="&#xE7FD;"
                     // defaultValue={task.requestedBy.id || ''}
@@ -48,19 +58,20 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                         formInputChangeHandler('company',e.target.value)
                         // actions.patchEntity(configResolver.updateCompany(e.target.value, task.id))
                     }}/>
+
+
+
             <div className="uk-input-group" style={{marginTop: '10px'}}>
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE7FE;</i></span>
                 <label className="uk-text-muted">Assigned</label>
                 <ReactSelect multi={true}
                              value={
-
-                                 form.assigned
-                                 // task.taskHasAssignedUsers.map((tHuser, i) => {
-                                 //     return {
-                                 //         value: tHuser.user.id,
-                                 //         label: tHuser.user.username
-                                 //     }
-                                 // })
+                                 form.assigned.map((tHuser, i) => {
+                                     return {
+                                         value: tHuser.user.id,
+                                         label: tHuser.user.username
+                                     }
+                                 })
                              }
                              options={assignedOptions}
                              joinValues={true}
@@ -73,11 +84,11 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                 />
             </div>
 
-            <DatePicker taskId={task.id} action={actions.taskUpdated} value={task.startedAt && task.startedAt.date}
+            <DatePicker taskId={task.id} action={formInputChangeHandler} value={form.started_at && form.started_at.date}
                         fieldName="started_at" label="Start At" icon="&#xE858;"/>
-            <DatePicker taskId={task.id} action={actions.taskUpdated}
+            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.deadline && form.deadline.date}
                         fieldName="deadline" label="Deadline" icon="&#xE8B2;"/>
-            <DatePicker taskId={task.id} action={actions.taskUpdated}
+            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.closed_at && form.closed_at.date}
                         fieldName="closed_at" label="Closed At" icon="&#xE5CD;"/>
 
             {/*<Repeat/>*/}

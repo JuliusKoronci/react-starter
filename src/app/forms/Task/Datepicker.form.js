@@ -9,12 +9,8 @@ const Datepicker = ({taskId, value, action, fieldName, label, icon}) => {
             <label className="uk-text-muted" htmlFor="uk_dp_1">{label}</label>
             <Flatpickr className="md-input" data-enable-time value={value}
                        onChange={(v) => {
-                           action(
-                               {
-                                   [fieldName]: v[0]
-                               },
-                               taskId
-                           )
+                           // action({[fieldName]: v[0]}, taskId)
+                           action(fieldName,v[0])
                        }}/>
         </div>
     );

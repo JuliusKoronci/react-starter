@@ -7,7 +7,7 @@ import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import ViewCreatable from '../../../views/templates/main/task/creatingTask.jsx';
 import configResolver from '../../../../config/configResolver';
 import {generateRoute} from '../../../../config/router';
-import {entityCreated, entityError} from '../../../services/general';
+import {entityCreated, entityError, stripEmptyValues} from '../../../services/general';
 import {TASK_LIST} from '../../../../api/urls';
 import {apiUploadFile} from '../../../../api/api';
 
@@ -28,7 +28,13 @@ class Task extends Component {
                 work_time: '',
                 company: '',
                 requester: '',
-                assigned: '',
+                assigned: [],
+                project: '',
+                started_at:'',
+                deadline:'',
+                closed_at:'',
+                tags:'',
+                important:false
             }
             ,
 
@@ -120,22 +126,35 @@ class Task extends Component {
         console.log(this.state);
     };
 
-    formInputChangeHandler = (name,value,e) => {
+    formInputChangeHandler = (name, value, e) => {
 
         // let obj={form[name]:value};
-console.log('change',name,value);
-        let form=Object.assign({},this.state.form);
-        form[name]=value;
+        console.log('change', name, value);
+
+        if(name==='project'){
+            //TODO update assignees
+            let config=configResolver.projectAssigners(value);
+            this.props.actions.getProjectAssigners(config);
+        }
+
+        let form = Object.assign({}, this.state.form);
+        form[name] = value;
         this.setState({form: form});
         // console.log(this.state);
     };
 
 
+    saveTask = () => {
 
-    saveTask=()=>{
+        let values=this.state.form;
 
-        console.log(this.state);
+        let config = configResolver.taskUpdate(this.props.params.taskId);
+        //this.props.actions.patchEntity(values,config,this.props.params.taskId);
+        this.props.actions.taskUpdate(stripEmptyValues(values),config,this.props.params.taskId);
+        console.log(values);
     };
+
+
 
     handleCommentFileUpload = (e) => {
         let file = e.target.files[0];
@@ -227,7 +246,36 @@ console.log('change',name,value);
 
         if (prevProps.task !== this.props.task) {
 
-            // console.log('did update');
+            // console.log(this.props.task);
+            // console.log('did update task component');
+
+
+            let task=this.props.task;
+            if(task){
+                // console.log(task);
+
+                let form={
+                    title: task.title,
+                    description: task.description,
+                    work: task.work,
+                    work_time: task.work_time,
+                    company: task.company?task.company.id:null,
+                    requester: task.requestedBy?task.requestedBy.id:null,
+                    assigned: task.taskHasAssignedUsers?task.taskHasAssignedUsers:[],
+                    project: task.project?task.project.id:null,
+                    started_at: task.startedAt,
+                    deadline: task.deadline,
+                    closed_at: task.closedAt,
+                    tags: task.tags,
+                    important: task.important,
+                };
+
+                this.setState({
+                    form:form
+                });
+
+
+            }
 
             if (this.props.params.taskId) {
                 this.setState({'creatingTask': false})

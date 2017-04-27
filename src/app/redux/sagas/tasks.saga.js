@@ -11,7 +11,8 @@ import {
 	TASK_UPLOADED,
 	CREATE_TASK,
 	DELETE_TASK,
-    ADD_TASK_COMMENT
+    ADD_TASK_COMMENT,
+    TASK_UPDATE
 } from '../constants';
 import { TASK_LIST } from '../../../api/urls';
 import { endAjax, startAjaxReset, asyncError } from '../actions/async.action';
@@ -21,9 +22,9 @@ import {
 	getTasksFromUrl,
 	getTaskById,
 	updateTask as updateApi,
-	uploadApi
+	uploadApi,
 } from '../../../api/tasks/tasks.api';
-import { defaultPOST, defaultPATCH, defaultGET, defaultDELETE } from '../../../api/api';
+import { defaultPOST, defaultPATCH, defaultGET, defaultDELETE, defaultRequest } from '../../../api/api';
 import { entityUpdated } from '../../services/general';
 
 function *defaultTasks(action) {
@@ -85,6 +86,21 @@ function *updateTask(action) {
 		yield put(asyncError(e));
 	}
 	yield put(endAjax());
+}
+
+function *taskUpdate(action) {
+	// alert('task update');
+	console.log(action);
+	let config=action.config;
+    yield put(startAjaxReset());
+    try {
+        const data = yield call(defaultRequest, config.url, 'PATCH', action.data, config);
+        console.log(data);
+    //     yield put(taskReceived(data));
+    } catch (e) {
+        yield put(asyncError(e));
+    }
+    yield put(endAjax());
 }
 
 function *updateStatus(action) {
@@ -168,6 +184,7 @@ export function *loadTasksFromUrl() {
 	yield takeLatest(TASK_STATUS_UPDATED, updateStatus);
 	yield takeLatest(TASK_UPLOADED, uploadTask);
 	yield takeLatest(CREATE_TASK, createTask);
+	yield takeLatest(TASK_UPDATE, taskUpdate);
 	yield takeLatest(DELETE_TASK, deleteTask);
 	yield takeLatest(ADD_TASK_COMMENT, addTaskComment);
 

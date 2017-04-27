@@ -20,7 +20,7 @@ const taskButtonPanel = ({saveAction}) => {
                     <i className="uk-icon-print"/>
                     Print
                 </a>
-                <a className="md-btn md-btn-primary md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+                <a className="md-btn md-btn-default md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
                    href="#">
                     <i className="uk-icon-star-half-empty"/>
                     Important

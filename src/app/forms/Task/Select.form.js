@@ -20,10 +20,10 @@ Select.propTypes = {
     action: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
-    defaultValue: PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number
-    ]).isRequired,
+    // defaultValue: PropTypes.oneOfType([
+    //     React.PropTypes.string,
+    //     React.PropTypes.number
+    // ]).isRequired,
     className: PropTypes.string,
 };
 
