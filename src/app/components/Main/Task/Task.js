@@ -33,7 +33,7 @@ class Task extends Component {
                 started_at:'',
                 deadline:'',
                 closed_at:'',
-                tags:'',
+                tags:[],
                 important:false
             }
             ,
@@ -137,6 +137,20 @@ class Task extends Component {
             this.props.actions.getProjectAssigners(config);
         }
 
+        if(name==='assigned'){
+
+
+
+            // value.value,
+            //     value.label
+            //
+            // value: tHuser.user.id,
+            //     label: tHuser.user.username
+
+        }
+
+
+
         let form = Object.assign({}, this.state.form);
         form[name] = value;
         this.setState({form: form});
@@ -148,8 +162,16 @@ class Task extends Component {
 
         let values=this.state.form;
 
+        values.started_at=this.state.form.started_at.date?this.state.form.started_at.date:this.state.form.started_at;
+        values.deadline=this.state.form.deadline.date?this.state.form.deadline.date:this.state.form.deadline;
+        values.closed_at=this.state.form.closed_at.date?this.state.form.closed_at.date:this.state.form.closed_at;
+
+        // values.tags=this.state.form.tags.map(tag=>{return tag.title;})
+
+
         let config = configResolver.taskUpdate(this.props.params.taskId);
         //this.props.actions.patchEntity(values,config,this.props.params.taskId);
+
         this.props.actions.taskUpdate(stripEmptyValues(values),config,this.props.params.taskId);
         console.log(values);
     };
@@ -254,6 +276,8 @@ class Task extends Component {
             if(task){
                 // console.log(task);
 
+
+                
                 let form={
                     title: task.title,
                     description: task.description,
@@ -261,7 +285,7 @@ class Task extends Component {
                     work_time: task.work_time,
                     company: task.company?task.company.id:null,
                     requester: task.requestedBy?task.requestedBy.id:null,
-                    assigned: task.taskHasAssignedUsers?task.taskHasAssignedUsers:[],
+                    assigned: task.taskHasAssignedUsers?task.taskHasAssignedUsers.map(user=>{console.log(user);return {userId:user.user.id,username:user.user.username}}):[],
                     project: task.project?task.project.id:null,
                     started_at: task.startedAt,
                     deadline: task.deadline,

@@ -95,8 +95,8 @@ function *taskUpdate(action) {
     yield put(startAjaxReset());
     try {
         const data = yield call(defaultRequest, config.url, 'PATCH', action.data, config);
-        console.log(data);
-    //     yield put(taskReceived(data));
+        // console.log(data);
+        yield put(taskReceived(data));
     } catch (e) {
         yield put(asyncError(e));
     }

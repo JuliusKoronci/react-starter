@@ -66,17 +66,27 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                 <label className="uk-text-muted">Assigned</label>
                 <ReactSelect multi={true}
                              value={
+
+
                                  form.assigned.map((tHuser, i) => {
                                      return {
-                                         value: tHuser.user.id,
-                                         label: tHuser.user.username
+                                         value: tHuser.userId,
+                                         label: tHuser.username
                                      }
                                  })
+
+
+                                 // form.assigned.map((tHuser, i) => {
+                                 //     return {
+                                 //         value: tHuser.user.id,
+                                 //         label: tHuser.user.username
+                                 //     }
+                                 // })
                              }
                              options={assignedOptions}
                              joinValues={true}
                              onChange={(values) => {
-                                 formInputChangeHandler('assigned',values)
+                                 formInputChangeHandler('assigned',values.map(value=>{return {userId:value.value,username:value.label} }))
 
                                  // const config = configResolver.assignUser(values, task.id, null);
                                  // actions.patchEntity(config, config.values);
@@ -96,7 +106,7 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
 
 
             <Tag
-                tagValues={task.tags}
+                tagValues={form.tags}
                 options={options.tag.map(tag => {
                     return {
                         value: tag.id,
@@ -104,8 +114,12 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                     }
                 })}
                 setValues={(values) => {
-                    const config = configResolver.addTags(values, task.id);
-                    actions.patchEntity(config, config.values);
+
+                    formInputChangeHandler('tags',values)
+                    // const config = configResolver.addTags(values, task.id);
+                    // actions.patchEntity(config, config.values);
+
+
                 }}/>
         </div>
     );

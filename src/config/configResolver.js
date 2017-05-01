@@ -432,6 +432,8 @@ class configResolver {
                 'assigned':'assigned',
                 'company':'company',
                 'requester':'requester',
+                'important':'important',
+                'tags':'tag'
             },
             jsonStringify:true,
             // contentType:'default',

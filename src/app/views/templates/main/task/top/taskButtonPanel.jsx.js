@@ -1,6 +1,6 @@
 import React from 'react';
 
-const taskButtonPanel = ({saveAction}) => {
+const taskButtonPanel = ({saveAction, form, formInputChangeHandler}) => {
     return (
         <div>
             <div className="md-btn-group">
@@ -20,11 +20,11 @@ const taskButtonPanel = ({saveAction}) => {
                     <i className="uk-icon-print"/>
                     Print
                 </a>
-                <a className="md-btn md-btn-default md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+                <button onClick={formInputChangeHandler.bind(null,'important',!form.important)} className={"md-btn md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light "+ (form.important?'md-btn-primary':'md-btn-default') }
                    href="#">
                     <i className="uk-icon-star-half-empty"/>
                     Important
-                </a>
+                </button>
             </div>
 
             <div className="alignright" style={{float: 'right'}}>

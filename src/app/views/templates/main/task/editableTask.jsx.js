@@ -15,7 +15,7 @@ const editableTask = (props) => {
 			<div className="uk-form-row">
 				{props.newTask && <NewTaskPannel {...props} />}
 
-				<TaskButtonPanel saveAction={props.saveAction} />
+				<TaskButtonPanel saveAction={props.saveAction} {...props} />
 				<hr />
 
 				<div className="uk-grid" data-uk-grid-margin>
