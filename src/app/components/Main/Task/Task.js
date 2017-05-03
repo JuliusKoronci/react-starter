@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../redux/actions/tasks.action';
 import * as genActions from '../../../redux/actions/general.action';
+import * as settingsActions from '../../../redux/actions/settings.action';
 import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import ViewCreatable from '../../../views/templates/main/task/creatingTask.jsx';
 import configResolver from '../../../../config/configResolver';
@@ -15,6 +16,8 @@ class Task extends Component {
 
     constructor(props, context) {
         super(props, context);
+
+
 
         this.state = {
             saved: false,
@@ -34,7 +37,8 @@ class Task extends Component {
                 deadline:'',
                 closed_at:'',
                 tags:[],
-                important:false
+                important:false,
+                taskData:[]
             }
             ,
 
@@ -47,6 +51,7 @@ class Task extends Component {
             commentFormAttachments: [],
             commentFormErrors: {}
         }
+
     }
 
     componentWillUnmount() {
@@ -137,6 +142,10 @@ class Task extends Component {
             this.props.actions.getProjectAssigners(config);
         }
 
+        if(name==='tags'){
+            value=value.map(val=>{return {id:val.value,title:val.label}});
+        }
+
         if(name==='assigned'){
 
 
@@ -162,9 +171,11 @@ class Task extends Component {
 
         let values=this.state.form;
 
-        values.started_at=this.state.form.started_at.date?this.state.form.started_at.date:this.state.form.started_at;
-        values.deadline=this.state.form.deadline.date?this.state.form.deadline.date:this.state.form.deadline;
-        values.closed_at=this.state.form.closed_at.date?this.state.form.closed_at.date:this.state.form.closed_at;
+        values.started_at=this.state.form.started_at&&this.state.form.started_at.date?this.state.form.started_at.date:this.state.form.started_at;
+        values.deadline=this.state.form.deadline&&this.state.form.deadline.date?this.state.form.deadline.date:this.state.form.deadline;
+        values.closed_at=this.state.form.closed_at&&this.state.form.closed_at.date?this.state.form.closed_at.date:this.state.form.closed_at;
+
+        console.log(this.state.form.started_at)
 
         // values.tags=this.state.form.tags.map(tag=>{return tag.title;})
 
@@ -172,7 +183,10 @@ class Task extends Component {
         let config = configResolver.taskUpdate(this.props.params.taskId);
         //this.props.actions.patchEntity(values,config,this.props.params.taskId);
 
-        this.props.actions.taskUpdate(stripEmptyValues(values),config,this.props.params.taskId);
+        let sendValues=stripEmptyValues(values,false,['started_at','deadline','closed_at']);
+        sendValues['started_at']='';
+        this.props.actions.taskUpdate(sendValues,config,this.props.params.taskId);
+
         console.log(values);
     };
 
@@ -258,6 +272,8 @@ class Task extends Component {
         if (this.props.params.taskId) {
             this.props.actions.loadTaskById(this.props.params.taskId);
             this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
+            this.props.actions.requestTaskAttributes();
+
             this.setState({'creatingTask': false})
         } else {
             this.setState({'creatingTask': true})
@@ -285,14 +301,17 @@ class Task extends Component {
                     work_time: task.work_time,
                     company: task.company?task.company.id:null,
                     requester: task.requestedBy?task.requestedBy.id:null,
-                    assigned: task.taskHasAssignedUsers?task.taskHasAssignedUsers.map(user=>{console.log(user);return {userId:user.user.id,username:user.user.username}}):[],
+                    assigned: task.taskHasAssignedUsers? task.taskHasAssignedUsers.map(user=>{return {userId:user.user.id,username:user.user.username}}):[],
                     project: task.project?task.project.id:null,
                     started_at: task.startedAt,
                     deadline: task.deadline,
                     closed_at: task.closedAt,
                     tags: task.tags,
                     important: task.important,
+                    taskData: task.taskData,
                 };
+
+                console.log(form.assigned,task)
 
                 this.setState({
                     form:form
@@ -354,6 +373,7 @@ class Task extends Component {
     };
 
     renderTask = () => {
+        // console.log(this.props.task);
         return (<ViewEditable
             handleFileUpload={this.handleFileUpload}
             handleFileDownload={this.handleFileDownload}
@@ -408,6 +428,7 @@ function mapStateToProps(state, ownProps) {
             canEdit: task ? task.canEdit : false,
             user: state.auth.user,
             creatingTask: false,
+            taskAttributes: state.taskAttributes && state.taskAttributes.data?state.taskAttributes.data:[]
         };
     }
 
@@ -417,7 +438,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions, ...genActions}, dispatch)
+        actions: bindActionCreators({...actions, ...genActions, ...settingsActions}, dispatch)
     };
 }
 

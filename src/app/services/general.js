@@ -166,7 +166,7 @@ export function setObjByString(obj, str, val) {
 }
 
 
-export function stripEmptyValues(values, stripOnlyKeys) {
+export function stripEmptyValues(values, stripOnlyKeys, dontStripKeys) {
     if (values) {
         // let newValues = {};
         let newValues = Object.assign({},values);
@@ -183,11 +183,21 @@ export function stripEmptyValues(values, stripOnlyKeys) {
             });
 
 		}else{
+
             Object.keys(newValues).map((key) => {
+
                 if (newValues.hasOwnProperty(key) && typeof newValues[key] !== 'undefined' && newValues[key] !== '') {
                     // newValues[key] = values[key];
                 }else{
+
                     removeValues.push(key);
+                    //
+                    // if(dontStripKeys && typeof dontStripKeys[key] !== "undefined"){
+						// // console.log('dont strip '+key)
+                    // }else {
+                    //     // console.log('strip '+key)
+                    //     removeValues.push(key);
+                    // }
                 }
             });
 		}

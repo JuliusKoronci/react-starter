@@ -9,13 +9,18 @@ import configResolver from '../../../../../../config/configResolver';
 import ReactSelect from 'react-select';
 
 
-const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler,form}) => {
+const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler,form, taskAttributes}) => {
 
     // console.log(form);
 
     const assignedOptions = options.assigner.map(r => {
-        return {value: r.id, label: r.username}
+        // return {value: r.id, label: r.username}
+        return {id: r.id, title: r.username}
     });
+    // console.log(assignedOptions)
+// console.log(form.assigned);
+
+console.log(taskAttributes);
 
     return (
         <div className="md-list md-list-addon">
@@ -62,43 +67,54 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
 
 
             <div className="uk-input-group" style={{marginTop: '10px'}}>
-                <span className="uk-input-group-addon"><i className="material-icons">&#xE7FE;</i></span>
-                <label className="uk-text-muted">Assigned</label>
-                <ReactSelect multi={true}
-                             value={
 
 
-                                 form.assigned.map((tHuser, i) => {
-                                     return {
-                                         value: tHuser.userId,
-                                         label: tHuser.username
-                                     }
-                                 })
+                <Select label="Assigned"
+                        icon="&#xE7FD;"
+                        defaultValue={form.assigned&&form.assigned[0]&&form.assigned[0]['userId']?form.assigned[0]['userId']: ''}
+                        options={assignedOptions}
+                        action={(e) => {
+                            formInputChangeHandler('assigned',[{userId:e.target.value}])
+                        }}/>
 
 
-                                 // form.assigned.map((tHuser, i) => {
-                                 //     return {
-                                 //         value: tHuser.user.id,
-                                 //         label: tHuser.user.username
-                                 //     }
-                                 // })
-                             }
-                             options={assignedOptions}
-                             joinValues={true}
-                             onChange={(values) => {
-                                 formInputChangeHandler('assigned',values.map(value=>{return {userId:value.value,username:value.label} }))
+                 {/*<span className="uk-input-group-addon"><i className="material-icons">&#xE7FE;</i></span>*/}
+                 {/*<label className="uk-text-muted">Assigned</label>*/}
+                {/*<ReactSelect multi={true}*/}
+                             {/*value={*/}
 
-                                 // const config = configResolver.assignUser(values, task.id, null);
-                                 // actions.patchEntity(config, config.values);
-                             }}
-                />
+                                 {/*form.assigned.map((tHuser, i) => {*/}
+                                     {/*// console.log(tHuser)*/}
+
+                                     {/*return {*/}
+                                         {/*value: tHuser.userId,*/}
+                                         {/*label: tHuser.username*/}
+                                     {/*}*/}
+
+                                     {/*// return {*/}
+                                     {/*//     value: tHuser.user.id,*/}
+                                     {/*//     label: tHuser.user.username*/}
+                                     {/*// }*/}
+                                 {/*})*/}
+                             {/*}*/}
+                             {/*options={assignedOptions}*/}
+                             {/*joinValues={true}*/}
+                             {/*onChange={(values) => {*/}
+                                 {/*formInputChangeHandler('assigned',values.map(value=>{return {userId:value.value,username:value.label} }))*/}
+
+                                 {/*// const config = configResolver.assignUser(values, task.id, null);*/}
+                                 {/*// actions.patchEntity(config, config.values);*/}
+                             {/*}}*/}
+                {/*/>*/}
+
+
             </div>
 
             <DatePicker taskId={task.id} action={formInputChangeHandler} value={form.started_at && form.started_at.date}
-                        fieldName="started_at" label="Start At" icon="&#xE858;"/>
-            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.deadline && form.deadline.date}
+                        fieldName="started_at" label="Start At" icon="&#xE858;" formInputChangeHandler={formInputChangeHandler} />
+            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.deadline && form.deadline.date} formInputChangeHandler={formInputChangeHandler}
                         fieldName="deadline" label="Deadline" icon="&#xE8B2;"/>
-            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.closed_at && form.closed_at.date}
+            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.closed_at && form.closed_at.date} formInputChangeHandler={formInputChangeHandler}
                         fieldName="closed_at" label="Closed At" icon="&#xE5CD;"/>
 
             {/*<Repeat/>*/}
@@ -121,6 +137,23 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
 
 
                 }}/>
+
+
+            <hr />
+
+            {taskAttributes.map(ta=>{
+
+                return (
+                    <div key={ta.id}>
+                        <h3>{ta.title} {ta.type}</h3>
+                        <br />
+
+                    </div>
+                )
+
+
+            })}
+
         </div>
     );
 };
