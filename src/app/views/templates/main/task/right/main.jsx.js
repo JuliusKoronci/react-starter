@@ -7,9 +7,10 @@ import DatePicker from '../../../../../forms/Task/Datepicker.form';
 import Select from '../../../../../forms/Task/Select.form';
 import configResolver from '../../../../../../config/configResolver';
 import ReactSelect from 'react-select';
+import CustomAttributeInput from '../../../../../forms/general/CustomAttributeInput.form';
 
 
-const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler,form, taskAttributes}) => {
+const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler, formTaskAttributeChangeHandler, form, taskAttributes}) => {
 
     // console.log(form);
 
@@ -24,6 +25,46 @@ console.log(taskAttributes);
 
     return (
         <div className="md-list md-list-addon">
+
+
+
+
+            {/*// Types of attributes used f.i. in Company attributes, Task attributes*/}
+            {/*const INPUT = 'input';*/}
+            {/*const DECIMAL_NUMBER = 'decimal_number';*/}
+            {/*const INTEGER_NUMBER = 'integer_number';*/}
+
+
+            {/*const TEXT_AREA = 'text_area';*/}
+            {/*const SIMPLE_SELECT = 'simple_select';*/}
+            {/*const MULTI_SELECT = 'multi_select';*/}
+            {/*const DATE = 'date';*/}
+            {/*const CHECKBOX = 'checkbox';*/}
+
+
+            {taskAttributes.map(ta=>{
+                // console.log(ta)
+                let name=ta.id;
+                let value=form.task_data&&form.task_data[ta.id]? form.task_data[ta.id].value:'';
+
+                return (
+                    <div key={ta.id}>
+                        <CustomAttributeInput type={ta.type} attribute={ta} value={value} action={formTaskAttributeChangeHandler} name={name} />
+                        <br />
+
+                    </div>
+                )
+
+
+            })}
+
+
+
+            <hr />
+
+
+
+
             <Status task={task} statuses={options.status} user={user} action={actions.handleStatus}/>
 
 
@@ -141,18 +182,9 @@ console.log(taskAttributes);
 
             <hr />
 
-            {taskAttributes.map(ta=>{
-
-                return (
-                    <div key={ta.id}>
-                        <h3>{ta.title} {ta.type}</h3>
-                        <br />
-
-                    </div>
-                )
 
 
-            })}
+
 
         </div>
     );

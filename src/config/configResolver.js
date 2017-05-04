@@ -433,7 +433,8 @@ class configResolver {
                 'company':'company',
                 'requester':'requester',
                 'important':'important',
-                'tags':'tag'
+                'tags':'tag',
+                'task_data':'task_data'
             },
             jsonStringify:true,
             // contentType:'default',

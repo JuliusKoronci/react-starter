@@ -38,7 +38,7 @@ class Task extends Component {
                 closed_at:'',
                 tags:[],
                 important:false,
-                taskData:[]
+                task_data:[]
             }
             ,
 
@@ -131,10 +131,22 @@ class Task extends Component {
         console.log(this.state);
     };
 
+
+    formTaskAttributeChangeHandler = (name, value, e) => {
+
+        // console.log('change', name, 'value:'+value);
+        let form = Object.assign({}, this.state.form);
+        form.task_data[name] = {id:name,value:value};
+        // form.task_data[name] = value;
+
+        this.setState({form: form});
+        console.log(this.state);
+    };
+
     formInputChangeHandler = (name, value, e) => {
 
         // let obj={form[name]:value};
-        console.log('change', name, value);
+        console.log('change', name, 'value:'+value);
 
         if(name==='project'){
             //TODO update assignees
@@ -163,19 +175,24 @@ class Task extends Component {
         let form = Object.assign({}, this.state.form);
         form[name] = value;
         this.setState({form: form});
-        // console.log(this.state);
+        console.log(this.state);
     };
 
 
     saveTask = () => {
 
-        let values=this.state.form;
+        let values=Object.assign({}, this.state.form);
 
         values.started_at=this.state.form.started_at&&this.state.form.started_at.date?this.state.form.started_at.date:this.state.form.started_at;
         values.deadline=this.state.form.deadline&&this.state.form.deadline.date?this.state.form.deadline.date:this.state.form.deadline;
         values.closed_at=this.state.form.closed_at&&this.state.form.closed_at.date?this.state.form.closed_at.date:this.state.form.closed_at;
 
-        console.log(this.state.form.started_at)
+        // console.log(this.state.form.started_at)
+        console.log(this.state.form.task_data);
+
+        // let filtered_task_data=
+
+        values.task_data=values.task_data.filter(function(val){if(val)return val})
 
         // values.tags=this.state.form.tags.map(tag=>{return tag.title;})
 
@@ -183,8 +200,18 @@ class Task extends Component {
         let config = configResolver.taskUpdate(this.props.params.taskId);
         //this.props.actions.patchEntity(values,config,this.props.params.taskId);
 
-        let sendValues=stripEmptyValues(values,false,['started_at','deadline','closed_at']);
-        sendValues['started_at']='';
+        // let sendValues=stripEmptyValues(values,false,['started_at','deadline','closed_at']);
+        // let sendValues=values;
+
+        let customAttributes={};
+        console.debug(values.task_data);
+        let sendValues=Object.assign({}, values);
+            values.task_data.map(v=>{
+                customAttributes[v.id]=v.value;
+            });
+        sendValues.task_data=customAttributes;
+
+        // sendValues['started_at']='';
         this.props.actions.taskUpdate(sendValues,config,this.props.params.taskId);
 
         console.log(values);
@@ -308,7 +335,7 @@ class Task extends Component {
                     closed_at: task.closedAt,
                     tags: task.tags,
                     important: task.important,
-                    taskData: task.taskData,
+                    task_data: task.taskData,
                 };
 
                 console.log(form.assigned,task)
@@ -384,6 +411,7 @@ class Task extends Component {
             sendComment={this.sendComment}
             formChangeHandler={this.formChangeHandler}
             formInputChangeHandler={this.formInputChangeHandler}
+            formTaskAttributeChangeHandler={this.formTaskAttributeChangeHandler}
             toggleState={this.toggleState}
             commentFormEmail={this.state.commentFormEmail}
             commentFormInternalNote={this.state.commentFormInternalNote}
