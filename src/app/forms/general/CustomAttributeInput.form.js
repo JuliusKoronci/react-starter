@@ -17,12 +17,6 @@ class CustomAttributeInput extends Component {
     render() {
 
 
-        {/*// Types of attributes used f.i. in Company attributes, Task attributes*/}
-        {/*const INPUT = 'input';*/}
-        {/*const DECIMAL_NUMBER = 'decimal_number';*/}
-        {/*const INTEGER_NUMBER = 'integer_number';*/}
-        {/*const TEXT_AREA = 'text_area';*/}
-
 
         {/*const SIMPLE_SELECT = 'simple_select';*/}
         {/*const MULTI_SELECT = 'multi_select';*/}
@@ -30,7 +24,7 @@ class CustomAttributeInput extends Component {
         {/*const CHECKBOX = 'checkbox';*/}
 
 
-        const {value,type}=this.props;
+        const {value,type, title}=this.props;
 
         let input='no input';
 
@@ -48,8 +42,8 @@ class CustomAttributeInput extends Component {
 
         return (
             <div>
-                <h3>{this.props.name} {this.props.type}</h3>
-                <h4>{this.props.value}</h4>
+                <h3>{title} {this.props.name} {type}</h3>
+                <h4>{value}</h4>
                 <div style={{border:'1px red solid'}}>
 
                     {input}
@@ -60,9 +54,9 @@ class CustomAttributeInput extends Component {
     }
 }
 
-CustomAttributeInput.propTypes = {
-    fieldName: PropTypes.string,
-    defaultValue: PropTypes.string
-};
+// CustomAttributeInput.propTypes = {
+//     fieldName: PropTypes.string,
+//     defaultValue: PropTypes.string
+// };
 
 export default CustomAttributeInput;

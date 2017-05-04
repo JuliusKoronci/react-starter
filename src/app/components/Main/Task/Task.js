@@ -190,20 +190,14 @@ class Task extends Component {
         // console.log(this.state.form.started_at)
         console.log(this.state.form.task_data);
 
-        // let filtered_task_data=
-
-        values.task_data=values.task_data.filter(function(val){if(val)return val})
-
-        // values.tags=this.state.form.tags.map(tag=>{return tag.title;})
-
-
         let config = configResolver.taskUpdate(this.props.params.taskId);
         //this.props.actions.patchEntity(values,config,this.props.params.taskId);
 
         // let sendValues=stripEmptyValues(values,false,['started_at','deadline','closed_at']);
-        // let sendValues=values;
+
 
         let customAttributes={};
+        values.task_data=values.task_data.filter(function(val){if(val)return val})
         console.debug(values.task_data);
         let sendValues=Object.assign({}, values);
             values.task_data.map(v=>{
@@ -335,10 +329,12 @@ class Task extends Component {
                     closed_at: task.closedAt,
                     tags: task.tags,
                     important: task.important,
-                    task_data: task.taskData,
+                    task_data: task.taskData?task.taskData.map(td=>{return {id:td.taskAttribute.id,value:td.value}}):[],
                 };
 
-                console.log(form.assigned,task)
+                // console.log(form.assigned,task)
+
+                console.log('task data:',form.task_data)
 
                 this.setState({
                     form:form

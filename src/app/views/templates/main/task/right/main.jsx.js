@@ -12,56 +12,49 @@ import CustomAttributeInput from '../../../../../forms/general/CustomAttributeIn
 
 const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler, formTaskAttributeChangeHandler, form, taskAttributes}) => {
 
-    // console.log(form);
-
     const assignedOptions = options.assigner.map(r => {
         // return {value: r.id, label: r.username}
         return {id: r.id, title: r.username}
     });
+
+
     // console.log(assignedOptions)
 // console.log(form.assigned);
-
-console.log(taskAttributes);
+// console.log(taskAttributes);
 
     return (
         <div className="md-list md-list-addon">
 
 
 
-
-            {/*// Types of attributes used f.i. in Company attributes, Task attributes*/}
-            {/*const INPUT = 'input';*/}
-            {/*const DECIMAL_NUMBER = 'decimal_number';*/}
-            {/*const INTEGER_NUMBER = 'integer_number';*/}
-
-
-            {/*const TEXT_AREA = 'text_area';*/}
-            {/*const SIMPLE_SELECT = 'simple_select';*/}
-            {/*const MULTI_SELECT = 'multi_select';*/}
-            {/*const DATE = 'date';*/}
-            {/*const CHECKBOX = 'checkbox';*/}
-
-
             {taskAttributes.map(ta=>{
-                // console.log(ta)
                 let name=ta.id;
-                let value=form.task_data&&form.task_data[ta.id]? form.task_data[ta.id].value:'';
+
+                //filter
+                // let value=form.task_data&&form.task_data[ta.id]? form.task_data[ta.id].value:'';
+
+
+
+                let value=form.task_data.filter((td) => parseInt(td.id, 10) === parseInt(ta.id, 10));
+                if(value.length>0){
+                    value=value[0].value;
+                }else{
+                    value='';
+                }
+
 
                 return (
                     <div key={ta.id}>
-                        <CustomAttributeInput type={ta.type} attribute={ta} value={value} action={formTaskAttributeChangeHandler} name={name} />
+                        <CustomAttributeInput type={ta.type} attribute={ta} title={ta.title} value={value} action={formTaskAttributeChangeHandler} name={name} />
                         <br />
 
                     </div>
                 )
 
-
             })}
 
 
-
             <hr />
-
 
 
 
