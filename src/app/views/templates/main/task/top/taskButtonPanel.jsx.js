@@ -1,6 +1,7 @@
 import React from 'react';
 
 const taskButtonPanel = ({saveAction, form, formInputChangeHandler}) => {
+
     return (
         <div>
             <div className="md-btn-group">
@@ -15,16 +16,19 @@ const taskButtonPanel = ({saveAction, form, formInputChangeHandler}) => {
                     CANCEL
                 </a>
 
-                <a className="md-btn md-btn-primary md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+
+                {formInputChangeHandler && <a className="md-btn md-btn-primary md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
                    href="#">
                     <i className="uk-icon-print"/>
                     Print
-                </a>
-                <button onClick={formInputChangeHandler.bind(null,'important',!form.important)} className={"md-btn md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light "+ (form.important?'md-btn-primary':'md-btn-default') }
+                </a>}
+
+                {formInputChangeHandler && <button onClick={formInputChangeHandler.bind(null,'important',!form.important)} className={"md-btn md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light "+ (form.important?'md-btn-primary':'md-btn-default') }
                    href="#">
                     <i className="uk-icon-star-half-empty"/>
                     Important
-                </button>
+                </button> }
+
             </div>
 
             <div className="alignright" style={{float: 'right'}}>

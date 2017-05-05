@@ -140,8 +140,10 @@ class Task extends Component {
         // form.task_data[name] = value;
 
         this.setState({form: form});
-        console.log(this.state);
+        console.log('form change:',name,value);
+        console.log('state:',this.state);
     };
+
 
     formInputChangeHandler = (name, value, e) => {
 
@@ -405,9 +407,11 @@ class Task extends Component {
             handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
 
             sendComment={this.sendComment}
+
             formChangeHandler={this.formChangeHandler}
             formInputChangeHandler={this.formInputChangeHandler}
             formTaskAttributeChangeHandler={this.formTaskAttributeChangeHandler}
+
             toggleState={this.toggleState}
             commentFormEmail={this.state.commentFormEmail}
             commentFormInternalNote={this.state.commentFormInternalNote}
