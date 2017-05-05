@@ -4,56 +4,64 @@ class Multicheckbox extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {inputValue: []};
+        this.state={inputValue:''};
     }
 
 
-    componentWillMount(){
-        console.log('will mount');
-    }
+    // componentWillMount(){
+    //     console.log('will mount');
+    // }
 
-    componentDidUpdate() {
-        if (this.state.inputValue !== this.props.input.value) {
+    componentDidUpdate(prevProps) {
+        if (this.state.inputValue !== this.props.value) {
             this.setState({
-                inputValue: this.props.input.value
+                inputValue: this.props.value
             });
         }
     }
 
+
     onChange = (value, e) => {
-        let inputValue = this.props.input.value;
-        if (typeof inputValue === 'string' || inputValue instanceof String) {
-            inputValue.split(',');
-            if (!Array.isArray(inputValue)) {
-                inputValue = [];
-            }
-        }
-        let newValue = inputValue;
-        if (e.target.checked) {
-            newValue.push(value);
-        } else {
-            let index = inputValue.indexOf(value);
-            if (index > -1) {
-                inputValue.splice(index, 1);
-            }
-        }
-        this.setState({inputValue: newValue});
-        this.props.onChange(newValue);
+        // let inputValue = this.props.input.value;
+        // if (typeof inputValue === 'string' || inputValue instanceof String) {
+        //     inputValue.split(',');
+        //     if (!Array.isArray(inputValue)) {
+        //         inputValue = [];
+        //     }
+        // }
+        // let newValue = inputValue;
+        // if (e.target.checked) {
+        //     newValue.push(value);
+        // } else {
+        //     let index = inputValue.indexOf(value);
+        //     if (index > -1) {
+        //         inputValue.splice(index, 1);
+        //     }
+        // }
+        // this.setState({inputValue: newValue});
+        // this.props.onChange(newValue);
     };
+
 
 
     render() {
 
-        const inputValue = this.state.inputValue;
+        const {name, label}=this.props;
+        // let inputValue = this.state.inputValue;
+        let inputValue = '';
+        let options=this.props.options;
+        options=[];
+
 
         return (
             <div>
-                <input type="text" value={inputValue} name={this.props.input.name}
-                       onChange={this.props.input.onChange.bind(null, inputValue)}/>
-                <label htmlFor={this.props.input.name}>{this.props.label}</label>
+                <input type="text" value={inputValue} name={name}
+                       // onChange={this.props.formInputChangeHandler.bind(null,inputValue)}
+                />
 
+                <label htmlFor={name}>{label}</label>
 
-                {this.props.options.map((option, i) => {
+                {options.map((option, i) => {
 
                     const fieldName = 'acls_' + option;
                     const checked = Array.isArray(inputValue) && inputValue.indexOf(option) !== -1;

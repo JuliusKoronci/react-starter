@@ -4,8 +4,6 @@ import Flatpickr from 'react-flatpickr';
 // const Datepicker = ({taskId, value, action, fieldName, label, icon, formInputChangeHandler}) => {
 class Datepicker extends Component {
 
-
-
     componentDidUpdate(prevProps) {
 
         if(prevProps!==this.props) {
@@ -17,11 +15,9 @@ class Datepicker extends Component {
 
     }
 
-
     render() {
         const {label,value,fieldName,action,formInputChangeHandler,icon}=this.props;
         const ic = icon || '&#xE858;';
-
 
         return (
         <div className="uk-input-group" style={{marginTop: '20px'}}>
@@ -43,8 +39,8 @@ class Datepicker extends Component {
 };
 
 Datepicker.propTypes = {
-    taskId: PropTypes.number.isRequired,
-    value: PropTypes.string,
+    // taskId: PropTypes.number.isRequired,
+    // value: PropTypes.string || PropTypes.date,
     action: PropTypes.func.isRequired,
     fieldName: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,

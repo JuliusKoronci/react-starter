@@ -4,7 +4,7 @@ import React from 'react';
 import RTE from '../forms/general/rte/RTE.form';
 import Tagger from '../forms/general/Tagger.form';
 import Colorpicker from '../forms/general/Colorpicker.form';
-import Multicheckbox from '../forms/general/Multicheckbox.form';
+import Multicheckbox from '../forms/general/MulticheckboxRedux.form';
 import Multiselect from '../forms/general/Multiselect.form';
 import Datepicker from '../forms/general/Datepicker.form';
 

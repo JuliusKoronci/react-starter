@@ -33,8 +33,6 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                 //filter
                 // let value=form.task_data&&form.task_data[ta.id]? form.task_data[ta.id].value:'';
 
-
-
                 let value=form.task_data.filter((td) => parseInt(td.id, 10) === parseInt(ta.id, 10));
                 if(value.length>0){
                     value=value[0].value;
@@ -42,12 +40,9 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                     value='';
                 }
 
-
                 return (
                     <div key={ta.id}>
-                        <CustomAttributeInput type={ta.type} attribute={ta} title={ta.title} value={value} action={formTaskAttributeChangeHandler} name={name} />
-                        <br />
-
+                        <CustomAttributeInput type={ta.type} customAttribute={ta} title={ta.title} value={value} action={formTaskAttributeChangeHandler} name={name} />
                     </div>
                 )
 
