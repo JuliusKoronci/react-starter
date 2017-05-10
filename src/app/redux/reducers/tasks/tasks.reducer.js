@@ -24,6 +24,7 @@ const defaultState: {data: Array<Object>, _links: Object}= {
         'tag': [],
         'assigner': [],
         'unit': [],
+        'taskAttributes': [],
     },
     'task': {}
 };

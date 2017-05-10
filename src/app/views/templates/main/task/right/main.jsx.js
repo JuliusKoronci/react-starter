@@ -27,22 +27,36 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
 
 
 
+            {/*FORM CHANGE FIELDID VS ID*/}
+
+
             {taskAttributes.map(ta=>{
                 let name=ta.id;
 
                 //filter
                 // let value=form.task_data&&form.task_data[ta.id]? form.task_data[ta.id].value:'';
+                let attributeData=null;
 
+// console.log('task data',form.task_data);
                 let value=form.task_data.filter((td) => parseInt(td.id, 10) === parseInt(ta.id, 10));
                 if(value.length>0){
+                    attributeData=value[0];
+                    // name=attributeData.fieldId;
+                    //fieldId
+                    // console.log('attribute data',attributeData);
+                    // console.log(attributeData);
+                    // console.log(ta);
+
                     value=value[0].value;
+                    // console.log(value);
+
                 }else{
                     value='';
                 }
 
                 return (
                     <div key={ta.id}>
-                        <CustomAttributeInput type={ta.type} customAttribute={ta} title={ta.title} value={value} action={formTaskAttributeChangeHandler} name={name} />
+                        <CustomAttributeInput type={ta.type} customAttribute={ta} title={ta.title} value={value} action={formTaskAttributeChangeHandler} name={name} attributeData={attributeData} />
                     </div>
                 )
 

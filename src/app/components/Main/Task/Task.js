@@ -134,13 +134,35 @@ class Task extends Component {
 
     formTaskAttributeChangeHandler = (name, value, e) => {
 
-        // console.log('change', name, 'value:'+value);
+        console.log('change', name, 'value:',value);
         let form = Object.assign({}, this.state.form);
-        form.task_data[name] = {id:name,value:value};
+
+
+        //form.task_data[name] = {id:name,value:value};
+
+        const isSetInState=!!(form.task_data.filter((td) => parseInt(td.id, 10) === parseInt(name, 10))).length;
+        console.log('is in state:',isSetInState)
+
+        if(isSetInState) {
+            form.task_data = form.task_data.map((td) => {
+                if (parseInt(td.id, 10) === parseInt(name, 10)) {
+                    return {id: name, value: value}
+                }
+                return td;
+            });
+        }
+        else{
+            form.task_data.push({id:name,value:value});
+        }
+
+
+
+
+
         // form.task_data[name] = value;
 
         this.setState({form: form});
-        console.log('form change:',name,value);
+        // console.log('form ta change:',name,value);
         console.log('state:',this.state);
     };
 
@@ -331,6 +353,7 @@ class Task extends Component {
                     closed_at: task.closedAt,
                     tags: task.tags,
                     important: task.important,
+                    // task_data: task.taskData?task.taskData.map(td=>{return {id:td.taskAttribute.id,value:td.value,fieldId:td.id,data:td}}):[],
                     task_data: task.taskData?task.taskData.map(td=>{return {id:td.taskAttribute.id,value:td.value}}):[],
                 };
 
@@ -457,6 +480,7 @@ function mapStateToProps(state, ownProps) {
             user: state.auth.user,
             creatingTask: false,
             taskAttributes: state.taskAttributes && state.taskAttributes.data?state.taskAttributes.data:[]
+            // taskAttributes: state.tasks.options.taskAttributes
         };
     }
 

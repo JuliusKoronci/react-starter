@@ -10,7 +10,7 @@ class CustomAttributeInput extends Component {
     }
 
     onChange = (value) => {
-        // console.log('on change',value)
+        console.log('on change',value)
         this.props.action(this.props.name, value)
     };
 
@@ -18,11 +18,22 @@ class CustomAttributeInput extends Component {
       this.onChange(value);
     };
 
+
+    onChangeSimpleSelect = (value) => {
+        console.log('on change simple',value);
+        this.onChange(value.value);
+    };
+
     onChangeSelect = (value) => {
-        // console.log('on change multiselect',value);
-        let newValue = (this.props.value?this.props.value+',':'') +value.value;
+        console.log('on change multiselect',value);
+        // let newValue = (this.props.value?this.props.value+',':'') +value.value;
+        // let newValue = (this.props.value?this.props.value+',':'') +value.value;
+        // let newValue = (this.props.value?this.props.value.push(value.value):[value.value]);
+        let newValue = value.map(val=>{return val.value}).join(',');
         // this.props.action(this.props.name, value.value)
-        this.props.action(this.props.name, newValue)
+        // this.props.action(this.props.name, newValue)
+
+        this.onChange(newValue);
     };
 
     // newOptionClick = (value) => {
@@ -64,7 +75,7 @@ class CustomAttributeInput extends Component {
 
         //simple select
         if (type === 'simple_select') {
-
+console.log(value)
             // console.log(customAttribute)
             let options= customAttribute.options.split(',').map(option=>{
                 return {value: option, label: option};
@@ -77,7 +88,7 @@ class CustomAttributeInput extends Component {
                         options={options}
                         value={value}
                         // action={(e) => {this.onChange(e.target.value)}}
-                        onChange={this.onChange}
+                        onChange={this.onChangeSimpleSelect}
                         // action={(e) => {alert('sdf');this.onChange(e.target.value)}}
                         // action={alert('sdf')}
                 />
@@ -88,10 +99,17 @@ class CustomAttributeInput extends Component {
 
         //multiselect
         if (type === 'multi_select') {
+            console.log(value)
+
+            let selValue=[];
+            if(value){
+                selValue=value.split(',').map(val=>{return {value:val,label:val}});//{value:value,label:value};
+            }
             // console.log('multiselect value',value);
             input = <Select label={title}
                             icon="&#xE7FD;"
-                            value={value}
+                            multi={true}
+                            value={selValue}
                             options={
                                 customAttribute.options.split(',').map(option=>{return {value: option,label: option}})
                             }
@@ -117,7 +135,7 @@ class CustomAttributeInput extends Component {
             <div className="uk-input-group" style={{marginTop: '20px'}}>
 
                 <span className="uk-input-group-addon"><i className="material-icons"/></span>
-                <label className="uk-text-muted">{title}</label>
+                <label className="uk-text-muted">{title} {customAttribute.id}</label>
 
                 {/*<h3>{title} {this.props.name} {type}</h3>*/}
                 {/*<h4>{value}</h4>*/}
