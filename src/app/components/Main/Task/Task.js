@@ -414,7 +414,6 @@ class Task extends Component {
     render() {
 
         if (this.props.task && this.props.task.canEdit) {
-            return this.renderReadonlyTask();
             return this.renderTask()
         }
         if (this.props.task && !this.props.task.canEdit) {

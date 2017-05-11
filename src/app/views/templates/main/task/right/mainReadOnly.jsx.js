@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
 import Attachment from './attachmentReadOnly.jsx';
-import CustomAttributeInput from '../../../../../forms/general/CustomAttributeInput.form';
 
 
 const main = ({task, handleFileDownload, form}) => {
