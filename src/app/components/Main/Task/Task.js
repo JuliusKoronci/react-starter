@@ -6,6 +6,7 @@ import * as genActions from '../../../redux/actions/general.action';
 import * as settingsActions from '../../../redux/actions/settings.action';
 import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import ViewCreatable from '../../../views/templates/main/task/creatingTask.jsx';
+import ViewReadable from '../../../views/templates/main/task/readOnlyTask.jsx';
 import configResolver from '../../../../config/configResolver';
 import {generateRoute} from '../../../../config/router';
 import {entityCreated, entityError, stripEmptyValues} from '../../../services/general';
@@ -411,8 +412,9 @@ class Task extends Component {
     }
 
     render() {
-        
+
         if (this.props.task && this.props.task.canEdit) {
+            return this.renderReadonlyTask();
             return this.renderTask()
         }
         if (this.props.task && !this.props.task.canEdit) {
@@ -431,13 +433,7 @@ class Task extends Component {
 
     renderReadonlyTask = () => {
         // console.log(this.props.task);
-        return (<ViewEditable
-            handleFileUpload={this.handleFileUpload}
-            handleFileDownload={this.handleFileDownload}
-            handleFileDelete={this.handleFileDelete}
-            handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
-            handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
-
+        return (<ViewReadable
             sendComment={this.sendComment}
 
             formChangeHandler={this.formChangeHandler}
@@ -454,9 +450,10 @@ class Task extends Component {
             commentFormAttachments={this.state.commentFormAttachments}
             handleCommentFileUpload={this.handleCommentFileUpload}
 
-            saveAction={this.saveTask}
+            handleFileDownload={this.handleFileDownload}
 
             form={this.state.form}
+
             {...this.props}
         />);
     }
