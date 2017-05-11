@@ -10,30 +10,38 @@ class CustomAttributeInput extends Component {
     }
 
     onChange = (value) => {
-        console.log('on change',value)
+        console.log('on change', value)
         this.props.action(this.props.name, value)
     };
 
-    formInputChangeHandler=(name, value)=>{
-      this.onChange(value);
+    formInputChangeHandler = (name, value) => {
+        this.onChange(value);
     };
 
 
     onChangeSimpleSelect = (value) => {
-        console.log('on change simple',value);
+        console.log('on change simple', value);
         this.onChange(value.value);
     };
 
     onChangeSelect = (value) => {
-        console.log('on change multiselect',value);
+        console.log('on change multiselect', value);
         // let newValue = (this.props.value?this.props.value+',':'') +value.value;
         // let newValue = (this.props.value?this.props.value+',':'') +value.value;
         // let newValue = (this.props.value?this.props.value.push(value.value):[value.value]);
-        let newValue = value.map(val=>{return val.value}).join(',');
+        let newValue = value.map(val => {
+            return val.value
+        }).join(',');
         // this.props.action(this.props.name, value.value)
         // this.props.action(this.props.name, newValue)
 
         this.onChange(newValue);
+    };
+
+
+    onChangeCheck = (e) => {
+        // console.log(e.target.checked);
+        this.onChange(e.target.checked+'');
     };
 
     // newOptionClick = (value) => {
@@ -45,8 +53,10 @@ class CustomAttributeInput extends Component {
 
     render() {
 
+
         const {value, type, title, customAttribute} = this.props;
 
+        // console.log(value)
         let input = type;
 
 
@@ -66,18 +76,16 @@ class CustomAttributeInput extends Component {
         //date
         if (type === 'date') {
             input = <DatePicker action={this.formInputChangeHandler} value={value}
-                                fieldName={name} label={title} icon="&#xE858;" formInputChangeHandler={this.formInputChangeHandler} />
+                                fieldName={name} label={title} icon="&#xE858;"
+                                formInputChangeHandler={this.formInputChangeHandler}/>
         }
-
-
-
 
 
         //simple select
         if (type === 'simple_select') {
-console.log(value)
+            console.log(value)
             // console.log(customAttribute)
-            let options= customAttribute.options.split(',').map(option=>{
+            let options = customAttribute.options.split(',').map(option => {
                 return {value: option, label: option};
             });
             // console.log(options)
@@ -87,23 +95,23 @@ console.log(value)
                         defaultValue={value}
                         options={options}
                         value={value}
-                        // action={(e) => {this.onChange(e.target.value)}}
+                    // action={(e) => {this.onChange(e.target.value)}}
                         onChange={this.onChangeSimpleSelect}
-                        // action={(e) => {alert('sdf');this.onChange(e.target.value)}}
-                        // action={alert('sdf')}
+                    // action={(e) => {alert('sdf');this.onChange(e.target.value)}}
+                    // action={alert('sdf')}
                 />
         }
-
-
 
 
         //multiselect
         if (type === 'multi_select') {
             console.log(value)
 
-            let selValue=[];
-            if(value){
-                selValue=value.split(',').map(val=>{return {value:val,label:val}});//{value:value,label:value};
+            let selValue = [];
+            if (value) {
+                selValue = value.split(',').map(val => {
+                    return {value: val, label: val}
+                });//{value:value,label:value};
             }
             // console.log('multiselect value',value);
             input = <Select label={title}
@@ -111,25 +119,24 @@ console.log(value)
                             multi={true}
                             value={selValue}
                             options={
-                                customAttribute.options.split(',').map(option=>{return {value: option,label: option}})
+                                customAttribute.options.split(',').map(option => {
+                                    return {value: option, label: option}
+                                })
                             }
                             onChange={this.onChangeSelect}
 
-                            // action={(e) => {
-                            //     this.onChange(e.target.value)
-                            //     // alert(e.target.value)
-                            // }}
+                // action={(e) => {
+                //     this.onChange(e.target.value)
+                //     // alert(e.target.value)
+                // }}
 
             />
         }
 
         //checkbox
         if (type === 'checkbox') {
-            //input='-------';
-            // input = <Multicheckbox action={this.formInputChangeHandler} value={value} options={customAttribute.options}
-            //     name={name} label={title} formInputChangeHandler={this.formInputChangeHandler} />;
+            input = <input type="checkbox" checked={(value==='true')} name={name} onChange={this.onChangeCheck}/>
         }
-
 
         return (
             <div className="uk-input-group" style={{marginTop: '20px'}}>

@@ -110,7 +110,7 @@ class configResolver {
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
             allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
-            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
+            customValuesEnabledOn: ['multi_select', 'simple_select']
         }
     };
 
@@ -131,7 +131,7 @@ class configResolver {
             afterEntityReceivedAction: taskAttributeReceived,
             redirectAfterCreation: paths.task_attributes,
             allowedFormFields: ['title', 'options', 'type', 'description', 'is_active'],
-            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
+            customValuesEnabledOn: ['multi_select', 'simple_select']
         }
     };
 
@@ -153,7 +153,7 @@ class configResolver {
             afterEntityReceivedAction: userAttributeReceived,
             redirectAfterCreation: paths.user_attributes,
             allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
-            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
+            customValuesEnabledOn: ['multi_select', 'simple_select']
         }
     };
     static userAttributeUpdate = (id) => {
