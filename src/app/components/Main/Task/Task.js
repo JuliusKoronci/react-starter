@@ -23,6 +23,9 @@ class Task extends Component {
             saved: false,
             creatingTask: true,
             newTaskTitle: '',
+            newTaskDescription:'',
+            newTaskProject:'',
+            newTaskAssigner:'',
 
             form: {
                 title: '',
@@ -203,6 +206,20 @@ class Task extends Component {
     };
 
 
+
+
+    inputChangeHandler = (name, value, e) => {
+        console.log(name,value)
+
+        if(name==='newTaskProject'){
+            //TODO update assignees
+            let config=configResolver.projectAssigners(value);
+            this.props.actions.getProjectAssigners(config);
+        }
+        this.setState({[name]: value});
+    };
+
+
     saveTask = () => {
 
         let values=Object.assign({}, this.state.form);
@@ -303,8 +320,13 @@ class Task extends Component {
     createTaskHandler = (e) => {
         e.preventDefault();
         let config = configResolver.createTask();
-        let values = {'title': this.state.newTaskTitle};
+        let values = {
+            'title': this.state.newTaskTitle,
+            'description':this.state.newTaskDescription,
+            'projectId':this.state.newTaskProject,
 
+        };
+// console.log(values);
         // console.log(this.state.newTaskTitle);
         // this.props.actions.createEntity(values,config);
         this.props.actions.createTask(values, config);
@@ -318,7 +340,6 @@ class Task extends Component {
             this.props.actions.loadTaskById(this.props.params.taskId);
             this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
             this.props.actions.requestTaskAttributes();
-
             this.setState({'creatingTask': false})
         } else {
             this.setState({'creatingTask': true})
@@ -330,15 +351,12 @@ class Task extends Component {
         if (prevProps.task !== this.props.task) {
 
             // console.log(this.props.task);
-            // console.log('did update task component');
+            console.log('did update task component');
 
 
             let task=this.props.task;
             if(task){
                 // console.log(task);
-
-
-                
                 let form={
                     title: task.title,
                     description: task.description,
@@ -356,17 +374,12 @@ class Task extends Component {
                     // task_data: task.taskData?task.taskData.map(td=>{return {id:td.taskAttribute.id,value:td.value,fieldId:td.id,data:td}}):[],
                     task_data: task.taskData?task.taskData.map(td=>{return {id:td.taskAttribute.id,value:td.value}}):[],
                 };
-
                 // console.log(form.assigned,task)
-
                 // console.log('task data:',form.task_data)
-
 
                 this.setState({
                     form:form
                 });
-
-
             }
 
             if (this.props.params.taskId) {
@@ -398,11 +411,12 @@ class Task extends Component {
     }
 
     render() {
+        
         if (this.props.task && this.props.task.canEdit) {
             return this.renderTask()
         }
         if (this.props.task && !this.props.task.canEdit) {
-            return <p>Read only task</p>
+            return this.renderReadonlyTask()
         }
         else if (this.props.creatingTask) {
             return this.renderCreatingTask()
@@ -412,14 +426,57 @@ class Task extends Component {
         }
     }
 
+
+
+
+    renderReadonlyTask = () => {
+        // console.log(this.props.task);
+        return (<ViewEditable
+            handleFileUpload={this.handleFileUpload}
+            handleFileDownload={this.handleFileDownload}
+            handleFileDelete={this.handleFileDelete}
+            handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
+            handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
+
+            sendComment={this.sendComment}
+
+            formChangeHandler={this.formChangeHandler}
+            formInputChangeHandler={this.formInputChangeHandler}
+            formTaskAttributeChangeHandler={this.formTaskAttributeChangeHandler}
+
+            toggleState={this.toggleState}
+            commentFormEmail={this.state.commentFormEmail}
+            commentFormInternalNote={this.state.commentFormInternalNote}
+            commentFormBody={this.state.commentFormBody}
+            commentFormEmailTo={this.state.commentFormEmailTo}
+            commentFormEmailCc={this.state.commentFormEmailCc}
+            commentFormEmailSubject={this.state.commentFormEmailSubject}
+            commentFormAttachments={this.state.commentFormAttachments}
+            handleCommentFileUpload={this.handleCommentFileUpload}
+
+            saveAction={this.saveTask}
+
+            form={this.state.form}
+            {...this.props}
+        />);
+    }
+
+
     renderCreatingTask = () => {
         return (<ViewCreatable
             saveAction={this.createTaskHandler}
             handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
             newTaskTitleChangeHandler={this.newTaskTitleChangeHandler}
+            newTaskProject={this.state.newTaskProject}
+            newTaskAssigner={this.state.newTaskAssigner}
+            form={this.state.form}
+            inputChangeHandler={this.inputChangeHandler}
+
             {...this.props}
         />);
     };
+
+
 
     renderTask = () => {
         // console.log(this.props.task);
@@ -469,7 +526,9 @@ function mapStateToProps(state, ownProps) {
             newTaskTitle: state.newTaskTitle,
             task: false,
             user: state.auth.user,
-            creatingTask: true
+            creatingTask: true,
+            userProjects:state.projects.data,
+            options: state.tasks.options,
         };
     } else {
 

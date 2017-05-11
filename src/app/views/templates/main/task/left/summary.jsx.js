@@ -10,7 +10,7 @@ const summary = ({ task, actions, canEdit, formInputChangeHandler, form }) => {
 			<div className="uk-margin-medium-bottom">
 
                 {canEdit &&
-				<RichText fieldName="description" label="Description" form={form} formInputChangeHandler={formInputChangeHandler}  />
+				<RichText fieldName="description" label="Description" form={form} action={formInputChangeHandler}  />
                 }
                 {!canEdit && <p dangerouslySetInnerHTML={{__html:task.description}} />}
 
@@ -32,7 +32,7 @@ const summary = ({ task, actions, canEdit, formInputChangeHandler, form }) => {
 
 
                 {canEdit &&
-				<RichText fieldName="work" label="Work Done" form={form} formInputChangeHandler={formInputChangeHandler} />
+				<RichText fieldName="work" label="Work Done" form={form} action={formInputChangeHandler} />
                 }
                 {!canEdit && <p dangerouslySetInnerHTML={{__html:task.work}} />}
 
