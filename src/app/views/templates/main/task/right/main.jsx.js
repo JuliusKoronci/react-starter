@@ -13,59 +13,12 @@ import CustomAttributeInput from '../../../../../forms/general/CustomAttributeIn
 const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler, formTaskAttributeChangeHandler, form, taskAttributes}) => {
 
     const assignedOptions = options.assigner.map(r => {
-        // return {value: r.id, label: r.username}
         return {id: r.id, title: r.username}
     });
 
 
-    // console.log(assignedOptions)
-// console.log(form.assigned);
-// console.log(taskAttributes);
-
     return (
         <div className="md-list md-list-addon">
-
-
-
-            {/*FORM CHANGE FIELDID VS ID*/}
-
-
-            {taskAttributes.map(ta=>{
-                let name=ta.id;
-
-                //filter
-                // let value=form.task_data&&form.task_data[ta.id]? form.task_data[ta.id].value:'';
-                let attributeData=null;
-
-// console.log('task data',form.task_data);
-                let value=form.task_data.filter((td) => parseInt(td.id, 10) === parseInt(ta.id, 10));
-                if(value.length>0){
-                    attributeData=value[0];
-                    // name=attributeData.fieldId;
-                    //fieldId
-                    // console.log('attribute data',attributeData);
-                    // console.log(attributeData);
-                    // console.log(ta);
-
-                    value=value[0].value;
-                    // console.log(value);
-
-                }else{
-                    value='';
-                }
-
-                return (
-                    <div key={ta.id}>
-                        <CustomAttributeInput type={ta.type} customAttribute={ta} title={ta.title} value={value} action={formTaskAttributeChangeHandler} name={name} attributeData={attributeData} />
-                    </div>
-                )
-
-            })}
-
-
-            <hr />
-            <hr />
-
 
 
             <Status task={task} statuses={options.status} user={user} action={actions.handleStatus}/>
@@ -185,6 +138,31 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
 
             <hr />
 
+
+
+
+            <hr />
+            {taskAttributes.map(ta=>{
+                let name=ta.id;
+
+                let attributeData=null;
+
+                let value=form.task_data.filter((td) => parseInt(td.id, 10) === parseInt(ta.id, 10));
+                if(value.length>0){
+                    attributeData=value[0];
+                    value=value[0].value;
+
+                }else{
+                    value='';
+                }
+
+                return (
+                    <div key={ta.id}>
+                        <CustomAttributeInput type={ta.type} customAttribute={ta} title={ta.title} value={value} action={formTaskAttributeChangeHandler} name={name} attributeData={attributeData} />
+                    </div>
+                )
+
+            })}
 
 
 

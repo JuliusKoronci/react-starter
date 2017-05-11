@@ -128,20 +128,20 @@ class Task extends Component {
         const targetName = e.target.name;
         this.setState({[targetName]: value});
 
-        console.log(this.state);
+        // console.log(this.state);
     };
 
 
     formTaskAttributeChangeHandler = (name, value, e) => {
 
-        console.log('change', name, 'value:',value);
+        // console.log('change', name, 'value:',value);
         let form = Object.assign({}, this.state.form);
 
 
         //form.task_data[name] = {id:name,value:value};
 
         const isSetInState=!!(form.task_data.filter((td) => parseInt(td.id, 10) === parseInt(name, 10))).length;
-        console.log('is in state:',isSetInState)
+        // console.log('is in state:',isSetInState)
 
         if(isSetInState) {
             form.task_data = form.task_data.map((td) => {
@@ -163,14 +163,14 @@ class Task extends Component {
 
         this.setState({form: form});
         // console.log('form ta change:',name,value);
-        console.log('state:',this.state);
+        // console.log('state:',this.state);
     };
 
 
     formInputChangeHandler = (name, value, e) => {
 
         // let obj={form[name]:value};
-        console.log('change', name, 'value:'+value);
+        // console.log('change', name, 'value:'+value);
 
         if(name==='project'){
             //TODO update assignees
@@ -199,7 +199,7 @@ class Task extends Component {
         let form = Object.assign({}, this.state.form);
         form[name] = value;
         this.setState({form: form});
-        console.log(this.state);
+        // console.log(this.state);
     };
 
 
@@ -212,7 +212,7 @@ class Task extends Component {
         values.closed_at=this.state.form.closed_at&&this.state.form.closed_at.date?this.state.form.closed_at.date:this.state.form.closed_at;
 
         // console.log(this.state.form.started_at)
-        console.log(this.state.form.task_data);
+        // console.log(this.state.form.task_data);
 
         let config = configResolver.taskUpdate(this.props.params.taskId);
         //this.props.actions.patchEntity(values,config,this.props.params.taskId);
@@ -222,7 +222,7 @@ class Task extends Component {
 
         let customAttributes={};
         values.task_data=values.task_data.filter(function(val){if(val)return val})
-        console.debug(values.task_data);
+        // console.debug(values.task_data);
         let sendValues=Object.assign({}, values);
             values.task_data.map(v=>{
                 customAttributes[v.id]=v.value;
@@ -232,7 +232,7 @@ class Task extends Component {
         // sendValues['started_at']='';
         this.props.actions.taskUpdate(sendValues,config,this.props.params.taskId);
 
-        console.log(values);
+        // console.log(values);
     };
 
 
@@ -359,7 +359,8 @@ class Task extends Component {
 
                 // console.log(form.assigned,task)
 
-                console.log('task data:',form.task_data)
+                // console.log('task data:',form.task_data)
+
 
                 this.setState({
                     form:form
