@@ -1,4 +1,5 @@
 export const HOST_URL = 'https://dev.lanhelpdesk.com';
+// export const HOST_URL = 'http://localhost:8000';
 export const BASE_URL = HOST_URL + '/api/v1';
 
 export const LOGIN_URL = BASE_URL + '/token-authentication';
@@ -21,6 +22,7 @@ export const PROJECTSHAREDFILTERS_LIST = BASE_URL + '/task-bundle/project-shared
 export const SHAREDFILTERS_LIST = BASE_URL + '/task-bundle/shared-filters';
 export const USERATTRIBUTES_LIST = BASE_URL + '/task-bundle/user-attributes';
 export const PROJECT_LIST = BASE_URL + '/task-bundle/projects';
+export const PROJECT_ASSIGNERS = BASE_URL + '/task-bundle/project/assigners';
 export const TAG_LIST = BASE_URL + '/task-bundle/tags';
 export const LOAD_ATTACHMENT = BASE_URL + '/core-bundle/cdn/load';
 export const OPTION_LIST = BASE_URL + '/task-bundle/tasks/options';

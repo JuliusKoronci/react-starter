@@ -13,7 +13,9 @@ import {
 	CREATE_TASK,
 	DELETE_TASK,
     ADD_TASK_COMMENT,
-    TASK_COMMENT_ADDED
+    TASK_COMMENT_ADDED,
+	TASK_UPDATE,
+    PROJECT_ASSIGNERS_REQUEST
 } from '../constants';
 
 import configResolver from '../../../config/configResolver';
@@ -25,6 +27,15 @@ export function addTaskComment(data,config) {
         data,
 		config
     };
+}
+
+export function taskUpdate(data, config, taskId) {
+    return {
+        type: TASK_UPDATE,
+        data,
+		config,
+        taskId
+    }
 }
 
 
@@ -90,6 +101,14 @@ export function taskUpdated(data, taskId) {
 		taskId
 	}
 }
+
+export function getProjectAssigners(config) {
+    return {
+        type: PROJECT_ASSIGNERS_REQUEST,
+		config
+    }
+}
+
 export function taskUpload(formData, taskId) {
 	return {
 		type: TASK_UPLOADED,

@@ -4,7 +4,7 @@ const taskAssignees = ({task}) => {
     return (
         <div>
         {task.taskHasAssignedUsers.map((user, i) => {
-            return (user.user.username)
+            return (user.user.username +', ')
         })}
         </div>
     )

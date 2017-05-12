@@ -1,4 +1,5 @@
-import {USERS_ALL_RECEIVED,REQUEST_USERS_ALL,FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED,REQUEST_PROJECTS, REQUEST_TAGS, TAGS_RECEIVED}
+import {USERS_ALL_RECEIVED,REQUEST_USERS_ALL,FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED,REQUEST_PROJECTS, REQUEST_TAGS, TAGS_RECEIVED, PROJECT_ASSIGNERS_RECEIVED,
+    PROJECT_ASSIGNERS_REQUEST}
 from '../constants';
 
 export function requestFilters() {
@@ -65,6 +66,16 @@ export function toggleSidebar(data) {
 export function optionsReceived(data) {
     return {
         type: OPTIONS_RECEIVED,
+        data
+    }
+}
+
+
+
+
+export function projectAssignersReceived(data) {
+    return {
+        type: PROJECT_ASSIGNERS_RECEIVED,
         data
     }
 }

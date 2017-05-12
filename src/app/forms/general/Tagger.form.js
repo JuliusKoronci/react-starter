@@ -9,7 +9,8 @@ class Tagger extends Component {
     }
 
     componentDidUpdate() {
-        // console.log(this.props.input.value);
+
+        console.log('input value',this.props.input.value);
         // this.setState({
         //     values:this.props.input.value?(this.props.input.value.split(',').map(option => {
         //         return {
@@ -22,28 +23,30 @@ class Tagger extends Component {
 
     onChange = (values) => {
         // this.props.input.onChange(values);
-        console.log('tagger on change ', values);
+        // console.log('tagger on change ', values);
         let newValue = values.map(value => {
             return value.value;
         }).join();
-        console.log(newValue);
+        // console.log('new value',newValue);
         //this.props.input.value+','+value.value;
         this.props.input.onChange(newValue);
     };
 
     newOptionClick = (value) => {
-        console.log('new option click ', value);
-        let newValue = this.props.input.value?this.props.input.value+ ',':'' + value.value;
+        // console.log('new option click ', value);
+        let newValue = (this.props.input.value?this.props.input.value+',':'') +value.value;
+        // console.log(this.props.input.value);
+        // console.log(newValue);
         this.props.input.onChange(newValue);
     };
-
-    onSetValues = (values) => {
-        console.log('on set values:', values);
-    };
-
-    selectValue = (value) => {
-        console.log('select value: ', value);
-    };
+    //
+    // onSetValues = (values) => {
+    //     console.log('on set values:', values);
+    // };
+    //
+    // selectValue = (value) => {
+    //     console.log('select value: ', value);
+    // };
 
     render() {
 
@@ -70,10 +73,13 @@ class Tagger extends Component {
                      label: option
                      }})}
                      */
+
                     joinValues={true}
                     multi={true}
                     onChange={ this.onChange }
                     onBlurResetsInput={false}
+
+
                     //onInputChange={ this.onChange }
 
                     /*
@@ -89,10 +95,10 @@ class Tagger extends Component {
                      */
 
 
-                    setValues={(values) => {
-                        console.log('set vals');
-                        this.onSetValues(values);
-                    }}
+                    // setValues={(values) => {
+                    //     console.log('set vals');
+                    //     this.onSetValues(values);
+                    // }}
 
                     onNewOptionClick={this.newOptionClick}
                     selectValue={this.selectValue}

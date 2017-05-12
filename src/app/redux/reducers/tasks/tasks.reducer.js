@@ -6,7 +6,8 @@ import {
     OPTIONS_RECEIVED,
     AFTER_TASK_ATTACHMENT_DELETED,
     AFTER_TASK_ATTACHMENT_UPLOADED,
-    TASK_COMMENT_ADDED
+    TASK_COMMENT_ADDED,
+    PROJECT_ASSIGNERS_RECEIVED
 } from '../../constants';
 
 const defaultState: {data: Array<Object>, _links: Object}= {
@@ -23,6 +24,7 @@ const defaultState: {data: Array<Object>, _links: Object}= {
         'tag': [],
         'assigner': [],
         'unit': [],
+        'taskAttributes': [],
     },
     'task': {}
 };
@@ -51,6 +53,14 @@ export default function tasks(state: Object = defaultState, action: Object): Obj
             return {
                 ...state,
                 'options': action.data
+            };
+
+        case PROJECT_ASSIGNERS_RECEIVED:
+            console.log(action.data);
+            console.log({...state.options, ...action.data});
+            return {
+                ...state,
+                'options': {...state.options, ...action.data}
             };
 
         case TASK_COMMENT_ADDED:

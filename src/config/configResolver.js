@@ -12,7 +12,7 @@ import {
     smtpReceived,
     roleReceived
 } from '../app/redux/actions/settings.action';
-import {optionsReceived, usersAllReceived} from '../app/redux/actions/system.actions';
+import {optionsReceived, usersAllReceived, projectAssignersReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, tasksReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 import {tagReceived, tagCreated} from '../app/redux/actions/tag.action';
@@ -110,7 +110,7 @@ class configResolver {
             afterEntityReceivedAction: companyAttributeReceived,
             redirectAfterCreation: paths.companies_attributes,
             allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
-            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
+            customValuesEnabledOn: ['multi_select', 'simple_select']
         }
     };
 
@@ -131,7 +131,7 @@ class configResolver {
             afterEntityReceivedAction: taskAttributeReceived,
             redirectAfterCreation: paths.task_attributes,
             allowedFormFields: ['title', 'options', 'type', 'description', 'is_active'],
-            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
+            customValuesEnabledOn: ['multi_select', 'simple_select']
         }
     };
 
@@ -153,7 +153,7 @@ class configResolver {
             afterEntityReceivedAction: userAttributeReceived,
             redirectAfterCreation: paths.user_attributes,
             allowedFormFields: ['title', 'description', 'options', 'type', 'is_active'],
-            customValuesEnabledOn: ['multi_select', 'checkbox', 'simple_select']
+            customValuesEnabledOn: ['multi_select', 'simple_select']
         }
     };
     static userAttributeUpdate = (id) => {
@@ -390,6 +390,14 @@ class configResolver {
         }
     };
 
+
+    static projectAssigners = (id) => {
+        return {
+            url:urls.PROJECT_ASSIGNERS + '/' + id,
+            afterEntityReceivedAction: projectAssignersReceived,
+        }
+    };
+
     static getProfileAvatarConfig = (id) => {
         return {
             id: id ? id : null,
@@ -404,6 +412,34 @@ class configResolver {
             url: urls.FILE_UPLOAD,
             uploadUrl: urls.FILE_UPLOAD,
             remapValues: {'image': 'image'},
+        }
+    };
+
+
+    static taskUpdate(taskId) {
+        return {
+            url: urls.TASK_LIST + '/quick-update/' + taskId,
+            // allowedFormFields: ['title','description','work','workTime'],
+            remapValues:{
+                'title':'title',
+                'description':'description',
+                'work':'work',
+                'work_time':'workTime',
+                'started_at':'startedAt',
+                'deadline':'deadline',
+                'closed_at':'closedAt',
+                'project':'project',
+                'assigned':'assigned',
+                'company':'company',
+                'requester':'requester',
+                'important':'important',
+                'tags':'tag',
+                'task_data':'task_data'
+            },
+            jsonStringify:true,
+            // contentType:'default',
+            // afterFileDeletedAction: taskAttachmentDeleted,
+            // afterFileDeletedActionParams: {taskId, slug}
         }
     };
 

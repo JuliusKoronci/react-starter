@@ -35,11 +35,8 @@ class RichText extends Component {
 
 
     handleChange=(value)=>{
-
-        // console.log('handling change');
-        if(this.props.formInputChangeHandler){
-
-            this.props.formInputChangeHandler(this.props.fieldName,value);
+        if(this.props.action){
+            this.props.action(this.props.fieldName,value);
         }else {
             this.setState({text: value});
         }
@@ -48,7 +45,7 @@ class RichText extends Component {
     render() {
 
         let val=this.props.form && this.props.form[this.props.fieldName]?this.props.form[this.props.fieldName]:false;
-        const value = val || this.props.task[this.props.fieldName] || '';
+        const value = val || this.props.value || (this.props.task&&this.props.task[this.props.fieldName]?this.props.task[this.props.fieldName]:'');
 
         let modules = {
             toolbar: [
@@ -74,7 +71,6 @@ class RichText extends Component {
             {this.props.label && <label className="uk-text-muted">{this.props.label}</label>}
 
             <ReactQuill valuee={this.state.text} theme="snow"
-                        valueeee={this.props.form[this.props.fieldName]}
                         value={value}
                         modules={modules} formats={formats}
                         onChange={this.handleChange}/>
