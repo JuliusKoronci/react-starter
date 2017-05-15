@@ -25,12 +25,13 @@ class Filter extends Component {
             getColumnsFromState:false,
             columns: [
                 {title: true},
-                {status: true},
-                {project: true},
-                {creator: false},
                 {requester: true},
-                {company: true},
+                {project: true},
                 {assigned: true},
+                {status: true},
+
+                {creator: false},
+                {company: false},
                 {tag: false},
                 // {owner: false},
                 {created: false},

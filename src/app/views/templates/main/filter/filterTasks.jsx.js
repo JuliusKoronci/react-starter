@@ -38,7 +38,7 @@ const FilterTasks = (props) => {
                                                                                       className="check_all"/></th>
 
 
-                        <th className="uk-text-center ">Key</th>
+                        <th className="uk-text-center ">Task ID</th>
 
 
                         {/*{ Object.keys(props.columns).map((key, i)=>{*/}
