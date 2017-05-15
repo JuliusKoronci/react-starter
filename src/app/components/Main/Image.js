@@ -33,7 +33,6 @@ class Image extends Component {
 
     render() {
         const props = this.props;
-
         const params = {
             style: props.style ? props.style : {},
             className: props.className ? props.className : '',

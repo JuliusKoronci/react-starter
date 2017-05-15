@@ -7,7 +7,12 @@ const userDropdownMenu = ({user,logout,dropdownToggled,handleToggle}) => {
 
     <li className={dropdownToggled ? "uk-open" : ""} onClick={handleToggle}>
         <a href="#" className="user_action_image">
-            <UserAvatar user={user}/>
+
+
+            <div className="user_heading_avatar">
+                {user.username}
+            <UserAvatar user={user} className="thumbnail" />
+            </div>
         </a>
 
         {dropdownToggled &&
