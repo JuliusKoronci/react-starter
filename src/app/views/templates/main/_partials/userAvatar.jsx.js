@@ -9,7 +9,6 @@ const userAvatar = ({user, className}) => {
     {/*<img className="md-user-image" src={user.image ? user.image : avatar}*/}
          {/*alt={user.username} title={user.username}/>*/}
 
-         console.log(user);
     return (
     <Image src={ user && user.image? LOAD_ATTACHMENT + '/'+user.image:'/assets/img/avatars/user.png'} staticSrc='/assets/img/avatars/user.png' fetchFromApi={!!(user && user.image)} alt="user avatar" className={className} />
     );

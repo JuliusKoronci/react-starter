@@ -1,4 +1,4 @@
-import {AUTH_LOGIN_SUCCESS, AUTH_LOGIN_ERROR, AUTH_LOGOUT} from '../../constants'
+import {AUTH_LOGIN_SUCCESS, AUTH_LOGIN_ERROR, AUTH_LOGOUT, PROFILE_RECEIVED} from '../../constants'
 
 const defaultState = {
     'authenticated': false,
@@ -15,6 +15,14 @@ export default function auth(state = defaultState, action) {
                 'jwt': action.data,
                 'user': action.user,
                 'error': ''
+            };
+        case PROFILE_RECEIVED:
+            const {facebook,google,linkdin,name,signature,surname,twitter}=action.data.data.detailData;
+            const {email,image, language, username}=action.data.data;
+            const user={facebook,google,linkdin,name,signature,surname,twitter,email,image, language, username};
+            return {
+                ...state,
+                'user':{...state.user, ...user}
             };
         case AUTH_LOGIN_ERROR:
             return {
