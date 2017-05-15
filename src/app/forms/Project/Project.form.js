@@ -10,6 +10,9 @@ class ProjectForm extends Component {
 
     render() {
         const {handleSubmit,heading} = this.props;
+        const fieldDisabled=this.props.formDisabled;
+
+
         return (
             <div className="md-card">
                 <form onSubmit={handleSubmit}>
@@ -22,20 +25,20 @@ class ProjectForm extends Component {
                             <div className="uk-margin-bottom">
 
                                 <Field type="checkbox" name="is_active" validate={[]} component={renderField}
-                                label="Active"/>
+                                label="Active" disabled={fieldDisabled} />
                                
                             </div>
                             <div className="uk-margin-bottom">
                                 <label className="inline-label">Project name</label>
-                                <Field type="text" name="title" validate={[]} component={renderField}/>
+                                <Field type="text" name="title" validate={[]} component={renderField} disabled={fieldDisabled} />
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Description</label>
-                                <Field type="textarea" name="description" validate={[]} component={renderTextarea}/>
+                                <Field type="textarea" name="description" validate={[]} component={renderTextarea} disabled={fieldDisabled} />
                             </div>
                             <div className="uk-margin-bottom">
-                                <Link className="md-btn md-btn-danger" to={generateRoute('projects')}>Cancel</Link>
-                                <button className="md-btn md-btn-primary alignright" href="settings_projects.html">Save</button>
+                                <Link className="md-btn md-btn-danger" to={generateRoute('projects')}>{ this.props.project && this.props.project.canEdit ?'Cancel':'Close'}</Link>
+                                { this.props.project && this.props.project.canEdit && <button className="md-btn md-btn-primary alignright" href="settings_projects.html">Save</button> }
                             </div>
                         </div>
                     </div>
@@ -52,6 +55,7 @@ function mapStateToProps(state, ownProps) {
     if (project.length > 0) {
         return {
             initialValues: project.length > 0 ? project[0] : {},
+            formDisabled:!(project.length > 0 && project[0].canEdit),
         };
     }
     return {};

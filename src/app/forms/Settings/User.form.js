@@ -54,7 +54,7 @@ class UserForm extends Component {
                 </div>
                 <div className="uk-grid" data-uk-grid-margin>
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
-                        <Field name="username" type="text" validate={[required]} component={renderField} id="user_edit_username_control" className="md-input" label="User name"/>
+                        <Field name="username" type="text" validate={[required]} component={renderField} id="user_edit_username_control" className="md-input" label="Login"/>
                     </div>
 
                     <div className="uk-width-medium-1-2 uk-margin-bottom">

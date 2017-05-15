@@ -20,7 +20,8 @@ const users = (props) => {
                 <table className="uk-table uk-text-nowrap">
                     <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Login</th>
+                        <th className="uk-text-center">Name</th>
                         <th className="uk-text-center">Email</th>
                         <th className="uk-text-center">Company</th>
                         <th className="uk-text-center">Active</th>
@@ -31,6 +32,7 @@ const users = (props) => {
                     {props.data.map((user, i) => {
                         return (
                             <tr key={i}>
+                                <td>{user.detailData && user.username}</td>
                                 <td>{user.detailData && user.detailData.name} {user.detailData && user.detailData.surname}</td>
                                 <td className="uk-text-center">{user.email}</td>
                                 <td className="uk-text-center">{user.company && user.company.title}</td>

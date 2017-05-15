@@ -8,10 +8,10 @@ import Multicheckbox from '../forms/general/MulticheckboxRedux.form';
 import Multiselect from '../forms/general/Multiselect.form';
 import Datepicker from '../forms/general/Datepicker.form';
 
-export const renderField = ({input, label, type, actions, className, meta: {touched, error, warning}}) => (
+export const renderField = ({input, label, type, actions, disabled, className, meta: {touched, error, warning}}) => (
     <div className={className?className+ " uk-form-row":'uk-form-row'}>
         <label htmlFor={input.name}>{label}</label>
-        <input className="md-input" {...input} type={type} {...actions} {...input.props} />
+        <input className="md-input" {...input} type={type} {...actions} {...input.props} disabled={disabled} />
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
     </div>
 );
@@ -25,10 +25,10 @@ export const renderRadio = ({input, label, type, actions, className, meta: {touc
 );
 
 
-export const renderColorpicker = ({input, label, type, meta: {touched, error, warning}}) => (
+export const renderColorpicker = ({input, label, type, disabled, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
         <label htmlFor={input.name}>{label}</label>
-        <Colorpicker input={input}  />
+        <Colorpicker input={input} disabled={disabled} />
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
     </div>
 );
@@ -40,11 +40,11 @@ export const renderRTE = ({input, label, type, meta: {touched, error, warning}})
     </div>
 );
 
-export const renderTextarea = ({input, label, type, meta: {touched, error, warning}}) => (
+export const renderTextarea = ({input, label, type, disabled, meta: {touched, error, warning}}) => (
     <div className="uk-form-row">
         <label htmlFor={input.name}>{label}</label>
         <div>
-        <textarea {...input} />
+        <textarea {...input} disabled={disabled}  />
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
     </div>
     </div>
