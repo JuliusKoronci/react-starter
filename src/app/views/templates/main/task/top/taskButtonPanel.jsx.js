@@ -5,6 +5,13 @@ const taskButtonPanel = ({saveAction, form, formInputChangeHandler}) => {
     return (
         <div>
             <div className="md-btn-group">
+
+                <a className="md-btn md-btn-danger md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+                   href="#">
+                    <i className="uk-icon-ban"/>
+                    DELETE
+                </a>
+
                 <a className="md-btn md-btn-warning md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
                    href="#">
                     <i className="uk-icon-ban"/>

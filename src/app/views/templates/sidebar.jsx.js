@@ -23,15 +23,15 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
                 </div>
             </div>
             <div className="menu_section">
-                <ul>
-                    <li>
-                        <Link onClick={createTask}>
-                            <span className="menu_icon"><i
-                                className="material-icons md-color-blue-500">&#xE145;</i></span>
-                            <span className="menu_title md-color-blue-500">NEW TASK</span>
-                        </Link>
-                    </li>
-                </ul>
+                {/*<ul>*/}
+                    {/*<li>*/}
+                        {/*<Link onClick={createTask}>*/}
+                            {/*<span className="menu_icon"><i*/}
+                                {/*className="material-icons md-color-blue-500">&#xE145;</i></span>*/}
+                            {/*<span className="menu_title md-color-blue-500">NEW TASK</span>*/}
+                        {/*</Link>*/}
+                    {/*</li>*/}
+                {/*</ul>*/}
                 <ul>
                     <li>
                         <Link to={'/tasks/create'}>
@@ -83,7 +83,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
 
                                    <span className="submenu-title">
                                      <Link to={link}
-                                           className={project.id==projectId?'active md-color-deep-orange-500':''}>
+                                           className={parseInt(project.id,10)===parseInt(projectId,10)?'active md-color-deep-orange-500':''}>
                                           {project.title}
                                         </Link>
                                      </span>

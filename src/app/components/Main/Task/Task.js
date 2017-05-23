@@ -83,34 +83,34 @@ class Task extends Component {
         e.preventDefault();
     };
 
-    _onValidate = () => {
-        const task = this.props.task;
-        console.log(task);
-
-        if (task.taskHasAssignedUsers.length === 0) {
-            return false;
-        }
-        if (task.title.trim() === '') {
-            return false;
-        }
-        if (!task.company && !task.company.id) {
-            return false;
-        }
-
-        return true;
-    };
-
-    _onNewTaskCreate = (taskId) => {
-        const path = generateRoute('task_list', {taskId: taskId});
-        if (this._onValidate()) {
-            this.setState({
-                saved: true,
-            });
-            entityCreated('Task created!', path);
-        } else {
-            entityError('The following fields are mandatory: Status, Project, Requester, Company, Assigned');
-        }
-    };
+    // _onValidate = () => {
+    //     const task = this.props.task;
+    //     console.log(task);
+    //
+    //     if (task.taskHasAssignedUsers.length === 0) {
+    //         return false;
+    //     }
+    //     if (task.title.trim() === '') {
+    //         return false;
+    //     }
+    //     if (!task.company && !task.company.id) {
+    //         return false;
+    //     }
+    //
+    //     return true;
+    // };
+    //
+    // _onNewTaskCreate = (taskId) => {
+    //     const path = generateRoute('task_list', {taskId: taskId});
+    //     if (this._onValidate()) {
+    //         this.setState({
+    //             saved: true,
+    //         });
+    //         entityCreated('Task created!', path);
+    //     } else {
+    //         entityError('The following fields are mandatory: Status, Project, Requester, Company, Assigned');
+    //     }
+    // };
     _onNewTaskCancel = (taskId) => {
         this.props.actions.deleteTask(`${TASK_LIST}/${taskId}`);
     };
@@ -335,6 +335,10 @@ class Task extends Component {
     };
 
 
+
+
+
+
     componentWillMount() {
 
         if (this.props.params.taskId) {
@@ -343,6 +347,9 @@ class Task extends Component {
             this.props.actions.requestTaskAttributes();
             this.setState({'creatingTask': false})
         } else {
+            // /api/v1/task-bundle/projects/create-tasks
+            this.props.actions.loadEntityList(configResolver.loadProjectsWhereUserCanAddTask());
+            // this.props.actions.loadProjectsWhereUserCanAddTask();
             this.setState({'creatingTask': true})
         }
     }
@@ -461,7 +468,7 @@ class Task extends Component {
     renderCreatingTask = () => {
         return (<ViewCreatable
             saveAction={this.createTaskHandler}
-            handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
+            // handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
             newTaskTitleChangeHandler={this.newTaskTitleChangeHandler}
             newTaskProject={this.state.newTaskProject}
             newTaskAssigner={this.state.newTaskAssigner}
@@ -480,7 +487,7 @@ class Task extends Component {
             handleFileUpload={this.handleFileUpload}
             handleFileDownload={this.handleFileDownload}
             handleFileDelete={this.handleFileDelete}
-            handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
+            // handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
             handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
 
             sendComment={this.sendComment}
@@ -523,7 +530,7 @@ function mapStateToProps(state, ownProps) {
             task: false,
             user: state.auth.user,
             creatingTask: true,
-            userProjects:state.projects.data,
+            userProjects:state.userOptions.projectsWhereUserCanAddTask,
             options: state.tasks.options,
         };
     } else {

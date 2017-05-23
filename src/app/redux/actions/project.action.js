@@ -37,7 +37,12 @@ export function projectAclUpdated(data) {
     }
 }
 
-
+export function projectsWhereUserCanAddTaskReceived(data) {
+    return {
+        type: constants.PROJECTS_WHERE_USER_CAN_ADD_TASK_RECEIVED,
+        data
+    }
+}
 
 
 

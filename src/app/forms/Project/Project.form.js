@@ -38,7 +38,7 @@ class ProjectForm extends Component {
                             </div>
                             <div className="uk-margin-bottom">
                                 <Link className="md-btn md-btn-danger" to={generateRoute('projects')}>{ this.props.project && this.props.project.canEdit ?'Cancel':'Close'}</Link>
-                                { this.props.project && this.props.project.canEdit && <button className="md-btn md-btn-primary alignright" href="settings_projects.html">Save</button> }
+                                { (!this.props.project || (this.props.project && this.props.project.canEdit) ) && <button className="md-btn md-btn-primary alignright" href="settings_projects.html">Save</button> }
                             </div>
                         </div>
                     </div>

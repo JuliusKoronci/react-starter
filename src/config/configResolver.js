@@ -21,7 +21,8 @@ import {
     projectCreated,
     projectUsersUpdated,
     projectUserRemoved,
-    projectAclUpdated
+    projectAclUpdated,
+    projectsWhereUserCanAddTaskReceived
 } from '../app/redux/actions/project.action';
 import {filterReceived, filterOptionsReceived} from '../app/redux/actions/filter.action';
 
@@ -641,6 +642,15 @@ class configResolver {
             taskId
         }
     }
+
+    static loadProjectsWhereUserCanAddTask(){
+        return{
+            url:urls.PROJECTS_WHERE_USER_CAN_ADD_TASK,
+            afterEntityReceivedAction: projectsWhereUserCanAddTaskReceived,
+        }
+    }
 }
+
+
 
 export default configResolver;

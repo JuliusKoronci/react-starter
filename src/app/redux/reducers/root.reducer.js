@@ -22,6 +22,7 @@ import userAttributes from './settings/user_attributes.reducer';
 import settingsReducer from './system/settings.reducer';
 import tagsReducer from './system/tags.reducer';
 import projectsReducer from './system/project.reducer';
+import userOptions from './system/user_options.reducer';
 import profileReducer from './profile/profile.reducer';
 import {REDUX_RESET} from '../constants';
 
@@ -50,6 +51,7 @@ const appReducer = combineReducers({
     profile: profileReducer,
     tags: tagsReducer,
     usersAll:usersAllReducer,
+    userOptions:userOptions,
 });
 
 const rootReducer = (state, action) => {
