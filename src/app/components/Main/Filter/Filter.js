@@ -20,7 +20,7 @@ class Filter extends Component {
 
         this.state = {
             filterFormVisible: props.formVisible || true,
-            sentValues: [],
+            sentValues: {},
 
             getColumnsFromState:false,
             columns: [
@@ -34,10 +34,10 @@ class Filter extends Component {
                 {company: false},
                 {tag: false},
                 // {owner: false},
-                {created: false},
-                {started: false},
-                {deadline: false},
-                {closed: false},
+                {createdTime: false},
+                {startedTime: false},
+                {deadlineTime: false},
+                {closedTime: false},
             ]
 
         }
@@ -110,40 +110,51 @@ class Filter extends Component {
                     values[field] = '';
                 }
             }
-
             // this.setState({sentValues:})
-
             // values[field+'Radio']='TO=NOW'
-
         });
         // values={};
 
         // console.log(values);
 
-        let columns = this.state.columns.map((column) => {
-            let key = Object.keys(column)[0];
-            if (values.columns && values.columns.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!values.columns[key])) {
-                return {[key]: true};
-            } else {
-                return {[key]: false};
-            }
-        });
-        this.setState({columns: columns ? columns : []});
+        // console.log(this.state.columns);
 
 
-        let newFilterValues = {};
-        if (values.filter) {
-            Object.keys(values.filter).map((key) => {
-                //console.log(values.filter[key]);
-                if ((values.filter.hasOwnProperty(key) && typeof values.filter[key] !== 'undefined' && values.filter[key] !== '' && values.filter[key])) {
-                    newFilterValues[key] = values.filter[key];
+            let columns = this.state.columns.map((column) => {
+                let key = Object.keys(column)[0];
+                if (values.columns && values.columns.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!values.columns[key])) {
+                    return {[key]: true};
+                } else {
+                    return {[key]: false};
                 }
             });
-        }
+            this.setState({columns: (columns ? columns : [])});
+
+
+
+
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        let newFilterValues = {};
+
+        // console.log('values filter',values.filter)
+        // if (values.filter) {
+        //     console.log('iterating values')
+        //     Object.keys(values.filter).map((key) => {
+        //         console.log('iteration',values.filter[key]);
+        //         if ((values.filter.hasOwnProperty(key) && typeof values.filter[key] !== 'undefined' && values.filter[key] !== '' && values.filter[key])) {
+        //             newFilterValues[key] = values.filter[key];
+        //         }
+        //     });
+        // }
 
         // console.log(newFilterValues)
-        // console.log(values)
+        // console.log('values',values)
+
         values.filter = newFilterValues;
+
+        // console.log('values',values);
+
 
         let filterValues = Object.assign({}, values);
         let filterSaveValues = Object.assign({}, values);
@@ -161,6 +172,11 @@ class Filter extends Component {
 
             let config = configResolver.saveFilter(filterSaveValues, this.props.params.filterId);
             this.props.actions.generalRequest(config.data, config);
+        }
+        else{
+            //ulozi sa do state hodnota formularu, aby sa ten chuj neresetol
+            // console.log('set sent values');
+            this.state.sentValues=values;
         }
 
 
@@ -210,8 +226,11 @@ class Filter extends Component {
 
     render() {
         // console.log(!!this.filter && this.filter.columns);
+        // console.log(this.state.columns);
+
         return (
             <View {...this.props}
+                sentValues={this.state.sentValues}
                   toggleFilter={this.toggleFilter}
                   filterFormVisible={this.state.filterFormVisible}
                   toggleRowVisibility={this.toggleRowVisibility}

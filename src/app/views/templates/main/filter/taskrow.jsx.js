@@ -51,13 +51,13 @@ const taskrow = ({task,columns}) => {
             if(col.tag){
                 return <td key={i}>{task.tags.map((tag)=>{return tag.title})}</td>}
 
-            if(col.created){
+            if(col.createdTime){
                 return <td key={i}>{task.createdAt && task.createdAt.date?dateFormat(task.createdAt.date):'-'}</td>}
-            if(col.started){
+            if(col.startedTime){
                 return <td key={i}>{task.startedAt && task.startedAt.date?dateFormat(task.startedAt.date):'-'}</td>}
-            if(col.deadline){
+            if(col.deadlineTime){
                 return <td key={i}>{task.deadline && task.deadline.date?dateFormat(task.deadline.date):'-'}</td>}
-            if(col.closed){
+            if(col.closedTime){
                 return <td key={i}>{task.closedAt && task.closedAt.date?dateFormat(task.closedAt.date):'-'}</td>}
 
 

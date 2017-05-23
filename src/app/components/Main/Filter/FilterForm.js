@@ -14,10 +14,12 @@ class FilterForm extends Component {
     changeRowVisibility = (e) => {
         let checked = !!e.target.checked;
         let name = e.target.name;
+        // console.log(name);
         this.props.dispatch(change('filterForm', name, checked));
     };
 
     resetForm = (e) => {
+        // console.log('reseting form')
         e.preventDefault();
         this.props.dispatch(reset('filterForm'));
     };
@@ -44,6 +46,8 @@ class FilterForm extends Component {
             return el !== undefined;
         });
 
+
+        // console.log(columns.map(c=>Object.keys(c)[0] +'='+ c[Object.keys(c)[0]]).join(','))
 
         return (
             <form onSubmit={handleSubmit} className={this.props.filterFormVisible ? "uk-width-medium-1-4" : 'hidden'}
@@ -167,19 +171,19 @@ class FilterForm extends Component {
                     </div>
 
                     <FilterFromTimepicker name={'createdTime'} label={'Created At'}
-                                          columnVisibilityName={'columns.created'}
+                                          columnVisibilityName={'columns.createdTime'}
                                           datePickerClear={this.datePickerClear}
                                           changeRowVisibility={this.changeRowVisibility}/>
                     <FilterFromTimepicker name={'startedTime'} label={'Started At'}
-                                          columnVisibilityName={'columns.started'}
+                                          columnVisibilityName={'columns.startedTime'}
                                           datePickerClear={this.datePickerClear}
                                           changeRowVisibility={this.changeRowVisibility}/>
                     <FilterFromTimepicker name={'deadlineTime'} label={'Deadline At'}
-                                          columnVisibilityName={'columns.deadline'}
+                                          columnVisibilityName={'columns.deadlineTime'}
                                           datePickerClear={this.datePickerClear}
                                           changeRowVisibility={this.changeRowVisibility}/>
                     <FilterFromTimepicker name={'closedTime'} label={'Closed At'}
-                                          columnVisibilityName={'columns.closed'}
+                                          columnVisibilityName={'columns.closedTime'}
                                           datePickerClear={this.datePickerClear}
                                           changeRowVisibility={this.changeRowVisibility}/>
 
@@ -195,8 +199,7 @@ class FilterForm extends Component {
 
 function mapStateToProps(state, ownProps) {
     const filterId = ownProps.params.filterId;
-    let filter = state.filter.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
-
+    let filter = state.filter.filter(f => parseInt(f.id, 10) === parseInt(filterId, 10));
 
     let columns = {};
     let visibleColumns = ownProps.columns.map((column) => {
@@ -209,12 +212,13 @@ function mapStateToProps(state, ownProps) {
     });
 
 
-
     if(filter && filter[0] && !Object.keys(columns).length){
         visibleColumns=filter[0].columns;
+        if(visibleColumns===null){
+            visibleColumns=[];
+        }
     }
 
-    // console.log(visibleColumns);
 
     visibleColumns.map((vColumn) => {
         columns[vColumn] = true;
@@ -235,9 +239,11 @@ function mapStateToProps(state, ownProps) {
     if (filter.length > 0) {
         //visible columns
         filter = filter[0];
-        filter.columns.map((column) => {
-            columns[column] = true
-        });
+        if(filter.columns!==null){
+            filter.columns.map((column) => {
+                columns[column] = true;
+            });
+        }
 
         let statuses = filter.filter.status;//.split(',');
         let projects = filter.filter.project;
@@ -247,7 +253,6 @@ function mapStateToProps(state, ownProps) {
         let assigned = filter.filter.assigned;
         let tag = filter.filter.tag;
         let search = filter.filter.search;
-
 
         initialValues.status = statuses ? statuses : '';
         initialValues.project = projects ? projects : '';
@@ -275,7 +280,6 @@ function mapStateToProps(state, ownProps) {
         });
 
 
-        // console.log(initialValues.columns)
 
         return {
             initialValues: {...filter, ...initialValues},
@@ -284,6 +288,9 @@ function mapStateToProps(state, ownProps) {
     }
 
 
+    if(Object.keys(ownProps.sentValues).length){
+        initialValues=ownProps.sentValues;
+    }
     //ak neni konkretny filter
     return {initialValues: {...initialValues}, enableReinitialize: true};
 
