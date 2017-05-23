@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {generateRoute, paths} from '../../../config/router';
 
-const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive}) => {
+const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, loggedUserAcl}) => {
 
     const projectId = params.projectId;
     const tagId = params.tagId;
@@ -94,7 +94,8 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
                                     </span>
                                 </li>
                             })}
-                            <li>
+
+                            { loggedUserAcl.indexOf('create_projects')!==-1 && <li>
                                 <span className="submenu-title">
                                     <Link to={paths.project_add} className="md-color-blue-500">
                                         <i className="material-icons md-color-blue-500">&#xE145;</i>
@@ -102,6 +103,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
                                     </Link>
                                 </span>
                             </li>
+                            }
                         </ul>
                     </li>
 
@@ -121,7 +123,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
                                 return <li key={i}>
                                     <span className="submenu-title">
                                         <Link to={link}
-                                              className={tag.id==tagId?'active  md-color-deep-orange-500':''}>
+                                              className={parseInt(tag.id,10)===parseInt(tagId,10)?'active  md-color-deep-orange-500':''}>
                                                 {tag.title}
                                         </Link>
                                     </span>
@@ -146,8 +148,9 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
 
 
                     {/*sidebar menu Reports */}
-                    <li className={reportId?"submenu_report act_section":'submenu_trigger'}>
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={reportsOpen?'active':''}>
+                    { loggedUserAcl.indexOf('report_filters') !== -1 &&
+                    <li className={reportId ? "submenu_report act_section" : 'submenu_trigger'}>
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={reportsOpen ? 'active' : ''}>
                             <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Reports</span>
                         </a>
@@ -192,7 +195,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive})
                             </li>
                         </ul>
                     </li>
-
+                    }
 
                 </ul>
             </div>

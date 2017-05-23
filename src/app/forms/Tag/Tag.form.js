@@ -21,10 +21,13 @@ class TagForm extends Component {
                         </div>
                         <hr/>
                         <div className="uk-width-medium-1-1 max-width-1000px">
+
+                            { this.props.loggedUserAcl.indexOf('share_tags') !== -1 &&
                             <div className="uk-margin-bottom">
                                 <Field type="checkbox" name="public" validate={[]} component={renderField}/>
                                 <label className="uk_dp1 uk-text-muted">Public</label>
-                            </div>
+                            </div>}
+
                             <div className="uk-margin-bottom">
                                 <label>Tag name</label>
                                 <Field type="text" name="title" validate={[]} component={renderField}/>
@@ -52,12 +55,16 @@ class TagForm extends Component {
 function mapStateToProps(state, ownProps) {
     const tagId = ownProps.params.tagId;
     const tag = state.tags.data.filter((tag) => parseInt(tag.id, 10) === parseInt(tagId, 10));
+
     if (tag.length > 0) {
         return {
             initialValues: tag.length > 0 ? tag[0] : {},
+            loggedUserAcl:state.auth.user.userRoleAcl || []
         };
     }
-    return {};
+    return {
+        loggedUserAcl:state.auth.user.userRoleAcl || []
+    };
 
 }
 

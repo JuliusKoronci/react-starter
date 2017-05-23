@@ -112,6 +112,7 @@ function mapStateToProps(state) {
         sidebarIsMinified: state.settings.sidebarIsMinified,
         projects:state.projects.data,
         tags:state.tags.data,
+        loggedUserAcl:state.auth.user.userRoleAcl || []
     };
 }
 function mapDispatchToProps(dispatch) {
