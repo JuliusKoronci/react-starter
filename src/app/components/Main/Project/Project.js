@@ -33,14 +33,23 @@ class Project extends Component {
     }
 
     componentWillMount() {
-        if (this.props.params.projectId && !this.props.project) {
-            this.props.actions.loadEntityById(this.props.params.projectId, this.projectConfig);
-            // this.props.actions.requestAllUsers();
-            // this.props.actions.loadEntityList(this.getAllUsersConfig);
-        }
 
-        if(this.props.usersAll.length==0){
+        this.props.actions.loadEntityById(this.props.params.projectId, this.projectConfig);
+
+        // if (this.props.params.projectId && !this.props.project) {
+        //     this.props.actions.loadEntityById(this.props.params.projectId, this.projectConfig);
+        //     // this.props.actions.requestAllUsers();
+        //     // this.props.actions.loadEntityList(this.getAllUsersConfig);
+        // }
+
+        if(this.props.usersAll.length===0){
             this.props.actions.loadEntityList(this.getAllUsersConfig);
+        }
+    }
+
+    componentWillUpdate(nextProps){
+        if(nextProps.params.projectId!==this.props.params.projectId){
+            this.props.actions.loadEntityById(nextProps.params.projectId, configResolver.getProjectConfig(nextProps.params.projectId));
         }
     }
 
