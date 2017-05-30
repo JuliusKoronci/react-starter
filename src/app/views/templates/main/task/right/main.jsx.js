@@ -17,6 +17,11 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
     });
 
 
+    // console.log('main');
+
+// console.log(taskAttributes,taskAttributes1);
+
+
     return (
         <div className="md-list md-list-addon">
 
@@ -143,6 +148,7 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
 
             <hr />
             {taskAttributes.map(ta=>{
+
                 let name=ta.id;
 
                 let attributeData=null;
@@ -155,6 +161,12 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                 }else{
                     value='';
                 }
+
+                // console.log(ta);
+                // return(<div>Ca</div>);
+                //
+
+
 
                 return (
                     <div key={ta.id}>

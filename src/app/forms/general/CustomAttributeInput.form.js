@@ -9,6 +9,7 @@ class CustomAttributeInput extends Component {
     }
 
     onChange = (value) => {
+        // console.error('changed ',this.props.name,this.props.title,this.props.type);
         this.props.action(this.props.name, value)
     };
 
@@ -36,6 +37,8 @@ class CustomAttributeInput extends Component {
 
 
     render() {
+
+        // return (<div>custom attribute</div>);
 
         const {value, type, title, customAttribute} = this.props;
 

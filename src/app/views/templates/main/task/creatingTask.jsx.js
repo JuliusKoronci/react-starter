@@ -13,7 +13,7 @@ const creatingTask = (props) => {
                 <div className="uk-grid" data-uk-grid-margin>
 
 
-                    <TaskButtonPanel saveAction={props.saveAction}/>
+                    <TaskButtonPanel saveAction={props.saveAction} deleteButton={false} />
                     <hr />
                     <div className="md-input-wrapper md-input-filled">
                         <input type="text" className="md-input header_b" style={{fontSize: '22px', lineHeight: '26px'}}

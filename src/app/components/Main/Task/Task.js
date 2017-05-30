@@ -18,7 +18,7 @@ class Task extends Component {
     constructor(props, context) {
         super(props, context);
 
-
+        // Delete task	View internal note	Edit internal note
 
         this.state = {
             saved: false,
@@ -356,10 +356,12 @@ class Task extends Component {
 
     componentDidUpdate(prevProps, prevState) {
 
+        // console.log('did update');
+
         if (prevProps.task !== this.props.task) {
 
             // console.log(this.props.task);
-            console.log('did update task component');
+            // console.log('did update task component');
 
 
             let task=this.props.task;
@@ -420,10 +422,10 @@ class Task extends Component {
 
     render() {
 
-        if (this.props.task && this.props.task.canEdit) {
+        if (this.props.task && this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1) {
             return this.renderTask()
         }
-        if (this.props.task && !this.props.task.canEdit) {
+        if (this.props.task && this.props.task.loggedUserProjectAcl.indexOf('resolve_task')===-1) {
             return this.renderReadonlyTask()
         }
         else if (this.props.creatingTask) {
@@ -482,7 +484,9 @@ class Task extends Component {
 
 
     renderTask = () => {
+        // console.log('render');
         // console.log(this.props.task);
+        // return(<h1 {...this.props}>task</h1>)
         return (<ViewEditable
             handleFileUpload={this.handleFileUpload}
             handleFileDownload={this.handleFileDownload}
@@ -542,8 +546,9 @@ function mapStateToProps(state, ownProps) {
             canEdit: task ? task.canEdit : false,
             user: state.auth.user,
             creatingTask: false,
-            taskAttributes: state.taskAttributes && state.taskAttributes.data?state.taskAttributes.data:[]
-            // taskAttributes: state.tasks.options.taskAttributes
+
+            // taskAttributes: state.taskAttributes && state.taskAttributes.data?state.taskAttributes.data:[],
+            taskAttributes: state.tasks.options.taskAttributes?state.tasks.options.taskAttributes:[]
         };
     }
 
