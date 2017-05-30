@@ -344,7 +344,7 @@ class Task extends Component {
         if (this.props.params.taskId) {
             this.props.actions.loadTaskById(this.props.params.taskId);
             this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
-            this.props.actions.requestTaskAttributes();
+            // this.props.actions.requestTaskAttributes();
             this.setState({'creatingTask': false})
         } else {
             // /api/v1/task-bundle/projects/create-tasks
@@ -493,6 +493,7 @@ class Task extends Component {
             handleFileDelete={this.handleFileDelete}
             // handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
             handleTaskDelete={this._onNewTaskCancel.bind(null, this.props.params.taskId)}
+            deleteButton={this.props.task.loggedUserProjectAcl.indexOf('delete_task')!==-1}
 
             sendComment={this.sendComment}
 
