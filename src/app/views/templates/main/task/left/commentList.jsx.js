@@ -26,7 +26,8 @@ const commentList = ({task,handleFileDownload}) => {
                 let key = comment.id;
                 let date = formatDate(comment.createdAt.date);
                 let username = comment.createdBy.username;
-                let initials = comment.createdBy.name.charAt(0)+comment.createdBy.surname.charAt(0);
+
+                let initials = (comment.createdBy.name?comment.createdBy.name.charAt(0):'undef first name ') + (comment.createdBy.surname?comment.createdBy.surname.charAt(0):'undef surname');
                 let attachments=[];
                 let avatar = <div className="timeline_icon timeline_icon_success"><p
                     className="md-user-letters md-bg-cyan">{initials}</p></div>;
@@ -45,9 +46,6 @@ const commentList = ({task,handleFileDownload}) => {
                         <i className="material-icons">&#xE163;</i>
                     </div>;
                 }
-
-
-
 
 
                 return <div className="timeline_item" key={key}>

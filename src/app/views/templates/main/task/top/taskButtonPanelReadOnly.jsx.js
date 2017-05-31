@@ -1,15 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router';
 
-const taskButtonPanel = ({saveAction, form, formInputChangeHandler}) => {
+const taskButtonPanel = ({form, formInputChangeHandler}) => {
 
     return (
         <div>
             <div className="md-btn-group">
-                <a className="md-btn md-btn-warning md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
-                   href="#">
-                    <i className="uk-icon-ban"/>
-                    CANCEL
-                </a>
+                <Link className="md-btn md-btn-warning md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light" to={'/'}><i className="uk-icon-ban"/> Cancel</Link>
 
 
                 {formInputChangeHandler && <a className="md-btn md-btn-primary md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
