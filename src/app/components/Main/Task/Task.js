@@ -500,6 +500,7 @@ class Task extends Component {
             formChangeHandler={this.formChangeHandler}
             formInputChangeHandler={this.formInputChangeHandler}
             formTaskAttributeChangeHandler={this.formTaskAttributeChangeHandler}
+            inputChangeHandler={this.inputChangeHandler}
 
             toggleState={this.toggleState}
             commentFormEmail={this.state.commentFormEmail}

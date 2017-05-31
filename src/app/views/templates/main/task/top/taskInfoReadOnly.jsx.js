@@ -5,7 +5,7 @@ import Input from '../../../../../forms/Task/Input.form';
 const taskInfo = ({ task }) => {
 	return (
 		<div className="uk-width-medium-3-4">
-			<p>{task.title}</p>
+			<p>{task.id}: {task.title}</p>
             <p className="uk-text-muted">
 				Created: {task.createdBy.email} | {dateFormat(task.createdAt)}
 			</p>

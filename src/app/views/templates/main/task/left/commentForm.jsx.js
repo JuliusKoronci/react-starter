@@ -1,7 +1,8 @@
 import React from 'react';
 
-const commentForm = ({task,sendComment,formChangeHandler,commentFormEmail,commentFormInternalNote,toggleState, commentFormBody, handleCommentFileUpload, commentFormAttachments}) => {
+const commentForm = (props) => {
 
+    const {task,sendComment,formChangeHandler,commentFormEmail,commentFormInternalNote,toggleState, commentFormBody, handleCommentFileUpload, commentFormAttachments}=props;
 
     let attachments=commentFormAttachments.map(att=>{
         return <p key={att}>{att}</p>
@@ -9,7 +10,6 @@ const commentForm = ({task,sendComment,formChangeHandler,commentFormEmail,commen
 
     return (
         <div className="uk-width-1-1">
-
 
 
             <ul className="uk-tab" data-uk-tab="{connect:'#tabs_1_content'}" id="tabs_1">
@@ -26,13 +26,17 @@ const commentForm = ({task,sendComment,formChangeHandler,commentFormEmail,commen
                               placeholder="Add comment..." name="commentFormBody"  value={commentFormBody} onChange={formChangeHandler.bind(null)} />
 
                     {task.loggedUserProjectAcl.indexOf('edit_internal_note') !== -1 && <div>
-                    <input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_1"
-                           data-md-icheck checked={commentFormInternalNote} onChange={toggleState.bind(null,{key:'commentFormInternalNote'})} />
+                    <input type="checkbox" id="checkbox_demo_inline_1"
+                           data-md-icheck
+                           checked={ commentFormInternalNote }
+                           onChange={props.inputChangeHandler.bind(null,'commentFormInternalNote',!commentFormInternalNote)}
+                    />
                     <label htmlFor="checkbox_demo_inline_1" className="inline-label margin15">Internal Note </label>
                     </div>
                     }
 
                     {attachments}
+
                     <input type="file" name="comment-attachment" onChange={handleCommentFileUpload}/>
 
                     <a className="md-btn-flat-primary" href="#">Add attachment</a>
@@ -49,10 +53,13 @@ const commentForm = ({task,sendComment,formChangeHandler,commentFormEmail,commen
                         <input id="table-item" type="text" className="md-input" placeholder="Subject:" name="commentFormEmailSubject" onChange={formChangeHandler.bind(null)} />
                         <textarea cols="30" rows="4" className="md-input" placeholder="Add comment..." name="commentFormBody" value={commentFormBody} onChange={formChangeHandler.bind(null)} />
 
-                        {task.loggedUserProjectAcl.indexOf('edit_internal_note') !== -1 && <div><input type="checkbox" name="checkbox_demo_inline_mercury" id="checkbox_demo_inline_2"
-                               data-md-icheck checked={commentFormInternalNote}
-                               onChange={toggleState.bind(null, {key: 'commentFormInternalNote'})}/>
-                            <label htmlFor="checkbox_demo_inline_2" className="inline-label margin15">Internal Note </label>
+                        {task.loggedUserProjectAcl.indexOf('edit_internal_note') !== -1 && <div>
+                            <input type="checkbox" id="checkbox_demo_inline_1"
+                                   data-md-icheck
+                                   checked={ commentFormInternalNote }
+                                   onChange={props.inputChangeHandler.bind(null,'commentFormInternalNote',!commentFormInternalNote)}
+                            />
+                            <label htmlFor="checkbox_demo_inline_1" className="inline-label margin15">Internal Note </label>
                         </div>
                         }
 

@@ -74,10 +74,15 @@ class Input extends Component {
 
         const value = val || this.props.task[this.props.fieldName] || '';
 
+        const style=this.props.labelInInput?{paddingLeft:'50px'}:{};
+
         return (
             <div>
+                {this.props.labelInInput && <span style={{position:'absolute',padding:'8px 4px 8px 10px'}}>{this.props.labelInInput}</span>}
+
                 <input onChange={this.handleChange} onBlur={this.handleSubmit} onKeyPress={this.handleKeyPress}
                        className={this.state.className}
+                       style={style}
                        value={value}/>
                 <span style={{color: 'red'}}>{this.state.error}</span>
             </div>
