@@ -21,7 +21,7 @@ const editableTask = (props) => {
 
 				<div className="uk-grid" data-uk-grid-margin>
 					<TaskInfo {...props} />
-					<TaskActions {...props} />
+					{/*<TaskActions {...props} />*/}
 				</div>
 				<hr />
 				<div className="uk-grid uk-grid-divider" data-uk-grid-margin>
