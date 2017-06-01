@@ -1,7 +1,7 @@
 import React from 'react';
 import DropDown from '../../../../../forms/Task/DropDown.form';
 
-const status = ({task, action, statuses}) => {
+const status = ({task, action, statuses, user}) => {
     const options = statuses.map((status) => {
         return {
             'label': status.title,
@@ -11,24 +11,29 @@ const status = ({task, action, statuses}) => {
             'selectedClassName': 'md-btn md-btn-wave-light md-btn-block'
         }
     });
+
+    // console.log('user',user);
+
+
+
     return (
         <div>
             <label className="uk-text-muted" style={{marginLeft: '51px'}}>Status</label>
 
             <div className="uk-input-group">
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>
-                {task.taskHasAssignedUsers.map((record) => {
+                {user.map((record) => {
                     return (<DropDown
-                            key={record.id}
+                            key={record.userId}
                             fieldName="status"
                             options={options}
-                            customLabel={record.user.username}
+                            customLabel={record.username}
                             action={action}
                             taskId={task.id}
-                            defaultValue={record.status.id}
+                            defaultValue={record.statusId}
                             additionalInfo={
                                 {
-                                    'assigned': record.user.id
+                                    'assigned': parseInt(record.userId,10)
                                 }
                             }
                         />

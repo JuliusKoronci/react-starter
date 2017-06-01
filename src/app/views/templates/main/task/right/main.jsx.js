@@ -10,7 +10,7 @@ import ReactSelect from 'react-select';
 import CustomAttributeInput from '../../../../../forms/general/CustomAttributeInput.form';
 
 
-const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler, formTaskAttributeChangeHandler, form, taskAttributes}) => {
+const main = ({task, user, actions, options, handleFileUpload, handleFileDownload, handleFileDelete,formInputChangeHandler, formTaskAttributeChangeHandler, form, taskAttributes, statusChange}) => {
 
     const assignedOptions = options.assigner.map(r => {
         return {id: r.id, title: r.username}
@@ -26,7 +26,7 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
         <div className="md-list md-list-addon">
 
 
-            <Status task={task} statuses={options.status} user={user} action={actions.handleStatus}/>
+            <Status task={task} statuses={options.status} user={form.assigned} action={statusChange} />
 
 
             <Select label="Project"

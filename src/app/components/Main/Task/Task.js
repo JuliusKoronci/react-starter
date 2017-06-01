@@ -115,6 +115,19 @@ class Task extends Component {
         this.props.actions.deleteTask(`${TASK_LIST}/${taskId}`);
     };
 
+    statusChange = (data, e) => {
+
+        let form = Object.assign({}, this.state.form);
+        let value=[{userId: data.assigned,
+            statusId: data.status?data.status:null}];
+
+        form['assigned'] = value;
+        this.setState({form: form});
+
+console.log(data);
+    };
+
+
 
     toggleState = (data, e) => {
 
@@ -374,7 +387,7 @@ class Task extends Component {
                     work_time: task.work_time,
                     company: task.company?task.company.id:null,
                     requester: task.requestedBy?task.requestedBy.id:null,
-                    assigned: task.taskHasAssignedUsers? task.taskHasAssignedUsers.map(user=>{return {userId:user.user.id,username:user.user.username}}):[],
+                    assigned: task.taskHasAssignedUsers? task.taskHasAssignedUsers.map(user=>{return {userId:user.user.id,username:user.user.username,statusId:user.status?user.status.id:null}}):[],
                     project: task.project?task.project.id:null,
                     started_at: task.startedAt,
                     deadline: task.deadline,
@@ -496,6 +509,7 @@ class Task extends Component {
             deleteButton={this.props.task.loggedUserProjectAcl.indexOf('delete_task')!==-1}
 
             sendComment={this.sendComment}
+            statusChange={this.statusChange}
 
             formChangeHandler={this.formChangeHandler}
             formInputChangeHandler={this.formInputChangeHandler}
