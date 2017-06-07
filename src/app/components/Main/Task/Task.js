@@ -26,7 +26,7 @@ class Task extends Component {
             newTaskTitle: '',
             newTaskDescription:'',
             newTaskProject:'',
-            newTaskAssigner:'',
+            newTaskAssigner:[],
 
             form: {
                 title: '',
@@ -338,11 +338,13 @@ console.log(data);
             'title': this.state.newTaskTitle,
             'description':this.state.newTaskDescription,
             'projectId':this.state.newTaskProject,
+            // 'assigned':JSON.stringify(this.state.newTaskAssigner),
 
         };
 // console.log(values);
-        // console.log(this.state.newTaskTitle);
-        // this.props.actions.createEntity(values,config);
+        // console.log(JSON.stringify(this.state.newTaskAssigner));
+
+
         this.props.actions.createTask(values, config);
         return false;
     };
@@ -370,6 +372,21 @@ console.log(data);
     componentDidUpdate(prevProps, prevState) {
 
         // console.log('did update');
+
+
+        if(prevProps.params.taskId!==this.props.params.taskId){
+            if (this.props.params.taskId) {
+                this.props.actions.loadTaskById(this.props.params.taskId);
+                this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
+                this.setState({'creatingTask': false})
+            }else{
+                this.props.actions.loadEntityList(configResolver.loadProjectsWhereUserCanAddTask());
+                this.setState({'creatingTask': true})
+            }
+
+        }
+
+
 
         if (prevProps.task !== this.props.task) {
 

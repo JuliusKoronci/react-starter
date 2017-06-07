@@ -12,9 +12,8 @@ const users = (props) => {
                 <hr/>
                 <div className="uk-input-group">
                     <span className="uk-input-group-addon"><i className="material-icons md-24">&#xE8B6;</i></span>
-                    <input type="text" className="md-input"/>
-                    <span className="uk-input-group-addon"><a className="md-btn md-btn-primary"
-                                                              href="#">Search</a></span>
+                    <input type="text" className="md-input" value={props.searchTerm} onChange={props.searchInputOnChange.bind(null) } />
+                    <span className="uk-input-group-addon"><button className="md-btn md-btn-primary" onClick={props.searchHandler}>Search</button></span>
                 </div>
 
                 <table className="uk-table uk-text-nowrap">

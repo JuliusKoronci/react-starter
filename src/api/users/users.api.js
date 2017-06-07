@@ -22,3 +22,12 @@ export function loadUsers(url) {
     }
     return defaultGET(finalUrl);
 }
+
+export function searchUsers(searchTerm) {
+    if (USE_MOCK) {
+        return mockDefault();
+    }
+    let finalUrl = USERS_LIST+'/search?term='+searchTerm;
+
+    return defaultGET(finalUrl);
+}

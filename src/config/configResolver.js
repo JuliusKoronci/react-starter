@@ -633,6 +633,7 @@ class configResolver {
     static createTask() {
         return {
             url: urls.TASK_LIST,
+            jsonStringify:true,
         }
     }
 

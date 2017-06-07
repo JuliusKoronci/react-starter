@@ -1,9 +1,17 @@
 import * as constants from '../constants';
+import {USERS_LIST} from '../../../api/urls';
 
 export function requestUsers(url) {
     return {
         type: constants.REQUEST_USERS,
         url
+    }
+}
+
+export function requestUsersSearch(searchTerm) {
+    return {
+        type: constants.SEARCH_USERS,
+        searchTerm:searchTerm,
     }
 }
 
