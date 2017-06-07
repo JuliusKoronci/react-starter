@@ -36,6 +36,13 @@ export function requestCompanies(url) {
     }
 }
 
+export function requestCompaniesSearch(searchTerm) {
+    return {
+        type: constants.SEARCH_COMPANIES,
+        searchTerm
+    }
+}
+
 export function companiesReceived(response) {
     return {
         type: constants.COMPANIES_RECEIVED,

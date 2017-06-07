@@ -12,7 +12,26 @@ class Companies extends Component {
     constructor(props, context) {
         super(props, context);
         this.companyConfig = configResolver.getCompanyConfig(props.params.companyId);
+
+        this.state = {
+            searchTerm:''
+        }
     }
+
+
+    searchInputOnChange=(e)=>{
+        const value=e.target.value;
+        this.setState({searchTerm:value})
+    };
+
+    searchHandler=()=>{
+        if(this.state.searchTerm) {
+            this.props.actions.requestCompaniesSearch(this.state.searchTerm);
+        }else{
+            this.props.actions.requestCompanies();
+        }
+    };
+
 
     deleteHandler=(id)=>{
         this.props.actions.deleteEntity(id, this.companyConfig);
@@ -29,7 +48,7 @@ class Companies extends Component {
 
     render() {
         return (
-            <View {...this.props.companies} loadCompanies={this.props.actions.requestCompanies} handleDelete={this.deleteHandler} />
+            <View {...this.props.companies} loadCompanies={this.props.actions.requestCompanies} handleDelete={this.deleteHandler} searchHandler={this.searchHandler} searchTerm={this.state.searchTerm} searchInputOnChange={this.searchInputOnChange} />
         );
     }
 }

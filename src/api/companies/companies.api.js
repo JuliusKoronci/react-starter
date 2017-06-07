@@ -23,6 +23,16 @@ export function loadCompanies(url) {
     return defaultGET(finalUrl);
 }
 
+export function searchCompanies(searchTerm) {
+    if (USE_MOCK) {
+        return mockDefault();
+    }
+    let finalUrl = COMPANIES_LIST+'/search?term='+searchTerm;
+
+    return defaultGET(finalUrl);
+}
+
+
 export function createNewCompany(data) {
     return defaultPOST(COMPANY_POST_NEW, data);
 }
