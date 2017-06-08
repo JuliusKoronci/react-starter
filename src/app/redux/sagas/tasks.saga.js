@@ -89,8 +89,6 @@ function *updateTask(action) {
 }
 
 function *taskUpdate(action) {
-	// alert('task update');
-	console.log(action);
 	let config=action.config;
     yield put(startAjaxReset());
     try {
@@ -150,7 +148,8 @@ function *deleteTask(action) {
 	yield put(startAjaxReset());
 	try {
 		yield call(defaultDELETE, action.url);
-		browserHistory.push('/');
+        yield call(entityUpdated, 'Task deleted!');
+        browserHistory.push('/');
 	} catch (e) {
 		browserHistory.push('/');
 		yield put(asyncError(e));
@@ -181,7 +180,7 @@ export function *loadTasksFromUrl() {
 	yield takeLatest(REQUEST_TASKS_FROM_URL, loadTasksUrl);
 	yield takeLatest(REQUEST_TASKS_WITH_PARAMS, loadTasksWithParams);
 	yield takeLatest(REQUEST_TASK_BY_ID, loadTaskById);
-	yield takeLatest(TASK_UPDATED, updateTask);
+	// yield takeLatest(TASK_UPDATED, updateTask);
 	yield takeLatest(TASK_STATUS_UPDATED, updateStatus);
 	yield takeLatest(TASK_UPLOADED, uploadTask);
 	yield takeLatest(CREATE_TASK, createTask);

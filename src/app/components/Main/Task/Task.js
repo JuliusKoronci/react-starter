@@ -58,11 +58,11 @@ class Task extends Component {
 
     }
 
-    componentWillUnmount() {
-        if (this.props.newTask && !this.state.saved) {
-            this._onNewTaskCancel(this.props.params.taskId);
-        }
-    }
+    // componentWillUnmount() {
+    //     if (this.props.newTask && !this.state.saved) {
+    //         this._onNewTaskCancel(this.props.params.taskId);
+    //     }
+    // }
 
     handleFileUpload = (acceptedFiles) => {
         let formData = new FormData();
@@ -111,8 +111,10 @@ class Task extends Component {
     //         entityError('The following fields are mandatory: Status, Project, Requester, Company, Assigned');
     //     }
     // };
-    _onNewTaskCancel = (taskId) => {
+    _onNewTaskCancel = (taskId,e) => {
         this.props.actions.deleteTask(`${TASK_LIST}/${taskId}`);
+
+        e.preventDefault();
     };
 
     statusChange = (data, e) => {
@@ -234,7 +236,7 @@ console.log(data);
     };
 
 
-    saveTask = () => {
+    saveTask = (e) => {
 
         let values=Object.assign({}, this.state.form);
 
@@ -468,7 +470,6 @@ console.log(data);
 
 
 
-
     renderReadonlyTask = () => {
         // console.log(this.props.task);
         return (<ViewReadable
@@ -494,7 +495,7 @@ console.log(data);
 
             {...this.props}
         />);
-    }
+    };
 
 
     renderCreatingTask = () => {

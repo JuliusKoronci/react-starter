@@ -37,43 +37,36 @@ class Input extends Component {
         if(this.props.formInputChangeHandler){
             this.props.formInputChangeHandler(this.props.fieldName,e.target.value);
         }else {
-            console.log('handle change');
-            //this.handleSubmit(e);
+            this.handleSubmit(e);
         }
     };
 
     handleKeyPress = (e) => {
-        // if (e.key.toLowerCase() === 'enter') {
-        //     this.handleSubmit(e);
-        // }
+        if (e.key.toLowerCase() === 'enter') {
+            this.handleSubmit(e);
+        }
     };
 
     handleSubmit = (e) => {
-
-        //
-        // let val = e.target.value;
-        // if (this.props.number) {
-        //     if (isNaN(Number.parseFloat(val))) {
-        //         this.setState({
-        //             error: 'Not a valid number'
-        //         });
-        //     } else {
-        //         this.setState({
-        //             error: ''
-        //         });
-        //     }
-        // }
-        // this.props.actions.taskUpdated(
-        //     {
-        //         [this.props.fieldName]: val
-        //     },
-        //     this.props.taskId
-        // )
-
-
+        let val = e.target.value;
+        if (this.props.number) {
+            if (isNaN(Number.parseFloat(val))) {
+                this.setState({
+                    error: 'Not a valid number'
+                });
+            } else {
+                this.setState({
+                    error: ''
+                });
+            }
+        }
+        this.props.actions.taskUpdated(
+            {
+                [this.props.fieldName]: val
+            },
+            this.props.taskId
+        )
     };
-
-
 
     render() {
 

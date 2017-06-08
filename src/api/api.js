@@ -73,15 +73,26 @@ export function defaultDELETE(url) {
     };
 
     return fetch(url, config)
-        .then(response =>
-            response.json().then(data => ({data, response}))
-        ).then(({data, response}) => {
+        .then(response => {
             if (!response.ok) {
-                return Promise.reject(buildError(response, data))
+                return Promise.reject(buildError(response))
             } else {
-                return Promise.resolve(data);
+                return Promise.resolve();
             }
         })
+
+    // return fetch(url, config)
+    //     .then(response =>
+    //         response.json().
+    //         then(data => ({data, response}))
+    //     ).then(({data, response}) => {
+    //     console.log(data,response)
+    //         if (!response.ok) {
+    //             return Promise.reject(buildError(response, data))
+    //         } else {
+    //             return Promise.resolve(data);
+    //         }
+    //     })
 
 }
 
