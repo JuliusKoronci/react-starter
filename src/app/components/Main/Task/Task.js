@@ -43,8 +43,7 @@ class Task extends Component {
                 tags:[],
                 important:false,
                 task_data:[]
-            }
-            ,
+            },
 
             commentFormBody: '',
             commentFormEmail: false,
@@ -339,8 +338,9 @@ console.log(data);
         let values = {
             'title': this.state.newTaskTitle,
             'description':this.state.newTaskDescription,
-            'projectId':this.state.newTaskProject,
-            // 'assigned':JSON.stringify(this.state.newTaskAssigner),
+            'project':this.state.newTaskProject,
+            'assigned':JSON.stringify(this.state.newTaskAssigner),
+            // 'assigned':this.state.newTaskAssigner,
 
         };
 // console.log(values);
@@ -383,7 +383,11 @@ console.log(data);
                 this.setState({'creatingTask': false})
             }else{
                 this.props.actions.loadEntityList(configResolver.loadProjectsWhereUserCanAddTask());
-                this.setState({'creatingTask': true})
+                this.setState({'creatingTask': true,
+                    newTaskTitle: '',
+                    newTaskDescription:'',
+                    newTaskProject:'',
+                    newTaskAssigner:[],})
             }
 
         }
