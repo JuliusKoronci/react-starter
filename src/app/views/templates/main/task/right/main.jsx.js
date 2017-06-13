@@ -68,7 +68,7 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
 
 
 
-            <div className="uk-input-group" style={{marginTop: '10px'}}>
+
 
 
                 <Select label="Assigned"
@@ -110,7 +110,7 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                 {/*/>*/}
 
 
-            </div>
+
 
             <DatePicker taskId={task.id} action={formInputChangeHandler} value={form.started_at && form.started_at.date}
                         fieldName="started_at" label="Start At" icon="&#xE858;" formInputChangeHandler={formInputChangeHandler} />
@@ -118,9 +118,6 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                         fieldName="deadline" label="Deadline" icon="&#xE8B2;"/>
             <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.closed_at && form.closed_at.date} formInputChangeHandler={formInputChangeHandler}
                         fieldName="closed_at" label="Closed At" icon="&#xE5CD;"/>
-
-            {/*<Repeat/>*/}
-            <Attachment task={task} handleFileUpload={handleFileUpload} handleFileDownload={handleFileDownload} handleFileDelete={handleFileDelete} />
 
 
             <Tag
@@ -141,12 +138,13 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
                 }}/>
 
 
-            <hr />
+                {/*<Repeat/>*/}
+                <Attachment task={task} handleFileUpload={handleFileUpload} handleFileDownload={handleFileDownload} handleFileDelete={handleFileDelete} />
 
 
 
 
-            <hr />
+
             {taskAttributes.map(ta=>{
 
                 let name=ta.id;

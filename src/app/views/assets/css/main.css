@@ -3889,7 +3889,7 @@ body > .content-preloader.preloader-active {
 .timeline {
     position: relative;
     min-height: 40px;
-    padding: 8px 0 8px 62px;
+    padding: 0px 0 0px 0px;
 }
 
 .timeline,
@@ -3901,6 +3901,7 @@ body > .content-preloader.preloader-active {
     box-sizing: border-box;
 }
 
+/*
 .timeline:before {
     position: absolute;
     left: 29px;
@@ -3911,11 +3912,11 @@ body > .content-preloader.preloader-active {
     content: '';
     display: block;
 }
-
+*/
 .timeline_item {
     position: relative;
     min-height: 64px;
-    padding: 16px 0;
+    padding: 0px 0;
 }
 
 .timeline_icon {
@@ -15010,7 +15011,7 @@ div.kineticjs-content {
 
 .user_heading_avatar {
     float: left;
-    margin-right: 24px;
+    margin-right: 0px;
     position: relative;
 }
 

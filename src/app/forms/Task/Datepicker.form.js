@@ -22,6 +22,7 @@ class Datepicker extends Component {
         return (
         <div className="uk-input-group" style={{marginTop: '20px'}}>
             <span className="uk-input-group-addon"><i className="material-icons">{ic}</i></span>
+
             <label className="uk-text-muted" htmlFor="uk_dp_1">{label}</label>
             <Flatpickr className="md-input" data-enable-time value={value}
                        ref={(fp) => {
@@ -31,7 +32,8 @@ class Datepicker extends Component {
                            // action({[fieldName]: v[0]}, taskId)
                            action(fieldName, v[0])
                        }}/>
-            <span onClick={formInputChangeHandler.bind(null, fieldName, '')}>X Clear</span>
+            <span style={{}} onClick={formInputChangeHandler.bind(null, fieldName, '')}><i className="material-icons">&#xE5CD;</i></span>
+
         </div>
         );
     };
