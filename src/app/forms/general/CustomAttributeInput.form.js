@@ -48,13 +48,13 @@ class CustomAttributeInput extends Component {
         //textovy input
         const textInputs = ['input', 'decimal_number', 'integer_number'];
         if (textInputs.indexOf(type) !== -1) {
-            input = <input type="text" name={name} onChange={e => {
+            input = <input type="text" name={name}  className="md-input" onChange={e => {
                 this.onChange(e.target.value)
             }} value={value}/>;
         }
         //textarea
         if (type === 'text_area') {
-            input = <textarea name={name} onChange={e => {
+            input = <textarea name={name} className="md-input" onChange={e => {
                 this.onChange(e.target.value)
             }} value={value}/>;
         }
