@@ -7,11 +7,9 @@ const userDropdownMenu = ({user,logout,dropdownToggled,handleToggle}) => {
 
     <li className={dropdownToggled ? "uk-open" : ""} onClick={handleToggle}>
         <a href="#" className="user_action_image">
-
-
-            <div className="user_heading_avatar">
-                {user.username}
-            <UserAvatar user={user} className="thumbnail" />
+            <div className="user_heading_avatar" style={userAvatarStyle}>
+                  <UserAvatar user={user} className="thumbnail header-thumbnail" />
+                  <span style={usernameStyle}>{user.username}</span>
             </div>
         </a>
 
@@ -38,5 +36,15 @@ userDropdownMenu.propTypes = {
     dropdownToggled:PropTypes.bool.isRequired,
 
 };
+
+var usernameStyle = {
+  paddingLeft: '15px'
+};
+
+var userAvatarStyle = {
+  marginTop: '4px'
+};
+
+
 
 export default userDropdownMenu;

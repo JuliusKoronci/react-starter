@@ -26,6 +26,7 @@
 .submenu_trigger a+ul{display:none;}
 .submenu_trigger a.active+ul{display:block !important;}
 
+
 .filter-clear {
     float: right;
     margin-top: -1.5em;
@@ -15002,8 +15003,8 @@ div.kineticjs-content {
 }
 
 .user_heading.uk-active .user_heading_avatar .thumbnail {
-    width: 64px;
-    height: 64px;
+    width: 42px;
+    height: 42px;
     line-height: 54px !important;
 }
 
@@ -15023,8 +15024,8 @@ div.kineticjs-content {
 
 @media only screen and (max-width: 959px) {
     .user_heading_avatar.fileinput {
-        width: 82px;
-        height: 82px;
+        width: 42px;
+        height: 42px;
         margin: 0 auto 16px;
         display: block;
     }
@@ -15040,8 +15041,8 @@ div.kineticjs-content {
 .user_heading_avatar .thumbnail {
     -webkit-transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
     transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
-    width: 82px;
-    height: 82px;
+    width: 42px;
+    height: 42px;
     line-height: 74px;
     border-radius: 50%;
     border: 2px solid #fff;
