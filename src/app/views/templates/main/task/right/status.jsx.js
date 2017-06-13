@@ -18,7 +18,7 @@ const status = ({task, action, statuses, user}) => {
 
     return (
         <div>
-            <label className="uk-text-muted" style={{marginLeft: '51px'}}>Status</label>
+            <label className="uk-text-muted" style={{marginLeft: '25px'}}>Status</label>
 
             <div className="uk-input-group">
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>

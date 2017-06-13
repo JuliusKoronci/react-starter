@@ -29,7 +29,6 @@ const main = ({inputChangeHandler, newTaskProject, userProjects, newTaskAssigner
             />
 
 
-            <div className="uk-input-group" style={{marginTop: '10px'}}>
 
                 <Select label="Assigned"
                         icon="&#xE7FD;"
@@ -38,8 +37,6 @@ const main = ({inputChangeHandler, newTaskProject, userProjects, newTaskAssigner
                         action={(e) => {
                             inputChangeHandler('newTaskAssigner', [{userId: e.target.value}])
                         }}/>
-
-            </div>
 
 
         </div>

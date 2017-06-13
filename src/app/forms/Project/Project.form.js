@@ -26,7 +26,7 @@ class ProjectForm extends Component {
 
                                 <Field type="checkbox" name="is_active" validate={[]} component={renderField}
                                 label="Active" disabled={fieldDisabled} />
-                               
+
                             </div>
                             <div className="uk-margin-bottom">
                                 <label className="inline-label">Project name</label>
@@ -34,7 +34,7 @@ class ProjectForm extends Component {
                             </div>
                             <div className="uk-margin-bottom">
                                 <label>Description</label>
-                                <Field type="textarea" name="description" validate={[]} component={renderTextarea} disabled={fieldDisabled} />
+                                <Field type="textarea" name="description" className="md-input" validate={[]} component={renderTextarea} disabled={fieldDisabled} />
                             </div>
                             <div className="uk-margin-bottom">
                                 <Link className="md-btn md-btn-danger" to={generateRoute('projects')}>{ this.props.project && this.props.project.canEdit ?'Cancel':'Close'}</Link>
