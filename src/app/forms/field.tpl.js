@@ -11,7 +11,7 @@ import Datepicker from '../forms/general/Datepicker.form';
 export const renderField = ({input, label, type, actions, disabled, className, meta: {touched, error, warning}}) => (
     <div className={className?className+ " uk-form-row":'uk-form-row'}>
         <label htmlFor={input.name}>{label}</label>
-        <input className="md-input" {...input} type={type} {...actions} {...input.props} disabled={disabled} />
+        <input className="md-input" {...input} type={type} {...actions} {...input.props} disabled={disabled} autoComplete="off" />
         {touched && ((error && <span className="uk-text-danger">{error}</span>) || (warning && <span className="uk-text-warning">{warning}</span>))}
     </div>
 );

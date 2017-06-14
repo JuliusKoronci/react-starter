@@ -26,7 +26,7 @@ const readOnlyTask = (props) => {
                         <Summary {...props} canEdit={false}/>
                         <Material task={props.task} />
                         <CommentForm {...props} />
-                        {/*<CommentList {...props} />*/}
+                        <CommentList {...props} />
                     </div>
                     <div className="uk-width-medium-1-4">
                         <RightMain {...props} />

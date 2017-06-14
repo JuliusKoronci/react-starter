@@ -17,7 +17,7 @@ class UserForm extends Component {
         return (
 
 <div className="md-card">
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} autoComplete="off">
         <div className="md-card-content max-width-1000px">
             <div className="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                 <div className="fileinput-new thumbnail">
@@ -54,17 +54,17 @@ class UserForm extends Component {
                 </div>
                 <div className="uk-grid" data-uk-grid-margin>
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
-                        <Field name="username" type="text" validate={[required]} component={renderField} id="user_edit_username_control" className="md-input" label="Login"/>
+                        <Field name="username" type="text" validate={[required]} component={renderField} id="user_edit_username_control" className="md-input" label="Login" autoComplete="off" />
                     </div>
 
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
-                        <Field name="detailData.function" type="text" validate={[]} component={renderField} id="user_edit_function_control" className="md-input" label="User position"/>
+                        <Field name="detailData.function" type="text" validate={[]} component={renderField} id="user_edit_function_control" className="md-input" label="User position" autoComplete="off"/>
                     </div>
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
-                        <Field name="detailData.name" type="text" validate={[]} component={renderField} id="user_edit_name_control" className="md-input" label="First name"/>
+                        <Field name="detailData.name" type="text" validate={[]} component={renderField} id="user_edit_name_control" className="md-input" label="First name" autoComplete="off"/>
                     </div>
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
-                        <Field name="detailData.surname" type="text" validate={[]} component={renderField} id="user_edit_surname_control" className="md-input" label="Surname"/>
+                        <Field name="detailData.surname" type="text" validate={[]} component={renderField} id="user_edit_surname_control" className="md-input" label="Surname" autoComplete="off"/>
                     </div>
 
                     <div className="uk-width-medium-1-2 uk-margin-bottom">
@@ -83,7 +83,7 @@ class UserForm extends Component {
                     <div className="uk-width-1-1">
 
                         <Field name="detailData.signature" className="md-input" type="text" validate={[]} component={renderTextarea}
-                               label="Signature"/>
+                               label="Signature" autoComplete="off" />
                     </div>
                 </div>
 

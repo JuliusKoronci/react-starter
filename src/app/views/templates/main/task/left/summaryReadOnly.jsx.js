@@ -44,7 +44,6 @@ const summary = ({task, form}) => {
       				<label className="uk-text-muted">Add work time</label>
       				<input
                 readOnly
-                fieldName="work_time"
                 className="md-input"
                 value={val}
                 />

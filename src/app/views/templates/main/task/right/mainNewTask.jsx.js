@@ -8,7 +8,7 @@ const main = ({inputChangeHandler, newTaskProject, userProjects, newTaskAssigner
         return {id: r.id, title: r.username}
     });
 
-    console.log(newTaskAssigner)
+    // console.log(newTaskAssigner)
     // options.project = [];
     options.project = userProjects;
 
