@@ -11,24 +11,25 @@ const main = ({task, handleFileDownload, form}) => {
     if(task.taskHasAssignedUsers.length>0)
     {
         user=task.taskHasAssignedUsers[0].user.username;
-        status= <span style={{ background: task.taskHasAssignedUsers[0].status.color }}>{task.taskHasAssignedUsers[0].status.title}</span>;
+        status= <div style={{background: task.taskHasAssignedUsers[0].status.color, color:'white', padding:'3px 8px'}}>{task.taskHasAssignedUsers[0].status.title}</div>;
 }
 
     return (
         <div className="md-list md-list-addon">
 
-
-
-            <div className="uk-input-group" style={{marginTop: '20px'}}>
-                <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>
-                <label className="uk-text-muted">Status</label>
-                  <input
-                          readOnly
-                          value={status}
-                          className="md-input"
-                  />
-            </div>
-
+          <div className="uk-input-group" style={{marginTop: '20px'}}>
+              <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>
+              <label className="uk-text-muted">Status</label>
+                <div
+                    style=
+                      {{border:'1px',
+                        borderRadius: '0',
+                        borderStyle:'solid',
+                        borderColor:'rgba(0, 0, 0, 0.12)'
+                       }}>
+                       {status}
+              </div>
+          </div>
 
             <div className="uk-input-group" style={{marginTop: '20px'}}>
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE2C8;</i></span>
@@ -103,14 +104,21 @@ const main = ({task, handleFileDownload, form}) => {
             <div className="uk-input-group" style={{marginTop: '20px'}}>
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE893;</i></span>
                 <label className="uk-text-muted">Tag</label>
-                  <input
-                         readOnly
-                         value={form.tags.map(tag=>{
-                                   return <span style={{background:'#'+tag.color}} key={tag.id}>{tag.title}</span>
-                               })}
-                         className="md-input"
-                  />
+                  <div
+                      style=
+                        {{border:'1px',
+                          borderRadius: '0',
+                          borderStyle:'solid',
+                          padding:'4px 8px 4px 8px',
+                          borderColor:'rgba(0, 0, 0, 0.12)'
+                         }}>
+                  {form.tags.map(tag=>{
+                      return <span style={{background:'#'+tag.color, marginRight:'8px',color:'white', padding:'3px'}} key={tag.id}>{tag.title}</span>
+                  })}
+                </div>
             </div>
+
+
 
 
             <Attachment task={task} handleFileDownload={handleFileDownload} />
