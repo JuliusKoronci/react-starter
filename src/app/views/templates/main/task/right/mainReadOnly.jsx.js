@@ -127,11 +127,21 @@ const main = ({task, handleFileDownload, form}) => {
 
             {task.taskData.length>0 && task.taskData.map(td=>{
 
-                return  <div key={td.id}><b>{td.taskAttribute.title}</b>
-                    <br />
-                    {td.value}
-                </div>
-
+                return (
+                          <div key={td.id} className="uk-margin-medium-bottom">
+                            <label className="uk-text-muted">{td.taskAttribute.title}</label>
+                              <div
+                                  style=
+                                    {{border:'1px',
+                                      borderRadius: '0',
+                                      borderStyle:'solid',
+                                      padding:'4px 8px 4px 8px',
+                                      borderColor:'rgba(0, 0, 0, 0.12)'
+                                     }}>
+                                     {td.value}
+                            </div>
+                          </div>
+                );
             })}
 
 
