@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Attachment from './attachmentReadOnly.jsx';
+import Select from '../../../../../forms/Task/Select.form';
 
 
 const main = ({task, handleFileDownload, form}) => {
@@ -17,91 +18,105 @@ const main = ({task, handleFileDownload, form}) => {
         <div className="md-list md-list-addon">
 
 
-            <label className="uk-text-muted" style={{marginLeft: '51px'}}>Status</label>
-            <div className="uk-input-group">
+
+            <div className="uk-input-group" style={{marginTop: '20px'}}>
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>
-
-                {user} {status}
-
+                <label className="uk-text-muted">Status</label>
+                  <input
+                          readOnly
+                          value={status}
+                          className="md-input"
+                  />
             </div>
-
-
 
 
             <div className="uk-input-group" style={{marginTop: '20px'}}>
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE2C8;</i></span>
                 <label className="uk-text-muted">Project</label>
-                {task.project&& task.project.title?task.project.title:''}
+                  <input
+                        readOnly
+                        value={task.project&& task.project.title?task.project.title:''}
+                        className="md-input"
+                  />
             </div>
-
-
-
-
 
             <div className="uk-input-group" style={{marginTop: '20px'}}>
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE7FD;</i></span>
                 <label className="uk-text-muted">Requester</label>
-                {task.requestedBy && task.requestedBy.username?task.requestedBy.username:'-'}
+                  <input
+                          readOnly
+                          value={task.requestedBy && task.requestedBy.username?task.requestedBy.username:'-'}
+                          className="md-input"
+                  />
             </div>
-
-
 
             <div className="uk-input-group" style={{marginTop: '20px'}}>
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE7EE;</i></span>
                 <label className="uk-text-muted">Company</label>
-                {task.company&&task.company.title?task.company.title:'-'}
+                  <input
+                         readOnly
+                         value={task.company&&task.company.title?task.company.title:'-'}
+                         className="md-input"
+                  />
             </div>
 
-
-
-
-
-            <div className="uk-input-group" style={{marginTop: '10px'}}>
-                <div className="uk-input-group" style={{marginTop: '20px'}}>
-                    <span className="uk-input-group-addon"><i className="material-icons">&#xE7FD;</i></span>
-                    <label className="uk-text-muted">Assigned</label>
-                    {task.taskHasAssignedUsers.length>0 ? task.taskHasAssignedUsers[0].user.username:'-'}
-                </div>
+            <div className="uk-input-group" style={{marginTop: '20px'}}>
+                <span className="uk-input-group-addon"><i className="material-icons">&#xE7FD;</i></span>
+                <label className="uk-text-muted">Assigned</label>
+                  <input
+                         readOnly
+                         value={task.taskHasAssignedUsers.length>0 ? task.taskHasAssignedUsers[0].user.username:'-'}
+                         className="md-input"
+                  />
             </div>
 
-
-
-            <div className="uk-input-group" style={{marginTop: '10px'}}>
-                <div className="uk-input-group" style={{marginTop: '20px'}}>
-                    <span className="uk-input-group-addon"><i className="material-icons">&#xE858;</i></span>
-                    <label className="uk-text-muted">Start At</label>
-                    {task.startedAt ? task.startedAt.date:'-'}
-                </div>
+            <div className="uk-input-group" style={{marginTop: '20px'}}>
+                <span className="uk-input-group-addon"><i className="material-icons">&#xE858;</i></span>
+                <label className="uk-text-muted">Start at</label>
+                  <input
+                         readOnly
+                         value={task.startedAt ? task.startedAt.date:'-'}
+                         className="md-input"
+                  />
             </div>
 
-            <div className="uk-input-group" style={{marginTop: '10px'}}>
-                <div className="uk-input-group" style={{marginTop: '20px'}}>
-                    <span className="uk-input-group-addon"><i className="material-icons">&#xE8B2;</i></span>
-                    <label className="uk-text-muted">Deadline</label>
-                    {task.deadline ?task.deadline.date:'-'}
-                </div>
+            <div className="uk-input-group" style={{marginTop: '20px'}}>
+                <span className="uk-input-group-addon"><i className="material-icons">&#xE8B2;</i></span>
+                <label className="uk-text-muted">Deadline</label>
+                  <input
+                         readOnly
+                         value={task.deadline ?task.deadline.date:'-'}
+                         className="md-input"
+                  />
             </div>
 
-            <div className="uk-input-group" style={{marginTop: '10px'}}>
-                <div className="uk-input-group" style={{marginTop: '20px'}}>
-                    <span className="uk-input-group-addon"><i className="material-icons">&#xE5CD;</i></span>
-                    <label className="uk-text-muted">Closed At</label>
-                    {task.closedAt? task.closedAt.date:'-'}
-                </div>
+            <div className="uk-input-group" style={{marginTop: '20px'}}>
+                <span className="uk-input-group-addon"><i className="material-icons">&#xE5CD;</i></span>
+                <label className="uk-text-muted">Closed at</label>
+                  <input
+                         readOnly
+                         value={task.closedAt? task.closedAt.date:'-'}
+                         className="md-input"
+                  />
             </div>
+
+            <div className="uk-input-group" style={{marginTop: '20px'}}>
+                <span className="uk-input-group-addon"><i className="material-icons">&#xE893;</i></span>
+                <label className="uk-text-muted">Tag</label>
+                  <input
+                         readOnly
+                         value={form.tags.map(tag=>{
+                                   return <span style={{background:'#'+tag.color}} key={tag.id}>{tag.title}</span>
+                               })}
+                         className="md-input"
+                  />
+            </div>
+
 
             <Attachment task={task} handleFileDownload={handleFileDownload} />
 
 
-            <div className="uk-input-group" style={{marginTop: '10px'}}>
-                <span className="uk-input-group-addon"><i className="material-icons">&#xE893;</i></span>
-                <label className="uk-text-muted">Tag</label>
-                {form.tags.map(tag=>{
-                    return <span style={{background:'#'+tag.color}} key={tag.id}>{tag.title}</span>
-                })}
-            </div>
 
-            <hr />
 
 
 
