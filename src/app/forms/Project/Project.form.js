@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {renderField,renderTextarea} from '../field.tpl';
+import {renderField,renderTextarea, renderWswg} from '../field.tpl';
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router';
 import {generateRoute} from '../../../config/router';
@@ -33,8 +33,9 @@ class ProjectForm extends Component {
                                 <Field type="text" name="title" validate={[]} component={renderField} disabled={fieldDisabled} />
                             </div>
                             <div className="uk-margin-bottom">
-                                <label>Description</label>
-                                <Field type="textarea" name="description" className="md-input" validate={[]} component={renderTextarea} disabled={fieldDisabled} />
+                                {/*<label>Description</label>*/}
+                                {/*<Field type="textarea" name="description" className="md-input" validate={[]} component={renderTextarea} disabled={fieldDisabled} />*/}
+                                <Field type="textarea" name="description" label="Description" className="md-input" validate={[]} component={renderWswg} disabled={fieldDisabled} />
                             </div>
                             <div className="uk-margin-bottom">
                                 <Link className="md-btn md-btn-danger" to={generateRoute('projects')}>{ this.props.project && this.props.project.canEdit ?'Cancel':'Close'}</Link>

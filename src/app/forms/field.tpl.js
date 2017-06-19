@@ -2,6 +2,7 @@ import React from 'react';
 
 
 import RTE from '../forms/general/rte/RTE.form';
+import RichText from '../forms/general/RichTextRedux.form';
 import Tagger from '../forms/general/Tagger.form';
 import Colorpicker from '../forms/general/Colorpicker.form';
 import Multicheckbox from '../forms/general/MulticheckboxRedux.form';
@@ -98,6 +99,21 @@ export const renderDatepicker = ({input,label,action,setValues}) => {
 export const renderMulticheckbox = ({input, options, label, action, meta: {touched, error, warning}}) => (
     <Multicheckbox {...input} input={input} options={options} />
 );
+
+
+
+export const renderWswg = ({input, label, type, disabled,actions, meta: {touched, error, warning}}) => {
+    return(
+<RichText
+    label={label}
+    // action={props.inputChangeHandler}
+    {...actions}
+    input={input}
+    // value={props.newTaskDescription}
+disabled={disabled}
+/>
+
+)};
 
 
 // export const renderSelect = ({input, label, type, options, defaultValue, action, meta: {touched, error, warning}}) => (
