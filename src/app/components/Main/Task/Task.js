@@ -12,6 +12,7 @@ import {generateRoute} from '../../../../config/router';
 import {entityCreated, entityError, stripEmptyValues} from '../../../services/general';
 import {TASK_LIST} from '../../../../api/urls';
 import {apiUploadFile} from '../../../../api/api';
+import { browserHistory } from 'react-router';
 
 class Task extends Component {
 
@@ -115,6 +116,11 @@ class Task extends Component {
         this.props.actions.deleteTask(`${TASK_LIST}/${taskId}`);
 
         e.preventDefault();
+    };
+
+    handleCancelClick=(e)=>{
+        e.preventDefault();
+        browserHistory.goBack();
     };
 
     statusChange = (data, e) => {
@@ -378,6 +384,9 @@ console.log(data);
 
 
         if(prevProps.params.taskId!==this.props.params.taskId){
+
+            // browserHistory.goBack();
+
             if (this.props.params.taskId) {
                 this.props.actions.loadTaskById(this.props.params.taskId);
                 this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
@@ -512,6 +521,7 @@ console.log(data);
             newTaskAssigner={this.state.newTaskAssigner}
             form={this.state.form}
             inputChangeHandler={this.inputChangeHandler}
+            handleCancelClick={this.handleCancelClick}
 
             {...this.props}
         />);

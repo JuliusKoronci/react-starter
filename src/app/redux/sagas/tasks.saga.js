@@ -96,6 +96,7 @@ function *taskUpdate(action) {
         // console.log(data);
         yield call(entityUpdated, 'Task saved!');
         yield put(taskReceived(data));
+        browserHistory.goBack();
     } catch (e) {
         yield put(asyncError(e));
     }
