@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, phone, alphanum, number} from '../../../config/validation';
 import {availableLanguages} from '../../../config/config';
-import {renderField, renderRTE, renderTextarea, renderSelect} from '../field.tpl';
+import {renderField, renderRTE, renderWswg, renderSelect} from '../field.tpl';
 import {LOAD_ATTACHMENT} from '../../../api/urls';
 import RTE from '../../forms/general/rte/RTE.form';
 import Image from '../../components/Main/Image';
@@ -83,7 +83,7 @@ class ProfileForm extends Component {
                             <div className="uk-width-1-1">
 
 
-                                <Field name="detailData.signature" type="text" validate={[required]} component={renderTextarea}
+                                <Field name="detailData.signature" type="text" validate={[required]} component={renderWswg}
                                 label="Signature"/>
 
                                 {/*<div className="uk-form-row">*/}
