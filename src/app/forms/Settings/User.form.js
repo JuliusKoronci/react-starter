@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {required, email} from '../../../config/validation';
+import {required, email, minLength8} from '../../../config/validation';
 import {renderField, renderWswg, renderSelect} from '../field.tpl';
 import {availableLanguages} from '../../../config/config';
 import {LOAD_ATTACHMENT} from '../../../api/urls';
@@ -91,7 +91,7 @@ class UserForm extends Component {
                 <div className="uk-grid">
                     <div className="uk-width-1-1">
 
-                        <Field name="password" className="md-input" type="password" validate={[required]} component={renderField}
+                        <Field name="password" className="md-input" type="password" validate={[required,minLength8]} component={renderField}
                                label="Initial password"/>
                     </div>
                 </div>}
