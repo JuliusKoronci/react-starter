@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {required, email} from '../../../config/validation';
-import {renderField, renderTextarea, renderSelect} from '../field.tpl';
+import {renderField, renderWswg, renderSelect} from '../field.tpl';
 import {availableLanguages} from '../../../config/config';
 import {LOAD_ATTACHMENT} from '../../../api/urls';
 import Image from '../../components/Main/Image';
@@ -82,7 +82,7 @@ class UserForm extends Component {
                 <div className="uk-grid">
                     <div className="uk-width-1-1">
 
-                        <Field name="detailData.signature" className="md-input" type="text" validate={[]} component={renderTextarea}
+                        <Field name="detailData.signature" className="md-input" type="text" validate={[]} component={renderWswg}
                                label="Signature" autoComplete="off" />
                     </div>
                 </div>

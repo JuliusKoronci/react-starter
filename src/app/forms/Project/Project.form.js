@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {renderField,renderTextarea, renderWswg} from '../field.tpl';
+import {renderField, renderWswg} from '../field.tpl';
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router';
 import {generateRoute} from '../../../config/router';
