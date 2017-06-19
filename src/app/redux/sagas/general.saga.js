@@ -99,7 +99,7 @@ function *downloadFile(action) {
     let config = action.config;
     yield put(startAjax());
     try {
-        yield call(apiDownloadFile, config.url + '/' + action.slug, action.config);
+        yield call(apiDownloadFile, config.url + '/' + action.slug, action.config, action.slug);
         entityUpdated('Downloading file');
     } catch (e) {
         yield put(asyncError(e));

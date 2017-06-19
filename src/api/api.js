@@ -215,7 +215,7 @@ export function defaultDeleteFile(url) {
 }
 
 
-export function apiDownloadFile(url) {
+export function apiDownloadFile(url, actionConfig, name) {
     const token = getFromStorage(TOKEN_KEY);
 
     let config = {
@@ -229,7 +229,7 @@ export function apiDownloadFile(url) {
         .then(function (response) {
             return response.blob();
         }).then(function (blob) {
-            downloadFile(blob);
+            downloadFile(blob, name);
         });
 }
 

@@ -100,11 +100,11 @@ const commentList = ({task,handleFileDownload}) => {
 
                             {comment.commentHasAttachments.map(att=>{
 
-                                return <p key={att.id} className="md-color-blue-900" onClick={handleFileDownload.bind(null,att.slug)}>
+                                return <a href="#" key={att.id} className="md-color-blue-900" onClick={handleFileDownload.bind(null,att.slug)}>
                             <span>
                                 <i className="material-icons md-color-blue-900">&#xE226;</i>{att.slug}
                             </span>
-                                </p>
+                                </a>
 
                             })}
 

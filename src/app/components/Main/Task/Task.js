@@ -73,7 +73,8 @@ class Task extends Component {
         this.props.actions.taskUpload(formData, this.props.params.taskId);
     };
 
-    handleFileDownload = (slug) => {
+    handleFileDownload = (slug,e) => {
+        e.preventDefault();
         this.props.actions.downloadFile(slug, configResolver.getDownloadFileConfig());
     };
 

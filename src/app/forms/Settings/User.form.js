@@ -169,9 +169,9 @@ class UserForm extends Component {
                         </div>
                     </div>
                 </div>
-                <h3 className="full_width_in_card heading_c">
-                    User attributes
-                </h3>
+                {/*<h3 className="full_width_in_card heading_c">*/}
+                    {/*User attributes*/}
+                {/*</h3>*/}
                 <div className="uk-grid-margin">
                     <Link className="md-btn md-btn-danger" to={generateRoute('users')}>Cancel</Link>
                     <button type="submit" className="md-btn md-btn-primary alignright" href="#">Save</button>
@@ -181,7 +181,7 @@ class UserForm extends Component {
     </form>
 
     {/*<form onSubmit={submitPassword}>*/}
-        <div className="md-card-content">
+        <div className="md-card-content max-width-1000px">
             <div className="uk-grid-margin">
                 <h3 className="full_width_in_card heading_c">
                     Password reset
