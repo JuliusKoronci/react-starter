@@ -126,13 +126,14 @@ class Task extends Component {
     statusChange = (data, e) => {
 
         let form = Object.assign({}, this.state.form);
+
         let value=[{userId: data.assigned,
             statusId: data.status?data.status:null}];
 
         form['assigned'] = value;
         this.setState({form: form});
 
-console.log(data);
+// console.log(data);
     };
 
 
@@ -208,21 +209,22 @@ console.log(data);
         }
 
         if(name==='assigned'){
-
-
-
-            // value.value,
-            //     value.label
-            //
-            // value: tHuser.user.id,
-            //     label: tHuser.user.username
-
+            let statusId=null;
+            let options=this.props.options;
+            if(options){
+                let status=options.status.filter(status=>{if (status.title==='new'){return status}});
+                if(status){
+                    statusId=status[0].id;
+                }
+            }
+            value=[{userId: value[0].userId, statusId: statusId}];
         }
 
 
 
         let form = Object.assign({}, this.state.form);
         form[name] = value;
+
         this.setState({form: form});
         // console.log(this.state);
     };

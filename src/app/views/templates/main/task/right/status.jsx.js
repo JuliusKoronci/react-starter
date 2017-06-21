@@ -2,6 +2,8 @@ import React from 'react';
 import DropDown from '../../../../../forms/Task/DropDown.form';
 
 const status = ({task, action, statuses, user}) => {
+    // console.log(user);
+    // console.log(statuses);
     const options = statuses.map((status) => {
         return {
             'label': status.title,
@@ -39,7 +41,7 @@ const status = ({task, action, statuses, user}) => {
                         />
                     )
                 })}
-                {task.taskHasAssignedUsers.length === 0 &&
+                {task.taskHasAssignedUsers.length === 0 && !user.length &&
                 <DropDown
                     fieldName="status"
                     options={options}
