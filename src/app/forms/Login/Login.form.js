@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {required, minLength8} from '../../../config/validation';
+import {required, minLength5} from '../../../config/validation';
 import {renderField} from '../field.tpl';
 
 
@@ -15,9 +15,9 @@ class LoginForm extends Component {
                             <div className="user_avatar"></div>
                         </div>
                         <form onSubmit={handleSubmit}>
-                            <Field name="username" type="text" validate={[required, minLength8]} component={renderField}
+                            <Field name="username" type="text" validate={[required, minLength5]} component={renderField}
                                    label="Username"/>
-                            <Field name="password" type="password" validate={[required, minLength8]}
+                            <Field name="password" type="password" validate={[required, minLength5]}
                                    component={renderField} label="Password"/>
                             <div className="uk-margin-medium-top">
                                 <div className="uk-text-danger">{loginError}</div>

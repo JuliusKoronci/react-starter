@@ -352,7 +352,7 @@ class configResolver {
             urlList: urls.TAG_LIST,
             afterEntityReceivedAction: projectReceived,
             //redirectAfterCreation: paths.units,
-            allowedFormFields: ['title', 'description']
+            allowedFormFields: ['title', 'description','is_active']
         }
     };
 

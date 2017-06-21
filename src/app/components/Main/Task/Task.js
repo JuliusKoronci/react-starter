@@ -468,11 +468,14 @@ console.log(data);
 
     render() {
 
-        if (this.props.task && this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1) {
-            return this.renderTask()
-        }
-        if (this.props.task && this.props.task.loggedUserProjectAcl.indexOf('resolve_task')===-1) {
-            return this.renderReadonlyTask()
+        if(this.props.task){
+            if (this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1 && this.props.task.project.is_active) {
+                return this.renderTask()
+            }
+            if (this.props.task.loggedUserProjectAcl.indexOf('resolve_task')===-1 || this.props.task.project.is_active===false) {
+                return this.renderReadonlyTask()
+            }
+            return <p>Task id: {this.props.params.taskId} ...</p>
         }
         else if (this.props.creatingTask) {
             return this.renderCreatingTask()
@@ -480,18 +483,36 @@ console.log(data);
         else {
             return <p>Task id: {this.props.params.taskId} ...</p>
         }
+
+
+        // if (this.props.task && this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1 && this.props.task.project.is_active) {
+        //     render='editable';
+        //     return this.renderTask()
+        // }
+        // if (this.props.task && this.props.task.loggedUserProjectAcl.indexOf('resolve_task')===-1) {
+        //     return this.renderReadonlyTask()
+        // }
+        // else if (this.props.creatingTask) {
+        //     return this.renderCreatingTask()
+        // }
+        // else {
+        //     return <p>Task id: {this.props.params.taskId} ...</p>
+        // }
+
     }
 
 
 
     renderReadonlyTask = () => {
         // console.log(this.props.task);
+        // return (<h1>read only</h1>);
         return (<ViewReadable
             sendComment={this.sendComment}
 
             formChangeHandler={this.formChangeHandler}
             formInputChangeHandler={this.formInputChangeHandler}
             formTaskAttributeChangeHandler={this.formTaskAttributeChangeHandler}
+            inputChangeHandler={this.inputChangeHandler}
 
             toggleState={this.toggleState}
             commentFormEmail={this.state.commentFormEmail}
