@@ -12,18 +12,34 @@ class Profile extends Component {
         super(props, context);
         this.profileConfig = configResolver.getProfileConfig(props.userId);
         this.profileAvatarConfig = configResolver.getProfileAvatarConfig(props.userId);
+
+        this.state = {password: {new: '', repeat: ''}};
     }
 
 
-    componentWillMount(){
+    passwordOnChange = (name, e) => {
+        const value=e.target.value;
+
+        // let oldState=Object.assign({},this.state);
+        // console.log(oldState);
+        // let password=oldState.password;
+        // let newState=Object.assign(oldState,{password:password});
+        // console.log(newState);
+        // this.setState(newState);
+        let password=Object.assign({},this.state.password);
+        password[name]=value;
+        this.setState({password:password});
+    };
+
+    handlePasswordChangeSubmit = (values, e) => {
+        console.log(values, e);
+        console.log(this.state.password.new, this.state.password.repeat);
+    };
+
+
+    componentWillMount() {
         this.props.actions.loadEntityById(this.props.userId, this.profileConfig);
     }
-
-// handleReset=()=>{
-//
-// }
-
-
 
     handleFileUpload = (e) => {
         let file = e.target.files[0];
@@ -32,14 +48,19 @@ class Profile extends Component {
         this.props.actions.uploadAvatar(formData, this.profileAvatarConfig);
     };
 
-    handleSubmit=(values)=>{
+    handleSubmit = (values) => {
         this.props.actions.updateEntity(this.props.userId, values, this.profileConfig);
     };
 
     render() {
         const {user} = this.props;
         return (
-            <View user={user} onSubmit={this.handleSubmit} handleFileUpload={this.handleFileUpload} />
+            <View user={user}
+                  onSubmit={this.handleSubmit}
+                  handleFileUpload={this.handleFileUpload}
+                  passwordState={this.state.password}
+                  passwordOnChange={this.passwordOnChange}
+                  handlePasswordChangeSubmit={this.handlePasswordChangeSubmit}/>
         );
     }
 }
@@ -52,7 +73,7 @@ Profile.propTypes = {
 function mapStateToProps(state) {
     return {
         userId: state.auth.user.id,
-        user:state.profile.data
+        user: state.profile.data
     };
 }
 function mapDispatchToProps(dispatch) {

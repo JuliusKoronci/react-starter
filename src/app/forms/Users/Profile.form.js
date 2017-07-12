@@ -7,6 +7,7 @@ import {renderField, renderRTE, renderWswg, renderSelect} from '../field.tpl';
 import {LOAD_ATTACHMENT} from '../../../api/urls';
 import RTE from '../../forms/general/rte/RTE.form';
 import Image from '../../components/Main/Image';
+import PasswordChangeForm from './PasswordChange.form.js';
 import {Link} from 'react-router';
 
 
@@ -14,7 +15,7 @@ import {Link} from 'react-router';
 class ProfileForm extends Component {
 
     render() {
-        const {handleSubmit, handleFileUpload, formError, user} = this.props;
+        const {handleSubmit, handleFileUpload, formError, user, handlePasswordChangeSubmit, passwordState, passwordOnChange} = this.props;
 
         return (
 
@@ -178,35 +179,15 @@ class ProfileForm extends Component {
                             <button className="md-btn md-btn-primary alignright" type="submit">SAVE</button>
 
                         </div>
-
-
-                        <div className="uk-grid-margin">
-                            <h3 className="full_width_in_card heading_c">
-                                Password reset
-                            </h3>
                         </div>
-                        <div className="uk-grid-margin">
-                            <div className="uk-width-1-1">
-                                <div className="uk-grid-margin">
-                                    <label>Old password</label>
-                                    <input type="text" className="md-input"/>
-                                </div>
-                                <div className="uk-grid-margin">
-                                    <label>New password</label>
-                                    <input type="text" className="md-input"/>
-                                </div>
-                                <div className="uk-grid-margin">
-                                    <label>Repeat new password</label>
-                                    <input type="text" className="md-input"/>
-                                </div>
-                            </div>
-                            <div className="uk-grid-margin">
-                                <Link className="md-btn md-btn-danger" to="/">Cancel</Link>
-                                <a className="md-btn md-btn-primary alignright" href="#">Change password</a>
-                            </div>
-                        </div>
-                    </div>
                     </form>
+
+
+
+
+                    <PasswordChangeForm handleSubmit={handlePasswordChangeSubmit} passwordState={passwordState} passwordOnChange={passwordOnChange} />
+
+
                 </div>
 
             </div>
