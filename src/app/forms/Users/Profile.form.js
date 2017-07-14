@@ -15,7 +15,7 @@ import {Link} from 'react-router';
 class ProfileForm extends Component {
 
     render() {
-        const {handleSubmit, handleFileUpload, formError, user, handlePasswordChangeSubmit, passwordState, passwordOnChange} = this.props;
+        const {handleSubmit, handleFileUpload, user} = this.props;
 
         return (
 
@@ -185,7 +185,7 @@ class ProfileForm extends Component {
 
 
 
-                    <PasswordChangeForm handleSubmit={handlePasswordChangeSubmit} passwordState={passwordState} passwordOnChange={passwordOnChange} />
+                    <PasswordChangeForm />
 
 
                 </div>

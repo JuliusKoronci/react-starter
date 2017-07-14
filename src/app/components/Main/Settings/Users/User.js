@@ -70,10 +70,17 @@ class User extends Component {
 
     render() {
         return (
-            <View formError={null} onSubmit={this.submitHandler} passwordHandler={this.passwordHandler} {...this.props}
-                  handleFileUpload={this.handleFileUpload} companies={this.props.companies} roles={this.props.roles}
-                  user={this.props.user} editing={!!this.props.user}
-                  heading={this.props.user ? "Edit user" : "Add user"} handleDelete={this.deleteHandler}/>
+            <View formError={null}
+                  onSubmit={this.submitHandler}
+                  passwordHandler={this.passwordHandler}
+                  {...this.props}
+                  handleFileUpload={this.handleFileUpload}
+                  companies={this.props.companies}
+                  roles={this.props.roles}
+                  user={this.props.user}
+                  editing={!!this.props.user}
+                  heading={this.props.user ? "Edit user" : "Add user"}
+                  handleDelete={this.deleteHandler}/>
         );
     }
 }

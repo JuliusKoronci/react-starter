@@ -8,6 +8,7 @@ import {LOAD_ATTACHMENT} from '../../../api/urls';
 import Image from '../../components/Main/Image';
 import {Link} from 'react-router';
 import {generateRoute} from '../../../config/router';
+import PasswordChangeForm from '../Users/PasswordChange.form.js';
 
 class UserForm extends Component {
 
@@ -180,31 +181,35 @@ class UserForm extends Component {
         </div>
     </form>
 
+
+{/*DAT FORMULAR NA ZMENU HESLA LEN PRE ADMINA?*/}
+    <PasswordChangeForm params={this.props.params} />
+
     {/*<form onSubmit={submitPassword}>*/}
-        <div className="md-card-content max-width-1000px">
-            <div className="uk-grid-margin">
-                <h3 className="full_width_in_card heading_c">
-                    Password reset
-                </h3>
-            </div>
-            <div className="uk-grid-margin">
-                <div className="uk-width-1-1">
-                    <div className="uk-grid-margin">
-                        {/*<Field name="old_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Old password"/>*/}
-                    </div>
-                    <div className="uk-grid-margin">
-                        {/*<Field name="password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="New password"/>*/}
-                    </div>
-                    <div className="uk-grid-margin">
-                        {/*<Field name="repeat_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Repeat new password"/>*/}
-                    </div>
-                </div>
-                <div className="uk-grid-margin">
-                    <Link className="md-btn md-btn-danger" to={generateRoute('users')}>Cancel</Link>
-                    <button type="submit" className="md-btn md-btn-primary alignright" href="#">Change password</button>
-                </div>
-            </div>
-        </div>
+        {/*<div className="md-card-content max-width-1000px">*/}
+            {/*<div className="uk-grid-margin">*/}
+                {/*<h3 className="full_width_in_card heading_c">*/}
+                    {/*Password reset*/}
+                {/*</h3>*/}
+            {/*</div>*/}
+            {/*<div className="uk-grid-margin">*/}
+                {/*<div className="uk-width-1-1">*/}
+                    {/*<div className="uk-grid-margin">*/}
+                        {/*/!*<Field name="old_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Old password"/>*!/*/}
+                    {/*</div>*/}
+                    {/*<div className="uk-grid-margin">*/}
+                        {/*/!*<Field name="password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="New password"/>*!/*/}
+                    {/*</div>*/}
+                    {/*<div className="uk-grid-margin">*/}
+                        {/*/!*<Field name="repeat_password" type="text" validate={[required]} component={renderField} id="user_edit_linkedin_control" className="md-input" label="Repeat new password"/>*!/*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+                {/*<div className="uk-grid-margin">*/}
+                    {/*<Link className="md-btn md-btn-danger" to={generateRoute('users')}>Cancel</Link>*/}
+                    {/*<button type="submit" className="md-btn md-btn-primary alignright" href="#">Change password</button>*/}
+                {/*</div>*/}
+            {/*</div>*/}
+        {/*</div>*/}
     {/*</form>*/}
 </div>
         );

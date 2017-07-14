@@ -12,36 +12,9 @@ class Profile extends Component {
         super(props, context);
         this.profileConfig = configResolver.getProfileConfig(props.userId);
         this.profileAvatarConfig = configResolver.getProfileAvatarConfig(props.userId);
-        this.passwordResetConfig = configResolver.passwordResetConfig(props.userId);
 
-        this.state = {password: {new: '', repeat: '',error:''}};
     }
 
-
-    passwordOnChange = (name, e) => {
-        const value=e.target.value;
-        let password=Object.assign({},this.state.password);
-        password[name]=value;
-        this.setState({password:password});
-    };
-
-    handlePasswordChangeSubmit = (e) => {
-        console.log(this.state.password.new, this.state.password.repeat);
-        let password=Object.assign({},this.state.password);
-
-        if(this.state.password.new!==this.state.password.repeat){
-            password.error='passwords don\'t match';
-        }
-        else if(this.state.password.new.length<8){
-            password.error='password has to have at least 8 characters';
-        }
-        else{
-            password.error='';
-            const values={password:this.state.password.new,password_repeat:this.state.password.repeat};
-            this.props.actions.resetPassword(this.props.userId, values, this.passwordResetConfig);
-        }
-        this.setState({password:password});
-    };
 
 
     componentWillMount() {
@@ -65,9 +38,10 @@ class Profile extends Component {
             <View user={user}
                   onSubmit={this.handleSubmit}
                   handleFileUpload={this.handleFileUpload}
-                  passwordState={this.state.password}
-                  passwordOnChange={this.passwordOnChange}
-                  handlePasswordChangeSubmit={this.handlePasswordChangeSubmit}/>
+                  // passwordState={this.state.password}
+                  // passwordOnChange={this.passwordOnChange}
+                  // handlePasswordChangeSubmit={this.handlePasswordChangeSubmit}
+            />
         );
     }
 }
