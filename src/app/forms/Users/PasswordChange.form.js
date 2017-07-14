@@ -35,6 +35,9 @@ class PasswordChangeForm extends Component {
                             <div className="uk-grid-margin">
                                 {/*<Link className="md-btn md-btn-danger" to="/">Cancel</Link>*/}
                                 <button type="submit" onClick={handleSubmit} className="md-btn md-btn-primary alignright" >Change password</button>
+
+                                {passwordState.error!=='' && <p className="">{passwordState.error}</p>}
+
                             </div>
                         </div>
                             <br />

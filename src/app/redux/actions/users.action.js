@@ -25,3 +25,12 @@ export function avatarUploaded(config, data) {
         config
     }
 }
+
+export function resetPassword(id,values,config){
+    return {
+        type: constants.GENERAL_REQUEST,
+        id,
+        values,
+        config
+    }
+}

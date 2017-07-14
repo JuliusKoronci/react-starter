@@ -392,6 +392,18 @@ class configResolver {
     };
 
 
+    static passwordResetConfig = (id) => {
+        return {
+            url: urls.USERS_LIST + '/' + id +'/reset-password',
+            method:'POST',
+            // urlList: urls.USERS_LIST,
+            allowedFormFields: ['password','password_repeat'],
+            message:'password changed'
+            // afterEntityReceivedAction: profileReceived
+        }
+    };
+
+
     static projectAssigners = (id) => {
         return {
             url:urls.PROJECT_ASSIGNERS + '/' + id,
