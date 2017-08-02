@@ -11,6 +11,7 @@ const defaultState = {
 export default function projects(state = defaultState, action) {
     switch (action.type) {
         case PROJECTS_RECEIVED:
+
             return action.data;
         case PROJECT_RECEIVED:
             return {

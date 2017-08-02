@@ -6,9 +6,14 @@ import View from '../../../views/templates/main/settings/settings.jsx';
 
 class Settings extends Component {
 
+
+
     render() {
+
+        const acl=this.props.state.auth.user.userRoleAcl;
+
         return (
-            <View prop={{}} />
+            <View acl={acl} />
         );
     }
 }

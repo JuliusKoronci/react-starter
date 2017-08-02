@@ -198,11 +198,14 @@ function mapStateToProps(state, ownProps) {
 
         return {
             initialValues: initialValues,
+            enableReinitialize: true
             // acl:newAcl
         };
     }
 
-    return {acl:{}};
+    return {initialValues:{'is_active':true},enableReinitialize: true};
+
+    // return {acl:{}};
 
 }
 

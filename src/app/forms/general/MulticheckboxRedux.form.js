@@ -4,15 +4,12 @@ class Multicheckbox extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {inputValue: []};
+        this.state = {inputValue: this.props.value?this.props.value:[]};
     }
 
-
-    componentWillMount(){
-        console.log('will mount');
-    }
 
     componentDidUpdate() {
+
         if (this.state.inputValue !== this.props.input.value) {
             this.setState({
                 inputValue: this.props.input.value
@@ -48,7 +45,7 @@ class Multicheckbox extends Component {
 
         return (
             <div>
-                <input type="text" value={inputValue} name={this.props.input.name}
+                <input type="hidden" value={inputValue} name={this.props.input.name}
                        onChange={this.props.input.onChange.bind(null, inputValue)}/>
                 <label htmlFor={this.props.input.name}>{this.props.label}</label>
 

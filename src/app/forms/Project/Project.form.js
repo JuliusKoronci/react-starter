@@ -8,6 +8,10 @@ import {generateRoute} from '../../../config/router';
 
 class ProjectForm extends Component {
 
+
+
+
+
     render() {
         const {handleSubmit,heading} = this.props;
         const fieldDisabled=this.props.formDisabled;
@@ -59,7 +63,7 @@ function mapStateToProps(state, ownProps) {
             formDisabled:!(project.length > 0 && project[0].canEdit),
         };
     }
-    return {};
+    return {initialValues:{'is_active':true}};
 
 }
 

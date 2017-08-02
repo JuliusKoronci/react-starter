@@ -90,9 +90,9 @@ function mapStateToProps(state, ownProps) {
         return {
             initialValues: company[0]
         };
-    }else {
-        return{};
     }
+
+    return {initialValues:{'is_active':true}};
 
 }
 

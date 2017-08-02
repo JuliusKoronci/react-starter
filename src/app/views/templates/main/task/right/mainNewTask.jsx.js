@@ -1,16 +1,19 @@
 import React from 'react';
 import Select from '../../../../../forms/Task/Select.form';
+import {sort_by} from '../../../../../services/general';
 
 
 const main = ({inputChangeHandler, newTaskProject, userProjects, newTaskAssigner, options}) => {
 
-    const assignedOptions = options.assigner.map(r => {
+    let assignedOptions = options.assigner.map(r => {
         return {id: r.id, title: r.username}
     });
 
-    // console.log(newTaskAssigner)
-    // options.project = [];
+    assignedOptions.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
+    userProjects.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
+
     options.project = userProjects;
+
 
 
     return (

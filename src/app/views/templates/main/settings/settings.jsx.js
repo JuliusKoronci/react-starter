@@ -2,7 +2,10 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {paths} from '../../../../../config/router';
 
-const settings = (prop) => {
+const settings = (props) => {
+
+    const acl=props.acl || [];
+
     return (
         <div className="md-card">
             <div className="md-card-content">
@@ -17,73 +20,107 @@ const settings = (prop) => {
                             <Link to={paths.automated_tasks} className="uk-text-large">Automated tasks</Link>
                         </td>
                     </tr>
-                    <tr>
+
+
+                    {acl.indexOf('company_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.companies} className="uk-text-large">Companies</Link>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr>}
+
+
+                    {acl.indexOf('company_attribute_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.companies_attributes} className="uk-text-large">Companies attributes</Link>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr>}
+
+
+                    {acl.indexOf('imap_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.imaps} className="uk-text-large">IMAPs</Link>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr>}
+
+
+                    {acl.indexOf('project_shared_filters') !== -1 && <tr>
                         <td>
                             <Link to={paths.project_shared_filters} className="uk-text-large">Project Shared
                                 Filters</Link>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr>}
+
+
+
+                    {acl.indexOf('user_role_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.roles} className="uk-text-large">Roles</Link>
                         </td>
                     </tr>
+                        }
+
+
+
                     <tr>
                         <td>
                             <Link to={paths.shared_filters} className="uk-text-large">Shared Filters</Link>
                         </td>
                     </tr>
-                    <tr>
+
+
+
+                    {acl.indexOf('smtp_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.smtps} className="uk-text-large">SMTPs</Link>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr>}
+
+
+
+                    {acl.indexOf('status_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.statuses} className="uk-text-large">Statuses</Link>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr>}
+
+
+                    {acl.indexOf('task_attribute_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.task_attributes} className="uk-text-large">Task attributes</Link>
                         </td>
-                    </tr>
+                    </tr>}
+
+
                     <tr>
                         <td>
                             <Link to={paths.triggers} className="uk-text-large">Triggers</Link>
                         </td>
                     </tr>
-                    <tr>
+
+
+
+                    {acl.indexOf('unit_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.units} className="uk-text-large">Units</Link>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr>}
+
+
+
+                    {acl.indexOf('user_settings') !== -1 && <tr>
                         <td>
                             <Link to={paths.users} className="uk-text-large">Users</Link>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr>}
+
+
+<tr>
                         <td>
                             <Link to={paths.user_custom_fields} className="uk-text-large">Users custom
                                 fields</Link>
                         </td>
                     </tr>
+
                     </tbody>
                 </table>
 
@@ -93,8 +130,8 @@ const settings = (prop) => {
     );
 };
 
-settings.propTypes = {
-    prop: PropTypes.object.isRequired
-};
+// settings.propTypes = {
+//     prop: PropTypes.object.isRequired
+// };
 
 export default settings;

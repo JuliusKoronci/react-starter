@@ -28,6 +28,7 @@ class Task extends Component {
             newTaskDescription:'',
             newTaskProject:'',
             newTaskAssigner:[],
+            errors:[],
 
             form: {
                 title: '',
@@ -342,6 +343,7 @@ class Task extends Component {
     };
 
     createTaskHandler = (e) => {
+        let errors=[];
         e.preventDefault();
         let config = configResolver.createTask();
         let values = {
@@ -356,8 +358,20 @@ class Task extends Component {
         // console.log(JSON.stringify(this.state.newTaskAssigner));
 
 
-        this.props.actions.createTask(values, config);
-        return false;
+
+        if(!values.title){
+            errors.push('Title must be defined');
+        }
+        if(!values.project){
+            errors.push('Project must be defined');
+        }
+
+        if(errors.length===0) {
+            this.props.actions.createTask(values, config);
+            return false;
+        }else{
+            this.setState({errors:errors});
+        }
     };
 
 
@@ -477,13 +491,16 @@ class Task extends Component {
             if (this.props.task.loggedUserProjectAcl.indexOf('resolve_task')===-1 || this.props.task.project.is_active===false) {
                 return this.renderReadonlyTask()
             }
-            return <p>Task id: {this.props.params.taskId} ...</p>
+
+            console.log(this.props.task.project.is_active);
+            console.log(this.props.task.loggedUserProjectAcl.indexOf('resolve_task'));
+            return <p>Task id: {this.props.params.taskId} ... line 480</p>
         }
         else if (this.props.creatingTask) {
             return this.renderCreatingTask()
         }
         else {
-            return <p>Task id: {this.props.params.taskId} ...</p>
+            return <p>Task id: {this.props.params.taskId} ... line last</p>
         }
 
 
@@ -502,7 +519,6 @@ class Task extends Component {
         // }
 
     }
-
 
 
     renderReadonlyTask = () => {
@@ -546,6 +562,7 @@ class Task extends Component {
             inputChangeHandler={this.inputChangeHandler}
             handleCancelClick={this.handleCancelClick}
 
+            errors={this.state.errors}
             {...this.props}
         />);
     };
