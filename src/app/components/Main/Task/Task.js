@@ -29,6 +29,7 @@ class Task extends Component {
             newTaskProject:'',
             newTaskAssigner:[],
             errors:[],
+            formChanged:false,
 
             form: {
                 title: '',
@@ -132,7 +133,7 @@ class Task extends Component {
             statusId: data.status?data.status:null}];
 
         form['assigned'] = value;
-        this.setState({form: form});
+        this.setState({form: form,formChanged:true});
 
 // console.log(data);
     };
@@ -196,6 +197,7 @@ class Task extends Component {
 
     formInputChangeHandler = (name, value, e) => {
 
+
         // let obj={form[name]:value};
         // console.log('change', name, 'value:'+value);
 
@@ -226,7 +228,7 @@ class Task extends Component {
         let form = Object.assign({}, this.state.form);
         form[name] = value;
 
-        this.setState({form: form});
+        this.setState({form: form,formChanged:true});
         // console.log(this.state);
     };
 
@@ -274,6 +276,7 @@ class Task extends Component {
         // sendValues['started_at']='';
         this.props.actions.taskUpdate(sendValues,config,this.props.params.taskId);
 
+        this.setState({formChanged:false});
         // console.log(values);
     };
 
@@ -484,8 +487,9 @@ class Task extends Component {
 
     render() {
 
+
         if(this.props.task){
-            if (this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1 && this.props.task.project.is_active) {
+            if ((this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1 && this.props.task.project.is_active)||this.props.user.userRoleAcl.indexOf('update_all_tasks')!==-1) {
                 return this.renderTask()
             }
             if (this.props.task.loggedUserProjectAcl.indexOf('resolve_task')===-1 || this.props.task.project.is_active===false) {
@@ -601,6 +605,7 @@ class Task extends Component {
 
             saveAction={this.saveTask}
 
+            formChanged={this.state.formChanged}
             form={this.state.form}
             {...this.props}
         />);

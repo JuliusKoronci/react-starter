@@ -46,7 +46,7 @@ const taskButtonPanel = ({saveAction, form, formInputChangeHandler, deleteButton
                 </button>
 
                 {
-                    errors && errors.length>0 &&  <div>{errors.map(er=>{return er})}</div>
+                    errors && errors.length>0 &&  <div>{errors.map(er=>{return <p key={er}>{er}</p>})}</div>
 
                 }
 
