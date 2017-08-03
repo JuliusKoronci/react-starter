@@ -30,6 +30,11 @@ class StatusForm extends Component {
                     <div className="uk-width-medium-1-1 max-width-1000px">
 
                         <div className="uk-margin-bottom">
+                            <Field name="is_active" type="checkbox" validate={[]} component={renderField}
+                                   label="Active"/>
+                        </div>
+
+                        <div className="uk-margin-bottom">
                             <Field name="title" type="text" validate={[required]} component={renderField}
                                    label="Status name"/>
                         </div>
@@ -72,9 +77,11 @@ function mapStateToProps(state, ownProps) {
     if (status.length > 0) {
         return {
             initialValues: status.length > 0 ? status[0] : {},
+            enableReinitialize: true
         };
     }
-    return {};
+
+    return {initialValues:{is_active:true},enableReinitialize: true};
 
 }
 

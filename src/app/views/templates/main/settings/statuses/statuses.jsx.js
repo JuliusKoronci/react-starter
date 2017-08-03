@@ -48,7 +48,8 @@ const statuses = (props) => {
 
                                     {status.is_active &&
                                     <Link to={generateRoute('statuses_edit',{statusId:status.id})} className="md-btn md-btn-primary" >Edit</Link>}
-                                    {!status.is_active && <span>Inactive</span>}
+                                    {/*{!status.is_active && <span>Inactive</span>}*/}
+                                    {!status.is_active && <Link to={generateRoute('statuses_edit',{statusId:status.id})} className="md-btn md-btn-danger" >Inactive</Link>}
 
                                 </td>
                             </tr>

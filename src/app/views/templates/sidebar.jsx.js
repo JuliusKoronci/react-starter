@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {generateRoute, paths} from '../../../config/router';
+import {sort_by} from '../../services/general';
 
 const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location}) => {
 
@@ -13,6 +14,10 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
     const projectsOpen = true;
     const tagsOpen = true;
     const reportsOpen = true;
+
+
+    projects.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
+    tags.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
 
 
 
@@ -71,6 +76,12 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
                     })}
                 </ul>
             </div>
+
+
+
+
+
+
 
 
             <div className="menu_section">
