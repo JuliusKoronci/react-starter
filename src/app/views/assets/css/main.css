@@ -22,6 +22,17 @@
 /*.submenu_trigger ul{display:none;}*/
 /*.submenu_trigger.act_section ul{display:block !important;}*/
 
+
+
+
+
+
+
+
+
+
+
+
 .hidden{display:none;}
 .submenu_trigger a+ul{display:none;}
 .submenu_trigger a.active+ul{display:block !important;}
@@ -76,6 +87,10 @@
     text-overflow:ellipsis;
     white-space: nowrap;
 }
+
+.submenu-title{max-width:180px;text-overflow: ellipsis;}
+.submenu-title a{max-width:180px;text-overflow: ellipsis;}
+
 
 .submenu-add {
     padding: 8px 72px;

@@ -109,12 +109,14 @@ function mapStateToProps(state, ownProps) {
     if (taskAttribute.length > 0) {
         return {
             initialValues: taskAttribute.length > 0 ? taskAttribute[0] : false,
-            currentValues: (currentValues && currentValues.values?currentValues.values:{})
+            currentValues: (currentValues && currentValues.values?currentValues.values:{}),
+            enableReinitialize: true
         };
     } else {
         return {
             currentValues: (currentValues && currentValues.values?currentValues.values:{}),
-            initialValues:{'is_active':true}
+            initialValues:{'is_active':true},
+            enableReinitialize: true
         };
     }
 

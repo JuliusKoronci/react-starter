@@ -50,9 +50,10 @@ function mapStateToProps(state, ownProps) {
     if (unit.length > 0) {
         return {
             initialValues: unit.length > 0 ? unit[0] : {},
+            enableReinitialize: true
         };
     }
-    return {initialValues:{'is_active':true}};
+    return {initialValues:{'is_active':true},enableReinitialize: true};
 
 }
 
