@@ -2,7 +2,7 @@ import React from 'react';
 import {Link, browserHistory} from 'react-router';
 
 
-const taskButtonPanel = ({saveAction, form, formInputChangeHandler, deleteButton, handleTaskDelete, handleCancelClick}) => {
+const taskButtonPanel = ({saveAction, form, formInputChangeHandler, deleteButton, handleTaskDelete, handleCancelClick,errors}) => {
 
     return (
         <div>
@@ -44,6 +44,12 @@ const taskButtonPanel = ({saveAction, form, formInputChangeHandler, deleteButton
                     <i className="uk-icon-save"/>
                     SAVE
                 </button>
+
+                {
+                    errors && errors.length>0 &&  <div>{errors.map(er=>{return <p key={er}>{er}</p>})}</div>
+
+                }
+
             </div>
         </div>
     );

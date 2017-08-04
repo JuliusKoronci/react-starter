@@ -52,7 +52,7 @@ function mapStateToProps(state, ownProps) {
             initialValues: unit.length > 0 ? unit[0] : {},
         };
     }
-    return {};
+    return {initialValues:{'is_active':true}};
 
 }
 

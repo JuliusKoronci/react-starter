@@ -28,6 +28,8 @@ class Task extends Component {
             newTaskDescription:'',
             newTaskProject:'',
             newTaskAssigner:[],
+            errors:[],
+            formChanged:false,
 
             form: {
                 title: '',
@@ -131,7 +133,7 @@ class Task extends Component {
             statusId: data.status?data.status:null}];
 
         form['assigned'] = value;
-        this.setState({form: form});
+        this.setState({form: form,formChanged:true});
 
 // console.log(data);
     };
@@ -195,6 +197,7 @@ class Task extends Component {
 
     formInputChangeHandler = (name, value, e) => {
 
+
         // let obj={form[name]:value};
         // console.log('change', name, 'value:'+value);
 
@@ -225,7 +228,7 @@ class Task extends Component {
         let form = Object.assign({}, this.state.form);
         form[name] = value;
 
-        this.setState({form: form});
+        this.setState({form: form,formChanged:true});
         // console.log(this.state);
     };
 
@@ -273,6 +276,7 @@ class Task extends Component {
         // sendValues['started_at']='';
         this.props.actions.taskUpdate(sendValues,config,this.props.params.taskId);
 
+        this.setState({formChanged:false});
         // console.log(values);
     };
 
@@ -342,6 +346,7 @@ class Task extends Component {
     };
 
     createTaskHandler = (e) => {
+        let errors=[];
         e.preventDefault();
         let config = configResolver.createTask();
         let values = {
@@ -356,8 +361,20 @@ class Task extends Component {
         // console.log(JSON.stringify(this.state.newTaskAssigner));
 
 
-        this.props.actions.createTask(values, config);
-        return false;
+
+        if(!values.title){
+            errors.push('Title must be defined');
+        }
+        if(!values.project){
+            errors.push('Project must be defined');
+        }
+
+        if(errors.length===0) {
+            this.props.actions.createTask(values, config);
+            return false;
+        }else{
+            this.setState({errors:errors});
+        }
     };
 
 
@@ -470,20 +487,24 @@ class Task extends Component {
 
     render() {
 
+
         if(this.props.task){
-            if (this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1 && this.props.task.project.is_active) {
+            if ((this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1 && this.props.task.project.is_active)||this.props.user.userRoleAcl.indexOf('update_all_tasks')!==-1) {
                 return this.renderTask()
             }
             if (this.props.task.loggedUserProjectAcl.indexOf('resolve_task')===-1 || this.props.task.project.is_active===false) {
                 return this.renderReadonlyTask()
             }
-            return <p>Task id: {this.props.params.taskId} ...</p>
+
+            console.log(this.props.task.project.is_active);
+            console.log(this.props.task.loggedUserProjectAcl.indexOf('resolve_task'));
+            return <p>Task id: {this.props.params.taskId} ... line 480</p>
         }
         else if (this.props.creatingTask) {
             return this.renderCreatingTask()
         }
         else {
-            return <p>Task id: {this.props.params.taskId} ...</p>
+            return <p>Task id: {this.props.params.taskId} ... line last</p>
         }
 
 
@@ -502,7 +523,6 @@ class Task extends Component {
         // }
 
     }
-
 
 
     renderReadonlyTask = () => {
@@ -546,6 +566,7 @@ class Task extends Component {
             inputChangeHandler={this.inputChangeHandler}
             handleCancelClick={this.handleCancelClick}
 
+            errors={this.state.errors}
             {...this.props}
         />);
     };
@@ -584,6 +605,7 @@ class Task extends Component {
 
             saveAction={this.saveTask}
 
+            formChanged={this.state.formChanged}
             form={this.state.form}
             {...this.props}
         />);

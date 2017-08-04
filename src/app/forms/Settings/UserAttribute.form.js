@@ -139,7 +139,8 @@ function mapStateToProps(state, ownProps) {
         };
     } else {
         return {
-            currentValues: (currentValues && currentValues.values?currentValues.values:{})
+            currentValues: (currentValues && currentValues.values?currentValues.values:{}),
+            initialValues:{'is_active':true}
         };
     }
 

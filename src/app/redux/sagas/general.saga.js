@@ -1,4 +1,6 @@
 import {call, put, takeLatest, takeEvery} from 'redux-saga/effects';
+import { browserHistory } from 'react-router';
+import { generateRoute } from '../../../config/router';
 
 import {
     REQUEST_ENTITY,
@@ -39,6 +41,15 @@ function *updateEntity(action) {
         if (config.afterEntityReceivedAction) {
             yield put(config.afterEntityReceivedAction(data));
         }
+
+
+
+        if(config.routeAfter) {
+            const id = data.id;
+            const link = generateRoute(config.routeAfter.name, {[config.routeAfter.param]: id });
+            browserHistory.push(link);
+        }
+
         // console.log(action)
         entityUpdated('Updated successfully', config.redirectAfter);
     } catch (e) {
@@ -88,6 +99,16 @@ function *createEntity(action) {
             yield put(config.afterEntityReceivedAction(data));
         }
         entityCreated('Created successfully', config.redirectAfterCreation);
+
+        if(config.routeAfter) {
+            // console.log(data);
+            const id = data.data.id;
+            // console.log(id);
+            // console.log([config.routeAfter.param]);
+            const link = generateRoute(config.routeAfter.name, {[config.routeAfter.param]: id });
+            browserHistory.push(link);
+        }
+
     } catch (e) {
         yield put(asyncError(e));
     }

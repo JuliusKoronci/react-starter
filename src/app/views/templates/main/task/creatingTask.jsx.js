@@ -4,11 +4,12 @@ import TaskButtonPanel from './top/taskButtonPanel.jsx';
 import RichText from '../../../../forms/general/RichText.form';
 
 
+
 const creatingTask = (props) => {
     return (
         <div className="md-card-content form-inputs-disabled">
                 {/*{props.newTask && <NewTaskPannel {...props} />}*/}
-                  <TaskButtonPanel saveAction={props.saveAction} deleteButton={false} />
+                  <TaskButtonPanel saveAction={props.saveAction} deleteButton={false} errors={props.errors} />
                   <hr/>
 
 

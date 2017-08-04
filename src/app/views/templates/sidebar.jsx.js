@@ -1,10 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {generateRoute, paths} from '../../../config/router';
+import {sort_by} from '../../services/general';
 
-const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, loggedUserAcl}) => {
+const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location}) => {
 
     const projectId = params.projectId;
+    const filterId = params.filterId;
     const tagId = params.tagId;
     const reportId = params.reportId;
 
@@ -12,6 +14,11 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
     const projectsOpen = true;
     const tagsOpen = true;
     const reportsOpen = true;
+
+
+    projects.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
+    tags.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
+
 
 
     let archivedProjects=projects.filter(project=>{if (!project.is_active) return project});
@@ -38,16 +45,18 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
                 {/*</ul>*/}
                 <ul>
                     <li>
-                        <Link to={'/tasks/create'}>
+                        <Link to={'/tasks/create'}
+                              className={location.pathname==='/tasks/create'?'active md-color-deep-orange-500':'md-color-blue-500'} >
                             <span className="menu_icon"><i
-                                className="material-icons md-color-blue-500">&#xE145;</i></span>
-                            <span className="menu_title md-color-blue-500">CREATE TASK</span>
+                                className={location.pathname==='/tasks/create'?'material-icons md-color-deep-orange-500':'material-icons md-color-blue-500'}>&#xE145;</i></span>
+                            <span className="menu_title ">CREATE TASK</span>
                         </Link>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <Link to='/filter'>
+                        <Link to='/filter'
+                              className={location.pathname==='/filter'?'active md-color-deep-orange-500':''} >
                             <span className="menu_icon"><i className="material-icons">&#xE152;</i></span>
                             <span className="menu_title">FILTER</span>
                         </Link>
@@ -57,7 +66,8 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
                     {filter.map((filt, i) => {
                         return (
                             <li key={i} title="FILTER">
-                                <Link to={'/dashboard/' + filt.id}>
+                                <Link to={'/dashboard/' + filt.id}
+                                      className={parseInt(filt.id,10)===parseInt(filterId,10)?'active md-color-deep-orange-500':''} >
                                     <span className="menu_icon"><i className="material-icons">&#xE152;</i></span>
                                     <span className="menu_title">{filt.title}</span>
                                 </Link>
@@ -66,6 +76,12 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
                     })}
                 </ul>
             </div>
+
+
+
+
+
+
 
 
             <div className="menu_section">

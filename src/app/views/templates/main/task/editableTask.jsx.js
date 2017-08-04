@@ -10,10 +10,10 @@ import NewTaskPannel from './left/newTaskPannel.jsx';
 import TaskButtonPanel from './top/taskButtonPanel.jsx';
 
 const editableTask = (props) => {
-	// console.log('editable');
+
 	return (
-		<div className="md-card-content">
-			<div className="uk-form-row">
+		<div className="md-card-content" >
+			<div className="uk-form-row" style={props.formChangedd?{margin:'-8px',padding:'3px',border:'blue 1px solid'}:{}}>
 				{props.newTask && <NewTaskPannel {...props} />}
 
 				<TaskButtonPanel saveAction={props.saveAction} {...props} />

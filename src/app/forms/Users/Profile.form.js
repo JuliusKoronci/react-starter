@@ -69,13 +69,13 @@ class ProfileForm extends Component {
                             </div>
                             <div className="uk-width-medium-1-2 uk-margin-bottom">
 
-                                <Field name="detailData.name" type="text" validate={[required]} component={renderField}
+                                <Field name="detailData.name" type="text" validate={[]} component={renderField}
                                        label="First name"/>
 
                             </div>
                             <div className="uk-width-medium-1-2 uk-margin-bottom">
 
-                                <Field name="detailData.surname" type="text" validate={[required]} component={renderField}
+                                <Field name="detailData.surname" type="text" validate={[]} component={renderField}
                                        label="Surname"/>
 
                             </div>
@@ -84,7 +84,7 @@ class ProfileForm extends Component {
                             <div className="uk-width-1-1">
 
 
-                                <Field name="detailData.signature" type="text" validate={[required]} component={renderWswg}
+                                <Field name="detailData.signature" type="text" validate={[]} component={renderWswg}
                                 label="Signature"/>
 
                                 {/*<div className="uk-form-row">*/}
@@ -139,7 +139,7 @@ class ProfileForm extends Component {
                                                                 </span>
 
 
-                                            <Field name="detailData.facebook" type="text" validate={[required]} component={renderField}
+                                            <Field name="detailData.facebook" type="text" validate={[]} component={renderField}
                                                    label="Facebook"/>
 
                                         </div>
@@ -149,7 +149,7 @@ class ProfileForm extends Component {
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon uk-icon-twitter" />
                                                                 </span>
-                                        <Field name="detailData.twitter" type="text" validate={[required]} component={renderField}
+                                        <Field name="detailData.twitter" type="text" validate={[]} component={renderField}
                                                label="Twitter"/>
                                     </div>
 
@@ -158,7 +158,7 @@ class ProfileForm extends Component {
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon uk-icon-linkedin" />
                                                                 </span>
-                                        <Field name="detailData.linkdin" type="text" validate={[required]} component={renderField}
+                                        <Field name="detailData.linkdin" type="text" validate={[]} component={renderField}
                                                label="Linkedin"/>
                                     </div>
 
@@ -167,7 +167,7 @@ class ProfileForm extends Component {
                                                                 <span className="uk-input-group-addon">
                                                                     <i className="md-list-addon-icon uk-icon-google-plus" />
                                                                 </span>
-                                        <Field name="detailData.google" type="text" validate={[required]} component={renderField}
+                                        <Field name="detailData.google" type="text" validate={[]} component={renderField}
                                                label="Google+"/>
                                     </div>
                                 </div>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Select from 'react-select';
 import DatePicker from '../../forms/Task/Datepicker.form';
 
+
 class CustomAttributeInput extends Component {
 
     constructor(props, context) {
@@ -37,8 +38,6 @@ class CustomAttributeInput extends Component {
 
 
     render() {
-
-        // return (<div>custom attribute</div>);
 
         const {value, type, title, customAttribute} = this.props;
 

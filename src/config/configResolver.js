@@ -172,7 +172,7 @@ class configResolver {
             urlList: urls.STATUSES_LIST,
             afterEntityReceivedAction: statusReceived,
             redirectAfterCreation: paths.statuses,
-            allowedFormFields: ['title', 'description', 'color','order']
+            allowedFormFields: ['title', 'description', 'color','order','is_active']
         }
     };
 
@@ -181,7 +181,7 @@ class configResolver {
             url: id ? urls.STATUSES_LIST + '/' + id : urls.STATUSES_LIST,
             urlList: urls.STATUSES_LIST,
             redirectAfter: paths.statuses,
-            allowedFormFields: ['title', 'description', 'color','order']
+            allowedFormFields: ['title', 'description', 'color','order','is_active']
         }
     };
 
@@ -352,7 +352,7 @@ class configResolver {
             urlList: urls.TAG_LIST,
             afterEntityReceivedAction: projectReceived,
             //redirectAfterCreation: paths.units,
-            allowedFormFields: ['title', 'description','is_active']
+            allowedFormFields: ['title', 'description','is_active'],
         }
     };
 
@@ -362,7 +362,8 @@ class configResolver {
             urlList: urls.TAG_LIST,
             afterEntityReceivedAction: projectCreated,
             //redirectAfterCreation: paths.units,
-            allowedFormFields: ['title', 'description']
+            allowedFormFields: ['title', 'description'],
+            routeAfter:{name:'project_edit',param:'projectId'}
         }
     };
 
