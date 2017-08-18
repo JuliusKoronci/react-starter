@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {required} from '../../../config/validation';
+import {required, email} from '../../../config/validation';
 import {renderField, renderSelect} from '../field.tpl';
 import DeleteButton from '../../components/Main/_partials/DeleteButton';
 import {Link} from 'react-router';
@@ -30,7 +30,7 @@ class ImapForm extends Component {
                         <div className="uk-width-medium-1-1 max-width-1000px">
 
                             <div className="uk-margin-bottom">
-                                <Field name="inbox_email" type="text" validate={[required]} component={renderField}
+                                <Field name="inbox_email" type="text" validate={[required,email]} component={renderField}
                                        label="Inbox email"/>
                             </div>
                             <div className="uk-margin-bottom">

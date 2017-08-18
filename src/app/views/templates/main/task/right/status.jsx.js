@@ -24,9 +24,10 @@ const status = ({task, action, statuses, user}) => {
 
             <div className="uk-input-group">
                 <span className="uk-input-group-addon"><i className="material-icons">&#xE896;</i></span>
-                {user.map((record) => {
+                {user.map((record,k) => {
+                    let key='id'+k;
                     return (<DropDown
-                            key={record.userId}
+                            key={record.userId || key}
                             fieldName="status"
                             options={options}
                             customLabel={record.username}

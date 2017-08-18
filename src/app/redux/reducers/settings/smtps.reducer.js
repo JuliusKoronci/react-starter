@@ -1,4 +1,4 @@
-import {SMTPS_RECEIVED, SMTP_RECEIVED} from '../../constants';
+import {SMTPS_RECEIVED, SMTP_RECEIVED, SMTP_DELETED} from '../../constants';
 
 const defaultState = {
     'data': [],
@@ -13,6 +13,10 @@ export default function statuses(state = defaultState, action) {
     switch (action.type) {
         case SMTPS_RECEIVED:
             return action.response;
+        case SMTP_DELETED:
+            return {...state,
+                'data': state.data.filter(smtp=>{return smtp.id!==action.id})
+            };
         case SMTP_RECEIVED:
             return {...state,
                 'data': [...state.data, action.data.data]};

@@ -38,6 +38,17 @@ export default function projects(state = defaultState, action) {
                     return project;
                 })
             };
+        case PROJECT_ACL_UPDATED:
+
+        return {
+            ...state,
+            'data': state.data.map((project) => {
+                if (project.id === action.data.data.id) {
+                    return Object.assign({}, project, action.data.data);
+                }
+                return project;
+            })
+        };
             // case PROJECT_ACL_UPDATED:
             // return {
             //     ...state,

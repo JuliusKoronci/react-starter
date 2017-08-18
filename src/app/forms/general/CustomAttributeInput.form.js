@@ -60,7 +60,7 @@ class CustomAttributeInput extends Component {
         //date
         if (type === 'date') {
             input = <DatePicker action={this.formInputChangeHandler} value={value}
-                                fieldName={name} label={title} icon="&#xE858;"
+                                fieldName={name} label={title} icon='false'
                                 formInputChangeHandler={this.formInputChangeHandler}/>
         }
 
@@ -106,16 +106,39 @@ class CustomAttributeInput extends Component {
             />
         }
 
+
+
+
         //checkbox
         if (type === 'checkbox') {
-            input = <input type="checkbox" checked={(value==='true')} name={name} onChange={this.onChangeCheck}/>
+            // input = <input type="checkbox" checked={(value==='true')} name={name} onChange={this.onChangeCheck}/>;
+            input = <label className="uk-text-muted">{title} <input type="checkbox" checked={(value==='true')} name={name} onChange={this.onChangeCheck}/></label>;
+
+            return (
+                <div className="uk-input-group" style={{marginTop: '20px'}}>
+                    <span className="uk-input-group-addon"><i className="material-icons"/></span>
+                    {input}
+                </div>
+            );
         }
+
+
+        if (type === 'date') {
+            return (
+                <div className="uk-input-group">
+                <span className="uk-input-group-addon"><i className="material-icons"/></span> {input}
+                </div>
+                );
+        }
+
+
+
 
         return (
             <div className="uk-input-group" style={{marginTop: '20px'}}>
-
                 <span className="uk-input-group-addon"><i className="material-icons"/></span>
-                <label className="uk-text-muted">{title} {customAttribute.id}</label>
+                {/*<label className="uk-text-muted">{title} {customAttribute.id}</label>*/}
+                <label className="uk-text-muted">{title}</label>
 
                 <div style={{border: '0px silver solid'}}>
                     {input}

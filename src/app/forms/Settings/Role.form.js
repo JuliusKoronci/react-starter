@@ -52,7 +52,7 @@ class RoleForm extends Component {
                             </div>
                             <div className="uk-margin-bottom">
                                 <Field name="title" type="text" validate={[required]} component={renderField}
-                                       label="Role Name"/>
+                                       label="Role Name" labelStyle={{fontWeight:'bold'}} />
                             </div>
                             <div className="uk-margin-bottom">
                                 <Field name="homepage" type="text" validate={[required]} component={renderField}

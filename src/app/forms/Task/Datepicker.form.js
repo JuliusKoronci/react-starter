@@ -21,7 +21,9 @@ class Datepicker extends Component {
 
         return (
         <div className="uk-input-group" style={{marginTop: '20px'}}>
-            <span className="uk-input-group-addon"><i className="material-icons">{ic}</i></span>
+
+
+            {ic!=='false' && <span className="uk-input-group-addon"><i className="material-icons">{ic}</i></span>}
 
             <label className="uk-text-muted" htmlFor="uk_dp_1">{label}</label>
             <Flatpickr className="md-input" data-enable-time value={value}

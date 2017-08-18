@@ -29,6 +29,9 @@ class ProjectAclForm extends Component {
 
 
     render() {
+
+        // console.log(this.props);
+
         const {handleSubmit,heading} = this.props;
 
         const acls=['view_own_tasks','view_tasks_from_users_company','view_all_tasks',
@@ -68,7 +71,11 @@ class ProjectAclForm extends Component {
                                     <td>{user.user.username}</td>
 
                                         {acls.map((acl,i)=>{
-                                            return <td className="uk-text-center" key={i}>
+
+
+                                            let key=user.user.id+'.'+this.props.project.id+'.'+acl;
+
+                                            return <td className="uk-text-center" key={key}>
                                                 <div className="icheckbox_md">
                                                     <input type="checkbox" name={acl} defaultChecked={(user.acl.indexOf(acl)!==-1)} onChange={this.onChange.bind(null,fieldName)} />
                                                 </div>

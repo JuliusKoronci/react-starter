@@ -216,7 +216,7 @@ class Task extends Component {
             let options=this.props.options;
             if(options){
                 let status=options.status.filter(status=>{if (status.title==='new'){return status}});
-                if(status){
+                if(status && status.length){
                     statusId=status[0].id;
                 }
             }

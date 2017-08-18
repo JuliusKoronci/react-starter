@@ -7,9 +7,12 @@ const header = ({user, logout, sidebarIsMinified, toggleSidebar}) => {
         <header id="header_main">
             <div className="header_main_content">
                  <nav className="uk-navbar">
-                    <a href="#" id="sidebar_main_toggle" className={sidebarIsMinified?"sSwitch sSwitch_right":"sSwitch sSwitch_left"} onClick={toggleSidebar.bind(null, !sidebarIsMinified)} >
-                        <span className="sSwitchIcon"/>
-                    </a>
+                    {/*<a href="#" id="sidebar_main_toggle" className={sidebarIsMinified?"sSwitch sSwitch_right":"sSwitch sSwitch_left"} onClick={toggleSidebar.bind(null, !sidebarIsMinified)} >*/}
+
+
+                    {/*<a href="#" id="sidebar_main_toggle" className={sidebarIsMinified?"sSwitch sSwitch_right":"sSwitch sSwitch_left"} onClick={(e)=>{e.preventDefault()}} >*/}
+                        {/*<span className="sSwitchIcon"/>*/}
+                    {/*</a>*/}
 
                     <div className="uk-navbar-flip">
                         <ul className="uk-navbar-nav user_actions">

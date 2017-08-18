@@ -183,7 +183,9 @@ class UserForm extends Component {
 
 
 {/*DAT FORMULAR NA ZMENU HESLA LEN PRE ADMINA?*/}
-    <PasswordChangeForm params={this.props.params} />
+    {editing &&
+    <PasswordChangeForm params={this.props.params}/>
+    }
 
     {/*<form onSubmit={submitPassword}>*/}
         {/*<div className="md-card-content max-width-1000px">*/}

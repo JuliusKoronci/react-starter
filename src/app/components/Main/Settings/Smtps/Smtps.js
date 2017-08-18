@@ -11,11 +11,12 @@ class Smtps extends Component {
     componentWillMount() {
         this.props.actions.requestSmtps();
         this.smtpConfig = configResolver.getSmtpConfig();
+        this.smtpDeleteConfig = configResolver.getSmtpDeleteConfig();
 
     }
 
     deleteHandler=(id)=>{
-        this.props.actions.deleteEntity(id, this.smtpConfig);
+        this.props.actions.deleteEntity(id, this.smtpDeleteConfig);
     };
 
     render() {

@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { browserHistory } from 'react-router';
+import { browserHistory, Router } from 'react-router';
 import { generateRoute } from '../../../config/router';
 import {
 	REQUEST_DEFAULT_TASKS,
@@ -96,6 +96,7 @@ function *taskUpdate(action) {
         // console.log(data);
         yield call(entityUpdated, 'Task saved!');
         yield put(taskReceived(data));
+
         browserHistory.goBack();
     } catch (e) {
         yield put(asyncError(e));

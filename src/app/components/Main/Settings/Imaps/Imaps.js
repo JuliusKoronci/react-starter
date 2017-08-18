@@ -11,11 +11,22 @@ class Imaps extends Component {
     componentWillMount() {
         this.props.actions.requestImaps();
         this.imapConfig = configResolver.getImapConfig();
+        this.imapDeleteConfig = configResolver.getImapDeleteConfig();
 
     }
 
+    // componentDidUpdate(prevProps, prevState){
+    //     console.log('did update');
+    //     console.log(this.props);
+    //
+    //     if(this.props.imaps.rerender){
+    //         console.log('forcing update');
+    //         this.forceUpdate();
+    //     }
+    // }
+
     deleteHandler=(id)=>{
-            this.props.actions.deleteEntity(id, this.imapConfig);
+            this.props.actions.deleteEntity(id, this.imapDeleteConfig);
     };
 
     render() {

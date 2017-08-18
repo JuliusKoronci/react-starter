@@ -1,6 +1,7 @@
 import * as constants from '../constants';
 import {USERS_LIST} from '../../../api/urls';
 
+
 export function requestUsers(url) {
     return {
         type: constants.REQUEST_USERS,
@@ -176,6 +177,13 @@ export function imapReceived(data) {
     }
 }
 
+export function imapDeleted(action) {
+    return {
+        type: constants.IMAP_DELETED,
+        id:action.id
+    }
+}
+
 export function requestSmtps(url) {
     return {
         type: constants.REQUEST_SMTPS,
@@ -196,6 +204,14 @@ export function smtpReceived(data) {
         data
     }
 }
+
+export function smtpDeleted(action) {
+    return {
+        type: constants.SMTP_DELETED,
+        id:action.id
+    }
+}
+
 
 export function requestProjectSharedFilters(url) {
     return {

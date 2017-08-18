@@ -9,8 +9,11 @@ import {
     userReceived,
     unitReceived,
     imapReceived,
+    requestImaps,
     smtpReceived,
-    roleReceived
+    smtpDeleted,
+    roleReceived,
+    imapDeleted
 } from '../app/redux/actions/settings.action';
 import {optionsReceived, usersAllReceived, projectAssignersReceived} from '../app/redux/actions/system.actions';
 import {taskReceived, tasksReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
@@ -255,8 +258,8 @@ class configResolver {
             url: urls.BASE_URL + '/task-bundle/project/' + projectId + '/process-acl',
             method: 'POST',
             contentType: 'default',
-            jsonStringify: true
-            // afterEntityReceivedAction: projectAclUpdated,
+            jsonStringify: true,
+            afterRequest: projectAclUpdated,
         }
     };
 
@@ -476,6 +479,17 @@ class configResolver {
         }
     };
 
+    static getImapDeleteConfig = (id, projectId) => {
+        return {
+            url: urls.IMAPS_LIST + (id ? '/' + id : '') + (projectId ? '/project/' + projectId : ''),
+            urlList: urls.IMAPS_LIST,
+            // afterEntityReceivedAction: imapDeleted,
+            afterEntityDeletedAction: imapDeleted,
+            redirectAfterCreation: paths.imaps,
+            allowedFormFields: []
+        }
+    };
+
     static imapUpdate = (id, projectId) => {
         return {
             url: urls.IMAPS_LIST + (id ? '/' + id : '') + (projectId ? '/project/' + projectId : ''),
@@ -492,6 +506,16 @@ class configResolver {
             afterEntityReceivedAction: smtpReceived,
             redirectAfterCreation: paths.smtps,
             allowedFormFields: ['host', 'port', 'email', 'name', 'password', 'ssl', 'tls']
+        }
+    };
+
+    static getSmtpDeleteConfig = (id) => {
+        return {
+            url: urls.SMTPS_LIST + (id ? '/' + id : ''),
+            urlList: urls.SMTPS_LIST,
+            afterEntityDeletedAction: smtpDeleted,
+            redirectAfterCreation: paths.smtps,
+            allowedFormFields: []
         }
     };
 

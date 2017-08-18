@@ -97,8 +97,10 @@ class Project extends Component {
             <div>
             <ProjectForm onSubmit={this.onSubmit} {...this.props} heading={this.props.project ? "Edit project" : "Add project"} />
 
-                {this.props.project && this.props.project.canEdit && <UserAddForm onSubmit={this.userAddOnSubmit} {...this.props} />}
-                {this.props.project && this.props.project.canEdit && <ProjectAclForm onSubmit={this.projectAclOnSubmit} {...this.props} removeUser={this.removeUser} />}
+                {this.props.project && this.props.project.canEdit  && <UserAddForm onSubmit={this.userAddOnSubmit} {...this.props} />}
+                {this.props.project && this.props.project.canEdit  && <ProjectAclForm onSubmit={this.projectAclOnSubmit} {...this.props} removeUser={this.removeUser} />}
+                {/*{this.props.project && ( this.props.project.canEdit || this.props.auth.user.userRoleAcl.indexOf('update_all_tasks')!==-1 ) && <UserAddForm onSubmit={this.userAddOnSubmit} {...this.props} />}*/}
+                {/*{this.props.project && ( this.props.project.canEdit || this.props.auth.user.userRoleAcl.indexOf('update_all_tasks')!==-1 ) && <ProjectAclForm onSubmit={this.projectAclOnSubmit} {...this.props} removeUser={this.removeUser} />}*/}
             </div>
         );
     }
