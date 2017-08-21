@@ -42,6 +42,7 @@ export default function tasks(state: Object = defaultState, action: Object): Obj
         case TASK_UPDATED:
             return {
                 ...state,
+                'task': action.data,
                 'data': state.data.map((task) => {
                     if (task.id === action.taskId) {
                         return Object.assign({}, task, action.data);
@@ -56,8 +57,8 @@ export default function tasks(state: Object = defaultState, action: Object): Obj
             };
 
         case PROJECT_ASSIGNERS_RECEIVED:
-            console.log(action.data);
-            console.log({...state.options, ...action.data});
+            // console.log(action.data);
+            // console.log({...state.options, ...action.data});
             return {
                 ...state,
                 'options': {...state.options, ...action.data}

@@ -98,8 +98,7 @@ class DropDown extends Component {
             const style = option.color && {background: option.color};
             return (
                 <li key={key}>
-                    <a onClick={this.changeSelectedOption.bind(null, option.value)}
-                       href="#">
+                    <a onClick={this.changeSelectedOption.bind(null, option.value)} >
                         <span style={style} className={option.className}>{option.label}</span>
                     </a>
                 </li>

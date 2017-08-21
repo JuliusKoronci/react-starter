@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { browserHistory, Router } from 'react-router';
+import { browserHistory } from 'react-router';
 import { generateRoute } from '../../../config/router';
 import {
 	REQUEST_DEFAULT_TASKS,
@@ -16,7 +16,7 @@ import {
 } from '../constants';
 import { TASK_LIST } from '../../../api/urls';
 import { endAjax, startAjaxReset, asyncError } from '../actions/async.action';
-import { tasksReceived, taskReceived, taskAttachmentUploaded,commentAdded } from '../actions/tasks.action';
+import { tasksReceived, taskReceived, taskUpdated, taskAttachmentUploaded,commentAdded } from '../actions/tasks.action';
 import {
 	defaultFilter,
 	getTasksFromUrl,
@@ -95,7 +95,8 @@ function *taskUpdate(action) {
         const data = yield call(defaultRequest, config.url, 'PATCH', action.data, config);
         // console.log(data);
         yield call(entityUpdated, 'Task saved!');
-        yield put(taskReceived(data));
+		
+        yield put(taskUpdated(data));
 
         browserHistory.goBack();
     } catch (e) {

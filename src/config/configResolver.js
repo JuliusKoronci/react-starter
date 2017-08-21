@@ -454,9 +454,6 @@ class configResolver {
                 'task_data':'task_data'
             },
             jsonStringify:true,
-            // contentType:'default',
-            // afterFileDeletedAction: taskAttachmentDeleted,
-            // afterFileDeletedActionParams: {taskId, slug}
         }
     };
 
