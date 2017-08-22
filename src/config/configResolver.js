@@ -175,7 +175,7 @@ class configResolver {
             urlList: urls.STATUSES_LIST,
             afterEntityReceivedAction: statusReceived,
             redirectAfterCreation: paths.statuses,
-            allowedFormFields: ['title', 'description', 'color','order','is_active']
+            allowedFormFields: ['title', 'description', 'color', 'order','is_active']
         }
     };
 

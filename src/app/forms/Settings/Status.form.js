@@ -51,6 +51,13 @@ class StatusForm extends Component {
 
                         </div>
 
+
+                        <div className="uk-margin-bottom">
+                            <Field name="order" type="text" validate={[required]} component={renderField}
+                                   label="Order"/>
+                        </div>
+
+
                         <div className="uk-margin-bottom">
                             <Link className="md-btn md-btn-danger" to={generateRoute('statuses')}>Cancel</Link>
                             {this.props.params.statusId && <DeleteButton handleDelete={handleDelete}

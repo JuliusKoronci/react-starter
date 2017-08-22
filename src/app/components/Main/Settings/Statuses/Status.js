@@ -26,13 +26,14 @@ class Status extends Component {
     }
 
     onSubmit = (values) => {
-        NProgress.start();
+        // NProgress.start();
 
         if (this.props.params.statusId) {
             let config=configResolver.statusUpdate(this.props.params.statusId);
             this.props.actions.updateEntity(this.props.params.statusId, values, config);
         } else {
-            values['order']=0;
+
+            // values['order']=0;
             this.props.actions.createEntity(values,this.statusConfig);
         }
     };

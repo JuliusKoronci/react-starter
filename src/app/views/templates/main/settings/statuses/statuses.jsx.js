@@ -36,7 +36,7 @@ const statuses = (props) => {
                     {props.data.map((status, i) => {
                         return (
                             <tr key={i}>
-                                <td>{status.id}</td>
+                                <td>{status.order}</td>
                                 <td>{status.title}</td>
                                 <td className="uk-text-center">{status.description}</td>
                                 <td className="uk-text-center">
