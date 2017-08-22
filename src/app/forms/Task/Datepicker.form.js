@@ -19,6 +19,9 @@ class Datepicker extends Component {
         const {label,value,fieldName,action,formInputChangeHandler,icon}=this.props;
         const ic = icon || '&#xE858;';
 
+
+        // console.log(value)
+
         return (
         <div className="uk-input-group" style={{marginTop: '20px'}}>
 

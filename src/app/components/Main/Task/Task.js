@@ -195,11 +195,13 @@ class Task extends Component {
     };
 
 
-    formInputChangeHandler = (name, value, e) => {
+    formInputChangeHandler = (fieldName, value, e) => {
 
 
         // let obj={form[name]:value};
         // console.log('change', name, 'value:'+value);
+
+        let name=fieldName;
 
         if(name==='project'){
             //TODO update assignees
@@ -227,6 +229,13 @@ class Task extends Component {
 
         let form = Object.assign({}, this.state.form);
         form[name] = value;
+
+        if(name==='started_at' || name==='closed_at' || name==='deadline') {
+
+            form[name]['date'] = value;
+        }
+
+
 
         this.setState({form: form,formChanged:true});
         // console.log(this.state);

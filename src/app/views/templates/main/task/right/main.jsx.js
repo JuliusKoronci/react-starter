@@ -112,11 +112,11 @@ const main = ({task, user, actions, options, handleFileUpload, handleFileDownloa
 
 
 
-            <DatePicker taskId={task.id} action={formInputChangeHandler} value={form.started_at && form.started_at.date}
+            <DatePicker taskId={task.id} action={formInputChangeHandler} value={form.started_at.date || form.started_at}
                         fieldName="started_at" label="Start At" icon="&#xE858;" formInputChangeHandler={formInputChangeHandler} />
-            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.deadline && form.deadline.date} formInputChangeHandler={formInputChangeHandler}
+            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.deadline.date || form.deadline} formInputChangeHandler={formInputChangeHandler}
                         fieldName="deadline" label="Deadline" icon="&#xE8B2;"/>
-            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={form.closed_at && form.closed_at.date} formInputChangeHandler={formInputChangeHandler}
+            <DatePicker taskId={task.id} action={formInputChangeHandler}  value={ form.closed_at.date || form.closed_at} formInputChangeHandler={formInputChangeHandler}
                         fieldName="closed_at" label="Closed At" icon="&#xE5CD;"/>
 
 

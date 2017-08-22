@@ -95,7 +95,7 @@ function *taskUpdate(action) {
         const data = yield call(defaultRequest, config.url, 'PATCH', action.data, config);
         // console.log(data);
         yield call(entityUpdated, 'Task saved!');
-		
+
         yield put(taskUpdated(data));
 
         browserHistory.goBack();
