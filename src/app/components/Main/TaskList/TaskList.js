@@ -7,45 +7,129 @@ import configResolver from '../../../../config/configResolver';
 
 class TaskList extends Component {
 
-    componentDidMount() {
 
-        if(this.props.params.projectId) {
-            this.config = configResolver.tasksConfig('project', this.props.params.projectId);
-        }
-        if(this.props.params.tagId){
-            this.config = configResolver.tasksConfig('tag', this.props.params.tagId);
-        }
+    constructor(props, context) {
+        super(props, context);
+
+        this.state={
+            search:'',
+            orderBy:'',
+            orderDirection:'',
+            hasSearch:false,
+            canOrder:false,
+        };
 
 
-        this.props.actions.requestTasks(this.config);
     }
 
-    componentDidUpdate(prevProps) {
+
+
+    componentDidMount() {
+
+        if(this.props.params.projectId || this.props.params.tagId){
+            this.setState({hasSearch:true,canOrder:true});
+        }
+
+        // if(this.props.params.projectId) {
+        //     this.config = configResolver.tasksConfig('project', this.props.params.projectId);
+        // }
+        // if(this.props.params.tagId){
+        //     this.config = configResolver.tasksConfig('tag', this.props.params.tagId);
+        // }
+        //
+        // this.props.actions.requestTasks(this.config);
+
+        this.requestTasks();
+
+    }
+
+    componentDidUpdate(prevProps, prevState) {
 
         if (prevProps.params !== this.props.params) {
 
-            if(this.props.params.projectId) {
-                this.config = configResolver.tasksConfig('project', this.props.params.projectId);
-            }
-            if(this.props.params.tagId){
-                this.config = configResolver.tasksConfig('tag', this.props.params.tagId);
-            }
+            this.requestTasks();
 
-            this.props.actions.requestTasks(this.config);
         }
     }
+
+
+    requestTasks=()=>{
+
+        let options={
+            // orderBy:'title=>ASC',
+            // orderBy:'title=>DESC',
+            orderBy:this.state.orderBy?this.state.orderBy+'=>'+this.state.orderDirection:'',
+            searchText:this.state.search
+        };
+
+        if(this.props.params.projectId) {
+            this.config = configResolver.tasksConfig('project', this.props.params.projectId, options);
+        }
+        if(this.props.params.tagId){
+            this.config = configResolver.tasksConfig('tag', this.props.params.tagId, options);
+        }
+
+        this.props.actions.requestTasks(this.config);
+    };
+
+
 
 
     loadTasksFunction = (url, e) => {
         this.props.actions.requestTasksFromUrl(url);
     };
 
+
+
+    searchChangeHandler=(e)=>{
+    let value=e.target.value;
+    this.setState({search:value},this.requestTasks);
+    };
+
+
+
+    orderByChangeHandler=(e)=>{
+// console.log('orderby');
+        let direction='ASC';
+        let orderBy=e.target.getAttribute('data-order-by');
+        //change direction
+
+        if(this.state.orderBy === orderBy){
+            if(this.state.orderDirection==='ASC'){
+                direction='DESC';
+            }
+            if(this.state.orderDirection==='DESC'){
+                direction='ASC';
+            }
+        }
+
+        this.setState({
+            orderBy:orderBy,
+            orderDirection:direction
+        },this.requestTasks);
+
+        // this.requestTasks();
+    };
+
+
     render() {
 
 
 
         return (
-            <View {...this.props} loadTasksFunction={this.loadTasksFunction} />
+            <View
+                {...this.props}
+                state={this.state}
+                  loadTasksFunction={this.loadTasksFunction}
+                  searchChange={this.searchChangeHandler}
+                  orderByChange={this.orderByChangeHandler}
+                  searchText={this.state.search}
+                  orderBy={this.state.orderBy}
+                  orderDirection={this.state.orderDirection}
+                reloadTasks={this.requestTasks}
+                hasSearch={this.state.hasSearch}
+                canOrder={this.state.canOrder}
+            />
         );
     }
 }

@@ -553,15 +553,32 @@ class configResolver {
         }
     };
 
-    static tasksConfig = (type, id) => {
+    static tasksConfig = (type, id, options) => {
+        let search='';
+        let order='';
+
+
+        if(options) {
+            let orderBy = options.orderBy;
+            let searchText = options.searchText;
+
+            //key=>value
+            if (orderBy) {
+                order = '&order=' + orderBy;
+            }
+            if (searchText) {
+                search = '&search=' + searchText
+            }
+        }
+
 
         if (!type) {
-            return {url: urls.TASK_LIST}
+            return {url: urls.TASK_LIST }
         }
 
         switch (type) {
             case 'project':
-                return {url: urls.TASK_LIST + '?project=' + id};
+                return {url: urls.TASK_LIST + '?project=' + id +search+order};
             case 'tag':
                 return {url: urls.TASK_LIST + '?tag=' + id};
             case 'filter':

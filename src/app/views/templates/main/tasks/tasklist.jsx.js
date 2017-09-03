@@ -1,10 +1,13 @@
 import React, {PropTypes} from 'react';
 import Task from './taskrow.jsx';
 import Pagination from '../_partials/pagination.jsx';
+import Tasklistcolumn from './tasklistcolumn.jsx';
 
 
-const tasklist = ({tasks, loadTasksFunction, filter, heading}) => {
+const tasklist = ({tasks, loadTasksFunction, filter, heading, searchChange, orderByChange, searchText,state,reloadTasks, hasSearch, canOrder, orderBy, orderDirection}) => {
 
+    // console.log(searchText)
+    // console.log(state)
 
     return (
         <div className="md-card-content">
@@ -32,6 +35,11 @@ const tasklist = ({tasks, loadTasksFunction, filter, heading}) => {
             &nbsp;
             <button className="md-btn md-btn-primary md-btn-small" type="button" data-uk-button>Bulk Actions
             </button>
+
+
+            {hasSearch && <span> <input type="text" name="search" value={searchText} onChange={searchChange} /> <button onClick={reloadTasks}>search</button> </span>}
+
+
             <p/>
             <div className="uk-overflow-container uk-margin-bottom">
                 <table
@@ -42,14 +50,17 @@ const tasklist = ({tasks, loadTasksFunction, filter, heading}) => {
                         <th className="uk-width-1-10 uk-text-center small_col">
                             <input type="checkbox" data-md-icheck className="check_all"/>
                         </th>
-                        <th className="uk-text-center ">Key</th>
-                        <th>Title</th>
-                        <th>Requester</th>
-                        <th>Company</th>
-                        <th>Assignee</th>
-                        <th>Created</th>
-                        <th>Deadline</th>
-                        <th>Status</th>
+                        {/*<th className="uk-text-center ">Key</th>*/}
+                        <th><Tasklistcolumn title="Key" name="id" clickHandler={orderByChange} canOrder={canOrder} orderBy={orderBy} orderDirection={orderDirection} /></th>
+                        <th><Tasklistcolumn title="Title" name="title" clickHandler={orderByChange} canOrder={canOrder} orderBy={orderBy} orderDirection={orderDirection} /></th>
+                        <th><Tasklistcolumn title="Requester" name="requester" clickHandler={orderByChange} canOrder={canOrder} orderBy={orderBy} orderDirection={orderDirection} /></th>
+                        <th><Tasklistcolumn title="Company" name="company" clickHandler={orderByChange} canOrder={canOrder} orderBy={orderBy} orderDirection={orderDirection} /></th>
+                        <th><Tasklistcolumn title="Assignee" name="assigned" clickHandler={orderByChange} canOrder={canOrder} orderBy={orderBy} orderDirection={orderDirection} /></th>
+                        <th><Tasklistcolumn title="Created" name="createdTime" clickHandler={orderByChange} canOrder={canOrder} orderBy={orderBy} orderDirection={orderDirection} /></th>
+                        <th><Tasklistcolumn title="Deadline" name="deadlineTime" clickHandler={orderByChange} canOrder={canOrder} orderBy={orderBy} orderDirection={orderDirection} /></th>
+                        <th><Tasklistcolumn title="Status" name="status" clickHandler={orderByChange} canOrder={canOrder} orderBy={orderBy} orderDirection={orderDirection} /></th>
+
+                        {/*<th><span data-order-by="status" onClick={orderByChange}>Status</span></th>*/}
                     </tr>
                     </thead>
                     <tbody>
