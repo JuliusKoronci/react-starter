@@ -190,7 +190,13 @@ function *generalRequest(action) {
             yield put(config.afterRequest(data,config));
         }
 
-        entityUpdated(config.message?config.message:'Request successful');
+        let redirectTo=config.redirectAfter;
+        if(redirectTo) {
+            entityUpdated(config.message ? config.message : 'Request successful', redirectTo);
+        }
+        else {
+            entityUpdated(config.message ? config.message : 'Request successful');
+        }
     } catch (e) {
         yield put(asyncError(e));
     }

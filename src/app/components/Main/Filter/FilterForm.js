@@ -14,15 +14,15 @@ class FilterForm extends Component {
     changeRowVisibility = (e) => {
         let checked = !!e.target.checked;
         let name = e.target.name;
-        // console.log(name);
         this.props.dispatch(change('filterForm', name, checked));
     };
 
+
     resetForm = (e) => {
-        // console.log('reseting form')
         e.preventDefault();
         this.props.dispatch(reset('filterForm'));
     };
+
 
     datePickerClear=(name)=>{
         let fieldName=name + 'Radio';
@@ -35,8 +35,15 @@ class FilterForm extends Component {
     };
 
 
+
     render() {
-        const {handleSubmit, formError, columns, filterOptions, getFilterTasks, saveFilter} = this.props;
+        const {handleSubmit, formError, columns, filterOptions, getFilterTasks, saveFilter, createFilter, deleteFilter} = this.props;
+
+        const showPublicField=this.props.filter && this.props.canModifyPublicFilters;
+        const canDeleteFilter=this.props.filter && (this.props.canModifyPublicFilters || !this.props.filter.public);
+        const canSaveFilter=this.props.filter && (this.props.canModifyPublicFilters || !this.props.filter.public);
+
+
         let visibleColumns = columns.map((column) => {
             let key = Object.keys(column)[0];
             if (column.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!column[key])) {
@@ -59,15 +66,26 @@ class FilterForm extends Component {
                 </button>
 
 
-                {this.props.filter && <button
+                {canSaveFilter && <button
                     className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
                     type="submit"
                     onClick={saveFilter.bind(null)}>SAVE</button>}
 
 
+                {this.props.creatingFilter && <button
+                    className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+                    type="submit"
+                    onClick={createFilter.bind(null)}>CREATE FILTER</button>}
+
+
+                {canDeleteFilter && <button
+                    className="md-btn md-btn-warning md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+                    type="submit"
+                    onClick={deleteFilter.bind(null)}>DELETE</button>}
+
                 <button type="submit"
                         className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-                        onClick={getFilterTasks.bind(null)}>FILTER
+                        onClick={getFilterTasks.bind(null)}>FILTER TASKS
                 </button>
 
 
@@ -75,12 +93,19 @@ class FilterForm extends Component {
 
 
                     {this.props.filter &&
-                    <Field name="title" type="text" validate={[]} component={renderField} label="Filter Name"/>}
+                    <Field name="title" type="text" validate={[]} component={renderField} label="Filter Name" disabled={!canSaveFilter} />}
+
+
+
+                    {showPublicField &&
+                    <Field name="public" type="checkbox" validate={[]} component={renderField} label="Is Public?"/>}
+
 
                     <div className="uk-margin-bottom">
                     <Field name="columns.title" type="checkbox" className="alignright" validate={[]}
                            component={renderField} label="Column" defaultChecked={true}
                            actions={{onChange: this.changeRowVisibility.bind(null)}}/>
+
 
                     <Field name="search" type="text" validate={[]} component={renderField} label="Task Name"/>
                     </div>
@@ -197,7 +222,11 @@ class FilterForm extends Component {
 }
 
 
+
+
 function mapStateToProps(state, ownProps) {
+
+
     const filterId = ownProps.params.filterId;
     let filter = state.filter.filter(f => parseInt(f.id, 10) === parseInt(filterId, 10));
 

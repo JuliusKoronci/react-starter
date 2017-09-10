@@ -14,11 +14,18 @@ class Filter extends Component {
     constructor(props, context) {
         super(props, context);
 
+        // console.log(props.userAcl)
+        // share_filters
+
         this.filterConfig = configResolver.filterConfig(props.params.filterId);
         this.filterOptionsConfig = configResolver.loadFilterOptionList();
         this.filterTasksConfig = configResolver.loadFilterTasks();
+        this.canModifyPublicFilters=props.userAcl.indexOf('share_filters')!==-1;
+        // console.log('can modify',props.userAcl.indexOf('share_filters'));
 
         this.state = {
+
+            creatingFilter:!props.params.filterId,
             filterFormVisible: props.formVisible || true,
             sentValues: {},
 
@@ -54,6 +61,8 @@ class Filter extends Component {
     };
 
     componentWillMount() {
+
+        //ak je vybraty konkretny filter a neni v reduxe, tak sa natiahne
         if (this.props.params.filterId && !this.props.filter) {
             // alert('loading');
             this.props.actions.loadEntityById(this.props.params.filterId, this.filterConfig);
@@ -61,7 +70,6 @@ class Filter extends Component {
 
         this.props.actions.loadEntityList(this.filterOptionsConfig);
         this.props.actions.loadEntityList(this.filterTasksConfig);
-
 
         //else{alert('not loading')}
     }
@@ -72,10 +80,48 @@ class Filter extends Component {
     };
     saveFilter = () => {
         this.setState({saveFilter: true});
+        this.setState({submitType: 'save'});
+    };
+    createFilterHandler = () => {
+        this.setState({saveFilter: true});
+        this.setState({submitType: 'create'});
+    };
+
+    deleteFilterHandler = () => {
+        this.setState({submitType: 'delete'});
+        // this.setState({saveFilter: true});
+        // alert('deleting filter')
     };
 
 
+
+    deleteFilter = () => {
+        let config = configResolver.deleteFilter(this.props.params.filterId);
+        this.props.actions.generalRequest(config.data, config);
+    };
+
+    createFilter = () => {
+        alert('created');
+    };
+
+
+
+
+
+
+
+// tu sa bud uklada filter, alebo len requestnu tasky, podla toho, na aky button sa kliklo (kvoli redux formu)
     onSubmit = (oldValues, e) => {
+
+
+
+        if(this.state.submitType && this.state.submitType === 'delete'){
+            return this.deleteFilter();
+        }
+
+
+
+
 
         this.setState({getColumnsFromState:true});
 
@@ -85,15 +131,15 @@ class Filter extends Component {
         // console.log('values:', values);
 
 
+
+        // MAP DATES
         ['closedTime', 'startedTime', 'deadlineTime', 'createdTime'].map((field) => {
 
             // console.log(field,values[field+'Radio'],values[field]);
 
             if (values[field + 'Radio'] && values[field + 'Radio'] === 'now') {
                 values[field] = this.state.saveFilter ? 'TO=NOW' : 'TO%3DNOW';
-
                 // console.log('now',[field]);
-
             } else {
                 //if (values[field]['radio'] === 'timeRange') {
                 // values[field]='';
@@ -113,11 +159,8 @@ class Filter extends Component {
             // this.setState({sentValues:})
             // values[field+'Radio']='TO=NOW'
         });
-        // values={};
 
-        // console.log(values);
 
-        // console.log(this.state.columns);
 
 
             let columns = this.state.columns.map((column) => {
@@ -160,16 +203,37 @@ class Filter extends Component {
         let filterSaveValues = Object.assign({}, values);
 
 
-        if (this.state.saveFilter) {
-            let columnsToSend = [];
-            this.state.columns.map((column) => {
-                let key = Object.keys(column)[0];
-                if (values.columns && values.columns.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!values.columns[key])) {
-                    columnsToSend.push(key);
-                }
-            });
-            filterSaveValues.columns = columnsToSend.join();
 
+
+
+        //pre create a save filter - columns to show sa daju do send values
+        let columnsToSend = [];
+        this.state.columns.map((column) => {
+            let key = Object.keys(column)[0];
+            if (values.columns && values.columns.hasOwnProperty(key) && typeof column[key] !== 'undefined' && (!!values.columns[key])) {
+                columnsToSend.push(key);
+            }
+        });
+        filterSaveValues.columns = columnsToSend.join();
+
+
+
+
+        //vytvorenie filtra
+        if(this.state.submitType && this.state.submitType === 'create'){
+            // return this.createFilter(oldValues,e);
+            filterSaveValues.title='new filter';
+            filterSaveValues.public=true;
+            filterSaveValues.order=0;
+            filterSaveValues.icon_class='&#xE7EF;';
+            let config = configResolver.createFilter(filterSaveValues, false);
+            this.props.actions.generalRequest(config.data, config);
+        }
+
+
+
+        //ulozenie existujuceho filtra
+        if (this.state.submitType && this.state.submitType === 'save') {
             let config = configResolver.saveFilter(filterSaveValues, this.props.params.filterId);
             this.props.actions.generalRequest(config.data, config);
         }
@@ -185,12 +249,17 @@ class Filter extends Component {
     };
 
 
+
+
+
+
+
     componentDidMount() {
         // TODO
         // this.config = configResolver.tasksConfig('project', 141);
 
-        let config = this.props.params.filterId ? configResolver.tasksConfig('filter', this.props.params.filterId) : configResolver.tasksConfig();
-        this.props.actions.requestTasks(config);
+        let requestTasksConfig = this.props.params.filterId ? configResolver.tasksConfig('filter', this.props.params.filterId) : configResolver.tasksConfig();
+        this.props.actions.requestTasks(requestTasksConfig);
     }
 
 
@@ -227,9 +296,11 @@ class Filter extends Component {
     render() {
         // console.log(!!this.filter && this.filter.columns);
         // console.log(this.state.columns);
+        // console.log('creating filter? ',this.state.creatingFilter);
 
         return (
             <View {...this.props}
+                creatingFilter={this.state.creatingFilter}
                 sentValues={this.state.sentValues}
                   toggleFilter={this.toggleFilter}
                   filterFormVisible={this.state.filterFormVisible}
@@ -240,6 +311,9 @@ class Filter extends Component {
                   loadTasksFunction={this.loadTasksFunction}
                   getFilterTasks={this.getFilterTasks}
                   saveFilter={this.saveFilter}
+                  deleteFilter={this.deleteFilterHandler}
+                  createFilter={this.createFilterHandler}
+                  canModifyPublicFilters={this.canModifyPublicFilters}
                   getColumnsFromState={this.state.getColumnsFromState}
             />
         );
@@ -257,7 +331,8 @@ function mapStateToProps(state, ownProps) {
         filterFormVisible: state.filterFormVisible,
         filter: filter.length > 0 ? filter[0] : false,
         filterOptions: filterOptions,
-        tasks: state.tasks
+        tasks: state.tasks,
+        userAcl:state.auth.user.userRoleAcl
     };
 }
 function mapDispatchToProps(dispatch) {

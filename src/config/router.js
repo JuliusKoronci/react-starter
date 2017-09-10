@@ -50,6 +50,7 @@ import Tag from '../app/components/Main/Tag/Tag';
 
 
 export const paths = {
+    'homepage':'/',
     'login': '/login',
     'logout': '/logout',
     'task_list': '/tasks',

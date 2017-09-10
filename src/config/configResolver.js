@@ -287,6 +287,7 @@ class configResolver {
             data:values,
             remapValues: {
                 'title': 'title',
+                'public':'public',
                 'status': 'filter[status]',
                 'project': 'filter[project]',
                 'requester': 'filter[requester]',
@@ -319,6 +320,71 @@ class configResolver {
         return config;
     };
 
+
+
+    static createFilter(values,filterId) {
+
+        const method = filterId ? 'PUT' : 'POST';
+        const url = filterId ? urls.BASE_URL + '/task-bundle/filters/' + filterId : urls.BASE_URL + '/task-bundle/filters';
+
+        let config = {
+            url,
+            method,
+            data:values,
+            remapValues: {
+                'title': 'title',
+                'order': 'order',
+                'icon_class':'icon_class',
+                'public':'public',
+                'status': 'filter[status]',
+                'project': 'filter[project]',
+                'requester': 'filter[requester]',
+                'company': 'filter[company]',
+                'creator': 'filter[creator]',
+                'assigned': 'filter[assigned]',
+                'tag': 'filter[tag]',
+                'search': 'filter[search]',
+                'columns': 'columns',
+                'closedTime':'filter[closedTime]',
+                'startedTime':'filter[startedTime]',
+                'deadlineTime':'filter[deadlineTime]',
+                'createdTime':'filter[createdTime]',
+            }
+            // contentType:'default',
+            // jsonStringify:true
+            // afterEntityReceivedAction: projectAclUpdated,
+        };
+
+        if (values) {
+            let newValues = {};
+            Object.keys(config.remapValues).map((key) => {
+                if (values.hasOwnProperty(key) && typeof values[key] !== 'undefined' && values[key] !== '') {
+                    newValues[key] = values[key];
+                }
+            });
+            config.data = newValues;
+        }
+
+        return config;
+    };
+
+
+
+    static deleteFilter(filterId) {
+
+        const method = 'DELETE';
+        const url = urls.BASE_URL + '/task-bundle/filters/' + filterId;
+
+        let config = {
+            url,
+            method,
+            message:'Filter was deleted successfully',
+            redirectAfter: paths.homepage,
+            // afterEntityDeletedAction:
+        };
+
+        return config;
+    };
 
     static loadFilterOptionList() {
         return {

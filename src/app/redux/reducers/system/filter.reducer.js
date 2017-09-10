@@ -1,9 +1,13 @@
 import {FILTERS_RECEIVED,FILTER_RECEIVED} from '../../constants';
+import {fieldSorter} from '../../../../app/services/general';
 
 export default function filters(state = [], action) {
     switch (action.type) {
         case FILTERS_RECEIVED:
-            return action.data;
+            let filters=action.data;
+            //sortovanie filtrov, najprv sa zoradia podla public, potom podla title
+            return filters.sort(fieldSorter(['-public', 'title']));
+
         case FILTER_RECEIVED:
             // //TODO
             // // console.log(action)
