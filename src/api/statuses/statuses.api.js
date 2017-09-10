@@ -16,7 +16,7 @@ export function loadStatuses(url) {
     if (USE_MOCK) {
         return mockDefault();
     }
-    let finalUrl = STATUSES_LIST;
+    let finalUrl = STATUSES_LIST + '?order=ASC';
     if(url){
         finalUrl = HOST_URL + url;
     }
