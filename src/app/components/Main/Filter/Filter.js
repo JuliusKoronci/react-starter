@@ -24,7 +24,14 @@ class Filter extends Component {
         // console.log('can modify',props.userAcl.indexOf('share_filters'));
 
         this.state = {
+            newFilterForm:{
+                title:'',
+                public:false,
+                error:false
+            },
+            createFilterFormState:{},
 
+            modalOpen:false,
             creatingFilter:!props.params.filterId,
             filterFormVisible: props.formVisible || true,
             sentValues: {},
@@ -51,6 +58,18 @@ class Filter extends Component {
     }
 
 
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.params.filterId !== this.props.params.filterId){
+            //alert('reinitialize')
+            this.forceUpdate();
+
+            // this.props.actions.requestTasks(configResolver.loadFilterTasks(filterValues));
+        }
+    }
+
+
+
     loadTasksFunction = (url, e) => {
         this.props.actions.requestTasksFromUrl(url);
     };
@@ -74,6 +93,29 @@ class Filter extends Component {
         //else{alert('not loading')}
     }
 
+
+    newFilterFormChange=(e)=>{
+
+        const name=e.target.name;
+        let value='';//e.target.value;
+
+        if(e.target.getAttribute('type')==='checkbox'){
+            value=!!e.target.checked;
+        }else{
+            value=e.target.value;
+        }
+
+        let newFilterForm=Object.assign({},this.state.newFilterForm);
+        newFilterForm[name]=value;
+
+        this.setState({newFilterForm});
+
+    };
+
+
+    modalClose=()=>{
+        this.setState({modalOpen:false});
+    };
 
     getFilterTasks = () => {
         this.setState({saveFilter: false});
@@ -100,10 +142,37 @@ class Filter extends Component {
         this.props.actions.generalRequest(config.data, config);
     };
 
-    createFilter = () => {
-        alert('created');
+    createFilter = (values) => {
+        this.setState({modalOpen:true});
+        values.title='new filter';
+        values.public=true;
+        values.order=0;
+        values.icon_class='&#xE7EF;';
+
+        this.setState({createFilterFormState:values});
+
+        // let config = configResolver.createFilter(values, false);
+        // this.props.actions.generalRequest(config.data, config);
+        // this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
     };
 
+    newFilterFormSubmitHandler=()=>{
+
+
+        const values=Object.assign({},this.state.createFilterFormState,this.state.newFilterForm);
+
+        if(values.title!=='') {
+
+            this.setState({newFilterForm:Object.assign({},this.state.newFilterForm,{error:false})});
+
+            let config = configResolver.createFilter(values, false);
+            this.props.actions.generalRequest(config.data, config);
+            this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
+        }else{
+            this.setState({newFilterForm:Object.assign({},this.state.newFilterForm,{error:'provide a title'})});
+        }
+
+    };
 
 
 
@@ -221,13 +290,8 @@ class Filter extends Component {
 
         //vytvorenie filtra
         if(this.state.submitType && this.state.submitType === 'create'){
-            // return this.createFilter(oldValues,e);
-            filterSaveValues.title='new filter';
-            filterSaveValues.public=true;
-            filterSaveValues.order=0;
-            filterSaveValues.icon_class='&#xE7EF;';
-            let config = configResolver.createFilter(filterSaveValues, false);
-            this.props.actions.generalRequest(config.data, config);
+            return this.createFilter(filterSaveValues,e);
+
         }
 
 
@@ -270,7 +334,7 @@ class Filter extends Component {
 
     changeRowVisibility = (value, e) => {
         alert('change row visibility');
-    }
+    };
 
 
     toggleRowVisibility = (value, e) => {
@@ -315,6 +379,13 @@ class Filter extends Component {
                   createFilter={this.createFilterHandler}
                   canModifyPublicFilters={this.canModifyPublicFilters}
                   getColumnsFromState={this.state.getColumnsFromState}
+
+                  modalOpen={this.state.modalOpen}
+                  modalClose={this.modalClose}
+                  modalAfterOpen={e=>{}}
+                  newFilterForm={this.state.newFilterForm}
+                  newFilterFormChange={this.newFilterFormChange}
+                  newFilterFormSubmit={this.newFilterFormSubmitHandler}
             />
         );
     }

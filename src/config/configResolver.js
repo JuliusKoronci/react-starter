@@ -349,7 +349,9 @@ class configResolver {
                 'startedTime':'filter[startedTime]',
                 'deadlineTime':'filter[deadlineTime]',
                 'createdTime':'filter[createdTime]',
-            }
+            },
+            // redirectAfterCreation: paths.filter,
+            routeAfter:{name:'filter_edit',param:'filterId'},
             // contentType:'default',
             // jsonStringify:true
             // afterEntityReceivedAction: projectAclUpdated,

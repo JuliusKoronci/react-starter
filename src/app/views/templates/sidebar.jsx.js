@@ -72,7 +72,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
                                       className={parseInt(filt.id,10)===parseInt(filterId,10)?'active md-color-deep-orange-500':''} >
                                     {/*<span className="menu_icon"><i className="material-icons" >{filt.icon_class}</i></span>*/}
                                     {/*<span className="menu_icon"><i className="material-icons" dangerouslySetInnerHTML={{__html: filt.icon_class}} /></span>*/}
-                                    <span className="menu_icon"><i className="material-icons" >&#xE152;</span>
+                                    <span className="menu_icon"><i className="material-icons" >&#xE152;</i></span>
                                     <span className="menu_title">{filt.title}</span>
                                 </Link>
                             </li>
