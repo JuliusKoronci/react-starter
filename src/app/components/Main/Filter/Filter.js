@@ -57,18 +57,48 @@ class Filter extends Component {
         }
     }
 
+    //
+    // componentDidUpdate(prevProps, prevState){
+    //     if(prevProps.params.filterId !== this.props.params.filterId){
+    //         //alert('reinitialize')
+    //         // this.forceUpdate();
+    //
+    //         this.setState = ({
+    //             newFilterForm: {
+    //                 title: '',
+    //                 public: false,
+    //                 error: false
+    //             },
+    //             createFilterFormState: {},
+    //             modalOpen: false,
+    //             creatingFilter: !this.props.params.filterId,
+    //         });
+    //         // this.props.actions.requestTasks(configResolver.loadFilterTasks(filterValues));
+    //     }
+    // }
 
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevProps.params.filterId !== this.props.params.filterId){
-            //alert('reinitialize')
-            this.forceUpdate();
+    componentWillReceiveProps(nextProps){
+        if(nextProps.params.filterId !== this.props.params.filterId){
+            // this.forceUpdate();
 
-            // this.props.actions.requestTasks(configResolver.loadFilterTasks(filterValues));
+            this.setState({
+                newFilterForm: {
+                    title: '',
+                    public: false,
+                    error: false
+                },
+                createFilterFormState: {},
+                modalOpen: false,
+                creatingFilter: !nextProps.params.filterId,
+            });
+
+            // form.filterForm.values
+            //TODO change dates
+            const filterFormValues=this.props.filterFormValues;
+            this.props.actions.requestTasks(configResolver.loadFilterTasks(filterFormValues));
         }
     }
-
-
 
     loadTasksFunction = (url, e) => {
         this.props.actions.requestTasksFromUrl(url);
@@ -118,8 +148,10 @@ class Filter extends Component {
     };
 
     getFilterTasks = () => {
+        console.log(this.setState)
         this.setState({saveFilter: false});
     };
+
     saveFilter = () => {
         this.setState({saveFilter: true});
         this.setState({submitType: 'save'});
@@ -181,8 +213,6 @@ class Filter extends Component {
 
 // tu sa bud uklada filter, alebo len requestnu tasky, podla toho, na aky button sa kliklo (kvoli redux formu)
     onSubmit = (oldValues, e) => {
-
-
 
         if(this.state.submitType && this.state.submitType === 'delete'){
             return this.deleteFilter();
@@ -362,6 +392,8 @@ class Filter extends Component {
         // console.log(this.state.columns);
         // console.log('creating filter? ',this.state.creatingFilter);
 
+
+
         return (
             <View {...this.props}
                 creatingFilter={this.state.creatingFilter}
@@ -397,13 +429,15 @@ function mapStateToProps(state, ownProps) {
 
     const filter = state.filter.filter((filter) => parseInt(filter.id, 10) === parseInt(filterId, 10));
     const filterOptions = state.filters.options || [];
+    const filterFormValues=(state.form && state.form.filterForm && state.form.filterForm.values)?state.form.filterForm.values:{};
 
     return {
         filterFormVisible: state.filterFormVisible,
         filter: filter.length > 0 ? filter[0] : false,
         filterOptions: filterOptions,
         tasks: state.tasks,
-        userAcl:state.auth.user.userRoleAcl
+        userAcl:state.auth.user.userRoleAcl,
+        filterFormValues:filterFormValues
     };
 }
 function mapDispatchToProps(dispatch) {
