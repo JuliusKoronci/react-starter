@@ -1,60 +1,72 @@
-import React, {PropTypes, Component} from 'react';
-import Flatpickr from 'react-flatpickr';
+import React, { PropTypes, Component } from "react";
+import Flatpickr from "react-flatpickr";
 
 // const Datepicker = ({taskId, value, action, fieldName, label, icon, formInputChangeHandler}) => {
 class Datepicker extends Component {
-
-    componentDidUpdate(prevProps) {
-
-        if(prevProps!==this.props) {
-            if (this.props.value === '') {
-                this.flatpicker.flatpickr.clear();
-                this.flatpicker.value = '';
-            }
-        }
-
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      if (this.props.value === "") {
+        this.flatpicker.flatpickr.clear();
+        this.flatpicker.value = "";
+      }
     }
+  }
 
-    render() {
-        const {label,value,fieldName,action,formInputChangeHandler,icon}=this.props;
-        const ic = icon || '&#xE858;';
+  render() {
+    const {
+      label,
+      value,
+      fieldName,
+      action,
+      formInputChangeHandler,
+      icon
+    } = this.props;
+    const ic = icon || "&#xE858;";
 
+    // console.log(value)
 
-        // console.log(value)
+    return (
+      <div className="uk-input-group" style={{ marginTop: "20px" }}>
+        {ic !== "false" && (
+          <span className="uk-input-group-addon">
+            <i className="material-icons">{ic}</i>
+          </span>
+        )}
 
-        return (
-        <div className="uk-input-group" style={{marginTop: '20px'}}>
-
-
-            {ic!=='false' && <span className="uk-input-group-addon"><i className="material-icons">{ic}</i></span>}
-
-            <label className="uk-text-muted" htmlFor="uk_dp_1">{label}</label>
-            <Flatpickr className="md-input" data-enable-time value={value}
-
-                       placeholder="Select date"
-
-                       ref={(fp) => {
-                           this.flatpicker = fp;
-                       }}
-                       onChange={(v) => {
-                           // action({[fieldName]: v[0]}, taskId)
-                           action(fieldName, v[0])
-                       }}/>
-            <span style={{cursor:'pointer'}} onClick={formInputChangeHandler.bind(null, fieldName, '')}><i className="material-icons">&#xE5CD;</i></span>
-
-        </div>
-        );
-    };
-
-};
+        <label className="uk-text-muted" htmlFor="uk_dp_1">
+          {label}
+        </label>
+        <Flatpickr
+          className="md-input"
+          data-enable-time
+          value={value}
+          placeholder="Select date"
+          ref={fp => {
+            this.flatpicker = fp;
+          }}
+          onChange={v => {
+            // action({[fieldName]: v[0]}, taskId)
+            action(fieldName, v[0]);
+          }}
+        />
+        <span
+          style={{ cursor: "pointer" }}
+          onClick={formInputChangeHandler.bind(null, fieldName, "")}
+        >
+          <i className="material-icons">&#xE5CD;</i>
+        </span>
+      </div>
+    );
+  }
+}
 
 Datepicker.propTypes = {
-    // taskId: PropTypes.number.isRequired,
-    // value: PropTypes.string || PropTypes.date,
-    action: PropTypes.func.isRequired,
-    fieldName: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    icon: PropTypes.string
+  // taskId: PropTypes.number.isRequired,
+  // value: PropTypes.string || PropTypes.date,
+  action: PropTypes.func.isRequired,
+  fieldName: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.string
 };
 
 export default Datepicker;

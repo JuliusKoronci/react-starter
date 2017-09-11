@@ -22,6 +22,18 @@
 /*.submenu_trigger ul{display:none;}*/
 /*.submenu_trigger.act_section ul{display:block !important;}*/
 
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  position: relative;
+  *overflow: hidden;
+}
+
+input[type="checkbox"] + label {
+  float: right;
+}
+
 .hidden {
   display: none;
 }
