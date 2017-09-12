@@ -190,14 +190,15 @@ function *generalRequest(action) {
             yield put(config.afterRequest(data,config));
         }
 
+        let redirectTo=config.redirectAfter;
 
         if(config.routeAfter) {
             const id = data.data.id;
             const link = generateRoute(config.routeAfter.name, {[config.routeAfter.param]: id });
-            browserHistory.push(link);
+            // browserHistory.push(link);
+            redirectTo=link;
         }
 
-        let redirectTo=config.redirectAfter;
         if(redirectTo) {
             entityUpdated(config.message ? config.message : 'Request successful', redirectTo);
         }

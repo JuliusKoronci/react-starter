@@ -78,9 +78,12 @@ class Filter extends Component {
     // }
 
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.params.filterId !== this.props.params.filterId){
+    // componentWillReceiveProps(nextProps){
+    componentDidUpdate(prevProps){
+        if(prevProps.params.filterId !== this.props.params.filterId){
             // this.forceUpdate();
+
+
 
             this.setState({
                 newFilterForm: {
@@ -90,13 +93,91 @@ class Filter extends Component {
                 },
                 createFilterFormState: {},
                 modalOpen: false,
-                creatingFilter: !nextProps.params.filterId,
+                creatingFilter: !this.props.params.filterId,
+            submitType: ''
             });
 
-            // form.filterForm.values
-            //TODO change dates
-            const filterFormValues=this.props.filterFormValues;
-            this.props.actions.requestTasks(configResolver.loadFilterTasks(filterFormValues));
+
+            //
+            // // form.filterForm.values
+            // //TODO change dates
+            // let values=this.props.filterFormValues;
+            //
+            // // MAP DATES
+            // ['closedTime', 'startedTime', 'deadlineTime', 'createdTime'].map((field) => {
+            //
+            //     if (values[field + 'Radio'] && values[field + 'Radio'] === 'now') {
+            //         values[field] = this.state.saveFilter ? 'TO=NOW' : 'TO%3DNOW';
+            //         // console.log('now',[field]);
+            //     } else {
+            //         //if (values[field]['radio'] === 'timeRange') {
+            //         // values[field]='';
+            //
+            //         let from = values[field] ? values[field]['from'] : '';
+            //         let to = values[field] ? values[field]['to'] : '';
+            //
+            //         from = convertDateToApiString(from);
+            //         to = convertDateToApiString(to);
+            //
+            //         if ((typeof from !== 'undefined' && from !== '') || (typeof to !== 'undefined' && to !== '')) {
+            //             values[field] = this.state.saveFilter ? 'FROM=' + from + ',TO=' + to : 'FROM%3D' + from + ',TO&%3D' + to;
+            //         } else {
+            //             values[field] = '';
+            //         }
+            //     }
+            // });
+            //
+            //
+            //
+            // this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
+            //
+
+
+
+
+
+            if(this.props.filter && this.props.filter.columns){
+
+// console.log('changing columns ',this.props.filter.id)
+                let visibleColumnsFromFilter=[];
+                    this.state.columns.forEach(column=>{
+
+                    //
+                    //      { Object.keys(column)[0]
+                    // }: !!Object.keys(column)[0].indexOf(this.props.filter.columns)!==1
+
+                        const columnKey=Object.keys(column)[0];
+                        const columnValue=Object.keys(column)[0].indexOf(this.props.filter.columns)!==-1;
+                        visibleColumnsFromFilter.push({[columnKey]:columnValue})
+                    });
+
+                this.setState({columns: visibleColumnsFromFilter });
+
+                // console.log(visibleColumnsFromFilter);
+            }else{
+                this.setState({
+                    columns:[
+                        {title: true},
+                        {requester: true},
+                        {project: true},
+                        {assigned: true},
+                        {status: true},
+                        {creator: false},
+                        {company: false},
+                        {tag: false},
+                        {createdTime: false},
+                        {startedTime: false},
+                        {deadlineTime: false},
+                        {closedTime: false},
+                    ]
+                });
+            }
+
+
+            let requestTasksConfig = this.props.params.filterId ? configResolver.tasksConfig('filter', this.props.params.filterId) : configResolver.tasksConfig();
+            this.props.actions.requestTasks(requestTasksConfig);
+
+
         }
     }
 
@@ -148,7 +229,7 @@ class Filter extends Component {
     };
 
     getFilterTasks = () => {
-        console.log(this.setState)
+        // console.log(this.setState)
         this.setState({saveFilter: false});
     };
 
@@ -166,6 +247,7 @@ class Filter extends Component {
         // this.setState({saveFilter: true});
         // alert('deleting filter')
     };
+
 
 
 

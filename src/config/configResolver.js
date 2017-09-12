@@ -15,7 +15,7 @@ import {
     roleReceived,
     imapDeleted
 } from '../app/redux/actions/settings.action';
-import {optionsReceived, usersAllReceived, projectAssignersReceived} from '../app/redux/actions/system.actions';
+import {optionsReceived, usersAllReceived, projectAssignersReceived, requestFilters} from '../app/redux/actions/system.actions';
 import {taskReceived, tasksReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 import {tagReceived, tagCreated} from '../app/redux/actions/tag.action';
@@ -301,7 +301,9 @@ class configResolver {
                 'startedTime':'filter[startedTime]',
                 'deadlineTime':'filter[deadlineTime]',
                 'createdTime':'filter[createdTime]',
-            }
+            },
+            afterRequest:requestFilters,
+            message:'Filter saved'
             // contentType:'default',
             // jsonStringify:true
             // afterEntityReceivedAction: projectAclUpdated,
@@ -352,6 +354,9 @@ class configResolver {
             },
             // redirectAfterCreation: paths.filter,
             routeAfter:{name:'filter_edit',param:'filterId'},
+            afterRequest:requestFilters,
+            message:'Filter created'
+
             // contentType:'default',
             // jsonStringify:true
             // afterEntityReceivedAction: projectAclUpdated,
@@ -382,11 +387,13 @@ class configResolver {
             method,
             message:'Filter was deleted successfully',
             redirectAfter: paths.homepage,
-            // afterEntityDeletedAction:
+            afterEntityDeletedAction:requestFilters,
+            afterRequest:requestFilters,
         };
 
         return config;
     };
+
 
     static loadFilterOptionList() {
         return {
