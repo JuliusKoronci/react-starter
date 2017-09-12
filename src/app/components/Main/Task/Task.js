@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../redux/actions/tasks.action';
 import * as genActions from '../../../redux/actions/general.action';
 import * as settingsActions from '../../../redux/actions/settings.action';
+import * as systemActions from '../../../redux/actions/system.actions';
 import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import ViewCreatable from '../../../views/templates/main/task/creatingTask.jsx';
 import ViewReadable from '../../../views/templates/main/task/readOnlyTask.jsx';
@@ -56,6 +57,20 @@ class Task extends Component {
             commentFormEmailCc: '',
             commentFormAttachments: [],
             commentFormErrors: {}
+        };
+
+
+        this.dirtyHandler = (ev) =>{
+            if(this.props.isDirty) {
+                if(ev) {
+                    ev.preventDefault();
+                    return ev.returnValue = 'Are you sure you want to close?';
+                }
+                else {
+                    alert('no ev')
+                    return false;
+                }
+            }
         }
 
     }
@@ -85,6 +100,35 @@ class Task extends Component {
         this.props.actions.deleteFile(slug, configResolver.deleteTaskAttachment(this.props.params.taskId, slug));
         e.preventDefault();
     };
+
+
+
+
+
+    componentWillUnmount(){
+        // alert('before')
+        // this.dirtyHandler();
+        // alert('mid')
+        window.removeEventListener("beforeunload", this.dirtyHandler);
+        this.props.actions.isDirty(false);
+        // return false;
+        // alert('after')
+    }
+    componentDidMount(){
+        window.addEventListener("beforeunload",this.dirtyHandler);
+        this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
+
+    };
+
+    routerWillLeave(nextLocation) {
+        const dirty = this.props.isDirty;
+
+        if (dirty) {
+            return 'You have unsaved information, are you sure you want to leave this page?';
+        }
+    }
+
+
 
     // _onValidate = () => {
     //     const task = this.props.task;
@@ -133,6 +177,8 @@ class Task extends Component {
             statusId: data.status?data.status:null}];
 
         form['assigned'] = value;
+
+        this.props.actions.isDirty(true);
         this.setState({form: form,formChanged:true});
 
 // console.log(data);
@@ -236,7 +282,7 @@ class Task extends Component {
         }
 
 
-
+        this.props.actions.isDirty(true);
         this.setState({form: form,formChanged:true});
         // console.log(this.state);
     };
@@ -285,6 +331,7 @@ class Task extends Component {
         // sendValues['started_at']='';
         this.props.actions.taskUpdate(sendValues,config,this.props.params.taskId);
 
+        this.props.actions.isDirty(false);
         this.setState({formChanged:false});
         // console.log(values);
     };
@@ -615,7 +662,8 @@ class Task extends Component {
 
             saveAction={this.saveTask}
 
-            formChanged={this.state.formChanged}
+            // formChanged={this.state.formChanged}
+            formChanged={this.props.isDirty}
             form={this.state.form}
             {...this.props}
         />);
@@ -640,6 +688,7 @@ function mapStateToProps(state, ownProps) {
             creatingTask: true,
             userProjects:state.userOptions.projectsWhereUserCanAddTask,
             options: state.tasks.options,
+            isDirty: state.system.isDirty
         };
     } else {
 
@@ -650,6 +699,7 @@ function mapStateToProps(state, ownProps) {
             canEdit: task ? task.canEdit : false,
             user: state.auth.user,
             creatingTask: false,
+            isDirty: state.system.isDirty,
 
             // taskAttributes: state.taskAttributes && state.taskAttributes.data?state.taskAttributes.data:[],
             taskAttributes: state.tasks.options.taskAttributes?state.tasks.options.taskAttributes:[]
@@ -662,7 +712,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({...actions, ...genActions, ...settingsActions}, dispatch)
+        actions: bindActionCreators({...actions, ...genActions, ...settingsActions, ...systemActions}, dispatch)
     };
 }
 

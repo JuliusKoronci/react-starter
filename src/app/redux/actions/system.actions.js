@@ -1,5 +1,5 @@
 import {USERS_ALL_RECEIVED,REQUEST_USERS_ALL,FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED,REQUEST_PROJECTS, REQUEST_TAGS, TAGS_RECEIVED, PROJECT_ASSIGNERS_RECEIVED,
-    PROJECT_ASSIGNERS_REQUEST}
+    PROJECT_ASSIGNERS_REQUEST,IS_DIRTY}
 from '../constants';
 
 export function requestFilters() {
@@ -79,3 +79,13 @@ export function projectAssignersReceived(data) {
         data
     }
 }
+
+    export function isDirty(bool) {
+        return {
+            type: IS_DIRTY,
+            data:bool
+        }
+    }
+
+
+

@@ -29,6 +29,7 @@ const editableTask = props => {
 
         <div className="uk-grid uk-grid-divider" data-uk-grid-margin>
           <div className="uk-width-medium-3-4">
+              {props.formChanged && <h1>Form changed</h1>}
             <TaskInfo {...props} />
             <Summary {...props} />
             <Material {...props} />

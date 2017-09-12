@@ -23,6 +23,7 @@ import settingsReducer from './system/settings.reducer';
 import tagsReducer from './system/tags.reducer';
 import projectsReducer from './system/project.reducer';
 import userOptions from './system/user_options.reducer';
+import systemReducer from './system/system.reducer';
 import profileReducer from './profile/profile.reducer';
 import {REDUX_RESET} from '../constants';
 
@@ -52,6 +53,7 @@ const appReducer = combineReducers({
     tags: tagsReducer,
     usersAll:usersAllReducer,
     userOptions:userOptions,
+    system:systemReducer
 });
 
 const rootReducer = (state, action) => {
