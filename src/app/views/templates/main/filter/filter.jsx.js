@@ -57,12 +57,12 @@ const Filter = (props) => {
                         contentLabel="Modal"
                     >
                         <h1>Creating filter</h1>
-                        <div className="uk-form-row">
+                        <div className="uk-form-row uk-margin-bottom">
                         Name of the new filter: <input name="title" type="text" value={props.newFilterForm.title} className="md-input" onChange={props.newFilterFormChange} />
                         </div>
 
                         { props.canModifyPublicFilters &&
-                        <div className="uk-form-row">
+                        <div className="uk-form-row uk-margin-bottom">
                             <label>Public <input type="checkbox" name="public" value={props.newFilterForm.public} checked={props.newFilterForm.public} onClick={props.newFilterFormChange} /></label></div>}
 
 
