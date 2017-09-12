@@ -22,7 +22,7 @@
     "react-color": "^2.11.1",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.9.2",
-    "react-flatpickr": "^3.0.1",
+    "react-flatpickr": "^3.5.1",
     "react-modal": "^2.3.2",
     "react-quill": "^1.0.0-rc.2",
     "react-redux": "^5.0.1",
@@ -40,7 +40,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow",
-    "build-storybook": "build-storybook -s public"
+    "flow": "flow"
   }
 }
