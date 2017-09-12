@@ -138,16 +138,17 @@ class Filter extends Component {
 
             if(this.props.filter && this.props.filter.columns){
 
-// console.log('changing columns ',this.props.filter.id)
+
+
                 let visibleColumnsFromFilter=[];
                     this.state.columns.forEach(column=>{
-
                     //
                     //      { Object.keys(column)[0]
                     // }: !!Object.keys(column)[0].indexOf(this.props.filter.columns)!==1
 
                         const columnKey=Object.keys(column)[0];
-                        const columnValue=Object.keys(column)[0].indexOf(this.props.filter.columns)!==-1;
+                        const columnValue=this.props.filter.columns.indexOf(Object.keys(column)[0])!==-1;
+
                         visibleColumnsFromFilter.push({[columnKey]:columnValue})
                     });
 
