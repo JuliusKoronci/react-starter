@@ -75,7 +75,7 @@ class FilterForm extends Component {
         }
         id="filterDiv"
       >
-
+<div className={"md-btn-group"}>
         <button
           className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
           onClick={this.resetForm.bind(null)}
@@ -112,10 +112,10 @@ class FilterForm extends Component {
             DELETE
           </button>
         )}
-<div className={"uk-margin-top"}>
+
         <button
           type="submit"
-          className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light md-btn-block"
+          className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
           onClick={getFilterTasks.bind(null)}
         >
           APPLY FILTER
