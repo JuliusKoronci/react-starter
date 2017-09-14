@@ -36,12 +36,23 @@ const Filter = (props) => {
         }
     };
 
+    // console.log(props.modalFilterForm)
+
+    const modalHeader=props.creatingFilter?'Creating filter':'Editing filter';
+    const buttonValue=props.creatingFilter?'Create filter':'Edit filter';
+    const onSubmit=props.creatingFilter?props.newFilterFormSubmit:props.modalFilterFormSubmit;
+
+    const header=props.creatingFilter?'Filter':'Filter '+props.filter.title;
+    const showIsPublicLabel=!props.creatingFilter && props.filter.public;
 
     return (
         <div className="md-card">
             <div className="md-card-content">
                 <div className="uk-margin-bottom" data-uk-margin>
-                    <h1 className="heading_b uk-margin-bottom">Filter</h1>
+                    <h1 className="heading_b uk-margin-bottom">{header}</h1>
+
+                    {showIsPublicLabel && <label>this filter is public</label>}
+
                 </div>
                 <hr/>
 
@@ -56,19 +67,19 @@ const Filter = (props) => {
                         style={modalStyles}
                         contentLabel="Modal"
                     >
-                        <h1>Creating filter</h1>
+                        <h1>{modalHeader}</h1>
                         <div className="uk-form-row uk-margin-bottom">
-                        Name of the new filter: <input name="title" type="text" value={props.newFilterForm.title} className="md-input" onChange={props.newFilterFormChange} />
+                        Name of the new filter: <input name="title" type="text" value={props.modalFilterForm.title} className="md-input" onChange={props.modalFilterFormChange} />
                         </div>
 
                         { props.canModifyPublicFilters &&
                         <div className="uk-form-row uk-margin-bottom">
-                            <label>Public <input type="checkbox" name="public" value={props.newFilterForm.public} checked={props.newFilterForm.public} onClick={props.newFilterFormChange} /></label></div>}
+                            <label>Public <input type="checkbox" name="public" value={props.modalFilterForm.public} checked={props.modalFilterForm.public} onClick={props.modalFilterFormChange} /></label></div>}
 
 
-                        {props.newFilterForm.error && <p>{props.newFilterForm.error}</p>}
+                        {props.modalFilterForm.error && <p>{props.modalFilterForm.error}</p>}
 
-                            <input type="button" className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light" onClick={props.newFilterFormSubmit} value="Create filter" />
+                            <input type="button" className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light" onClick={onSubmit} value={buttonValue} />
 
                     </Modal>
 

@@ -113,6 +113,7 @@ class FilterForm extends Component {
           </button>
         )}
 
+
         <button
           type="submit"
           className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
@@ -122,7 +123,8 @@ class FilterForm extends Component {
         </button>
 </div>
         <ul className="md-list md-list-addon">
-          {this.props.filter && (
+          {/*{this.props.filter && (*/}
+          {false && (
             <div className="uk-margin-top uk-margin-bottom">
               <Field
                 name="title"
@@ -135,7 +137,8 @@ class FilterForm extends Component {
             </div>
           )}
 
-          {showPublicField && (
+          {/*{showPublicField && (*/}
+          {false && (
             <Field
               name="public"
               type="checkbox"
