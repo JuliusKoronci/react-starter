@@ -4332,6 +4332,15 @@ body > .content-preloader.preloader-active {
   background: #2196f3;
 }
 
+.md-btn-important,
+.md-btn-important:hover,
+.md-btn-important:focus,
+.md-btn-important:active,
+.md-btn-important.uk-active {
+  background: #ffd600;
+  color: #ffffff;
+}
+
 .md-btn-success,
 .md-btn-success:hover,
 .md-btn-success:focus,
