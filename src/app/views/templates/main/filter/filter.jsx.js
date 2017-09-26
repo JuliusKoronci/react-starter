@@ -42,16 +42,23 @@ const Filter = (props) => {
     const buttonValue=props.creatingFilter?'Create filter':'Edit filter';
     const onSubmit=props.creatingFilter?props.newFilterFormSubmit:props.modalFilterFormSubmit;
 
-    const header=props.creatingFilter?'Filter':'Filter '+props.filter.title;
+    const header=props.creatingFilter?'Filter':props.filter.title;
     const showIsPublicLabel=!props.creatingFilter && props.filter.public;
 
     return (
         <div className="md-card">
             <div className="md-card-content">
                 <div className="uk-margin-bottom" data-uk-margin>
-                    <h1 className="heading_b uk-margin-bottom">{header}</h1>
 
-                    {showIsPublicLabel && <label>this filter is public</label>}
+
+                    <h1 className="heading_b">
+
+                      <i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12'}}>&#xE152;</i>
+
+                      {header}
+                    </h1>
+
+                    {showIsPublicLabel && <label>public filter</label>}
 
                 </div>
                 <hr/>
