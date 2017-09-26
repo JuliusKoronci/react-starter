@@ -11,7 +11,7 @@ import TaskButtonPanel from "./top/taskButtonPanel.jsx";
 
 const editableTask = props => {
   return (
-    <div className="md-card-content">
+    <div className="md-card-content" style={props.formChanged ? {borderStyle:'solid',borderColor:'#8b4'}:{borderStyle:'solid',borderColor:'#fff'}}  >
       <div
         className="uk-form-row"
         style={
@@ -20,6 +20,7 @@ const editableTask = props => {
           ) : (
             {}
           )
+
         }
       >
         {props.newTask && <NewTaskPannel {...props} />}
@@ -29,7 +30,7 @@ const editableTask = props => {
 
         <div className="uk-grid uk-grid-divider" data-uk-grid-margin>
           <div className="uk-width-medium-3-4">
-              {props.formChanged && <h1>Form changed</h1>}
+              {/*{props.formChanged && <h1>Form changed</h1>}*/}
             <TaskInfo {...props} />
             <Summary {...props} />
             <Material {...props} />
