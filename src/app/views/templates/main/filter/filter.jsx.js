@@ -49,14 +49,16 @@ const Filter = (props) => {
         <div className="md-card">
             <div className="md-card-content">
                 <div className="uk-margin-bottom" data-uk-margin>
-
-
                     <h1 className="heading_b">
+                      {location.pathname==='/filter'?
+                      <i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12'}}>&#xE145;</i>
+                      :
                       <i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12'}}>&#xE152;</i>
+                      }
                       {header}
                     </h1>
 
-                    {showIsPublicLabel && <label>public filter</label>}
+                    {showIsPublicLabel ? <label>public filter</label>:<label>private filter</label>}
 
                 </div>
                 <hr/>
