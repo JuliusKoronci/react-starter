@@ -30,9 +30,7 @@ input[type="checkbox"] {
   *overflow: hidden;
 }
 
-input[type="checkbox"] + label {
-  float: right;
-}
+
 
 .hidden {
   display: none;
