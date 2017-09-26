@@ -52,9 +52,7 @@ const Filter = (props) => {
 
 
                     <h1 className="heading_b">
-
                       <i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12'}}>&#xE152;</i>
-
                       {header}
                     </h1>
 
