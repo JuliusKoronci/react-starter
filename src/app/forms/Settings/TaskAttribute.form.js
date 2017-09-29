@@ -35,7 +35,7 @@ class TaskAttributeForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, customAttributeTypes, toggleActive} = this.props;
+        const {handleSubmit, formError, customAttributeTypes} = this.props;//handleDelete,toggleActive
 
         return (
             <div className="md-card">

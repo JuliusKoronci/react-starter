@@ -9,6 +9,7 @@ const commentList = ({task,handleFileDownload}) => {
     if (task && Object.keys(task.comments).length) {
         Object.keys(task.comments).map(key => {
             comments.unshift(task.comments[key]);
+            return null;
         });
 
 
@@ -27,7 +28,7 @@ const commentList = ({task,handleFileDownload}) => {
                 let username = comment.createdBy.username;
 
                 let initials = (comment.createdBy.name?comment.createdBy.name.charAt(0):'undef first name ') + (comment.createdBy.surname?comment.createdBy.surname.charAt(0):'undef surname');
-                let attachments=[];
+                // let attachments=[];
                 let avatar = <div className="timeline_icon timeline_icon_success"><p
                     className="md-user-letters md-bg-cyan">{initials}</p></div>;
 

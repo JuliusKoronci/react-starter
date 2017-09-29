@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../redux/actions/settings.action';
 import * as generalActions from '../../../redux/actions/general.action';
 import configResolver from '../../../../config/configResolver';
-import {reset} from 'redux-form';
+// import {reset} from 'redux-form';
 
 class Tag extends Component {
 

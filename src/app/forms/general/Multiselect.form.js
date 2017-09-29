@@ -47,6 +47,7 @@ class Multiselect extends Component {
                     label
                 }
             }
+            return null;
         });
 
 

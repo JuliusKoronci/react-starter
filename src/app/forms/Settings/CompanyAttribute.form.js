@@ -49,7 +49,7 @@ class CompanyAttributeForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, setCustomValues, customAttributeTypes} = this.props;
+        const {handleSubmit, formError, customAttributeTypes} = this.props;//handleDelete, setCustomValues,
 
 
         return (

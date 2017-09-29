@@ -3,6 +3,17 @@ import {Link} from 'react-router';
 import UserAvatar from '../_partials/userAvatar.jsx';
 
 const userDropdownMenu = ({user,logout,dropdownToggled,handleToggle}) => {
+
+
+    const usernameStyle = {
+        paddingLeft: '15px'
+    };
+
+    const userAvatarStyle = {
+        marginTop: '4px'
+    };
+
+
     return (
 
     <li className={dropdownToggled ? "uk-open" : ""} onClick={handleToggle}>
@@ -37,13 +48,7 @@ userDropdownMenu.propTypes = {
 
 };
 
-var usernameStyle = {
-  paddingLeft: '15px'
-};
 
-var userAvatarStyle = {
-  marginTop: '4px'
-};
 
 
 

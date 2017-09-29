@@ -1,5 +1,5 @@
 import * as constants from '../constants';
-import {USERS_LIST} from '../../../api/urls';
+// import {USERS_LIST} from '../../../api/urls';
 
 
 export function requestUsers(url) {

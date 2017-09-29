@@ -1,17 +1,17 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 
 
 class commentForm extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-
-
-
-    }
+    // constructor(props, context) {
+    //     super(props, context);
+    //
+    //
+    //
+    // }
 
     fireFileInput=()=>{
-        let inputAttachment;
+        // let inputAttachment;
         this.inputAttachment.click();
     };
 

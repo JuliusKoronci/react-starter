@@ -20,7 +20,7 @@ class ProjectAclForm extends Component {
             this.props.change(fieldName, newValues.join());
 
         }else if(valuesBefore.indexOf(value)!==-1 && !checked){
-            let newValues=valuesBefore.length>0? valuesBefore.filter((val)=>{if(val!==value)return val;}) : [];
+            let newValues=valuesBefore.length>0? valuesBefore.filter((val)=>{if(val!==value)return val;return null;}) : [];
             this.props.change(fieldName, newValues.join());
 
         }
@@ -32,7 +32,7 @@ class ProjectAclForm extends Component {
 
         // console.log(this.props);
 
-        const {handleSubmit,heading} = this.props;
+        const {handleSubmit} = this.props;
 
         const acls=['view_own_tasks','view_tasks_from_users_company','view_all_tasks',
             'create_task','resolve_task','delete_task',
@@ -117,6 +117,7 @@ function mapStateToProps(state, ownProps) {
                 let value=user.acl.join(',');
                 initialValues[fieldName]=value;
                 fields.push(fieldName);
+                return null;
             });
 
         return {

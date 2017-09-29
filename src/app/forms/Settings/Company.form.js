@@ -17,7 +17,7 @@ class CompanyAddForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete} = this.props;
+        const {handleSubmit, formError} = this.props;
         return (
 
             <div className="md-card">

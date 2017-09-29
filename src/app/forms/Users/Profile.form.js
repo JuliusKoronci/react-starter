@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {required, phone, alphanum, number} from '../../../config/validation';
+import {required} from '../../../config/validation';
 import {availableLanguages} from '../../../config/config';
-import {renderField, renderRTE, renderWswg, renderSelect} from '../field.tpl';
+import {renderField, renderWswg, renderSelect} from '../field.tpl';//renderRTE
 import {LOAD_ATTACHMENT} from '../../../api/urls';
-import RTE from '../../forms/general/rte/RTE.form';
+// import RTE from '../../forms/general/rte/RTE.form';
 import Image from '../../components/Main/Image';
 import PasswordChangeForm from './PasswordChange.form.js';
 import {Link} from 'react-router';
@@ -28,7 +28,7 @@ class ProfileForm extends Component {
                         <div className="fileinput-new thumbnail">
                             <Image src={ user && user.image? LOAD_ATTACHMENT + '/'+user.image:'/assets/img/avatars/user.png'} staticSrc='/assets/img/avatars/user.png' fetchFromApi={!!(user && user.image)} alt="user avatar" />
                         </div>
-                        <div className="fileinput-preview fileinput-exists thumbnail"></div>
+                        <div className="fileinput-preview fileinput-exists thumbnail" />
                         <div className="user_avatar_controls">
                                         <span className="btn-file">
                                             <span className="fileinput-new"><i

@@ -18,7 +18,7 @@ class SmtpForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, heading, editing} = this.props;
+        const {handleSubmit,  handleDelete, heading, editing} = this.props;
         return (
 
             <div className="md-card">

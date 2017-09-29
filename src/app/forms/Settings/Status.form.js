@@ -17,7 +17,8 @@ class StatusForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, colorpickerOnDrag, colorpickerColor} = this.props;
+        // const {handleSubmit, formError, handleDelete, colorpickerOnDrag, colorpickerColor} = this.props;
+        const {handleSubmit, handleDelete} = this.props;
         return (
 
             <div className="md-card">

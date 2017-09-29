@@ -48,7 +48,7 @@ class UserAttributeForm extends Component {
 
 
     render() {
-        const {handleSubmit, formError, handleDelete, setCustomValues} = this.props;
+        const {handleSubmit, formError, handleDelete } = this.props;//setCustomValues
 
         const options=[
             {id:'input',title:'Input',},
