@@ -11,8 +11,7 @@ const summary = ({task, form}) => {
             <div className="uk-margin-medium-bottom">
               <label className="uk-text-muted">Description</label>
               <div
-                  style=
-                    {{border:'1px',
+                  style={{border:'1px',
                       borderRadius: '0',
                       borderStyle:'solid',
                       padding:'4px 8px 4px 8px',
@@ -25,8 +24,7 @@ const summary = ({task, form}) => {
             <div className="uk-margin-medium-bottom">
               <label className="uk-text-muted">Work done</label>
               <div
-                  style=
-                    {{border:'1px',
+                  style={{border:'1px',
                       borderRadius: '0',
                       borderStyle:'solid',
                       padding:'4px 8px 4px 8px',

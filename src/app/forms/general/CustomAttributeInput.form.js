@@ -5,9 +5,9 @@ import DatePicker from '../../forms/Task/Datepicker.form';
 
 class CustomAttributeInput extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
+    // constructor(props, context) {
+    //     super(props, context);
+    // }
 
     onChange = (value) => {
         // console.error('changed ',this.props.name,this.props.title,this.props.type);

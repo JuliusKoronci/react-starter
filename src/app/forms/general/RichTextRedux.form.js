@@ -4,9 +4,9 @@ import ReactQuill from 'react-quill';
 
 class RichText extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
+    // constructor(props, context) {
+    //     super(props, context);
+    // }
 
 
     handleChange=(value)=>{

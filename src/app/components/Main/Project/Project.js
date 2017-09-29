@@ -19,15 +19,16 @@ class Project extends Component {
 
 
         //check permission
-        if(this.props.auth.user.userRoleAcl.indexOf('create_projects')==-1){
+        if(this.props.auth.user.userRoleAcl.indexOf('create_projects')===-1){
             console.log('no permission');
         }else{
             console.log('has permission');
         }
-        if(this.props.project ){
-            let hasProject=this.props.project.userHasProjects.filter((user) => parseInt(user.user.id, 10) === parseInt(this.props.auth.user.id, 10));
-            // alert(hasProject);
-        }
+
+        // if(this.props.project ){
+        //     // let hasProject=this.props.project.userHasProjects.filter((user) => parseInt(user.user.id, 10) === parseInt(this.props.auth.user.id, 10));
+        //     // alert(hasProject);
+        // }
         //
 
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import TaskInfo from "./top/taskInfo.jsx";
-import TaskActions from "./top/taskActions.jsx";
+// import TaskActions from "./top/taskActions.jsx";
 import Summary from "./left/summary.jsx";
 import Material from "./left/material.jsx";
 import CommentForm from "./left/commentForm.jsx";

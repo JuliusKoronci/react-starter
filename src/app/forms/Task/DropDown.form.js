@@ -93,7 +93,7 @@ class DropDown extends Component {
 
         return this.props.options.map((option, key) => {
             if (option.value === this.state.selected || option.is_active === false) {
-                return;
+                return '';
             }
             const style = option.color && {background: option.color};
             return (

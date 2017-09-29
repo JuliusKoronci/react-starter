@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
-import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
+// import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
 import {generateRoute} from '../../../../../../config/router';
 
 const roles = (props) => {

@@ -1,6 +1,5 @@
 import React, { PropTypes } from "react";
 import dateFormat from "../../../../../services/formatedDate";
-import Input from "../../../../../forms/Task/Input.form";
 
 const taskInfo = ({ task }) => {
   return (

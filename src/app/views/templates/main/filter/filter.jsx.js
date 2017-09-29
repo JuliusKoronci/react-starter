@@ -51,9 +51,9 @@ const Filter = (props) => {
                 <div className="uk-margin-bottom" data-uk-margin>
                     <h1 className="heading_b">
                       {location.pathname==='/filter'?
-                      <i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12'}}>&#xE145;</i>
+                      <i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12px'}}>&#xE145;</i>
                       :
-                      <i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12'}}>&#xE152;</i>
+                      <i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12px'}}>&#xE152;</i>
                       }
                       {header}
                     </h1>

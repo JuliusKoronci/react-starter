@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import Pagination from '../../_partials/pagination.jsx';
 import {generateRoute} from '../../../../../../config/router';
-import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
+// import DeleteButton from '../../../../../components/Main/_partials/DeleteButton';
 
 const statuses = (props) => {
     return (

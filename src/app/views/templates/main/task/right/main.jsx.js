@@ -5,8 +5,8 @@ import Attachment from "./attachment.jsx";
 import Tag from "./tag.jsx";
 import DatePicker from "../../../../../forms/Task/Datepicker.form";
 import Select from "../../../../../forms/Task/Select.form";
-import configResolver from "../../../../../../config/configResolver";
-import ReactSelect from "react-select";
+// import configResolver from "../../../../../../config/configResolver";
+// import ReactSelect from "react-select";
 import CustomAttributeInput from "../../../../../forms/general/CustomAttributeInput.form";
 
 const main = ({

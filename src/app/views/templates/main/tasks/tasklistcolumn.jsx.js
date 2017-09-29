@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 
 
 const tasklistcolumn = ({title, name, clickHandler, canOrder, orderBy, orderDirection}) => {
 
-
-    // data-order-by="status"
-    {/*<div dangerouslySetInnerHTML={{__html: getMarkup()}} />*/}
+    //
+    // // data-order-by="status"
+    // {/*<div dangerouslySetInnerHTML={{__html: getMarkup()}} />*/}
 
     let caret = '';
 
