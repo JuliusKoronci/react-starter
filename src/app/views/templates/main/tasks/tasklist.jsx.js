@@ -12,7 +12,9 @@ const tasklist = ({tasks, loadTasksFunction, filter, heading, searchChange, orde
     return (
         <div className="md-card-content">
             <div className="uk-margin-bottom" data-uk-margin>
-                <h1 className="heading_b uk-margin-bottom">{heading ? heading : 'Dashboard'}</h1>
+                <h1 className="heading_b uk-margin-bottom">
+        {/*<i className="material-icons md-24" style={{verticalAlign:'top', paddingRight:'12'}}>&#xE2C8;</i>*/}
+                  {heading ? heading : 'Dashboard'}</h1>
             </div>
             <hr/>
             <button

@@ -317,7 +317,7 @@ class FilterForm extends Component {
               type="text"
               validate={[]}
               component={renderMultiselect}
-              label="Context"
+              label="Tags"
               defaultOptions={filterOptions.tag.map(option => {
                 return { value: option.id, label: option.title };
               })}

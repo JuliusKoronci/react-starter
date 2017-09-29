@@ -12,8 +12,10 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
 
     //aby boli otvorene menu Projects,Tags,Reports
     const projectsOpen = true;
-    const tagsOpen = true;
-    const reportsOpen = true;
+    const archivedProjectsOpen = false;
+    const tagsOpen = false;
+    const reportsOpen = false;
+
 
 
     projects.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
@@ -54,13 +56,15 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
                     </li>
                 </ul>
                 <ul>
-                    <li>
-                        <Link to='/filter'
-                              className={location.pathname==='/filter'?'active md-color-deep-orange-500':''} >
-                            <span className="menu_icon"><i className="material-icons">&#xE152;</i></span>
-                            <span className="menu_title">FILTER</span>
-                        </Link>
-                    </li>
+                  <li>
+                      <Link to='/filter'
+                            className={location.pathname==='/filter'?'active md-color-deep-orange-500':'md-color-blue-500'} >
+                          <span className="menu_icon"><i
+                            className={location.pathname==='/filter'?'material-icons md-color-deep-orange-500':'material-icons md-color-blue-500'}>
+                            &#xE145;</i></span>
+                          <span className="menu_title">FILTER</span>
+                      </Link>
+                  </li>
                 </ul>
                 <ul>
                     {filter.map((filt, i) => {
@@ -137,7 +141,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
                     {/*sidebar menu - archived projects */}
                     <li className={projectId?"submenu_trigger act_section":'submenu_trigger'}>
 
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={projectsOpen?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null)} className={archivedProjectsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
                             <span className="menu_title">Archived projects</span>
                         </a>
