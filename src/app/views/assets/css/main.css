@@ -30,8 +30,6 @@ input[type="checkbox"] {
   *overflow: hidden;
 }
 
-
-
 .hidden {
   display: none;
 }
@@ -75,6 +73,7 @@ input[type="checkbox"] {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 .submenu-icon {
