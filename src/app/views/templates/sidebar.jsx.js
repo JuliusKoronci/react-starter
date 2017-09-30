@@ -20,6 +20,8 @@ const sidebar = ({
   const reportId = params.reportId;
 
   //aby boli otvorene menu Projects,Tags,Reports
+  const mytasksOpen = true;
+  const filtersOpen = true;
   const projectsOpen = true;
   const archivedProjectsOpen = false;
   const tagsOpen = false;
@@ -85,6 +87,8 @@ const sidebar = ({
               <span className="menu_title ">CREATE TASK</span>
             </Link>
           </li>
+
+          {/*Create filter*/}
           <li>
             <Link
               to="/filter"
@@ -106,37 +110,183 @@ const sidebar = ({
                     )
                   }
                 >
-                  &#xE145;
+                  &#xE8B6;
                 </i>
               </span>
-              <span className="menu_title">FILTER</span>
+              <span className="menu_title">SEARCH</span>
             </Link>
           </li>
-          {filter.map((filt, i) => {
-            return (
-              <li key={i} title="FILTER">
-                {/*<Link to={'/dashboard/' + filt.id}*/}
-                {/*{filt.public?'public':'private'}*/}
-                <Link
-                  to={"/filter/" + filt.id}
-                  className={
-                    parseInt(filt.id, 10) === parseInt(filterId, 10) ? (
-                      "active md-color-deep-orange-500"
-                    ) : (
-                      ""
-                    )
-                  }
+
+          {/*sidebar menu - MyTasks */}
+          <li
+            className={
+              projectId ? "submenu_trigger act_section" : "submenu_trigger"
+            }
+          >
+            <a
+              href="#"
+              onClick={menuToggleActive.bind(null)}
+              className={mytasksOpen ? "active" : ""}
+            >
+              <span className="menu_icon">
+                <i
+                  className="material-icons"
+                  onClick={menuToggleActive.bind(null)}
                 >
-                  {/*<span className="menu_icon"><i className="material-icons" >{filt.icon_class}</i></span>*/}
-                  {/*<span className="menu_icon"><i className="material-icons" dangerouslySetInnerHTML={{__html: filt.icon_class}} /></span>*/}
-                  <span className="menu_icon">
-                    <i className="material-icons">&#xE152;</i>
-                  </span>
-                  <span className="menu_title">{filt.title}</span>
-                </Link>
+                  &#xE851;
+                </i>
+              </span>
+              <span className="menu_title">MY TASKS</span>
+            </a>
+            <ul>
+              <li>
+                <span className="submenu-title">
+                  <Link
+                    to="/reports/custom"
+                    style={{
+                      backgroundColor: "rgb(30, 144, 255)",
+                      color: "#fff",
+                      paddingTop: 2,
+                      paddingBottom: 2,
+                      paddingLeft: 15,
+                      paddingRight: 15
+                    }}
+                  >
+                    NEW
+                  </Link>
+                </span>
               </li>
-            );
-          })}
+              <li>
+                <span className="submenu-title">
+                  <Link
+                    to="/reports/custom"
+                    style={{
+                      backgroundColor: "rgb(65, 117, 5)",
+                      color: "#fff",
+                      paddingTop: 2,
+                      paddingBottom: 2,
+                      paddingLeft: 15,
+                      paddingRight: 15
+                    }}
+                  >
+                    OPEN
+                  </Link>
+                </span>
+              </li>
+              <li>
+                <span className="submenu-title">
+                  <Link
+                    to="/reports/custom"
+                    style={{
+                      backgroundColor: "rgb(245, 166, 35)",
+                      color: "#fff",
+                      paddingTop: 2,
+                      paddingBottom: 2,
+                      paddingLeft: 15,
+                      paddingRight: 15
+                    }}
+                  >
+                    PENDING
+                  </Link>
+                </span>
+              </li>
+              <li>
+                <span className="submenu-title">
+                  <Link
+                    to="/reports/custom"
+                    style={{
+                      backgroundColor: "rgb(169, 169, 169)",
+                      color: "#fff",
+                      paddingTop: 2,
+                      paddingBottom: 2,
+                      paddingLeft: 15,
+                      paddingRight: 15
+                    }}
+                  >
+                    CLOSED
+                  </Link>
+                </span>
+              </li>
+            </ul>
+            <ul />
+          </li>
+
+          {/*sidebar menu - filters */}
+          <li
+            className={
+              projectId ? "submenu_trigger act_section" : "submenu_trigger"
+            }
+          >
+            <a
+              href="#"
+              onClick={menuToggleActive.bind(null)}
+              className={filtersOpen ? "active" : ""}
+            >
+              <span className="menu_icon">
+                <i
+                  className="material-icons"
+                  onClick={menuToggleActive.bind(null)}
+                >
+                  &#xE152;
+                </i>
+              </span>
+              <span className="menu_title">Filters</span>
+            </a>
+
+            <ul>
+              {filter.map((filt, i) => {
+                return (
+                  <li key={i} title="FILTER">
+                    {/*<Link to={'/dashboard/' + filt.id}*/}
+                    {/*{filt.public?'public':'private'}*/}
+                    <Link
+                      to={"/filter/" + filt.id}
+                      className={
+                        parseInt(filt.id, 10) === parseInt(filterId, 10) ? (
+                          "active md-color-deep-orange-500"
+                        ) : (
+                          ""
+                        )
+                      }
+                    >
+                      <span className="submenu-title">{filt.title}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+
+              <li>
+                <span className="submenu-title">
+                  <Link
+                    to="/filter"
+                    className={
+                      location.pathname === "/filter" ? (
+                        "active md-color-deep-orange-500"
+                      ) : (
+                        "md-color-blue-500"
+                      )
+                    }
+                  >
+                    <span className="menu_icon">
+                      <i
+                        className={
+                          location.pathname === "/filter" ? (
+                            "material-icons md-color-deep-orange-500"
+                          ) : (
+                            "material-icons md-color-blue-500"
+                          )
+                        }
+                      >
+                        &#xE145;
+                      </i>
+                    </span>
+                    <span className="menu_title">FILTER</span>
+                  </Link>
+                </span>
+              </li>
+            </ul>
+          </li>
+
           {/*sidebar menu - projects */}
           <li
             className={
@@ -149,7 +299,12 @@ const sidebar = ({
               className={projectsOpen ? "active" : ""}
             >
               <span className="menu_icon">
-                <i className="material-icons">&#xE2C8;</i>
+                <i
+                  className="material-icons"
+                  onClick={menuToggleActive.bind(null)}
+                >
+                  &#xE2C8;
+                </i>
               </span>
               <span className="menu_title">Projects</span>
             </a>
