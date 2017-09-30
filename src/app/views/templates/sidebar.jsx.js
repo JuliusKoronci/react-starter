@@ -57,15 +57,6 @@ const sidebar = ({
         </div>
       </div>
       <div className="menu_section">
-        {/*<ul>*/}
-        {/*<li>*/}
-        {/*<Link onClick={createTask}>*/}
-        {/*<span className="menu_icon"><i*/}
-        {/*className="material-icons md-color-blue-500">&#xE145;</i></span>*/}
-        {/*<span className="menu_title md-color-blue-500">NEW TASK</span>*/}
-        {/*</Link>*/}
-        {/*</li>*/}
-        {/*</ul>*/}
         <ul>
           <li>
             <Link
@@ -94,8 +85,6 @@ const sidebar = ({
               <span className="menu_title ">CREATE TASK</span>
             </Link>
           </li>
-        </ul>
-        <ul>
           <li>
             <Link
               to="/filter"
@@ -123,8 +112,6 @@ const sidebar = ({
               <span className="menu_title">FILTER</span>
             </Link>
           </li>
-        </ul>
-        <ul>
           {filter.map((filt, i) => {
             return (
               <li key={i} title="FILTER">
@@ -150,11 +137,6 @@ const sidebar = ({
               </li>
             );
           })}
-        </ul>
-      </div>
-
-      <div className="menu_section">
-        <ul>
           {/*sidebar menu - projects */}
           <li
             className={
@@ -234,7 +216,7 @@ const sidebar = ({
               className={archivedProjectsOpen ? "active" : ""}
             >
               <span className="menu_icon">
-                <i className="material-icons">&#xE2C8;</i>
+                <i className="material-icons">&#xE149;</i>
               </span>
               <span className="menu_title">Archived projects</span>
             </a>
