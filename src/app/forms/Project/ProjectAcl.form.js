@@ -12,7 +12,9 @@ class ProjectAclForm extends Component {
     onChange=(fieldName,e)=>{
         let checked=e.target.checked;
         let value=e.target.name;
+
         const valuesBefore=this.props.thisForm['ProjectAclForm'].values[fieldName].split(',');
+
 
         if(valuesBefore.indexOf(value)===-1 && checked){
             let newValues=valuesBefore;
@@ -65,7 +67,8 @@ class ProjectAclForm extends Component {
 
                             {this.props.project.userHasProjects.map((user, i) =>{
                                 const fieldName='user'+user.user.id;
-                                let fieldValue=user.acl.join(',');
+                                // let fieldValue=user.acl.join(',');
+                                let fieldValue=user.acl;
 
                                 return <tr key={i}>
                                     <td>{user.user.username}</td>
@@ -106,7 +109,9 @@ class ProjectAclForm extends Component {
 
 function mapStateToProps(state, ownProps) {
     const projectId = ownProps.params.projectId;
-    const project = state.projects.data.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
+    // const project = ownProps.project;
+    // const project = state.projects.data.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
+    const project = state.system.menu.projects.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
     const thisForm=state.form;
 
     if (project.length > 0) {
@@ -123,7 +128,8 @@ function mapStateToProps(state, ownProps) {
         return {
             thisForm,
             initialValues:initialValues,
-            fields
+            fields,
+            enableReinitialize: true,
         };
     }
     return {thisForm};

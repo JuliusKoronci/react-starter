@@ -55,7 +55,8 @@ class ProjectForm extends Component {
 
 function mapStateToProps(state, ownProps) {
     const projectId = ownProps.params.projectId;
-    const project = state.projects.data.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
+    // const project = state.projects.data.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
+    const project = state.system.menu.projects.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
 
     if (project.length > 0) {
         return {

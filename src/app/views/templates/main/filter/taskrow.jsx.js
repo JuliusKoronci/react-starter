@@ -24,7 +24,7 @@ const taskrow = ({task,columns}) => {
 
                 if(col.title){
                     return <td key={i}>
-                    <Link className="uk-text-large" to={'/tasks/' + task.id}>{task.title} {!task.canEdit?'(READ-ONLY)':''}</Link>
+                    <Link className="uk-text-large" to={'/tasks/' + task.id}>{task.title}</Link> {!task.canEdit?'(READ-ONLY)':''}
                     <TagList task={task}/>
                 </td>}
 
@@ -62,7 +62,7 @@ const taskrow = ({task,columns}) => {
 
 
 
-                return '';
+                return null;
             })}
 
 

@@ -43,7 +43,8 @@ class Tag extends Component {
 
 function mapStateToProps(state, ownProps) {
     const tagId = ownProps.params.tagId;
-    const tag = state.tags.data.filter((tag) => parseInt(tag.id, 10) === parseInt(tagId, 10));
+    // const tag = state.tags.data.filter((tag) => parseInt(tag.id, 10) === parseInt(tagId, 10));
+    const tag = state.system.menu.tags.filter((tag) => parseInt(tag.id, 10) === parseInt(tagId, 10));
     return {
         tag: tag.length > 0 ? tag[0] : false,
     };

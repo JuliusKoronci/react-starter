@@ -14,7 +14,7 @@ const taskrow = ({task}) => {
             </td>
             <td className="uk-text-center"><span className="uk-text-muted uk-text-nowrap">{task.id}</span></td>
             <td>
-                <Link className="uk-text-large" to={'/tasks/' + task.id} >{task.title}  {!task.canEdit?'(READ-ONLY)':''}</Link>
+                <Link className="uk-text-large" to={'/tasks/' + task.id} >{task.title}</Link>  {!task.canEdit?'(READ-ONLY)':''}
                 <TagList task={task}/>
             </td>
 

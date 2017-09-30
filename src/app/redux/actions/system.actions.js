@@ -1,7 +1,25 @@
 import {USERS_ALL_RECEIVED,REQUEST_USERS_ALL,FILTERS_RECEIVED, REQUEST_FILTERS, TOGGLE_SIDEBAR, SIDEBAR_IS_MINIFIED, PROJECTS_RECEIVED,OPTIONS_RECEIVED,REQUEST_PROJECTS, REQUEST_TAGS, TAGS_RECEIVED, PROJECT_ASSIGNERS_RECEIVED,
-    IS_DIRTY}//PROJECT_ASSIGNERS_REQUEST,
+    IS_DIRTY,REQUEST_MENU,MENU_ITEMS_RECEIVED}//PROJECT_ASSIGNERS_REQUEST,
 from '../constants';
 
+
+
+export function requestMenuItems() {
+    return {
+        type: REQUEST_MENU
+    }
+}
+export function menuItemsReceived(data) {
+    return {
+        type: MENU_ITEMS_RECEIVED,
+        data
+    }
+}
+
+
+
+
+//TODO toto sa nahradza
 export function requestFilters() {
     return {
         type: REQUEST_FILTERS
@@ -18,6 +36,10 @@ export function requestTags() {
         type: REQUEST_TAGS
     }
 }
+//TODO
+
+
+
 
 export function requestAllUsers(url) {
     return {

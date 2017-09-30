@@ -23,9 +23,14 @@ class Main extends Component {
 
     componentDidMount() {
         document.body.className = 'sidebar_main_open sidebar_main_swipe';
+
+
+        this.props.actions.requestMenuItems();
+
+
         this.props.actions.requestFilters();
-        this.props.actions.requestProjects();
-        this.props.actions.requestTags();
+        // this.props.actions.requestProjects();
+        // this.props.actions.requestTags();
 
     }
 
@@ -101,6 +106,7 @@ Main.propTypes = {
 
 
 function mapStateToProps(state) {
+
     return {
         authenticated: state.auth.authenticated,
         loading: state.async.loading,
@@ -110,8 +116,16 @@ function mapStateToProps(state) {
         user: state.auth.user,
         filter: state.filter,
         sidebarIsMinified: state.settings.sidebarIsMinified,
-        projects:state.projects.data,
-        tags:state.tags.data,
+
+
+        projects:state.system.menu.projects || [],
+        archivedProjects:state.system.menu.archived || [],
+        filters:state.system.menu.filters || [],
+        tags:state.system.menu.tags || [],
+
+        // projects:state.projects.data,
+        // tags:state.tags.data,
+
         loggedUserAcl:state.auth.user.userRoleAcl || []
     };
 }

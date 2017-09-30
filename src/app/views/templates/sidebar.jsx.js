@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {generateRoute, paths} from '../../../config/router';
 import {sort_by} from '../../services/general';
 
-const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location}) => {
+const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location}) => {
 
     const projectId = params.projectId;
     const filterId = params.filterId;
@@ -19,12 +19,16 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
 
 
     projects.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
+
+    let archivedProjects=projects.filter(project=>{if (!project.is_active) return project});
+    archivedProjects.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
+    projects=projects.filter(project=>{if (project.is_active) return project});
+
     tags.sort(sort_by('title', false, function(a){return a.toUpperCase()}));
 
 
 
-    let archivedProjects=projects.filter(project=>{if (!project.is_active) return project});
-    projects=projects.filter(project=>{if (project.is_active) return project});
+
 
     return (
         <aside id="sidebar_main" style={{overflow:'auto'}}>
@@ -67,7 +71,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
                   </li>
                 </ul>
                 <ul>
-                    {filter.map((filt, i) => {
+                    {filters.map((filt, i) => {
                         return (
                             <li key={i} title="FILTER">
                                 {/*<Link to={'/dashboard/' + filt.id}*/}
@@ -267,7 +271,7 @@ const sidebar = ({filter, projects, tags, createTask, params, menuToggleActive, 
 };
 
 sidebar.propTypes = {
-    filter: PropTypes.array.isRequired
+    filters: PropTypes.array.isRequired
 };
 
 export default sidebar;

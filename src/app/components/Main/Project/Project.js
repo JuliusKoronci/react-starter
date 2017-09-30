@@ -109,7 +109,10 @@ class Project extends Component {
 
 function mapStateToProps(state, ownProps) {
     const projectId = ownProps.params.projectId;
-    const project = state.projects.data.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
+    // const project = state.projects.data.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
+
+    // console.log(state.system.menu.projects)
+    const project = state.system.menu.projects.filter((project) => parseInt(project.id, 10) === parseInt(projectId, 10));
 
     return {
         project: project.length > 0 ? project[0] : false,

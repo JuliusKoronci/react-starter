@@ -14,6 +14,7 @@ import {entityCreated, entityError, stripEmptyValues} from '../../../services/ge
 import {TASK_LIST} from '../../../../api/urls';
 import {apiUploadFile} from '../../../../api/api';
 import { browserHistory } from 'react-router';
+import texts from '../../../../config/texts';
 
 class Task extends Component {
 
@@ -64,10 +65,9 @@ class Task extends Component {
             if(this.props.isDirty) {
                 if(ev) {
                     ev.preventDefault();
-                    return ev.returnValue = 'Are you sure you want to close?';
+                    return ev.returnValue = texts.areYouSureToClose;
                 }
                 else {
-                    alert('no ev')
                     return false;
                 }
             }
@@ -124,7 +124,7 @@ class Task extends Component {
         const dirty = this.props.isDirty;
 
         if (dirty) {
-            return 'You have unsaved information, are you sure you want to leave this page?';
+            return texts.unsavedInformation;
         }
     }
 
@@ -274,11 +274,18 @@ class Task extends Component {
 
 
         let form = Object.assign({}, this.state.form);
+
         form[name] = value;
 
-        if(name==='started_at' || name==='closed_at' || name==='deadline') {
+        // console.log(value);
+        // console.log(name);
+        // console.log(form);
+        // console.log(form[name]);
 
-            form[name]['date'] = value;
+        if(name==='started_at' || name==='closed_at' || name==='deadline') {
+            // console.log(value)
+            // form[name]['date'] = value;
+            form[name] = value;
         }
 
 
@@ -291,7 +298,7 @@ class Task extends Component {
 
 
     inputChangeHandler = (name, value, e) => {
-        console.log(name,value)
+        // console.log(name,value)
 
         if(name==='newTaskProject'){
             //TODO update assignees
@@ -309,6 +316,19 @@ class Task extends Component {
         values.started_at=this.state.form.started_at&&this.state.form.started_at.date?this.state.form.started_at.date:this.state.form.started_at;
         values.deadline=this.state.form.deadline&&this.state.form.deadline.date?this.state.form.deadline.date:this.state.form.deadline;
         values.closed_at=this.state.form.closed_at&&this.state.form.closed_at.date?this.state.form.closed_at.date:this.state.form.closed_at;
+
+
+        //TODO - toto upravit s apinou
+        if(!values.started_at){
+            values.started_at='null';
+        }
+        if(!values.deadline){
+            values.deadline='null';
+        }
+        if(!values.closed_at){
+            values.closed_at='null';
+        }
+        //TODO ///////////////////////////
 
         // console.log(this.state.form.started_at)
         // console.log(this.state.form.task_data);

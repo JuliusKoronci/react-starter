@@ -15,7 +15,10 @@ import {
     roleReceived,
     imapDeleted
 } from '../app/redux/actions/settings.action';
-import {optionsReceived, usersAllReceived, projectAssignersReceived, requestFilters} from '../app/redux/actions/system.actions';
+import {
+    optionsReceived, usersAllReceived, projectAssignersReceived, requestFilters,
+    requestMenuItems
+} from '../app/redux/actions/system.actions';
 import {taskReceived, tasksReceived, taskAttachmentDeleted} from '../app/redux/actions/tasks.action';
 import {profileReceived, avatarUploaded} from '../app/redux/actions/users.action';
 import {tagReceived, tagCreated} from '../app/redux/actions/tag.action';
@@ -211,7 +214,8 @@ class configResolver {
         return {
             url: id ? urls.TAG_LIST + '/' + id : urls.TAG_LIST,
             urlList: urls.TAG_LIST,
-            afterEntityReceivedAction: tagReceived,
+            // afterEntityReceivedAction: tagReceived,
+            afterEntityReceivedAction: requestMenuItems,
             //redirectAfterCreation: paths.units,
             allowedFormFields: ['title', 'color', 'public']
         }
@@ -220,7 +224,10 @@ class configResolver {
         return {
             url: id ? urls.TAG_LIST + '/' + id : urls.TAG_LIST,
             urlList: urls.TAG_LIST,
-            afterEntityReceivedAction: tagCreated,
+
+            // afterEntityReceivedAction: tagCreated,
+            afterEntityReceivedAction: requestMenuItems,
+            redirectAfterCreation: paths.homepage,
             //redirectAfterCreation: paths.units,
             allowedFormFields: ['title', 'color', 'public']
         }
@@ -249,7 +256,9 @@ class configResolver {
     static projectUserConfig(projectId, userId) {
         return {
             url: urls.BASE_URL + '/task-bundle/project/' + projectId + '/user/' + userId,
-            afterEntityReceivedAction: projectUsersUpdated,
+            // afterRequest:requestMenuItems,
+            // afterEntityReceivedAction: projectUsersUpdated,
+            afterEntityReceivedAction: requestMenuItems,
         }
     };
 
@@ -259,7 +268,8 @@ class configResolver {
             method: 'POST',
             contentType: 'default',
             jsonStringify: true,
-            afterRequest: projectAclUpdated,
+            // afterRequest: projectAclUpdated,
+            afterRequest:requestMenuItems,
         }
     };
 
@@ -271,7 +281,8 @@ class configResolver {
             message: 'User removed from project',
             userId,
             projectId,
-            afterRequest: projectUserRemoved,
+            afterRequest:requestMenuItems,
+            // afterRequest: projectUserRemoved,
         }
     };
 
@@ -302,7 +313,8 @@ class configResolver {
                 'deadlineTime':'filter[deadlineTime]',
                 'createdTime':'filter[createdTime]',
             },
-            afterRequest:requestFilters,
+            afterRequest:requestMenuItems,
+            // afterRequest:requestFilters,
             message:'Filter saved'
             // contentType:'default',
             // jsonStringify:true
@@ -354,7 +366,8 @@ class configResolver {
             },
             // redirectAfterCreation: paths.filter,
             routeAfter:{name:'filter_edit',param:'filterId'},
-            afterRequest:requestFilters,
+            //afterRequest:requestFilters,
+            afterRequest:requestMenuItems,
             message:'Filter created'
 
             // contentType:'default',
@@ -387,8 +400,9 @@ class configResolver {
             method,
             message:'Filter was deleted successfully',
             redirectAfter: paths.homepage,
-            afterEntityDeletedAction:requestFilters,
-            afterRequest:requestFilters,
+            // afterEntityDeletedAction:requestFilters,
+            afterRequest:requestMenuItems,
+            // afterRequest:requestFilters,
         };
 
         return config;
@@ -428,7 +442,8 @@ class configResolver {
         return {
             url: id ? urls.PROJECT_LIST + '/' + id : urls.PROJECT_LIST,
             urlList: urls.TAG_LIST,
-            afterEntityReceivedAction: projectReceived,
+            afterEntityReceivedAction: requestMenuItems,
+            // afterEntityReceivedAction: projectReceived,
             //redirectAfterCreation: paths.units,
             allowedFormFields: ['title', 'description','is_active'],
         }
@@ -438,7 +453,9 @@ class configResolver {
         return {
             url: id ? urls.PROJECT_LIST + '/' + id : urls.PROJECT_LIST,
             urlList: urls.TAG_LIST,
-            afterEntityReceivedAction: projectCreated,
+            //afterEntityReceivedAction: projectCreated,
+            afterEntityReceivedAction: requestMenuItems,
+
             //redirectAfterCreation: paths.units,
             allowedFormFields: ['title', 'description'],
             routeAfter:{name:'project_edit',param:'projectId'}
