@@ -120,21 +120,22 @@ const sidebar = ({
           {/*sidebar menu - MyTasks */}
           <li
             className={
-              projectId ? "submenu_trigger act_section" : "submenu_trigger"
+              sidebarIsMinified ? (
+                "sidebar_submenu"
+              ) : "" + projectId ? (
+                "submenu_trigger act_section"
+              ) : (
+                "submenu_trigger"
+              )
             }
           >
             <a
               href="#"
               onClick={menuToggleActive.bind(null)}
-              className={mytasksOpen ? "active" : ""}
+              className={mytasksOpen ? "active" : "active"}
             >
               <span className="menu_icon">
-                <i
-                  className="material-icons"
-                  onClick={menuToggleActive.bind(null)}
-                >
-                  &#xE851;
-                </i>
+                <i className="material-icons">&#xE851;</i>
               </span>
               <span className="menu_title">MY TASKS</span>
             </a>
