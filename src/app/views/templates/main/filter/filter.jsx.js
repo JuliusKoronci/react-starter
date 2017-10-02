@@ -44,6 +44,43 @@ const Filter = (props) => {
 
     const header=props.creatingFilter?'Filter':props.filter.title;
     const showIsPublicLabel=!props.creatingFilter && props.filter.public;
+    // PUBLIC/PRIVATE label sa zobrazi, ak sa nevytvara novy filter
+    const filterLabel=!props.creatingFilter?(showIsPublicLabel ? <label>public filter</label>:<label>private filter</label>):'';
+
+
+
+
+
+    const ModalWindow =()=> {
+        return <Modal
+            isOpen={props.modalOpen}
+            onAfterOpen={props.modalAfterOpen}
+            onRequestClose={props.modalClose}
+            closeTimeoutMS={200}
+            style={modalStyles}
+            contentLabel="Modal">
+
+
+            <h1>{modalHeader}</h1>
+
+            <div className="uk-form-row uk-margin-bottom">
+                Name of the new filter: <input name="title" type="text" value={props.modalFilterForm.title} className="md-input" onChange={props.modalFilterFormChange} />
+            </div>
+
+            { props.canModifyPublicFilters &&
+            <div className="uk-form-row uk-margin-bottom">
+                <label>Public <input type="checkbox" name="public" value={props.modalFilterForm.public} checked={props.modalFilterForm.public} onClick={props.modalFilterFormChange}  /></label></div>}
+
+
+            {props.modalFilterForm.error && <p>{props.modalFilterForm.error}</p>}
+
+            <input type="button" className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light" onClick={onSubmit} value={buttonValue} />
+
+        </Modal>
+    };
+
+
+
 
     return (
         <div className="md-card">
@@ -58,7 +95,9 @@ const Filter = (props) => {
                       {header}
                     </h1>
 
-                    {showIsPublicLabel ? <label>public filter</label>:<label>private filter</label>}
+
+                    {filterLabel}
+
 
                 </div>
                 <hr/>
@@ -66,29 +105,9 @@ const Filter = (props) => {
                 <div className="uk-grid uk-grid-divider" style={{position:'relative'}} data-uk-grid-margin>
 
 
-                    <Modal
-                        isOpen={props.modalOpen}
-                        onAfterOpen={props.modalAfterOpen}
-                        onRequestClose={props.modalClose}
-                        closeTimeoutMS={200}
-                        style={modalStyles}
-                        contentLabel="Modal"
-                    >
-                        <h1>{modalHeader}</h1>
-                        <div className="uk-form-row uk-margin-bottom">
-                        Name of the new filter: <input name="title" type="text" value={props.modalFilterForm.title} className="md-input" onChange={props.modalFilterFormChange} />
-                        </div>
 
-                        { props.canModifyPublicFilters &&
-                        <div className="uk-form-row uk-margin-bottom">
-                            <label>Public <input type="checkbox" name="public" value={props.modalFilterForm.public} checked={props.modalFilterForm.public} onClick={props.modalFilterFormChange} /></label></div>}
+                <ModalWindow/>
 
-
-                        {props.modalFilterForm.error && <p>{props.modalFilterForm.error}</p>}
-
-                            <input type="button" className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light" onClick={onSubmit} value={buttonValue} />
-
-                    </Modal>
 
                     <FilterForm {...props} />
 
@@ -99,6 +118,14 @@ const Filter = (props) => {
             </div>
         </div>
     );
+
+
+
+
+
+
+
+
 };
 
 

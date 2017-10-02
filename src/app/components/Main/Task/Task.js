@@ -9,8 +9,8 @@ import ViewEditable from '../../../views/templates/main/task/editableTask.jsx';
 import ViewCreatable from '../../../views/templates/main/task/creatingTask.jsx';
 import ViewReadable from '../../../views/templates/main/task/readOnlyTask.jsx';
 import configResolver from '../../../../config/configResolver';
-import {generateRoute} from '../../../../config/router';
-import {entityCreated, entityError, stripEmptyValues} from '../../../services/general';
+// import {generateRoute} from '../../../../config/router';
+// import {entityCreated, entityError, stripEmptyValues} from '../../../services/general';
 import {TASK_LIST} from '../../../../api/urls';
 import {apiUploadFile} from '../../../../api/api';
 import { browserHistory } from 'react-router';
@@ -75,6 +75,28 @@ class Task extends Component {
 
     }
 
+    componentWillUnmount(){
+        // alert('before')
+        // this.dirtyHandler();
+        // alert('mid')
+        window.removeEventListener("beforeunload", this.dirtyHandler);
+        this.props.actions.isDirty(false);
+        // return false;
+        // alert('after')
+    }
+    componentDidMount(){
+        window.addEventListener("beforeunload",this.dirtyHandler);
+        this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
+    };
+
+    routerWillLeave(nextLocation) {
+        const dirty = this.props.isDirty;
+        if (dirty) {
+            return texts.unsavedInformation;
+        }
+    }
+
+
     // componentWillUnmount() {
     //     if (this.props.newTask && !this.state.saved) {
     //         this._onNewTaskCancel(this.props.params.taskId);
@@ -105,28 +127,7 @@ class Task extends Component {
 
 
 
-    componentWillUnmount(){
-        // alert('before')
-        // this.dirtyHandler();
-        // alert('mid')
-        window.removeEventListener("beforeunload", this.dirtyHandler);
-        this.props.actions.isDirty(false);
-        // return false;
-        // alert('after')
-    }
-    componentDidMount(){
-        window.addEventListener("beforeunload",this.dirtyHandler);
-        this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
 
-    };
-
-    routerWillLeave(nextLocation) {
-        const dirty = this.props.isDirty;
-
-        if (dirty) {
-            return texts.unsavedInformation;
-        }
-    }
 
 
 
@@ -445,6 +446,11 @@ class Task extends Component {
             errors.push('Project must be defined');
         }
 
+
+        if(this.state.newTaskAssigner.length<1){
+            errors.push('Assigner must be defined');
+        }
+
         if(errors.length===0) {
             this.props.actions.createTask(values, config);
             return false;
@@ -485,10 +491,11 @@ class Task extends Component {
             if (this.props.params.taskId) {
                 this.props.actions.loadTaskById(this.props.params.taskId);
                 this.props.actions.loadEntityList(configResolver.loadOptionList(this.props.params.taskId));
-                this.setState({'creatingTask': false})
+                this.setState({'creatingTask': false,errors:[],})
             }else{
                 this.props.actions.loadEntityList(configResolver.loadProjectsWhereUserCanAddTask());
                 this.setState({'creatingTask': true,
+                    errors:[],
                     newTaskTitle: '',
                     newTaskDescription:'',
                     newTaskProject:'',

@@ -6,7 +6,7 @@ import {
 	REQUEST_TASKS_FROM_URL,
 	REQUEST_TASK_BY_ID,
 	REQUEST_TASKS_WITH_PARAMS,
-	TASK_UPDATED,
+	// TASK_UPDATED,
 	TASK_STATUS_UPDATED,
 	TASK_UPLOADED,
 	CREATE_TASK,
@@ -21,7 +21,7 @@ import {
 	defaultFilter,
 	getTasksFromUrl,
 	getTaskById,
-	updateTask as updateApi,
+	// updateTask as updateApi,
 	uploadApi,
 } from '../../../api/tasks/tasks.api';
 import { defaultPOST, defaultPATCH, defaultGET, defaultDELETE, defaultRequest } from '../../../api/api';
@@ -77,16 +77,16 @@ function *loadTaskById(action) {
 	yield put(endAjax());
 }
 
-function *updateTask(action) {
-	yield put(startAjaxReset());
-	try {
-		const data = yield call(updateApi, action.taskId, action.data);
-		yield put(taskReceived(data));
-	} catch (e) {
-		yield put(asyncError(e));
-	}
-	yield put(endAjax());
-}
+// function *updateTask(action) {
+// 	yield put(startAjaxReset());
+// 	try {
+// 		const data = yield call(updateApi, action.taskId, action.data);
+// 		yield put(taskReceived(data));
+// 	} catch (e) {
+// 		yield put(asyncError(e));
+// 	}
+// 	yield put(endAjax());
+// }
 
 function *taskUpdate(action) {
 	let config=action.config;

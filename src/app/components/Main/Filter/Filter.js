@@ -23,8 +23,28 @@ class Filter extends Component {
         this.canModifyPublicFilters=props.userAcl.indexOf('share_filters')!==-1;
         // console.log('can modify',props.userAcl.indexOf('share_filters'));
 
-        this.state = {
 
+
+        this.defaultColumns=[
+            {title: true},
+            {requester: true},
+            {project: true},
+            {assigned: true},
+            {status: true},
+
+            {creator: false},
+            {company: false},
+            {tag: false},
+            // {owner: false},
+            {createdTime: false},
+            {startedTime: false},
+            {deadlineTime: false},
+            {closedTime: false},
+        ];
+
+
+
+        this.initialState={
             modalFilterForm: {
                 title: '',
                 public: false,
@@ -39,24 +59,11 @@ class Filter extends Component {
             sentValues: {},
 
             getColumnsFromState:false,
-            columns: [
-                {title: true},
-                {requester: true},
-                {project: true},
-                {assigned: true},
-                {status: true},
+            columns:this.defaultColumns
+        };
 
-                {creator: false},
-                {company: false},
-                {tag: false},
-                // {owner: false},
-                {createdTime: false},
-                {startedTime: false},
-                {deadlineTime: false},
-                {closedTime: false},
-            ]
 
-        }
+        this.state =this.initialState;
     }
 
     //
@@ -84,7 +91,6 @@ class Filter extends Component {
     componentDidUpdate(prevProps){
         if(prevProps.params.filterId !== this.props.params.filterId){
             // this.forceUpdate();
-
 
 
             this.setState({
@@ -139,16 +145,11 @@ class Filter extends Component {
 
 
 
+            // ak je definovany filter a ma columns, nacitaju sa do stateu
             if(this.props.filter && this.props.filter.columns){
-
-
 
                 let visibleColumnsFromFilter=[];
                     this.state.columns.forEach(column=>{
-                    //
-                    //      { Object.keys(column)[0]
-                    // }: !!Object.keys(column)[0].indexOf(this.props.filter.columns)!==1
-
                         const columnKey=Object.keys(column)[0];
                         const columnValue=this.props.filter.columns.indexOf(Object.keys(column)[0])!==-1;
 
@@ -158,23 +159,27 @@ class Filter extends Component {
                 this.setState({columns: visibleColumnsFromFilter });
 
                 // console.log(visibleColumnsFromFilter);
-            }else{
+            }else {
                 this.setState({
-                    columns:[
-                        {title: true},
-                        {requester: true},
-                        {project: true},
-                        {assigned: true},
-                        {status: true},
-                        {creator: false},
-                        {company: false},
-                        {tag: false},
-                        {createdTime: false},
-                        {startedTime: false},
-                        {deadlineTime: false},
-                        {closedTime: false},
-                    ]
+                    columns:this.defaultColumns
                 });
+
+                // this.setState({
+                //     columns:[
+                //         {title: true},
+                //         {requester: true},
+                //         {project: true},
+                //         {assigned: true},
+                //         {status: true},
+                //         {creator: false},
+                //         {company: false},
+                //         {tag: false},
+                //         {createdTime: false},
+                //         {startedTime: false},
+                //         {deadlineTime: false},
+                //         {closedTime: false},
+                //     ]
+                // });
             }
 
 
@@ -190,9 +195,9 @@ class Filter extends Component {
     };
 
 
-    deleteHandler = (id) => {
-        alert('delete handler');
-    };
+    // deleteHandler = (id) => {
+    //     alert('delete handler');
+    // };
 
     componentWillMount() {
 
@@ -265,6 +270,7 @@ class Filter extends Component {
         this.setState({saveFilter: true});
         this.setState({submitType: 'save'});
     };
+
     createFilterHandler = () => {
         this.setState({saveFilter: true});
         this.setState({submitType: 'create'});
@@ -286,11 +292,14 @@ class Filter extends Component {
 
     createFilter = (values) => {
         this.setState({modalOpen:true});
-        values.title='new filter';
-        values.public=true;
+        console.log(values)
+
+        values.title='new filter name';
+        values.public=false;
         values.order=0;
         values.icon_class='&#xE7EF;';
 
+        this.setState({modalFilterForm:values});
         this.setState({createFilterFormState:values});
 
         // let config = configResolver.createFilter(values, false);
@@ -316,16 +325,25 @@ class Filter extends Component {
 
 
     newFilterFormSubmitHandler=()=>{
-        const values=Object.assign({},this.state.createFilterFormState,this.state.newFilterForm);
+        // const values=Object.assign({},this.state.createFilterFormState,this.state.newFilterForm);
+        const values=Object.assign({},this.state.createFilterFormState,this.state.modalFilterForm);
+        const newFilter={'a':'a','b':'b'};
+        console.log(values)
+        if(Object.keys(newFilter).length === 0){
+            this.setState({modalFilterForm: Object.assign({}, this.state.modalFilterForm, {error: 'Filter is empty'})});
+        }else
+        {
+            if (values.title !== '') {
+                // alert(values.title)
+                this.setState({modalFilterForm: Object.assign({}, this.state.modalFilterForm, {error: false})});
+                // this.setState({newFilterForm:Object.assign({},this.state.newFilterForm,{error:false})});
 
-        if(values.title!=='') {
-            this.setState({newFilterForm:Object.assign({},this.state.newFilterForm,{error:false})});
-
-            let config = configResolver.createFilter(values, false);
-            this.props.actions.generalRequest(config.data, config);
-            this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
-        }else{
-            this.setState({newFilterForm:Object.assign({},this.state.newFilterForm,{error:'provide a title'})});
+                let config = configResolver.createFilter(values, false);
+                this.props.actions.generalRequest(config.data, config);
+                this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
+            } else {
+                this.setState({modalFilterForm: Object.assign({}, this.state.modalFilterForm, {error: 'provide a title'})});
+            }
         }
 
     };
@@ -478,7 +496,7 @@ class Filter extends Component {
         else{
             //ulozi sa do state hodnota formularu, aby sa ten chuj neresetol
             // console.log('set sent values');
-            this.state.sentValues=values;
+            this.setState({sentValues:values});
         }
 
 
@@ -506,29 +524,34 @@ class Filter extends Component {
     };
 
 
-    changeRowVisibility = (value, e) => {
-        alert('change row visibility');
-    };
+    // changeRowVisibility = (value, e) => {
+    //     alert('change row visibility');
+    // };
 
-
-    toggleRowVisibility = (value, e) => {
-
-        let name = value;
-        let checked = !!e.target.checked;
-
-        if (this.state.columns[name]) {
-            console.log('exists')
-            this.setState({
-                // visibleFields: Object.assign({},this.state.visibleFields, {[name]:checked })
-                columns: Object.assign({}, this.state.columns, this.state.columns[name]['visible'] = checked)
-            });
-        } else {
-            console.log('doesnt exist')
-        }
-
-        console.log('columns', this.state.columns);
-
-    };
+//
+//     toggleRowVisibility = (value, e) => {
+// console.log('toggling columns');
+//         let name = value;
+//         let checked = !!e.target.checked;
+//
+//         if (this.state.columns[name]) {
+//             console.log('exists')
+//
+//
+//             // this.state.columns[name]['visible'] = checked
+//
+//             let columns={columns:{[name]:{'visible':checked}}};
+//             this.setState({
+//                 // visibleFields: Object.assign({},this.state.visibleFields, {[name]:checked })
+//                 columns: Object.assign({}, this.state.columns, ...columns)
+//             });
+//         } else {
+//             console.log('doesnt exist')
+//         }
+//
+//         console.log('columns', this.state.columns);
+//
+//     };
 
 
     render() {
@@ -563,8 +586,10 @@ class Filter extends Component {
                   modalAfterOpen={e=>{}}
 
                   // modalFilterForm={this.state.modalFilterForm}
-                  modalFilterForm={this.state.modalFilterForm}
-                  modalFilterFormChange={this.modalFilterFormChange}
+                  // modalFilterForm={this.state.creatingFilter?this.state.newFilterForm:this.state.modalFilterForm}
+                  // modalFilterFormChange={this.state.creatingFilter?this.newFilterFormChange:this.modalFilterFormChange}
+                   modalFilterForm={this.state.modalFilterForm}
+                   modalFilterFormChange={this.modalFilterFormChange}
                   // newFilterFormChange={this.newFilterFormChange}
                   newFilterFormSubmit={this.newFilterFormSubmitHandler}
                   modalFilterFormSubmit={this.modalFilterFormSubmitHandler}

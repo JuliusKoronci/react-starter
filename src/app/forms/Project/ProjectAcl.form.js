@@ -9,6 +9,13 @@ import {generateRoute} from '../../../config/router';
 class ProjectAclForm extends Component {
 
 
+    componentWillReceiveProps(nextProps){
+        if(this.props.dirty!==nextProps.dirty) {
+            this.props.dispatchIsDirty(nextProps.form, nextProps.dirty, nextProps.pristine);
+        }
+    }
+
+
     onChange=(fieldName,e)=>{
         let checked=e.target.checked;
         let value=e.target.name;
@@ -42,6 +49,9 @@ class ProjectAclForm extends Component {
 
         return (
             <div className="md-card">
+
+                <h1>form dirty:{this.props.formDirty?'true':'false'} ** form redux dirty:{this.props.dirty?'true':'false'}</h1>
+
                 <form onSubmit={handleSubmit}>
                     <div className="md-card-content">
                         

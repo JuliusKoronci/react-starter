@@ -73,15 +73,19 @@ const taskButtonPanel = ({
           </button>
         )}
 
+
+      </div>
+
+
         {errors &&
         errors.length > 0 && (
-          <div>
-            {errors.map(er => {
-              return <p key={er}>{er}</p>;
-            })}
-          </div>
+            <div className="">
+                {errors.map(er => {
+                    return <p key={er} style={{color:'red'}}>{er}</p>;
+                })}
+            </div>
         )}
-      </div>
+
     </div>
   );
 };
