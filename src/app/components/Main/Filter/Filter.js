@@ -292,7 +292,7 @@ class Filter extends Component {
 
     createFilter = (values) => {
         this.setState({modalOpen:true});
-        console.log(values)
+        // console.log(values)
 
         values.title='new filter name';
         values.public=false;
@@ -327,8 +327,13 @@ class Filter extends Component {
     newFilterFormSubmitHandler=()=>{
         // const values=Object.assign({},this.state.createFilterFormState,this.state.newFilterForm);
         const values=Object.assign({},this.state.createFilterFormState,this.state.modalFilterForm);
+
+        // console.log(this.state.createFilterFormState);
+        // console.log(values);
+        // return;
+
         const newFilter={'a':'a','b':'b'};
-        console.log(values)
+        // const newFilter
         if(Object.keys(newFilter).length === 0){
             this.setState({modalFilterForm: Object.assign({}, this.state.modalFilterForm, {error: 'Filter is empty'})});
         }else
