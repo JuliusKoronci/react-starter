@@ -25,6 +25,7 @@ export const PROJECT_LIST = BASE_URL + '/task-bundle/projects';
 export const PROJECT_ASSIGNERS = BASE_URL + '/task-bundle/project/assigners';
 export const TAG_LIST = BASE_URL + '/task-bundle/tags';
 export const PROJECTS_WHERE_USER_CAN_ADD_TASK = BASE_URL + '/task-bundle/projects/create-tasks';
+export const MENU_ITEMS_URL = BASE_URL + '/task-bundle/left-menu-params';
 
 
 export const LOAD_ATTACHMENT = BASE_URL + '/core-bundle/cdn/load';
