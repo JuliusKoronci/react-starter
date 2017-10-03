@@ -76,27 +76,25 @@ class Project extends Component {
 
     isDirty=()=>{
         // console.log(this.state);
+        // return false;//T ODO docasne odstranenie vyskakovacieho okna
+
         return ( this.state.formsDirty.ProjectForm || this.state.formsDirty.ProjectAclForm );
     };
 
 
 
     dispatchIsDirty=(formName,dirty,pristine)=>{
-
-
         // console.log(formName+' state is gonna be: ',{formsDirty:Object.assign({},this.state.formsDirty,{[formName]:dirty})})
-
             this.setState(
                 {formsDirty:Object.assign({},this.state.formsDirty,{[formName]:dirty})}
                 );
-
                 //()=>{console.log('is it dirty yet or what?', this.isDirty())});
     };
 
 
     componentWillMount() {
 
-        this.props.actions.loadEntityById(this.props.params.projectId, this.projectConfig);
+        // this.props.actions.loadEntityById(this.props.params.projectId, this.projectConfig);
 
         // if (this.props.params.projectId && !this.props.project) {
         //     this.props.actions.loadEntityById(this.props.params.projectId, this.projectConfig);
@@ -104,6 +102,7 @@ class Project extends Component {
         //     // this.props.actions.loadEntityList(this.getAllUsersConfig);
         // }
 
+        //TODO zmenit api na all users
         if(this.props.usersAll.length===0){
             this.props.actions.loadEntityList(this.getAllUsersConfig);
         }
@@ -111,8 +110,9 @@ class Project extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.params.projectId!==this.props.params.projectId) {
-            alert('did update setting state');
-            console.log('did update setting state');
+            // alert('did update setting state');
+            // console.log('%cdid update setting state! ','background:black;color:yellow;', 'background: #222; color: #bada55');
+            // console.log('did update setting state');
             this.setState({
                 formsDirty: {
                     ProjectForm: false,
@@ -124,7 +124,7 @@ class Project extends Component {
 
     componentWillUpdate(nextProps){
         if(nextProps.params.projectId!==this.props.params.projectId){
-            this.props.actions.loadEntityById(nextProps.params.projectId, configResolver.getProjectConfig(nextProps.params.projectId));
+            // this.props.actions.loadEntityById(nextProps.params.projectId, configResolver.getProjectConfig(nextProps.params.projectId));
 
         }
     }
@@ -174,16 +174,22 @@ class Project extends Component {
 
 
     render() {
+
+        // if(!this.props.project){
+        //     return(<div>Loading project</div>)
+        // }
+
         // console.log('dirty? ' + this.props.isDirty);
         // console.log('dirty form? ' + (this.projectF?this.projectF.dirty:'undefined'));
-        console.log('state:',this.state);
-        console.log('props:',this.props);
+        // console.log('state:',this.state);
+        // console.log('props:',this.props);
         return (
             <div>
-            <ProjectForm formDirty={this.state.formsDirty.ProjectForm} ref={pf=>{this.projectF=pf}} dispatchIsDirty={this.dispatchIsDirty} onSubmit={this.onSubmit} {...this.props} heading={this.props.project ? "Edit project" : "Add project"} />
+            <ProjectForm formDirty={this.state.formsDirty.ProjectForm} dispatchIsDirty={this.dispatchIsDirty} onSubmit={this.onSubmit} {...this.props} heading={this.props.project ? "Edit project" : "Add project"} />
 
                 {this.props.project && this.props.project.canEdit  && <UserAddForm onSubmit={this.userAddOnSubmit} {...this.props} />}
-                {this.props.project && this.props.project.canEdit && false  && <ProjectAclForm onSubmit={this.projectAclOnSubmit} {...this.props} formDirty={this.state.formsDirty.ProjectAclForm}  dispatchIsDirty={this.dispatchIsDirty} removeUser={this.removeUser} />}
+                {this.props.project && this.props.project.canEdit  && <ProjectAclForm onSubmit={this.projectAclOnSubmit} {...this.props} formDirty={this.state.formsDirty.ProjectAclForm}  dispatchIsDirty={this.dispatchIsDirty} removeUser={this.removeUser} />}
+
                 {/*{this.props.project && ( this.props.project.canEdit || this.props.auth.user.userRoleAcl.indexOf('update_all_tasks')!==-1 ) && <UserAddForm onSubmit={this.userAddOnSubmit} {...this.props} />}*/}
                 {/*{this.props.project && ( this.props.project.canEdit || this.props.auth.user.userRoleAcl.indexOf('update_all_tasks')!==-1 ) && <ProjectAclForm onSubmit={this.projectAclOnSubmit} {...this.props} removeUser={this.removeUser} />}*/}
             </div>

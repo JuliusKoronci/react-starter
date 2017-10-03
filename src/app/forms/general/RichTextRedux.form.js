@@ -10,7 +10,16 @@ class RichText extends Component {
 
 
     handleChange=(value)=>{
-        this.props.input.onChange(value);
+
+        // console.log(this.RTE.getEditorContents());
+        this.props.input.onChange(this.RTE.getEditorContents());
+
+        // console.log(this.RTE);
+        // console.log(this);
+        // console.log(value);
+        // console.log(value.target);
+        // console.log('rich text:',value.target.innerHtml);
+        // this.props.input.onChange(value);
     };
 
 
@@ -44,7 +53,10 @@ class RichText extends Component {
             <ReactQuill theme="snow"
                         value={value}
                         modules={modules} formats={formats}
-                        onChange={this.handleChange}/>
+                        // onChange={this.handleChange}
+                ref={editor=>this.RTE=editor}
+                        onKeyUp={this.handleChange}
+            />
             </div>
         );
     }

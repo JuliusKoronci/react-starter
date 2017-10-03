@@ -15,15 +15,32 @@ class ProjectForm extends Component {
         // console.log('will receive',nextProps);
         // console.log('will receive');
 
-        if(nextProps.dirty){
-            alert('receiving dirty');
-            console.log(this.props);
-            console.log(nextProps);
-        }
+        // console.log(this.props)
+
+
+
+
+
+
+        // if(nextProps.dirty){
+        //     // alert('receiving dirty');
+        //
+        //     console.log('%cNEXT PROPS: %c receiving dirty from redux! ','background:black;color:red;', 'background: #222; color: #bada55');
+        //
+        //     console.log(this.props.initialValues);
+        //     console.log(this.props.project);
+        //
+        //     console.log((JSON.stringify(this.props.initialValues) === JSON.stringify(this.props.project)?'%cequals':'%cdiffer'),'color:blue');
+        //
+        //     // console.log(nextProps.project);
+        //     // console.log(this.props);
+        //     // console.log(nextProps);
+        // }
 
         if(this.props.dirty!==nextProps.dirty) {
 
-            alert('dispatching '+nextProps.dirty)
+            // alert('dispatching '+nextProps.dirty)
+            // console.log('%c dispatching dirty '+nextProps.dirty+' from next props', 'background: #222; color: #bada55');
             this.props.dispatchIsDirty(nextProps.form, nextProps.dirty, nextProps.pristine);
         }
     }
@@ -56,13 +73,13 @@ class ProjectForm extends Component {
             <div className="md-card">
 
 
-                <h1>form dirty:{this.props.formDirty?'true':'false'} ** form redux dirty:{this.props.dirty?'true':'false'} pristine:{this.props.pristine?'true':'false'}</h1>
-
+                {/*<h1>form dirty:{this.props.formDirty?'true':'false'} ** form redux dirty:{this.props.dirty?'true':'false'} pristine:{this.props.pristine?'true':'false'}</h1>*/}
+                {/*<h2>{this.props.anyTouched?'touched':'not touched'}</h2>*/}
                 <form onSubmit={handleSubmit} >
                     <div className="md-card-content">
                         <div className="uk-margin-bottom" data-uk-margin>
                             <h1 className="heading_b uk-margin-bottom">{heading}</h1>
-                            {this.props.formDirty?<h2>DIRTY</h2>:''}
+                            {/*{this.props.formDirty?<h2>DIRTY</h2>:''}*/}
                         </div>
                         <hr/>
                         <div className="uk-width-medium-1-1">
@@ -79,6 +96,7 @@ class ProjectForm extends Component {
                             <div className="uk-margin-bottom">
                                 {/*<label>Description</label>*/}
                                 {/*<Field type="textarea" name="description" className="md-input" validate={[]} component={renderTextarea} disabled={fieldDisabled} />*/}
+
                                 <Field type="textarea" name="description" label="Description" className="md-input" validate={[]} component={renderWswg} disabled={fieldDisabled} />
                             </div>
                             <div className="uk-margin-bottom">
@@ -112,6 +130,7 @@ function mapStateToProps(state, ownProps) {
     // }
     //
     if (project) {
+        console.log('%c IS PROJECT IN PROPS','color:red;');
         return {
             enableReinitialize: true,
             keepDirtyOnReinitialize:false,
@@ -121,6 +140,7 @@ function mapStateToProps(state, ownProps) {
     }
 
 
+    console.log('%c IS PROJECT ISNT IN PROPS','color:purple;');
     return {
         enableReinitialize: true,
         keepDirtyOnReinitialize:false,
