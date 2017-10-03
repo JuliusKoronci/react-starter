@@ -10,6 +10,14 @@ import {generateRoute} from '../../../config/router';
 
 class TagForm extends Component {
 
+
+    componentWillReceiveProps(nextProps){
+        if(this.props.dirty!==nextProps.dirty) {
+            this.props.dispatchIsDirty(nextProps.form, nextProps.dirty, nextProps.pristine);
+        }
+    }
+
+
     render() {
         const {handleSubmit,heading} = this.props;
         return (

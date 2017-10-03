@@ -60,7 +60,7 @@ class Project extends Component {
 
     componentWillUnmount(){
         window.removeEventListener("beforeunload", this.dirtyHandler);
-        this.props.actions.isDirty(false);
+        // this.props.actions.isDirty(false);
     }
     componentDidMount(){
         window.addEventListener("beforeunload",this.dirtyHandler);

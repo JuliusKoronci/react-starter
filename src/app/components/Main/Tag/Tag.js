@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../redux/actions/settings.action';
 import * as generalActions from '../../../redux/actions/general.action';
 import configResolver from '../../../../config/configResolver';
+import texts from '../../../../config/texts';
 // import {reset} from 'redux-form';
 
 class Tag extends Component {
@@ -13,9 +14,63 @@ class Tag extends Component {
         super(props, context);
         this.tagConfig = configResolver.getTagConfig(props.params.tagId);
         this.tagCreatedConfig = configResolver.tagCreatedConfig(props.params.tagId);
+
+
+        this.state={
+            formDirty:false
+        };
+
+        this.dirtyHandler = (ev) =>{
+            if(this.isDirty()) {
+                if(ev) {
+                    ev.preventDefault();
+                    return ev.returnValue = texts.areYouSureToClose;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+
     }
 
+
+
+
+    componentWillUnmount(){
+        window.removeEventListener("beforeunload", this.dirtyHandler);
+        // this.props.actions.isDirty(false);
+    }
+    componentDidMount(){
+        window.addEventListener("beforeunload",this.dirtyHandler);
+        this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
+    };
+
+    routerWillLeave(nextLocation) {
+        const dirty = this.isDirty();
+        if (dirty) {
+            return texts.unsavedInformation;
+        }
+    }
+
+    isDirty=()=>{
+        return ( this.state.formDirty );
+    };
+
+    dispatchIsDirty=(formName,dirty,pristine)=>{
+        this.setState(
+            {formDirty:dirty}
+        );
+    };
+
+
+
     componentDidUpdate(prevProps){
+        if(prevProps.params.tagId!==this.props.params.tagId) {
+            this.setState({
+                formDirty:false
+            });
+        }
     }
 
     componentWillMount() {
@@ -36,7 +91,7 @@ class Tag extends Component {
 
     render() {
         return (
-            <View onSubmit={this.onSubmit} {...this.props} heading={this.props.tag ? "Edit tag" : "Add tag"} />
+            <View onSubmit={this.onSubmit} dispatchIsDirty={this.dispatchIsDirty} {...this.props} heading={this.props.tag ? "Edit tag" : "Add tag"} />
         );
     }
 }
