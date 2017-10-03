@@ -10,7 +10,7 @@ class Multiselect extends Component {
 
     onChange = (values) => {
         // this.props.input.onChange(values);
-        console.log('on change ', values);
+        // console.log('on change ', values);
 
         let newValue = values.map(value => {
             return value.value;

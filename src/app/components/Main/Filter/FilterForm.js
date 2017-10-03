@@ -235,7 +235,8 @@ class FilterForm extends Component {
               component={renderMultiselect}
               label="Created"
               defaultOptions={filterOptions.created.map(option => {
-                return { value: option.id, label: option.username };
+                // return { value: option.id, label: option.username };
+              return { value: option.id, label: option.username + (option.name || option.surname?'  (':'') + (option.name?option.name:'') +(option.surname?' '+option.surname:'') + (option.name || option.surname?')':'') };
               })}
             />
           </div>
@@ -257,7 +258,8 @@ class FilterForm extends Component {
               component={renderMultiselect}
               label="Requester"
               defaultOptions={filterOptions.requester.map(option => {
-                return { value: option.id, label: option.username };
+                // return { value: option.id, label: option.username };
+              return { value: option.id, label: option.username + (option.name || option.surname?'  (':'') + (option.name?option.name:'') +(option.surname?' '+option.surname:'') + (option.name || option.surname?')':'') };
               })}
             />
           </div>
@@ -301,7 +303,7 @@ class FilterForm extends Component {
               component={renderMultiselect}
               label="Assigned"
               defaultOptions={filterOptions.assigned.map(option => {
-                return { value: option.id, label: option.username };
+                return { value: option.id, label: option.username + (option.name || option.surname?'  (':'') + (option.name?option.name:'') +(option.surname?' '+option.surname:'') + (option.name || option.surname?')':'') };
               })}
             />
           </div>
