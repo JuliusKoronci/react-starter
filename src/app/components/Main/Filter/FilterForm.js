@@ -70,8 +70,18 @@ class FilterForm extends Component {
 
 <div className={"md-btn-group"}>
 
+{canDeleteFilter && (
+  <button
+    className="md-btn  md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+    type="submit"
+    onClick={deleteFilter.bind(null)}
+  >
+    DELETE
+  </button>
+)}
+
         <button
-          className="md-btn md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+          className="md-btn md-btn-warning md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
           onClick={this.resetForm.bind(null)}
         >
           RESET
@@ -98,18 +108,6 @@ class FilterForm extends Component {
             onClick={createFilter.bind(null)}
           >
             SAVE
-          </button>
-        )}
-
-
-
-        {canDeleteFilter && (
-          <button
-            className="md-btn md-btn-warning md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-            type="submit"
-            onClick={deleteFilter.bind(null)}
-          >
-            DELETE
           </button>
         )}
 
