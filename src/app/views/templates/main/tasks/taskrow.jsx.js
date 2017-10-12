@@ -4,6 +4,7 @@ import TaskAssignees from './taskrow/task_assignees.jsx';
 import TaskStatus from './taskrow/task_status.jsx';
 import {Link} from 'react-router';
 import dateFormat from '../../../../services/formatedDate';
+import {timestampToDate} from '../../../../services/general';
 
 
 const taskrow = ({task}) => {
@@ -26,8 +27,10 @@ const taskrow = ({task}) => {
                 <TaskAssignees task={task}/>
             </td>
 
-            <td>{dateFormat(task.createdAt)}</td>
-            <td>{dateFormat(task.deadline)}</td>
+            {/*<td>{dateFormat(task.createdAt)}</td>*/}
+            <td>{timestampToDate(task.createdAt)}</td>
+            {/*<td>{dateFormat(task.deadline)}</td>*/}
+            <td>{timestampToDate(task.deadline)}</td>
 
             <td>
                 <TaskStatus task={task}/>
