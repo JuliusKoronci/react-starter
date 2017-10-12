@@ -39,12 +39,12 @@ export function dateToTimestamp(date) {
 export function timestampToDate(timestamp) {
   // Multiply by 1000 because JS works in milliseconds instead of the UNIX seconds
 
-  console.log(timestamp * 1000);
+  // console.log(timestamp * 1000);
   const date = new Date(timestamp * 1000);
-  console.log(date.getTime());
+  // console.log(date.getTime());
 
-  console.log(date);
-  console.log(date.getTimezoneOffset());
+  // console.log(date);
+  // console.log(date.getTimezoneOffset());
 
   if (timestamp < 100) {
     return "-";
