@@ -510,6 +510,10 @@ select.error {
   }
 }
 
+.uk-comment {
+  padding-left: 48px;
+}
+
 .uk-comment-header {
   padding: 16px 8px 8px;
   border: none;
@@ -3995,7 +3999,7 @@ body > .content-preloader.preloader-active {
 
 .timeline_icon {
   position: absolute;
-  left: -54px;
+  left: 0px;
   top: 16px;
   height: 44px;
   width: 44px;
