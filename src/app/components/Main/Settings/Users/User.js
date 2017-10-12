@@ -45,7 +45,11 @@ class User extends Component {
 
 
         if (this.props.params.userId) {
-            let config=configResolver.userUpdate(this.props.params.userId);
+            let config=configResolver.userUpdate(this.props.params.userId,values.user_role.id, values.company.id);
+
+            // userAdditionalConfig = configResolver.getUserAdditionalConfig(this.props.params.userId, values.user_role.id, values.company.id, !!this.props.user);
+            // this.userConfig.url = userAdditionalConfig.url;
+
             this.props.actions.updateEntity(this.props.params.userId, values, config);
         } else {
             this.props.actions.createEntity(values, this.userConfig);

@@ -6,13 +6,29 @@ import {createTask} from '../../../redux/actions/tasks.action';
 
 class Sidebar extends Component {
 
-    menuToggleActive = (e) => {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            projectsOpen: true,
+            archivedProjectsOpen: false,
+            tagsOpen: false,
+            reportsOpen: false
+        };
+    }
 
-        if (e.target.classList.contains('active')) {
-            e.target.classList.remove('active');
-        } else {
-            e.target.classList.add('active');
+
+    menuToggleActive = (name,e) => {
+
+        if(this.state.hasOwnProperty(name)){
+            let newState=Object.assign({}, this.state, {[name]:!this.state[name]});
+            this.setState(newState);
         }
+
+        // if (e.target.classList.contains('active')) {
+        //     e.target.classList.remove('active');
+        // } else {
+        //     e.target.classList.add('active');
+        // }
 
     };
 
@@ -23,10 +39,11 @@ class Sidebar extends Component {
     render() {
 
         return (
-            <View {...this.props} createTask={this._handleCreateTask} menuToggleActive={this.menuToggleActive}/>
+            <View {...this.props} {...this.state} createTask={this._handleCreateTask} menuToggleActive={this.menuToggleActive}/>
         );
     }
 }
+
 const _mapStateToProps = (state) => {
     return {};
 };

@@ -78,10 +78,19 @@ class configResolver {
     };
 
 
-    static userUpdate = (id) => {
+    static userUpdate = (id, role, company) => {
+
+        let url= urls.USERS_LIST + '/' + (id ? id + '/' : '');
+        if(role){
+            url=url+ 'user-role/' + role;
+            if(company){
+                url=url+ '/company/' + company;
+            }
+        }
 
         return {
-            url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            // url: id ? urls.USERS_LIST + '/' + id : urls.USERS_LIST,
+            url,
             urlList: urls.USERS_LIST,
             redirectAfter: paths.users,
             remapValues: {

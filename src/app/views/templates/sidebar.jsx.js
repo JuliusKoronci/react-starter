@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {generateRoute, paths} from '../../../config/router';
 import {sort_by} from '../../services/general';
 
-const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location}) => {
+const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location,projectsOpen,archivedProjectsOpen,tagsOpen,reportsOpen}) => {
 
     const projectId = params.projectId;
     const filterId = params.filterId;
@@ -11,10 +11,10 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
     const reportId = params.reportId;
 
     //aby boli otvorene menu Projects,Tags,Reports
-    const projectsOpen = true;
-    const archivedProjectsOpen = false;
-    const tagsOpen = false;
-    const reportsOpen = false;
+    // const projectsOpen = true;
+    // const archivedProjectsOpen = false;
+    // const tagsOpen = false;
+    // const reportsOpen = false;
 
 
 
@@ -101,7 +101,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                     {/*sidebar menu - projects */}
                     <li className={projectId?"submenu_trigger act_section":'submenu_trigger'}>
 
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={projectsOpen?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null,'projectsOpen')} className={projectsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
                             <span className="menu_title">Projects</span>
                         </a>
@@ -145,7 +145,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                     {/*sidebar menu - archived projects */}
                     <li className={projectId?"submenu_trigger act_section":'submenu_trigger'}>
 
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={archivedProjectsOpen?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null,'archivedProjectsOpen')} className={archivedProjectsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
                             <span className="menu_title">Archived projects</span>
                         </a>
@@ -177,7 +177,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
 
                     {/*sidebar menu tags */}
                     <li className={tagId?"submenu_trigger act_section":'submenu_trigger'}>
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={tagsOpen?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null,'tagsOpen')} className={tagsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE893;</i></span>
                             <span className="menu_title">Tags</span>
                         </a>
@@ -217,7 +217,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                     {/*sidebar menu Reports */}
                     { loggedUserAcl.indexOf('report_filters') !== -1 &&
                     <li className={reportId ? "submenu_report act_section" : 'submenu_trigger'}>
-                        <a href="#" onClick={menuToggleActive.bind(null)} className={reportsOpen ? 'active' : ''}>
+                        <a href="#" onClick={menuToggleActive.bind(null,'reportsOpen')} className={reportsOpen ? 'active' : ''}>
                             <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Reports</span>
                         </a>
