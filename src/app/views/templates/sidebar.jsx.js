@@ -103,7 +103,17 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
             <div className="menu_section">
                 <ul>
                     {/*sidebar menu - projects */}
-                    <li className={projectId?"submenu_trigger act_section":'submenu_trigger'}>
+                    <li
+                    className={
+                      sidebarIsMinified ? (
+                        "sidebar_submenu"
+                      ) : "" + projectId ? (
+                        "submenu_trigger"
+                      ) : (
+                        "submenu_trigger "
+                      )
+                    }
+                    >
 
                         <a href="#" onClick={menuToggleActive.bind(null,'projectsOpen')} className={projectsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
@@ -147,7 +157,19 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
 
 
                     {/*sidebar menu - archived projects */}
-                    <li className={projectId?"submenu_trigger act_section":'submenu_trigger'}>
+
+                    <li
+                    className={
+                      sidebarIsMinified ? (
+                        "sidebar_submenu"
+                      ) : "" + projectId ? (
+                        "submenu_trigger"
+                      ) : (
+                        "submenu_trigger act_section"
+                      )
+                    }
+                    >
+
 
                         <a href="#" onClick={menuToggleActive.bind(null,'archivedProjectsOpen')} className={archivedProjectsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
@@ -180,7 +202,20 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
 
 
                     {/*sidebar menu tags */}
-                    <li className={tagId?"submenu_trigger act_section":'submenu_trigger'}>
+
+
+                    <li
+                    className={
+                      sidebarIsMinified ? (
+                        "sidebar_submenu"
+                      ) : "" + tagId? (
+                        "submenu_trigger"
+                      ) : (
+                        "submenu_trigger act_section"
+                      )
+                    }
+                    >
+
                         <a href="#" onClick={menuToggleActive.bind(null,'tagsOpen')} className={tagsOpen?'active':''}>
                             <span className="menu_icon"><i className="material-icons">&#xE893;</i></span>
                             <span className="menu_title">Tags</span>
@@ -220,7 +255,17 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
 
                     {/*sidebar menu Reports */}
                     { loggedUserAcl.indexOf('report_filters') !== -1 &&
-                    <li className={reportId ? "submenu_report act_section" : 'submenu_trigger'}>
+                      <li
+                    className={
+                      sidebarIsMinified ? (
+                        "sidebar_submenu"
+                      ) : "" + reportId? (
+                        "submenu_trigger"
+                      ) : (
+                        "submenu_trigger act_section"
+                      )
+                    }
+                    >
                         <a href="#" onClick={menuToggleActive.bind(null,'reportsOpen')} className={reportsOpen ? 'active' : ''}>
                             <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Reports</span>
