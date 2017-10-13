@@ -7,7 +7,7 @@ export default ({children, user, actions, filters, sidebarIsMinified, projects, 
     return (
         <div>
             <Header user={user} logout={actions.logout} sidebarIsMinified={sidebarIsMinified} toggleSidebar={actions.toggleSidebar} />
-            <Sidebar filters={filters} projects={projects} archivedProjects={archivedProjects} tags={tags} params={params} loggedUserAcl={loggedUserAcl} location={location} />
+            <Sidebar filters={filters} projects={projects} archivedProjects={archivedProjects} tags={tags} params={params} loggedUserAcl={loggedUserAcl} location={location} sidebarIsMinified={sidebarIsMinified} />
             <div id="page_content">
                 <div id="page_content_inner">
                     <div className="md-card">

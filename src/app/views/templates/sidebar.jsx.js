@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {generateRoute, paths} from '../../../config/router';
 import {sort_by} from '../../services/general';
 
-const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location,projectsOpen,archivedProjectsOpen,tagsOpen,reportsOpen}) => {
+const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location,projectsOpen,archivedProjectsOpen,tagsOpen,reportsOpen,sidebarIsMinified}) => {
 
     const projectId = params.projectId;
     const filterId = params.filterId;
@@ -31,14 +31,18 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
 
 
     return (
-        <aside id="sidebar_main" style={{overflow:'auto'}}>
-            <div className="sidebar_main_header">
-                <div className="align-logo">
-                    <Link to='/' className="uk-text-large"><h1 className="heading_a md-color-white">LAN HELPDESK
-                        4.0</h1>
-                    </Link>
-                </div>
-            </div>
+      <aside id="sidebar_main" style={{ overflow: "auto" }}>
+        <div className="sidebar_main_header">
+          <div className="align-logo">
+            <Link to="/" className="uk-text-large">
+              {sidebarIsMinified ? (
+                <h1 className="heading_a md-color-white">LAN</h1>
+              ) : (
+                <h1 className="heading_a md-color-white">LAN HELPDESK 4.0</h1>
+              )}
+            </Link>
+          </div>
+        </div>
             <div className="menu_section">
                 {/*<ul>*/}
                     {/*<li>*/}
