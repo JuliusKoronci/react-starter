@@ -14926,7 +14926,7 @@ div.kineticjs-content {
   position: fixed;
   left: 59px;
   top: 0;
-  width: 202px;
+  width: 242px;
   display: none;
   padding: 0 16px 0 17px;
   line-height: 50px;
@@ -14980,11 +14980,11 @@ div.kineticjs-content {
 }
 
 .sidebar_mini #sidebar_main .menu_section > ul > li > ul li {
-  width: 200px;
+  width: 240px;
 }
 
 .sidebar_mini #sidebar_main .menu_section > ul > li > ul li a {
-  padding: 8px 16px;
+  /*padding: 8px 16px;*/
 }
 
 .sidebar_mini #sidebar_main .menu_section > ul > li > ul li.menu_subtitle {

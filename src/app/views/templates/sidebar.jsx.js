@@ -31,7 +31,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
 
 
     return (
-      <aside id="sidebar_main" style={{ overflow: "auto" }}>
+      <aside id="sidebar_main" style={sidebarIsMinified ? {}:{ overflow: "auto" }}>
         <div className="sidebar_main_header">
           <div className="align-logo">
             <Link to="/" className="uk-text-large">
