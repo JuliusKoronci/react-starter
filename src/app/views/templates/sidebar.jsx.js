@@ -54,9 +54,9 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                     {/*</li>*/}
                 {/*</ul>*/}
                 <ul>
-                    <li>
+                    <li className="onHoverMenu">
                         <Link to={'/tasks/create'}
-                              className={location.pathname==='/tasks/create'?'active md-color-deep-orange-500':'md-color-blue-500'} >
+                              className={location.pathname==='/tasks/create'?'active md-color-deep-orange-500':'md-color-blue-500'}>
                             <span className="menu_icon"><i
                                 className={location.pathname==='/tasks/create'?'material-icons md-color-deep-orange-500':'material-icons md-color-blue-500'}>&#xE145;</i></span>
                             <span className="menu_title ">CREATE TASK</span>
@@ -64,7 +64,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                     </li>
                 </ul>
                 <ul>
-                  <li>
+                  <li className="onHoverMenu">
                       <Link to='/filter'
                             className={location.pathname==='/filter'?'active md-color-deep-orange-500':'md-color-blue-500'} >
                           <span className="menu_icon"><i
@@ -77,7 +77,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                 <ul>
                     {filters.map((filt, i) => {
                         return (
-                            <li key={i} title="FILTER">
+                            <li key={i} title="FILTER" className="onHoverMenu">
                                 {/*<Link to={'/dashboard/' + filt.id}*/}
                                 {/*{filt.public?'public':'private'}*/}
                                 <Link to={'/filter/' + filt.id}
@@ -115,7 +115,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                     }
                     >
 
-                        <a href="#" onClick={menuToggleActive.bind(null,'projectsOpen')} className={projectsOpen?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null,'projectsOpen')} className={projectsOpen?'active onHoverMenu':'onHoverMenu'}>
                             <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
                             <span className="menu_title">Projects</span>
                         </a>
@@ -125,7 +125,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                                 const link = generateRoute('project_tasks', {projectId: project.id});
                                 const linkEdit = generateRoute('project_edit', {projectId: project.id});
 
-                                return <li key={i}>
+                                return <li key={i} className="onHoverMenu">
 
                                    <span className="submenu-title">
                                      <Link to={link}
@@ -141,7 +141,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                                 </li>
                             })}
 
-                            { loggedUserAcl.indexOf('create_projects')!==-1 && <li>
+                            { loggedUserAcl.indexOf('create_projects')!==-1 && <li className="onHoverMenu">
                                 <span className="submenu-title">
                                     <Link to={paths.project_add} className="md-color-blue-500">
                                         <i className="material-icons md-color-blue-500">&#xE145;</i>
@@ -165,7 +165,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                     }
                     >
 
-                        <a href="#" onClick={menuToggleActive.bind(null,'tagsOpen')} className={tagsOpen?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null,'tagsOpen')} className={tagsOpen?'active onHoverMenu':'onHoverMenu'}>
                             <span className="menu_icon"><i className="material-icons">&#xE893;</i></span>
                             <span className="menu_title">Tags</span>
                         </a>
@@ -175,7 +175,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                                 const link = generateRoute('tag_tasks', {tagId: tag.id});
                                 const linkEdit = generateRoute('tag_edit', {tagId: tag.id});
 
-                                return <li key={i}>
+                                return <li key={i} className="onHoverMenu">
                                     <span className="submenu-title">
                                         <Link to={link}
                                               className={parseInt(tag.id,10)===parseInt(tagId,10)?'active  md-color-deep-orange-500':''}>
@@ -189,7 +189,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
 
                                 </li>
                             })}
-                            <li>
+                            <li className="onHoverMenu">
                                 <span className="submenu-title">
                                     <Link to={paths.tag_add} className="md-color-blue-500">
                                         <i className="material-icons md-color-blue-500">&#xE145;</i>
@@ -215,12 +215,12 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                       )
                     }
                     >
-                        <a href="#" onClick={menuToggleActive.bind(null,'reportsOpen')} className={reportsOpen ? 'active' : ''}>
+                        <a href="#" onClick={menuToggleActive.bind(null,'reportsOpen')} className={reportsOpen ? 'active onHoverMenu' : 'onHoverMenu'}>
                             <span className="menu_icon"><i className="material-icons">&#xE85C;</i></span>
                             <span className="menu_title">Reports</span>
                         </a>
                         <ul>
-                            <li>
+                            <li className="onHoverMenu">
                                 <span className="submenu-title">
                                     <Link
                                         to='/reports/companies'>
@@ -229,28 +229,28 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                                  </span>
                             </li>
 
-                            <li>
+                            <li className="onHoverMenu">
                                 <span className="submenu-title">
                                     <Link to='/reports/users'>
                                     Users
                                     </Link>
                                 </span>
                             </li>
-                            <li>
+                            <li className="onHoverMenu">
                                 <span className="submenu-title">
                                          <Link to='/reports/custom'>
                                          Custom
                                          </Link>
                                 </span>
                             </li>
-                            <li>
+                            <li className="onHoverMenu">
                                    <span className="submenu-title">
                                         <Link to='/reports/custom'>
                                             Custom report 1
                                         </Link>
                                    </span>
                             </li>
-                            <li>
+                            <li className="onHoverMenu">
                                 <span className="submenu-title">
                                     <Link to={paths.report_add} className="md-color-blue-500">
                                         <i className="material-icons md-color-blue-500">&#xE145;</i>
@@ -276,8 +276,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                     }
                     >
 
-
-                        <a href="#" onClick={menuToggleActive.bind(null,'archivedProjectsOpen')} className={archivedProjectsOpen?'active':''}>
+                        <a href="#" onClick={menuToggleActive.bind(null,'archivedProjectsOpen')} className={archivedProjectsOpen?'active onHoverMenu':'onHoverMenu'}>
                             <span className="menu_icon"><i className="material-icons">&#xE149;</i></span>
                             <span className="menu_title">Archived projects</span>
                         </a>
@@ -287,7 +286,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                                 const link = generateRoute('project_tasks', {projectId: project.id});
                                 const linkEdit = generateRoute('project_edit', {projectId: project.id});
 
-                                return <li key={i}>
+                                return <li key={i} className="onHoverMenu">
 
                                    <span className="submenu-title">
                                      <Link to={link}

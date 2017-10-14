@@ -22,6 +22,12 @@
 /*.submenu_trigger ul{display:none;}*/
 /*.submenu_trigger.act_section ul{display:block !important;}*/
 
+.onHoverMenu:hover {
+  background: #def;
+
+}
+
+
 input[type="checkbox"] {
   width: 16px;
   height: 16px;
@@ -14994,6 +15000,8 @@ div.kineticjs-content {
 .sidebar_mini #sidebar_main .menu_section > ul > li:hover.sidebar_submenu {
   background: #7cb342;
 }
+
+
 
 .sidebar_mini
   #sidebar_main
