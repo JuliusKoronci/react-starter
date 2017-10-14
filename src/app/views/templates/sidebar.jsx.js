@@ -152,58 +152,7 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                             }
                         </ul>
                     </li>
-
-
-
-
-                    {/*sidebar menu - archived projects */}
-
-                    <li
-                    className={
-                      sidebarIsMinified ? (
-                        "sidebar_submenu"
-                      ) : "" + projectId ? (
-                        "submenu_trigger"
-                      ) : (
-                        "submenu_trigger act_section"
-                      )
-                    }
-                    >
-
-
-                        <a href="#" onClick={menuToggleActive.bind(null,'archivedProjectsOpen')} className={archivedProjectsOpen?'active':''}>
-                            <span className="menu_icon"><i className="material-icons">&#xE2C8;</i></span>
-                            <span className="menu_title">Archived projects</span>
-                        </a>
-
-                        <ul>
-                            {archivedProjects.map((project, i) => {
-                                const link = generateRoute('project_tasks', {projectId: project.id});
-                                const linkEdit = generateRoute('project_edit', {projectId: project.id});
-
-                                return <li key={i}>
-
-                                   <span className="submenu-title">
-                                     <Link to={link}
-                                           className={parseInt(project.id,10)===parseInt(projectId,10)?'active md-color-deep-orange-500':''}>
-                                          {project.title}
-                                        </Link>
-                                     </span>
-                                    <span className="submenu-icon">
-                                        <Link to={linkEdit}>
-                                            <i className="material-icons">&#xE8B8;</i>
-                                        </Link>
-                                    </span>
-                                </li>
-                            })}
-
-                        </ul>
-                    </li>
-
-
                     {/*sidebar menu tags */}
-
-
                     <li
                     className={
                       sidebarIsMinified ? (
@@ -312,6 +261,50 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                         </ul>
                     </li>
                     }
+
+                    {/*sidebar menu - archived projects */}
+
+                    <li
+                    className={
+                      sidebarIsMinified ? (
+                        "sidebar_submenu"
+                      ) : "" + projectId ? (
+                        "submenu_trigger"
+                      ) : (
+                        "submenu_trigger act_section"
+                      )
+                    }
+                    >
+
+
+                        <a href="#" onClick={menuToggleActive.bind(null,'archivedProjectsOpen')} className={archivedProjectsOpen?'active':''}>
+                            <span className="menu_icon"><i className="material-icons">&#xE149;</i></span>
+                            <span className="menu_title">Archived projects</span>
+                        </a>
+
+                        <ul>
+                            {archivedProjects.map((project, i) => {
+                                const link = generateRoute('project_tasks', {projectId: project.id});
+                                const linkEdit = generateRoute('project_edit', {projectId: project.id});
+
+                                return <li key={i}>
+
+                                   <span className="submenu-title">
+                                     <Link to={link}
+                                           className={parseInt(project.id,10)===parseInt(projectId,10)?'active md-color-deep-orange-500':''}>
+                                          {project.title}
+                                        </Link>
+                                     </span>
+                                    <span className="submenu-icon">
+                                        <Link to={linkEdit}>
+                                            <i className="material-icons">&#xE8B8;</i>
+                                        </Link>
+                                    </span>
+                                </li>
+                            })}
+
+                        </ul>
+                    </li>
 
                 </ul>
             </div>
