@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {generateRoute, paths} from '../../../config/router';
 import {sort_by} from '../../services/general';
 
-const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location,projectsOpen,archivedProjectsOpen,tagsOpen,reportsOpen,sidebarIsMinified}) => {
+const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive, loggedUserAcl,location,projectsOpen,archivedProjectsOpen,tagsOpen,filtersOpen,reportsOpen,sidebarIsMinified}) => {
 
     const projectId = params.projectId;
     const filterId = params.filterId;
@@ -44,15 +44,6 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
           </div>
         </div>
             <div className="menu_section">
-                {/*<ul>*/}
-                    {/*<li>*/}
-                        {/*<Link onClick={createTask}>*/}
-                            {/*<span className="menu_icon"><i*/}
-                                {/*className="material-icons md-color-blue-500">&#xE145;</i></span>*/}
-                            {/*<span className="menu_title md-color-blue-500">NEW TASK</span>*/}
-                        {/*</Link>*/}
-                    {/*</li>*/}
-                {/*</ul>*/}
                 <ul>
                     <li className="onHoverMenu">
                         <Link to={'/tasks/create'}
@@ -63,45 +54,58 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                         </Link>
                     </li>
                 </ul>
-                <ul>
-                  <li className="onHoverMenu">
-                      <Link to='/filter'
-                            className={location.pathname==='/filter'?'active md-color-deep-orange-500':'md-color-blue-500'} >
-                          <span className="menu_icon"><i
-                            className={location.pathname==='/filter'?'material-icons md-color-deep-orange-500':'material-icons md-color-blue-500'}>
-                            &#xE145;</i></span>
-                          <span className="menu_title">FILTER</span>
-                      </Link>
-                  </li>
-                </ul>
-                <ul>
-                    {filters.map((filt, i) => {
-                        return (
-                            <li key={i} title="FILTER" className="onHoverMenu">
-                                {/*<Link to={'/dashboard/' + filt.id}*/}
-                                {/*{filt.public?'public':'private'}*/}
-                                <Link to={'/filter/' + filt.id}
-                                      className={parseInt(filt.id,10)===parseInt(filterId,10)?'active md-color-deep-orange-500':''} >
-                                    {/*<span className="menu_icon"><i className="material-icons" >{filt.icon_class}</i></span>*/}
-                                    {/*<span className="menu_icon"><i className="material-icons" dangerouslySetInnerHTML={{__html: filt.icon_class}} /></span>*/}
-                                    <span className="menu_icon"><i className="material-icons" >&#xE152;</i></span>
-                                    <span className="menu_title">{filt.title}</span>
-                                </Link>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
-
-
-
-
-
-
+                          </div>
 
 
             <div className="menu_section">
+
+
                 <ul>
+                {/*sidebar menu - filters */}
+                <li
+                className={
+                  sidebarIsMinified ? (
+                    "sidebar_submenu"
+                  ) : "" + filterId ? (
+                    "submenu_trigger"
+                  ) : (
+                    "submenu_trigger "
+                  )
+                }
+                >
+
+                    <a href="#" onClick={menuToggleActive.bind(null,'filtersOpen')} className={filtersOpen?'active onHoverMenu':'onHoverMenu'}>
+                        <span className="menu_icon"><i className="material-icons">&#xE152;</i></span>
+                        <span className="menu_title">Filters</span>
+                    </a>
+
+                    <ul>
+                        {filters.map((filt, i) => {
+
+
+                            return   <li key={i} title="FILTER" className="onHoverMenu">
+
+                               <span className="submenu-title">
+                               <Link to={'/filter/' + filt.id}
+                                     className={parseInt(filt.id,10)===parseInt(filterId,10)?'active md-color-deep-orange-500':''} >
+                                {filt.title}
+
+                                 </Link>
+                                  </span>
+                            </li>
+                        })}
+
+                        { loggedUserAcl.indexOf('create_projects')!==-1 && <li className="onHoverMenu">
+                            <span className="submenu-title">
+                                <Link to='/filter' className="md-color-blue-500">
+                                    <i className="material-icons md-color-blue-500">&#xE145;</i>
+                                    Filter
+                                </Link>
+                            </span>
+                        </li>
+                        }
+                    </ul>
+                </li>
                     {/*sidebar menu - projects */}
                     <li
                     className={

@@ -9,6 +9,7 @@ class Sidebar extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+            filtersOpen: true,
             projectsOpen: true,
             archivedProjectsOpen: false,
             tagsOpen: false,
