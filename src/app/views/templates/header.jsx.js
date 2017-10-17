@@ -21,6 +21,13 @@ const header = ({ user, logout, sidebarIsMinified, toggleSidebar }) => {
             <span className="sSwitchIcon" />
           </a>
 
+          <div className="uk-float-left uk-hidden-small">
+              <div className="uk-input-group">
+                  <input type="text" className="md-input" />
+                  <span className="uk-input-group-addon"><a className="md-btn md-btn-success md-btn-wave-light waves-effect waves-button waves-light" href="#"><i className="material-icons md-24 md-light">&#xE8B6;</i></a></span>
+              </div>
+          </div>
+
           <div className="uk-navbar-flip">
             <ul className="uk-navbar-nav user_actions">
                         <UserMenu user={user} logout={logout} />

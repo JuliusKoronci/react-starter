@@ -54,7 +54,38 @@ const sidebar = ({filters, projects, tags, createTask, params, menuToggleActive,
                         </Link>
                     </li>
                 </ul>
-                          </div>
+            </div>
+
+            <div className="menu_section">
+                <ul>
+                    <li className="onHoverMenu">
+                        <Link to={'/tasks/create'}
+                              className={location.pathname==='/tasks/create'?'active md-color-deep-orange-500':''}>
+                            <span className="menu_icon"><i
+                                className={location.pathname==='/tasks/create'?'material-icons md-color-deep-orange-500':'material-icons'}>&#xE8B6;</i></span>
+                            <span className="menu_title ">Search</span>
+                        </Link>
+                      </li>
+                </ul>
+            </div>
+
+            <div className="menu_section">
+                <ul>
+                    <li className="onHoverMenu">
+                        <Link to={'/tasks/create'}
+                              className={location.pathname==='/tasks/create'?'active md-color-deep-orange-500':''}>
+                            <span className="menu_icon"><i
+                                className={location.pathname==='/tasks/create'?'material-icons md-color-deep-orange-500':'material-icons '}>&#xE7FD;</i></span>
+                            <span className="menu_title ">My Tasks</span>
+                                            </Link>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+
 
 
             <div className="menu_section">
