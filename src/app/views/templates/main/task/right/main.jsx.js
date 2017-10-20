@@ -4,7 +4,8 @@ import Status from "./status.jsx";
 import Attachment from "./attachment.jsx";
 import Tag from "./tag.jsx";
 import DatePicker from "../../../../../forms/Task/Datepicker.form";
-import Select from "../../../../../forms/Task/Select.form";
+// import Select from "../../../../../forms/Task/Select.form";
+import Select from "../../../../../forms/general/Select.form";
 // import configResolver from "../../../../../../config/configResolver";
 // import ReactSelect from "react-select";
 import CustomAttributeInput from "../../../../../forms/general/CustomAttributeInput.form";
@@ -23,10 +24,8 @@ const main = ({
   taskAttributes,
   statusChange
 }) => {
-  const assignedOptions = options.assigner.map(r => {
-    return { id: r.id, title: r.username };
-  });
-
+  // console.log(form);
+  // console.log("company", options.company);
   // console.log('main');
 
   // console.log(taskAttributes,taskAttributes1);
@@ -45,12 +44,17 @@ const main = ({
         icon="&#xE2C8;"
         // defaultValue={task.project ? task.project.id : ''}
         defaultValue={form.project || ""}
-        options={options.project}
+        options={options.project.map(r => {
+          return {
+            value: r.id,
+            label: r.title
+          };
+        })}
         // action={(e) => {actions.patchEntity(configResolver.updateProject(e.target.value, task.id))}}
         value={form.project}
-        // defaultValue=''
         name="project"
-        action={e => {
+        action={formInputChangeHandler}
+        actiona={e => {
           formInputChangeHandler("project", e.target.value);
         }}
       />
@@ -58,42 +62,58 @@ const main = ({
       <Select
         label="Requester"
         icon="&#xE7FD;"
+        value={form.requester}
         // defaultValue={task.requestedBy.id || ''}
         defaultValue={form.requester || ""}
+        name={"requester"}
         options={options.requester.map(r => {
-          return { id: r.id, title: r.username };
+          return {
+            value: r.id,
+            label: r.username
+          };
         })}
-        action={e => {
+        actiona={e => {
           // actions.patchEntity(configResolver.updateRequester(e.target.value, task.id))
           formInputChangeHandler("requester", e.target.value);
         }}
+        action={formInputChangeHandler}
       />
       <Select
         label="Company"
         icon="&#xE7EE;"
-        // defaultValue={task.company ? task.company.id : ''}
-        options={options.company}
         defaultValue={form.company}
         action={e => {
           formInputChangeHandler("company", e.target.value);
-          // actions.patchEntity(configResolver.updateCompany(e.target.value, task.id))
         }}
+        options={options.company.map(r => {
+          return {
+            value: r.id,
+            label: r.title
+          };
+        })}
+        value={form.company}
+        name="company"
+        action={formInputChangeHandler}
       />
 
       <Select
         label="Assigned"
         icon="&#xE7FD;"
         defaultValue={
-          form.assigned && form.assigned[0] && form.assigned[0]["userId"] ? (
-            form.assigned[0]["userId"]
-          ) : (
-            ""
-          )
+          form.assigned && form.assigned[0] && form.assigned[0]["userId"]
+            ? form.assigned[0]["userId"]
+            : ""
         }
-        options={assignedOptions}
-        action={e => {
-          formInputChangeHandler("assigned", [{ userId: e.target.value }]);
-        }}
+        options={options.assigner.map(r => {
+          return { value: r.id, label: r.username };
+        })}
+        value={
+          form.assigned && form.assigned[0] && form.assigned[0]["userId"]
+            ? form.assigned[0]["userId"]
+            : ""
+        }
+        name="assigned"
+        action={formInputChangeHandler}
       />
 
       {/*<span className="uk-input-group-addon"><i className="material-icons">&#xE7FE;</i></span>*/}
@@ -132,11 +152,9 @@ const main = ({
         taskId={task.id}
         action={formInputChangeHandler}
         value={
-          form.started_at && form.started_at.date ? (
-            form.started_at.date
-          ) : (
-            form.started_at
-          )
+          form.started_at && form.started_at.date
+            ? form.started_at.date
+            : form.started_at
         }
         fieldName="started_at"
         label="Start At"
@@ -147,11 +165,9 @@ const main = ({
         taskId={task.id}
         action={formInputChangeHandler}
         value={
-          form.deadline && form.deadline.date ? (
-            form.deadline.date
-          ) : (
-            form.deadline
-          )
+          form.deadline && form.deadline.date
+            ? form.deadline.date
+            : form.deadline
         }
         formInputChangeHandler={formInputChangeHandler}
         fieldName="deadline"
@@ -162,11 +178,9 @@ const main = ({
         taskId={task.id}
         action={formInputChangeHandler}
         value={
-          form.closed_at && form.closed_at.date ? (
-            form.closed_at.date
-          ) : (
-            form.closed_at
-          )
+          form.closed_at && form.closed_at.date
+            ? form.closed_at.date
+            : form.closed_at
         }
         formInputChangeHandler={formInputChangeHandler}
         fieldName="closed_at"

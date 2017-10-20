@@ -61,7 +61,8 @@ class Task extends Component {
     };
 
     this.dirtyHandler = ev => {
-      if (this.props.isDirty) {
+      // if (this.props.isDirty) {
+      if (this.state.formChanged) {
         if (ev) {
           ev.preventDefault();
           return (ev.returnValue = texts.areYouSureToClose);
@@ -73,9 +74,9 @@ class Task extends Component {
   }
 
   componentWillUnmount() {
-    // alert('before')
-    // this.dirtyHandler();
-    // alert('mid')
+    // alert("before");
+    this.dirtyHandler();
+    // alert("mid");
     window.removeEventListener("beforeunload", this.dirtyHandler);
     this.props.actions.isDirty(false);
     // return false;
@@ -90,7 +91,8 @@ class Task extends Component {
   }
 
   routerWillLeave(nextLocation) {
-    const dirty = this.props.isDirty;
+    // const dirty = this.props.isDirty;
+    const dirty = this.state.formChanged;
     if (dirty) {
       return texts.unsavedInformation;
     }
@@ -234,7 +236,7 @@ class Task extends Component {
 
   formInputChangeHandler = (fieldName, value, e) => {
     // let obj={form[name]:value};
-    // console.log('change', name, 'value:'+value);
+    console.log("change", fieldName, "value:" + value);
 
     let name = fieldName;
 
@@ -263,7 +265,9 @@ class Task extends Component {
           statusId = status[0].id;
         }
       }
-      value = [{ userId: value[0].userId, statusId: statusId }];
+      // console.log(value);
+      // value = [{ userId: value[0].userId, statusId: statusId }];
+      value = [{ userId: value, statusId: statusId }];
     }
 
     let form = Object.assign({}, this.state.form);
@@ -282,8 +286,7 @@ class Task extends Component {
     }
 
     this.props.actions.isDirty(true);
-    this.setState({ form: form, formChanged: true });
-    // console.log(this.state);
+    this.setState({ form: form, formChanged: true }, console.log(this.state));
   };
 
   inputChangeHandler = (name, value, e) => {
@@ -313,9 +316,9 @@ class Task extends Component {
         ? this.state.form.closed_at.date
         : this.state.form.closed_at;
 
-    console.log("started at", values.started_at);
-    console.log("deadline", values.deadline);
-    console.log("closed", values.closed_at);
+    // console.log("started at", values.started_at);
+    // console.log("deadline", values.deadline);
+    // console.log("closed", values.closed_at);
     // console.log("exit");
     // return;
 
@@ -664,6 +667,9 @@ class Task extends Component {
     // console.log('render');
     // console.log(this.props.task);
     // return(<h1 {...this.props}>task</h1>)
+
+    // console.log(this.props.task.loggedUserProjectAcl.indexOf("delete_task"));
+
     return (
       <ViewEditable
         handleFileUpload={this.handleFileUpload}

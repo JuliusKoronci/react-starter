@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
 
 const taskStatus = ({task}) => {
-    const statuses = task.taskHasAssignedUsers.length > 0 && task.taskHasAssignedUsers.map((record, i) => {
+    const statuses = task.taskHasAssignedUsers.length && task.taskHasAssignedUsers.map((record, i) => {
             return (
-                <span key={i} className="uk-badge" style={{background: record.status.color}}>{record.status.title}</span>
+                record.status?<span key={i} className="uk-badge" style={{background: record.status.color}}>{record.status.title}</span>:''
             );
         });
     return (
