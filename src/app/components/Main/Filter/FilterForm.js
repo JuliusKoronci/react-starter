@@ -277,7 +277,7 @@ class FilterForm extends Component {
 
           <div className="uk-margin-bottom">
             <Field
-              name="columns.company"
+              name="columns.taskCompany"
               type="checkbox"
               className="alignright"
               validate={[]}
@@ -435,7 +435,8 @@ function mapStateToProps(state, ownProps) {
     filter = filter[0];
     if (filter.columns !== null) {
       filter.columns.map(column => {
-        let columnKey = column == "taskCompany" ? "company" : column;
+        // let columnKey = column == "taskCompany" ? "company" : column;
+        let columnKey = column;
         columns[columnKey] = true;
       });
     }

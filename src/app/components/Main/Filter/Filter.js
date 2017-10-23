@@ -29,7 +29,7 @@ class Filter extends Component {
       { status: true },
 
       { creator: false },
-      { company: false },
+      { taskCompany: false },
       { tag: false },
       // {owner: false},
       { createdTime: false },
@@ -79,21 +79,18 @@ class Filter extends Component {
 
       // ak je definovany filter a ma columns, nacitaju sa do stateu
       if (this.props.filter && this.props.filter.columns) {
-        console.log("filter");
         let visibleColumnsFromFilter = [];
         this.state.columns.forEach(column => {
           let columnKey = Object.keys(column)[0];
-          console.log(column);
-          if (columnKey == "company") {
-            alert("company");
-            columnKey = "taskCompany";
-          }
+          //   if (columnKey == "company") {
+          //     columnKey = "taskCompany";
+          //   }
           const columnValue =
             this.props.filter.columns.indexOf(Object.keys(column)[0]) !== -1;
 
-          if (columnKey == "taskCompany") {
-            columnKey = "company";
-          }
+          //   if (columnKey == "taskCompany") {
+          //     columnKey = "company";
+          //   }
 
           visibleColumnsFromFilter.push({ [columnKey]: columnValue });
         });
