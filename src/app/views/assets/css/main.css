@@ -22,6 +22,39 @@
 /*.submenu_trigger ul{display:none;}*/
 /*.submenu_trigger.act_section ul{display:block !important;}*/
 
+
+
+
+
+.modalOverlayClass{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+  z-index: 5000;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  -webkit-overflow-scrolling:touch;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  margin-left: -250px;
+  margin-top: -100px;
+  height: 200px;
+  width: 500px;
+}
+
+
+
+
 .onHoverMenu:hover {
   background: #def;
 

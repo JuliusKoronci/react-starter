@@ -16,6 +16,10 @@ import { apiUploadFile } from "../../../../api/api";
 import { browserHistory } from "react-router";
 import texts from "../../../../config/texts";
 import { timestampToDate, dateToTimestamp } from "../../../services/general";
+import ModalConfirmDelete from "../../common/ModalConfirmDelete";
+// import { withTranslate } from "../../../containers/translatable";
+// import i18next from "i18next";
+// const i18n = require("i18next");
 
 class Task extends Component {
   constructor(props, context) {
@@ -75,7 +79,7 @@ class Task extends Component {
 
   componentWillUnmount() {
     // alert("before");
-    this.dirtyHandler();
+    // this.dirtyHandler();
     // alert("mid");
     window.removeEventListener("beforeunload", this.dirtyHandler);
     this.props.actions.isDirty(false);
@@ -97,12 +101,6 @@ class Task extends Component {
       return texts.unsavedInformation;
     }
   }
-
-  // componentWillUnmount() {
-  //     if (this.props.newTask && !this.state.saved) {
-  //         this._onNewTaskCancel(this.props.params.taskId);
-  //     }
-  // }
 
   handleFileUpload = acceptedFiles => {
     let formData = new FormData();
@@ -158,10 +156,13 @@ class Task extends Component {
   //         entityError('The following fields are mandatory: Status, Project, Requester, Company, Assigned');
   //     }
   // };
-  _onNewTaskCancel = (taskId, e) => {
-    this.props.actions.deleteTask(`${TASK_LIST}/${taskId}`);
+  _onNewTaskCancel = taskId => {
+    this.props.actions.isDirty(false);
+    this.setState({ formChanged: false }, e => {
+      this.props.actions.deleteTask(`${TASK_LIST}/${taskId}`);
+    });
 
-    e.preventDefault();
+    // e.preventDefault();
   };
 
   handleCancelClick = e => {
@@ -670,16 +671,29 @@ class Task extends Component {
 
     // console.log(this.props.task.loggedUserProjectAcl.indexOf("delete_task"));
 
+    // console.log(i18next.t("key"), {
+    //   resources: "src/config/locales/en/common.json"
+    //   // 'src/config/locales'
+    // });
+
     return (
       <ViewEditable
         handleFileUpload={this.handleFileUpload}
         handleFileDownload={this.handleFileDownload}
         handleFileDelete={this.handleFileDelete}
         // handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
-        handleTaskDelete={this._onNewTaskCancel.bind(
+
+        handleTaskDeleteQWER={this._onNewTaskCancel.bind(
           null,
           this.props.params.taskId
         )}
+        handleTaskDelete={e =>
+          this.props.openConfirmModal({
+            title: "Deleting task",
+            onConfirm: ef => {
+              this._onNewTaskCancel(this.props.params.taskId, ef);
+            }
+          })}
         deleteButton={
           this.props.task.loggedUserProjectAcl.indexOf("delete_task") !== -1
         }
@@ -756,4 +770,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Task);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ModalConfirmDelete(Task)
+);
