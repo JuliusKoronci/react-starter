@@ -39,7 +39,15 @@ const tasklist = ({tasks, loadTasksFunction, filter, heading, searchChange, orde
             </button>
 
 
-            {hasSearch && <span> <input type="text" name="search" value={searchText} onChange={searchChange} /> <button onClick={reloadTasks}>search</button> </span>}
+
+            {hasSearch && <span>
+
+              <i className="material-icons md-light">&#xE8B6;</i>
+              <input type="text" className="search-input" name="search" value={searchText} onChange={searchChange} />
+              <button className="md-btn md-btn-success md-btn-small" Click={reloadTasks}>
+                  <i className="material-icons md-light">&#xE8B6;</i>
+              </button>
+            </span>}
 
 
             <p/>
