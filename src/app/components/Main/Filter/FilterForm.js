@@ -385,8 +385,11 @@ class FilterForm extends Component {
 
 function mapStateToProps(state, ownProps) {
   const filterId = ownProps.params.filterId;
-  let filter = state.filter.filter(
-    f => parseInt(f.id, 10) === parseInt(filterId, 10)
+  // let filter = state.filter.filter(
+  //   f => parseInt(f.id, 10) === parseInt(filterId, 10)
+  // );
+  let filter = state.system.menu.filters.filter(
+    filter => parseInt(filter.id, 10) === parseInt(filterId, 10)
   );
 
   let columns = {};
