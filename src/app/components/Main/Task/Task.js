@@ -65,6 +65,7 @@ class Task extends Component {
     };
 
     this.dirtyHandler = ev => {
+      return true;
       // if (this.props.isDirty) {
       if (this.state.formChanged) {
         if (ev) {
@@ -95,6 +96,7 @@ class Task extends Component {
   }
 
   routerWillLeave(nextLocation) {
+    return true;
     // const dirty = this.props.isDirty;
     const dirty = this.state.formChanged;
     if (dirty) {

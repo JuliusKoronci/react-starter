@@ -41,9 +41,14 @@ class FilterForm extends Component {
       deleteFilter
     } = this.props;
 
-    const showPublicField = this.props.filter && this.props.canModifyPublicFilters;
-    const canDeleteFilter = this.props.filter && (this.props.canModifyPublicFilters || !this.props.filter.public);
-    const canSaveFilter = this.props.filter && (this.props.canModifyPublicFilters || !this.props.filter.public);
+    const showPublicField =
+      this.props.filter && this.props.canModifyPublicFilters;
+    const canDeleteFilter =
+      this.props.filter &&
+      (this.props.canModifyPublicFilters || !this.props.filter.public);
+    const canSaveFilter =
+      this.props.filter &&
+      (this.props.canModifyPublicFilters || !this.props.filter.public);
 
     let visibleColumns = columns
       .map(column => {
@@ -63,113 +68,105 @@ class FilterForm extends Component {
     // console.log(columns.map(c=>Object.keys(c)[0] +'='+ c[Object.keys(c)[0]]).join(','))
 
     return (
-      <form onSubmit={handleSubmit}
-        className={this.props.filterFormVisible ? "uk-width-medium-1-4" : "hidden"}
-        id="filterDiv" >
+      <form
+        onSubmit={handleSubmit}
+        className={
+          this.props.filterFormVisible ? "uk-width-medium-1-4" : "hidden"
+        }
+        id="filterDiv"
+      >
+        <div className={"md-btn-group"}>
+          {canDeleteFilter && (
+            <button
+              className="md-btn  md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+              type="submit"
+              onClick={deleteFilter.bind(null)}
+            >
+              DELETE
+            </button>
+          )}
 
-
-<div className={"md-btn-group"}>
-
-{canDeleteFilter && (
-  <button
-    className="md-btn  md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-    type="submit"
-    onClick={deleteFilter.bind(null)}
-  >
-    DELETE
-  </button>
-)}
-
-        <button
-          className="md-btn md-btn-warning md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-          onClick={this.resetForm.bind(null)}
-        >
-          RESET
-        </button>
-
-
-
-        {canSaveFilter && (
           <button
-            className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-            type="submit"
-            onClick={saveFilter.bind(null)}
+            className="md-btn md-btn-warning md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+            onClick={this.resetForm.bind(null)}
           >
-            SAVE
+            RESET
           </button>
-        )}
 
+          {canSaveFilter && (
+            <button
+              className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+              type="submit"
+              onClick={saveFilter.bind(null)}
+            >
+              SAVE
+            </button>
+          )}
 
+          {this.props.creatingFilter && (
+            <button
+              className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+              type="submit"
+              onClick={createFilter.bind(null)}
+            >
+              SAVE
+            </button>
+          )}
 
-        {this.props.creatingFilter && (
           <button
-            className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
             type="submit"
-            onClick={createFilter.bind(null)}
+            className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+            onClick={getFilterTasks.bind(null)}
           >
-            SAVE
+            APPLY FILTER
           </button>
-        )}
-
-
-        <button
-          type="submit"
-          className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-          onClick={getFilterTasks.bind(null)}
-        >
-          APPLY FILTER
-        </button>
-
-
-</div>
+        </div>
         <div className="md-list md-list-addon">
-
-
-
           {/*{this.props.filter && (*/}
           {/*{false && (*/}
-            {/*<div className="uk-margin-top uk-margin-bottom">*/}
-              {/*<Field*/}
-                {/*name="title"*/}
-                {/*type="text"*/}
-                {/*validate={[]}*/}
-                {/*component={renderField}*/}
-                {/*label="Filter Name"*/}
-                {/*disabled={!canSaveFilter}*/}
-              {/*/>*/}
-            {/*</div>*/}
+          {/*<div className="uk-margin-top uk-margin-bottom">*/}
+          {/*<Field*/}
+          {/*name="title"*/}
+          {/*type="text"*/}
+          {/*validate={[]}*/}
+          {/*component={renderField}*/}
+          {/*label="Filter Name"*/}
+          {/*disabled={!canSaveFilter}*/}
+          {/*/>*/}
+          {/*</div>*/}
           {/*)}*/}
 
           {/*{showPublicField && (*/}
           {/*{false && (*/}
-            {/*<Field*/}
-              {/*name="public"*/}
-              {/*type="checkbox"*/}
-              {/*validate={[]}*/}
-              {/*component={renderField}*/}
-              {/*label="Is Public?"*/}
-            {/*/>*/}
+          {/*<Field*/}
+          {/*name="public"*/}
+          {/*type="checkbox"*/}
+          {/*validate={[]}*/}
+          {/*component={renderField}*/}
+          {/*label="Is Public?"*/}
+          {/*/>*/}
           {/*)}*/}
 
-
-
           <div className="uk-margin-bottom">
-            <Field name="columns.title"
+            <Field
+              name="columns.title"
               type="checkbox"
               className="alignright"
               validate={[]}
               component={renderField}
               label="Column"
               defaultChecked={true}
-              actions={{ onChange: this.changeRowVisibility.bind(null) }} />
+              actions={{ onChange: this.changeRowVisibility.bind(null) }}
+            />
 
-            <Field name="search"
+            <Field
+              name="search"
               type="text"
               validate={[]}
               component={renderField}
-              label="Task Name" />
+              label="Task Name"
+            />
           </div>
-
 
           <div className="uk-margin-bottom">
             <Field
@@ -234,7 +231,15 @@ class FilterForm extends Component {
               label="Created"
               defaultOptions={filterOptions.created.map(option => {
                 // return { value: option.id, label: option.username };
-              return { value: option.id, label: option.username + (option.name || option.surname?'  (':'') + (option.name?option.name:'') +(option.surname?' '+option.surname:'') + (option.name || option.surname?')':'') };
+                return {
+                  value: option.id,
+                  label:
+                    option.username +
+                    (option.name || option.surname ? "  (" : "") +
+                    (option.name ? option.name : "") +
+                    (option.surname ? " " + option.surname : "") +
+                    (option.name || option.surname ? ")" : "")
+                };
               })}
             />
           </div>
@@ -257,7 +262,15 @@ class FilterForm extends Component {
               label="Requester"
               defaultOptions={filterOptions.requester.map(option => {
                 // return { value: option.id, label: option.username };
-              return { value: option.id, label: option.username + (option.name || option.surname?'  (':'') + (option.name?option.name:'') +(option.surname?' '+option.surname:'') + (option.name || option.surname?')':'') };
+                return {
+                  value: option.id,
+                  label:
+                    option.username +
+                    (option.name || option.surname ? "  (" : "") +
+                    (option.name ? option.name : "") +
+                    (option.surname ? " " + option.surname : "") +
+                    (option.name || option.surname ? ")" : "")
+                };
               })}
             />
           </div>
@@ -301,7 +314,15 @@ class FilterForm extends Component {
               component={renderMultiselect}
               label="Assigned"
               defaultOptions={filterOptions.assigned.map(option => {
-                return { value: option.id, label: option.username + (option.name || option.surname?'  (':'') + (option.name?option.name:'') +(option.surname?' '+option.surname:'') + (option.name || option.surname?')':'') };
+                return {
+                  value: option.id,
+                  label:
+                    option.username +
+                    (option.name || option.surname ? "  (" : "") +
+                    (option.name ? option.name : "") +
+                    (option.surname ? " " + option.surname : "") +
+                    (option.name || option.surname ? ")" : "")
+                };
               })}
             />
           </div>
@@ -414,7 +435,8 @@ function mapStateToProps(state, ownProps) {
     filter = filter[0];
     if (filter.columns !== null) {
       filter.columns.map(column => {
-        columns[column] = true;
+        let columnKey = column == "taskCompany" ? "company" : column;
+        columns[columnKey] = true;
       });
     }
 
