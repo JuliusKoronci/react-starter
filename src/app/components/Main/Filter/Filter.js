@@ -5,6 +5,7 @@ import * as actions from "../../../redux/actions/tasks.action";
 import * as generalActions from "../../../redux/actions/general.action";
 import configResolver from "../../../../config/configResolver";
 import { convertDateToApiString } from "../../../services/general";
+import ModalConfirmDelete from "../../common/ModalConfirmDelete";
 
 import View from "../../../views/templates/main/filter/filter.jsx";
 
@@ -189,7 +190,6 @@ class Filter extends Component {
 
   deleteFilterHandler = () => {
     this.setState({ submitType: "delete" });
-    // this.setState({saveFilter: true});
     // alert('deleting filter')
   };
 
@@ -468,7 +468,14 @@ class Filter extends Component {
         onSubmit={this.onSubmit}
         loadTasksFunction={this.loadTasksFunction}
         getFilterTasks={this.getFilterTasks}
-        deleteFilter={this.deleteFilterHandler}
+        ex_deleteFilter={this.deleteFilterHandler}
+        deleteFilter={e =>
+          this.props.openConfirmModal({
+            title: "Deleting filter",
+            onConfirm: ef => {
+              this.deleteFilter();
+            }
+          })}
         saveFilter={this.saveFilterHandler}
         createFilter={this.createFilterHandler}
         canModifyPublicFilters={this.canModifyPublicFilters}
@@ -516,4 +523,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ModalConfirmDelete(Filter)
+);
