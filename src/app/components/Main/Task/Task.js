@@ -691,7 +691,7 @@ class Task extends Component {
         )}
         handleTaskDelete={e =>
           this.props.openConfirmModal({
-            title: "Deleting task",
+            title: "Are you sure you want to delete the task?",
             onConfirm: ef => {
               this._onNewTaskCancel(this.props.params.taskId, ef);
             }
