@@ -440,7 +440,9 @@ class configResolver {
         closedTime: "filter[closedTime]",
         startedTime: "filter[startedTime]",
         deadlineTime: "filter[deadlineTime]",
-        createdTime: "filter[createdTime]"
+        createdTime: "filter[createdTime]",
+        icon_class: "icon_class",
+        order: "order"
       },
       afterRequest: requestMenuItems,
       message: "Filter saved"

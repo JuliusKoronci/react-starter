@@ -251,6 +251,11 @@ const sidebar = ({
                     <span className="submenu-title">
                       <Link
                         to={link}
+                        style={{
+                          color: "white",
+                          padding: ".2em",
+                          backgroundColor: "#" + tag.color
+                        }}
                         className={
                           parseInt(tag.id, 10) === parseInt(tagId, 10)
                             ? "active  md-color-deep-orange-500"

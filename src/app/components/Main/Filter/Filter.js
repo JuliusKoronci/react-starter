@@ -240,6 +240,8 @@ class Filter extends Component {
     // console.log("SAVE REMEMBERED", values);
 
     values.title = "filter";
+    values.icon_class = "&#xE7EF;";
+    values.order = 0;
     this.setState({ submitType: "" });
     let config = configResolver.saveRememberedFilter(values);
     this.props.actions.generalRequest(config.data, config);
