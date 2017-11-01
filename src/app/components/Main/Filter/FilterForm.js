@@ -455,7 +455,7 @@ function mapStateToProps(state, ownProps) {
     let statuses = filter.filter.status; //.split(',');
     let projects = filter.filter.project;
     let requester = filter.filter.requester;
-    let company = filter.filter.company;
+    let company = filter.filter.taskCompany;
     let creator = filter.filter.creator;
     let assigned = filter.filter.assigned;
     let tag = filter.filter.tag;
@@ -496,7 +496,8 @@ function mapStateToProps(state, ownProps) {
       }
     });
 
-    console.log("intial values:", initialValues);
+    // console.log("intial values:", initialValues);
+    // console.log("filter filter:", filter.filter);
 
     return {
       initialValues: { ...filter, ...initialValues },
