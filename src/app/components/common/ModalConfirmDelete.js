@@ -43,19 +43,21 @@ const ModalConfirmDelete = WrappedComponent => {
               key="Modal"
               title={this.state.title}
             >
-              <h1>Are you sure?</h1>
+              <h2 style={{color:"red", marginTop:"50px"}}>Deletions are final!</h2>
+              <div style={{marginTop:55}} className="uk-text-right">
+          <button
+              className="md-btn md-btn-warning md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+              onClick={this.closeModal}
+            >
+              Cancel
+            </button>
               <button
                 onClick={this.confirm}
                 className="md-btn md-btn-danger md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
               >
                 Delete
               </button>
-              <button
-                className="md-btn md-btn-warning md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
-                onClick={this.closeModal}
-              >
-                Cancel
-              </button>
+            </div>
             </Modal>
           )}
           <WrappedComponent

@@ -501,7 +501,7 @@ class Filter extends Component {
         ex_deleteFilter={this.deleteFilterHandler}
         deleteFilter={e =>
           this.props.openConfirmModal({
-            title: "Deleting filter",
+            title: "Are you sure you want to delete the filter?",
             onConfirm: ef => {
               this.deleteFilter();
             }

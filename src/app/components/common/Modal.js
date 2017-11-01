@@ -24,9 +24,9 @@ const Modal = ({ title, ...props }) => (
     {...props}
   >
     {title && (
-      <h1 className="Modal__title" id="Modal__title">
+      <h2 className="Modal__title" id="Modal__title">
         {title}
-      </h1>
+      </h2>
     )}
     <div className="Modal__content">{props.children}</div>
     {/* <button className="Modal__close">{props.t('close')}</button> */}
