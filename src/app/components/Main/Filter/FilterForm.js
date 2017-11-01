@@ -115,7 +115,7 @@ class FilterForm extends Component {
               type="submit"
               onClick={e => createFilter()}
             >
-              SAVE A NEW FILTER
+              SAVE
             </button>
           )}
 
@@ -124,7 +124,7 @@ class FilterForm extends Component {
             className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
             onClick={e => getFilterTasks(e)}
           >
-            APPLY FILTER
+            FILTER
           </button>
         </div>
         <div className="md-list md-list-addon">
