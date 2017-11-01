@@ -29,36 +29,6 @@ const Filter = props => {
     ""
   );
 
-  //
-  //
-  // const ModalWindow =()=> {
-  //     return <Modal
-  //         isOpen={props.modalOpen}
-  //         onAfterOpen={props.modalAfterOpen}
-  //         onRequestClose={props.modalClose}
-  //         closeTimeoutMS={200}
-  //         style={modalStyles}
-  //         contentLabel="Modal">
-  //
-  //
-  //         <h1>{modalHeader}</h1>
-  //
-  //         <div className="uk-form-row uk-margin-bottom">
-  //             Name of the new filter: <input name="title" type="text" value={props.modalFilterForm.title} className="md-input" onChange={props.modalFilterFormChange} />
-  //         </div>
-  //
-  //         { props.canModifyPublicFilters &&
-  //         <div className="uk-form-row uk-margin-bottom">
-  //             <label>Public <input type="checkbox" name="public" value={props.modalFilterForm.public} checked={props.modalFilterForm.public} onClick={props.modalFilterFormChange}  /></label></div>}
-  //
-  //
-  //         {props.modalFilterForm.error && <p>{props.modalFilterForm.error}</p>}
-  //
-  //         <input type="button" className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light" onClick={onSubmit} value={buttonValue} />
-  //
-  //     </Modal>
-  // };
-
   return (
     <div className="md-card">
       <div className="md-card-content">

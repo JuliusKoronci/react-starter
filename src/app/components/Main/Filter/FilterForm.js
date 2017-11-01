@@ -76,47 +76,53 @@ class FilterForm extends Component {
         id="filterDiv"
       >
         <div className={"md-btn-group"}>
-          {canDeleteFilter && (
-            <button
-              className="md-btn  md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-              type="submit"
-              onClick={deleteFilter.bind(null)}
-            >
-              DELETE
-            </button>
-          )}
+          {canDeleteFilter &&
+            !this.props.filter.remembered && (
+              <button
+                className="md-btn  md-btn-danger md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+                type="submit"
+                onClick={deleteFilter.bind(null)}
+              >
+                DELETE
+              </button>
+            )}
 
           <button
             className="md-btn md-btn-warning md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-            onClick={this.resetForm.bind(null)}
+            onClick={
+              this.props.filter && this.props.filter.remembered
+                ? e => this.props.resetRememberedFilter(e)
+                : e => this.resetForm(e)
+            }
           >
             RESET
           </button>
 
-          {canSaveFilter && (
-            <button
-              className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-              type="submit"
-              onClick={saveFilter.bind(null)}
-            >
-              SAVE
-            </button>
-          )}
+          {canSaveFilter &&
+            !this.props.filter.remembered && (
+              <button
+                className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
+                type="submit"
+                onClick={saveFilter.bind(null)}
+              >
+                SAVE
+              </button>
+            )}
 
           {this.props.creatingFilter && (
             <button
               className="md-btn md-btn-success md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
               type="submit"
-              onClick={createFilter.bind(null)}
+              onClick={e => createFilter()}
             >
-              SAVE
+              SAVE A NEW FILTER
             </button>
           )}
 
           <button
             type="submit"
             className="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light"
-            onClick={getFilterTasks.bind(null)}
+            onClick={e => getFilterTasks(e)}
           >
             APPLY FILTER
           </button>
@@ -385,12 +391,15 @@ class FilterForm extends Component {
 
 function mapStateToProps(state, ownProps) {
   const filterId = ownProps.params.filterId;
-  // let filter = state.filter.filter(
-  //   f => parseInt(f.id, 10) === parseInt(filterId, 10)
+  // let filter = state.system.menu.filters.filter(
+  //   filter => parseInt(filter.id, 10) === parseInt(filterId, 10)
   // );
-  let filter = state.system.menu.filters.filter(
-    filter => parseInt(filter.id, 10) === parseInt(filterId, 10)
-  );
+
+  let filter = ownProps.filter;
+  //temp
+  if (filter) {
+    filter = [filter];
+  }
 
   let columns = {};
   let visibleColumns = ownProps.columns
@@ -438,7 +447,6 @@ function mapStateToProps(state, ownProps) {
     filter = filter[0];
     if (filter.columns !== null) {
       filter.columns.map(column => {
-        // let columnKey = column == "taskCompany" ? "company" : column;
         let columnKey = column;
         columns[columnKey] = true;
       });
@@ -487,6 +495,8 @@ function mapStateToProps(state, ownProps) {
         );
       }
     });
+
+    console.log("intial values:", initialValues);
 
     return {
       initialValues: { ...filter, ...initialValues },

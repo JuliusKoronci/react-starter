@@ -203,6 +203,7 @@ function* fileUpload(action) {
 // }
 
 function* generalRequest(action) {
+  console.log("general r");
   yield put(startAjax());
   try {
     let config = action.config;
