@@ -5,34 +5,6 @@ import configResolver from '../../../../../../config/configResolver';
 const material = ({ task, options, actions, canEdit }) => {
 	return (
 		<div>
-		<label className="uk-text-muted">Subtasks</label>
-		<div className="md-card uk-margin-medium-bottom">
-			<div className="md-card-content">
-				<div className="uk-overflow-container">
-					<table className="uk-table uk-text-nowrap">
-						<tbody>
-						<tr>
-			<td className="small_col">
-							<input type="checkbox" data-md-icheck="true" class="check_row" value="on"/>	</td>
-							<td>Oprava klavesnice</td>
-				<td className="small_col">
-							<a id="table-item" class="md-btn md-btn-flat md-btn-flat-danger md-btn-wave">Delete</a></td>
-						</tr>
-						<tr>
-				<td className="small_col">
-						<input type="checkbox" data-md-icheck="true" class="check_row" value="on"/>	</td>
-							<td>Kontrola funkčnosti</td>
-					<td className="small_col">
-							<a id="table-item" class="md-btn md-btn-flat md-btn-danger md-btn-wave">Delete</a></td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-
-
-
 			<label className="uk-text-muted">Material</label>
 			<div className="md-card uk-margin-medium-bottom">
 				<div className="md-card-content">

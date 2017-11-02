@@ -28,24 +28,24 @@ const summary = ({ task, actions, canEdit, formInputChangeHandler, form }) => {
 
 
 
-			{/*<div className="uk-margin-medium-bottom">
+			<div className="uk-margin-medium-bottom">
 
 
                 {canEdit &&
 				<RichText fieldName="work" label="Work Done" form={form} action={formInputChangeHandler} />
                 }
                 {!canEdit && <p dangerouslySetInnerHTML={{__html:task.work}} />}
-			</div>*/}
+			</div>
 
 
 
 
-			{/*{canEdit &&
+		{canEdit &&
 			<div className="uk-margin-medium-bottom">
 				<label className="uk-text-muted">Add work time</label>
 				<Input fieldName="work_time" className="header_b md-input" taskId={task.id} number={true} form={form} formInputChangeHandler={formInputChangeHandler} />
 			</div>
-		}*/}
+		}
 
 
 		</div>

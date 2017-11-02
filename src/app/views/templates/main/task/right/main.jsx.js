@@ -78,6 +78,7 @@ const main = ({
         }}
         action={formInputChangeHandler}
       />
+
       <Select
         label="Company"
         icon="&#xE7EE;"
