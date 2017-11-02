@@ -15,15 +15,17 @@ const readOnlyTask = props => {
         <TaskButtonPanel saveAction={props.saveAction} {...props} />
         <hr />
         <div className="uk-grid uk-grid-divider" data-uk-grid-margin>
-          <div className="uk-width-medium-3-4">
-            <TaskInfo {...props} />
-            <Summary {...props} canEdit={false} />
-            <Material task={props.task} />
-            <CommentForm {...props} />
-            <CommentList {...props} />
-          </div>
           <div className="uk-width-medium-1-4">
-            <RightMain {...props} />
+          <RightMain {...props} />
+
+          </div>
+          <div className="uk-width-medium-3-4">
+          <TaskInfo {...props} />
+          <Summary {...props} canEdit={false} />
+          <Material task={props.task} />
+          <CommentForm {...props} />
+          <CommentList {...props} />
+
           </div>
         </div>
       </div>

@@ -29,16 +29,18 @@ const editableTask = props => {
         <hr />
 
         <div className="uk-grid uk-grid-divider" data-uk-grid-margin>
-          <div className="uk-width-medium-3-4">
-              {/*{props.formChanged && <h1>Form changed</h1>}*/}
-            <TaskInfo {...props} />
-            <Summary {...props} />
-            <Material {...props} />
-            <CommentForm {...props} />
-            <CommentList {...props} />
-          </div>
           <div className="uk-width-medium-1-4">
-            <RightMain {...props} />
+              {/*{props.formChanged && <h1>Form changed</h1>}*/}
+      <RightMain {...props} />
+          </div>
+          <div className="uk-width-medium-3-4">
+          <TaskInfo {...props} />
+          <Summary {...props} />
+          <Material {...props} />
+          <h3>Comments</h3>
+          <CommentForm {...props} />
+          <CommentList {...props} />
+
           </div>
         </div>
       </div>

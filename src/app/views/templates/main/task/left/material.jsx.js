@@ -5,6 +5,43 @@ import configResolver from '../../../../../../config/configResolver';
 const material = ({ task, options, actions, canEdit }) => {
 	return (
 		<div>
+		<label className="uk-text-muted">Works</label>
+		<div className="md-card uk-margin-medium-bottom">
+			<div className="md-card-content">
+				<div className="uk-overflow-container">
+					<table className="uk-table uk-text-nowrap">
+						<thead>
+						<tr>
+							<th></th>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Quantity</th>
+							<th>Actions</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+						<td>		<input type="checkbox" data-md-icheck="true" class="check_row" value="on"/>	</td>
+							<td>Oprava klavesnice</td>
+							<td>Servis PC</td>
+							<td>5</td>
+							<td><a id="table-item" class="md-btn md-btn-flat md-btn-flat-danger md-btn-wave">Delete</a></td>
+						</tr>
+						<tr>
+						<td>		<input type="checkbox" data-md-icheck="true" class="check_row" value="on"/>	</td>
+							<td>Vyjazd</td>
+							<td>Vyjazd BA</td>
+							<td>5</td>
+							<td><a id="table-item" class="md-btn md-btn-flat md-btn-danger md-btn-wave">Delete</a></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+
 			<label className="uk-text-muted">Material</label>
 			<div className="md-card uk-margin-medium-bottom">
 				<div className="md-card-content">
@@ -43,6 +80,8 @@ const material = ({ task, options, actions, canEdit }) => {
 					</div>
 				</div>
 			</div>
+
+
 		</div>
 	);
 };
