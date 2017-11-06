@@ -7,23 +7,15 @@ import Input from '../../../../../forms/Task/Input.form';
 const summary = ({ task, actions, canEdit, formInputChangeHandler, form }) => {
 	return (
 		<div>
-			<div className="uk-margin-medium-bottom">
 
+{/*
+			<div className="uk-margin-medium-bottom">
                 {canEdit &&
 				<RichText fieldName="description" label="Description" form={form} action={formInputChangeHandler}  />
                 }
-                {!canEdit && <p dangerouslySetInnerHTML={{__html:task.description}} />}
-
-
-
-
-				{/*{canEdit &&*/}
-				{/*<RTE defaultValue={task.description} actionn={actions.taskUpdated} action={formInputChangeHandler} fieldName="description"*/}
-					 {/*label="Description" taskId={task.id} />*/}
-				{/*}*/}
-				{/*{!canEdit && <p dangerouslySetInnerHTML={{__html:task.description}} />}*/}
+            	{!canEdit && <p dangerouslySetInnerHTML={{__html:task.description}} />}
 			</div>
-
+*/}
 
 
 

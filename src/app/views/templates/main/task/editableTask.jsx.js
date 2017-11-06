@@ -38,8 +38,9 @@ const editableTask = props => {
           <Summary {...props} />
           <Material {...props} />
           <h3>Comments</h3>
+                    <CommentList {...props} />
           <CommentForm {...props} />
-          <CommentList {...props} />
+
 
           </div>
         </div>
