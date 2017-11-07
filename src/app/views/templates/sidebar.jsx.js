@@ -252,12 +252,14 @@ const sidebar = ({
                       <Link
                         to={link}
                         style={{
+                          overflow: "hidden",
                           color: "white",
-                          padding: ".2em",
-                          backgroundColor: "#" + tag.color
+                          padding: ".2em .5em",
+                          backgroundColor: "#" + tag.color.replace('#','')
                         }}
                         className={
-                          parseInt(tag.id, 10) === parseInt(tagId, 10)
+                          "tag-in-menu " + parseInt(tag.id, 10) ===
+                          parseInt(tagId, 10)
                             ? "active  md-color-deep-orange-500"
                             : ""
                         }
