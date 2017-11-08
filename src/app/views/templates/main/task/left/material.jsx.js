@@ -43,6 +43,8 @@ const material = ({ task, options, actions, canEdit }) => {
 					</div>
 				</div>
 			</div>
+
+
 		</div>
 	);
 };

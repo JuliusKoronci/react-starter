@@ -39,6 +39,9 @@ class SelectAutocomplete extends Component {
           <i className="material-icons">{this.props.icon}</i>
         </span>
         <label htmlFor={this.props.name}>{this.props.label}</label>
+        <span className="alignright">
+            <label className="uk_dp1 uk-text-muted md-color-light-blue-A700">+ {this.props.label}</label>
+         </span>
         {/* <p>{value}</p>
         <p>
           {options.map(option => {
