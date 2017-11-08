@@ -8,14 +8,14 @@ const summary = ({ task, actions, canEdit, formInputChangeHandler, form }) => {
 	return (
 		<div>
 
-{/*
+
 			<div className="uk-margin-medium-bottom">
                 {canEdit &&
 				<RichText fieldName="description" label="Description" form={form} action={formInputChangeHandler}  />
                 }
             	{!canEdit && <p dangerouslySetInnerHTML={{__html:task.description}} />}
 			</div>
-*/}
+
 
 
 
