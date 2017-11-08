@@ -15,6 +15,9 @@ const creatingTask = props => {
       <hr />
 
       <div className="uk-grid uk-grid-divider">
+        <div className="uk-width-medium-1-4">
+          <RightMain {...props} />
+        </div>
         <div className="uk-width-medium-3-4">
           <label className="uk-text-muted">Task name</label>
           <div className="md-input-wrapper md-input-filled uk-margin-medium-bottom">
@@ -35,9 +38,6 @@ const creatingTask = props => {
             action={props.inputChangeHandler}
             value={props.newTaskDescription}
           />
-        </div>
-        <div className="uk-width-medium-1-4">
-          <RightMain {...props} />
         </div>
       </div>
     </div>
