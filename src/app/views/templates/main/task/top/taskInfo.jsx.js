@@ -6,26 +6,16 @@ const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
   return (
     <div>
       <div className="uk-grid">
-        <div className="uk-width-medium-1-2 uk-margin-bottom">
-          <h1 >{task.id} : {task.title}</h1>
+        <div className="uk-width-medium-1-2">
+          <label className="uk-text-muted">Task name</label>
         </div>
         <div className="uk-width-medium-1-2">
-        <p className="uk-text-muted alignright">
-          Created: {task.createdBy.email} | {dateFormat(task.createdAt)}
-        </p>
+          <p className="uk-text-muted alignright">
+            Created: {task.createdBy.email} | {dateFormat(task.createdAt)}
+          </p>
         </div>
-
       </div>
-
-
-{/*
-
       {canEdit && (
-        <h1>
-          {task.id} : {task.title}
-        </h1>
-
-
         <Input
           fieldName="title"
           className="header_a md-input uk-margin-medium-bottom"
@@ -34,17 +24,12 @@ const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
           formInputChangeHandler={formInputChangeHandler}
           labelInInput={task.id + ":"}
         />
-
       )}
-
       {!canEdit && (
-        <h1>
+        <p>
           {task.id} {task.title}
-        </h1>
+        </p>
       )}
-*/}
-
-
     </div>
   );
 };
