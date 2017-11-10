@@ -27,6 +27,7 @@ class User extends Component {
         this.userConfig
       );
     }
+    //request all user and companies for form select
     this.props.actions.requestRoles("/api/v1/task-bundle/user-roles?limit=999");
     this.props.actions.requestCompanies(
       "/api/v1/core-bundle/companies?limit=999"

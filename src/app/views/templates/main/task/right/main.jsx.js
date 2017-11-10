@@ -24,7 +24,7 @@ const main = ({
   taskAttributes,
   statusChange
 }) => {
-  // console.log(form);
+  console.log(form);
   // console.log("company", options.company);
   // console.log('main');
 

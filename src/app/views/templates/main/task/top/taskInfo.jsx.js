@@ -1,8 +1,13 @@
 import React, { PropTypes } from "react";
 import dateFormat from "../../../../../services/formatedDate";
+import { timestampToDateString } from "../../../../../services/general";
 import Input from "../../../../../forms/Task/Input.form";
 
 const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
+  const createdAtDate = timestampToDateString(task.createdAt);
+  const startedAtDate = timestampToDateString(task.startedAt);
+  console.log(task.startedAt, startedAtDate);
+
   return (
     <div>
       <div className="uk-grid">
@@ -11,7 +16,7 @@ const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
         </div>
         <div className="uk-width-medium-1-2">
           <p className="uk-text-muted alignright">
-            Created: {task.createdBy.email} | {dateFormat(task.createdAt)}
+            Created: {task.createdBy.email} | {createdAtDate}
           </p>
         </div>
       </div>

@@ -130,34 +130,6 @@ class Task extends Component {
     e.preventDefault();
   };
 
-  // _onValidate = () => {
-  //     const task = this.props.task;
-  //     console.log(task);
-  //
-  //     if (task.taskHasAssignedUsers.length === 0) {
-  //         return false;
-  //     }
-  //     if (task.title.trim() === '') {
-  //         return false;
-  //     }
-  //     if (!task.company && !task.company.id) {
-  //         return false;
-  //     }
-  //
-  //     return true;
-  // };
-  //
-  // _onNewTaskCreate = (taskId) => {
-  //     const path = generateRoute('task_list', {taskId: taskId});
-  //     if (this._onValidate()) {
-  //         this.setState({
-  //             saved: true,
-  //         });
-  //         entityCreated('Task created!', path);
-  //     } else {
-  //         entityError('The following fields are mandatory: Status, Project, Requester, Company, Assigned');
-  //     }
-  // };
   _onNewTaskCancel = taskId => {
     this.props.actions.isDirty(false);
     this.setState({ formChanged: false }, e => {
@@ -292,11 +264,14 @@ class Task extends Component {
     this.setState({ form: form, formChanged: true }, console.log(this.state));
   };
 
+  /**
+   *
+   */
   inputChangeHandler = (name, value, e) => {
-    // console.log(name,value)
-
+    if (name === "newTaskAssigner") {
+      value = [{ userId: value }];
+    }
     if (name === "newTaskProject") {
-      //TODO update assignees
       let config = configResolver.projectAssigners(value);
       this.props.actions.getProjectAssigners(config);
     }
@@ -319,26 +294,24 @@ class Task extends Component {
         ? this.state.form.closed_at.date
         : this.state.form.closed_at;
 
-    // console.log("started at", values.started_at);
-    // console.log("deadline", values.deadline);
-    // console.log("closed", values.closed_at);
-    // console.log("exit");
-    // return;
+    console.log("save task values", values);
 
     //TODO - toto upravit s apinou
     if (!values.started_at) {
       values.started_at = "null";
+    } else {
+      values.started_at = dateToTimestamp(values.started_at);
     }
     if (!values.deadline) {
       values.deadline = "null";
+    } else {
+      values.deadline = dateToTimestamp(values.deadline);
     }
     if (!values.closed_at) {
       values.closed_at = "null";
+    } else {
+      values.closed_at = dateToTimestamp(values.closed_at);
     }
-    //TODO ///////////////////////////
-
-    // console.log(this.state.form.started_at)
-    // console.log(this.state.form.task_data);
 
     let config = configResolver.taskUpdate(this.props.params.taskId);
     //this.props.actions.patchEntity(values,config,this.props.params.taskId);
@@ -485,6 +458,7 @@ class Task extends Component {
         );
         this.setState({ creatingTask: false, errors: [] });
       } else {
+        //defaultne hodnoty pre formulare pri vytvarani tasku
         this.props.actions.loadEntityList(
           configResolver.loadProjectsWhereUserCanAddTask()
         );

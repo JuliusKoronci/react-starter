@@ -337,9 +337,6 @@ class Filter extends Component {
 
   /**
    *
-   *
-   *
-   *
    */
   // tu sa bud uklada filter, alebo len requestnu tasky, podla toho, na aky button sa kliklo (kvoli redux formu)
   onSubmit = (oldValues, e) => {
@@ -354,8 +351,6 @@ class Filter extends Component {
 
     // MAP DATES
     ["closedTime", "startedTime", "deadlineTime", "createdTime"].map(field => {
-      // console.log(field,values[field+'Radio'],values[field]);
-
       if (values[field + "Radio"] && values[field + "Radio"] === "now") {
         values[field] = this.state.saveFilter ? "TO=NOW" : "TO%3DNOW";
         // console.log('now',[field]);
@@ -380,10 +375,9 @@ class Filter extends Component {
           values[field] = "";
         }
       }
-      // this.setState({sentValues:})
-      // values[field+'Radio']='TO=NOW'
     });
-
+    console.log(values);
+    // return;
     let columns = this.state.columns.map(column => {
       let key = Object.keys(column)[0];
       if (
@@ -438,22 +432,7 @@ class Filter extends Component {
       return this.saveFilter(filterSaveValues, e);
     }
 
-    // TODO toto je co?
-    //ulozenie existujuceho filtra
-    // if (this.state.submitType && this.state.submitType === "save") {
-    //   let config = configResolver.saveFilter(
-    //     filterSaveValues,
-    //     this.props.params.filterId
-    //   );
-    //   this.props.actions.generalRequest(config.data, config);
-    // } else {
-    //   //ulozi sa do state hodnota formularu, aby sa ten chuj neresetol
-    //   // console.log('set sent values');
-    //   this.setState({ sentValues: values });
-    // }
-
     //ulozi sa do state hodnota formularu, aby sa ten chuj neresetol
-    // console.log('set sent values');
     this.setState({ sentValues: values });
 
     if (

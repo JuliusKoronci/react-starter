@@ -7,6 +7,7 @@ import Colorpicker from "../forms/general/Colorpicker.form";
 import Multicheckbox from "../forms/general/MulticheckboxRedux.form";
 import Multiselect from "../forms/general/Multiselect.form";
 import Datepicker from "../forms/general/Datepicker.form";
+import Select from "../forms/general/Select.form";
 
 export const renderField = ({
   input,
@@ -114,12 +115,24 @@ export const renderSelect = ({
   label,
   action,
   meta: { touched, error, warning }
-}) => (
-  <div className="uk-form-row">
-    <label htmlFor={input.name}>{label}</label>
-    {/*<select value={input.defaultValue} className="md-input" {...input} onChange={action.bind(null)} onClick={action.bind(null)} >*/}
-    {/*<select value={input.defaultValue} className="md-input" {...input} onChange={(action ? action.bind(null):null)} onClick={(action ? action.bind(null):null)} >/*/}
-    <select value={input.defaultValue} className="md-input" {...input}>
+}) => {
+  return (
+    <div className="uk-form-row">
+      {/* <label htmlFor={input.name}>{label}</label> */}
+
+      <Select
+        label={label}
+        {...input}
+        options={options.map(r => {
+          return {
+            value: r.id,
+            label: r.title
+          };
+        })}
+        action={(name, value) => input.onChange(value)}
+      />
+
+      {/* <select value={input.defaultValue} className="md-input" {...input}>
       <option value={false}>Select {label}...</option>
       {options.map((option, i) => {
         return (
@@ -128,11 +141,13 @@ export const renderSelect = ({
           </option>
         );
       })}
-    </select>
-    {touched &&
-      ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-  </div>
-);
+    </select> */}
+      {touched &&
+        ((error && <span>{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  );
+};
 
 export const renderTagger = ({
   input,

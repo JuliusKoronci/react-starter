@@ -1,7 +1,9 @@
 import React, { PropTypes } from "react";
 import dateFormat from "../../../../../services/formatedDate";
+import timestampToDateString from "../../../../../services/general";
 
 const taskInfo = ({ task }) => {
+  const createdAtDate = timestampToDateString(task.createdAt);
   return (
     <div>
       <div className="uk-grid">
@@ -10,7 +12,7 @@ const taskInfo = ({ task }) => {
         </div>
         <div className="uk-width-medium-1-2">
           <p className="uk-text-muted alignright">
-            Created: {task.createdBy.email} | {dateFormat(task.createdAt)}
+            Created: {task.createdBy.email} | {createdAtDate}
           </p>
         </div>
       </div>

@@ -36,33 +36,18 @@ export function dateToTimestamp(date) {
   return new Date(date).getTime() / 1000;
 }
 
-export function timestampToDate(timestamp) {
-  // Multiply by 1000 because JS works in milliseconds instead of the UNIX seconds
-
-  // console.log(timestamp * 1000);
-  const date = new Date(timestamp * 1000);
-  // console.log(date.getTime());
-
-  // console.log(date);
-  // console.log(date.getTimezoneOffset());
-
-  if (timestamp < 100) {
+export function timestampToDateString(timestamp) {
+  if (!timestamp || timestamp < 100) {
     return "-";
   }
 
+  const date = new Date(timestamp * 1000);
   const year = date.getFullYear();
   let month = date.getMonth() + 1; // getMonth() is zero-indexed, so we'll increment to get the correct month number
   let day = date.getDate();
   let hours = date.getHours();
   let minutes = date.getMinutes();
   let seconds = date.getSeconds();
-
-  // const year = date.getUTCFullYear();
-  // let month = date.getUTCMonth() + 1; // getMonth() is zero-indexed, so we'll increment to get the correct month number
-  // let day = date.getUTCDate();
-  // let hours = date.getUTCHours();
-  // let minutes = date.getUTCMinutes();
-  // let seconds = date.getUTCSeconds();
 
   month = month < 10 ? "0" + month : month;
   day = day < 10 ? "0" + day : day;
@@ -73,48 +58,37 @@ export function timestampToDate(timestamp) {
   return year + "-" + month + "-" + day + " " + hours + ":" + minutes;
 }
 
+export function timestampToDate(timestamp) {
+  // Multiply by 1000 because JS works in milliseconds instead of the UNIX seconds
+
+  const date = new Date(timestamp * 1000);
+
+  if (timestamp < 100) {
+    return null;
+  }
+  return date;
+}
+
 export function convertDateToApiString(date) {
   let parsedDate = Date.parse(date);
   date = new Date(parsedDate);
 
   if (date !== "Invalid Date" && !isNaN(date)) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-
-    hours = hours > 9 ? hours : "0" + hours;
-    minutes = minutes > 9 ? minutes : "0" + minutes;
-    seconds = seconds > 9 ? seconds : "0" + seconds;
-    month = month > 9 ? month : "0" + month;
-    day = day > 9 ? day : "0" + day;
-
-    let string =
-      date.getFullYear() +
-      "-" +
-      month +
-      "-" +
-      day +
-      "T" +
-      hours +
-      ":" +
-      minutes +
-      ":" +
-      seconds +
-      "+01:00";
-
-    return string;
+    // vrati timestamp
+    return parsedDate / 1000;
   }
   return "";
 }
 
-export function convertApiStringToDate(string) {
-  string = string.replace("FROM=", "");
-  string = string.replace("TO=", "");
-  let date = string.split("T")[0];
+export function convertApiStringToDate(timestamp) {
+  // po novom sa ziskava uz timestamp
+  return new Date(timestamp * 1000);
 
-  return date;
+  // string = string.replace("FROM=", "");
+  // string = string.replace("TO=", "");
+  // let date = string.split("T")[0];
+
+  // return date;
 }
 
 export function entityCreated(toast, redirectTo) {

@@ -128,31 +128,6 @@ class FilterForm extends Component {
           </button>
         </div>
         <div className="md-list md-list-addon">
-          {/*{this.props.filter && (*/}
-          {/*{false && (*/}
-          {/*<div className="uk-margin-top uk-margin-bottom">*/}
-          {/*<Field*/}
-          {/*name="title"*/}
-          {/*type="text"*/}
-          {/*validate={[]}*/}
-          {/*component={renderField}*/}
-          {/*label="Filter Name"*/}
-          {/*disabled={!canSaveFilter}*/}
-          {/*/>*/}
-          {/*</div>*/}
-          {/*)}*/}
-
-          {/*{showPublicField && (*/}
-          {/*{false && (*/}
-          {/*<Field*/}
-          {/*name="public"*/}
-          {/*type="checkbox"*/}
-          {/*validate={[]}*/}
-          {/*component={renderField}*/}
-          {/*label="Is Public?"*/}
-          {/*/>*/}
-          {/*)}*/}
-
           <div className="uk-margin-bottom">
             <Field
               name="columns.title"
