@@ -34,6 +34,9 @@ padding: 3px 0px;
 
 
 
+.Select-menu-outer{
+  z-index:3000;
+}
 
 
 .modalOverlayClass{
