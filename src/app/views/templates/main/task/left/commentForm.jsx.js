@@ -119,7 +119,7 @@ class commentForm extends Component {
 
 
 
-                <hr/>
+          
             </div>
         )
     }

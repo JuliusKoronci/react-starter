@@ -21,7 +21,7 @@ const commentList = ({task,handleFileDownload}) => {
 
     return (
         <div className="timeline">
-
+      <hr/>
             {comments.map(comment => {
                 let key = comment.id;
                 let date = formatDate(comment.createdAt.date);

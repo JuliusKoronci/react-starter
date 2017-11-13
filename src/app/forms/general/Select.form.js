@@ -31,6 +31,11 @@ class SelectAutocomplete extends Component {
         )}
         <label htmlFor={this.props.name}>{this.props.label}</label>
 
+        <span className="alignright">
+          <label className="uk_dp1 uk-text-muted md-color-light-blue-A700">
+            + {this.props.label}
+          </label>
+        </span>
         <Select
           className="md-input"
           value={value}

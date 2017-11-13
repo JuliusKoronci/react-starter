@@ -983,7 +983,7 @@ select.error {
 
 .uk-input-group > input[type="text"] {
   position: relative;
-  z-index: 2;
+  z-index: 0;
   float: left;
   width: 100%;
   margin-bottom: 0;
