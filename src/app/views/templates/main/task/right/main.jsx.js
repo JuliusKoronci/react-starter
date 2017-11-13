@@ -189,7 +189,7 @@ const main = ({
         icon="&#xE5CD;"
       />
 
-      <Tag
+      {/*       <Tag
         tagValues={form.tags}
         options={options.tag.map(tag => {
           return {
@@ -202,7 +202,7 @@ const main = ({
           // const config = configResolver.addTags(values, task.id);
           // actions.patchEntity(config, config.values);
         }}
-      />
+      /> */}
 
       {/*<Repeat/>*/}
       <Attachment

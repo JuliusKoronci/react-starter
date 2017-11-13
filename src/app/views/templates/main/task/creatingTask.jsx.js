@@ -31,6 +31,7 @@ const creatingTask = props => {
               // props.newTaskTitleChangeHandler.bind(null)
             />
           </div>
+
           <RichText
             fieldName="newTaskDescription"
             label="Description"
