@@ -2,6 +2,7 @@ import React, { PropTypes } from "react";
 import dateFormat from "../../../../../services/formatedDate";
 import { timestampToDateString } from "../../../../../services/general";
 import Input from "../../../../../forms/Task/Input.form";
+import TagList from "../../_partials/tags.jsx";
 
 const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
   const createdAtDate = timestampToDateString(task.createdAt);
@@ -35,6 +36,9 @@ const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
           {task.id} {task.title}
         </p>
       )}
+      <div style={{ marginTop: "-2em", marginBottom: "1em" }}>
+        <TagList task={{ tags: form.tags }} />
+      </div>
     </div>
   );
 };

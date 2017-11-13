@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react";
-import TagList from "../tasks/taskrow/tags.jsx";
+import TagList from "../_partials/tags.jsx";
 import TaskAssignees from "../tasks/taskrow/task_assignees.jsx";
 import TaskStatus from "../tasks/taskrow/task_status.jsx";
 import { Link } from "react-router";
