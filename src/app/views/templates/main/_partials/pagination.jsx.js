@@ -1,5 +1,8 @@
 import React, { PropTypes } from "react";
 import PaginationHOC from "./paginationHOC";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { setPagination } from "../../../../redux/actions/system.actions";
 
 class Pagination extends React.PureComponent {
   //     total,
@@ -13,7 +16,6 @@ class Pagination extends React.PureComponent {
   //   loadFunction.bind(null, links.first)
 
   componentWillReceiveProps(nextProps) {
-    console.log("will receive props");
     if (nextProps.paginationValue !== this.props.paginationValue) {
       this.props.loadFunction(
         this.props.links.first.replace(
@@ -34,6 +36,9 @@ class Pagination extends React.PureComponent {
       paginationSetter,
       paginationValue
     } = this.props;
+
+    // console.log(total, page, numberOfPages);
+    // console.log(this.props);
 
     const itemsPerPage = paginationValue;
     const fromTaskNumber = (page - 1) * itemsPerPage + 1;
@@ -140,7 +145,9 @@ class Pagination extends React.PureComponent {
         </ul>
 
         <p style={{ textAlign: "center" }}>
-          Showing {fromTaskNumber} to {toTaskNumber} of {total} entries
+          Showing {fromTaskNumber} to{" "}
+          {toTaskNumber < total ? toTaskNumber : total} of {total} entries<br />
+          {page}/{numberOfPages}
         </p>
       </div>
     );
@@ -153,5 +160,17 @@ Pagination.propTypes = {
   links: PropTypes.object.isRequired,
   loadFunction: PropTypes.func.isRequired
 };
+// export default PaginationHOC(Pagination);
 
-export default PaginationHOC(Pagination);
+function mapStateToProps(state, ownProps) {
+  return { paginationValue: state.settings.paginationValue };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({ setPagination }, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  PaginationHOC(Pagination)
+);
