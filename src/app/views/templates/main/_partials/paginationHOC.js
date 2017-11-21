@@ -1,5 +1,7 @@
 import React from "react";
 
+const defaultValue = 10;
+
 const PaginationSetter = ({ setPagination, paginationValue }) => {
   const options = [10, 25, 50, 100, "all"];
   return (
@@ -18,24 +20,26 @@ const PaginationSetter = ({ setPagination, paginationValue }) => {
 
 const PaginationHOC = WrappedComponent => {
   return class PaginationHOC extends React.PureComponent {
-    state = {
-      paginationValue: 10
-    };
-
     setPagination = e => {
       //TODO spravit to neskor cez redux + ukladat do user settings do api
-      this.setState({ paginationValue: e.target.value });
+      // console.log(this.props);
+      this.props.actions.setPagination(e.target.value);
+      // this.setState({ paginationValue: e.target.value });
     };
 
     render() {
+      // console.log(this.props);
+      const paginationValue = this.props.paginationValue
+        ? this.props.paginationValue
+        : defaultValue;
       return (
         <WrappedComponent
           {...this.props}
-          paginationValue={this.state.paginationValue}
+          paginationValue={paginationValue}
           paginationSetter={
             <PaginationSetter
               setPagination={this.setPagination}
-              paginationValue={this.state.paginationValue}
+              paginationValue={paginationValue}
             />
           }
         />

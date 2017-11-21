@@ -1,5 +1,5 @@
-// export const HOST_URL = 'https://test.lanhelpdesk.com';
-export const HOST_URL = 'https://dev.lanhelpdesk.com';
+export const HOST_URL = "https://test.lanhelpdesk.com";
+// export const HOST_URL = "https://dev.lanhelpdesk.com";
 // export const HOST_URL = "http://localhost:8000";
 export const BASE_URL = HOST_URL + "/api/v1";
 

@@ -42,7 +42,7 @@ import { entityUpdated } from "../../services/general";
 function* defaultTasks(action) {
   yield put(startAjaxReset());
   try {
-    const data = yield call(defaultFilter, action.filterId);
+    const data = yield call(defaultFilter, action.filterId, action.search);
     yield put(tasksReceived(data));
   } catch (e) {
     yield put(asyncError(e));

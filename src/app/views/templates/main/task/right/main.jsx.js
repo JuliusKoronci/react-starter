@@ -24,7 +24,7 @@ const main = ({
   taskAttributes,
   statusChange
 }) => {
-  console.log(form);
+  // console.log(form);
   // console.log("company", options.company);
   // console.log('main');
 
@@ -213,6 +213,9 @@ const main = ({
       />
 
       {taskAttributes.map(ta => {
+        {
+          /* console.log(taskAttributes); */
+        }
         let name = ta.id;
 
         let attributeData = null;

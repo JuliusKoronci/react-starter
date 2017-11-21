@@ -36,8 +36,8 @@ export function dateToTimestamp(date) {
   return new Date(date).getTime() / 1000;
 }
 
-export function timestampToDateString(timestamp) {
-  if (!timestamp || timestamp < 100) {
+export const timestampToDateString = timestamp => {
+  if (!Number.isInteger(timestamp) || timestamp < 100) {
     return "-";
   }
 
@@ -56,7 +56,7 @@ export function timestampToDateString(timestamp) {
   seconds = seconds < 10 ? "0" + seconds : seconds;
 
   return year + "-" + month + "-" + day + " " + hours + ":" + minutes;
-}
+};
 
 export function timestampToDate(timestamp) {
   // Multiply by 1000 because JS works in milliseconds instead of the UNIX seconds

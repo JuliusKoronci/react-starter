@@ -4875,6 +4875,12 @@ react-flatpickr@^3.5.1:
     flatpickr "^3.0.7"
     prop-types "^15.5.10"
 
+react-geolocated@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-geolocated/-/react-geolocated-2.2.1.tgz#816b88d3d88afc5afde08e4d071b36cd16b4c34a"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-i18next@^6.0.6:
   version "6.0.6"
   resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-6.0.6.tgz#be92e3936c98c2934019457484cb85b9c2be1c28"
@@ -4882,9 +4888,9 @@ react-i18next@^6.0.6:
     hoist-non-react-statics "2.3.1"
     html-parse-stringify2 "2.0.1"
 
-react-input-autosize@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.0.0.tgz#c0268a5385b595a1ee197b1e532fa61a52334841"
+react-input-autosize@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.0.1.tgz#e92190497b4026c2780ad0f2fd703c835ba03e33"
   dependencies:
     create-react-class "^15.5.2"
     prop-types "^15.5.8"
@@ -4979,13 +4985,13 @@ react-scripts@0.9.5:
   optionalDependencies:
     fsevents "1.0.17"
 
-react-select@^1.0.0-rc.3:
-  version "1.0.0-rc.8"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.8.tgz#83284bab6486228a0e2cb55702a314073fb1775c"
+react-select@^1.0.0-rc.10:
+  version "1.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.10.tgz#f137346250f9255c979fbfa21860899928772350"
   dependencies:
     classnames "^2.2.4"
     prop-types "^15.5.8"
-    react-input-autosize "^2.0.0"
+    react-input-autosize "^2.0.1"
 
 react@^15.4.2:
   version "15.6.1"
