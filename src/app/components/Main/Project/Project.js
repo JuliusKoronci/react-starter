@@ -55,7 +55,7 @@ class Project extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.dirtyHandler);
-    // this.props.actions.isDirty(false);
+    this.props.actions.isDirty(false);
   }
   componentDidMount() {
     window.addEventListener("beforeunload", this.dirtyHandler);
@@ -119,7 +119,19 @@ class Project extends Component {
   }
 
   onSubmit = values => {
+    this.props.actions.isDirty(false);
+    this.setState(
+      {
+        formsDirty: {
+          ...this.state.formsDirty,
+          ProjectForm: false
+        }
+      },
+      console.log(this.state)
+    );
+
     if (this.props.params.projectId) {
+      //updating project
       this.projectConfig = configResolver.getProjectConfig(
         this.props.params.projectId
       );
@@ -129,9 +141,11 @@ class Project extends Component {
         this.projectConfig
       );
     } else {
+      //creating project
       this.projectCreatedConfig = configResolver.projectCreatedConfig(
         this.props.params.projectId
       );
+
       this.props.actions.createEntity(values, this.projectCreatedConfig);
     }
   };

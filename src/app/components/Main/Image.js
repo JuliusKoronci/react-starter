@@ -8,19 +8,28 @@ class Image extends Component {
       loading: false,
       loaded: false,
       fetchFromApi: props.fetchFromApi,
-      imageSrc: props.src
+      imageSrc: props.src,
+      loadedBlob: false
     };
   }
 
-  componentDidUpdate() {
-    if (this.props.fetchFromApi && !this.state.loaded && !this.state.loading) {
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.src !== this.props.src ||
+      (this.props.fetchFromApi && !this.state.loaded && !this.state.loading)
+    ) {
       let url = this.props.src;
       this.setState({ loading: true });
       // let data =
       apiGetBlob(url).then(data => {
         let urlCreator = window.URL || window.webkitURL;
         let imageBlob = urlCreator.createObjectURL(data);
-        this.setState({ imageSrc: imageBlob, loading: false, loaded: true });
+        this.setState({
+          imageSrc: imageBlob,
+          loadedBlob: imageBlob,
+          loading: false,
+          loaded: true
+        });
       });
     }
   }
@@ -32,10 +41,10 @@ class Image extends Component {
       className: props.className ? props.className : ""
     };
 
-    if (this.state.loading && this.state.fetchFromApi) {
-      return <img {...params} src={props.staticSrc} alt="" />;
-    } else {
+    if (this.state.loadedBlob) {
       return <img {...params} src={this.state.imageSrc} alt="" />;
+    } else {
+      return <img {...params} src={props.staticSrc} alt="" />;
     }
   }
 }
