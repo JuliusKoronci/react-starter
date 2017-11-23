@@ -36,6 +36,7 @@ export const PROJECTS_WHERE_USER_CAN_ADD_TASK =
 export const MENU_ITEMS_URL = BASE_URL + "/task-bundle/left-menu-params";
 
 export const LOAD_ATTACHMENT = BASE_URL + "/core-bundle/cdn/load";
+export const LOAD_ATTACHMENT_WITHOUT_BASE = BASE_URL + "/core-bundle/cdn/load";
 export const OPTION_LIST = BASE_URL + "/task-bundle/tasks/options";
 export const TASK_UPLOAD = BASE_URL + "/core-bundle/cdn/upload/task";
 export const FILE_UPLOAD = BASE_URL + "/core-bundle/cdn/upload";

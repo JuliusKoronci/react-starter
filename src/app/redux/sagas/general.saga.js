@@ -216,7 +216,13 @@ function* generalRequest(action) {
     );
 
     if (config.afterRequest) {
-      yield put(config.afterRequest(data, config));
+      if (Array.isArray(config.afterRequest)) {
+        for (let req of config.afterRequest) {
+          yield put(req(data, config));
+        }
+      } else {
+        yield put(config.afterRequest(data, config));
+      }
     }
 
     let redirectTo = config.redirectAfter;

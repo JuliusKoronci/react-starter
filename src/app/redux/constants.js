@@ -115,6 +115,7 @@ export const COMPANY_RECEIVED = "COMPANY_RECEIVED";
 //profile
 export const PROFILE_RECEIVED = "PROFILE_RECEIVED";
 export const UPLOAD_AVATAR = "UPLOAD_AVATAR";
+export const AVATAR_UPLOADED = "AVATAR_UPLOADED";
 // export const PASSWORD_RESET = 'PASSWORD_RESET';
 
 //general

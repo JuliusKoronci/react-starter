@@ -59,7 +59,10 @@ class Filter extends Component {
 
   // componentWillReceiveProps(nextProps){
   componentDidUpdate(prevProps) {
-    if (prevProps.params.filterId !== this.props.params.filterId) {
+    if (
+      prevProps.params.filterId !== this.props.params.filterId ||
+      prevProps.filter !== this.props.filter
+    ) {
       // this.forceUpdate();
 
       this.setState({
@@ -74,6 +77,8 @@ class Filter extends Component {
         creatingFilter: !this.props.params.filterId,
         submitType: ""
       });
+
+      // console.log("did update filter: ", this.props.filter);
 
       // ak je definovany filter a ma columns, nacitaju sa do stateu
       if (this.props.filter && this.props.filter.columns) {
