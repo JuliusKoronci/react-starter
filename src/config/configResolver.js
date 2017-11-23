@@ -42,7 +42,8 @@ import {
 } from "../app/redux/actions/project.action";
 import {
   filterReceived,
-  filterOptionsReceived
+  filterOptionsReceived,
+  newFilter
 } from "../app/redux/actions/filter.action";
 
 class configResolver {
@@ -515,7 +516,7 @@ class configResolver {
       // redirectAfterCreation: paths.filter,
       routeAfter: { name: "filter_edit", param: "filterId" },
       //afterRequest:requestFilters,
-      afterRequest: requestMenuItems,
+      afterRequest: [newFilter, requestMenuItems],
       message: "Filter created"
 
       // contentType:'default',
