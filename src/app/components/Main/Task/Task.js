@@ -17,6 +17,7 @@ import { browserHistory } from "react-router";
 import texts from "../../../../config/texts";
 import { timestampToDate, dateToTimestamp } from "../../../services/general";
 import ModalConfirmDelete from "../../common/ModalConfirmDelete";
+import { geolocated } from "react-geolocated";
 // import { withTranslate } from "../../../containers/translatable";
 // import i18next from "i18next";
 // const i18n = require("i18next");
@@ -211,7 +212,7 @@ class Task extends Component {
 
   formInputChangeHandler = (fieldName, value, e) => {
     // let obj={form[name]:value};
-    console.log("change", fieldName, "value:" + value);
+    // console.log("change", fieldName, "value:" + value);
 
     let name = fieldName;
 
@@ -261,7 +262,7 @@ class Task extends Component {
     }
 
     this.props.actions.isDirty(true);
-    this.setState({ form: form, formChanged: true }, console.log(this.state));
+    this.setState({ form: form, formChanged: true }); //, console.log(this.state));
   };
 
   /**
@@ -294,7 +295,13 @@ class Task extends Component {
         ? this.state.form.closed_at.date
         : this.state.form.closed_at;
 
-    console.log("save task values", values);
+    // console.log("save task values", values);
+
+    // console.log(
+    //   this.props.isGeolocationAvailable
+    //     ? this.props.coords
+    //     : "geo not available"
+    // );
 
     //TODO - toto upravit s apinou
     if (!values.started_at) {
@@ -328,6 +335,9 @@ class Task extends Component {
       customAttributes[v.id] = v.value;
     });
     sendValues.task_data = customAttributes;
+
+    console.log(customAttributes);
+    // return;
 
     // sendValues['started_at']='';
     this.props.actions.taskUpdate(sendValues, config, this.props.params.taskId);
@@ -446,11 +456,10 @@ class Task extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log('did update');
-
     if (prevProps.params.taskId !== this.props.params.taskId) {
       // browserHistory.goBack();
 
+      //nacita task na zakade id z adresy
       if (this.props.params.taskId) {
         this.props.actions.loadTaskById(this.props.params.taskId);
         this.props.actions.loadEntityList(
@@ -458,6 +467,7 @@ class Task extends Component {
         );
         this.setState({ creatingTask: false, errors: [] });
       } else {
+        //ak neni id, ale vytvara sa task
         //defaultne hodnoty pre formulare pri vytvarani tasku
         this.props.actions.loadEntityList(
           configResolver.loadProjectsWhereUserCanAddTask()
@@ -474,16 +484,8 @@ class Task extends Component {
     }
 
     if (prevProps.task !== this.props.task) {
-      // console.log(this.props.task);
-      // console.log('did update task component');
-
       let task = this.props.task;
       if (task) {
-        // console.log('timestamp',task.deadline);
-        // console.log('to date',timestampToDate(task.deadline));
-        // console.log('to timestamp',dateToTimestamp(timestampToDate(task.deadline)));
-
-        // console.log(task);
         let form = {
           title: task.title,
           description: task.description,
@@ -519,12 +521,17 @@ class Task extends Component {
               })
             : []
         };
-        // console.log(form.assigned,task)
-        // console.log('task data:',form.task_data)
 
-        this.setState({
-          form: form
-        });
+        // ak sa tasky lisia iba v komentaroch, tak sa tu neupdatne state
+        // tuto sa porovnaju task objekty bez komentarov. ak sa lisia, tak sa updatne formular
+        if (
+          JSON.stringify({ ...prevProps.task, comments: [] }) !=
+          JSON.stringify({ ...this.props.task, comments: [] })
+        ) {
+          this.setState({
+            form: form
+          });
+        }
       }
 
       if (this.props.params.taskId) {
@@ -539,6 +546,7 @@ class Task extends Component {
         );
       }
 
+      //ak sa prida komentar, vyresetuje sa komentarovy formular
       if (
         JSON.stringify(prevProps.task.comments) !==
         JSON.stringify(this.props.task.comments)
@@ -578,8 +586,11 @@ class Task extends Component {
       return <p>Task id: {this.props.params.taskId} ... line 480</p>;
     } else if (this.props.creatingTask) {
       return this.renderCreatingTask();
+    } else if (!this.props.creatingTask && !this.props.task) {
+      return null; //<p>no task</p>;
     } else {
-      return <p>Task id: {this.props.params.taskId} ... line last</p>;
+      return <p>Loading</p>;
+      // return <p>Task id: {this.props.params.taskId} ... line last</p>;
     }
 
     // if (this.props.task && this.props.task.loggedUserProjectAcl.indexOf('resolve_task')!==-1 && this.props.task.project.is_active) {
@@ -641,24 +652,11 @@ class Task extends Component {
   };
 
   renderTask = () => {
-    // console.log('render');
-    // console.log(this.props.task);
-    // return(<h1 {...this.props}>task</h1>)
-
-    // console.log(this.props.task.loggedUserProjectAcl.indexOf("delete_task"));
-
-    // console.log(i18next.t("key"), {
-    //   resources: "src/config/locales/en/common.json"
-    //   // 'src/config/locales'
-    // });
-
     return (
       <ViewEditable
         handleFileUpload={this.handleFileUpload}
         handleFileDownload={this.handleFileDownload}
         handleFileDelete={this.handleFileDelete}
-        // handleTaskCreate={this._onNewTaskCreate.bind(null, this.props.params.taskId)}
-
         handleTaskDeleteQWER={this._onNewTaskCancel.bind(
           null,
           this.props.params.taskId
@@ -747,5 +745,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  ModalConfirmDelete(Task)
+  geolocated({
+    positionOptions: {
+      enableHighAccuracy: false
+    },
+    userDecisionTimeout: 5000
+  })(ModalConfirmDelete(Task))
 );

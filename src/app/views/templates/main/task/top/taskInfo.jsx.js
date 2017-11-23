@@ -7,7 +7,7 @@ import TagList from "../../_partials/tags.jsx";
 const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
   const createdAtDate = timestampToDateString(task.createdAt);
   const startedAtDate = timestampToDateString(task.startedAt);
-  console.log(task.startedAt, startedAtDate);
+  // console.log(task.startedAt, startedAtDate);
 
   return (
     <div>

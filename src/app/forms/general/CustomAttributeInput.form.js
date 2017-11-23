@@ -89,6 +89,14 @@ class CustomAttributeInput extends Component {
       let options = Object.keys(customAttribute.options).map(key => {
         return { value: key, label: customAttribute.options[key] };
       });
+      // console.log(customAttribute);
+      // let options = [];
+
+      // if (customAttribute.options) {
+      //   options = customAttribute.options.split(",").map(item => {
+      //     return { value: item, label: item };
+      //   });
+      // }
 
       input = (
         <Select

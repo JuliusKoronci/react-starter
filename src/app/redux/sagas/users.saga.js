@@ -1,60 +1,68 @@
-import {call, put, takeLatest} from 'redux-saga/effects';
-import {REQUEST_USERS, UPLOAD_AVATAR,SEARCH_USERS} from '../constants';
-import {endAjax, startAjax, asyncError} from '../actions/async.action';
-import {usersReceived} from '../actions/settings.action';
-import {loadUsers as getUsers,searchUsers as searchInUsers} from '../../../api/users/users.api';
-import {apiUploadFile, defaultRequest} from '../../../api/api';
-import {entityUpdated} from '../../services/general';
+import { call, put, takeLatest } from "redux-saga/effects";
+import { REQUEST_USERS, UPLOAD_AVATAR, SEARCH_USERS } from "../constants";
+import { endAjax, startAjax, asyncError } from "../actions/async.action";
+import { usersReceived } from "../actions/settings.action";
+import { avatarUploaded } from "../actions/users.action";
+import {
+  loadUsers as getUsers,
+  searchUsers as searchInUsers
+} from "../../../api/users/users.api";
+import { apiUploadFile, defaultRequest } from "../../../api/api";
+import { entityUpdated } from "../../services/general";
 
-function *loadUsers(action) {
-    yield put(startAjax());
-    try {
-        const data = yield call(getUsers, action.url);
+function* loadUsers(action) {
+  yield put(startAjax());
+  try {
+    const data = yield call(getUsers, action.url);
 
-        yield put(usersReceived(data));
-    } catch (e) {
-        yield put(asyncError(e));
-    }
-    yield put(endAjax());
+    yield put(usersReceived(data));
+  } catch (e) {
+    yield put(asyncError(e));
+  }
+  yield put(endAjax());
 }
 
-function *searchUsers(action) {
-    yield put(startAjax());
-    try {
-        const data = yield call(searchInUsers, action.searchTerm);
+function* searchUsers(action) {
+  yield put(startAjax());
+  try {
+    const data = yield call(searchInUsers, action.searchTerm);
 
-        yield put(usersReceived(data));
-    } catch (e) {
-        yield put(asyncError(e));
-    }
-    yield put(endAjax());
+    yield put(usersReceived(data));
+  } catch (e) {
+    yield put(asyncError(e));
+  }
+  yield put(endAjax());
 }
 
+function* uploadAvatar(action) {
+  let config = action.config;
 
-function *uploadAvatar(action) {
-    let config = action.config;
+  yield put(startAjax());
+  try {
+    const data = yield call(apiUploadFile, config.uploadUrl, action.data);
+    // entityUpdated("File uploaded");
+    //upload image then update profile
+    const userData = yield call(
+      defaultRequest,
+      action.config.url,
+      "PUT",
+      { image: data.slug },
+      action.config
+    );
+    yield put(avatarUploaded(config, data, userData));
+    // entityUpdated('User updated');
+  } catch (e) {
+    yield put(asyncError(e));
+  }
 
-    yield put(startAjax());
-    try {
-        const data = yield call(apiUploadFile, config.uploadUrl, action.data);
-        entityUpdated('File uploaded');
-
-        yield call(defaultRequest, action.config.url, 'PUT', {'image':data.slug}, action.config);
-        entityUpdated('User updated');
-    } catch (e) {
-        yield put(asyncError(e));
-    }
-
-    yield put(endAjax());
+  yield put(endAjax());
 }
 
-export function *loadUsersDefault() {
-    yield takeLatest(REQUEST_USERS, loadUsers);
-    yield takeLatest(SEARCH_USERS, searchUsers);
-
+export function* loadUsersDefault() {
+  yield takeLatest(REQUEST_USERS, loadUsers);
+  yield takeLatest(SEARCH_USERS, searchUsers);
 }
 
-export function *uploadAvatarDefault() {
-    yield takeLatest(UPLOAD_AVATAR, uploadAvatar);
-
+export function* uploadAvatarDefault() {
+  yield takeLatest(UPLOAD_AVATAR, uploadAvatar);
 }

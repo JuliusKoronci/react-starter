@@ -91,6 +91,7 @@ const FilterTasks = props => {
         total={props.tasks.total}
         page={props.tasks.page}
         loadFunction={props.loadTasksFunction}
+        numberOfPages={props.tasks.numberOfPages}
       />
     </div>
   );

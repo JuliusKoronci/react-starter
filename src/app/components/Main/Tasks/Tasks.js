@@ -1,141 +1,98 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import * as actions from "../../../redux/actions/tasks.action";
-import * as generalActions from "../../../redux/actions/general.action";
+// import View from "./tasks.jsx";
+import View from "../../../views/templates/main/tasks/tasklist.jsx";
+import TasksHOC from "./TasksHOC";
+import tasksContainer from "../../../containers/Tasks/tasksContainer";
+import FilterForm from "./FilterForm";
 import configResolver from "../../../../config/configResolver";
 import { convertDateToApiString } from "../../../services/general";
-import ModalConfirmDelete from "../../common/ModalConfirmDelete";
 
-import View from "../../../views/templates/main/filter/filter.jsx";
-
-class Filter extends Component {
+class Tasks extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.filterConfig = configResolver.filterConfig(props.params.filterId);
-    this.filterOptionsConfig = configResolver.loadFilterOptionList();
-    this.filterTasksConfig = configResolver.loadFilterTasks();
-    this.canModifyPublicFilters = props.userAcl.indexOf("share_filters") !== -1;
-    // console.log('can modify',props.userAcl.indexOf('share_filters'));
-
-    this.defaultColumns = [
-      { title: true },
-      { requester: true },
-      { project: true },
-      { assigned: true },
-      { status: true },
-
-      { creator: false },
-      { taskCompany: false },
-      { tag: false },
-      // {owner: false},
-      { createdTime: false },
-      { startedTime: false },
-      { deadlineTime: false },
-      { closedTime: false }
-    ];
-
-    this.initialState = {
-      modalFilterForm: {
-        title: "",
-        public: false,
-        error: false
-      },
-      createFilterFormState: {},
-      saveFilterFormState: {},
-
-      modalOpen: false,
-      creatingFilter: !props.params.filterId,
-      filterFormVisible: props.formVisible || true,
-      sentValues: {},
-
-      getColumnsFromState: false,
-      columns: this.defaultColumns
+    this.state = {
+      search: "",
+      orderBy: "",
+      orderDirection: "",
+      hasSearch: false,
+      canOrder: false
     };
 
-    this.state = this.initialState;
-  }
-
-  // componentWillReceiveProps(nextProps){
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.params.filterId !== this.props.params.filterId ||
-      prevProps.filter !== this.props.filter
-    ) {
-      // this.forceUpdate();
-
-      this.setState({
-        modalFilterForm: {
-          title: "",
-          public: false,
-          error: false
-        },
-        createFilterFormState: {},
-        saveFilterFormState: {},
-        modalOpen: false,
-        creatingFilter: !this.props.params.filterId,
-        submitType: ""
-      });
-
-      // console.log("did update filter: ", this.props.filter);
-
-      // ak je definovany filter a ma columns, nacitaju sa do stateu
-      if (this.props.filter && this.props.filter.columns) {
-        let visibleColumnsFromFilter = [];
-        this.state.columns.forEach(column => {
-          let columnKey = Object.keys(column)[0];
-          const columnValue =
-            this.props.filter.columns.indexOf(Object.keys(column)[0]) !== -1;
-
-          visibleColumnsFromFilter.push({ [columnKey]: columnValue });
-        });
-
-        this.setState({ columns: visibleColumnsFromFilter });
-
-        // console.log(visibleColumnsFromFilter);
-      } else {
-        this.setState({
-          columns: this.defaultColumns
-        });
-      }
-
-      // console.log("filter:", this.props.filter);
-      // let requestTasksConfig = this.props.params.filterId
-      let requestTasksConfig =
-        this.props.filter && this.props.filter.id
-          ? configResolver.tasksConfig("filter", this.props.filter.id)
-          : configResolver.tasksConfig();
-
-      this.props.actions.requestTasks(requestTasksConfig);
-    }
-  }
-
-  componentWillMount() {
-    //ak je vybraty konkretny filter a neni v reduxe, tak sa natiahne
-    if (this.props.params.filterId && !this.props.filter) {
-      // alert('loading');
-      this.props.actions.loadEntityById(
-        this.props.params.filterId,
-        this.filterConfig
-      );
-    }
-
-    this.props.actions.loadEntityList(this.filterOptionsConfig);
-    this.props.actions.loadEntityList(this.filterTasksConfig);
-
-    //else{alert('not loading')}
+    console.log(props);
   }
 
   componentDidMount() {
-    let requestTasksConfig = this.props.params.filterId
-      ? configResolver.tasksConfig("filter", this.props.params.filterId)
-      : configResolver.tasksConfig();
-    this.props.actions.requestTasks(requestTasksConfig);
+    if (this.props.params.projectId || this.props.params.tagId) {
+      this.setState({ hasSearch: true, canOrder: true });
+    }
+
+    this.requestTasks();
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.params !== this.props.params) {
+      this.requestTasks();
+    }
+  }
+
+  requestTasks = () => {
+    let options = {
+      orderBy: this.state.orderBy
+        ? this.state.orderBy + "=>" + this.state.orderDirection
+        : "",
+      searchText: this.state.search
+    };
+
+    if (this.props.params.projectId) {
+      this.config = configResolver.tasksConfig(
+        "project",
+        this.props.params.projectId,
+        options
+      );
+    }
+    if (this.props.params.tagId) {
+      this.config = configResolver.tasksConfig(
+        "tag",
+        this.props.params.tagId,
+        options
+      );
+    }
+
+    // this.props.actions.requestTasks(this.config);
+  };
 
   loadTasksFunction = (url, e) => {
     this.props.actions.requestTasksFromUrl(url);
+  };
+
+  searchChangeHandler = e => {
+    let value = e.target.value;
+    this.setState({ search: value }, this.requestTasks);
+  };
+
+  orderByChangeHandler = e => {
+    let direction = "ASC";
+    let orderBy = e.target.getAttribute("data-order-by");
+    //change direction
+    if (this.state.orderBy === orderBy) {
+      if (this.state.orderDirection === "ASC") {
+        direction = "DESC";
+      }
+      if (this.state.orderDirection === "DESC") {
+        direction = "ASC";
+      }
+    }
+
+    this.setState(
+      {
+        orderBy: orderBy,
+        orderDirection: direction
+      },
+      this.requestTasks
+    );
+
+    // this.requestTasks();
   };
 
   newFilterFormChange = e => {
@@ -338,9 +295,8 @@ class Filter extends Component {
   };
 
   /**
-   *
+   * tu sa bud uklada filter, alebo len requestnu tasky, podla toho, na aky button sa kliklo (kvoli redux formu)
    */
-  // tu sa bud uklada filter, alebo len requestnu tasky, podla toho, na aky button sa kliklo (kvoli redux formu)
   onSubmit = (oldValues, e) => {
     console.log("SUBMIT TYPE TOP", this.state.submitType);
     if (this.state.submitType && this.state.submitType === "delete") {
@@ -380,7 +336,22 @@ class Filter extends Component {
     });
     console.log(values);
     // return;
-    let columns = this.state.columns.map(column => {
+    // let columns = this.state.columns.map(column => {
+    //   let key = Object.keys(column)[0];
+    //   if (
+    //     values.columns &&
+    //     values.columns.hasOwnProperty(key) &&
+    //     typeof column[key] !== "undefined" &&
+    //     !!values.columns[key]
+    //   ) {
+    //     return { [key]: true };
+    //   } else {
+    //     return { [key]: false };
+    //   }
+    // });
+
+    // TODO
+    let columns = this.props.activeColumns.map(column => {
       let key = Object.keys(column)[0];
       if (
         values.columns &&
@@ -458,92 +429,41 @@ class Filter extends Component {
   };
 
   render() {
-    // console.log(!!this.filter && this.filter.columns);
-    // console.log(this.state.columns);
-    // console.log('creating filter? ',this.state.creatingFilter);
-
+    console.log("tasks props", this.props);
     return (
-      <View
-        {...this.props}
-        creatingFilter={this.state.creatingFilter}
-        sentValues={this.state.sentValues}
-        toggleFilter={this.toggleFilter}
-        filterFormVisible={this.state.filterFormVisible}
-        toggleRowVisibility={this.toggleRowVisibility}
-        visibleFields={this.state.visibleFields}
-        columns={
-          this.filter && this.filter.columns
-            ? this.filter.columns
-            : this.state.columns
-        }
-        onSubmit={this.onSubmit}
-        loadTasksFunction={this.loadTasksFunction}
-        getFilterTasks={this.getFilterTasks}
-        ex_deleteFilter={this.deleteFilterHandler}
-        deleteFilter={e =>
-          this.props.openConfirmModal({
-            title: "Are you sure you want to delete the filter?",
-            onConfirm: ef => {
-              this.deleteFilter();
-            }
-          })}
-        resetRememberedFilter={this.resetRememberedFilter}
-        saveFilter={this.saveFilterHandler}
-        createFilter={this.createFilterHandler}
-        canModifyPublicFilters={this.canModifyPublicFilters}
-        getColumnsFromState={this.state.getColumnsFromState}
-        modalOpen={this.state.modalOpen}
-        modalClose={this.modalClose}
-        modalAfterOpen={e => {}}
-        modalFilterForm={this.state.modalFilterForm}
-        modalFilterFormChange={this.modalFilterFormChange}
-        newFilterFormSubmit={this.newFilterFormSubmitHandler}
-        modalFilterFormSubmit={this.modalFilterFormSubmitHandler}
-      />
+      <div>
+        <h2>Tasks</h2>
+        {this.props.filterEnabled &&
+          this.props.showFilter && (
+            <div>
+              <h1>Filter</h1>
+              <FilterForm
+                columns={this.props.columns}
+                filterOptions={this.props.filterOptions}
+                filterFormVisible={true}
+                getFilterTasks={this.getFilterTasks}
+                onSubmit={this.onSubmit}
+              />
+            </div>
+          )}
+        <div>
+          <View
+            {...this.props}
+            state={this.state}
+            loadTasksFunction={this.loadTasksFunction}
+            searchChange={this.searchChangeHandler}
+            orderByChange={this.orderByChangeHandler}
+            searchText={this.state.search}
+            orderBy={this.state.orderBy}
+            orderDirection={this.state.orderDirection}
+            reloadTasks={this.requestTasks}
+            hasSearch={this.state.hasSearch}
+            canOrder={this.state.canOrder}
+          />
+        </div>
+      </div>
     );
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const filterId = ownProps.params.filterId;
-
-  let filter;
-  let filterRemembered;
-  if (filterId) {
-    //ak je definovane id filtru
-    filter = state.system.menu.filters.filter(
-      filter => parseInt(filter.id, 10) === parseInt(filterId, 10)
-    );
-    filterRemembered = false;
-  } else {
-    //ak neni definovane id filtru v adrese, vyfiltruje defaultny filter z reduxu (filter.remembered:true)
-    filter = state.system.menu.filters.filter(filter => !!filter.remembered);
-    filterRemembered = true;
-  }
-
-  // console.log(filter);
-  const filterOptions = state.filters.options || [];
-  const filterFormValues =
-    state.form && state.form.filterForm && state.form.filterForm.values
-      ? state.form.filterForm.values
-      : {};
-
-  return {
-    filterFormVisible: state.filterFormVisible,
-    filter: filter.length > 0 ? filter[0] : false,
-    filterOptions: filterOptions,
-    tasks: state.tasks,
-    userAcl: state.auth.user.userRoleAcl,
-    filterFormValues: filterFormValues,
-    filterRemembered
-  };
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({ ...actions, ...generalActions }, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ModalConfirmDelete(Filter)
-);
+export default tasksContainer(TasksHOC(Tasks));

@@ -118,8 +118,6 @@ export const renderSelect = ({
 }) => {
   return (
     <div className="uk-form-row">
-      {/* <label htmlFor={input.name}>{label}</label> */}
-
       <Select
         label={label}
         {...input}
