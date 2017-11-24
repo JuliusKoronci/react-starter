@@ -36,7 +36,7 @@ export default ({
       />
       <div id="page_content">
         <div id="page_content_inner">
-          <div className="md-card">
+          <div className="md-card layout-background">
             {/*{children}*/}
             {React.cloneElement(children, { projects, tags })}
           </div>

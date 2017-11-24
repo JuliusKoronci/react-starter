@@ -71,11 +71,13 @@ class FilterForm extends Component {
       <form
         onSubmit={handleSubmit}
         className={
-          this.props.filterFormVisible ? "uk-width-medium-1-4" : "hidden"
+          this.props.filterFormVisible
+            ? "uk-width-medium-1-4 filter-background"
+            : "hidden"
         }
         id="filterDiv"
       >
-        <div className={"md-btn-group"}>
+        <div className={"md-btn-group uk-margin-top"}>
           {canDeleteFilter &&
             !this.props.filter.remembered && (
               <button

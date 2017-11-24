@@ -17,7 +17,9 @@ const FilterTasks = props => {
   return (
     <div
       className={
-        props.filterFormVisible ? "uk-width-medium-3-4" : "uk-width-medium-4-4"
+        props.filterFormVisible
+          ? "uk-width-medium-3-4 uk-margin-top"
+          : "uk-width-medium-4-4 uk-margin-top"
       }
       id="tasksDiv"
     >

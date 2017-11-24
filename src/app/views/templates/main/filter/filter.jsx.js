@@ -54,7 +54,7 @@ const Filter = props => {
 
           {filterLabel}
         </div>
-        <hr />
+        <hr style={{ margin: 0 }} />
 
         <div
           className="uk-grid uk-grid-divider"
