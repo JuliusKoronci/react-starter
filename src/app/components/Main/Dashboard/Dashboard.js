@@ -6,6 +6,7 @@ import * as actions from "../../../redux/actions/tasks.action";
 
 class Dashboard extends Component {
   componentDidMount() {
+    console.log("did mount dashboard");
     this.props.actions.requestDefaultTasks(
       this.props.params.filterId,
       this.props.params.search
@@ -17,6 +18,7 @@ class Dashboard extends Component {
       prevProps.params.filterId !== this.props.params.filterId ||
       prevProps.params.search !== this.props.params.search
     ) {
+      console.log("did update dashboard");
       this.props.actions.requestDefaultTasks(
         this.props.params.filterId,
         this.props.params.search

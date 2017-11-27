@@ -310,7 +310,7 @@ class Tasks extends Component {
     // MAP DATES
     ["closedTime", "startedTime", "deadlineTime", "createdTime"].map(field => {
       if (values[field + "Radio"] && values[field + "Radio"] === "now") {
-        values[field] = this.state.saveFilter ? "TO=NOW" : "TO%3DNOW";
+        values[field] = this.state.saveFilter ? "TO=now" : "TO%3Dnow";
         // console.log('now',[field]);
       } else {
         //if (values[field]['radio'] === 'timeRange') {

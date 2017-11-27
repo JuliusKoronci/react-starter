@@ -82,7 +82,11 @@ export function convertDateToApiString(date) {
 
 export function convertApiStringToDate(timestamp) {
   // po novom sa ziskava uz timestamp
-  return new Date(timestamp * 1000);
+  let string = timestamp + "";
+  string = string.replace("FROM=", "");
+  string = string.replace("TO=", "");
+  const ts = parseInt(string, 10);
+  return new Date(ts * 1000);
 
   // string = string.replace("FROM=", "");
   // string = string.replace("TO=", "");

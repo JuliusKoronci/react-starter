@@ -78,8 +78,6 @@ class Filter extends Component {
         submitType: ""
       });
 
-      // console.log("did update filter: ", this.props.filter);
-
       // ak je definovany filter a ma columns, nacitaju sa do stateu
       if (this.props.filter && this.props.filter.columns) {
         let visibleColumnsFromFilter = [];
@@ -102,36 +100,68 @@ class Filter extends Component {
 
       // console.log("filter:", this.props.filter);
       // let requestTasksConfig = this.props.params.filterId
-      let requestTasksConfig =
-        this.props.filter && this.props.filter.id
-          ? configResolver.tasksConfig("filter", this.props.filter.id)
-          : configResolver.tasksConfig();
+
+      // let requestTasksConfig =
+      //   this.props.filter && this.props.filter.id
+      //     ? configResolver.tasksConfig("filter", this.props.filter.id)
+      //     : configResolver.tasksConfig();
+
+      let requestTasksConfig = this.props.params.filterId
+        ? configResolver.tasksConfig("filter", this.props.params.filterId)
+        : configResolver.tasksConfig();
+      //defaultny filter
+      if (!this.props.params.filterId && this.props.filter) {
+        console.log("on update - default filter config", this.props.filter);
+        requestTasksConfig = configResolver.tasksConfig(
+          "filter",
+          this.props.filter.id
+        );
+      }
 
       this.props.actions.requestTasks(requestTasksConfig);
+      console.log("did update request tasks", this.props.params.filterId);
     }
   }
 
   componentWillMount() {
     //ak je vybraty konkretny filter a neni v reduxe, tak sa natiahne
-    if (this.props.params.filterId && !this.props.filter) {
-      // alert('loading');
-      this.props.actions.loadEntityById(
-        this.props.params.filterId,
-        this.filterConfig
-      );
-    }
+    // if (this.props.params.filterId && !this.props.filter) {
+    //   console.log("loading filter");
+    //   this.props.actions.loadEntityById(
+    //     this.props.params.filterId,
+    //     this.filterConfig
+    //   );
+    // }
 
+    //toto natiahne options do selectov
     this.props.actions.loadEntityList(this.filterOptionsConfig);
-    this.props.actions.loadEntityList(this.filterTasksConfig);
-
-    //else{alert('not loading')}
+    // this.props.actions.loadEntityList(this.filterTasksConfig);
+    // console.log(
+    //   "will mount load entity list - request tasks?",
+    //   this.filterTasksConfig,
+    //   this.props.params.filterId
+    // );
   }
 
   componentDidMount() {
     let requestTasksConfig = this.props.params.filterId
       ? configResolver.tasksConfig("filter", this.props.params.filterId)
       : configResolver.tasksConfig();
+
+    if (!this.props.params.filterId && this.props.filter) {
+      console.log("on did mount - default filter config", this.props.filter);
+      requestTasksConfig = configResolver.tasksConfig(
+        "filter",
+        this.props.filter.id
+      );
+    }
+
     this.props.actions.requestTasks(requestTasksConfig);
+    console.log(
+      "did mount request tasks",
+      requestTasksConfig,
+      this.props.params.filterId
+    );
   }
 
   loadTasksFunction = (url, e) => {
@@ -175,7 +205,7 @@ class Filter extends Component {
   };
 
   getFilterTasks = () => {
-    // console.log("get filter tasks");
+    console.log("get filter tasks");
     this.setState({ saveFilter: false });
     this.setState({ submitType: "request-tasks" });
   };
@@ -248,6 +278,7 @@ class Filter extends Component {
     let config = configResolver.saveRememberedFilter(values);
     this.props.actions.generalRequest(config.data, config);
     this.props.actions.requestTasks(configResolver.loadFilterTasks(values));
+    console.log("request tasks from save remembered filter", values);
   };
 
   resetRememberedFilter = e => {
@@ -354,7 +385,7 @@ class Filter extends Component {
     // MAP DATES
     ["closedTime", "startedTime", "deadlineTime", "createdTime"].map(field => {
       if (values[field + "Radio"] && values[field + "Radio"] === "now") {
-        values[field] = this.state.saveFilter ? "TO=NOW" : "TO%3DNOW";
+        values[field] = this.state.saveFilter ? "TO=now" : "TO%3Dnow";
         // console.log('now',[field]);
       } else {
         //if (values[field]['radio'] === 'timeRange') {
@@ -448,6 +479,7 @@ class Filter extends Component {
 
     this.setState({ submitType: "" });
 
+    console.log("load filter tasks from submit", filterValues);
     this.props.actions.requestTasks(
       configResolver.loadFilterTasks(filterValues)
     );
@@ -514,6 +546,7 @@ function mapStateToProps(state, ownProps) {
     filter = state.system.menu.filters.filter(
       filter => parseInt(filter.id, 10) === parseInt(filterId, 10)
     );
+    // console.log(filter)
     filterRemembered = false;
   } else {
     //ak neni definovane id filtru v adrese, vyfiltruje defaultny filter z reduxu (filter.remembered:true)

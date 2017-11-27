@@ -451,7 +451,11 @@ function mapStateToProps(state, ownProps) {
       initialValues[picker] = {};
       initialValues[picker + "Radio"] = "timeRange";
 
-      if (filter.filter[picker] && filter.filter[picker] === "TO=NOW") {
+      if (
+        filter.filter[picker] &&
+        (filter.filter[picker] === "TO=now" ||
+          filter.filter[picker] === "TO%3Dnow")
+      ) {
         initialValues[picker + "Radio"] = "now";
       } else if (
         filter.filter[picker] &&

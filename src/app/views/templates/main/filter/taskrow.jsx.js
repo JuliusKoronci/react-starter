@@ -4,6 +4,7 @@ import TaskAssignees from "../tasks/taskrow/task_assignees.jsx";
 import TaskStatus from "../tasks/taskrow/task_status.jsx";
 import { Link } from "react-router";
 import dateFormat from "../../../../services/formatedDate";
+import { timestampToDateString } from "../../../../services/general";
 
 const taskrow = ({ task, columns }) => {
   // console.log(columns);
@@ -76,36 +77,34 @@ const taskrow = ({ task, columns }) => {
         if (col.createdTime) {
           return (
             <td key={i}>
-              {task.createdAt && task.createdAt.date
+              {/* {task.createdAt && task.createdAt.date
                 ? dateFormat(task.createdAt.date)
-                : "-"}
+                : "-"} */}
+              {task.createdAt ? timestampToDateString(task.createdAt) : "-"}
             </td>
           );
         }
         if (col.startedTime) {
           return (
             <td key={i}>
-              {task.startedAt && task.startedAt.date
+              {/* {task.startedAt && task.startedAt.date
                 ? dateFormat(task.startedAt.date)
-                : "-"}
+                : "-"} */}
+              {task.startedAt ? timestampToDateString(task.startedAt) : "-"}
             </td>
           );
         }
         if (col.deadlineTime) {
           return (
             <td key={i}>
-              {task.deadline && task.deadline.date
-                ? dateFormat(task.deadline.date)
-                : "-"}
+              {task.deadline ? timestampToDateString(task.deadline) : "-"}
             </td>
           );
         }
         if (col.closedTime) {
           return (
             <td key={i}>
-              {task.closedAt && task.closedAt.date
-                ? dateFormat(task.closedAt.date)
-                : "-"}
+              {task.closedAt ? timestampToDateString(task.closedAt) : "-"}
             </td>
           );
         }
