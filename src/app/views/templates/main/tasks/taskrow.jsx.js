@@ -3,7 +3,7 @@ import TagList from "../_partials/tags.jsx";
 import TaskAssignees from "./taskrow/task_assignees.jsx";
 import TaskStatus from "./taskrow/task_status.jsx";
 import { Link } from "react-router";
-import dateFormat from "../../../../services/formatedDate";
+// import dateFormat from "../../../../services/formatedDate";
 import { timestampToDateString } from "../../../../services/general";
 
 const taskrow = ({ task }) => {

@@ -40,6 +40,7 @@ import {
 import { entityUpdated } from "../../services/general";
 
 function* defaultTasks(action) {
+  console.log("default tasks, tasks.saga", action);
   yield put(startAjaxReset());
   try {
     const data = yield call(defaultFilter, action.filterId, action.search);
@@ -66,6 +67,7 @@ function* loadTasksUrl(action) {
 }
 
 function* loadTasksWithParams(action) {
+  console.log("load tasks with params", action);
   yield put(startAjaxReset());
   try {
     const data = yield call(defaultGET, action.url, action.config);

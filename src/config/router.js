@@ -141,6 +141,10 @@ export default (
     <Route path="/" component={Main}>
       {/* <IndexRoute component={Tasks} /> */}
       <IndexRoute component={Dashboard} />
+      {/* <Route exact path="/" component={Dashboard} /> */}
+      <Route exact path="/" component={Dashboard} />
+      <Route name="filter_edit" path={paths.filter_edit} component={Filter} />
+      <Route name="filter" path={paths.filter} component={Filter} />
       <Route path={paths.filters} component={Dashboard} />
       <Route path={paths.task_list} component={Task} />
       <Route path={paths.tasks_search} component={Dashboard} />
@@ -148,8 +152,6 @@ export default (
       <Route path={paths.task_create} component={Task} />
       <Route path={paths.task_show} component={Task} />
       <Route path={paths.profile} component={Profile} />
-      <Route name="filter" path={paths.filter_edit} component={Filter} />
-      <Route name="filter" path={paths.filter} component={Filter} />
 
       <Route path={paths.project_tasks} component={TaskList} />
       <Route path={paths.tag_tasks} component={TaskList} />
@@ -300,7 +302,7 @@ export default (
 
       <Route name="tag" path={paths.tag_add} component={Tag} />
       <Route name="tag" path={paths.tag_edit} component={Tag} />
-
+      {/* <Route exact path="/" component={Dashboard} /> */}
       <Route path="*" component={NotFoundPage} />
     </Route>
   </Route>

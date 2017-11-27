@@ -38,8 +38,8 @@ export default ({
       <div id="page_content">
         <div id="page_content_inner">
           <div className="md-card">
-            {/*{children}*/}
-            {React.cloneElement(children, { projects, tags })}
+            {children}
+            {/* {React.cloneElement(children, { projects, tags })} */}
           </div>
         </div>
       </div>

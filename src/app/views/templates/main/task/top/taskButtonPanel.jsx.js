@@ -10,6 +10,7 @@ const taskButtonPanel = ({
   handleCancelClick,
   errors
 }) => {
+  // console.log(Router, browserHistory);
   return (
     <div>
       <div className="md-btn-group">
@@ -72,20 +73,20 @@ const taskButtonPanel = ({
             Important
           </button>
         )}
-
-
       </div>
 
-
-        {errors &&
+      {errors &&
         errors.length > 0 && (
-            <div className="">
-                {errors.map(er => {
-                    return <p key={er} style={{color:'red'}}>{er}</p>;
-                })}
-            </div>
+          <div className="">
+            {errors.map(er => {
+              return (
+                <p key={er} style={{ color: "red" }}>
+                  {er}
+                </p>
+              );
+            })}
+          </div>
         )}
-
     </div>
   );
 };
