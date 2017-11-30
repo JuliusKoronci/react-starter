@@ -21,7 +21,8 @@ const summary = ({
             options={options.tag.map(tag => {
               return {
                 value: tag.id,
-                label: tag.title
+                label: tag.title,
+                color: tag.color
               };
             })}
             setValues={values => {

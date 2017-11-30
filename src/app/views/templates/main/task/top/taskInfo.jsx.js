@@ -36,9 +36,9 @@ const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
           {task.id} {task.title}
         </p>
       )}
-      <div style={{ marginTop: "-2em", marginBottom: "1em" }}>
+      {/* <div style={{ marginTop: "-2em", marginBottom: "1em" }}>
         <TagList task={{ tags: form.tags }} />
-      </div>
+      </div> */}
     </div>
   );
 };
