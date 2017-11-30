@@ -68,7 +68,15 @@ const taskrow = ({ task, columns }) => {
           return (
             <td key={i}>
               {task.tags.map(tag => {
-                return tag.title;
+                return (
+                  <span
+                    key={tag.id}
+                    className="uk-badge"
+                    style={{ background: "#" + tag.color.replace("#", "") }}
+                  >
+                    {tag.title}
+                  </span>
+                );
               })}
             </td>
           );

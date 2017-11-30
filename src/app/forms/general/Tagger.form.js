@@ -1,6 +1,11 @@
 import React, { PropTypes, Component } from "react";
 import { Creatable } from "react-select";
 
+// const renderSelectValue = value => {
+//   console.log(value);
+//   return <div>CustomValue:{value}</div>;
+// };
+
 class Tagger extends Component {
   constructor(props, context) {
     super(props, context);
@@ -30,39 +35,38 @@ class Tagger extends Component {
   }
 
   onChange = values => {
-    console.log("on change");
+    console.log("on change", values);
     // this.props.input.onChange(values);
     // console.log('tagger on change ', values);
-    let newValue = values
-      .map(value => {
-        return value.value;
-      })
-      .filter(val => val !== "")
-      .join();
-    this.props.input.onChange(newValue);
+    // let newValue = values
+    //   .map(value => {
+    //     return value.value;
+    //   })
+    //   .filter(val => val !== "")
+    //   .join();
+    // this.props.input.onChange(newValue);
+
+    let newValue = values.map(value => {
+      return value.value;
+    });
+    let unique = [...new Set(newValue)].join();
+    this.props.input.onChange(unique);
   };
 
   newOptionClick = value => {
-    console.log("new option click ", value);
+    // console.log("new option click ", value);
+
     let newValue =
       (this.props.input.value ? this.props.input.value + "," : "") +
       value.value;
-
-    // console.log(this.props.input.value);
-    // console.log(newValue);
+    console.log(this.props.input.value, newValue);
     this.props.input.onChange(newValue);
+
+    return newValue;
   };
-  //
-  // onSetValues = (values) => {
-  //     console.log('on set values:', values);
-  // };
-  //
-  // selectValue = (value) => {
-  //     console.log('select value: ', value);
-  // };
 
   render() {
-    const values = this.values;
+    // const values = this.values;
     // const values = this.props.input.value
     //   .split(",")
     //   .filter(v => v !== "")
@@ -73,18 +77,32 @@ class Tagger extends Component {
     //     };
     //   });
 
+    let inputValue = Array.isArray(this.props.input.value)
+      ? this.props.input.value.join(",")
+      : this.props.input.value;
+    // this.props.input.value += "";
+    const values = inputValue.split(",").map(value => {
+      if (value !== "") {
+        return {
+          value,
+          label: value
+          // className: value
+        };
+      }
+      return null;
+    });
+
     return (
       <div>
-        <input
+        {/* <input
           type="hidden"
           value={values}
           name={this.props.input.name}
           {...this.props.input}
-        />
+        /> */}
         <label htmlFor={this.props.input.name}>{this.props.label}</label>
         <Creatable
           className="md-input"
-          //value={this.props.tagValues}
           value={values}
           /*
                      options={this.props.input.value.split(',').map(option => {
@@ -95,6 +113,7 @@ class Tagger extends Component {
                      */
 
           joinValues={true}
+          unique={true}
           multi={true}
           onChange={this.onChange}
           onBlurResetsInput={false}
@@ -117,8 +136,8 @@ class Tagger extends Component {
           //     this.onSetValues(values);
           // }}
 
-          onNewOptionClick={this.newOptionClick}
-          selectValue={this.selectValue}
+          sssonNewOptionClick={this.newOptionClick}
+          ssselectValue={this.selectValue}
         />
       </div>
     );

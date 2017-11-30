@@ -303,7 +303,6 @@ class Task extends Component {
     //     : "geo not available"
     // );
 
-    //TODO - toto upravit s apinou
     if (!values.started_at) {
       values.started_at = "null";
     } else {
@@ -331,12 +330,30 @@ class Task extends Component {
     });
     // console.debug(values.task_data);
     let sendValues = Object.assign({}, values);
+    //custom attributes null
     values.task_data.map(v => {
-      customAttributes[v.id] = v.value;
+      let customAttributeValue = v.value;
+      if (customAttributeValue == "") {
+        customAttributeValue = "null";
+      }
+      //datepicker null
+      let customAttribute = this.props.options.taskAttributes.filter(
+        ta => v.id === ta.id
+      );
+      if (
+        customAttribute.length &&
+        customAttribute[0].type === "date" &&
+        Number.isNaN(v.value)
+      ) {
+        customAttributeValue = "null";
+      }
+
+      customAttributes[v.id] = customAttributeValue;
     });
+
     sendValues.task_data = customAttributes;
 
-    console.log(customAttributes);
+    // console.log(sendValues, this.props.options);
     // return;
 
     // sendValues['started_at']='';
@@ -344,7 +361,6 @@ class Task extends Component {
 
     this.props.actions.isDirty(false);
     this.setState({ formChanged: false });
-    // console.log(values);
   };
 
   handleCommentFileUpload = e => {

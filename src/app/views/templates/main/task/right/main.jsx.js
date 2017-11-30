@@ -38,7 +38,6 @@ const main = ({
         user={form.assigned}
         action={statusChange}
       />
-
       <Select
         label="Project"
         icon="&#xE2C8;"
@@ -58,7 +57,6 @@ const main = ({
           formInputChangeHandler("project", e.target.value);
         }}
       />
-
       <Select
         label="Requester"
         icon="&#xE7FD;"
@@ -78,7 +76,6 @@ const main = ({
         }}
         action={formInputChangeHandler}
       />
-
       <Select
         label="Company"
         icon="&#xE7EE;"
@@ -96,7 +93,6 @@ const main = ({
         name="company"
         action={formInputChangeHandler}
       />
-
       <Select
         label="Assigned"
         icon="&#xE7FD;"
@@ -116,20 +112,16 @@ const main = ({
         name="assigned"
         action={formInputChangeHandler}
       />
-
       {/*<span className="uk-input-group-addon"><i className="material-icons">&#xE7FE;</i></span>*/}
       {/*<label className="uk-text-muted">Assigned</label>*/}
       {/*<ReactSelect multi={true}*/}
       {/*value={*/}
-
       {/*form.assigned.map((tHuser, i) => {*/}
       {/*// console.log(tHuser)*/}
-
       {/*return {*/}
       {/*value: tHuser.userId,*/}
       {/*label: tHuser.username*/}
       {/*}*/}
-
       {/*// return {*/}
       {/*//     value: tHuser.user.id,*/}
       {/*//     label: tHuser.user.username*/}
@@ -140,12 +132,10 @@ const main = ({
       {/*joinValues={true}*/}
       {/*onChange={(values) => {*/}
       {/*formInputChangeHandler('assigned',values.map(value=>{return {userId:value.value,username:value.label} }))*/}
-
       {/*// const config = configResolver.assignUser(values, task.id, null);*/}
       {/*// actions.patchEntity(config, config.values);*/}
       {/*}}*/}
       {/*/>*/}
-
       {/*
             TODO
             */}
@@ -194,7 +184,8 @@ const main = ({
         options={options.tag.map(tag => {
           return {
             value: tag.id,
-            label: tag.title
+            label: tag.title,
+            color: tag.color
           };
         })}
         setValues={values => {
@@ -203,7 +194,6 @@ const main = ({
           // actions.patchEntity(config, config.values);
         }}
       />
-
       {/*<Repeat/>*/}
       <Attachment
         task={task}
@@ -211,13 +201,11 @@ const main = ({
         handleFileDownload={handleFileDownload}
         handleFileDelete={handleFileDelete}
       />
-
       {taskAttributes.map(ta => {
         {
           /* console.log(taskAttributes); */
         }
         let name = ta.id;
-
         let attributeData = null;
 
         let value = form.task_data.filter(
@@ -229,11 +217,9 @@ const main = ({
         } else {
           value = "";
         }
-
         // console.log(ta);
         // return(<div>Ca</div>);
         //
-
         return (
           <div key={ta.id}>
             <CustomAttributeInput
