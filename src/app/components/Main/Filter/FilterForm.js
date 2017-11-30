@@ -325,7 +325,11 @@ class FilterForm extends Component {
               component={renderMultiselect}
               label="Tags"
               defaultOptions={filterOptions.tag.map(option => {
-                return { value: option.id, label: option.title };
+                return {
+                  value: option.id,
+                  label: option.title,
+                  color: option.color
+                };
               })}
             />
           </div>

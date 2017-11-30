@@ -30,39 +30,25 @@ class Tagger extends Component {
   }
 
   onChange = values => {
-    console.log("on change");
-    // this.props.input.onChange(values);
-    // console.log('tagger on change ', values);
-    let newValue = values
-      .map(value => {
-        return value.value;
-      })
-      .filter(val => val !== "")
-      .join();
-    this.props.input.onChange(newValue);
+    let newValue = values.map(value => {
+      return value.value;
+    });
+    let unique = [...new Set(newValue)].join();
+    this.props.input.onChange(unique);
   };
 
   newOptionClick = value => {
-    console.log("new option click ", value);
     let newValue =
       (this.props.input.value ? this.props.input.value + "," : "") +
       value.value;
-
-    // console.log(this.props.input.value);
-    // console.log(newValue);
+    // console.log(this.props.input.value, newValue);
     this.props.input.onChange(newValue);
+
+    return newValue;
   };
-  //
-  // onSetValues = (values) => {
-  //     console.log('on set values:', values);
-  // };
-  //
-  // selectValue = (value) => {
-  //     console.log('select value: ', value);
-  // };
 
   render() {
-    const values = this.values;
+    // const values = this.values;
     // const values = this.props.input.value
     //   .split(",")
     //   .filter(v => v !== "")
@@ -73,52 +59,31 @@ class Tagger extends Component {
     //     };
     //   });
 
+    let inputValue = Array.isArray(this.props.input.value)
+      ? this.props.input.value.join(",")
+      : this.props.input.value;
+    // this.props.input.value += "";
+    const values = inputValue.split(",").map(value => {
+      if (value !== "") {
+        return {
+          value,
+          label: value
+        };
+      }
+      return null;
+    });
+
     return (
       <div>
-        <input
-          type="hidden"
-          value={values}
-          name={this.props.input.name}
-          {...this.props.input}
-        />
         <label htmlFor={this.props.input.name}>{this.props.label}</label>
         <Creatable
           className="md-input"
-          //value={this.props.tagValues}
           value={values}
-          /*
-                     options={this.props.input.value.split(',').map(option => {
-                     return {
-                     value: option,
-                     label: option
-                     }})}
-                     */
-
           joinValues={true}
+          unique={true}
           multi={true}
           onChange={this.onChange}
           onBlurResetsInput={false}
-          //onInputChange={ this.onChange }
-
-          /*
-                     {...this.props.input}
-
-
-                     options={['option1','option2'].map(option => {
-                     return {
-                     value: option,
-                     label: option
-                     }
-                     })}
-                     */
-
-          // setValues={(values) => {
-          //     console.log('set vals');
-          //     this.onSetValues(values);
-          // }}
-
-          onNewOptionClick={this.newOptionClick}
-          selectValue={this.selectValue}
         />
       </div>
     );

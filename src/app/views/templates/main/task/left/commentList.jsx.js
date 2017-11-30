@@ -24,14 +24,14 @@ const commentList = ({ task, handleFileDownload }) => {
         let date = timestampToDateString(comment.createdAt);
 
         let username = comment.createdBy.username;
-
         let initials =
-          (comment.createdBy.name
-            ? comment.createdBy.name.charAt(0)
-            : "undef first name ") +
+          (comment.createdBy.name ? comment.createdBy.name.charAt(0) : "") +
           (comment.createdBy.surname
             ? comment.createdBy.surname.charAt(0)
-            : "undef surname");
+            : "");
+        if (initials === "") {
+          initials = username.charAt(0);
+        }
         // let attachments=[];
         let avatar = (
           <div className="timeline_icon timeline_icon_success">

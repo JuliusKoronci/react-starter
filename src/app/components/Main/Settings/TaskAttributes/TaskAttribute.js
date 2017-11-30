@@ -30,11 +30,13 @@ class TaskAttribute extends Component {
 
   componentWillMount() {
     if (this.entityId && !this.props.taskAttribute) {
+      //nacita attribut, ak neni v reduxe
       this.props.actions.loadEntityById(this.entityId, this.entityConfig);
     }
   }
+
   setCustomValues = values => {
-    console.log("set values " + values);
+    console.log("task attribute set values " + values);
     this.setState({
       customValues: values
     });
@@ -52,13 +54,17 @@ class TaskAttribute extends Component {
     // }
     // console.log(valuesToSend);
 
-    valuesToSend.options = JSON.stringify([
-      { asdf: "asdf" },
-      { "1234": "1234" },
-      { "568": "568" }
-    ]);
+    // valuesToSend.options = JSON.stringify([
+    //   { asdf: "asdf" },
+    //   { "1234": "1234" },
+    //   { "568": "568" }
+    // ]);
+    // valuesToSend.options = JSON.stringify(["asdf", "1234", "dgh", "uy"]);
+
+    // console.log(valuesToSend);
     // console.log(queryString.stringify(valuesToSend));
     // return;
+
     if (this.entityId) {
       let config = configResolver.taskAttributeUpdate(this.entityId);
       this.props.actions.updateEntity(this.entityId, valuesToSend, config);

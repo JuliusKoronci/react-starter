@@ -1,23 +1,31 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import DatePicker from "../../forms/Task/Datepicker.form";
+import {
+  timestampToDate,
+  dateToTimestamp,
+  convertApiStringToDate
+} from "../../services/general";
 
 class CustomAttributeInput extends Component {
-  // constructor(props, context) {
-  //     super(props, context);
-  // }
-
   onChange = value => {
     // console.error('changed ',this.props.name,this.props.title,this.props.type);
     this.props.action(this.props.name, value);
   };
 
   formInputChangeHandler = (name, value) => {
+    if (this.props.type === "date") {
+      let timestamp = Date.parse(value) / 1000;
+      return this.onChange(timestamp);
+    }
     this.onChange(value);
   };
 
   onChangeSimpleSelect = value => {
-    this.onChange(value.value);
+    if (value !== null) {
+      return this.onChange(value.value);
+    }
+    this.onChange(null);
   };
 
   onChangeSelect = value => {
@@ -35,8 +43,6 @@ class CustomAttributeInput extends Component {
 
   render() {
     const { value, type, title, customAttribute } = this.props;
-    // console.log(type);
-    // console.log(customAttribute);
     let input = type;
 
     //textovy input
@@ -69,10 +75,14 @@ class CustomAttributeInput extends Component {
     }
     //date
     if (type === "date") {
+      let dateValue =
+        value && Number.isInteger(parseInt(value, 10))
+          ? timestampToDate(parseInt(value, 10))
+          : value;
       input = (
         <DatePicker
           action={this.formInputChangeHandler}
-          value={value}
+          value={dateValue}
           fieldName={name}
           label={title}
           icon="false"
@@ -86,9 +96,13 @@ class CustomAttributeInput extends Component {
       //   let options = customAttribute.options.split(",").map(option => {
       //     return { value: option, label: option };
       //   });
-      let options = Object.keys(customAttribute.options).map(key => {
-        return { value: key, label: customAttribute.options[key] };
+      // let options = Object.keys(customAttribute.options).map(key => {
+      //   return { value: key, label: customAttribute.options[key] };
+      // });
+      let options = customAttribute.options.split(",").map(value => {
+        return { value: value, label: value };
       });
+
       // console.log(customAttribute);
       // let options = [];
 
