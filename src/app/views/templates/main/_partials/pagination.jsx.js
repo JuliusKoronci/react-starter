@@ -67,88 +67,92 @@ class Pagination extends React.PureComponent {
       }
     }
     return (
-      <div>
-        {paginationSetter && paginationSetter}
+      <div className="uk-grid">
+        <div className="uk-width-medium-1-3 uk-row-first">
+          {paginationSetter && paginationSetter}
+        </div>
+        <div className="uk-width-medium-1-3 uk-row-first">
+          <ul className="uk-pagination uk-margin-medium-bottom">
+            {links &&
+              links.first &&
+              links.first !== links.self && (
+                <li onClick={loadFunction.bind(null, links.first)}>
+                  <a href="#" onClick={e => e.preventDefault()}>
+                    <i className="uk-icon-angle-double-left" />
+                  </a>
+                </li>
+              )}
 
-        <ul className="uk-pagination uk-margin-medium-top uk-margin-medium-bottom">
-          {links &&
-            links.first &&
-            links.first !== links.self && (
-              <li onClick={loadFunction.bind(null, links.first)}>
-                <a href="#" onClick={e => e.preventDefault()}>
-                  <i className="uk-icon-angle-double-left" />
-                </a>
-              </li>
-            )}
+            {links &&
+              links.prev && (
+                <li onClick={loadFunction.bind(null, links.prev)}>
+                  <a href="#" onClick={e => e.preventDefault()}>
+                    <i className="uk-icon-angle-left" />
+                  </a>
+                </li>
+              )}
 
-          {links &&
-            links.prev && (
-              <li onClick={loadFunction.bind(null, links.prev)}>
-                <a href="#" onClick={e => e.preventDefault()}>
-                  <i className="uk-icon-angle-left" />
-                </a>
-              </li>
-            )}
+            {/* linky na predosle pages */}
+            {prevPagesLinks &&
+              prevPagesLinks.map(item => (
+                <li
+                  onClick={loadFunction.bind(null, item.link)}
+                  key={"prev" + item.pageNr}
+                >
+                  <a href="#" onClick={e => e.preventDefault()}>
+                    {item.pageNr}
+                  </a>
+                </li>
+              ))}
+            {/* linky na predosle pages */}
 
-          {/* linky na predosle pages */}
-          {prevPagesLinks &&
-            prevPagesLinks.map(item => (
-              <li
-                onClick={loadFunction.bind(null, item.link)}
-                key={"prev" + item.pageNr}
-              >
-                <a href="#" onClick={e => e.preventDefault()}>
-                  {item.pageNr}
-                </a>
-              </li>
-            ))}
-          {/* linky na predosle pages */}
+            {/* aktualny link */}
+            <li className="uk-active">
+              <span>{page}</span>
+            </li>
+            {/* aktualny link */}
 
-          {/* aktualny link */}
-          <li className="uk-active">
-            <span>{page}</span>
-          </li>
-          {/* aktualny link */}
+            {/* linky na dalsie pages */}
+            {nextPagesLinks &&
+              nextPagesLinks.map(item => (
+                <li
+                  onClick={loadFunction.bind(null, item.link)}
+                  key={"next" + item.pageNr}
+                >
+                  <a href="#" onClick={e => e.preventDefault()}>
+                    {item.pageNr}
+                  </a>
+                </li>
+              ))}
+            {/* linky na dalsie pages */}
 
-          {/* linky na dalsie pages */}
-          {nextPagesLinks &&
-            nextPagesLinks.map(item => (
-              <li
-                onClick={loadFunction.bind(null, item.link)}
-                key={"next" + item.pageNr}
-              >
-                <a href="#" onClick={e => e.preventDefault()}>
-                  {item.pageNr}
-                </a>
-              </li>
-            ))}
-          {/* linky na dalsie pages */}
+            {links &&
+              links.next && (
+                <li onClick={loadFunction.bind(null, links.next)}>
+                  <a href="#" onClick={e => e.preventDefault()}>
+                    <i className="uk-icon-angle-right" />
+                  </a>
+                </li>
+              )}
 
-          {links &&
-            links.next && (
-              <li onClick={loadFunction.bind(null, links.next)}>
-                <a href="#" onClick={e => e.preventDefault()}>
-                  <i className="uk-icon-angle-right" />
-                </a>
-              </li>
-            )}
-
-          {links &&
-            links.last &&
-            links.last !== links.self && (
-              <li onClick={loadFunction.bind(null, links.last)}>
-                <a href="#" onClick={e => e.preventDefault()}>
-                  <i className="uk-icon-angle-double-right" />
-                </a>
-              </li>
-            )}
-        </ul>
-
-        <p style={{ textAlign: "center" }}>
-          Showing {fromTaskNumber} to{" "}
-          {toTaskNumber < total ? toTaskNumber : total} of {total} entries<br />
-          {page}/{numberOfPages}
-        </p>
+            {links &&
+              links.last &&
+              links.last !== links.self && (
+                <li onClick={loadFunction.bind(null, links.last)}>
+                  <a href="#" onClick={e => e.preventDefault()}>
+                    <i className="uk-icon-angle-double-right" />
+                  </a>
+                </li>
+              )}
+          </ul>
+        </div>
+        <div className="uk-width-medium-1-3 uk-row-first">
+          <p style={{ textAlign: "right" }}>
+            Showing {fromTaskNumber} to{" "}
+            {toTaskNumber < total ? toTaskNumber : total} of {total} entries
+            {/* {page}/{numberOfPages} */}
+          </p>
+        </div>
       </div>
     );
   }
