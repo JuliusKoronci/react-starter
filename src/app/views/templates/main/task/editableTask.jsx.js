@@ -11,16 +11,20 @@ import TaskButtonPanel from "./top/taskButtonPanel.jsx";
 
 const editableTask = props => {
   return (
-    <div className="md-card-content" style={props.formChanged ? {borderStyle:'solid',borderColor:'#8b4'}:{borderStyle:'solid',borderColor:'#fff'}}  >
+    <div
+      className="md-card-content task-div"
+      style={
+        props.formChanged
+          ? { borderStyle: "solid", borderColor: "#8b4" }
+          : { borderStyle: "solid", borderColor: "#fff" }
+      }
+    >
       <div
         className="uk-form-row"
         style={
-          props.formChangedd ? (
-            { margin: "-8px", padding: "3px", border: "blue 1px solid" }
-          ) : (
-            {}
-          )
-
+          props.formChangedd
+            ? { margin: "-8px", padding: "3px", border: "blue 1px solid" }
+            : {}
         }
       >
         {props.newTask && <NewTaskPannel {...props} />}
@@ -29,19 +33,17 @@ const editableTask = props => {
         <hr />
 
         <div className="uk-grid uk-grid-divider" data-uk-grid-margin>
-          <div className="uk-width-medium-1-4">
-              {/*{props.formChanged && <h1>Form changed</h1>}*/}
-      <RightMain {...props} />
-          </div>
           <div className="uk-width-medium-3-4">
-          <TaskInfo {...props} />
-          <Summary {...props} />
-          <Material {...props} />
-          <h3>Comments</h3>
-                    <CommentList {...props} />
-          <CommentForm {...props} />
-
-
+            <TaskInfo {...props} />
+            <Summary {...props} />
+            <Material {...props} />
+            <h3>Comments</h3>
+            <CommentList {...props} />
+            <CommentForm {...props} />
+          </div>
+          <div className="uk-width-medium-1-4">
+            {/*{props.formChanged && <h1>Form changed</h1>}*/}
+            <RightMain {...props} />
           </div>
         </div>
       </div>

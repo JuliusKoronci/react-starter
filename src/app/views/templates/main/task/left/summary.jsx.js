@@ -59,20 +59,6 @@ const summary = ({
         )}
         {!canEdit && <p dangerouslySetInnerHTML={{ __html: task.work }} />}
       </div> */}
-
-      {canEdit && (
-        <div className="uk-margin-medium-bottom">
-          <label className="uk-text-muted">Add work time</label>
-          <Input
-            fieldName="work_time"
-            className="header_b md-input"
-            taskId={task.id}
-            number={true}
-            form={form}
-            formInputChangeHandler={formInputChangeHandler}
-          />
-        </div>
-      )}
     </div>
   );
 };

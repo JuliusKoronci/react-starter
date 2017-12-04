@@ -21,6 +21,13 @@
 
 /*.submenu_trigger ul{display:none;}*/
 /*.submenu_trigger.act_section ul{display:block !important;}*/
+
+.task-div {
+  max-width: 1280px;
+  margin: auto;
+}
+
+
 .search-input {
 border-radius: 0;
 border-width: 1px 1px 1px;

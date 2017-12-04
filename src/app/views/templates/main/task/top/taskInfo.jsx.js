@@ -24,7 +24,7 @@ const taskInfo = ({ task, canEdit, formInputChangeHandler, form }) => {
       {canEdit && (
         <Input
           fieldName="title"
-          className="header_a md-input uk-margin-medium-bottom"
+          className="md-input uk-margin-medium-bottom header_a"
           taskId={task.id}
           form={form}
           formInputChangeHandler={formInputChangeHandler}
